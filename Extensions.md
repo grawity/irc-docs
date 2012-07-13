@@ -1,6 +1,7 @@
 See also:
 
- * [Jilles' IRC protocol documentation](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/).
+ * [Jilles' IRC protocol documentation](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/)
+ * [IRC v3 Working Group](http://ircv3.atheme.org/)
 
 ## ISUPPORT (current; all ircds)
 
