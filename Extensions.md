@@ -37,6 +37,10 @@ Features:
  * Can disable extensions (using `CAP REQ -foo`).
  * Can list extensions during registration (using `CAP LS`).
 
+Downsides:
+
+ * For `sasl`, supported SASL mechanisms are not advertised. (This may be fixed soon.)
+
 ## CAPAB (obsolete; Hyperion)
 
 Known extensions:
@@ -86,3 +90,15 @@ Downsides:
  * Cannot request extensions after registration.
  * Cannot disable extensions once enabled.
  * Supported extensions are not advertised by the server (the client must request all extensions it wants).
+
+## IRCX (obsolete; Microsoft)
+
+An extension of the IRC protocol as a whole. Describes several new commands implemented by IRCX-compatible servers, as well as modes and privilege levels. Adds SASL support using `AUTH`, predating CAP.
+
+Features:
+
+ * Extension must be enabled during registration (using `IRCX`).
+ * All supported extensions are part of the specification.
+ * Supported SASL mechanisms are advertised by server during registration.
+
+Edited [draft specification](http://static.ignition-project.com/ircxdraft/) exists.
