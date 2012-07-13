@@ -1,9 +1,11 @@
 ## ISUPPORT (current; all ircds)
 
-Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.)
+Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) [Draft specification](http://www.irc.org/tech_docs/draft-brocklesby-irc-isupport-03.txt) exists.
+
+Known extensions:
 
  * [`WHOX`](http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who)
- * [several other extensions](http://www.irc.org/tech_docs/005.html)
+ * [List of other extensions](http://www.irc.org/tech_docs/005.html)
 
 ## CAP (current; many ircds)
 
