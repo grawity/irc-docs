@@ -43,11 +43,12 @@ Downsides:
 
  * For `sasl`, supported SASL mechanisms are not advertised. (This may be fixed soon.)
 
-## CAPAB (obsolete; Hybrid, Hyperion)
+## CAPAB (obsolete; Hybrid, Dancer, Hyperion)
 
 Known extensions:
 
  * `IDENTIFY-MSG` – identical to CAP `identify-msg`
+ * `IDENTIFY-CTCP` – merged into `IDENTIFY-MSG`?
 
 Features:
 
