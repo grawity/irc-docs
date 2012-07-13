@@ -1,6 +1,8 @@
 ## ISUPPORT (current; all ircds)
 
-Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) [Draft specification](http://www.irc.org/tech_docs/draft-brocklesby-irc-isupport-03.txt) exists.
+Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) Many extensions in ISUPPORT deal with core IRC features; for example, supported channel types (e.g. `CHANTYPES=#&`) or the longest permitted nickname (`NICKLEN`).
+
+Implemented by almost all ircds. [Draft specification](http://www.irc.org/tech_docs/draft-brocklesby-irc-isupport-03.txt) exists.
 
 Known extensions:
 
