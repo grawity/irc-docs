@@ -43,7 +43,7 @@ Downsides:
 
  * For `sasl`, supported SASL mechanisms are not advertised. (This may be fixed soon.)
 
-## CAPAB (obsolete; Hyperion)
+## CAPAB (obsolete; Hybrid, Hyperion)
 
 Known extensions:
 
@@ -59,7 +59,7 @@ Downsides:
  * Cannot disable extensions once enabled.
  * Extensions are only advertised after registration (in ISUPPORT).
 
-## PROTOCTL (deprecated; UnrealIRCd, several others)
+## PROTOCTL (deprecated; Dreamforge, UnrealIRCd)
 
 Known extensions:
 
