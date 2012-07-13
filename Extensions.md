@@ -1,4 +1,4 @@
-## `CAP`
+## CAP
 
 Known extensions:
 
@@ -17,7 +17,7 @@ Features:
  * Can disable extensions (using `CAP REQ -foo`).
  * Can list extensions during registration (using `CAP LS`).
 
-## `CAPAB` (Hyperion)
+## CAPAB (Hyperion)
 
 Known extensions:
 
@@ -33,7 +33,7 @@ Downsides:
  * Cannot disable extensions once enabled.
  * Extensions are only advertised after registration (in ISUPPORT).
 
-## `PROTOCTL` (UnrealIRCd, several others)
+## PROTOCTL (UnrealIRCd, several others)
 
 Known extensions:
 
@@ -46,4 +46,9 @@ Downsides:
  * Cannot disable extensions once enabled.
  * Extensions are only advertised after registration (in ISUPPORT).
 
-## Miscellaneous
+## ISUPPORT (all ircds)
+
+Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.)
+
+ * [`WHOX`](http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who)
+ * [several other extensions](http://www.irc.org/tech_docs/005.html)
