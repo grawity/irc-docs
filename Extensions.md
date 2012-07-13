@@ -68,3 +68,14 @@ Known extensions (listed in draft):
  * [`CHARSET`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/tip/reference/draft-meglio-irc-handshake-00.txt#l287)
  * [`LANGUAGE`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/tip/reference/draft-meglio-irc-handshake-00.txt#l312)
  * `NAMESX` – identical to CAP `multi-prefix`
+
+Features:
+
+ * Extensions can be enabled during registration.
+ * Server acknowledges successful requests.
+
+Downsides:
+
+ * Cannot request extensions after registration.
+ * Cannot disable extensions once enabled.
+ * Supported extensions are not advertised by the server (the client must request all extensions it wants).
