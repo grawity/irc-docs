@@ -1,3 +1,5 @@
+# An incomplete list of extensions to the IRC protocol
+
 See also:
 
  * [Jilles' IRC protocol documentation](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/)
