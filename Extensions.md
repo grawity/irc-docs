@@ -5,7 +5,7 @@ See also:
  * [Jilles' IRC protocol documentation](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/)
  * [IRC v3 Working Group](http://ircv3.atheme.org/)
 
-## ISUPPORT (current; all ircds)
+## RPL_ISUPPORT (current; all ircds)
 
 Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) Many extensions in ISUPPORT deal with core IRC features; for example, supported channel types (e.g. `CHANTYPES=#&`) or the longest permitted nickname (`NICKLEN`).
 
