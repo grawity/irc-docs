@@ -1,4 +1,11 @@
-## CAP
+## ISUPPORT (current; all ircds)
+
+Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.)
+
+ * [`WHOX`](http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who)
+ * [several other extensions](http://www.irc.org/tech_docs/005.html)
+
+## CAP (current; many ircds)
 
 Part of [IRCv3](http://ircv3.atheme.org/). Implemented by most major ircds according to [draft specification](http://ircv3.atheme.org/specification/capability-negotiation-3.1).
 
@@ -19,7 +26,7 @@ Features:
  * Can disable extensions (using `CAP REQ -foo`).
  * Can list extensions during registration (using `CAP LS`).
 
-## CAPAB (Hyperion)
+## CAPAB (obsolete; Hyperion)
 
 Known extensions:
 
@@ -35,7 +42,7 @@ Downsides:
  * Cannot disable extensions once enabled.
  * Extensions are only advertised after registration (in ISUPPORT).
 
-## PROTOCTL (UnrealIRCd, several others)
+## PROTOCTL (deprecated; UnrealIRCd, several others)
 
 Known extensions:
 
@@ -47,10 +54,3 @@ Downsides:
  * Server does not acknowledge requests.
  * Cannot disable extensions once enabled.
  * Extensions are only advertised after registration (in ISUPPORT).
-
-## ISUPPORT (all ircds)
-
-Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.)
-
- * [`WHOX`](http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who)
- * [several other extensions](http://www.irc.org/tech_docs/005.html)
