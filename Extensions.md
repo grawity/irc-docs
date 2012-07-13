@@ -72,13 +72,13 @@ Downsides:
  * Cannot disable extensions once enabled.
  * Extensions are only advertised after registration (in ISUPPORT).
 
-## HANDSHAKE (never used)
+## HANDSHAKE (obsolete; never used)
 
 [Draft specification](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/tip/reference/draft-meglio-irc-handshake-00.txt).
 
 Known extensions (listed in draft):
 
- * [`CHARSET`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/tip/reference/draft-meglio-irc-handshake-00.txt#l287)
+ * [`CHARSET`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/tip/reference/draft-meglio-irc-handshake-00.txt#l287) – most users assume UTF-8 these days
  * [`LANGUAGE`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/tip/reference/draft-meglio-irc-handshake-00.txt#l312)
  * `NAMESX` – identical to CAP `multi-prefix`
 
