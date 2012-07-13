@@ -1,14 +1,16 @@
 ## CAP
 
+Part of [IRCv3](http://ircv3.atheme.org/). Implemented by most major ircds according to [draft specification](http://ircv3.atheme.org/specification/capability-negotiation-3.1).
+
 Known extensions:
 
  * [`account-notify`](http://ircv3.atheme.org/extensions/account-notify-3.1)
- * `away-notify`
- * `extended-join`
+ * [`away-notify`](http://ircv3.atheme.org/extensions/away-notify-3.1)
+ * [`extended-join`](http://ircv3.atheme.org/extensions/extended-join-3.1)
  * `identify-msg`
- * `multi-prefix`
- * `sasl`
- * `tls`
+ * [`multi-prefix`](http://ircv3.atheme.org/extensions/multi-prefix-3.1)
+ * [`sasl`](http://ircv3.atheme.org/extensions/sasl-3.1)
+ * [`tls`](http://ircv3.atheme.org/extensions/tls-3.1)
  * `userhost-in-names`
 
 Features:
