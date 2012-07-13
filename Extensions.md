@@ -93,12 +93,12 @@ Downsides:
 
 ## IRCX (obsolete; Microsoft)
 
-An extension of the IRC protocol as a whole. Describes several new commands implemented by IRCX-compatible servers, as well as modes and privilege levels. Adds SASL support using `AUTH`, predating CAP.
+An extension of the IRC protocol as a whole, used by Microsoft Chat client as well as Microsoft Exchange Chat server.
+
+Edited [draft specification](http://static.ignition-project.com/ircxdraft/) exists; it describes several new commands implemented by IRCX-compatible servers, as well as modes and privilege levels. Adds SASL support using `AUTH`, predating CAP.
 
 Features:
 
  * Extension must be enabled during registration (using `IRCX`).
  * All supported extensions are part of the specification.
  * Supported SASL mechanisms are advertised by server during registration.
-
-Edited [draft specification](http://static.ignition-project.com/ircxdraft/) exists.
