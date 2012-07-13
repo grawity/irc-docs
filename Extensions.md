@@ -6,6 +6,8 @@ Implemented by almost all ircds. [Draft specification](http://www.irc.org/tech_d
 
 Known extensions:
 
+ * [`CALLERID`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/modeg.txt)
+ * [`MONITOR`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/monitor.txt) and [`WATCH`](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/draft-meglio-irc-watch-00.txt)
  * [`WHOX`](http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who)
  * [List of other extensions](http://www.irc.org/tech_docs/005.html)
 
