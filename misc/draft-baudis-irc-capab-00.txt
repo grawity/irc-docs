@@ -1,0 +1,838 @@
+Network Working Group                                          P. Baudis
+Internet-Draft                                                  A. Wiebe
+Expires: May 5, 2003                                    November 4, 2002
+
+
+                  IRC client capabilities negotiation
+                       draft-baudis-irc-capab-00
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as Internet-
+   Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at http://
+   www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on May 5, 2003.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2002).  All Rights Reserved.
+
+Abstract
+
+   This memo presents a way for IRC servers and clients to negotiate
+   optional features of the IRC protocol, mainly those which need to be
+   explicitly supported by the client and are either backwards
+   incompatible with the original IRC protocol or involve the format of
+   data sent by the client.
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 1]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+Table of Contents
+
+   1.    Introduction . . . . . . . . . . . . . . . . . . . . . . . .  3
+   1.1   Motivation . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   1.2   Impacts to the server-server protocols . . . . . . . . . . .  3
+   1.3   Current Problems . . . . . . . . . . . . . . . . . . . . . .  3
+   1.3.1 Bandwidth  . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   1.3.2 Compatibility  . . . . . . . . . . . . . . . . . . . . . . .  3
+   1.4   Goals  . . . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   2.    Special handshake  . . . . . . . . . . . . . . . . . . . . .  5
+   2.1   Handshake message  . . . . . . . . . . . . . . . . . . . . .  5
+   2.2   Register message . . . . . . . . . . . . . . . . . . . . . .  5
+   2.3   Compatibility  . . . . . . . . . . . . . . . . . . . . . . .  5
+   3.    Capabilities negotiation . . . . . . . . . . . . . . . . . .  7
+   3.1   Capab message  . . . . . . . . . . . . . . . . . . . . . . .  7
+   3.1.1 CAP LS . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+   3.1.2 CAP ENDLS  . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   3.1.3 CAP RQ . . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   3.1.4 CAP ACK  . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   3.1.5 CAP NAK  . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   3.1.6 Capability Tokens  . . . . . . . . . . . . . . . . . . . . .  9
+   4.    Examples . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+   5.    Further Documents  . . . . . . . . . . . . . . . . . . . . . 11
+   5.1   Requirements . . . . . . . . . . . . . . . . . . . . . . . . 11
+   6.    Security Considerations  . . . . . . . . . . . . . . . . . . 12
+         References . . . . . . . . . . . . . . . . . . . . . . . . . 13
+         Authors' Addresses . . . . . . . . . . . . . . . . . . . . . 13
+   A.    Acknowledgements . . . . . . . . . . . . . . . . . . . . . . 14
+         Full Copyright Statement . . . . . . . . . . . . . . . . . . 15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 2]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+1. Introduction
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119.
+
+1.1 Motivation
+
+   Due to the nature of IRC development in the past decade, with most
+   organizations expanding and altering protocol specifications at will,
+   the protocol for communication between IRC client and server contains
+   a lot of slight differences and special unique features depending on
+   the particular server used.  This memo aims to standardize way of
+   announcing such optional IRC protocol capabilities to clients and way
+   of requesting such features by clients.
+
+   Due to existence of various concurrent protocols aside of IRC and
+   because some IRC clients can support those protocols as well, this
+   memo also covers negotiation of the protocol used for communication
+   with the server.
+
+1.2 Impacts to the server-server protocols
+
+   Servers, when interconnected, have the ability to use various
+   different protocol specifications, usually unique to the IRC server
+   type.  Standardizing compatible server-server communication inside of
+   one IRC network is matter of the IRC network administration and it
+   does not influence users.  Thus, server-server protocol is not the
+   subject of this specification.
+
+1.3 Current Problems
+
+1.3.1 Bandwidth
+
+   Due to the explosive growth of IRC, many networks are experiencing
+   serious problems with raw bandwidth usage of client servers.  While
+   optimizations have been made to the server to server protocol to
+   reduce bandwidth usage, client side connections still make up the
+   bulk of bandwidth usage.
+
+   Due to the expanded format of original RFC 1459 [1], there is a
+   substantially large number of ways to address this problem without
+   rewriting the protocol entirely.
+
+1.3.2 Compatibility
+
+   There is a press inside of the IRC developers community to introduce
+   non-standard but valuable and useful changes to the protocol, which
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 3]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+   could violate the original IRC specification (RFC 1459 [1]) and
+   introduce some incompatibilities to the client-server communication,
+   resulting in problems with some clients.  Using this specification,
+   client could select only those of these changes which it could
+   understand.
+
+   Clients supporting extensions described in this document SHOULD still
+   be backwards compatible to the original protocol as described in RFC
+   1459.
+
+1.4 Goals
+
+   The primary goals of the IRC protocol capabilities negotiation are as
+   follows:
+
+   o  Flexible expandable format that allows alternative capabilities
+      negotiation systems to be put into place for further altering of
+      the protocol.
+
+   o  Fully transparent backwards compatibility on the both client and
+      server side, due to the vast number of clients which will not be
+      compliant for many years.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 4]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+2. Special handshake
+
+   In order to be able to effectively set up unlimited number of
+   capabilities in a correct way during the handshake (before user
+   registration), special new handshake must be introduced.  This
+   handshake only differs from the regular handshake in requirement of
+   explicitly finish.  That is, the handshake MUST NOT be taken as
+   complete by the server until the client doesn't explicitly indicate
+   that.
+
+   The special handshake involves two newly introduced commands: it is
+   started by the HANDSHAKE command and finished by the REGISTER
+   command.
+
+2.1 Handshake message
+
+   The special handshake is started by the HANDSHAKE command.  The ABNF
+   [2] representation for this message is:
+
+   message   =  "HANDSHAKE" CRLF
+
+   The server responds by the HANDSHAKE message of the same format as
+   the command has.  Note that for forward compatibility,
+   implementations SHOULD ignore any possible parameters sent along.
+
+   Then, the server MUST send the CAP ENDLS message, possibly preceded
+   by a number of CAP LS messages, as further described below.  In
+   future, some more messages MAY be inserted between the HANDSHAKE
+   message and capabilities list.
+
+2.2 Register message
+
+   This command is used by client to indicate that it considers its part
+   of the handshake done and expects 001 numeric from the server.  The
+   ABNF [2] representation for this message is:
+
+   message   =  "REGISTER" <CRLF>
+
+   The server responds by the 001 numeric or the appropriate error
+   numeric if the informations sent by client were incomplete or the
+   registration failed for some other reason.  Note that for forward
+   compatibility, implementations SHOULD ignore any possible parameters
+   sent along the REGISTER command.
+
+2.3 Compatibility
+
+   In order to preserve the backwards compatibility with the original
+   IRC protocol, the client SHOULD send the HANDSHAKE message and then
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 5]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+   try to register using the original IRC protocol, not waiting for the
+   HANDSHAKE reply which may not come if the server doesn't support the
+   special handshake.  If the server doesn't support HANDSHAKE, it will
+   reply with the 001 message, otherwise it will reply with the
+   HANDSHAKE message and it will postpone finishing of the registration
+   until the REGISTER command will be received.
+
+   Note that each server supporting the capabilities negotiation MUST
+   support the special handshake and vice versa, thus the clients may
+   rely on that.
+
+   The client could use USER and NICK commands as many times as it
+   wants, while the new invocation overrides settings of the previous
+   ones.  This is important because USER and NICK possibly sent before
+   HANDSHAKE acknowledge from server count to the registration process
+   as well, but the client may want to re-issue those commands with some
+   of the capabilities turned on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 6]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+3. Capabilities negotiation
+
+   The capabilities negotiation is done by exchange of the CAP messages,
+   which is usually initiated by the client.  The first negotiation is
+   expected to happen during the special handshake; obviously the client
+   could negotiate even during the regular handshake, but it SHOULD NOT
+   since there's no clean lag-prune method to do that while staying
+   backwards compatible.  Also, there is no known reason why the special
+   handshake should not be used and it provides flexible base for
+   further extensions of the registration process.
+
+3.1 Capab message
+
+   Capabilities negotiation happens through the CAP (short for
+   CAPabilities) command.  The ABNF [2] representation for this message
+   is:
+
+   message =  "CAP" 1*SP type [ 1*SP ":" token ] CRLF
+   type    =  "LS" / "ENDLS" / "RQ" / "ACK" / "NAK"
+   token   =  [ "-" ] name [ "=" value ] [ 1*SP token ]
+   name    =  letterS *19letter
+   value   =  1*letter
+
+   letterS =  ALPHA / DIGIT / "_"
+   letter  =  ALPHA / DIGIT / "_" / "-"
+
+   Note that the value obviously MUST NOT contain any whitespace
+   characters.
+
+   The CAP command can be issued at any time by client, even during the
+   client registration.  Server MUST NOT send request CAP messages, only
+   the informational ones.
+
+3.1.1 CAP LS
+
+   This message is used to request or announce the list of supported
+   capabilities.  Only the client sends the capabilities list request
+   and only the server sends the list of them.  The list can take
+   multiple CAP LS messages, if it would exceed the 512 characters
+   limit; see also CAP ENDLS.
+
+   When requesting the capabilities list, no extra parameters should be
+   sent.  If the message is the capabilities list announcement sent by
+   server, a list of capability tokens is sent as third parameter,
+   unless there are no particular capabilities supported.
+
+   Note that the capabilities list can vary depending on the
+   capabilities already selected by client, so the new capabilities list
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 7]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+   SHOULD be re-retrieved by client each time the client will turn on
+   some capabilities successfully.
+
+3.1.2 CAP ENDLS
+
+   Each chain of CAP LS MUST be terminated by a CAP ENDLS message,
+   indicating that no more CAP LS messages will come, as the one list
+   can take more than one CAP LS message.  Note that this message MUST
+   be sent even if only one message is going to take the whole list;
+   then, the server can send only the CAP ENDLS message standalone,
+   without any preceding CAP LS messages.  The syntax of the CAP ENDLS
+   message is same as the syntax of CAP LS message.
+
+3.1.3 CAP RQ
+
+   This message is used by client exclusively to turn on certain IRC
+   protocol capabilities.  The client sends a list of capability tokens
+   (Section 3.1.6).  The server replies with either CAP ACK or CAP NAK.
+   Note that if tokens already set are included in the list, the
+   capability value is updated, if it's relevant for the value type (no
+   value means that the old value is kept and the token is silently
+   ignored).
+
+3.1.4 CAP ACK
+
+   This message is used by server to acknowledge the CAP RQ command
+   previously issued by client.  It contains a list of capability tokens
+   (Section 3.1.6) acknowledged by the server (same or subset of the
+   list of capability tokens in client's CAP RQ).  The server starts
+   sending of the messages using the new capability tokens immediately
+   after sending the <crlf> terminating this CAP ACK message.  The
+   client has to respond to this message by another CAP ACK message
+   which MUST contain the same list of capability tokens; then, it MUST
+   start using those capabilities immediately after sending the <crlf>
+   terminating this CAP ACK message.
+
+3.1.5 CAP NAK
+
+   This message is used by server to indicate some problem with the list
+   client sent along the CAP RQ command.  It means that none of these
+   capabilities become effective, and no changes in the active
+   capabilities list are not made by the server.  The server SHOULD send
+   the list of capabilities with unknown name (or conflicting with
+   another capability being set already) or inappropriate value along
+   this message, with same restrictions of their list as in CAP LS,
+   unless the server couldn't properly parse the list received from
+   client.
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 8]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+3.1.6 Capability Tokens
+
+   These tokens are formed by optional prefix, capability name and
+   optional capability value, as described in the ABNF above.  The name
+   length MUST NOT exceed 20 characters nor be shorter than 3
+   characters.  It SHOULD be chosen as short as possible, while staying
+   meaningful.
+
+   Only one prefix is defined now - a dash ('-').  If it is specified,
+   it means that the capability MUST be reset to the default value (and
+   the "boolean" capability MUST be turned off, as all boolean
+   capabilities are off by default).  Note that it may not be possible
+   to turn off some capabilities (probably for example TLS) once they
+   are turned on - server then MUST send a CAP NAK for that capability
+   (obviously not including the dash in the capability token).
+
+   Note that some capabilities may not be available all the time, but
+   could be offered by the server only when some other capability(ies)
+   is (are) already turned on.  So, the capabilities can be
+   theoretically formed in a virtual tree.
+
+   The list of tokens is limited only by the 512 characters maximal IRC
+   message length (thus, the effective length is 512 without the length
+   of the message preceding it (ie.  502 characters for "CAP LS
+   :...\r\n")).  The usual 15 parameters limit for IRC message does not
+   apply, as the whole capabilities list is prefixed by a ':', thus
+   should be recognized as a single string by the current IRC message
+   parsers.
+
+   The concrete tokens (names and possibly value types) will be defined
+   in further documents published by the IRC development community
+   (Section 5).  There is a special namespace defined in this document
+   already, though.  All capability names beginning with "x-" or "X-"
+   string are reserved for experimental capabilities not standarized yet
+   and for non-standard capabilities which don't need to be standarized
+   officially (as they are ie.  used only in closed environment of
+   clients and servers or privately).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                   [Page 9]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+4. Examples
+
+   The basic example of the complete negotiation with the conforming
+   server:
+
+   CLIENT> HANDSHAKE
+   CLIENT> USER foo - - :text
+   CLIENT> NICK bar
+   SERVER> HANDSHAKE
+   SERVER> CAP LS :cap1 cap2 cap3 cap4
+   SERVER> CAP ENDLS :cap5 cap6
+   CLIENT> CAP RQ :cap2 cap3=11,cap7
+   SERVER> CAP NAK
+   CLIENT> CAP RQ :cap2 cap3=11 cap7
+   SERVER> CAP NAK :cap7
+   CLIENT> CAP RQ :cap2 cap3=11
+   SERVER> CAP ACK :cap2 cap3=11
+   CLIENT> CAP ACK :cap2 cap3=11
+   CLIENT> CAP LS
+   SERVER> CAP ENDLS :cap1 cap2 somenewcap anothernewcap whataboutthiscap
+   CLIENT> REGISTER
+   SERVER> :irc.xy.com 001 bar :Welcome
+
+   The basic example of the complete negotiation with an old server:
+
+   CLIENT> HANDSHAKE
+   CLIENT> USER foo - - :test
+   CLIENT> NICK bar
+   SERVER> :irc.xy.com 001 bar :Welcome
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                  [Page 10]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+5. Further Documents
+
+   The secondary purpose of this document is to provide a framework for
+   definition of protocol enhancements.  Documents will be published as
+   Internet Drafts and possibly RFCs, after a careful review by the IRC
+   development community.  The actual list of the CAP tokens will be
+   published by Internet Assigned Numbers Authority (IANA).
+
+   The IRC development community, as used in this document, is defined
+   as the authors of prominent software in use.  Currently, this
+   consists of - but is not limited to - the development teams for the
+   major IRC networks (including DALnet, EFnet, IRCnet and Undernet), as
+   well as the development teams for the client packages - currently
+   irssi, BitchX, EPIC, IRCle, and mIRC.
+
+5.1 Requirements
+
+   All further specifications MUST be reviewed by the development
+   community.  In order for this review to take place, the author MUST
+   contact the protocol discussion email list.  The current list address
+   is proto-desc@dal.net.  The administrative contact for this list is
+   proto-desc-admin@dal.net.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                  [Page 11]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+6. Security Considerations
+
+   In order to prevent possible disclosure of any confidential
+   information, any security-related capabilities SHOULD be issued as
+   soon as possible, preferably already during the client registration.
+   This involves for example TLS setup.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                  [Page 12]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+References
+
+   [1]  Oikarinen, J. and D. Reed, "Internet Relay Chat Protocol", RFC
+        1459, May 1993.
+
+   [2]  Crocker, D. and P. Overell, "ABNF for Syntax Specifications",
+        RFC 2234, November 1997.
+
+
+Authors' Addresses
+
+   Petr Baudis
+   Masarykovo nam. 4
+   Jihlava  58601
+   CZ
+
+   Phone: +420 776 584 544
+   EMail: pasky@ucw.cz
+   URI:   http://pasky.ji.cz/
+
+
+   Aaron Wiebe
+   90 A Victoria St. N
+   New Hamburg, Ontario  N0B 2G0
+   CA
+
+   Phone: +519 662 9432
+   EMail: epiphani@powertrip.net
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                  [Page 13]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+Appendix A. Acknowledgements
+
+   The authors especially gratefully acknowledge the contributions of:
+
+      Simon Butcher
+
+      Lee Hardy
+
+      Piotr Kucharski
+
+      Kurt Roecx
+
+      Timo Sirainen
+
+      Jakub Vlasek
+
+      ...and others.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                  [Page 14]
+
+Internet-Draft    IRC client capabilities negotiation      November 2002
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2002).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baudis & Wiebe            Expires May 5, 2003                  [Page 15]
+

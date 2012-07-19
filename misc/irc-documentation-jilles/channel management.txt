@@ -1,0 +1,318 @@
+IRC: Channel Management
+-----------------------
+
+Status of this Memo
+
+This memo provides information for the Internet community.  It does not specify an Internet standard of any kind.  Distribution of this memo is unlimited.
+
+Copyright Notice
+
+Copyright (C) The Internet Society (2000).  All Rights Reserved.
+
+Abstract
+
+One of the most notable characteristics of the IRC (Internet Relay Chat) protocol is to allow for users to be grouped in forums, called channels, providing a mean for multiple users to communicate together.
+
+This document specifies how channels, their characteristics and properties are managed by IRC servers.
+
+1. Introduction
+
+This document defines in detail on how channels are managed by the IRC servers and will be mostly useful to people working on implementing an IRC server.
+
+While the concepts defined here are an important part of IRC, they remain non essential for implementing clients.  While the trend seems to be towards more and more complex and "intelligent" clients which are able to take advantage of knowing the internal workings of channels to provide the users with a more friendly interface, simple clients can be implemented without reading this document.
+
+Many of the concepts defined here were designed with the IRC architecture [IRC-ARCH] in mind and mostly make sense in this context.  However, many others could be applied to other architectures in order to provide forums for a conferencing system.
+
+Finally, it is to be noted that IRC users may find some of the following sections of interest, in particular sections 2 (Channel Characteristics) and 4 (Channel Modes).
+
+2. Channel Characteristics
+
+A channel is a named group of one or more users which will all receive messages addressed to that channel.  A channel is characterized by its name, properties and current members.
+
+2.1 Namespace
+
+Channels names are strings which begin with an identifying character which implies which type of channel it is. Valid identifying characters differ from implementation to implementation, and are given in the RPL_ISUPPORT CHANTYPES token.
+
+Each prefix characterizes a different channel type.
+
+The total length of a channel name is a maximum of up to fifty (50) characters, though a network may negotiate and allow a longer length.
+
+The only restriction on a channel name is that it SHALL NOT contain any spaces (' '), a control G (^G or ASCII 7), a comma (','). 
+
+Space is used as parameter separator and comma is used as a list item separator by the protocol). Channel names are case insensitive.
+
+This document is only about channels starting with '#'. Channels starting with other characters MAY behave differently.
+
+2.2 Channel Scope
+
+Channels starting with '#' are known by all servers on the IRC network.  Other channel types MAY have more restricted scope.  A user can only become member of a channel known by the server to which the user is directly connected.
+
+2.3 Channel Properties
+
+Each channel has its own properties, which are defined by channel modes.  Channel modes can be manipulated by the channel members.  The modes affect the way servers manage the channels.
+
+2.4 Privileged Channel Members
+
+In order for the channel members to keep some control over a channel, and some kind of sanity, some channel members are privileged.  Only these members are allowed to perform the following actions on the channel:
+
+        INVITE  - Invite a client to an invite-only channel (mode +i)
+        KICK    - Eject a client from the channel
+        MODE    - Change the channel's mode, as well as members' privileges
+        PRIVMSG - Sending messages to the channel (mode +n, +m, +v)
+        TOPIC   - Change the channel topic in a mode +t channel
+
+2.4.1 Channel Operators
+
+The channel operators (also referred to as a "chop" or "chanop") on a given channel have the privileges to manage that channel.  Depending on network policies, ownership of a channel may be shared among channel operators or defined at a higher level.
+
+Channel operators are identified by the '@' symbol next to their nickname whenever it is associated with a channel (i.e., replies to the NAMES, WHO and WHOIS commands).
+
+2.5 Invitations
+
+Some INVITE commands from channel operators are stored with the channel, and can allow the invited user to join even if they otherwise could not join, as listed with the channel modes.  Invites from users who are not channel operators MUST NOT affect the target user's ability to join.
+
+These stored invitations are lost when the channel ceases to exist (also due to network splits) and MAY also be cleared if the invite-only flag is cleared.
+
+Servers MAY restrict INVITE to channel operators entirely, or allow users who are not channel operators to invite to channels which do not have the invite-only flag set.  Servers MUST NOT allow users who are not channel operators to allow to channels which have the invite-only flag set.
+
+3. Channel lifetime
+
+A channel is created implicitly when the first user joins it, and cease to exist when the last user leaves it.  While the channel exists, any client can reference the channel using the name of the channel.
+
+The user creating a channel automatically becomes channel operator.  See section 2.4.1 (Channel Operators) for more details on this title.
+
+In order to avoid abuse through the creation of duplicate channels (typically when the IRC network becomes disjoint because of a split between two servers), several measures can be taken, see section 5.2.
+
+4. Channel Modes
+
+Standard (REQUIRED) modes available for channels are as follows:
+
+        o - give/take channel operator privilege;
+        v - give/take the voice privilege;
+
+        i - toggle the invite-only channel flag;
+        m - toggle the moderated channel;
+        n - toggle the no messages to channel from clients on the
+            outside;
+        s - toggle the secret channel flag;
+        t - toggle the topic settable by channel operator only flag;
+
+        k - set/remove the channel key (password);
+        l - set/remove the user limit to channel;
+
+        b - set/remove ban mask to keep users out;
+
+The following additional modes are RECOMMENDED:
+
+        e - set/remove an exception mask to override a ban mask;
+        I - set/remove an invitation mask to automatically override
+            the invite-only flag;
+
+All these modes can be manipulated by "channel operators" by using the MODE command defined in "IRC Client Protocol" [IRC-CLIENT].
+
+The server MUST show the available channel modes in the PREFIX and CHANMODES tokens in the RPL_ISUPPORT numeric. This will include the above modes and any non-standard modes. The behaviour of channels with non-standard modes set is unspecified.
+
+4.1 Member Status
+
+The modes in this category take a channel member nickname as argument and affect the privileges given to this user.
+
+4.1.1 Channel Operator Status
+
+The mode 'o' is used to toggle the operator status of a channel member.
+
+4.1.2 Voice Privilege
+
+The mode 'v' is used to give and take voice privilege to/from a channel member.  Users with this privilege can talk on moderated channels.  (See section 4.2.2 (Moderated Channel Flag).
+
+4.2 Channel Flags
+
+The modes in this category are used to define properties which affects how channels operate.
+
+4.2.1 Invite Only Flag
+
+When the channel flag 'i' is set, new members are only accepted if their mask matches Invite-list (See section 4.3.2) or they have been invited by a channel operator.
+
+4.2.2 Moderated Channel Flag
+
+The channel flag 'm' is used to control who may speak on a channel.  When it is set, only channel operators, and members who have been given the voice privilege may send messages to the channel.  Similarly, members without channel operator or voice privilege SHOULD have their part reasons stripped.
+
+      This flag only affects users.
+
+4.2.4 No Messages To Channel From Clients On The Outside
+
+When the channel flag 'n' is set, servers MUST NOT allow users who are not channel members to send messages to the channel.
+
+4.2.5 Secret Channels
+
+The channel flag 's' is used to mark a channel "secret". This conceals the existence of the channel from other users.
+
+This means that there is no way of getting this channel's name from the server without being a member.  In other words, these channels MUST be omitted from replies to queries like the WHOIS command.
+
+Additionally, the server will act as if the channel does not exist for queries like the TOPIC, LIST, NAMES commands.  Note that there is one exception to this rule: servers will correctly reply to the MODE command.
+
+4.2.8 Topic Settable by channel operator only
+
+The channel flag 't' is used to restrict the usage of the TOPIC command to channel operators.
+
+4.2.9 User Limit
+
+A user limit may be set on channels by using the channel flag 'l'.  When the limit is reached, servers MUST forbid their local users to join the channel, except in the case where the user is invited or matches an invite exception; in either or both of these cases a join MAY be allowed.
+
+The value of the limit SHOULD only be made available to the channel members in the reply sent by the server to a MODE query.
+
+4.2.10 Channel Key
+
+When a channel key is set (by using the mode 'k'), servers MUST reject their local users request to join the channel unless this key is given.
+
+The channel key MUST only be made visible to the channel members in the reply sent by the server to a MODE query.
+
+4.3 Channel Access Control
+
+The last category of modes is used to control access to the channel, they take a mask as argument.
+
+In order to reduce the size of the global database for control access modes set for channels, servers SHOULD put a maximum limit on the number of such modes set for a particular channel.  If such restriction is imposed, it MUST only affect local user requests.  The limit SHOULD be homogeneous on a per IRC network basis.
+
+Moreover, more complex mechanisms MAY be used to avoid having redundant masks set for the same channel.
+
+4.3.1 Channel Ban and Exception
+
+When a user requests to join a channel, his local server checks if the user's address matches any of the ban masks set for the channel.  If a match is found, the user request is denied unless the address also matches an exception mask set for the channel. If the implementation does not support ban exceptions, it shall treat all channels as having no ban exceptions.
+
+Servers SHOULD NOT allow a channel member who is banned from the channel to speak on the channel, unless this member is a channel operator or has voice privilege. (See Section 4.1.2 (Voice Privilege)).  Similarly, if such a member leaves, servers SHOULD replace any non-default part reason with the default.
+
+A user who is banned from a channel and who carries an invitation may be allowed to join the channel, but this is NOT RECOMMENDED.
+
+4.3.2 Channel Invitation
+
+For channels which have the invite-only flag set (See Section 4.2.2 (Invite Only Flag)), users whose address matches an invitation mask set for the channel are allowed to join the channel without any invitation. If the implementation does not support invitation masks, it shall treat all channels as having no invitation masks.
+
+5. Network considerations
+
+Having multiple servers leads to various complications for channel management.
+
+5.1 Server connections
+
+When two servers connect to each other, channel data is exchanged.  This MUST include members and modes, and SHOULD also include topics.
+
+The basic procedure is as follows; this may be changed as described in Section 5.2.  Channel collisions (either legitimate or not) are treated as inclusive events, meaning that the resulting channel has for members all the users who are members of the channel on either server prior to the connection.
+
+The modes are merged.  There are three types of modes for a given channel: flags, masks, and data.  The first two types are easy to deal with as they are either set or unset.  If such a mode is set on one server, it MUST be set on the other server as a result of the connection. If simple modes with parameters (CHANMODES type B and C, including 'l' or 'k') are set on both servers prior to the connection, an implementation-defined mechanism should be used to decide which of the two values takes precedence.  This mechanism MUST be the same on all servers.
+
+If topics are exchanged, an implementation-defined mechanism, which should be the same on all servers, is used to decide which of the two values takes precedence.
+
+5.2 Name collisions
+
+This document defines one of the many labels used by the IRC protocol.  It is possible for users on different servers to pick the label which may result in collisions (with the exception of channels known to only one server where they can be averted).
+
+Various mechanisms exist to mitigate the abuse caused by these collisions, possibly amending the rules in section 5.1.
+
+5.2.1 Channel Delay
+
+To avoid abuse of network splits, servers MAY deny creation of a channel if a channel operator recently left an identically named channel because of a network split.  The delay should be configured depending on many factors such as the average length of network splits, and should be the same on all servers in the network.
+
+5.2.2 Channel Timestamping
+
+A channel timestamping mechanism is RECOMMENDED to avoid take overs via abuse of network splits.
+
+Each channel shall have a timestamp (TS) associated with it, to be interpreted as the time of creation of the current ops in the channel, as a number of seconds since 1 Jan 1970 00:00:00 UTC (Unix timestamp).
+
+When a local user creates a channel, the server shall set the channel's TS to the current time, and propagate this.
+
+When two servers connect to each other, each server shall include each channel's TS in the data sent.  The processing of the modes depends on the TS.  For historical reasons, if one or both sides has a TS of 0, the behaviour follows implementation-defined rules. Otherwise, the following rules apply.
+
+If the timestamps are equal on both sides, the modes are merged as described in section 5.1.
+
+If the timestamps are not equal, both sides SHALL remove the modes associated with the newer (higher) TS and accept the modes associated with the older TS.  The side with the newer TS MUST change its TS for the channel and SHOULD notify all local users in the channel of the TS change.  Additionally, certain mode changes and kicks sent by users on the side with the newer TS after the servers connected but before their channel operator privileges were removed MUST NOT be accepted and MUST be reverted.  This does not apply to mode changes and kicks sent by users who were granted channel operator privileges again by the other side, and to kicks targetted at users at the side with the newer TS; those may or may not be applied.
+
+5.2.3 No create on split
+
+To further limit abuse of network splits, a server MAY deny a local user creating a channel if the number of servers currently linked is below a configured value.  The administrator should choose this value based on the usual kinds of network splits, striking a balance between preventing abuse and allowing channels to be created while some servers are not available.
+
+This mechanism works well but can be annoying for users.
+
+5.2.4 Kick on split riding
+
+To further limit abuse of network splits, a server MAY apply channel TS to channel members, by kicking local users if the TS of a channel is changed and modes restricting joins (+i or +k) are set on the channel.
+
+5.3 Propagation Delays
+
+Channel mode changes and kicks MUST be checked for validity if they come from local users or if the server implements channel timestamps and the rule in section 5.2.2 applies.  Otherwise, they MAY be checked.  Operations rejected in this manner MAY be ignored or bounced.  Any bouncing mechanism SHOULD be designed such that bounce loops cannot happen.
+
+Because of network delays induced by the network and various other reasons (messages from killed users, bounces), it is possible for a MODE message to only affect part of the network, often creating a discrepancy between servers on the current state of a channel.
+
+Checks on commands that do not affect state (PRIVMSG, NOTICE, stripping PART reasons) MAY be performed on the server of the user sending the command only.  This may result in some messages getting through in case of a race or desync.
+
+6. Security Considerations
+
+6.1 Access Control
+
+One of the main ways to control access to a channel is to use masks which are based on the username and hostname of the user connections.  This mechanism can only be efficient and safe if the IRC servers have an accurate way of authenticating user connections, and if users cannot easily get around it.  While it is in theory possible to implement such a strict authentication mechanism, most IRC networks (especially public networks) do not have anything like this in place and provide little guaranty about the accuracy of the username and hostname for a particular client connection.
+
+Another way to control access is to use a channel key.  Unless SSL is used, this key is sent in plaintext, making it vulnerable to traditional man in the middle attacks.  Additionally, sharing a secret key with all users in a channel is not particularly secure.
+
+6.2 Channel Privacy
+
+Because some networks treat channel collisions as inclusive events (See Section 5.1), it may be possible for users to join a channel overriding its access control settings.  This can be used to find out the exact list of members of a channel, as well as to eventually receive some of the messages sent to the channel.
+
+7. Acknowledgements
+
+Parts of this document were copied from the RFC 2811.
+
+Parts of this document were copied from the RFC 1459 [IRC] which first formally documented the IRC Protocol.  It has also benefited from many rounds of review and comments.  In particular, the following people have made significant contributions to RFC 2811:
+
+Matthew Green, Michael Neumayer, Volker Paulsen, Kurt Roeckx, Vesa Ruokonen, Magnus Tjernstrom, Stefan Zehl.
+
+8. References
+
+TBD
+
+   [KEYWORDS]   Bradner, S., "Key words for use in RFCs to Indicate
+                Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [IRC]        Oikarinen, J. and D. Reed, "Internet Relay Chat
+                Protocol", RFC 1459, May 1993.
+
+   [IRC-ARCH]   Kalt, C., "Internet Relay Chat: Architecture", RFC 2810,
+                April 2000.
+
+   [IRC-CLIENT] Kalt, C., "Internet Relay Chat: Client Protocol", RFC
+                2812, April 2000.
+
+9. Author's Address
+
+TBD
+
+12.  Full Copyright Statement
+
+about rfc2811
+
+   Copyright (C) The Internet Society (2000).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.

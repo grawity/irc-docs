@@ -1,0 +1,28 @@
+<w00t> jilles, how does hyperion do snomasks?
+<jilles> it doesn't
+<jilles> that and umodes-as-privs makes hyperion's umode system really enormous
+<jilles> or are you actually asking about charybdis
+<w00t> err
+<w00t> yeah
+<w00t> sorry, brainfreeze
+<jilles> MODE <nick> +s  (enables a default set, namely +s)
+<w00t> patch committed
+<jilles> MODE <nick> +s <changes>
+<jilles> MODE <nick> -s  (clear all)
+<jilles> that's what the client can send
+<w00t> +s -foo+bar?
+<jilles> yeah
+<jilles> snomask changes can be combined with other umodes
+<w00t> i think we need to standardise on this system then
+<w00t> afaik unreal's works the same way
+<jilles> when sending it out to the client, charybdis will never use this syntax
+<w00t> ours does too, except we currently use +n
+<w00t> er.
+<w00t> you don't send +s back?
+<jilles> it sends +s without parameters, if it changed; then RPL_SNOMASK with the new snomask
+<w00t> hmm.
+<w00t> a little trippy
+<jilles> RPL_SNOMASK is also send after RPL_UMODEIS if you MODE <nick>
+<w00t> though
+<w00t> that actually makes more sense in that perspective, yeah
+<jilles> ircu works similarly, except that snomasks are decimal numbers there

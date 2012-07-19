@@ -1,0 +1,557 @@
+Internet-Draft                                           Dominick Meglio
+Expires June 2004                                       January 09, 2004
+
+                     Protocol handshaking over IRC
+                   draft-meglio-irc-handshake-00.txt
+Status of this Memo
+   This document is an Internet-Draft and is subject to all provisions
+   of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as Internet-
+   Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at
+   http://www.ietf.org/1id-abstracts.html
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+Abstract
+
+   As IRC has expanded, many features have been proposed that would
+   destroy backwards compatibility with already existing clients. As a
+   result, such suggestions have been abandoned.
+
+   To rectify this issue, this Memo proposes a method to allow the
+   client and the server to agree on features that both support. This
+   allows new features to be added while maintaining backwards
+   compatibility with clients that do not support the features. As a
+   result of the importance of backwards compatibility with IRC, this
+   Memo proposes this change in a manner that itself would be fully
+   backwards compatible.
+
+Table of Contents
+
+   1     Introduction . . . . . . . . . . . . . . . . . . . . . . . .  2
+   1.1       Terminology  . . . . . . . . . . . . . . . . . . . . . .  2
+   1.2       Rationale  . . . . . . . . . . . . . . . . . . . . . . .  2
+
+
+
+Meglio                                                          [Page 1]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+   2     HANDSHAKE Message  . . . . . . . . . . . . . . . . . . . . .  3
+   2.1       HANDSHAKE Initiation . . . . . . . . . . . . . . . . . .  3
+   2.2       HANDSHAKE Response . . . . . . . . . . . . . . . . . . .  4
+   3     Error Handling . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.1       Client Generated Errors  . . . . . . . . . . . . . . . .  4
+   3.2       Server Generated Errors  . . . . . . . . . . . . . . . .  4
+   4     Protocol Tokens  . . . . . . . . . . . . . . . . . . . . . .  5
+   4.1       Required Protocol Tokens . . . . . . . . . . . . . . . .  5
+   4.1.1         NAMESX Token . . . . . . . . . . . . . . . . . . . .  5
+   4.1.1.1           NAMESX Syntax  . . . . . . . . . . . . . . . . .  5
+   4.2       Optional Protocol Tokens . . . . . . . . . . . . . . . .  6
+   4.2.1         CHARSET Token  . . . . . . . . . . . . . . . . . . .  6
+   4.2.1.1           CHARSET Syntax . . . . . . . . . . . . . . . . .  6
+   4.2.2         LANGUAGE Token . . . . . . . . . . . . . . . . . . .  6
+   4.2.2.1           LANGUAGE Syntax  . . . . . . . . . . . . . . . .  7
+   4.3       Other Protocol Tokens  . . . . . . . . . . . . . . . . .  7
+   4.4       Reserved Tokens  . . . . . . . . . . . . . . . . . . . .  7
+   4.4.1         END Token  . . . . . . . . . . . . . . . . . . . . .  7
+   4.4.2         RFC Tokens . . . . . . . . . . . . . . . . . . . . .  7
+   4.4.3         PVT Tokens . . . . . . . . . . . . . . . . . . . . .  7
+   5     Compatibility Considerations . . . . . . . . . . . . . . . .  8
+   6     Security Considerations  . . . . . . . . . . . . . . . . . .  8
+   7     Examples . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   8     Comments and Suggestions . . . . . . . . . . . . . . . . . .  9
+   9     Acknowledgements . . . . . . . . . . . . . . . . . . . . . .  9
+   10    References . . . . . . . . . . . . . . . . . . . . . . . . .  9
+   10.1      Normative  . . . . . . . . . . . . . . . . . . . . . . .  9
+   10.2      Informative  . . . . . . . . . . . . . . . . . . . . . . 10
+   11    Contact Information  . . . . . . . . . . . . . . . . . . . . 10
+   12    Full Copyright Statement . . . . . . . . . . . . . . . . . . 10
+
+1. Introduction
+
+1.1 Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+   NOT","SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in
+   this document are to be interpreted as described in RFC 2119 [n1].
+
+1.2 Rationale
+
+   Since its creation, IRC has evolved into many different forms, each
+   of these forms implementing new and different features. However,
+   there has been one fundamental limit placed on IRC server designers,
+   IRC offers no mechanism of protocol negotiation. As a result, adding
+   features that are not backwards compatible is difficult if not
+   impossible.
+
+
+
+
+Meglio                                                          [Page 2]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+   Numerous solutions have been proposed to solve this issue however
+   none of the suggestions fully recognized all aspects necessary for a
+   viable solution. This Memo proposes a new idea that allows for full
+   protocol negotiation while fully maintaining backwards compatibility
+   with the current IRC protocol.
+
+2. HANDSHAKE Message
+
+   The HANDSHAKE message is used to implement protocol negotiation. This
+   message is sent both from the client to the server and from the
+   server to the client. A server MUST NOT process this message if it is
+   received from a client who has already registered as defined in
+   RFC1459 Section 4.1 [n2], rather the server SHOULD reply with a
+   numeric reply of ERR_ALREADYREGISTRED (462).
+
+2.1 HANDSHAKE Initiation
+
+   To begin the protocol negotiations, the client must first send the
+   HANDSHAKE message to the server. This command SHOULD be sent after
+   the PASS command (if present) but before the NICK/USER pair, however
+   the HANDSHAKE command MAY be placed in any location so long as it is
+   done before registration as defined in RFC1459 Section 4.1 [n2] has
+   been completed. This command will notify the server that the client
+   supports handshaking and also of the features the client wishes to
+   enable. The server MUST skip over any tokens it does not recognize.
+   Additionally the server MUST "activate" the particular protocol
+   extensions in the order specified in the HANDSHAKE message.
+
+   This command takes the following form as represented in ABNF [n3]:
+
+   message = "HANDSHAKE" SP ":" *( token SP ) [ token ]  [ "END" ] CRLF
+
+   token = name [ "=" value ]
+   name = ALPHA / DIGIT
+   value = ALPHA / DIGIT / punct
+   punct = %x21-%x2F / %x3A-%x40 / %x5B-%x60 / %x7B-7E
+
+   The client may send multiple HANDSHAKE messages so as to not violate
+   the 512 length limitations imposed by RFC1459 Section 2.3 [n2]. This
+   message is not subject to the 15 parameter limit since the tokens are
+   prefixed with a ":" which will force the string to be interpreted as
+   a single parameter. The last of these HANDSHAKE messages must be
+   terminated by the character string "END". After sending the HANDSHAKE
+   message the client MUST continue with the registration process.
+
+
+
+
+
+
+
+Meglio                                                          [Page 3]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+2.2 HANDSHAKE Response
+
+   The last phase in the negotiation involves the server sending back a
+   list to the client verifying that the protocols it supplied will be
+   enabled. This is done by using a similar method as above. The server
+   sends back a HANDSHAKE message specifying only those protocol tokens
+   the client send that the server does indeed support. If the client
+   sent a token in its HANDSHAKE that is not present in the server's
+   response, the client MUST assume that the server is not enabling the
+   specific protocol. Again, this message is also limited by RFC1459
+   Section 2.3 [n2] to a total length of 512. As before, to compensate
+   the server MAY send multiple HANDSHAKE messages the last of which
+   MUST be terminated with the character string "END".
+
+   This message takes the following form as represented in ABNF [n3]:
+
+   message = "HANDSHAKE" SP ":" *( token SP ) [ token ] [ "END" ] CRLF
+
+
+   token = name [ "=" value ]
+   name = ALPHA / DIGIT
+   value = ALPHA / DIGIT / punct
+   punct = %x21-%x2F / %x3A-%x40 / %x5B-%x60 / %x7B-7E
+
+3. Error Handling
+
+   An error occurs when an invalid HANDSHAKE message is received. An
+   invalid handshake message is one that either violates RFC1459 Section
+   2.3 [n2] by exceeding the 512 buffer limit, or when the message
+   received does not follow the ABNF [n3] definition of that message.
+
+3.1 Client Generated Errors
+
+   If a client is responsible for generating an error, the server SHOULD
+   generate an ERROR message as described in RFC2812 Section 3.7.4 [n4]
+   followed by connection termination. The exact text used in the ERROR
+   message is implementation specific though it SHOULD describe the
+   particular error condition that occurred.
+
+3.2 Server Generated Errors
+
+   In the event that the server causes an error in the messages sent to
+   the client, the client SHOULD terminate the connection to the server
+   and notify the user of the error that has occurred.
+
+
+
+
+
+
+
+Meglio                                                          [Page 4]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+4. Protocol Tokens
+
+4.1 Required Protocol Tokens
+
+   In order to be compliant with this document, a server MUST implement
+   all of the tokens listed in this section. Likewise, for a client to
+   be compliant with this document it MUST understand all of the tokens
+   in this section.
+
+4.1.1 NAMESX Protocol
+
+   Since IRC's creation, a flaw has existed that has no real solution.
+   The NAMESX protocol offers a solution to this problem. The problem is
+   best illustrated by the following example:
+
+   UserA joins #foo
+   Op1 sets mode +ov on UserA
+   UserB joins #foo
+   UserB sees @UserA in NAMES
+   Op1 sets -o on UserA
+   UserA sees +UserA in the nicklist
+   UserB sees UserA in the nicklist
+
+   The problem results from the fact that the NAMES message only
+   displays the "highest" mode prefix for the user. In the example
+   above, it means only the '@' prefix is displayed. As a result, this
+   causes problems when as user has two modes set and other clients are
+   not aware of this. The NAMESX protocol rectifys this by allowing all
+   of the mode prefixes to be displayed in a NAMES reply. Since this
+   would break clients that do not have explicit support for this
+   feature, it is perfect for the HANDSHAKE message.
+
+4.1.1.1 NAMESX Syntax
+
+   When sent from the client to indicate support for the NAMESX
+   protocol, the client should simply include NAMESX in the token list.
+   The server's reply is represented in ABNF [n3] as follows:
+
+   token = "NAMESX" "=" 1*prefixes
+   prefixes = 1*punct
+   punct = %x21-%x2F / %x3A-%x40 / %x7E
+
+   Specific implementations may place further restrictions on the valid
+   set of prefixes due to the fact that different IRC implementations
+   specify differing legal characters for use within nicknames. However,
+   the server MUST NOT use any characters not specified above in the
+   reply as they are legal nickname characters as defined by RFC2812
+   Section 2.3.1 [n4].
+
+
+
+Meglio                                                          [Page 5]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+4.2 Optional Protocol Tokens
+
+   The protocol tokens defined in this section are optional. It is
+   RECOMMENDED that a server provide support for these tokens, however
+   it is not required.
+
+4.2.1 CHARSET Token
+
+   The CHARSET token allows the client to inform the server of what
+   character set will be used for communication. The purpose of this
+   token is to allow for more internationalization of the IRC protocol.
+   Multiple CHARSET tokens may be specified by the client to indicate
+   that the client supports multiple charsets. The client should list
+   the charsets from first to last in order of highest-preference to
+   lowest-preference. The server will respond to the client's request
+   specifying one charset which will be the highest-preference charset
+   specified that the server supports. If the client does not specify a
+   CHARSET token, or the client does not specify any charsets that the
+   server understands, or the server does not support the CHARSET token,
+   the charset will default to US-ASCII as per RFC2812 Section 2.2 [n4].
+
+4.2.1.1 CHARSET Token Syntax
+
+   The CHARSET token is specified both by the client in the request and
+   by the server in the response as follows represented in ABNF [n3]:
+
+   token = "CHARSET" "=" charset
+
+   The charset is any value that has been registered as an official
+   charset name as required by RFC2278 [n5].
+
+4.2.2 LANGUAGE Token
+
+   The LANGUAGE token goes hand-in-hand with the CHARSET token. The
+   purpose of the LANGUAGE token is to inform the server of what
+   language the user speaks. Again this is to help allow for more
+   internationalization of IRC. When used, the server will generate
+   numeric replies that are in the language that has been negotiated. In
+   most current implementations of IRC, the server only supports one
+   language and it always speaks that language. As a result this may
+   confuse users who do not speak the chosen language. The client may
+   specify multiple LANGUAGE tokens to indicate that the user speaks
+   more than one language. The languages should be listed from first to
+   last in order of highest-preference to lowest-preference. The server
+   will respond to the client's requiest specifying one language which
+   will be the highest-preference language that the server supports. If
+   the client does not specify a LANGUAGE token, or the client does not
+   specify any languages that the server understands, or the server does
+
+
+
+Meglio                                                          [Page 6]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+   not support the LANGUAGE token, the language SHOULD default to
+   English.
+
+4.2.2.1 LANGUAGE Token Syntax
+
+   The LANGUAGE token is specified both by the client in the request and
+   by the server in the response as follows represented in ABNF [n3]:
+
+   token = "LANGUAGE" "=" language-tag
+
+   language-tag = 1*VCHAR ; The precise definition of the language tag can be found in
+                            RFC2066 [n6].
+
+
+4.3 Other Protocol Tokens
+
+   The purpose of the HANDSHAKE message is to facilitate the addition of
+   numerous new features to the IRC protocol. It is RECOMMENDED that any
+   new protocol tokens be formally written up and submitted as an RFC.
+   However, it is the author's opinion that, since the IRC community has
+   expanded the IRC protocol over the years and no real conflicts have
+   occurred due to the lack of standardization, formal declaration of
+   protocol tokens may not be necessary in all cases.
+
+4.4 Reserved Tokens
+
+4.4.1 END Token
+
+   Due to the fact that END is used as a special case to signal the last
+   message in a series of HANDSHAKE messages, the END token is reserved
+   and may not be used for any purpose other than ending a series of
+   HANDSHAKE messages.
+
+4.4.2 RFC Tokens
+
+   All token names beginning with the character string "RFC" are
+   reserved for use only by protocol tokens that have been officially
+   recognized through the RFC process. It is recommended that the token
+   be of the form, "RFCNNNN" where "NNNN" is the RFC number though this
+   is not required.
+
+4.4.3 PVT Tokens
+
+   All tokens beginning with the character string "PVT" are for private
+   use. These are for cases in which a particular server and IRC client
+   need to negotiate a protocol that will not and should not be
+   supported by all clients. For example, this may be used to by a Java
+   client designed specifically for the server software package to
+
+
+
+Meglio                                                          [Page 7]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+   identify itself to the server as that particular Java package. A
+   client MUST NOT expect that a particular PVT token will have the same
+   meaning on all servers.
+
+5. Compatibility Considerations
+
+   This specification should in no way affect backwards compatibility
+   with either non-HANDSHAKE supporting clients nor non-HANDSHAKE
+   supporting servers. A server that supports HANDSHAKE MUST still allow
+   a client that complies to RFC1459 to successfully connect, and a
+   client that supports HANDSHAKE MUST be able to connect to a server
+   that does not.
+
+6. Security Considerations
+
+   Due to the fact that this protocol implements a feature that is
+   limited by RFC1459 Section 2.3 [n2], care must be taken to ensure
+   that buffer overflows do not occur. It would be very easy to
+   miscalculate a length and subsequently send a buffer that is greater
+   than the allowed 512 characters. Most existing implementations of the
+   IRC protocol use a static buffer for many purposes related to message
+   parsing. As a result the potential for a buffer overflow exists. To
+   prevent such a problem, all servers and clients SHOULD treat such a
+   condition as an error as defined in Section 3.
+
+7. Examples
+
+   Example domain names in this section comply with RFC2606 Section 3
+   [n7].  The following is a dialogue between the client and server to
+   successfully negotiate feature support:
+
+   C->S: HANDSHAKE :proto1 proto3=value3 END
+   C->S: NICK foo
+   C->S: USER foo foo.example.com irc.example.net :me
+   S->C: HANDSHAKE :proto1 proto3=value3 END
+   S->C: :irc.example.net 001 foo :Welcome to the IRC server
+
+   If the server does not support HANDSHAKE:
+
+   C->S: HANDSHAKE :proto1 proto3=value3 END
+   C->S: NICK foo
+   C->S: USER foo foo.example.com irc.example.net :me
+   S->C: :irc.example.net 001 foo :Welcome to the IRC server
+
+   If the client does not support HANDSHAKE:
+
+   C->S: NICK foo
+   C->S: USER foo foo.example.com irc.example.net :me
+
+
+
+Meglio                                                          [Page 8]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+   S->C: :irc.example.net 001 foo :Welcome to the IRC Server
+
+8. Comments and Suggestions
+
+   As this is an Internet-Draft, comments are welcomed and encouraged.
+   A mailing list has been setup, <irc-handshake@unrealircd.com> to
+   promote discussion about this draft. To subscribe simply send a blank
+   email to <irc-handshake-subscribe@unrealircd.com> and follow the
+   instructions it gives you.
+
+9. Acknowledgements
+
+   I would first like to thank Jarkko Oikarinen and Darren Reed for
+   creating the first formal specification for the IRC protocol.
+   Without their work, IRC would not be what it is today.
+
+   I would also like to thank people who have given me input on this
+   effort, especially:
+
+   Bram Matthys who went over a great deal of the technical
+   specifications of this document with me.
+   Trevor Talbot who pointed out and proposed suggestions to numerous
+   flaws in the original version.
+
+   Lastly, I want to thank Petr Baudis and Aaron Wiebe for their
+   Internet-Draft on the proposed IRC Capab protocol [i1] which gave me
+   the inspiration to create the HANDSHAKE protocol.
+
+10. References
+
+10.1 Normative
+
+   [n1] Bradner, S., "Key words for use in RFCs to Indicate
+        Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [n2] Oikarinen, J. and D. Reed, "Internet Relay Chat Protocol", RFC
+        1459, May 1993.
+
+   [n3] Crocker, D. and P. Overell, "Augmented BNF for Syntax
+        Specifications: ABNF", RFC 2234, November 1997.
+
+   [n4] Network Working Group and C. Kalt, "Internet Relay Chat: Client
+        Protocol", RFC 2812, April 2000.
+
+   [n5] Network Working Groups, N. Freed and J. Postel, "IANA Charset
+        Registration Procedures", BCP 19, RFC 2278, January 1998.
+
+   [n6] Network Working Group and H. Alvestrand, "Tags for the
+
+
+
+Meglio                                                          [Page 9]
+
+Internet-Draft        Protocol handshaking over IRC    December 20, 2003
+
+
+        Identification of Languages", BCP 47, RFC 3066, January 2001.
+
+   [n7] Eastlake, D. and A. Panitz, "Reserved Top Level DNS Names",
+        BCP 32, RFC 2606, June 1999.
+
+10.2 Informative
+
+   [i1] Baudis, P. and A. Wiebe, "IRC client capabilities negotiation"
+        (draft-baudis-irc-capab-00)
+
+11. Contact information
+
+   Dominick Meglio
+
+   Email: dmeglio@codemastr.com
+   URL:   www.codemastr.com
+
+
+12. Full Copyright Statement
+
+   Copyright (C) The Internet Society (2004). All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+This document expires in June 2004
+
+
+
+
+Meglio                                                         [Page 10]
+

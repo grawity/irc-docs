@@ -1,0 +1,167 @@
+IRC: Architecture
+
+
+
+
+
+
+Abstract
+
+The IRC (Internet Relay Chat) protocol is for use with text based conferencing. It has been developed since 1989 when it was originally implemented as a mean for users on a BBS to chat amongst themselves.
+
+First formally documented in May 1993 by RFC 1459 [IRC], the protocol has kept evolving. This document is an update describing the architecture of the current IRC protocol and the role of its different components.  Other documents describe in detail the protocol used between the various components defined 
+
+1. Introduction
+
+
+The IRC (Internet Relay Chat) protocol has been designed over a number of years for use with text based conferencing.  This document describes its current architecture.
+
+The IRC Protocol is based on the client-server model, and is well suited to running on many machines in a distributed fashion.  A typical setup involves a single process (the server) forming a central point for clients (or other servers) to connect to, performing the required message delivery/multiplexing and other functions.
+
+2. Components
+
+
+The following paragraphs define the basic components of the IRC protocol.
+
+2.1 Servers
+
+The server forms the backbone of IRC as it is the only component of the protocol which is able to link all the other components together: it provides a point to which clients may connect to talk to each other [IRC-CLIENT], and a point for other servers to connect to.  The server is also responsible for providing the basic services defined by the IRC protocol.
+
+2.2 Clients
+
+A client is anything connecting to a server that is not another server. 
+User clients are generally programs providing a text based interface that is used to communicate interactively via IRC.  This particular type of clients is often referred as "users".
+
+3. Architecture
+
+An IRC network is defined by a group of servers connected to each other.  A single server forms the simplest IRC network.
+
+The most common, and recommended network configuration allowed for IRC servers is that of a spanning tree where each server acts as a central node for the rest of the network it sees.
+
+  1--\
+         A             D---4
+  2--/ \             /
+            B----C
+          /           \
+       3                 E
+
+Servers: A, B, C, D, EClients: 1, 2, 3, 4
+
+  [ Fig. 1. Sample small IRC network ]
+
+4. IRC Protocol Services
+
+This section describes the services offered by the IRC protocol.  The combination of these services allow real-time conferencing.
+
+4.1 Client Locator
+
+To be able to exchange messages, two clients must be able to locate each other.
+Upon connecting to a server, a client registers using a label which is then used by other servers and clients to know where the client is located.  Servers are responsible for keeping track of all the labels being used.
+
+4.2 Message Relaying
+
+The IRC protocol provides no mean for two clients to directly communicate.  All communication between clients is relayed by the server(s).
+
+4.3 Channel Hosting and Management
+
+A channel is a named group of one or more users which will all receive messages addressed to that channel.  A channel is characterized by its name and current members, it also has a set of properties which can be manipulated by (some of) its members.
+
+Channels provide a mean for a message to be sent to several clients. Servers host channels, providing the necessary message multiplexing. Servers are also responsible for managing channels by keeping track of the channel members.  The exact role of servers is defined in "Internet Relay Chat: Channel Management" [IRC-CHAN].
+
+5. IRC Concepts
+
+This section is devoted to describing the actual concepts behind the organization of the IRC protocol and how different classes of messages are delivered.
+
+5.1 One-To-One Communication
+
+Communication on a one-to-one basis is usually performed by clients, since most server-server traffic is not a result of servers talking only to each other.  To provide a means for clients to talk to each other, it is REQUIRED that all servers be able to send a message in exactly one direction along the spanning tree in order to reach any client.  Thus the path of a message being delivered is the shortest path between any two points on the spanning tree.
+The following examples all refer to Figure 1 above.
+
+	Example 1: A message between clients 1 and 2 is only seen by server A, which sends it straight to client 2.
+	Example 2: A message between clients 1 and 3 is seen by servers A &  B, and client 3.  No other clients or servers shall see the message.
+	Example 3: A message between clients 2 and 4 is seen by servers A, B, C & D and client 4 only.
+
+5.2 One-To-Many
+
+The main goal of IRC is to provide a forum which allows easy and efficient conferencing (one to many conversations).  IRC offers several means to achieve this, each serving its own purpose.
+
+5.2.1 To a Channel
+
+In IRC the channel has a role equivalent to that of the multicast group; their existence is dynamic and the actual conversation carried out on a channel MUST only be sent to servers which are supporting users on a given channel.  Moreover, the message SHALL only be sent once to every local link as each server is responsible to fan the original message to ensure that it will reach all the recipients.
+
+The following examples all refer to Figure 2.
+
+	Example 4: Any channel with 1 client in it. Messages to the channel go to the server and then nowhere else.
+	Example 5: 2 clients in a channel. All messages traverse a path as if  they were private messages between the two clients outside a channel.
+	Example 6: Clients 1, 2 and 3 in a channel.  All messages to the  channel are sent to all clients and only those servers which must  be traversed by the message if it were a private message to a single client.  If client 1 sends a message, it goes back to client 2 and then via server B to client 3.
+
+5.2.2 To A Host/Server Mask
+
+To provide with some mechanism to send messages to a large body of related users, host and server mask messages are available.  These messages are sent to users whose host or server information match that of the mask.
+
+5.2.3 To A List
+
+The least efficient style of one-to-many conversation is through clients talking to a 'list' of targets (client, channel, mask).  How this is done is almost self explanatory: the client gives a list of destinations to which the message is to be delivered and the server breaks it up and dispatches a separate copy of the message to each given destination.
+
+This is not as efficient as using a channel since the destination list MAY be broken up and the dispatch sent without checking to make sure duplicates aren't sent down each path.
+
+5.3 One-To-All
+
+The one-to-all type of message is better described as a broadcast message, sent to all clients or servers or both.  On a large network of users and servers, a single message can result in a lot of traffic being sent over the network in an effort to reach all of the desired destinations.
+For some class of messages, there is no option but to broadcast it to all servers so that the state information held by each server is consistent between servers.
+
+5.3.1 Client-to-Client
+
+The IRC protocol does not provide for direct client to client communication. This is handled by negotiated extensions such as DCC.
+
+5.3.2 Client-to-Server
+
+Most of the commands which result in a change of state information MUST be sent to all servers by default, and this distribution SHALL NOT be changed by the client.
+
+5.3.3 Server-to-Server
+
+While most messages between servers are distributed to all 'other' servers, this is only required for any message that affects a user, channel or server.  Since these are the basic items found in IRC, nearly all messages originating from a server are broadcast to all other connected servers.
+
+
+
+6. Current Problems
+
+
+There are a number of recognized problems with this protocol; this section only addresses the problems related to the architecture of the protocol.
+
+6.1 Privacy
+
+Besides not scaling well, the fact that servers need to know all information about other entities, the issue of privacy is also a concern. This is in particular true for channels, as the related information is quite a lot more revealing than whether a user is online or not.
+
+7. Current support and availability
+
+
+IRC
+
+irc.inspircd.org #irc-standard
+
+E-Mail
+
+w00t@inspircd.org
+
+8. Acknowledgements
+
+
+This document makes heavy reference to RFCs 1459, 2811, 2812, and 2813 - the previous documented standards of the IRC protocol. It has also benefited from the consultation and comments of many.  In particular, the following people have made significant contributions to this document:
+
+	Craig Edwards		<brain -at- inspircd.org>
+	John Brooks		<special -at- inspircd.org>
+	Oliver Lupton		<om -at- inspircd.org>
+	Jilles Tjoelker		<jilles -at- stack.nl>
+	William Pitcock		<nenolod -at- nenolod.net>
+	Carsten V. Munk		<stskeeps -at- unrealircd.org>
+
+9. References
+
+	[KEYWORDS]Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.
+	[ABNF] Crocker, D. and P. Overell, "Augmented BNF for Syntax Specifications: ABNF", RFC 2234, November 1997.
+	[HNAME]Braden, R., "Requirements for Internet Hosts -- Application and Support", STD 3, RFC 1123, October 1989.
+	[IRC]  Oikarinen, J. & D. Reed, "Internet Relay Chat Protocol", RFC 1459, May 1993.
+	[IRC-ARCH]Kalt, C., "Internet Relay Chat: Architecture", RFC 2810, April 2000.
+	[IRC-CHAN]Kalt, C., "Internet Relay Chat: Channel Management", RFC 2811, April 2000.
+	[IRC-SERVER] Kalt, C., "Internet Relay Chat: Server Protocol", RFC 2813, April 2000.

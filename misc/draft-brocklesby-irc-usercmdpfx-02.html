@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="creator" content="rfcmarkup version 1.99" />
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Identifier" content="urn:ietf:id:brocklesby-irc-usercmdpfx" />
+<meta name="DC.Creator" content="Edward Brocklesby &lt;ejb@hades.skumler.net&gt;" />
+<meta name="DC.Date.Issued" content="2002-12-09" />
+<meta name="DC.Title" content="IRC Command Prefix Capability" />
+
+    <link rel="icon" href="/images/id.png" type="image/png" />
+    <link rel="shortcut icon" href="/images/id.png" type="image/png" />
+    <title>draft-brocklesby-irc-usercmdpfx-02 - IRC Command Prefix Capability</title>
+    
+    
+    <style type="text/css">
+	body {
+	    margin: 0px 8px;
+            font-size: 1em;
+	}
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style>
+    <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]-->
+
+    <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>          <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>            <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>    <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>     <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td><td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td><td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard:</td>   <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>         <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>         <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script>
+</head>
+<body onload="addHeaderTags()">
+   <div style="height: 13px;">
+      <div onmouseover="this.style.cursor='pointer';"
+         onclick="showElem('legend');"
+         onmouseout="hideElem('legend')"
+	 style="height: 6px; position: absolute;"
+         class="pre noprint docinfo bgred"
+         title="Click for colour legend." >                                                                        </div>
+      <div id="legend"
+           class="docinfo noprint pre legend"
+           style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; "
+           onmouseover="showElem('legend');"
+           onmouseout="hideElem('legend');">
+      </div>
+   </div>
+<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="http://tools.ietf.org/id/draft-brocklesby-irc-usercmdpfx-02.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/draft-brocklesby-irc-usercmdpfx-02.txt" title="PDF version of this document">pdf</a>] [<a href='https://datatracker.ietf.org/doc/draft-brocklesby-irc-usercmdpfx' title='IESG Datatracker information for this document'>Tracker</a>] [<a href="mailto:draft-brocklesby-irc-usercmdpfx@tools.ietf.org?subject=draft-brocklesby-irc-usercmdpfx%20" title="Send email to the document authors">Email</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=draft-brocklesby-irc-usercmdpfx-02.txt" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=draft-brocklesby-irc-usercmdpfx-02.txt" title="Side-by-side diff">Diff2</a>] [<a href="/idnits?url=http://tools.ietf.org/id/draft-brocklesby-irc-usercmdpfx-02.txt" title="Run an idnits check of this document">Nits</a>]               </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<span class="pre noprint docinfo">Versions: <a href="./draft-brocklesby-irc-usercmdpfx-00">00</a> <a href="./draft-brocklesby-irc-usercmdpfx-01">01</a> <a href="./draft-brocklesby-irc-usercmdpfx-02">02</a>                                                      </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<pre>
+Network Working Group                                      E. Brocklesby
+INTERNET-DRAFT                                             November 2002
+Expires: May 2003
+
+                     <span class="h1">IRC Command Prefix Capability</span>
+                   <span class="h1">draft-brocklesby-irc-usercmdpfx-02</span>
+
+Status of this Document
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of <a href="./rfc2026#section-10">Section&nbsp;10 of RFC2026</a>.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as Internet-
+   Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at
+   <a href="http://www.ietf.org/ietf/1id-abstracts.txt">http://www.ietf.org/ietf/1id-abstracts.txt</a>
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   <a href="http://www.ietf.org/shadow.html">http://www.ietf.org/shadow.html</a>.
+
+
+   This document is a product of an individual.  Comments are solicited
+   and should be addressed to the author.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2002). All Rights Reserved.
+
+Abstract
+
+     This memo presents a method for a client to prefix commands sent to
+     an IRC (Internet Relay Chat) server with a label, in order to match
+     server replies against commands previously sent, without having to
+     keep excessive state on the server connection.  It is a primary
+     goal to implement this in a way which is completely backwards-
+     compatible with existing IRC servers.
+
+     This documents describes an extention to the Internet Relay Chat
+     protocol as described in <a href="./rfc1459">RFC 1459</a> [<a href="#ref-1" title='"Internet Relay Chat Protocol"'>1</a>].
+
+
+
+
+<span class="grey">Brocklesby                                                      [Page 1]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-2" id="page-2" href="#page-2" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT              Expires: May 2003              November 2002</span>
+
+
+                           Table of Contents
+
+
+<a href="#section-1">1</a>. Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+ <a href="#section-1.1">1.1</a>. Motivation . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+ <a href="#section-1.2">1.2</a>. Terminology. . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+<a href="#section-2">2</a>. Outline of the protocol . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+<a href="#section-3">3</a>. Compatibility . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-3">3</a>
+<a href="#section-4">4</a>. Impact on the server-server protocol. . . . . . . . . . . . . . .   <a href="#page-3">3</a>
+<a href="#section-5">5</a>. Message Format. . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-4">4</a>
+<a href="#section-6">6</a>. Interaction with remote commands. . . . . . . . . . . . . . . . .   <a href="#page-4">4</a>
+<a href="#section-7">7</a>. Capability negotiation. . . . . . . . . . . . . . . . . . . . . .   <a href="#page-5">5</a>
+ <a href="#section-7.1">7.1</a>. RPL_ISUPPORT (005) numeric . . . . . . . . . . . . . . . . . .   <a href="#page-5">5</a>
+<a href="#section-8">8</a>. New numerics. . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-5">5</a>
+ <a href="#section-8.1">8.1</a>. ERR_PFXUNROUTABLE (525). . . . . . . . . . . . . . . . . . . .   <a href="#page-5">5</a>
+<a href="#section-9">9</a>. Security Considerations . . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+<a href="#section-10">10</a>. Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+<a href="#section-11">11</a>. References . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+<a href="#section-12">12</a>. Author's address . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+<a href="#section-13">13</a>. Full Copyright Statement . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+
+<span class="h2"><a class="selflink" name="section-1" href="#section-1">1</a>.  Introduction</span>
+
+<span class="h3"><a class="selflink" name="section-1.1" href="#section-1.1">1.1</a>.  Motivation</span>
+
+     Currently, interaction between the IRC client and the server
+     requires the client to keep an amount of state regarding the
+     current connection.  For example, caching of other client's
+     usernames and hosts by the client requires that it request a
+     listing of channel members (via the WHO command) and process the
+     reply.  In order to prevent misinterpreting WHO requests by the
+     user, the client must keep state on the order of WHO commands which
+     have been sent to the server, and match each received reply to a
+     command on the queue.  This is prone to error, and does not
+     gracefully handle losing the state of the queue.
+
+     This memo proposes an alternative method for tracking the state of
+     commands sent to the server; it is not specific to the WHO command,
+     but may be applied to any command.
+
+<span class="h3"><a class="selflink" name="section-1.2" href="#section-1.2">1.2</a>.  Terminology</span>
+
+     Original IRC protocol: The original IRC protocol as described in
+     <a href="./rfc1459">RFC 1459</a> [<a href="#ref-1" title='"Internet Relay Chat Protocol"'>1</a>].
+
+     The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+     "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in
+     this document are to be interpreted as described in <a href="./rfc2119">RFC 2119</a> [<a href="#ref-2" title='"Key words for use in RFCs to Indicate Requirement Levels"'>2</a>].
+
+
+
+<span class="grey">Brocklesby                                        <a href="#section-1.2">Section 1.2</a>.  [Page 2]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-3" id="page-3" href="#page-3" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT              Expires: May 2003              November 2002</span>
+
+
+     The ABNF syntax used in this document is defined in <a href="./rfc2234">RFC 2234</a> [<a href="#ref-3" title='"Augmented BNF for Syntax Specifications: ABNF"'>3</a>].
+
+     The phrase "keeping state" is used in this document to mean storing
+     information in the client about the state of the connection to the
+     server; for example, commands for which it is expecting replies.
+
+<span class="h2"><a class="selflink" name="section-2" href="#section-2">2</a>.  Outline of the protocol</span>
+     The command prefix proposal allows a client to prefix each command
+     sent to the server with a label, followed by the actual command.
+     The server will then use this prefix when sending replies generated
+     by this command to the client.  An example session might be:
+
+          Client --&gt; "*W001 WHO #epic"
+
+          Server &lt;-- "*W001 :irc.example.com 352 larne #epic chady
+               irc.concentric.net irc.concentric.net chady H*@ :5 Moo!"
+
+          Server &lt;-- "*W001 :irc.example.com 315 larne #epic :End of
+               /WHO list."
+
+          Client --&gt; "*T001 TIME"
+
+          Client --&gt; "*J001 JOIN #testing123"
+
+          Server &lt;-- "*T001 :irc.example.com 391 larne irc.example.com
+               :Thursday September 12 2002 -- 01:54:19 +02:00"
+
+          Server &lt;-- "*J001 :larne!ejb@user.example.com JOIN
+               :#testing123"
+
+          Server &lt;-- "*J001 :irc.example.com MODE #testing123 +nt"
+
+          Server &lt;-- "*J001 :irc.example.com 353 larne = #testing123
+               :@larne"
+
+          Server &lt;-- "*J001 :irc.example.com 366 larne #testing123 :End
+               of /NAMES list."
+
+          Client --&gt; "QUIT"
+
+          Server &lt;-- "ERROR :Closing Link: user.example.com (Client
+               Quit)"
+
+     The client is therefore able to determine exactly which request
+     generated the replies it receives.
+
+     The client and server should negotiate to determine whether support
+     for command prefixes is available; this process is described in
+
+
+
+<span class="grey">Brocklesby                                          <a href="#section-2">Section 2</a>.  [Page 3]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-4" id="page-4" href="#page-4" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT              Expires: May 2003              November 2002</span>
+
+
+     <a href="#section-7">section 7</a>.
+
+<span class="h2"><a class="selflink" name="section-3" href="#section-3">3</a>.  Compatibility</span>
+
+     Because the command prefix capability is negotiated by the client
+     and server, it will only be used when both the server and client
+     agree to support it.  This memo therefore does not introduce any
+     incompatible changes to the IRC protocol.
+
+<span class="h2"><a class="selflink" name="section-4" href="#section-4">4</a>.  Impact on the server-server protocol</span>
+
+     While the command prefix proposal allows remote prefixes, which
+     would presumably require a change in the server-server protocol
+     used by the IRC server software to communicate, the author does not
+     believe that it is beneficial to the IRC community to attempt to
+     define any aspect of the server protocol.  Therefore this memo does
+     not address the server-server protocol.
+
+<span class="h2"><a class="selflink" name="section-5" href="#section-5">5</a>.  Message Format</span>
+
+     Any command sent to the server by the client may be proceeded by a
+     prefix token, followed by a single space.  It is not required that
+     the client sends a prefix for a command.  The ABNF representation
+     of a prefix is:
+
+          prefix = "*" 1*10alnum
+          alnum = ALPHA / DIGIT
+
+     An asterisk was chosen to introduce the prefix because it is not a
+     valid character in this position under normal circumstances, and
+     thus no ambiguity is introduced in the prefix message.
+
+     This prefix should be present at the start of the line sent to the
+     server, and the command should follow the prefix unchanged.  The
+     prefix must be followed by exactly one space character (ASCII
+     0x20).
+
+     When the server receives a command from a client with a prefix
+     present, it MUST prefix all replies (both numerics and commands)
+     generated by that command with the prefix the client specified.
+     The returned prefix shall have the same form as that sent by the
+     client; that is, it shall occur at the beginning of the line, and
+     should be separated from the reply by exactly 1 space character.
+     The rest of the reply shall follow on the same line as the prefix
+     as normal.
+
+     If the client sends a prefix which has an invalid format, for
+     example it is over 10 characters in length, the server should
+
+
+
+<span class="grey">Brocklesby                                          <a href="#section-5">Section 5</a>.  [Page 4]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-5" id="page-5" href="#page-5" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT              Expires: May 2003              November 2002</span>
+
+
+     ignore the prefix, and process the command as if the prefix was not
+     provided.
+
+     The server MUST NOT send a prefix to replies when the client did
+     not specify a prefix in the command generating the reply.  If the
+     client receives a prefix which it was not expecting -- for example,
+     it did not send a command with a corresponding prefix -- it should
+     treat the message as if it did not contain a prefix.  It is
+     expected that this could occur during remote queries where the
+     client changes its nickname before the reply is received.  Note,
+     however, that the client should not use presence of an unexpected
+     prefix to indicate misdelivery of a message.
+
+<span class="h2"><a class="selflink" name="section-6" href="#section-6">6</a>.  Interaction with remote commands</span>
+
+     It is recommended, though not required, that the server should
+     support command prefixes for remote commands.
+
+     If the server receives a command to be executed remotely which
+     includes a prefix, the command should be forwarded as normal, along
+     with the prefix.  Any replies generated in response to this
+     command, whether from the local server, the target (remote) server
+     or any intermediate server forwarding the command, MUST contain the
+     prefix specified by the client.
+
+     If the message is unable to be delivered to the target server with
+     the prefix intact, the command MUST NOT be executed by any server.
+     Instead, the server which is unable to forward the message should
+     reply to the client with an ERR_PFXUNROUTABLE (525) numeric.  This
+     reply MUST be delivered with the prefix supplied by the client for
+     the original message.
+
+     Note that the server should take all reasonable measures to ensure
+     that an error message is delivered to the client in the case where
+     a prefixed message cannot be delivered.  However, it is sometimes
+     unavoidable that messages will be lost in transit, and never
+     arrive.  The client therefore MUST NOT rely on a reply to any
+     remote prefixed command being delivered.
+
+<span class="h2"><a class="selflink" name="section-7" href="#section-7">7</a>.  Capability negotiation</span>
+
+     The client should not send command prefixes to the server unless
+     the server has indicated that it understands them. This is handled
+     through the RPL_ISUPPORT numeric.
+
+
+
+
+
+
+
+<span class="grey">Brocklesby                                          <a href="#section-7">Section 7</a>.  [Page 5]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-6" id="page-6" href="#page-6" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT              Expires: May 2003              November 2002</span>
+
+
+<span class="h3"><a class="selflink" name="section-7.1" href="#section-7.1">7.1</a>.  RPL_ISUPPORT (005) numeric</span>
+
+     The server should advertise to the client that it supports command
+     prefixes via the RPL_ISUPPORT numeric.  This numeric is described
+     in <a href="./draft-brocklesby-irc-isupport-00">draft-brocklesby-irc-isupport-00</a> [<a href="#ref-4" title='"IRC RPL_ISUPPORT Numeric Definition"'>4</a>]. In this case, the ISUPPORT
+     token USERCMDPFX should be sent by the server to indicate that it
+     supports command prefixes.
+
+     The USERCMDPFX token must not be specified with a value; if a value
+     is given, the client should treat the token as if it was specified
+     without a value.
+
+<span class="h2"><a class="selflink" name="section-8" href="#section-8">8</a>.  New numerics</span>
+
+     This memo introduces one new numeric.
+
+<span class="h3"><a class="selflink" name="section-8.1" href="#section-8.1">8.1</a>.  ERR_PFXUNROUTABLE (525)</span>
+
+     "&lt;nickname&gt; :Remote prefixed command could not be delivered."
+
+     The ERR_PFXUNROUTABLE reply is sent by the server when a command
+     with a prefix which was due to be forwarded to another server for
+     execution could not be delivered.  This reply MUST contain the
+     prefix specified by the client for the original message.
+
+<span class="h2"><a class="selflink" name="section-9" href="#section-9">9</a>.  Security Considerations</span>
+
+     This memo does not raise any security considerations.
+
+<span class="h2"><a class="selflink" name="section-10" href="#section-10">10</a>.  Acknowledgements</span>
+
+     The author gratefully acknowledges the contributions of Jeremy
+     Nelson, Daniel C.  Sobral, Bill Fenner, Kurt Roeckx, and Petr
+     Baudis in the preparation of this document.
+
+<span class="h2"><a class="selflink" name="section-11" href="#section-11">11</a>.  References</span>
+
+     [<a name="ref-1" id="ref-1">1</a>] Oikarinen, J. and D. Reed, "Internet Relay Chat Protocol", <a href="./rfc1459">RFC</a>
+          <a href="./rfc1459">1459</a>, May 1993.
+
+     [<a name="ref-2" id="ref-2">2</a>] Bradner, S., "Key words for use in RFCs to Indicate Requirement
+          Levels", <a href="./rfc2119">RFC 2119</a>, March 1997.
+
+     [<a name="ref-3" id="ref-3">3</a>] Crocker, D. and P. Overell, "Augmented BNF for Syntax
+          Specifications: ABNF", <a href="./rfc2234">RFC 2234</a>, November 1997.
+
+     [<a name="ref-4" id="ref-4">4</a>] Brocklesby, E., "IRC RPL_ISUPPORT Numeric Definition", Internet
+          draft, November 2002.
+
+
+
+<span class="grey">Brocklesby                                         <a href="#section-11">Section 11</a>.  [Page 6]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-7" id="page-7" href="#page-7" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT              Expires: May 2003              November 2002</span>
+
+
+<span class="h2"><a class="selflink" name="section-12" href="#section-12">12</a>.  Author's address</span>
+
+     Edward Brocklesby
+     57 Williamson Way
+     Oxford  OX4 4TU
+     UK
+
+     Phone: +44 1865 452230
+     EMail: ejb@hades.skumler.net
+
+<span class="h2"><a class="selflink" name="section-13" href="#section-13">13</a>.  Full Copyright Statement</span>
+
+     Copyright (C) The Internet Society (2002). All Rights Reserved.
+
+     This document and translations of it may be copied and furnished to
+     others, and derivative works that comment on or otherwise explain
+     it or assist in its implementation may be prepared, copied,
+     published and distributed, in whole or in part, without restriction
+     of any kind, provided that the above copyright notice and this
+     paragraph are included on all such copies and derivative works.
+     However, this document itself may not be modified in any way, such
+     as by removing the copyright notice or references to the Internet
+     Society or other Internet organizations, except as needed for the
+     purpose of developing Internet standards in which case the
+     procedures for copyrights defined in the Internet Standards process
+     must be followed, or as required to translate it into languages
+     other than English.
+
+     The limited permissions granted above are perpetual and will not be
+     revoked by the Internet Society or its successors or assigns.
+
+     This document and the information contained herein is provided on
+     an "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET
+     ENGINEERING TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+     THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+     WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Brocklesby                                         <a href="#section-13">Section 13</a>.  [Page 7]
+
+</pre><br />
+<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.99, available from
+<a href="http://tools.ietf.org/tools/rfcmarkup/">http://tools.ietf.org/tools/rfcmarkup/</a>
+</small></small></span>
+</body></html>
