@@ -1,7 +1,8 @@
 # Original IRC protocol
 
- * [RFC 1459](http://tools.ietf.org/html/rfc1459) has the original protocol
- * Later updated by RFCs [2810](http://tools.ietf.org/html/rfc2810), [2811](http://tools.ietf.org/html/rfc2811), [2812](http://tools.ietf.org/html/rfc2812), [2813](http://tools.ietf.org/html/rfc2813)
+ * [grawity's collected docs](https://github.com/grawity/irc-docs)
+
+[RFC 1459](http://tools.ietf.org/html/rfc1459) has the original protocol. Later updated by RFCs [2810](http://tools.ietf.org/html/rfc2810), [2811](http://tools.ietf.org/html/rfc2811), [2812](http://tools.ietf.org/html/rfc2812), [2813](http://tools.ietf.org/html/rfc2813)
 
 Client-server protocol later extended in various ways:
 
