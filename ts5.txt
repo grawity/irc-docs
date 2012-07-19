@@ -1,7 +1,7 @@
   Overview of the TS5 system
   Lee H <lee@leeh.co.uk>
 
-$Id: ts5.txt 33 2005-10-02 20:50:00Z knight $
+$Id: ts5.txt 23020 2006-09-01 18:20:19Z androsyn $
 
 For the purposes of this document, ircd versions:
   hybrid6.0
@@ -11,6 +11,7 @@ For the purposes of this document, ircd versions:
 and prior, are TS3.
 
 ircd-hybrid-6.2 and later support TS5.
+
 
 Whats TS5?
 ----------
@@ -96,7 +97,7 @@ TS4, so it was thought better to avoid a clash with an existing version.
 Advantages
 ----------
 
-It's a realistic event that a server will be attacked so it splits off a
+Its a realistic event that a server will be attacked so it splits off a
 network, then used to regain ops in a channel.  TS5 makes this pointless,
 the server will never give ops on a netsplit.  TS5 is network wide, so it
 leaves individual servers free to choose options like NO_JOIN_ON_SPLIT,
@@ -106,7 +107,7 @@ whilst keeping splits useless to users.
 Disadvantages
 -------------
 
-It's virtually impossible for a user to actively regain ops themselves (some
+Its virtually impossible for a user to actively regain ops themselves (some
 regard this as an advantage..) because on a large sized channel, its
 impossible to get people to leave so it can be recreated, therefore if a
 network did not have some form of services, it could possibly end up
@@ -145,3 +146,6 @@ configuration of minimum servers and users, and sometimes a split that is
 above these limits is enough to be abused to regain ops, whereas if the
 limits are too high, clients will never be able to join anything or be opped
 when they create a channel.
+
+
+EOF
