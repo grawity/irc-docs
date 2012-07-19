@@ -10,7 +10,7 @@ Client-server protocol later extended in various ways:
 
 Server-server protocol went through a lot of changes:
 
- * hybrid→charybdis [TS3](https://gist.github.com/3146537), [TS5](https://gist.github.com/3146542), [TS6](https://raw.github.com/gist/3146552/76e3fc29e5ab014c0db9060e33e0f03c0c93b2f7/ts6.txt), [TS6 v7](https://raw.github.com/gist/3146552/867a2bd4b7654e27cb4cee16d0ed9d61b9a41262/ts6v7.txt), [TS6 v8](https://raw.github.com/gist/3146552/d654071d10f138ea01fefe908314c7eea66e11fc/ts6v8.txt)
+ * hybrid→charybdis [TS3](https://github.com/grawity/irc-docs/blob/master/ts3.txt), [TS5](https://github.com/grawity/irc-docs/blob/master/ts5.txt), [TS6](https://github.com/grawity/irc-docs/blob/master/ts6.txt), [TS6 v7](https://github.com/grawity/irc-docs/blob/master/ts6v7.txt), [TS6 v8](https://github.com/grawity/irc-docs/blob/master/ts6v8.txt)
  * ircu [P10](http://web.mit.edu/klmitch/Sipb/devel/src/ircu2.10.11/doc/p10.html)
 
 # An incomplete list of extensions to the client-server IRC protocol
