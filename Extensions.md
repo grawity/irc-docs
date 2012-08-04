@@ -42,8 +42,13 @@ Known extensions:
  * `identify-msg`
  * [`multi-prefix`](http://ircv3.atheme.org/extensions/multi-prefix-3.1)
  * [`sasl`](http://ircv3.atheme.org/extensions/sasl-3.1)
+ * [`server-time`](http://ircv3.atheme.org/extensions/server-time-3.2)
  * [`tls`](http://ircv3.atheme.org/extensions/tls-3.1)
  * `userhost-in-names`
+
+Related documents:
+
+ * [message tags](http://ircv3.atheme.org/specification/message-tags-3.2)
 
 Features:
 
