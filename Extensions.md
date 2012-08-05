@@ -30,9 +30,9 @@ Known extensions:
  * [`WHOX`](http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who)
  * [List of other extensions](http://www.irc.org/tech_docs/005.html)
 
-## CAP (current; many ircds)
+## IRCv3 – CAP (current; many ircds)
 
-Part of [IRCv3](http://ircv3.atheme.org/). Implemented by most major ircds according to [draft specification](http://ircv3.atheme.org/specification/capability-negotiation-3.1).
+`CAP` is part of [IRCv3](http://ircv3.atheme.org/). Implemented by most major ircds according to [draft specification](http://ircv3.atheme.org/specification/capability-negotiation-3.1).
 
 Known extensions:
 
@@ -46,9 +46,10 @@ Known extensions:
  * [`tls`](http://ircv3.atheme.org/extensions/tls-3.1)
  * `userhost-in-names`
 
-Related documents:
+Other IRCv3 specifications:
 
  * [message tags](http://ircv3.atheme.org/specification/message-tags-3.2)
+ * [metadata](http://ircv3.atheme.org/specification/metadata-3.2)
 
 Features:
 
