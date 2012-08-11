@@ -36,19 +36,19 @@ Known extensions:
 
 Known extensions:
 
- * [`account-notify`](http://ircv3.atheme.org/extensions/account-notify-3.1) (charybdis, unreal)
- * [`away-notify`](http://ircv3.atheme.org/extensions/away-notify-3.1) (charybdis, unreal)
- * [`extended-join`](http://ircv3.atheme.org/extensions/extended-join-3.1) (charybdis, unreal)
- * `identify-msg` (charybdis)
+ * [`account-notify`](http://ircv3.atheme.org/extensions/account-notify-3.1) (Charybdis, Unreal)
+ * [`away-notify`](http://ircv3.atheme.org/extensions/away-notify-3.1) (Charybdis, Unreal)
+ * [`extended-join`](http://ircv3.atheme.org/extensions/extended-join-3.1) (Charybdis, Unreal)
+ * `identify-msg` (Charybdis)
  * [`multi-prefix`](http://ircv3.atheme.org/extensions/multi-prefix-3.1)
  * [`sasl`](http://ircv3.atheme.org/extensions/sasl-3.1)
- * [`server-time`](http://ircv3.atheme.org/extensions/server-time-3.2) (znc)
- * [`tls`](http://ircv3.atheme.org/extensions/tls-3.1) (inspircd, unreal)
- * `userhost-in-names` (unreal)
+ * [`server-time`](http://ircv3.atheme.org/extensions/server-time-3.2) (ZNC)
+ * [`tls`](http://ircv3.atheme.org/extensions/tls-3.1) (InspIRCd, Unreal)
+ * `userhost-in-names` (Unreal)
 
 Other IRCv3 specifications:
 
- * [message tags](http://ircv3.atheme.org/specification/message-tags-3.2) (used for `server-time` by znc)
+ * [message tags](http://ircv3.atheme.org/specification/message-tags-3.2) (used for `server-time` by ZNC)
  * [metadata](http://ircv3.atheme.org/specification/metadata-3.2)
 
 Features:
@@ -66,7 +66,7 @@ Downsides:
 Known extensions:
 
  * `IDENTIFY-MSG` – identical to CAP `identify-msg`
- * `IDENTIFY-CTCP` – merged into `IDENTIFY-MSG`?
+ * `IDENTIFY-CTCP` (Dancer) – merged into `IDENTIFY-MSG` by Hyperion
 
 Features:
 
