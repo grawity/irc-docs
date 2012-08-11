@@ -118,6 +118,8 @@ An extension of the IRC protocol as a whole, used by Microsoft Chat client as we
 
 Edited [draft specification](http://static.ignition-project.com/ircxdraft/) exists; it describes several new commands implemented by IRCX-compatible servers, as well as modes and privilege levels. Adds SASL support using `AUTH`, predating CAP.
 
+There are plans to add several IRCX features to IRCv3.
+
 Features:
 
  * Extension must be enabled during registration (using `IRCX`).
