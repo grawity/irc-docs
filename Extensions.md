@@ -36,19 +36,19 @@ Known extensions:
 
 Known extensions:
 
- * [`account-notify`](http://ircv3.atheme.org/extensions/account-notify-3.1)
- * [`away-notify`](http://ircv3.atheme.org/extensions/away-notify-3.1)
- * [`extended-join`](http://ircv3.atheme.org/extensions/extended-join-3.1)
- * `identify-msg`
+ * [`account-notify`](http://ircv3.atheme.org/extensions/account-notify-3.1) (charybdis, unreal)
+ * [`away-notify`](http://ircv3.atheme.org/extensions/away-notify-3.1) (charybdis, unreal)
+ * [`extended-join`](http://ircv3.atheme.org/extensions/extended-join-3.1) (charybdis, unreal)
+ * `identify-msg` (charybdis)
  * [`multi-prefix`](http://ircv3.atheme.org/extensions/multi-prefix-3.1)
  * [`sasl`](http://ircv3.atheme.org/extensions/sasl-3.1)
- * [`server-time`](http://ircv3.atheme.org/extensions/server-time-3.2)
- * [`tls`](http://ircv3.atheme.org/extensions/tls-3.1)
- * `userhost-in-names`
+ * [`server-time`](http://ircv3.atheme.org/extensions/server-time-3.2) (znc)
+ * [`tls`](http://ircv3.atheme.org/extensions/tls-3.1) (inspircd, unreal)
+ * `userhost-in-names` (unreal)
 
 Other IRCv3 specifications:
 
- * [message tags](http://ircv3.atheme.org/specification/message-tags-3.2)
+ * [message tags](http://ircv3.atheme.org/specification/message-tags-3.2) (used for `server-time` by znc)
  * [metadata](http://ircv3.atheme.org/specification/metadata-3.2)
 
 Features:
