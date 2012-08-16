@@ -1,0 +1,59 @@
+# vim: ts=4:sw=4:
+
+TS3
+	ircd-hybrid 6.0
+	ircd-comstud 1.12
+	CS r31pl4
+TS5
+	ircd-hybrid 6.1
+
+(scratch)
+	ircd
+		ircu							{P10}
+			Asuka					[d]
+			Nefarious
+				ircd-darenet
+			snircd (QuakeNet)
+			Austhex					[d]
+		DreamForge					[d]
+			bIRCd
+			EliteIRCd				[d]
+				UnrealIRCd
+					QuakeIRCd		[d]
+			Faerion
+		ircd-hybrid						{TS6~5}
+			Bahamut						{TS5~3}
+				LiquidIRC
+				solid-ircd			[d]
+				UlimateIRCd				{TS5~3}
+				TR-IRCd
+			dancer-ircd				[d]	{TS4+DNCR}
+				Hyperion			[d]	{???+DNCR}
+			oftc-hybrid
+				oftc-hybrid/bc
+			PlexusIRCd (Rizon)
+				Rizon IRCd
+			ircd-ratbox					{TS6}
+				Charybdis				{TS6}
+					ShadowIRCd			{TS6}
+						SporksIRCd
+					ircd-seven			{TS6}
+						cherry-ircd
+							ircd-cherry
+			PTLink					[d]
+		SorIrcd (SorceryNet)		[d]
+	DarkIRCd
+	beware ircd
+	ConferenceRoom
+	csircd							[d]	{TS5}
+	InspIRCd							{InspIRCd TS6}
+	ithildin
+	ngIRCd								{1459}
+	pircd							[d]
+	Pure IRCD
+		ignitionServer
+	Synchronet IRCd
+	WeIRCd
+?
+	Titan IRCd
+		ViagraIRCd [d]

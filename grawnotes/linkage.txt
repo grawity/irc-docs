@@ -1,0 +1,64 @@
+PORT	SERVER			PROTO	SID	NICKLEN
+
+-	atheme.services		TS6	00A	31
+-	ratbox.services		TS6	00B	31
+-	anope.services		Unreal	---	31
+
+8000	charybdis.sol.irc	TS6	01A	31
+8001	ratbox.sol.irc		TS6	01B	31
+8002	hybrid.sol.irc		TS6~5	01C	31
+8003	bahamut.sol.irc		TS5~3	-	31
+8004	inspircd.sol.irc	InspTS6	01E	31
+8005	unreal.sol.irc		Unreal	  1	31
+8006	dancer.sol.irc		TS4.d	-	?
+8007	oftc-hybrid.sol.irc	TS6	01H	?
+8008	hyperion.sol.irc	TS4.d	-	?
+8009	ultimate.sol.irc	TS5~3	-	30
+8010	shadow.sol.irc		TS6	01K	31
+8011	csircd.sol.irc		TS5	-	31
+8012	ircu.sol.irc		?	  1	?
+8013	sporks.sol.irc		TS6	01N	31
+
+hybrid(old)	You have the phorce.  Use it wisely.
+hybrid(ayb)	SOMEONE SET YOU UP THE /KILL FOR GREAT JUSTICE!
+hybrid		You have entered... the Twilight Zone!
+ratbox		You have entered... the PANTS FREE ZONE!
+charybdis	IRCOP FLAG TURN ON
+inspircd	You are now a[n] <opertype>
+bahamut		You are now an IRC Operator
+unreal		You are now an IRC Operator
+dancer		You are now a deity, be nice or else!
+oftc-hybrid	You have entered... the Twilight Zone!
+ultimateircd	You are now an IRC Operator
+csircd		You are now an IRC Operator
+shadowircd	Only the jilles can fix your machine god.
+
+Working links:
+	charybdis <-> hybrid (TS6)
+	charybdis <-> ratbox (TS6)
+	charybdis <-> shadowircd (TS6)
+	hybrid <-> ratbox (TS6)
+	ratbox <-> shadowircd (TS6)
+	bahamut <-> ultimate3 (TS5)
+Almost working:
+	hybrid <-> shadowircd (TS6)
+		hybrid coredumps
+Should work:
+	dancer <-> hyperion (TS5)
+Not working:
+	bahamut <-> csircd
+	bahamut <-> dancer'
+		bahamut kills with nick collision
+	csircd <-> hybrid
+		csircd expects ":TS"
+	dancer <-> *
+		dancer requires CAPAB DNCR
+	dancer' --> *
+		dancer sends CHALL instead of PASS
+	csircd <-> ultimate
+	dancer' <-> ultimate
+	hybrid <-> ultimate
+		ultimate kills with "Bad NICK with wrong number of parameters"
+
+		ultimate: NICK nick hops ts mode user host server ? ? gecos
+		other:    NICK nick hops ts mode user host gecos
