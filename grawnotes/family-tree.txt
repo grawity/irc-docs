@@ -8,8 +8,8 @@ TS5
 	ircd-hybrid 6.1
 
 (scratch)
-	ircd
-		ircu							{P10}
+	ircd {RFC 1459}
+		ircu {P10}
 			Asuka					[d]
 			Nefarious
 				ircd-darenet
@@ -21,35 +21,39 @@ TS5
 				UnrealIRCd
 					QuakeIRCd		[d]
 			Faerion
+			SorIrcd/Sorcery v1.x	[d]
 		ircd-hybrid						{TS6~5}
 			Bahamut						{TS5~3}
 				LiquidIRC
 				solid-ircd			[d]
 				UlimateIRCd				{TS5~3}
+                    CritenIRCd (Criten/Abjects)
 				TR-IRCd
-			dancer-ircd				[d]	{TS4+DNCR}
-				Hyperion			[d]	{???+DNCR}
+				??? fqircd
+			dancer-ircd				            [d] {TS4+DNCR}
+				Hyperion			            [d] {???+DNCR} (Atheme has 5~3+DNCR)
 			oftc-hybrid
 				oftc-hybrid/bc
 			PlexusIRCd (Rizon)
 				Rizon IRCd
-			ircd-ratbox					{TS6}
-				Charybdis				{TS6}
-					ShadowIRCd			{TS6}
+			PTLink					            [d]	(Atheme has TS10~3+PTS4)
+                Vlife.IRCd                          "PTS:ow"
+			??? Aurora				            [d]
+			ircd-ratbox {TS6}
+				Charybdis {TS6}
+					ShadowIRCd {TS6}
 						SporksIRCd
-					ircd-seven			{TS6}
+					ircd-seven {TS6}
 						cherry-ircd
 							ircd-cherry
-			PTLink					[d]
-		SorIrcd (SorceryNet)		[d]
 	DarkIRCd
 	beware ircd
 	ConferenceRoom
-	csircd							[d]	{TS5}
-	InspIRCd							{InspIRCd TS6}
-	ithildin
-	ngIRCd								{1459}
-	pircd							[d]
+	csircd							            [d]	{TS5}
+	InspIRCd                                        {InspIRCd TS6}
+	ithildin						            [d]	{TS5~3}
+	ngIRCd {RFC 1459}
+	pircd							            [d]
 	Pure IRCD
 		ignitionServer
 	Synchronet IRCd
@@ -57,3 +61,4 @@ TS5
 ?
 	Titan IRCd
 		ViagraIRCd [d]
+    AustHex
