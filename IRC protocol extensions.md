@@ -1,4 +1,6 @@
-# Original IRC protocol
+# IRC protocol extensions
+
+## Original IRC protocol
 
  * [grawity's collected docs](https://github.com/grawity/irc-docs)
 
@@ -16,8 +18,6 @@ Server-server protocol went through a lot of changes:
  * hybrid→charybdis [TS3](https://github.com/grawity/irc-docs/blob/master/server/ts3.txt), [TS5](https://github.com/grawity/irc-docs/blob/master/server/ts5.txt), [TS6](https://github.com/grawity/irc-docs/blob/master/server/ts6.txt), [TS6 v7](https://github.com/grawity/irc-docs/blob/master/server/ts6v7.txt), [TS6 v8](https://github.com/grawity/irc-docs/blob/master/server/ts6v8.txt)
      * [EUID](https://github.com/grawity/irc-docs/blob/master/server/ts6-euid.txt), [SAVE](https://github.com/grawity/irc-docs/blob/master/server/ts-collision-fnc.txt), other [CAPABs](https://github.com/grawity/irc-docs/blob/master/server/capab.txt)
  * ircu [P10](http://web.mit.edu/klmitch/Sipb/devel/src/ircu2.10.11/doc/p10.html)
-
-# An incomplete list of extensions to the client-server IRC protocol
 
 ## RPL_ISUPPORT (current; all ircds)
 
