@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>PRIVMSG (extension to RFC1459 command)</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch03.html" title="Chapter 3. IRCX Client Messages" /><link rel="previous" href="ch03s10.html" title="NOTICE (extension to RFC1459 command)" /><link rel="next" href="ch03s12.html" title="PROP (new IRCX command)" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">PRIVMSG (extension to RFC1459 command)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s10.html">Prev</a> </td><th width="60%" align="center">Chapter 3. IRCX Client Messages</th><td width="20%" align="right"> <a accesskey="n" href="ch03s12.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4760410"></a>PRIVMSG (extension to RFC1459 command)</h2></div></div><div></div></div><p>
+            Sends a message to a channel or user.  PRIVMSG is extended in
+            the same way as NOTICE.
+         </p><p>
+            Syntax 1 (RFC 1459 defined):
+            </p><pre class="synopsis">PRIVMSG &lt;target&gt; :&lt;message&gt;</pre><p>
+            Syntax 2 (IRCX extension):
+            </p><pre class="synopsis">PRIVMSG &lt;channel&gt; &lt;nickname list&gt; :&lt;message&gt;</pre><p>
+         </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760443"></a>Results</h3></div></div><div></div></div><p>
+               Same as defined in RFC1459, but with the additional
+               functionality of sending to a list of nicknames within the
+               context of a channel.
+            </p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Editor's Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Editor's Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>This form of PRIVMSG is like the IRCX WHISPER command. As with NOTICE, the IRCX draft is not clear about how this
+                  command should function. In order to be compatible with RFC 1459 clients, I believe the
+                  recepients receive the PRIVMSG as if it got sent to the entire channel.
+                  </p><div class="example"><a id="id4760471"></a><p class="title"><b>Example 3.14. Possible way to handle a "contextual PRIVMSG"</b></p><p>Client: <span><b class="command">PRIVMSG #Channel Romeo,Juliet :Thou shalt not marry!</b></span><br />
+                           Server (to recepients): <span><b class="command">:Username!Ident@Hostname PRIVMSG #Channel :Thou shalt not marry!</b></span>
+                     </p></div><p>
+            </p><p>Because the IRCX draft isn't very clear about this command, a server developer could send the PRIVMSG to the recepients
+                  with both the channel and nickname in the message. It could also be possible to use the "fallback" that the WHISPER
+                  command calls for: send the extended version if the client supports IRCX, otherwise lose the context and send it
+                  normally.</p></td></tr></table></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s10.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s12.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">NOTICE (extension to RFC1459 command) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> PROP (new IRCX command)</td></tr></table></div></body></html>

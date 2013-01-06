@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>LISTX (new IRCX command)</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch03.html" title="Chapter 3. IRCX Client Messages" /><link rel="previous" href="ch03s07.html" title="ISIRCX (new IRCX command)" /><link rel="next" href="ch03s09.html" title="MODE (extension to RFC1459 command)" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">LISTX (new IRCX command)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s07.html">Prev</a> </td><th width="60%" align="center">Chapter 3. IRCX Client Messages</th><td width="20%" align="right"> <a accesskey="n" href="ch03s09.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4759815"></a>LISTX (new IRCX command)</h2></div></div><div></div></div><p>
+            Extended version of the LIST command that returns  additional
+            channel properties.   Channels  with  extended names will be
+            returned, even to non-IRCX clients.  Some channel modes and
+            the PICS rating string are included with the result.  Only the
+            channel modes that do not define an additional argument
+            (TOPICOP, NOEXTERN, etc.) are included in the &lt;modes&gt; field.
+            Clients should use the query limit to avoid overloading the
+            client or having the connection dropped by the server.
+         </p><p>
+            Syntax 1: </p><pre class="synopsis">LISTX [&lt;channel list&gt;]</pre><p>
+            Syntax 2: </p><pre class="synopsis">LISTX &lt;query list&gt; [&lt;query limit&gt;]</pre><p>
+         </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4759853"></a>Parameters</h3></div></div><div></div></div><p>
+               <span class="token">&lt;channel list&gt;</span>  A list of channels may be specified in order
+                  to  find the PICS ratings or modes of those channels.  If
+                  no channels are specified, the server will send the
+                  entire matching list of channels.
+            </p><p>
+               <span class="token">&lt;query list&gt;</span>  One or more query terms separated by spaces or
+                  commas.
+               </p><div class="table"><a id="id4759882"></a><p class="title"><b>Table 3.2. Query terms for LIST command</b></p><table summary="Query terms for LIST command" width="100%" border="1"><colgroup><col /><col /></colgroup><thead><tr><th align="left">Query Term</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">&lt;#</td><td align="left">Select channels with less than # members.</td></tr><tr><td align="left">&gt;#</td><td align="left">Select channels with more than # members.</td></tr><tr><td align="left">C&lt;#</td><td align="left">Select channels created less than # minutes ago.</td></tr><tr><td align="left">C&gt;#</td><td align="left">Select channels created greater than # minutes ago.</td></tr><tr><td align="left">L=&lt;mask&gt;</td><td align="left">Select channels with language property matching the mask string.</td></tr><tr><td align="left">N=&lt;mask&gt;</td><td align="left">Select channels with name matching the mask string.</td></tr><tr><td align="left">R=0</td><td align="left">Select unregistered channels.</td></tr><tr><td align="left">R=1</td><td align="left">Select registered channels.</td></tr><tr><td align="left">S=&lt;mask&gt;</td><td align="left">Select channels with subject matching the mask string.</td></tr><tr><td align="left">T&lt;#</td><td align="left">Select channels with a topic changed less than # minutes ago.</td></tr><tr><td align="left">T&gt;#</td><td align="left">Select channels with a topic changed greater than # minutes ago.</td></tr><tr><td align="left">T=&lt;mask&gt;</td><td align="left">Select channels that topic matches the mask string.</td></tr><tr><td align="left">&lt;query limit&gt;</td><td align="left">Maximum number of channels to be returned.</td></tr><tr><td align="left">&lt;mask&gt;</td><td align="left">Sequence of characters that is used to select
+                              a matching  channel  name  or  topic.   The
+                              character * and ? are used for wildcard
+                              searches.</td></tr></tbody></table></div><p>
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760077"></a>Results</h3></div></div><div></div></div><p>
+               IRCRPL_LISTXSTART<br />
+               IRCRPL_LISTXLIST<br />
+               IRCRPL_LISTXPICS<br />
+               IRCRPL_LISTXTRUNC<br />
+               IRCRPL_LISTXEND<br />
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760100"></a>Remarks</h3></div></div><div></div></div><p>
+               To compose a mask, use this character escaping scheme.
+               </p><div class="table"><a id="id4760110"></a><p class="title"><b>Table 3.3. Character escaping in mask-string</b></p><table summary="Character escaping in mask-string" width="100%" border="1"><colgroup><col /><col /></colgroup><thead><tr><th align="left">Escaped Character</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">\b</td><td align="left">For " " blank</td></tr><tr><td align="left">\c</td><td align="left">for ","</td></tr><tr><td align="left">\\</td><td align="left">for "\"</td></tr><tr><td align="left">\*</td><td align="left">for "*" (not wildcard)</td></tr><tr><td align="left">\?</td><td align="left">for "?" (not wildcard)</td></tr></tbody></table></div><p>
+            </p><p>
+               The PICS property is only returned if not null.
+            </p><p>
+               A record limit of '0' (zero) or blank will be interpreted as
+               unlimited.
+            </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s07.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s09.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">ISIRCX (new IRCX command) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> MODE (extension to RFC1459 command)</td></tr></table></div></body></html>

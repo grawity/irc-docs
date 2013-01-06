@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>Chapter 6. Channel Modes and Properties</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="index.html" title="IRCX Draft" /><link rel="previous" href="ch05s02.html" title="GAG (IRCX +z)" /><link rel="next" href="ch06s02.html" title="Properties" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 6. Channel Modes and Properties</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05s02.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch06s02.html">Next</a></td></tr></table><hr /></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="id4761946"></a>Chapter 6. Channel Modes and Properties</h2></div></div><div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="ch06.html#id4761965">Modes</a></span></dt><dd><dl><dt><span class="section"><a href="ch06.html#id4761978">PUBLIC (RFC1459 default)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762013">PRIVATE (RFC1459 +p)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762035">HIDDEN (IRCX +h)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762063">SECRET (RFC1459 +s)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762083">MODERATED (RFC1459 +m)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762112">NOEXTERN (RFC1459 +n)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762132">TOPICOP (RFC1459 +t)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762152">INVITE (RFC1459 +i)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762172">KNOCK (IRCX +u)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762192">NOFORMAT (IRCX +f)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762231">NOWHISPER (IRCX +w)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762253">AUDITORIUM (IRCX +x)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762298">REGISTERED (IRCX +r)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762320">SERVICE (IRCX +z)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762343">AUTHONLY (IRCX +a)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762371">CLONEABLE (IRCX +d)</a></span></dt><dt><span class="section"><a href="ch06.html#id4762401">CLONE (IRCX +e)</a></span></dt></dl></dd><dt><span class="section"><a href="ch06s02.html">Properties</a></span></dt><dd><dl><dt><span class="section"><a href="ch06s02.html#id4762451">OID (Read Only)</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762479">NAME (Read Only)</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762499">CREATION (Read Only)</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762519">LANGUAGE</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762542">OWNERKEY (Write Only)</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762563">HOSTKEY (Write Only)</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762584">MEMBERKEY (Write Only)</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762612">PICS</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762641">TOPIC</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762663">SUBJECT</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762684">CLIENT</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762704">ONJOIN</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762734">ONPART</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762786">LAG</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762830">ACCOUNT</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762859">CLIENTGUID</a></span></dt><dt><span class="section"><a href="ch06s02.html#id4762879">SERVICEPATH</a></span></dt></dl></dd></dl></div><p>
+         New modes and properties have been added to channels.
+      </p><p>
+         Channels support four mutually exclusive states of visibility:
+         public, private, hidden, and secret.  The visibility of a
+         channel affects which modes and properties are available to a
+         client.
+      </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4761965"></a>Modes</h2></div></div><div></div></div><p>
+            Each channel object contains a number of binary mode settings
+            that can be queried and optionally updated via the RFC1459
+            MODE command.
+         </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4761978"></a>PUBLIC (RFC1459 default)</h3></div></div><div></div></div><p>
+               The channel is public and all information about the channel
+               (except for text messages) can be queried  by  non-members.
+               PUBLIC mode is mutually exclusive with the PRIVATE, HIDDEN and
+               SECRET modes.
+            </p><p>
+               This mode may be set and queried by sysop managers, owners and
+               hosts of the channel.  It may be queried by sysops, members of
+               the channel, and users.
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Editor's Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Editor's Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>The "PUBLIC" mode is not actually a mode, but an absence of the modes
+               +h, +p, and +s.</p></td></tr></table></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762013"></a>PRIVATE (RFC1459 +p)</h3></div></div><div></div></div><p>
+               The channel is private and only the name, number of members
+               and PICS property can be queried  by  non-members.  PRIVATE
+               mode is mutually exclusive with the PUBLIC, HIDDEN and SECRET
+               modes.
+            </p><p>
+               This mode may be set by sysop managers, owners and hosts of
+               the channel.  It may be not be queried by sysops or users.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762035"></a>HIDDEN (IRCX +h)</h3></div></div><div></div></div><p>
+               The channel is hidden and cannot be located by enumeration
+               queries from non-members. HIDDEN mode is mutually exclusive
+               with  the  PUBLIC, PRIVATE, and SECRET modes.  The purpose of
+               the new HIDDEN channel mode is to permit the existence of
+               channels that cannot be found using the standard  LIST
+               command, but whose properties can be queried if the exact
+               channel name is known.  Thus a HIDDEN channel is the same as
+               a PUBLIC channel except that it cannot be enumerated by using
+               a LIST or LISTX command.
+            </p><p>
+               This mode may be set and queried like PUBLIC mode.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762063"></a>SECRET (RFC1459 +s)</h3></div></div><div></div></div><p>
+               The channel is secret and cannot by located by any query from
+               non-members.  SECRET mode is mutually exclusive with the
+               PUBLIC, PRIVATE, and HIDDEN modes.
+            </p><p>
+               This mode may be set and queried like PRIVATE mode.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762083"></a>MODERATED (RFC1459 +m)</h3></div></div><div></div></div><p>
+               Normally, new channel members may speak.  In MODERATED  mode
+               however, new channel members may not speak by default.  This
+               is achieved by giving all new members the '-v' mode (no voice)
+               for that channel.  Usually -v mode has no effect, but in a
+               MODERATED channel it does.
+            </p><p>
+               This mode may be set and queried by sysop managers, owners and
+               hosts of the channel.  It may be queried by sysops and members
+               of the channel.  Users may query this mode if the channel is
+               PUBLIC or HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762112"></a>NOEXTERN (RFC1459 +n)</h3></div></div><div></div></div><p>
+               NOEXTERN  mode  blocks  messages  from  non-members to the
+               channel. A sysop manager can still send a message to the
+               channel.
+            </p><p>
+               This mode may be set and queried like MODERATED mode.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762132"></a>TOPICOP (RFC1459 +t)</h3></div></div><div></div></div><p>
+               TOPICOP mode permits only channel owners and hosts to change
+               the channel topic property.
+            </p><p>
+               This mode may be set and queried like MODERATED mode.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762152"></a>INVITE (RFC1459 +i)</h3></div></div><div></div></div><p>
+               INVITE mode permits only invited users to enter the channel.
+               Only owners and hosts can issue an invitation when this mode
+               is on.
+            </p><p>
+               This mode may be set and queried like MODERATED mode.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762172"></a>KNOCK (IRCX +u)</h3></div></div><div></div></div><p>
+               The KNOCK extended mode causes a KNOCK message to be sent to
+               owners and hosts of the channel if a user attempts to join a
+               channel and the server denies entrance.
+            </p><p>
+               This mode may be set and queried like MODERATED mode.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762192"></a>NOFORMAT (IRCX +f)</h3></div></div><div></div></div><p>
+               The NOFORMAT channel mode is an indication to the client
+               application not to format text received from  the  channel.
+            </p><p>
+               Normally clients will prefix text messages with "x said y" or
+               "x whispers to y  and  x", if the NOFORMAT mode is set then
+               just the raw text should be displayed moving to the next line
+               at the end of the message.  The client should not echo text
+               sent by the client.  This is to permit custom applications to
+               control the formatting to clients.  Clients may want to inform
+               users that messages can be spoofed with this mode.
+            </p><p>
+               This mode can only be set by sysop managers.  It can be read
+               by sysop managers, sysops, owners, hosts and members of the
+               channel.  It can be read by users if the channel is PUBLIC or
+               HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762231"></a>NOWHISPER (IRCX +w)</h3></div></div><div></div></div><p>
+               The NOWHISPER channel mode will prevent all messages sent to
+               specific nicknames within the context of that channel.
+            </p><p>
+               This channel mode may be set and read by sysop managers and
+               owners.  It can be read by sysops, hosts and members of the
+               channel.  It can be read by other users if the channel is
+               PUBLIC or HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762253"></a>AUDITORIUM (IRCX +x)</h3></div></div><div></div></div><p>
+               The AUDITORIUM channel mode restricts visibility and messaging
+               within a channel.  Members will only see themselves and the
+               hosts/owners in the channel.  Any message sent by a member
+               will only be received by the hosts and owners.  Hosts and
+               owners will see all members in the channel and messages from a
+               host or owner are seen by all channel members.  Ordinary
+               members will not receive JOIN/PART messages from other
+               members.  This mode is designed for channels with so many
+               members that they do not want to see each other.  Note that
+               auditorium mode may only be set at channel creation time using
+               the CREATE command.
+            </p><p>
+               This mode may be set and read by sysop managers, sysops, and
+               owners.  It may be read by hosts and members of the channel.
+               It can be read by other users if the channel is PUBLIC or
+               HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762298"></a>REGISTERED (IRCX +r)</h3></div></div><div></div></div><p>
+               The channel is registered by the administrator of the chat
+               network. The registration procedure is not defined here.  Only
+               the server or server administrator can set this mode.
+            </p><p>
+               It can be read by sysop managers, sysops, owners, hosts, and
+               members of the channel.  It can be read by users if the
+               channel is PUBLIC or HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762320"></a>SERVICE (IRCX +z)</h3></div></div><div></div></div><p>
+               A service is monitoring/controlling the channel.  This is an
+               indication  to  the client that message traffic sent to the
+               channel is being monitored by a Chat Service which does not
+               appear as a member in the channel.
+            </p><p>
+               This mode can only be set by the Chat Server.  It can be read
+               by sysop managers, sysops, owners, hosts and members of the
+               channel.  It can be read by users if the channel is PUBLIC or
+               HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762343"></a>AUTHONLY (IRCX +a)</h3></div></div><div></div></div><p>
+               The AUTHONLY channel mode permits channel access only to users
+               who have been authenticated by the server.  Note that an
+               authenticated user is any user that was successfully
+               authenticated with the PASS command or the AUTH command.
+            </p><p>
+               This mode can be set and read by sysop managers or owners of
+               the channel.  It can be read by sysops, hosts and members of
+               the channel.  It can be read by users if the channel is PUBLIC
+               or HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762371"></a>CLONEABLE (IRCX +d)</h3></div></div><div></div></div><p>
+               The CLONEABLE channel mode defines a channel that creates new
+               clone channels if the parent channel is full.  A clone channel
+               is created with the same name as the parent cloneable channel
+               with a numeric suffix starting at 1, ranging to 99.  It is not
+               valid to set the CLONEABLE channel mode of a parent channel
+               that ends with a numeric character.   The clone channel
+               inherits modes and properties from the parent channel when it
+               is set up.  When a clone channel is created, any channel  that
+               has the same name is removed.  This prevents channel takeover
+               of a clone channel.
+            </p><p>
+               It is advised that only sysop be allowed to set cloneable mode
+               on a channel.  The mode may be read by sysops, owners, hosts
+               and members of the channel. It may be read by users if the
+               channel is PUBLIC or HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762401"></a>CLONE (IRCX +e)</h3></div></div><div></div></div><p>
+               The CLONE channel mode defines a channel that was created by
+               the server when a parent CLONEABLE channel becomes full.
+               Users should usually join the parent channel, although a user
+               may join a clone channel that is not full.  A sysop manager
+               can set up a clone channel but only when the channel is being
+               created.
+            </p><p>
+               This mode can be set by the sysop manager and read like the
+               SERVICE mode.
+            </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">GAG (IRCX +z) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Properties</td></tr></table></div></body></html>

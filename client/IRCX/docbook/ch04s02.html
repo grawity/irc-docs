@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>CLONE (new IRCX message)</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch04.html" title="Chapter 4. IRCX Server Messages" /><link rel="previous" href="ch04.html" title="Chapter 4. IRCX Server Messages" /><link rel="next" href="ch04s03.html" title="CREATE (new IRCX message)" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">CLONE (new IRCX message)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><th width="60%" align="center">Chapter 4. IRCX Server Messages</th><td width="20%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4760995"></a>CLONE (new IRCX message)</h2></div></div><div></div></div><p>Informs the hosts and owners in a CLONEABLE channel that a new CLONE channel was created.</p><p>Syntax: <span><b class="command">CLONE &lt;channel-name&gt; &lt;oid&gt;</b></span></p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4761013"></a>Parameters</h3></div></div><div></div></div><p>
+               <span class="token">&lt;channel-name&gt;</span> The name of the created CLONE channel.
+            </p><p>
+               <span class="token">&lt;oid&gt;</span>  The object identifier for this new CLONE channel.  The
+               value is implementation-dependent and must equal 0 if not
+               supported.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4761039"></a>Remarks</h3></div></div><div></div></div><p>
+               The CLONE message can be sent at anytime to the hosts/owners
+               of a CLONEABLE channel to inform them that a new CLONE channel
+               was created. This message is intended to be used by a custom
+               application to automatically  join the new CLONE channel.  A
+               non-IRCX client will not get this message.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4761060"></a>Example</h3></div></div><div></div></div><p>
+               </p><div class="example"><a id="id4761067"></a><p class="title"><b>Example 4.1. A clone of #MyChat is created</b></p><p>Server: <span><b class="command">:&lt;server&gt; CLONE #MyChat1 034F8FF32</b></span></p></div><p>
+               </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Editor's Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Editor's Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>The IRCX draft does not say if the server's prefix comes before the CLONE message
+                  (as shown in the example). It can be assumed that it should, because RFC 1459 requires
+                  all commands begin with a prefix, except for PING/PONG. IRCX requires that AUTH not
+                  have a prefix, because AUTH happens before registering as a user.</p><p>Client developers should expect to see CLONE with and without a prefix, because
+                  the IRCX draft is unclear whether or not it requires a prefix. Server developers should
+                  send the message with a prefix in order to follow the IRC RFC.</p></td></tr></table></div><p>
+            </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 4. IRCX Server Messages </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> CREATE (new IRCX message)</td></tr></table></div></body></html>

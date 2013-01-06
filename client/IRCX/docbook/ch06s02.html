@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>Properties</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch06.html" title="Chapter 6. Channel Modes and Properties" /><link rel="previous" href="ch06.html" title="Chapter 6. Channel Modes and Properties" /><link rel="next" href="ch07.html" title="Chapter 7. IRCX Command Responses" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Properties</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><th width="60%" align="center">Chapter 6. Channel Modes and Properties</th><td width="20%" align="right"> <a accesskey="n" href="ch07.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4762431"></a>Properties</h2></div></div><div></div></div><p>
+            Each channel object contains a number of properties that can
+            be queried and optionally updated via the IRCX PROP command.
+            Owners and hosts may update a property for their own channel.
+            Sysop Managers and Sysops can use the PROP command on a
+            channel only by becoming host/owner of that channel.  Users
+            and members can read properties only.
+         </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762451"></a>OID (Read Only)</h3></div></div><div></div></div><p>
+               The OID channel property is the internal object identifier for
+               the channel.  As a shortcut, the OID can be optionally used
+               in place of the  full  string  name  of a channel.  If the OID
+               is set to "0", then this feature is not supported on the
+               server.
+            </p><p>
+               This property may be read by all users, except by ordinary
+               users when the channel is SECRET or PRIVATE.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762479"></a>NAME (Read Only)</h3></div></div><div></div></div><p>
+               The NAME channel property is the name of the channel (limited
+               to 63 characters, including 1 or 2 characters for channel
+               prefix).  Valid characters are as defined in RFC1459.
+            </p><p>
+               This property may be set and read like the OID property.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762499"></a>CREATION (Read Only)</h3></div></div><div></div></div><p>
+               The CREATION channel property is the time that the channel
+               was created, in number of seconds elapsed since midnight
+               (00:00:00), January 1, 1970, (coordinated universal time).
+            </p><p>
+               This property may be set and read like the OID property.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762519"></a>LANGUAGE</h3></div></div><div></div></div><p>
+               The LANGUAGE channel property is the preferred language type.
+               The LANGUAGE property is a string limited to 31 characters.
+               We recommend following the guidelines of RFC1766[6] to form
+               well-understood language-defining strings.
+            </p><p>
+               This property may be set and read by sysop managers, owners
+               and hosts of the channel.  It may be read by sysop managers,
+               sysops and members.  It may be read by users if the channel is
+               PUBLIC or HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762542"></a>OWNERKEY (Write Only)</h3></div></div><div></div></div><p>
+               The OWNERKEY channel property is the owner keyword that will
+               provide owner access when entering the channel.  The OWNERKEY
+               property is limited to 31 characters.
+            </p><p>
+               This property may be set by the sysop manager or channel
+               owner.  It may never be read.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762563"></a>HOSTKEY (Write Only)</h3></div></div><div></div></div><p>
+               The HOSTKEY channel property is the host keyword that will
+               provide host (channel op) access when entering the channel.
+               The HOSTKEY property is limited to 31 characters.
+            </p><p>
+               This property may be set and read like the OWNERKEY property.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762584"></a>MEMBERKEY (Write Only)</h3></div></div><div></div></div><p>
+               The MEMBERKEY channel property is the keyword required to
+               enter the channel.  The MEMBERKEY property is limited to 31
+               characters.  This is backwards-compatible with RFC1459 because
+               users can still use the MODE command as an alternative way to
+               set this property.
+            </p><p>
+               This property may be set and read like the OWNERKEY property.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762612"></a>PICS</h3></div></div><div></div></div><p>
+               The PICS channel property is the current PICS rating of the
+               channel. Chat clients that are PICS enabled can use this
+               property to determine if the channel is appropriate for the
+               user.  The PICS property is limited  to 255 characters.  The
+               format for this field is defined by PICS (see
+               http://www.w3.org).
+            </p><p>
+               This property may be set by sysop managers and read by all.
+               It may not be read by ordinary users if the channel is SECRET.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762641"></a>TOPIC</h3></div></div><div></div></div><p>
+               The TOPIC channel property is the current topic of the
+               channel.  The TOPIC property is limited to 160 characters.
+            </p><p>
+               This property may be set and read by sysop managers, owners
+               and hosts of the channel.  It may be read by sysops and
+               members of the channel.  It may be read by users if the
+               channel is PUBLIC or HIDDEN.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762663"></a>SUBJECT</h3></div></div><div></div></div><p>
+               The SUBJECT channel property is a string that can contain
+               subject keywords for search engines.  The SUBJECT property is
+               limited to 31 characters.
+            </p><p>
+               This property may be set and read like the TOPIC property.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762684"></a>CLIENT</h3></div></div><div></div></div><p>
+               The CLIENT channel property contains client-specified
+               information.  The format is not defined by the server.  The
+               CLIENT property is limited to 255 characters.
+            </p><p>
+               This property may be set and read like the TOPIC property.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762704"></a>ONJOIN</h3></div></div><div></div></div><p>
+               The ONJOIN channel property contains a string to be sent (via
+               PRIVMSG) to a user after the user has joined the channel.  The
+               channel name is displayed as the sender of the message. Only
+               the user joining the channel will see this message.  Multiple
+               lines can be generated by embedding '\n' in the string.  The
+               ONJOIN property is limited to 255 characters.
+            </p><p>
+               This property may be set and read by sysop managers, owners
+               and hosts of the channel. It may additionally  be read by
+               sysops.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762734"></a>ONPART</h3></div></div><div></div></div><p>
+               The ONPART channel property contains a string that is sent
+               (via NOTICE) to a user after they have parted from the
+               channel.  The channel name is displayed as the sender of the
+               message.  Only the user parting the channel will see this
+               message.  Multiple lines can be generated  by  embedding '\n'
+               in the string.  The ONPART property is limited to 255
+               characters.
+            </p><p>
+               This property may be set and read like the ONJOIN property.
+            </p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Editor's Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Editor's Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>ONJOIN should appear as a PRIVMSG from the channel to the channel (<span><b class="command">:#Channel PRIVMSG #Channel :Welcome!</b></span>).
+            ONPART should appear as a NOTICE from the channel to the user (<span><b class="command">:#Channel NOTICE UserName :Goodbye!</b></span>).</p></td></tr></table></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762786"></a>LAG</h3></div></div><div></div></div><p>
+               The LAG channel property contains a numeric value between 0 to
+               2 seconds.  The server will add an artificial delay of that
+               length between subsequent messages from the same member.  All
+               messages to the channel are affected.
+            </p><p>
+               This property may be set and read by sysop managers and
+               owners.  It can additionally be read by sysops, hosts, and
+               members of the channel.  It can be read by users if the
+               channel is PUBLIC or HIDDEN.
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Editor's Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Editor's Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>The LAG property is used to prevent people from flooding the
+               channel. Basically, the user's messages (if there are more than one)
+               will be lagged by the number set in the LAG property. This is an
+               excellent way to prevent people from doing massive floods, which
+               occasionally will crash clients.</p></td></tr></table></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762830"></a>ACCOUNT</h3></div></div><div></div></div><p>
+               The  ACCOUNT channel property contains an implementation-
+               dependent string for attaching a security account.  This
+               controls access to the channel  using the native OS security
+               system.  The ACCOUNT property is limited to 31 characters.
+            </p><p>
+               This property may be set by sysop managers. It can only be
+               read by sysop managers, sysops and owners of the channel.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762859"></a>CLIENTGUID</h3></div></div><div></div></div><p>
+               The CLIENTGUID channel property contains a GUID that defines
+               the client protocol to be used within the channel.
+            </p><p>
+               This property may be set and read like the LAG property.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4762879"></a>SERVICEPATH</h3></div></div><div></div></div><p>
+               The SERVICEPATH channel property contains the path of a server
+               side extension that is used to control the channel operation.
+               Details are implementation-dependent.
+            </p><p>
+               This property may be set and read like the LAG property.
+            </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 6. Channel Modes and Properties </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 7. IRCX Command Responses</td></tr></table></div></body></html>

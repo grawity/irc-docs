@@ -1,0 +1,48 @@
+body {
+   font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
+}
+
+td {
+   padding: 5px;
+}
+
+th {
+   padding: 5px;
+   font-weight: bold;
+}
+
+.command {
+   font-family: Courier New, monospace;
+   font-weight: normal;
+   font-size: 95%;
+}
+
+.synopsis {
+   font-family: Courier New, monospace;
+   font-weight: normal;
+   font-size: 100%;
+}
+
+.note {
+   padding: 10px;
+   margin-top: 10px;
+   border: 1px dashed #CCCCCC;
+}
+
+.token {
+   font-weight: bold;
+   font-size: 100%;
+   border-left: 1px solid #FFFFFF;
+   border-top: 1px solid #FFFFFF;
+   border-bottom: 1px solid #999999;
+   border-right: 1px solid #999999;
+   background-color: #E6E6E6;
+   color: #000000;
+   padding: 0.12em;
+   margin: 1px;
+   vertical-align: middle;
+   display: inline;
+   margin-bottom: 10px;
+   margin-top: 10px;
+   line-height: 170%;
+}

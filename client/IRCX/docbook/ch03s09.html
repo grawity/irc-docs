@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>MODE (extension to RFC1459 command)</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch03.html" title="Chapter 3. IRCX Client Messages" /><link rel="previous" href="ch03s08.html" title="LISTX (new IRCX command)" /><link rel="next" href="ch03s10.html" title="NOTICE (extension to RFC1459 command)" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">MODE (extension to RFC1459 command)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s08.html">Prev</a> </td><th width="60%" align="center">Chapter 3. IRCX Client Messages</th><td width="20%" align="right"> <a accesskey="n" href="ch03s10.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4760214"></a>MODE (extension to RFC1459 command)</h2></div></div><div></div></div><p>
+            MODE command can now be used for new user or channel modes
+            (see later sections).  In addition, the special syntax "MODE
+            ISIRCX" can be used to help clients find out whether a server
+            supports IRCX prior to logging into the server.
+         </p><p>Syntax: </p><pre class="synopsis">MODE ISIRCX</pre><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760235"></a>Parameters</h3></div></div><div></div></div><p>
+               None in this context (checking IRCX status). For a full list of
+               the original modes and parameters, see RFC 1459 (IRC).
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760249"></a>Results</h3></div></div><div></div></div><p>
+               MODE message<br />
+               IRCRPL_IRCX
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760262"></a>Remarks</h3></div></div><div></div></div><p>
+               The ISIRCX mode (must be in capital letters) is only
+               functional before the user has registered with the server.
+               IRCX servers respond with IRCRPL_IRCX  and  non-IRCX  servers
+               should return an error code.  This allows unregistered users
+               to query whether the server supports IRCX.
+            </p><p>
+               See RFC1459 for more details on the original MODE command and
+               its parameters.
+            </p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Editor's Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Editor's Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>This command should only be used to see if the server supports IRCX. It should not enable IRCX.</p></td></tr></table></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s08.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s10.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">LISTX (new IRCX command) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> NOTICE (extension to RFC1459 command)</td></tr></table></div></body></html>

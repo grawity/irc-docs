@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>PROP (new IRCX command)</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch03.html" title="Chapter 3. IRCX Client Messages" /><link rel="previous" href="ch03s11.html" title="PRIVMSG (extension to RFC1459 command)" /><link rel="next" href="ch03s13.html" title="WHISPER (new IRCX command)" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">PROP (new IRCX command)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s11.html">Prev</a> </td><th width="60%" align="center">Chapter 3. IRCX Client Messages</th><td width="20%" align="right"> <a accesskey="n" href="ch03s13.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4760512"></a>PROP (new IRCX command)</h2></div></div><div></div></div><p>Add, change or delete a channel data property.</p><p>Syntax 1 (query a property): </p><pre class="synopsis">PROP &lt;channel&gt; &lt;property&gt;[,&lt;property&gt;]</pre><p>Syntax 2 (set or change a property): </p><pre class="synopsis">PROP &lt;channel&gt; &lt;property&gt; :&lt;data&gt;</pre><p>Syntax 3 (delete a property): </p><pre class="synopsis">PROP &lt;channel&gt; &lt;property&gt; :</pre><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760549"></a>Results</h3></div></div><div></div></div><p>
+               PROP message<br />
+               IRCRPL_PROPLIST<br />
+               IRCRPL_PROPEND<br />
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760566"></a>Possible Errors</h3></div></div><div></div></div><p>
+               IRCERR_BADCOMMAND<br />
+               IRCERR_BADPROPERTY<br />
+               IRCERR_SECURITY<br />
+               IRCERR_NOSUCHOBJECT<br />
+               IRCERR_TOOMANYARGUMENTS<br />
+               IRCERR_BADVALUE<br />
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760592"></a>Remarks</h3></div></div><div></div></div><p>The PROP command provides a new method for manipulating string
+            and numeric properties of channels.  If an optional channel
+            property is not supported on the server, the server should
+            return IRCERR_BADPROPERTY.</p><p>See later sections for definitions of channel properties. </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4760614"></a>Examples</h3></div></div><div></div></div><p>
+               </p><div class="example"><a id="id4760620"></a><p class="title"><b>Example 3.15. Check two properties</b></p><p>Client: <span><b class="command">PROP #MyChan TOPIC,ONJOIN</b></span><br />
+                        Server: <span><b class="command">:&lt;server&gt; 818 &lt;nick&gt; #MyChan TOPIC :This is the topic of my channel</b></span><br />
+                        Server: <span><b class="command">:&lt;server&gt; 818 &lt;nick&gt; #MyChan ONJOIN :Welcome to my channel!</b></span><br />
+                        Server: <span><b class="command">:&lt;server&gt; 819 &lt;nick&gt; #MyChan :End of properties</b></span></p></div><p>
+               </p><div class="example"><a id="id4760662"></a><p class="title"><b>Example 3.16. Change the TOPIC property</b></p><p>Client: <span><b class="command">PROP #MyChannel TOPIC :Change my channel topic</b></span><br />
+                        Server: <span><b class="command">:User!Ident@Host PROP #MyChannel TOPIC :Change my channel topic</b></span></p></div><p>
+               </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Editor's Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Editor's Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>The second example was changed in order to clarify that the client who set the property should have
+                        his/her prefix at the beginning of the response.</p></td></tr></table></div><p>
+            </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s11.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s13.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">PRIVMSG (extension to RFC1459 command) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> WHISPER (new IRCX command)</td></tr></table></div></body></html>

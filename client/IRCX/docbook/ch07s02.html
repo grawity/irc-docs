@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>IRCX Error Replies</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch07.html" title="Chapter 7. IRCX Command Responses" /><link rel="previous" href="ch07.html" title="Chapter 7. IRCX Command Responses" /><link rel="next" href="ch08.html" title="Chapter 8. Security Considerations" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">IRCX Error Replies</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><th width="60%" align="center">Chapter 7. IRCX Command Responses</th><td width="20%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4763451"></a>IRCX Error Replies</h2></div></div><div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763456"></a>900 - IRCERR_BADCOMMAND</h3></div></div><div></div></div><pre class="synopsis">&lt;command&gt; :Bad command</pre><p>Response to an incorrectly formatted command.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763474"></a>901 - IRCERR_TOOMANYARGUMENTS</h3></div></div><div></div></div><pre class="synopsis">&lt;command&gt; :Too many arguments</pre><p>Response to too many arguments being provided for a command.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763492"></a>902 - IRCERR_BADFUNCTION</h3></div></div><div></div></div><pre class="synopsis">&lt;command&gt; :Bad function</pre><p>
+               Response to a command that supports functions, with invalid
+               function sent by the user.  For example, the EVENT command
+               supports functions.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763514"></a>903 - IRCERR_BADLEVEL</h3></div></div><div></div></div><pre class="synopsis">&lt;command&gt; :Bad level</pre><p>
+               Response to an ACCESS command with a bad level specified (i.e.
+               not GRANT, DENY...)
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763535"></a>904 - IRCERR_BADTAG</h3></div></div><div></div></div><pre class="synopsis">&lt;command&gt; :Bad message tag.</pre><p>
+               Response to a DATA/REQUEST/REPLY with an incorrect message
+               tag.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763555"></a>905 - IRCERR_BADPROPERTY</h3></div></div><div></div></div><pre class="synopsis">&lt;channel&gt; :Bad property specified</pre><p>
+               Response to a channel property command with a bad property
+               specified.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763576"></a>906 - IRCERR_BADVALUE</h3></div></div><div></div></div><pre class="synopsis">&lt;channel&gt; :Bad value specified</pre><p>
+               Response to an attempt to set an integer property to a string
+               value (PROP command).
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763597"></a>907 - IRCERR_RESOURCE</h3></div></div><div></div></div><pre class="synopsis">:Not enough resources</pre><p>Server does not have enough resources to perform command.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763614"></a>908 - IRCERR_SECURITY</h3></div></div><div></div></div><pre class="synopsis">:No permissions to perform command</pre><p>
+               For security reasons, the command/function/operation is not
+               permitted for this level of client.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763635"></a>909 - IRCERR_ALREADYAUTHENTICATED</h3></div></div><div></div></div><pre class="synopsis">&lt;package&gt; :Already authenticated</pre><p>The client is already authenticated with the server.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763654"></a>910 - IRCERR_AUTHENTICATIONFAILED</h3></div></div><div></div></div><pre class="synopsis">&lt;package&gt; :Authentication failed</pre><p>
+               The authentication failed due to a bad userid/password or
+               server/network failure.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763675"></a>911 - IRCERR_AUTHENTICATIONSUSPENDED</h3></div></div><div></div></div><pre class="synopsis">&lt;package&gt; :Authentication suspended for this IP</pre><p>
+               Authentication has been temporary disabled due to too many
+               authentication failures from this IP.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763697"></a>912 - IRCERR_UNKNOWNPACKAGE</h3></div></div><div></div></div><pre class="synopsis">&lt;package&gt; :Unsupported authentication package</pre><p>
+               The authentication package specified is not known to the
+               server.  ISIRCX command will return a list of supported
+               authentication packages.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763720"></a>913 - IRCERR_NOACCESS</h3></div></div><div></div></div><pre class="synopsis">&lt;command&gt; :No access</pre><p>
+               Response to a user trying to change the ACCESS list for an
+               object the user does not have sufficient privileges to alter.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763742"></a>914 - IRCERR_DUPACCESS</h3></div></div><div></div></div><pre class="synopsis">:Duplicate access entry</pre><p>An access entry already exists for the specified user mask.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763759"></a>915 - IRCERR_MISACCESS</h3></div></div><div></div></div><pre class="synopsis">:Unknown access entry</pre><p>
+               Response to ACCESS DELETE command when server does not
+               recognize the entry to be removed.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763780"></a>916 - IRCERR_TOOMANYACCESSES</h3></div></div><div></div></div><pre class="synopsis">:Too many access entries</pre><p>
+               Response to ACCESS ADD command when maximum number of access
+               entries has been reached.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763800"></a>918 - IRCERR_EVENTDUP</h3></div></div><div></div></div><pre class="synopsis">&lt;event&gt; &lt;mask&gt; :Duplicate event entry</pre><p>The user has asked for an event that is already being sent.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763819"></a>919 - IRCERR_EVENTMIS</h3></div></div><div></div></div><pre class="synopsis">&lt;event&gt; &lt;mask&gt; :Unknown event entry</pre><p>
+               Response to event remove command when user is not already
+               receiving the event specified.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763840"></a>920 - IRCERR_NOSUCHEVENT</h3></div></div><div></div></div><pre class="synopsis">&lt;event&gt; :No such event type</pre><p>
+               Response to event add command when server does not recognize
+               the event specified.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763861"></a>921 - IRCERR_TOOMANYEVENTS</h3></div></div><div></div></div><pre class="synopsis">&lt;event&gt; :Too many events specified</pre><p>
+               Response to event add command when user may not add another
+               event to monitor.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763882"></a>923 - IRCERR_NOWHISPER</h3></div></div><div></div></div><pre class="synopsis">&lt;object&gt; :Does not permit whispers</pre><p>
+               Response to whisper command when channel does not permit
+               whispers.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763903"></a>926 - IRCERR_CHANNELEXIST</h3></div></div><div></div></div><pre class="synopsis">&lt;channel&gt; :Channel already exists.</pre><p>
+               The channel name in the CREATE command already exists on the
+               server and the +c mode was specified.
+            </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763924"></a>927 - IRCERR_ALREADYONCHANNEL</h3></div></div><div></div></div><pre class="synopsis">&lt;channel&gt; :Already in the channel.</pre><p>Response to join command when user is already in the channel.</p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id4763943"></a>999 - IRCERR_UNKNOWNERROR</h3></div></div><div></div></div><pre class="synopsis">:Unknown error code &lt;error-code&gt;</pre><p>
+               The internal error generated doesn't map to a valid IRCX error
+               reply.  The error code is implementation-dependent.
+            </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 7. IRCX Command Responses </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 8. Security Considerations</td></tr></table></div></body></html>

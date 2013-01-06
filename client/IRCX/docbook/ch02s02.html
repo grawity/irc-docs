@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><title>Prefixes</title><link rel="stylesheet" href="ircx-draft.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.65.1" /><link rel="home" href="index.html" title="IRCX Draft" /><link rel="up" href="ch02.html" title="Chapter 2. Terms and Definitions" /><link rel="previous" href="ch02.html" title="Chapter 2. Terms and Definitions" /><link rel="next" href="ch03.html" title="Chapter 3. IRCX Client Messages" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Prefixes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Terms and Definitions</th><td width="20%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr></table><hr /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id4695015"></a>Prefixes</h2></div></div><div></div></div><p>
+            Each object contains a unique prefix that identifies the type
+            of object.  By tagging UNICODE objects with a special prefix,
+            a client can easily decide whether to use standard ASCII or
+            UNICODE when sending a message to a user or channel.  The IRCX
+            client is responsible, when sending a UNICODE string, for
+            prefixing it with a '%' character so that other IRCX clients
+            can interpret it as UNICODE.
+            
+            </p><div class="table"><a id="id4695034"></a><p class="title"><b>Table 2.3. Object identifiers</b></p><table summary="Object identifiers" width="100%" border="1"><colgroup><col /><col /></colgroup><thead><tr><th align="left">Prefix</th><th align="left">Definition</th></tr></thead><tbody><tr><td align="left">#</td><td align="left">The '#' prefix identifies a RFC1459 global channel.</td></tr><tr><td align="left">&amp;</td><td align="left">The '&amp;' prefix identifies a RFC1459 local channel.</td></tr><tr><td align="left">%#</td><td align="left">The '%#' prefix identifies an extended global channel name (a modified UTF8-encoded UNICODE string).</td></tr><tr><td align="left">%&amp;</td><td align="left">The '%&amp;' prefix identifies an extended local channel name (a modified UTF8-encoded UNICODE string).</td></tr><tr><td align="left">%</td><td align="left">The '%' character followed by a space or comma can
+                              identify  the  last channel that this client
+                              specified and is a member of.  Its function is to
+                              optimize  server processing of multiple messages from
+                              a client to a channel.
+                        </td></tr><tr><td align="left">A to }</td><td align="left">The 'A' through '}' prefix identifies a standard RFC1459 nickname.</td></tr><tr><td align="left">'</td><td align="left">The ''' prefix identifies an extended IRCX nickname
+                              which  consists of a modified UTF8-encoded UNICODE
+                              string.  The ''' character followed by a space or
+                              comma is used to represent the local client
+                              connection. The characters following ''' can be '0'
+                              through '9', '-', and any character above 'A'.
+                        </td></tr><tr><td align="left">^</td><td align="left">The '^' prefix identifies a nickname which was
+                              translated from  UTF8 into hex characters so that the
+                              nickname can be viewed by  non-IRCX clients.  The
+                              characters following '^' can be any standard RFC1459
+                              nickname characters.
+                        </td></tr><tr><td align="left">0</td><td align="left">The '0' prefix identifies an internal object
+                              identifier  (OID).   The OID consists of the '0'
+                              prefix and eight hexadecimal characters. If not
+                              supported by the server, then OID must be returned as
+                              '0'.
+                        </td></tr><tr><td align="left">$</td><td align="left">The  '$' prefix identifies a server on the network.
+                              The '$' character followed by a space or comma  may
+                              be used to represent the local server the client is
+                              connected to.
+                        </td></tr></tbody></table></div><p>
+         </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2. Terms and Definitions </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. IRCX Client Messages</td></tr></table></div></body></html>
