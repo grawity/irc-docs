@@ -45,7 +45,7 @@ Server-server protocol:
 However, most clients do not implement the quoting, and only recognize messages consisting entirely of a single "extended data" command.
 
  * [Later CTCP draft][ctcp-1997] (no known implementations)
- * [CTCP/2][ctcp2] (no known implementations)
+ * [Later CTCP/2 draft][ctcp2] (no known implementations)
 
 IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC" refers specifically to the file transfer part.
 
