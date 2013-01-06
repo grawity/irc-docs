@@ -1,0 +1,817 @@
+<HTML>
+<HEAD>
+<BASE HREF="http://www.invlogic.com/irc/ctcp.html">
+<TITLE>Internet Relay Chat (IRC)</TITLE>
+<META name="description" content="computer consulting services, internet and
+intranet design, and custom software development">
+<META name="keywords" content="computer, consulting, web, internet, intranet, 
+WWW, world wide web, services, software, development, OS/2, Linux, Windows, 
+hosting, virtual host, design, graphic, multimedia, Washington, Baltimore, Maryland, 
+scanning, CD-Rom, computers, consultant, programming, scanner, IRC/2, Internet 
+Relay Chat, IRC">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="/images/backdrop.gif">
+
+
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0 WIDTH=100%>
+<TR>
+<TD ALIGN=LEFT>
+<A HREF="/index.html"><IMG SRC="/images/ilclogo2.gif" HEIGHT=85 WIDTH=140 BORDER=0 ALT="Innovative Logic Corp."></A>
+<TD ALIGN=LEFT>&nbsp;
+<TD ALIGN=RIGHT>
+<A HREF="/info/philosophy.html">
+<IMG SRC="/images/buttons/philosop.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Corporate Philosophy">
+</A>
+<A HREF="/services/consulting.html">
+<IMG SRC="/images/buttons/consult.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Consulting Services">
+</A>
+<A HREF="/products/index.html">
+<IMG SRC="/images/buttons/softprod.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Software Products">
+</A>
+<A HREF="/info/experts.html">
+<IMG SRC="/images/buttons/experts.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Our Expert Staff">
+</A>
+<A HREF="/info/contact.html">
+<IMG SRC="/images/buttons/contact.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Contact Us">
+</A>
+<BR>
+<A HREF="/services/internet.html">
+<IMG SRC="/images/buttons/website.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Web Site Creation">
+</A>
+<A HREF="/services/intranet.html">
+<IMG SRC="/images/buttons/intranet.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Intranet Design">
+</A>
+<A HREF="/services/multimedia.html">
+<IMG SRC="/images/buttons/multimed.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Multimedia Services">
+</A>
+<A HREF="/services/graphics.html">
+<IMG SRC="/images/buttons/graphic.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Graphic Design">
+</A>
+<A HREF="/services/customsoftware.html">
+<IMG SRC="/images/buttons/custsoft.gif" HEIGHT=45 WIDTH=85 HSPACE=0 VSPACE=0 
+BORDER=0 ALT="Custom Software">
+</A>
+</TABLE>
+
+<CENTER>
+<IMG SRC="/images/break.gif" HEIGHT=10 WIDTH=530 ALT="----------">
+</CENTER>
+
+<P>
+
+<TABLE CELLSPACING=0 CELLPADDING=3 BORDER=0 WIDTH=100%>
+<TR ALIGN=LEFT>
+<TD ALIGN=LEFT VALIGN=TOP><H3>Internet Draft</H3><TD>
+<TD ALIGN=RIGHT VALIGN=TOP><H3>Michael McLagan<BR>
+Innovative Logic Corp.<BR>
+February 2, 1997</H3>
+</TABLE>
+<H2>Internet Relay Chat<BR>
+Client To Client Protocol</H2>
+</CENTER>
+<P><B>Changes have been made to <A HREF="#2.1">Section 2.1</A> as of February 12, 1997</B>.
+<P><H3>Status of this Memo</H3>
+<P>This document is a result of ongoing discussions among the
+IRC client coders CTCP Working Group.  The mailing list for the
+group may be subscribed to by sending a mail message to
+<A HREF="maito:listproc%25catless@newcastle.ac.uk">listproc%catless@newcastle.ac.uk</A>.  Comments may be sent to this
+mailing list, or to the author at <A HREF="mailto:mmclagan_at_invlogic.com">mmclagan&nbsp;(at)&nbsp;invlogic.com</A>
+or in writing at his address on last page.
+<P>Distribution of this memo is unlimited.
+<P>This document is an Internet Draft.  Internet Drafts are working
+documents of the Internet Engineering Task Force (IETF), its
+Areas, and its Working Groups.  Note that other groups may also
+distribute working documents as Internet Drafts.
+<P>Internet Drafts are draft documents valid for a maximum of six
+months, and may be updated, replaced, or obsoleted by other
+documents at any time.  It is not appropriate to use Internet
+Drafts as reference material, or to cite them other than as a
+''working draft'' or ''work in progress.''
+<P><H3>Abstract</H3>
+<P>This document discusses messages exchanged between IRC (RFC 1459)
+clients.  The intent of these messages, and the protocol described
+herein, is to enhance the use of IRC.  These include text
+formatting codes, information exchange, direct conversation and
+exchanging of files.  A de facto standard exists today, but is
+undefined and usually different from client to client.  With this
+draft, and ultimately an RFC, a clearly defined standard will be
+established.
+<P><H3>Table of Contents:</H3>
+<MENU>
+<LI><A HREF="#1">1. Introduction</A>
+<MENU>
+<LI><A HREF="#1.1">1.1 Definitions</A>
+<LI><A HREF="#1.2">1.2 Background</A>
+</MENU>
+<LI><A HREF="#2">2. General Requirements </A>
+<MENU>
+<LI><A HREF="#2.1">2.1 Parsing Order </A>
+<LI><A HREF="#2.2">2.2 Quoting </A>
+</MENU>
+<LI><A HREF="#3">3. Text Attributes </A>
+<MENU>
+<LI><A HREF="#3.1">3.1 Bold </A>
+<LI><A HREF="#3.2">3.2 Inverse (Reverse) </A>
+<LI><A HREF="#3.3">3.3 Underline </A>
+<LI><A HREF="#3.4">3.4 Overstrike </A>
+<LI><A HREF="#3.5">3.5 Italics </A>
+<LI><A HREF="#3.6">3.6 Colours </A>
+<LI><A HREF="#3.7">3.7 Size </A>
+<LI><A HREF="#3.9">3.9 Extensions </A>
+<LI><A HREF="#3.10">3.10 Violations </A>
+<LI><A HREF="#3.11">3.11 Deprecations </A>
+</MENU>
+<LI><A HREF="#4">4. User Requests </A>
+<MENU>
+<LI><A HREF="#4.1">4.1 VERSION </A>
+<LI><A HREF="#4.2">4.2 PING </A>
+<LI><A HREF="#4.3">4.3 CLIENTINFO </A>
+<LI><A HREF="#4.4">4.4 ACTION </A>
+<LI><A HREF="#4.5">4.5 USERINFO </A>
+<LI><A HREF="#4.6">4.6 TIME </A>
+<LI><A HREF="#4.7">4.7 DCC </A>
+<MENU>
+<LI><A HREF="#4.7.1">4.7.1 CHAT </A>
+<LI><A HREF="#4.7.2">4.7.2 XMIT </A>
+<LI><A HREF="#4.7.3">4.7.3 OFFER </A>
+</MENU>
+<LI><A HREF="#4.8">4.8 XDCC </A>
+<MENU>
+<LI><A HREF="#4.8.1">4.8.1 LIST </A>
+<LI><A HREF="#4.8.2">4.8.2 SEND </A>
+</MENU>
+<LI><A HREF="#4.9">4.9 URL </A>
+<LI><A HREF="#4.10">4.10 EXT </A>
+<LI><A HREF="#4.11">4.11 SCR </A>
+<LI><A HREF="#4.12">4.12 Depecations </A>
+</MENU>
+<LI><A HREF="#5">5. Assigned IDs </A>
+<MENU>
+<LI><A HREF="#5.1">5.1 Client Extensions</A>
+<LI><A HREF="#5.2">5.2 DCC Protocols </A>
+</MENU>
+</MENU>
+<P><H3><A NAME="1">1.  Introduction</A></H3>
+<P><H3><A NAME="1.1">1.1  Definitions:</A></H3>
+<DL>
+<DT>&lt;request&gt;<DD>  Any valid request, as discussed in 3.  Sequence of chacters 
+              A-Z, a-z and 0-9.  A space is used to mark the end of the
+              request.
+<DT>   &lt;text&gt;<DD>     Any arbitrary text, subject to quoting as discussed in 2b.
+   [ ]        Optional item
+   ...        Item repeated as desired
+<DT>   &lt;marker&gt;<DD>   Character used to begin and end a user request.  Currently  ^A, \001.
+<DT>   &lt;quoted&gt;<DD>   Text which is passed thru a quoting mechanism as yet 
+              undefined.  Not currently used.
+<DT>   &lt;filename&gt;<DD>Name of a file for transmission using DCC.  File names 
+              should be presented without path information.  Path 
+              separators contained in a filename will invalidate the 
+              request.  Each client will be required to accept and convert 
+              a filename to local conventions.
+<DT>   &lt;format&gt;<DD>Character used to begin and optionally end a text formatting 
+              request.  Currently ^F, \006.  
+<DT>   &lt;EOT&gt;<DD>An extended text attribute specification is terminated by a 
+              ^D, \004.
+<DT>   &lt;space&gt;<DD>Required space.
+<DT>   &lt;arg&gt;<DD>Request/Format argument.
+<DT>   &lt;index&gt;<DD>Colour selected from the table below.  Each spec will be 
+              preceded by an I, indicating this is an indexed value. 
+<P>              Single character, 0-9 and A-F.
+<P>              Example:   IA
+<DT>   &lt;RGB&gt;<DD>      3 byte value, representing Red, Green & Blue attributes as 
+              values from 0 - 255.  Each byte will be encoded in 
+              hexadecimal and converted to text.  Characters 0-9 and A-F 
+              will be permitted.  Each such value will be preceded by a #,
+              indicating RGB.
+<P>              Example:   #00FF00  &lt;&lt; produces light green, btw.
+<DT>   &lt;colour&gt;<DD>A colour specification.  This can either be an indexed colour
+              or an RGB value.
+<P>              Specification: &lt;index&gt; | &lt;RGB&gt;
+<DT>   &lt;port&gt;<DD>     TCP/IP port number, 1024 - 65535
+<DT>   &lt;ip&gt;<DD>       Internet Protocol number, as follows:
+<OL>
+<LI>IP4 dotted notation (d.d.d.d)<BR>
+                 Example: 192.168.0.5
+<LI>              IP6 hex notation, also compressed format (x:x:x:x:x:x:x:x)<BR>
+                  See RFC 1884, chapter 2.2 for more info.<BR>
+                 Example: ::FFFF:C0:A8:00:05
+<LI>              IP6 mixed hex notation (x:x:x:x:x:x:d.d.d.d)<BR>
+                 Example: ::FFFF:192.168.0.5
+<LI>              32-bit IP4 number<BR>
+                 This will be phased out, but is deprecated as of this RFC.<BR>
+                 Retained for compatibility with current DCC CHAT implementation.
+</OL>
+<DT>   &lt;target&gt;<DD>   Either a nickname or channel, something that IRC messages can  be sent to.
+<DT>   &lt;id&gt;<DD>       A 3 character ID code assigned to each known IRC client, used as part of extended text attributes or extended request.
+</DL>
+ 
+<P>All specifications will be spaced for legibility, white space used for  this purpose will not be considered part of the format of a given  command. Only spaces shown as &lt;space&gt; are required by the protocol.
+<P>   Each colour will be an index, selected from the following table:
+<TABLE CELLSPACING=0 CELLPADDING=3 BORDER=1>
+<TR><TH>Index<TH>Name<TH>RGB
+<TR><TD ALIGN=CENTER>        0<TD>     Black<TD>     000,000,000
+<TR><TD ALIGN=CENTER>        1<TD>     Blue<TD>      000,000,128
+<TR><TD ALIGN=CENTER>        2<TD>    Green<TD>     000,128,000
+<TR><TD ALIGN=CENTER>        3<TD>     Cyan<TD>      000,128,128
+<TR><TD ALIGN=CENTER>        4<TD>     Red<TD>       128,000,000
+<TR><TD ALIGN=CENTER>        5<TD>     Purple<TD>    128,000,128
+<TR><TD ALIGN=CENTER>        6<TD>    Brown<TD>     128,128,000
+<TR><TD ALIGN=CENTER>        7<TD>    Lt Gray<TD>   204,204,204
+<TR><TD ALIGN=CENTER>        8<TD>   Gray<TD>      128,128,128
+<TR><TD ALIGN=CENTER>        9<TD>     Lt Blue<TD>   000,000,255
+<TR><TD ALIGN=CENTER>        A<TD>     Lt Green<TD>  000,255,000
+<TR><TD ALIGN=CENTER>        B<TD>     Lt Cyan<TD>   000,255,255
+<TR><TD ALIGN=CENTER>        C<TD>     Lt Red<TD>    255,000,000
+<TR><TD ALIGN=CENTER>        D<TD>     Pink<TD>      255,000,255
+<TR><TD ALIGN=CENTER>        E<TD>     Yellow<TD>    255,255,000
+<TR><TD ALIGN=CENTER>        F<TD>     White<TD>     255,255,255
+</TABLE>
+<P><H3><A NAME="2">2. General Requirements</A></H3>
+<MENU>
+<LI><P><H3><A NAME="2.1">2.1  Parsing Order</A></H3>
+<P>The CTCP protocol involves different levels of encapsulation and 
+   quoting, which can be confused.  Below is the order of parsing of 
+   incoming messages, which must be used in reverse for assembling requests 
+   or replies.  This will be involved in the parsing of PRIVMSG, NOTICE and
+   DCC CHAT traffic.  This order is for user requests (section 4) only. 
+   Text attributes (section 3) should be parsed where appropriate.
+<UL>
+<LI>Check for request -- text embedded between &lt;marker&gt;s.
+</UL>
+<P>If a request is found, it should be processed as follows:
+<UL>
+<LI>Break message into tokens using &lt;space&gt;.
+<LI>Interpret first token as &lt;request&gt;.
+<LI>Unquote tokens specified as requiring quoting for the given &lt;request&gt;.
+<LI>Process request.
+</UL>
+<P>A message containing multiple valid requests should be processed in a 
+   left to right order.  Requests generating replies may or may not be combined
+   into a single message, but must be returned in the same order as the requests
+   were processed.
+
+<LI><P><H3><A NAME="2.2">2.2  Quoting</A></H3>
+<P>To allow transmission thru the server, which reserves certain characters
+   for its own use, as well as to support the workings of the protocol,
+   various characters contained in request messages will require quoting.
+   Listed below are the characters which require quoting, as well as their
+   quoted equivalents.
+<TABLE CELLSPACING=0 CELLPADDING=3 BORDER=1>
+<TR><TH>      Name<TH>                  ASCII<BR>(Octal)<TH>   Quoted
+<TR><TD>      NUL  (null)<TD ALIGN=CENTER>            000<TD ALIGN=CENTER>      '\0'
+<TR><TD>      STX  (ctcp marker)<TD ALIGN=CENTER>     001<TD ALIGN=CENTER>      '\1'
+<TR><TD>      LF   (newline)<TD ALIGN=CENTER>         012<TD ALIGN=CENTER>      '\n'
+<TR><TD>      CR   (carriage return)<TD ALIGN=CENTER>015<TD ALIGN=CENTER>      '\r'
+<TR><TD>      SPC  (space)<TD ALIGN=CENTER>           040<TD ALIGN=CENTER>      '\@'
+<TR><TD>      \    (backslash)<TD ALIGN=CENTER>       134<TD ALIGN=CENTER>      '\\'
+</TABLE>
+<P>   Quoting will only be applied to arguments which require it as specified 
+   in section 4 below.
+</MENU>
+<P><H3><A NAME="3">3. Text Attributes</A></H3>
+ 
+<P>The primary task of an IRC Client program is to display text to the user,
+   and allow text messages to be sent to other users.  As such, the 
+   following specifications affect all aspects of a particular client's
+   display.  All text presented to the user should be assessed for 
+   attribute changes.  It is up to each client how it interprets the 
+   request, as well as whether or not to present a particular attribute 
+   change request.
+<P>   All attributes are cumulative, that is to say, no specific attribute 
+   overrides any other attribute type.  All attributes requests may be 
+   ignored, and any particular combination of attributes may be ignored,
+   either by design or by user request.  Certain combinations may not make
+   sense in all environments, and are therefore not required to be
+   implemented.
+<MENU>
+<LI><P><H3><A NAME="3.1">3.1  Bold</A></H3>
+<P>Used to toggle the bold state.  Clients may display this by using the
+   "BOLD" attribute of the current font, or by choosing predefined colour
+   combination, based on the capabilities of the terminal being used.
+<P>   Specification: &lt;format&gt; B
+      
+<LI><P><H3><A NAME="3.2">3.2  Inverse (Reverse)</A></H3>
+<P>Used to toggle the inverse state.  This should be displayed by reversing
+   the foreground and background colours of the current attribute.  If this
+   behavior is not readily available to the client coder due to terminal 
+   type restrictions, user defined colours may be used to indicate this 
+   state.
+<P>   Specification: &lt;format&gt; V
+<LI><P><H3><A NAME="3.3">3.3  Underline</A></H3>
+<P>Used to toggle the underline state.  This should be displayed by using 
+   the "UNDERLINE" attribute of the current font, or by choosing predefined
+   colour combinations, based on the capabilities of the terminal being 
+   used.
+<P>   Specification: &lt;format&gt; U
+<LI><P><H3><A NAME="3.4">3.4  Overstrike</A></H3>
+<P>Used to toggle the overstrike state.  This should be displayed by using 
+   the "OVERSTRIKE" attribute of the current font, or by choosing 
+   predefined colour combinations, based on the capabilities of the 
+   terminal being used.
+<P>   Specification: &lt;format&gt; S
+<LI><P><H3><A NAME="3.5">3.5  Italics</A></H3>
+<P>Used to toggle the italics state.  This should be displayed by using the
+   "ITALICS" attribute of the current font, or by choosing predefined 
+   colour combinations, based on the capabilities of the terminal being 
+   used.
+<P>   Specification: &lt;format&gt; I
+<LI><P><H3><A NAME="3.6">3.6  Colours</A></H3>
+<P>This allows the requestor to specify the desired colours in which the 
+   text following this attribute will be displayed.  This attribute is
+   cumulative as well, within the restrictions of the terminal in use.
+   Colours may be chosen in two methods, either from an indexed colour 
+   table, or by specifying an RGB value.  As a result, each specification
+   below offers an option of selecting an RGB or Index value.
+<P>   There will be 3 forms of request, as well as a means to end a request.
+<P>   Specification: &lt;format&gt; CA &lt;colour&gt; &lt;colour&gt;
+<MENU>
+<LI><P>      This form specifies both the foreground and background colours, in 
+      that order.  Identical values of fore and back should be considered 
+      invalid and ignored.  The client may define a range in which colours 
+      of a similar nature may also be ignored.  One possible means of 
+      comparison would be:
+<LI><P>         R1 &lt; R2 - 8 or R1 &gt; R2 + 8<BR>
+         G1 &lt; G2 - 8 or G1 &gt; G2 + 8<BR>
+         B1 &lt; B2 - 8 or B1 &gt; B2 + 8
+<LI><P>      If a pair of colours passes these 3 tests, then it should be 
+      considered different enough for display purposes, based on 
+      constraints of the current display screen.  The choice of a range of 
+      16 values is arbitrary for the example, and individual clients may 
+      choose larger or smaller values at their discretion.
+<LI><P>      This particular request will specify both the foreground and 
+      background of any text to follow it.  Foreground colour will be 
+      specified first in this format.  Clients may ignore either component 
+      or both, based on user requests.  A selection of &lt;fore&gt; and &lt;back&gt; 
+      with the same value should be considered invalid and ignored, using 
+      all other currently active attributes.
+</MENU>
+<P>   Specification: &lt;format&gt; CF &lt;colour&gt;
+<MENU>
+<LI><P>      Specify a change in foreground colour only. The current background
+      colour is kept.  Requests which set the foreground colour to one
+      similar to the current background colour should be ignored.
+</MENU>
+<P>   Specification: &lt;format&gt; CB &lt;colour&gt;
+<MENU> 
+<LI><P>      Specify a change in background colour only.  The current foreground
+      colour is preserved.  Requests which set the background colour to
+      one similar to the current foreground should be ignored.
+</MENU>
+<P>   Specification: &lt;format&gt; CX &lt;A|F|B&gt;
+<MENU>
+<LI><P>      Remove the current colour attributes, leaving all other attributes
+      intact.  The type argument specifies which attribute, or both, is
+      being ended.  A - both fore and back, F - fore only, B - back only.
+</MENU>
+<LI><P><H3><A NAME="3.7">3.7  Size</A></H3>
+<P>Choice of typeface point sizes may be made by the use of the Size text
+   attribute.  An argument consisting of 2 decimal digits is used to set 
+   the typeface point size used for subsequent display.  Valid values are
+   01 - 72.  A value of 00 is used to reset the size attribute.
+<P>   Specification: &lt;format&gt; F nn
+<MENU>
+<LI><P>      Additionally, the point size may be changed in steps.  These can be 
+      either points or in defined step sizes or faces.
+</MENU>
+<P>   Specification: &lt;format&gt; F +n<BR>
+   Specification: &lt;format&gt; F -n
+<MENU>
+<LI><P>      where the sign indicates direction positive or negative and N is a 
+      1-4 step count to modify the current typeface.
+</MENU>
+<LI><P><H3><A NAME="3.8">3.8  Normal</A></H3>
+<P>In order to facilitate the clearing of all currently set text 
+   attributes, a means of specifying a return to baseline is desired.  The
+   following code will clear all attributes and return to displaying text 
+   in the client's currently defined 'normal' attribute.
+<P>   Specification: &lt;format&gt; N
+<LI><P><H3><A NAME="3.9">3.9  Extensions</A></H3>
+<P>In order to facilitate the extension of this protocol, a client may
+   indicate such an extension as follows:
+<P>   Specification: &lt;format&gt; X &lt;id&gt; [&lt;arg&gt; [...]] &lt;EOT&gt;
+<MENU>
+<LI><P>      The &lt;id&gt; field will contain a 3 character ID value, assigned to each 
+      client below.  New clients should request an assigned ID from the
+      appropriate authority.  Current assignments are in section 5.
+</MENU>
+<LI><P><H3><A NAME="3.10">3.10 Violations</A></H3>
+<P>Any combination not listed above is considered a violation of the
+   formatting protocol.  Any such violation of this protocol will require
+   immediate expulsion from IRC of the individuals in question, with a note
+   for their mommy pinned to their lapel.
+<P>   Until this desired result becomes feasable however, it is recommended 
+   that the client discard the &lt;format&gt; character and continue to display 
+   the line as if it had not been present.
+<LI><P><H3><A NAME="3.11">3.11  Deprecations</A></H3>
+      
+<P>Currently implemented standard codes are ^B for Bold, ^V for Inverse or
+   (Reverse as in ircII), ^_ for Underline, and ^O to turn off all 
+   attributes.  These are being replaced by the above formatting
+   specifications, and should no longer be sent by IRC clients, per section 
+   2. Clients receiving these messages may either strip the codes from the
+   text or display them as previously defined.
+</MENU>
+<P><H3><A NAME="4">4.  User Requests</A></H3>
+   
+<P>In order to facilitate the exchange of information with in the IRC
+   networks, users have indicated desire to transmit files, determine
+   transmission times and send specialized text messages.  As RFC 1459 
+   offers no direct means to exchange such requests, a protocol built upon
+   RFC1459's is required.  Over the course of time, the use of PRIVMSG and
+   NOTICE encapsulated within the &lt;marker&gt; character, ^A, has come to be
+   standard.  This will be an attempt to clarify earlier documents on this
+   subject, as well as provide additional functionality.
+<P>   The basic format of any request will be as follows:
+<MENU>
+<LI><P>      PRIVMSG &lt;space&gt; &lt;target&gt; &lt;space&gt; : &lt;marker&gt; &lt;command&gt; [&lt;arg&gt; [...]] 
+         &lt;marker&gt;
+</MENU>
+<P>   Within the framework of these requests, some may generate a response.
+   This response will take the following general form:
+<MENU>
+<LI><P>      NOTICE &lt;space&gt; &lt;target&gt; &lt;space&gt; : &lt;marker&gt; &lt;command&gt; [&lt;arg&gt; [...]] 
+         &lt;marker&gt;
+</MENU>
+<P>   Requests which are not recognised or are invalid may return an error 
+   message similar to the following:
+<MENU>
+<LI><P>       NOTICE &lt;space&gt; &lt;target&gt; &lt;space&gt; : &lt;marker&gt; ERRMSG \
+         &lt;command&gt; [&lt;arg&gt; [...]] &lt;marker&gt;
+</MENU>
+<P>   RFC 1459 indicates that the servers will contain flood control 
+   mechanisms, which will disconnect clients that send excessive amounts of
+   text to their server within short periods of time.  Given that this 
+   method is used by less desirable elements of the IRC community to take 
+   over channels, gain access to otherwise used nicknames and to disrupt 
+   the pursuit of enjoyment, each client must take steps to avoid this
+   outcome.
+<P>   For this reason, requests may be ignored by the client, based on 
+   selected criteria.  Each client must determine, for the benefit of its
+   users, what means it will provide to ensure that excessive text is not 
+   sent to the server.  Suggestions include sending only 1 CTCP reply per
+   second, counting requests and not responding to more than X requests per 
+   Y seconds, and others.  The use of ignore commands within clients may 
+   also be used to reject requests.
+<MENU>
+<LI><P><H3><A NAME="4.1">4.1  VERSION                                                   (required)</A></H3>
+<P>This request will provide to the initiator information about the 
+   particular client is being used by the recipient.  A valid request will
+   have no arguments accompanying it.  This will generate a reply in the
+   general form above, with three fields in the response:
+<P>   Field 1: Client name and version<BR>
+   Field 2: Operating system name and version<BR>
+   Field 3: Contact for individual/organization responsible for client.
+<P>   These will be combined as follows:
+<MENU>
+<LI><P>      &lt;marker&gt; VERSION &lt;field 1&gt; &lt;space&gt; &lt;field 2&gt; &lt;space&gt; &lt;field 3&gt; &lt;marker&gt;
+</MENU>
+<P>  Various clients include the ability to run scripts which may choose to
+   receive and reply to this request.  At no time should any such script be
+   permitted to filter the request from the client's internal handling, and 
+   as such, a client is REQUIRED to produce its own VERSION response, 
+   subject to flood control.  Text within the fields should be quoted to 
+   avoid conflicting with the space separator.
+<LI><P><H3><A NAME="4.2">4.2  PING &lt;space&gt; &lt;arg&gt;                                        (required)</A></H3>
+  
+<P>This request is intended to determine the round trip time of a message 
+   from the initiator to the recipient and back to the initiator.  The
+   precipient is required to return a duplicate of the received argument
+   without modification.  Each client will define its own format for the 16
+   byte argument.  Requests with arguments longer than 16 characters should 
+   be silently dropped.
+<P>   The reply will be formatted as:
+<MENU>
+<LI><P>      &lt;marker&gt; PONG &lt;space&gt; &lt;arg&gt; &lt;marker&gt;
+</MENU>
+<P>   Various clients include the ability to run scripts which may choose to
+   receive and reply to this request.  At no time should any such script be
+   permitted to filter the request from the client's internal handling, and 
+   as such, a client is REQUIRED to produce its own PONG response, subject 
+   to flood control.
+<LI><P><H3><A NAME="4.3">4.3  CLIENTINFO                                               (required)</A></H3>
+<P>This request will be used to inquire of the capabilities of a client. 
+   The response will be a space separated list of the valid request command
+   words recognised by this client.
+<P>   The current implementation of this command allowed for an argument which
+   would provide additional information about the command, acting like a 
+   help reference.  In the interests of cutting down on the flood potential 
+   of clients, as well as the recent need to maintain local help files, 
+   this optional behavior is deprecated.
+<LI><P><H3><A NAME="4.4">4.4  ACTION &lt;space&gt; &lt;text&gt;                                     (required)</A></H3>
+      
+<P>This request is used to provide an alternative form of speaking either 
+   to an individual or channel.  This text should be treated in a manner
+   similar to a PRIVMSG from RFC1459.  Alternate display methods are
+   encouraged.
+<P>   No reply is made to this request.
+<LI><P><H3><A NAME="4.5">4.5  USERINFO                                                  (optional)</A></H3>
+<P>The response to this request will be a user specified text string, and 
+   may contain any valid ASCII character 32 or above.  No restrictions are
+   placed on the content of this reply.
+<LI><P><H3><A NAME="4.6">4.6  TIME                                                      (optional)</A></H3>
+<P>The response to this request will be the date and time of the system the
+   client is running on.  The format of this reply will be that used be
+   RFC822, section 5. The general syntax is reprinted here for ease of use.
+   Implementers should review the referenced section for more information.
+<P>   SYNTAX
+<TABLE CELLSPACING=0 CELLPADDING=3 BORDER=0>
+<TR><TD VALIGN=TOP>date-time   =<TD>[ day "," ] date time<TD>        ; dd mm yy<BR>
+                                                  ;  hh:mm:ss zzz
+<TR><TD VALIGN=TOP>     day         =<TD>  "Mon"  / "Tue" /  "Wed"  / "Thu"
+<TR><TD VALIGN=TOP><TD>                 /  "Fri"  / "Sat" /  "Sun"
+<TR><TD VALIGN=TOP>     date        =<TD>  1*2DIGIT month 2DIGIT<TD>        ; day month year<BR>
+                                                 ;  e.g. 20 Jun 82
+<TR><TD VALIGN=TOP>     month       =<TD>  "Jan"  /  "Feb" /  "Mar"  /  "Apr"<BR>
+                 /  "May"  /  "Jun" /  "Jul"  /  "Aug"<BR>
+                 /  "Sep"  /  "Oct" /  "Nov"  /  "Dec"
+<TR><TD VALIGN=TOP>     time        =<TD>  hour zone<TD>                    ; ANSI and Military
+<TR><TD VALIGN=TOP>     hour        =<TD>  2DIGIT ":" 2DIGIT [":" 2DIGIT]<TD>                                                 ; 00:00:00 - 23:59:59
+<TR><TD VALIGN=TOP>        zone        =<TD>   "UT"  / "GMT"<TD>                ; Universal Time<BR>
+                                                    ; North American : UT
+<TR><TD><TD>                    /  "EST" / "EDT"       <TD>     ;  Eastern:  - 5/ - 4
+<TR><TD><TD>                    /  "CST" / "CDT"       <TD>          ;  Central:  - 6/ - 5
+<TR><TD><TD>                    /  "MST" / "MDT"       <TD>          ;  Mountain: - 7/ - 6
+<TR><TD><TD>                    /  "PST" / "PDT"         <TD>        ;  Pacific:  - 8/ - 7
+<TR><TD><TD>                   /  1ALPHA              <TD>          ; Military: Z = UT;<BR>
+                                                    ;  A:-1; (J not used)<BR>
+                                                    ;  M:-12; N:+1; Y:+12
+<TR><TD><TD>                    / ( ("+" / "-") 4DIGIT )   <TD>      ; Local differential<BR>
+                                                    ;  hours+min. (HHMM)
+ </TABLE>
+<P>
+<MENU>
+<LI>     &lt;marker&gt; TIME &lt;space&gt; &lt;date-time&gt; &lt;marker&gt;
+</MENU>
+<LI><P><H3><A NAME="4.7">4.7  DCC &lt;space&gt; &lt;type&gt; &lt;space&gt; &lt;protocol&gt; &lt;space&gt; &lt;ip&gt; &lt;space&gt; &lt;port&gt; [&lt;space&gt; &lt;arg&gt; [&lt;space&gt; &lt;arg&gt; [...]]]          (optional)</A></H3>
+<P>This implements the Direct Client to Client protocol.  The intent of 
+   this protocol is to facilitate the transfer of information from client 
+   to client, without directly accessing the IRC network.  An initial 
+   message is sent from the initiator to the recipient, where an IP and 
+   PORT are extracted from the message and a direct TCP connection is
+   established.  The intent of the connection is indicated by the TYPE 
+   field on the original message.
+<MENU>
+<LI><P><H3><A NAME="4.7.1">   4.7.1  CHAT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; &lt;ip&gt; &lt;space&gt; &lt;port&gt;</A></H3>
+<P>CHAT is used to initiate a conversation directly between clients. 
+      Often used to bypass the IRC network, and its associated latencies in
+      delivering messages.  May also be used for other unspecified 
+      purposes.
+<P>      All messages recieved via the DCC CHAT connection should be treated 
+      in the same fashion as messages received from the IRC network via a
+      PRIVMSG.  This extention of the current protocol allows further 
+      requests or text attributes to be exchanged once the connection is
+      established.
+<P>      The &lt;protocol&gt; will be used to determine what, if any, protocol will 
+      be used in the exchange of messages.  The recipient must be able to 
+      support the requested protocol, or it must not establish the 
+      connection, returning an error reply, subject to flood control, as 
+      follows:
+<MENU>
+<LI><P>      &lt;marker&gt; ERRMSG &lt;space&gt; DCC &lt;space&gt; CHAT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; unavailable &lt;marker&gt;
+</MENU>
+<P>      Currently, the only protocol which is in use is 'chat'.  This will be
+      deprecated in favour of the schemes discussed in section 5. As of 
+      this writing, the only valid protocol is 'clear'.  Others may be 
+      added as necessary, and will be published from time to time in a 
+      supplement to this RFC.
+    
+<P>      If the recipient of the offer does not accept within a given time 
+      frame, 5 minutes seems appropriate, or the recipient declines to 
+      enter a chat with the initiator, a negative acknowledgement should be 
+      sent, subject to flood control.  The format of this rejection should 
+      be:
+<MENU>
+<LI><P>      &lt;marker&gt; ERRMSG &lt;space&gt; DCC &lt;space&gt; CHAT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; declined &lt;marker&gt;
+</MENU>
+<P>      Upon reciept of this message, the initiator should inform its user 
+      and clear the offered connection.
+<P>      Should the cause of the failure be for a reason other than timeout or 
+      user rejection, the rejection message should take the following 
+      format:
+<MENU>
+<LI><P>      &lt;marker&gt; ERRMSG &lt;space&gt; DCC &lt;space&gt; CHAT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; &lt;error&gt; &lt;marker&gt;
+</MENU>
+<LI><P><H3><A NAME="4.7.2">   4.7.2  XMIT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; &lt;ip&gt; &lt;space&gt; &lt;port&gt; [&lt;space&gt; &lt;name&gt; [&lt;space&gt; &lt;size&gt; [&lt;space&gt; &lt;MIME-type&gt;]]]</A></H3>
+<P> XMIT is intended to act as a replacement and enhancement of the 
+      original DCC SEND protocol.  One of the main failings of the older 
+      file exchange is it required an acknowledgement of receipt of data
+      prior to more data being sent.  This is a direct duplication of TCP
+      streams, and as such is redundant.  DCC SEND also lacks the capacity 
+      to restart a failed transmission from any other point than the 
+      beginning of the file.
+<P>      In order to maintain compatibility with the CHAT request, XMIT will 
+      make use of identical initial arguments.
+<P>      The &lt;protocol&gt; will be used to determine what, if any, protocol will 
+      be used in the exchange of data.  The recipient must be able to 
+      support the requested protocol, or it must not establish the 
+      connection, returning an error reply, subject to flood control, as 
+      follows:
+<MENU>
+<LI><P>      &lt;marker&gt; ERRMSG &lt;space&gt; DCC &lt;space&gt; CHAT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; unavailable &lt;marker&gt;
+</MENU>
+<P>      As of this writing, the only valid protocol is 'clear'.  Others may 
+      be added as necessary, and will be published from time to time in a 
+      supplement to this RFC.  This will be used primarily to support 
+      encryption methods, although other uses are not disallowed.  See 
+      section 5 for a description of the 'clear' protocol.
+<P>      The &lt;file&gt;, &lt;size&gt; and &lt;MIME-type&gt; fields are optional.  The 
+      recipient client should provide adequate means to create a local file 
+      from the offered data stream.  Alternatively the stream may be 
+      directed to another program for handling.
+         
+<P>      Should it be desired to supply a MIME-type in the case where either 
+      the file has no name (is from a live feed) or has undetermined size,
+      missing fields must be filled in with '-'.  A filename of '-' or 
+      beginning with a '-' must be quoted to avoid confusion with the place
+      holder.
+          
+<P>      If the recipient of the offer does not accept within a given time 
+      frame, 5 minutes seems appropriate, or the recipient declines to 
+      accept the offer from the initiator, a negative acknowledgement 
+      should be sent, subject to flood control.  The format of this 
+      rejection should be:
+<MENU>
+<LI><P>      &lt;marker&gt; ERRMSG &lt;space&gt; DCC &lt;space&gt; XMIT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; declined &lt;marker&gt;
+</MENU>
+<P>      Upon reciept of this message, the initiator should inform its user 
+      and clear the offered connection.
+<P>      Should the cause of the failure be for a reason other than timeout or 
+      user rejection, the rejection message should take the following 
+      format:
+<MENU>
+<LI><P>      &lt;marker&gt; ERRMSG &lt;space&gt; DCC &lt;space&gt; XMIT &lt;space&gt; &lt;protocol&gt; &lt;space&gt; &lt;error&gt; &lt;marker&gt;
+</MENU>
+<P>      The transmission of data on the established connection will be 
+      dictated by the protocol definiton in section 5.
+<LI><P><H3><A NAME="4.7.3">   4.7.3  OFFER &lt;space&gt; &lt;protocol&gt; &lt;space&gt; &lt;ip&gt; &lt;space&gt; &lt;port&gt; [&lt;space&gt; &lt;file&gt; [&lt;space&gt; &lt;size&gt; [&lt;space&gt; &lt;MIME-type&gt;]]]</A></H3>
+<P>This type is identical in all respects to the XMIT indicated above, 
+      but it is designed for use on a channel, where the offer message will 
+      be broadcast to multiple individuals.  The initiator will open a 
+      server socket (LISTEN) and accept connections on this socket as long 
+      as it is open.  Each such accepted connection will be handled 
+      identically to a DCC XMIT connection.
+<P>      The offering socket may be closed at any time by the initiating 
+      client, and a reasonable timeout value on the offer would also be
+      indicated.  Closing the offer socket does not affect the state of any 
+      of the previously established XMIT connections.
+</MENU>
+<LI><P><H3><A NAME="4.8">4.8  XDCC &lt;space&gt; &lt;type&gt; [&lt;space&gt; &lt;arg&gt; [...]]                 (optional)</A></H3>
+<P>eXtended DCC protocol is implemented primarily in slower scripts at 
+   this time.  It's primary purpose allows the client to act as a file 
+   server, being automatically able to initiate DCC SEND requests.  The
+   client, using whatever means is most appropriate, builds a list of 
+   packages which are available for transmission.  This list is then 
+   available for anyone on IRC to transfer files from.
+<MENU>
+<LI><P><H3><A NAME="4.8.1">   4.8.1  LIST [&lt;space&gt; &lt;arg&gt;]</A></H3>
+<P>In response to this request, the recipient will send to the initiator 
+      a list of offered packages.  With each package will be a brief 
+      description of the file or files included within the package.  The 
+      exact format and lines/package are at the discretion of the 
+      implementing client.
+<P>      Use of the argument form of this request will provide the initiator 
+      with a list of files contained within a given package, and possibly a
+      description of each file.  Again, the format of the response is at 
+      the discretion of the implementor.
+<LI><P><H3><A NAME="4.8.2">   4.8.2  SEND &lt;space&gt; &lt;arg&gt;</A></H3>
+<P>This will initiate the transfer of files within the specified 
+      package.  Each file offered will generate either a DCC SEND or DCC 
+      OFFER, based on the destination of the request.  At the discretion of 
+      the client developer, requests directed to channels may result in a 
+      DCC OFFER being made to the entire channel, or directly back to the 
+      user via a DCC SEND.  Use of this feature violates the rule of RFC 
+      1459, although I do not believe it violates the spirit intended by 
+      the statement that a PRIVMSG should not be sent in response to a 
+      PRIVMSG.
+</MENU>
+<LI><P><H3><A NAME="4.9">4.9  URL                                                       (optional)</A></H3>
+<P>This request is a supplement to USERINFO, and is designed to allow users 
+   to request and respond with their home pages.  The format of the reply 
+   is:
+<MENU>
+<LI><P>   &lt;marker&gt; URL &lt;space&gt; &lt;text&gt; &lt;marker&gt;.
+</MENU>
+<P>   The user of the recipient client controls what text is returned.  Upon
+   reciept, the initiator of the request may direct the response to be 
+   placed in a list of extracted urls, or may directly activate an 
+   appropriate browser to view the home page returned.
+<LI><P><H3><A NAME="4.10">4.10  EXT &lt;space&gt; &lt;id&gt; [&lt;space&gt; &lt;arg&gt; [...]]                    (optional)</A></H3>
+<P>This request is used to provide EXTentions to the protocol on a client 
+   by client basis.  The use of the assigned ID (section 5) is to guarantee
+   uniqueness of any request.  No restrictions are placed on content beyond
+   the ID.  Recipients of a request which they do not comprehend may ignore
+   the request silently.
+ 
+<P>   Any request implemented using EXT should be converted to a standard 
+   request once it has been shown to function, is approved by the committee
+   for CTCPs, and incorporated into a rewrite of this RFC.
+<LI><P><H3><A NAME="4.11">4.11  SCR &lt;space&gt; &lt;sid&gt; [&lt;space&gt; &lt;arg&gt; [...]]                   (optional)  </A></H3>
+<P>This request provides a means for scripts executing within a client to
+   provide extensions not provided by the client.  The &lt;sid&gt; field is a 3
+   character ID field for use by scripts.  Clients should always ignore 
+   this request, allowing only a script to generate a response no 
+   restrictions on content are imposed.  Script is responsible for quoting 
+   any undesirable characters in the argument or reply.
+<LI><P><H3><A NAME="4.12">4.12  Deprecations                                              (required)</A></H3>
+<P>Currently there are clients which implement requests which are of no
+   significant value in the face of these specificiations.  All such 
+   requests will generate an ERRMSG reply.  The list of deprecated requests
+   is:
+<P>   ECHO, SED, FINGER, UTC, ERRMSG (as a request), CLIENTINFO &lt;arg&gt;, SOURCE,
+   and DCC SEND.
+</MENU>
+<P><H3><A NAME="5">5. Assigned IDs</A></H3>
+<MENU>
+<LI><P><H3><A NAME="5.1">5.1  Client Extensions</A></H3>
+ 
+<TABLE CELLSPACING=0 CELLPADDING=3 BORDER=1>
+<TR><TH>Value<TH>Client(s)<TH>OS<TH>Author/Developers<TH>Email Contact
+<TR><TD ALIGN=CENTER>TST<TD>Reserved<TD ALIGN=CENTER>N/A<TD ALIGN=CENTER>N/A<TD ALIGN=CENTER>N/A
+<TR><TD ALIGN=CENTER>ILC<TD>IRC/2 & PMIRC/2<TD ALIGN=CENTER>OS/2<TD ALIGN=CENTER>Innovative Logic Corp<TD ALIGN=CENTER>&lt;irc2&nbsp;(at)&nbsp;invlogic.com&gt;
+</TABLE>  
+<P>[ please send me a private email at mmclagan&nbsp;(at)&nbsp;invlogic.com and give me
+   your choice of IDs ] 
+<LI><P><H3><A NAME="5.2">5.2  DCC protocols</A></H3>
+<MENU>
+<LI><P><H3><A NAME="5.2.1">   5.2.1  clear</A></H3>
+<P>This protocol must be supported by all clients.  This will be the 
+      most widely used method for inter-client communications.  As its name
+      implies, data is transmitted without any form of encryption.  This is
+      therefore an insecure protocol and should be used only in 
+      circumstances where information contained in the packets is public
+      knowledge.
+<MENU>
+<LI><P><H3><A NAME="5.2.1.1">      5.2.1.1  CHAT</A></H3>
+  
+<P>In the context of the CHAT protocol, no initial handshaking will 
+         be undertaken.
+ 
+<LI><P><H3><A NAME="5.2.1.2">      5.2.1.2  XMIT</A></H3>
+            
+<P> While there is no handshaking for encryption, there is a small 
+         handshake used to allow for resumption of transmission.  The 
+         initiator will send 4 byte timestamp value, in network byte order 
+         of seconds since the epoch.  This value will be compared with the 
+         stamp on any file of the same name the client has.
+<P>         If this matches then the client will transmit a 4 byte offset into 
+         the file from which the initiator should begin transmission.  If 
+         they do not match, the client may either overwrite the current 
+         file or select another name at its discretion.  In this case, a 4 
+         byte 0 will be transmitted, indicating to the initiator that it 
+         should commence transmission from the begining of the file.
+<P>         Clients in environments not offering the epoch time value may send 
+         a 0 value, which should be interpreted by the recipient as an 
+         indication that resumed transfers are not supported and return a 0 
+         value, taking appropriate steps to rename or create a new name for 
+         the incoming file.
+<P>         Upon completion of the transfer, the client should set the files 
+         time/date to that specified in the initial epoch value.  If this 
+         is value is 0, then the current date/time should be used as 
+         stamped by the operating system.
+ </MENU>
+<LI><P><H3><A NAME="5.2.2">   5.2.2  others</A></H3>
+<P>Other protocols may be implemented, and will be described in a 
+     supplement to this RFC.  Any protocol implemented should build upon 
+     the 'clear' protocol, allowing maximal reusage of code.  This will 
+     affect primarily XMIT as the CHAT protocol carries no additional
+     handshaking.
+</MENU>
+</MENU>
+<H3>Author's Address</H3>
+Michael McLagan<BR>
+Innovative Logic Corp.<BR>
+59 E. River St, #2<BR>
+Ogdensburg, NY 13669<BR>
+U.S.A.
+<P>
+EMail: <A HREF="mailto:mmclagan_at_invlogic.com">mmclagan&nbsp;(at)&nbsp;invlogic.com</A>
+
+<P>
+
+<CENTER>
+
+<IMG SRC="/images/break.gif" HEIGHT=10 WIDTH=530 ALT="---------"><BR>
+Report any access issues to our
+<A HREF="mailto:webmaster_at_invlogic.com">webmaster</A>.
+</CENTER>
+<A HREF="/index.html">
+<IMG ALIGN=ABSMIDDLE BORDER=0 HEIGHT=35 WIDTH=75 HSPACE=5 
+SRC="/images/buttons/home.gif" ALT="homepage"></A><BR>
+<FONT SIZE=2>
+Last modified: 17-Sep-2004 01:04PM.<BR>
+Material copyright &copy;1996-1997, Innovative Logic Corp.<BR>
+Design copyright &copy;1996-1997, 
+<A HREF="http://www.invweb.com/">Innovative Web Creations</A>.<BR>
+All rights reserved.<BR>
+</FONT>
+</BODY>
+</HTML>

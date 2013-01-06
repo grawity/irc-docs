@@ -1,0 +1,143 @@
+<BASE HREF="http://www.invlogic.com/irc/ctcp2_1.html">
+<TITLE>Internet Relay Chat</TITLE>
+<META name="description" content="computer consulting services, internet and
+intranet desing, and custom software development">
+<META name="keywords" content="computer, consulting, web, internet, intranet, 
+WWW, world wide web, services, software, development, OS/2, Linux, Windows, 
+hosting, virtual host, design, graphic, multimedia, Washington, Baltimore, Maryland, 
+scanning, CD-Rom, computers, consultant, programming, scanner, IRC/2, Internet 
+Relay Chat, IRC">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="/images/backdrop.gif">
+
+
+<H2>TABLE OF CONTENTS</H2>
+
+<TABLE>
+<TR><TD>1.	<TD COLSPAN=3><A HREF="#INTRO">Introduction</A>
+<TR><TD><TD>1.1	<TD>Conventions
+<TR><TD><TD>1.2	<TD>Base Definitions
+<TR><TD>2.	<TD COLSPAN=3><A HREF="ctcp2_2.html">Text Attributes</A>
+<TR><TD><TD>2.1	<TD>Bold
+<TR><TD><TD>2.2	<TD>Inverse (Reverse)
+<TR><TD><TD>2.3	<TD>Underline
+<TR><TD><TD>2.4	<TD>Overstrike
+<TR><TD><TD>2.5	<TD>Italics
+<TR><TD><TD>2.6	<TD>Colours
+<TR><TD><TD>2.7	<TD>Size
+<TR><TD><TD>2.8	<TD>Universal Resource Locator
+<TR><TD><TD>2.9	<TD>Character Spacing
+<TR><TD><TD>2.10	<TD>Encoding
+<TR><TD><TD>2.11	<TD>Normal
+<TR><TD><TD>2.12	<TD>Extensions
+<TR><TD><TD>2.13	<TD>Deprecations
+<TR><TD><TD>2.14	<TD>Examples
+<TR><TD>3.	<TD COLSPAN=3><A HREF="ctcp2_3.html">Parsing CTCP Messages</A>
+<TR><TD><TD>3.1	<TD>Quoting
+<TR><TD><TD>3.2	<TD>"Flooding" Policy
+<TR><TD>4.	<TD COLSPAN=3><A HREF="ctcp2_4.html">CTCP Requests and Replies</A>
+<TR><TD><TD>4.1	<TD>VERSION
+<TR><TD><TD>4.2	<TD>PING
+<TR><TD><TD>4.3	<TD>CLIENTINFO
+<TR><TD><TD>4.4	<TD>ACTION
+<TR><TD><TD>4.5	<TD>USERINFO
+<TR><TD><TD>4.6	<TD>TIME
+<TR><TD><TD>4.7	<TD>DCC
+<TR><TD><TD>4.8	<TD>ERRMSG
+<TR><TD><TD>4.9	<TD>PLAY
+<TR><TD><TD>4.10	<TD>Client Extensions
+<TR><TD><TD>4.11	<TD>Deprecations
+<TR><TD>5.	<TD COLSPAN=3><A HREF="ctcp2_5.html">DCC Requests</A>
+<TR><TD><TD>5.1	<TD COLSPAN=3>DCC Over Firewalls
+<TR><TD><TD>5.3	<TD COLSPAN=3>MIME DCC Protocol
+<TR><TD><TD><TD>5.3.1 MIME DCC Negotiation
+<TR><TD><TD><TD>5.3.2 MIME DCC Data Transfer
+</TABLE>
+
+<P>
+
+<H2><A NAME="INTRO">1. Introduction</A></H2>
+
+<P>
+This document describes CTCP version 2 (CTCP2).
+
+<P>
+In order to facilitate the exchange of information with in the IRC
+networks, users have indicated desire to transmit files, determine
+transmission times and send specialized text messages.  As RFC 1459 
+offers no direct means to exchange such requests, a protocol built upon
+RFC 1459's is required.  This protocol is known as CTCP (or Client
+To Client Protocol).
+
+<P>
+The original CTCP definition specified only request and reply messages,
+but allowed users to transfer files over IRC, measure lag (network delay),
+and retreive automated responses to queries about a user's IRC client or
+time zone.
+
+<P>
+Over the course of time, CTCP has been expanded by various sources, and
+what was once a "standard" has become increasingly less so.  This document
+is an attempt to clarify earlier CTCP documentation and standardize some of
+the new features that have become commonplace since then.  In addition,
+some new functionality has been added in anticipation of future clients,
+and the extensibility of CTCP has been greatly improved.
+
+<P>
+In a few cases, extensibility has been chosen over compatibility.  For
+that reason, CTCP2 is not completely compatible with the original CTCP.
+Clients that understand CTCP will not necessarily understand CTCP2.
+Clients that understand CTCP2 can be made compatible with the original
+CTCP, but this is not required.
+
+<P>
+
+<H3>1.1 Conventions</H3>
+
+<P>
+This document uses a mechanism known as "augmented Backus-Naur Form"
+(BNF) for most of its specifications.  A description of this augmented
+BNF can be found in RFC 2068 (HTTP/1.1) and RFC 822 (email) among many
+other places.  Please consult one of those RFCs for a full description.
+A few of the major elements this document uses are:
+
+<PRE>
+"literal"
+   Anything in double quotes is a literal text string.  Unless stated
+   otherwise, it is case-insensitive.
+*rule
+   This indicates repitition, allowing 0 or more occurances of this
+   element.  A common derivitive is "1*rule" which specifies 1 or
+   more occurances.
+[rule]
+   Square brackets indicate an optional element or elements.
+</PRE>
+
+<P>
+Unless stated otherwise, there are is no implied whitespace.  Areas
+where whitespace is allowed will be clearly marked.
+
+<P>
+
+<H3>1.2 Base Definitions</H3>
+
+<P>
+These are standard definitions that will show up throughout the document.
+
+<PRE>
+OCTET	= &lt;any 8-bit sequence of data&gt;
+ALPHA	= &lt;any US-ASCII uppercase or lowercase letter&gt;
+DIGIT	= &lt;any US-ASCII digit "0".."9"&gt;
+NUL	= &lt;US-ASCII character 0 (octal 000)&gt;
+LF	= &lt;US-ASCII character 10 (octal 012)&gt;
+CR	= &lt;US-ASCII character 13 (octal 015)&gt;
+SP	= &lt;US-ASCII character 32 (octal 040)&gt;
+</PRE>
+
+<P>
+<FONT SIZE=2>
+Maintained by: <A HREF="mailto:webmaster_at_invlogic.com">Webmaster, Innovative Logic Corp.</A>.<BR>
+Last modified: 17-Sep-2004 01:04PM.<BR>
+</FONT>
+</BODY>
+</HTML>

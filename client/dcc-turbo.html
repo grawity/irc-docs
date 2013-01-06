@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+   <title>Visual IRC 2 - Turbo DCC Specification</title>
+</head>
+<body>
+<div align=center><table width="95%" bgcolor="#CCCCCC" >
+  <tr>
+    <td width=150><a href="http://www.hansprestige.com/">
+    <img src="/hanslogo2.gif" width=150 height=60 alt="Hans Prestige" border=0></a></td>
+    <td><font size="+2">Turbo DCC Specification</font>
+    <div style="float:right">
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-3335742208683618";
+        google_ad_width = 468;
+        google_ad_height = 60;
+        google_ad_format = "468x60_as";
+        google_color_link = "000000";
+        google_color_url = "666666";
+        google_color_text = "333333";
+        google_color_border = "CCCCCC";
+        google_color_bg = "FFFFFF";
+        //--></script>
+        <script type="text/javascript"
+          src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
+    </td>
+  </tr>
+  <tr>
+    <td width=150 bgcolor="#FFFFFF" valign=top><font face="Verdana" size="-3">
+    <a href="http://www.visualirc.net/">Visual IRC</a><br>
+    <b>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/features.php">Features &amp; Screenshots</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/download.php">Download ViRC!</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/scripts/">Scripts</a><br>
+    <br>
+    &nbsp; &nbsp;<a href="http://groups.google.com/group/virc">Visual IRC Forum</a><br>
+    &nbsp; &nbsp;<a href="irc://us.undernet.org/virc">Chat in Undernet #ViRC</a><br>
+    </b>
+    <br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/awards.php">Awards and Reviews</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/author.php">About the Author</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/tech.php">About the Technology</a>
+    <hr width="100%" size=1 noshade>
+    <a href="http://www.visualirc.net/old/">ViRC Antique Shop</a><br>
+    <hr width="100%" size=1 noshade>
+    <center>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="jmcgrew@hansprestige.com">
+    <input type="hidden" name="item_name" value="Visual IRC development">
+    <input type="hidden" name="no_shipping" value="1">
+    <input type="hidden" name="return" value="http://www.hansprestige.com/">
+    <input type="hidden" name="cancel_return" value="http://www.hansprestige.com/">
+    <input type="image" src="http://images.paypal.com/images/x-click-butcc-donate.gif" style="border: none" name="submit" alt="Support ViRC development with a secure PayPal donation">
+    </form>
+    <!--BUY.COM WISHLIST?
+    <br style="clear: both">
+    or
+    <a href="http://www.buy.com/retail/giftcenter/mywishlist.asp?email=%6A%6D%63%67%72%65%77%40%68%61%6E%73%70%72%65%73%74%69%67%65%2E%63%6F%6D">
+    see the buy.com wish list</a>
+    -->
+    </center>
+    </font></td>
+    
+    <td bgcolor="#FFFFFF">
+  
+<h2>CTCP Handshake</h2>
+
+<dl>
+<dt>Old handshake
+<dd><tt>DCC TSEND <i>filename</i> <i>encoded-ip</i> <i>port</i> <i>size</i></tt>
+<dt>New handshake
+<dd><tt>DCC SEND <i>filename</i> <i>encoded-ip</i> <i>port</i> <i>size</i> T</tt>
+</dl>
+
+<ul>
+<li><b>filename</b> - The name (without path) of the file being sent. The
+filename may contain spaces if it's surrounded by double quote marks
+(&quot;file with spaces.txt&quot;).
+<li><b>encoded-ip</b> - The sender's IPv4 address, expressed as a single
+number. The number is obtained by interpreting the 32-bit IP address as an
+unsigned integer in network byte order (most significant byte first).
+<li><b>port</b> - The port on which the sender is listening for a TDCC
+connection.
+<li><b>size</b> - The size of the file in bytes.
+</ul>
+
+<p>Any further handshaking for DCC Resume takes place just as in regular
+DCC.</p>
+
+<h2>Sending</h2>
+
+<p>The sender waits for the receiver to connect to the advertised port. Once
+a connection is made, the sender immediately begins sending the file, with
+no pauses or interruptions. (If a DCC Resume has been negotiated, the file
+will be sent starting at the negotiated offset; otherwise, it is sent from
+the beginning.) When the entire file has been sent, the sender waits for the
+receiver to close the socket.</p>
+
+<h2>Receiving</h2>
+
+<p>The receiver connects to the sender's advertised IP address and port. Once
+the connection is made, the receiver begins reading data as fast as possible
+from the socket and writing it to a local file, with no pauses or
+interruptions. When the entire file has been received (as determined by the
+advertised file size), the receiver closes the socket.</p>
+
+<h2>Changes for Reverse TDCC</h2>
+
+<p>Reverse TDCC uses a different handshake:</p>
+
+<blockquote>
+<tt>DCC SEND <i>filename</i> <i>encoded-ip</i> 0 <i>size</i> <i>token</i></tt>
+</blockquote>
+
+<p>... where <i>token</i> is a non-negative integer followed by the letter
+<tt>T</tt>. The integer must be unique for each file being sent by the same
+client at any given time. (The same token is included at the end of any DCC
+RESUME or DCC ACCEPT messages dealing with this connection.)</p>
+
+<p>Notice the port is 0; this signals to the receiver that the sender is
+requesting Reverse (T)DCC. The receiver opens a connection on a port of its
+choice and responds with a similar handshake:</p>
+
+<blockquote>
+<tt>DCC SEND <i>filename</i> <i>encoded-ip</i> <i>port</i> <i>size</i> <i>token</i></tt>
+</blockquote>
+
+<p>This message is sent as a CTCP request, not a CTCP reply, as if the
+receiver is attempting to send this file to the sender! (This may require
+the sender to add the receiver to his "DCC Allow" list on some networks.)
+The message can be identified as the second half of a Reverse DCC
+transaction because the token is present and the port is nonzero.</p>
+
+<p>In this second handshake, <i>encoded-ip</i> and <i>port</i> refer to the
+IP address and port being used by the <b>receiver</b>, since the receiver
+opens the connection in Reverse DCC. The sender connects to that port, and
+as soon as the connection is made, the file transfer takes place as usual.
+The sender still waits for the receiver to close the socket when the file is
+finished.</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2 align=left><font size="-3">&copy; Jesse McGrew 2001-2007</font></td>
+  </tr>
+</table></div>
+</body>
+</html>
+  

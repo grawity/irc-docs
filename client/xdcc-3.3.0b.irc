@@ -1,0 +1,1151 @@
+# ------------------------------------------------------------------------------
+# Program       : XDCC Script
+# Date          : 04/24/94
+# Version       : 3.3.0 Beta
+# Written by    : Xabier Vazquez Gallardo [XaBi]
+# System needed : Un*x computer with >= ircII2.2.9 client
+#
+# Copyright (c) 1993, 1994 XaBier Vazquez Gallardo
+# All rights reserved.
+# Redistribution and use of this source is permitted
+# provided that this notice is preserved and that due credit is given
+# to Xabier Vazquez Gallardo
+#
+# ------------------------------------------------------------------------------
+# I am not responsible and should not be held responsible for any harm or
+# damages caused by this script any complaints received resulting from the use
+# of these scripts will be ignored ! Use at your own risk !
+# TG (cedras@rahul.net) :)
+# ------------------------------------------------------------------------------
+# WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING
+# RNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING -
+# G - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARN
+# WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING 
+# ------------------------------------------------------------------------------
+# SOMEONE HACKED XDCC.IRC 3.2.0F (03/16/94) AND ADDED A FEW BACKDOORS TO IT 
+# WITH THIS BACKDOORS PPL CAN CONTROL YOU AS A BOT, AND CAN MAKE YOU TO DELETE 
+# YOUR WHOLE ACCOUNT, ETC ETC. 
+# PLEASE DONT GET XDCC.IRC FOR SOME1 YOU DON'T KNOW. E-MAIL ME AND I'LL SEND 
+# YOU MY LATEST XDCC.
+# IF YOU GONNA CHECK IT YOU HAVE AN HACKED XDCC WITH BACKDOORS YOU CAN LOOK ON 
+# YOUR SCRIPT FOR 'ctcp' AND IF YOU FIND ANYTHING LIKE THIS: 
+# on ^ctcp "% % CMD *" ^$3-
+# YOU HAVE A BACKDOOR. 
+# REMEMBER XDCC.IRC ONLY HAVE THIS KIND OF 'ON' COMMANDS: 
+# on exec_error 
+# on exec ....
+# ON on ^ctcp "% % DCC SEND % % % %" dccrequest $0 $4 
+# on ^msg "% XDCC *" xdccmsg $0 $2- 
+# on ^ctcp "* * XDCC *" xdccmsg $0 $3- 
+# IF YOU FIND ANY OTHER 'ON' COMMAND YOU HAVE A HACKED VERSION 
+# THANX to Ruff (an75399) & Bootp
+# ------------------------------------------------------------------------------
+# WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING 
+# RNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING -
+# G - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARN
+# WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING - WARNING
+# ------------------------------------------------------------------------------
+# How to run this script?
+# First of all you must edit this file and change the
+# INITIAL SETTINGS (see below, after this comments)
+# You can run this script by adding this line to your .ircrc
+# load xdcc.irc
+# You can run it too typing /load xdcc.irc on IRC 
+# Remember that the script must be in your script directory or in your present
+# directory. If this script isn't in those directories you'll need to type
+# the full path of the script.
+# ------------------------------------------------------------------------------
+# If you:
+# -have any bug report for me.
+# -have any suggestion about XDCC
+# -want lastest version of XDCC
+# -want to subscribe to XDCC (FREE!!!!)
+# -only want to talk to me :)
+# E-Mail to:
+# siavagaj@sisa02.si.ehu.es    checked 1-2 times per day
+# sixconse@sisb00.si.ehu.es    checked 2-3 times per week
+# an43404@anon.penet.fi        checked 2-3 times per week
+# xabier@burka.demos.su        checked 1-2 times per week
+# sixconse@axposf.pa.dec.com   checked 2-3 times per month
+# ------------------------------------------------------------------------------
+# New features on 3.2.0 :
+# More bugs fixed
+# New features in offer file: Wildcards allowed, easier configuration ...
+# New command: PSEND that allows send ppl a PACK of files
+# New command: LOAD  that allows to load an offer file
+# New command: SAVE  that allows to create an offer file
+# Command LOAD is now Intelligent and will try to fix any file error :)
+# Wildcards allowed on all commands :)
+# Full path support on all files
+# Better commands, like LIST command ...
+# Better help system
+# Info about file sizes ....
+# Ctcp support: now /CTCP XaBi XDCC LIST is the same as /MSG XaBi XDCC LIST
+# Try /CTCP #channel XDCC LIST to get all files offered on channel :)
+# Other bugs fixed.
+# Report when pll ask you for a list of files offered.
+# Etc etc
+#
+# New features on 3.3.0
+# More and more bugs fixed.
+# Security commands as ppl request!!! Here goes a security command review:
+# New command: /XDCC SEC
+# New command: /XDCC SEC LIST
+# New command: /XDCC SEC LOAD
+# New command: /XDCC SEC ADD
+# New command: /XDCC SEC NADD
+# New command: /XDCC SEC REMOVE
+# New command: /XDCC SEC NREMOVE
+#
+#             +--------------------------------------------------+
+#             | SORRY ABOUT MY ENGLISH, BUT IT'S MY 3th LANGUAGE |
+#             +--------------------------------------------------+
+#
+# +--------------------------------------------------------------------------+
+# | INITIAL SETTINGS, change it as you need.                                 |
+# +--------------------------------------------------------------------------+
+# | AUTOGET   : [ON]  If you want this script gets all files that ppl send u |
+# |             [OFF] If don't.                                              |
+# | AUTOSEND  : [ON]  If you want that this script send automatically your   |
+# |                   offered files at ppl request.                          |
+# |             [OFF] If don't.                                              |
+# | AUTOCLOSE : [ON]  If you have AUTOGET [OFF] this script will close the   |
+# |                   the DCC request.                                       |
+# |             [OFF] If don't.                                              |
+# | NOISE     : [ON]  If you want the script shows you all actions.          |
+# |             [OFF] If don't.                                              |
+# | CHANGEST  : [ON]  If you want the script add an info field to your       |
+# |                   Status Line.                                           |
+# |             [OFF] If don't.                                              |
+# | LOADFILE  : [ON]  If you want this script loads automatically your offer |
+# |                   file (please type /XDCC help file for more info)       |
+# |             [OFF] If don't.                                              |
+# | OFFERFILE : [/complete/path/of/your/offer/file/offer_file]               |
+# | SECURITYFLAG  : [ON]  If you only want to send files to registered ppl.  |
+# |                       and load SECURITY list at script load time.        |
+# |               : [OFF] If Don't.                                          |
+# | SECURFILE : [/complete/path/of/your/secur/file/secur_file]               |
+# +--------------------------------------------------------------------------+
+@ AUTOGET       = [ON]
+@ AUTOSEND      = [ON]
+@ AUTOCLOSE     = [OFF]
+@ NOISE         = [ON]
+@ CHANGEST      = [ON]
+@ LOADFILE      = [ON]
+@ OFFERFILE     = [offer.xdcc]
+@ SECURITYFLAG  = [OFF]
+@ SECURFILE     = [~secur.xdcc]
+# +--------------------------------------------------------------------------+
+# | Variable init. Internal Use, don't change it.                            |
+# +--------------------------------------------------------------------------+
+@ MYSEND          = [NO]
+@ GETCOUNT        = 0
+@ TOTPACK         = 0
+@ XDCCVER         = [3.3.0 Beta (c) XaBi'94]
+@ XDCCEMAIL       = [siavagaj@sisa02.si.ehu.es]
+@ STRIPCHAR       = [~-]
+eval @ OLD_STATUS = STATUS_FORMAT
+# +--------------------------------------------------------------------------+
+# | Some important SETS                                                      |
+# +--------------------------------------------------------------------------+
+set novice off
+set exec_protection off
+# +--------------------------------------------------------------------------+
+# | Only two ON's for faster work                                            |
+# +--------------------------------------------------------------------------+
+on ^ctcp "% % DCC SEND % % % %" dccrequest $0 $4
+on ^msg "% XDCC *" {
+    @ XDCCUSER = userhost()
+    xdccmsg $0 $2-
+}
+on ^ctcp "% % XDCC *" {
+    @ XDCCUSER = userhost()
+    xdccmsg $0 $3-
+}
+# +--------------------------------------------------------------------------+
+# | Parse MSG's alias                                                        |
+# +--------------------------------------------------------------------------+
+alias xdccmsg {
+      if (match($1 HELP LIST SEND VERSION))
+         { $1COMMAND $0 $2- }
+         { ^notice $0 Try /MSG $N XDCC HELP }
+}
+# +--------------------------------------------------------------------------+
+# | People Help Command                                                      |
+# +--------------------------------------------------------------------------+
+alias HELPcommand {
+      ^notice $0 /MSG $N XDCC HELP    to get this help.
+      ^notice $0 /MSG $N XDCC LIST    to get the list of offered packs.
+      ^notice $0 /MSG $N XDCC LIST #N to get more info on pack #N
+      ^notice $0 /MSG $N XDCC SEND #N to send pack #N
+      ^notice $0 /MSG $N XDCC VERSION to get XDCC version.
+      if (([$SECURITYFLAG] == [OFF]) || ([$isonsecurlist($XDCCUSER)] == [YES]))
+         {}
+         { ^notice $0 XDCC-SECURITY = ON and you aren't registered.
+           ^notice $0 You can't use LIST & SEND command. }
+}
+# +--------------------------------------------------------------------------+
+# | People List Command                                                      |
+# +--------------------------------------------------------------------------+
+alias LISTcommand {
+      if (([$SECURITYFLAG] == [OFF]) || ([$isonsecurlist($XDCCUSER)] == [YES]))
+         { if ([$1])
+              { if ([$[1]1] == [#])
+                   { @ TEMP = [$1]
+                     @ NUM  = right(${@TEMP-index(# $1)+1} $1)
+                     if (NUM <= TOTPACK)
+                        { xdccecho List of pack #$NUM request received from $0
+                          @ TEMPFILE = []
+                          @ TEMPTOT  = 0
+                          @ COUNT0   = 1
+                          ^notice $0 Pack : $ARRAYDESC[$NUM]
+                          ^notice $0 Length     File
+                          while (COUNT0 <= ARRAYTOTF[$NUM])
+                                { ^notice $0 $[10]ARRAYLENG[$NUM][$COUNT0] $X_FILE($ARRAYFILE[$NUM][$COUNT0])
+                                  @ TEMPTOT  = TEMPTOT + ARRAYLENG[$NUM][$COUNT0]
+                                  @ COUNT0   = COUNT0 + 1 }
+                          ^notice $0 ---------- --------------------------------
+                          ^notice $0 $[10]TEMPTOT $ARRAYTOTF[$NUM] file/es }
+                        { ^notice $0 Pack $1 doesn't exist, try /MSG $N XDCC LIST } }
+                   { ^notice $0 /MSG $N XDCC LIST $1 is not a valid format.
+                     ^notice $0 Try /MSG $N XDCC HELP } }
+              { if (TOTPACK > 0)
+                   { xdccecho All pack list request received from $0
+                     @ COUNT0 = 1
+                     ^notice $0 Pack Description
+                     while (COUNT0 <= TOTPACK)
+                           { ^notice $0 #$[3]COUNT0 $ARRAYDESC[$COUNT0]
+                             @ COUNT0 = COUNT0 + 1 } }
+                   { ^notice $0 Sorry there are no files offered. } } }
+          { xdccecho Unregistered user XDCC LIST REQUEST from $0
+            ^notice $0 XDCC-SECURITY = ON and you aren't registered. }
+}
+# +--------------------------------------------------------------------------+
+# | This alias send people requested packs                                   |
+# +--------------------------------------------------------------------------+
+alias SENDcommand {
+      if (([$SECURITYFLAG] == [OFF]) || ([$isonsecurlist($XDCCUSER)] == [YES]))
+         { if ([$AUTOSEND] == [ON] || [$MYSEND] == [YES])
+              { if ([$1])
+                   { if ([$[1]1] == [#])
+                        { @ TEMP = [$1]
+                          @ NUM  = right(${@TEMP-index(# $1)+1} $1)
+                          if (NUM <= TOTPACK)
+                             { xdccecho Sending $1 to $0.
+                               ^notice $0 Sending you $ARRAYDESC[$NUM]
+                               @ COUNT1 = 1
+                               @ TEMPTOT = 0
+                               while (COUNT1 <= ARRAYTOTF[$NUM])
+                                     { ^dcc send $0 $ARRAYFILE[$NUM][$COUNT1]
+                                       @ TEMPTOT = TEMPTOT + ARRAYLENG[$NUM][$COUNT1]
+                                       @ COUNT1 = COUNT1 + 1 }
+                               ^notice $0 Total files sent : $ARRAYTOTF[$NUM]
+                               ^notice $0 You'll need $TEMPTOT bytes ... }
+                             { ^notice $0 File $1 doesn't exist, try /msg $N XDCC LIST } }
+                        { ^notice $0 /msg $N XDCC SEND $1 is not a valid format.
+                          ^notice $0 Try /msg $N XDCC HELP } }
+                   { ^notice $0 What file??? Try /msg $N XDCC HELP } }
+              { notice $0 Sorry, this function is now dissabled. } }
+         { xdccecho Unregistered user XDCC SEND REQUEST from $0
+           ^notice $0 XDCC-SECURITY = ON and you aren't registered. }
+}
+# +--------------------------------------------------------------------------+
+# | This alias send XDCC version and more info                               |
+# +--------------------------------------------------------------------------+
+alias VERSIONcommand {
+      notice $0 XDCC Version: $XDCCVER
+      notice $0 To get latest XDCC version email to $XDCCEMAIL
+}
+# +--------------------------------------------------------------------------+
+# | This alias parse your commands to this script                            |
+# +--------------------------------------------------------------------------+
+alias xdcc {
+      if (match($0 SEC LOAD PSEND CLOSE SAVE GET DIR AUTOCLOSE HELP LIST PLIST SEND STATUS NOTICE OFFER DOFFER AUTOGET AUTOSEND NOISE CSTAT GLIST))
+         { $0MCOMMAND $1- }
+         { echo [XDCC] Try /XDCC HELP }
+}
+# +--------------------------------------------------------------------------+
+# | This is your Help Script                                                 |
+# +--------------------------------------------------------------------------+
+alias HELPmcommand {
+      if ([$0])
+         { if (match($0 SEC LOAD SAVE PSEND HELP LIST PLIST SEND STATUS NOTICE OFFER FILE DOFFER AUTOGET AUTOSEND NOISE CSTAT DIR GET CLOSE AUTOCLOSE GLIST))
+              { echo [XDCC] Help on topic: $0
+                $0HCOMMAND }
+              { echo [XDCC] $0 is not a valid command. } }
+         { echo [XDCC] Script $XDCCVER
+           echo [XDCC] /XDCC HELP [Command] to get help on Command
+           echo [XDCC] /XDCC LIST [#N]      to get a list of packs offered
+           echo [XDCC] /XDCC GLIST          to get a list of pending dcc's
+           echo [XDCC] /XDCC NOTICE         to make a public notice
+           echo [XDCC] /XDCC PLIST          to take the offered list on CHANNEL
+           echo [XDCC] /XDCC SEND           to send files
+           echo [XDCC] /XDCC PSEND          to send packs
+           echo [XDCC] /XDCC GET            to get files
+           echo [XDCC] /XDCC CLOSE          to close files
+           echo [XDCC] /XDCC STATUS         to get XDCC status
+           echo [XDCC] /XDCC OFFER          to offer files to ppl
+           echo [XDCC] /XDCC DOFFER         to remove files from offered list
+           echo [XDCC] /XDCC LOAD FILE_NAME to load offer-file FILE_NAME
+           echo [XDCC] /XDCC SAVE FILE_NAME to create an offer-file FILE_NAME
+           echo [XDCC] /XDCC DIR            to get a dir
+           echo [XDCC] /XDCC AUTOGET        to switch Autoget            ON/OFF
+           echo [XDCC] /XDCC AUTOSEND       to switch Autosend           ON/OFF
+           echo [XDCC] /XDCC AUTOCLOSE      to switch Autoclose          ON/OFF
+           echo [XDCC] /XDCC NOISE          to switch Noise              ON/OFF
+           echo [XDCC] /XDCC CSTAT          to switch Change_status_line ON/OFF
+           echo [XDCC] /XDCC SEC [Command]  Try /XDCC HELP SEC }
+}
+alias HELPHCOMMAND {
+      echo [XDCC] Format: /XDCC HELP [Command]
+      echo [XDCC] Shows a help of any XDCC command, without [Command]
+      echo [XDCC] shows a general help.
+}
+alias LISTHCOMMAND {
+      echo [XDCC] Format: /XDCC LIST [#N]
+      echo [XDCC] Shows all the files offered.
+      echo [XDCC] Use #N to get more info about #N pack
+      echo [XDCC] See also: AUTOSEND OFFER DOFFER
+}
+alias GLISTHCOMMAND {
+      echo [XDCC] Format: /XDCC GLIST
+      echo [XDCC] Shows all the files pending to get.
+      echo [XDCC] See also: GET AUTOGET AUTOCLOSE CLOSE
+}
+alias DIRHCOMMAND {
+      echo [XDCC] Format: /XDCC DIR
+      echo [XDCC] Shows the files on the current dir. Wilcards allowed.
+      echo [XDCC] Ie: *.irc *.exe
+}
+alias GETHCOMMAND {
+      echo [XDCC] Format: /XDCC GET
+      echo [XDCC] Lets you to get files from some1.
+      echo [XDCC] See also: AUTOGET AUTOCLOSE GLIST
+}
+alias LOADHCOMMAND {
+      echo [XDCC] Format: /XDCC LOAD FILE_NAME
+      echo [XDCC] Lets you to load FILE_NAME offer file.
+      echo [XDCC] Try /XDCC HELP FILE to get help about offer file format.
+      echo [XDCC] See also: SAVE FILE
+}
+alias SAVEHCOMMAND {
+      echo [XDCC] Format: /XDCC SAVE FILE_NAME [[pack] [pack] ... ]
+      echo [XDCC] Lets you create a offer file called FILE_NAME.
+      echo [XDCC] If you don't give any pack number file it will be created
+      echo [XDCC] with all packs from your offer list.
+      echo [XDCC] Note: If file exists the original file will be appended.
+      echo [XDCC] ie: /XDCC SAVE offer.file    Will create a file called
+      echo [XDCC]                              offer.file with all packs.
+      echo [XDCC]     /XDCC SAVE offer.file #1 #1 Will create a file called
+      echo [XDCC]                              offer file with #1 & #2 packs
+      echo [XDCC] See also: LOAD FILE DIR
+}
+alias CLOSEHCOMMAND {
+      echo [XDCC] Format: /XDCC CLOSE
+      echo [XDCC] Lets you close files from some1. 
+      echo [XDCC] See also: AUTOGET GET AUTOCLOSE GLIST
+}
+alias AUTOCLOSEHCOMMAND {
+      echo [XDCC] Format: /XDCC AUTOCLOSE
+      echo [XDCC] This command switch ON/OFF autoclose
+      echo [XDCC] When it's ON all filles offered to you will be closed
+      echo [XDCC] When it's OFF if AUTOGET is OFF all files offered to
+      echo [XDCC] you will be saved on an array, you must use GET command
+      echo [XDCC] to get it.
+      echo [XDCC] See also: CLOSE STATUS
+}
+alias NOTICEHCOMMAND {
+      echo [XDCC] Format: /XDCC NOTICE
+      echo [XDCC] Make a public notice about how to use XDCC on you
+      echo [XDCC] You must use this command to avoid flooding the channel.
+      echo [XDCC] See also: PLIST LIST
+}
+alias PLISTHCOMMAND {
+      echo [XDCC] Format: /XDCC PLIST
+      echo [XDCC] Show the list of files offered on public.
+      echo [XDCC] Be carefull with this command, you can flood the channel
+      echo [XDCC] See also: LIST NOTICE
+}
+alias SENDHCOMMAND {
+      echo [XDCC] Format: /XDCC SEND
+      echo [XDCC] This command lets you send files to ppl.
+      echo [XDCC] You can send multi files to multi nicks.
+      echo [XDCC] IE: FILES: *.zip *.exe
+      echo [XDCC]     NICKS: $N Byte_ Barnabus
+      echo [XDCC] This send *.zip *.exe to $N, Byte_ and Barnabus
+      echo [XDCC] See also: DIR OFFER
+}
+alias PSENDHCOMMAND {
+      echo [XDCC] Format: /XDCC PSEND
+      echo [XDCC] This command let you send packs to ppl.
+      echo [XDCC] You can send a pack to multi nicks.
+      echo [XDCC] IE: PACK: 1
+      echo [XDCC]     NICKS: $N Byte_ Barnabus
+      echo [XDCC] This send pack #1 to $N, Byte_ and Barnabus
+      echo [XDCC] See also: DIR OFFER SEND LIST
+}
+alias STATUSHCOMMAND {
+      echo [XDCC] Format: /XDCC STATUS
+      echo [XDCC] This command shows you the XDCC script status.
+}
+alias OFFERHCOMMAND {
+      echo [XDCC] Format: /XDCC OFFER
+      echo [XDCC] This command lets you offer files to ppl.
+      echo [XDCC] You can offer multiple files.
+      echo [XDCC] IE: FILES: xdcc.*
+      echo [XDCC]     Description: Last XDCC script
+      echo [XDCC] This offer xdcc.irc and xdcc.nfo to ppl on a pack.
+      echo [XDCC] See also: AUTOSEND SEND DIR DOFFER
+}
+alias DOFFERHCOMMAND {
+      echo [XDCC] Format: /XDCC DOFFER
+      echo [XDCC] This command lets you remove packs.
+      echo [XDCC] You can remove all files or a simple pack.
+      echo [XDCC] * to remove all files or N to take off N pack
+      echo [XDCC] See also: OFFER LIST
+}
+alias AUTOGETHCOMMAND {
+      echo [XDCC] Format: /XDCC AUTOGET
+      echo [XDCC] This command switchs AUTOGET ON/OFF
+      echo [XDCC] See also: GET
+}
+alias AUTOSENDHCOMMAND {
+      echo [XDCC] Format: /XDCC AUTOSEND
+      echo [XDCC] This comamnd switchs AUTOSEND ON/OFF
+      echo [XDCC] See also: OFFER LIST DOFFER
+}
+alias NOISEHCOMMAND {
+      echo [XDCC] Format: /XDCC NOISE
+      echo [XDCC] This command switchs script NOISE ON/OFF
+      echo [XDCC] When it's ON XDCC script shows you all messages
+}
+alias CSTATHCOMMAND {
+      echo [XDCC] Format: /XDCC CSTAT
+      echo [XDCC] This command switchs the change status line ON/OFF
+      echo [XDCC] When it's ON XDCC script add to the status line some info
+      echo [XDCC] like this [XGSNC00-00]
+      echo [XDCC] X ---> SECURITY  ON
+      echo [XDCC] G ---> AUTOGET   ON
+      echo [XDCC] S ---> AUTOSEND  ON
+      echo [XDCC] N ---> NOISE     ON
+      echo [XDCC] C ---> AUTOCLOSE ON
+      echo [XDCC] 00 --> 0 files offered
+      echo [XDCC] 00 --> 0 files pending to get
+}
+alias FILEHCOMMAND {
+      echo [XDCC] Now you can use a init file with data about files you would
+      echo [XDCC] like to offer. To use this file you must initialice these
+      echo [XDCC] two vars on top of this script.
+      echo [XDCC] LOADFILE  it must be ON or OFF .... no more info.
+      echo [XDCC] OFFERFILE this must have the full path and name of the file
+      echo [XDCC] The file must be a text file with at least two lines by pack and
+      echo [XDCC] each line must begin with one of this words:comment,files,desc
+      echo [XDCC] Here goes one example file:
+      echo [XDCC] comment This is one of my packs
+      echo [XDCC] desc A complete Xabi's Script pack
+      echo [XDCC] files x*.irc /usr/xabi/autoop.list   (wildcards allowed)
+      echo [XDCC] files signon.irc *.dat  (more than a file per line allowed)
+      echo [XDCC] ....... and you can add more packs :)
+      echo [XDCC] As you can see, each pack must have a first line that begins
+      echo [XDCC] with 'desc' and one or more lines that begins with 'files'
+      echo [XDCC] Files can have full path especification
+      echo [XDCC] See also: LIST DOFFER LOAD SAVE
+}
+alias SECHCOMMAND {
+      echo [XDCC] Now you can cut XDCC access to all ppl via security commands.
+      echo [XDCC] Type /XDCC SEC                To switch security On/Off.
+      echo [XDCC] Type /XDCC SEC LOAD           To Load security list.
+      echo [XDCC] Type /XDCC SEC NADD Nick      To Add a nick to your list.
+      echo [XDCC] Type /XDCC SEC ADD Pattern    To Add a pattern to your list.
+      echo [XDCC] Type /XDCC SEC NREMOVE Nick   To remove a nick from your list.
+      echo [XDCC] Type /XDCC SEC REMOVE Pattern To remove a pattern from your list.
+      echo [XDCC] Type /XDCC SEC LIST           To get a list of registered ppl.
+      echo [XDCC] IE: /XDCC SEC ADD *@*.es This will allow access to all Spanish ppl.
+      echo [XDCC]     /XDCC SEC NADD XaBi  This will allow access to XaBi.
+      echo [XDCC] Note: This list checks account@host not nick!account@Host
+      echo [XDCC] Note: If SECURITYFLAG = OFF on load type and you switch it into ON
+      echo [XDCC]       during a IRC session you must use /XDCC SEC LOAD to load
+      echo [XDCC]       security list.
+}
+# +--------------------------------------------------------------------------+
+# | This alias parse your security commands                                  |
+# +--------------------------------------------------------------------------+
+alias SECmcommand {
+      if ([$0])
+         { if (match($0 LOAD NADD ADD NREMOVE REMOVE LIST))
+              { SEC$0 $1- }
+              { echo [XDCC] $0 is not a valid SECURITY command. } }
+         { if ([$SECURITYFLAG] == [ON])
+              { @ SECURITYFLAG = [OFF] }
+              { @ SECURITYFLAG = [ON] }
+           echo [XDCC] SECURITY: $SECURITYFLAG
+           change_statusline }
+}
+# +--------------------------------------------------------------------------+
+# | This alias adds a Nick to your security list                             |
+# +--------------------------------------------------------------------------+
+alias SECNADD {
+      echo [XDCC] Searching for $0 ......
+      userhost $0 -cmd if ([$3] != [<UNKNOWN>])
+              { if ([$isonsecurlist($3@$4)] == [YES])
+                   { echo [XDCC] $0 is allready on security list. }
+                   { secadd $3@$4 $0 } }
+              { echo [XDCC] Couldn't find $0 on IRC }
+}
+# +--------------------------------------------------------------------------+
+# | This alias adds a Pattern to your security list                          |
+# +--------------------------------------------------------------------------+
+alias SECADD {
+      if ([$0])
+         { ^exec -name save_securfile echo $strip($stripchar $0) >> $SECURFILE
+           ^wait %save_securfile
+           @ SECURITY_LIST = [$SECURITY_LIST ]##[$0]
+           if ([$1])
+             { echo [AUTOOP] Added to security list $1!$0
+              ^notice $1 You have been added to $N's xdcc security list. }
+             { echo [XDCC] Added to security list $0 } }
+         { echo [XDCC] What do want to add? }
+}
+# +--------------------------------------------------------------------------+
+# | This alias shows your security list                                      |
+# +--------------------------------------------------------------------------+
+alias SECLIST {
+      echo [XDCC] Security List ======
+      @ COUNT = 0
+      while (word($COUNT $SECURITY_LIST))
+            { echo [XDCC] $word($COUNT $SECURITY_LIST)
+              @ COUNT = COUNT + 1 }
+}
+# +--------------------------------------------------------------------------+
+# | This alias loads a security list                                         |
+# +--------------------------------------------------------------------------+
+alias SECLOAD {
+      echo [XDCC] Loading security list ....
+      @ SECURITY_LIST = []
+      @ ERROR = 0
+      ^on exec_error "load_security *" {
+          echo [XDCC] Error loading security list.
+          @ ERROR = 1 }
+      ^on ^exec "load_security *" {
+           @ SECURITY_LIST = [$SECURITY_LIST ]##[$1] }
+      ^exec -name load_security cat $SECURFILE
+      ^wait %load_security
+      if (ERROR == 0)
+         { echo [XDCC] Security list loaded ok. }
+         {}
+}
+# +--------------------------------------------------------------------------+
+# | This alias saves a security list                                         |
+# +--------------------------------------------------------------------------+
+alias SECSAVE {
+      @ ERROR = 0
+      ^on exec_error "delete_security *" echo ^V[XDCC]^V Error deleting security list.
+      ^exec -name delete_security rm $SECURFILE
+      ^wait %delete_security
+      ^on exec_error "save_security *" {
+          echo [XDCC] Error saving security list.
+          @ ERROR = 1 }
+      @ COUNT = 0
+      while (word($COUNT $SECURITY_LIST))
+            { ^exec -name save_security echo $word($COUNT $SECURITY_LIST) >> $SECURFILE
+              wait %save_security
+              @ COUNT = COUNT + 1 }
+      if (ERROR == 0)
+         { echo [XDCC] Security list saved ok. }
+         {}
+}
+# +--------------------------------------------------------------------------+
+# | This alias remove a nick from your security list                         |
+# +--------------------------------------------------------------------------+
+alias SECNREMOVE {
+      echo [XDCC] Trying to find $0 on IRC ....
+      userhost $0 -cmd if ([$3] != [<UNKNOWN>])
+               { SECREMOVE $strip($stripchar $3) }
+               { [XDCC] Couldn't find $0 on IRC. }
+}
+# +--------------------------------------------------------------------------+
+# | This alias remove a pattern from your security list                      |
+# +--------------------------------------------------------------------------+
+alias SECREMOVE {
+      if ([$0])
+         { @ TOT = 0
+           @ COUNT = 0
+           @ NEWLIST = []
+           while (word($COUNT $SECURITY_LIST))
+                 { if (match(*$0* $word($COUNT $SECURITY_LIST)))
+                      { echo [XDCC] Removing $word($COUNT $SECURITY_LIST)
+                        @ tot = tot + 1 }
+                      { @ NEWLIST = [$NEWLIST ]##[$word($COUNT $SECURITY_LIST)] }
+                   @ COUNT = COUNT + 1 }
+           if (tot > 0)
+              { @ SECURITY_LIST = [$NEWLIST]
+                @ NEWLIST = []
+                SECSAVE }
+              { echo [XDCC] No matches found for pattern $0 } }
+         { echo [XDCC] Remove what? }
+}
+# +--------------------------------------------------------------------------+
+# | This is your file offered list command                                   |
+# +--------------------------------------------------------------------------+
+alias PSENDmcommand {
+      if (TOTPACK > 0)
+         { @ TMPVAR = []
+           @ NICKLIST = []
+           ^assign TMPVAR $"[XDCC] Pack to send : "
+           if ([$TMPVAR])
+              { if (TMPVAR <= TOTPACK)
+                   { ^assign NICKLIST $"[XDCC] Nicks: "
+                     if ([$NICKLIST])
+                        { @ COUNT2 = 0
+                          @ MYSEND = [YES]
+                          while (word($COUNT2 $NICKLIST))
+                                { SENDcommand $word($COUNT2 $NICKLIST) #$TMPVAR
+                                  @ COUNT2 = COUNT2 + 1 }
+                          @ MYSEND = [NO] }
+                        {} }
+                   { ^echo [XDCC] Pack #$TMPVAR doesn't exist. Try /XDCC LIST } }
+              {} }
+         { ^echo [XDCC] There r no packs created }
+}
+# +--------------------------------------------------------------------------+
+# | This is your file offered list command                                   |
+# +--------------------------------------------------------------------------+
+alias LISTmcommand {
+      if ([$0])
+         { if ([$[1]0] == [#])
+              { @ TEMP = [$0]
+                @ NUM  = right(${@TEMP-index(# $0)+1} $0)
+                if (NUM <= TOTPACK)
+                   { @ COUNT2 = 1
+                     @ TEMPTOT = 0
+                     echo [XDCC] PACK  : $ARRAYDESC[$NUM]
+                     while (COUNT2 <= ARRAYTOTf[$NUM])
+                           { echo [XDCC] FILE  : $ARRAYFILE[$NUM][$COUNT2]
+                             @ TEMPTOT = TEMPTOT + ARRAYLENG[$NUM][$COUNT2]
+                             @ COUNT2 = COUNT2 + 1 }
+                     echo [XDCC] TOTAL : $TEMPTOT Bytes on $ARRAYTOTF[$NUM] file/es }
+                   { echo [XDCC] $0 pack doesn't exist } }
+              { echo [XDCC] /XDCC LIST $0 is not a valid format
+                echo [XDCC] Try /XDCC HELP LIST } }
+         { if (TOTPACK > 0)
+              { @ COUNT2 = 1
+                echo [XDCC] Pack Description
+                while (COUNT2 <= TOTPACK)
+                      { echo [XDCC] #$[2]COUNT2  $ARRAYDESC[$COUNT2]
+                        @ COUNT2 = COUNT2 + 1 } }
+              { echo [XDCC] There are no files offered. } }
+}
+# +--------------------------------------------------------------------------+
+# | Make a notice                                                            |
+# +--------------------------------------------------------------------------+
+alias NOTICEmcommand {
+      say To get a list of files I'm offering now /MSG $N XDCC LIST
+}
+# +--------------------------------------------------------------------------+
+# | Put on public all your list                                              |
+# +--------------------------------------------------------------------------+
+alias PLISTmcommand {
+      if (TOTPACK > 0)
+         { say ** PACKS OFFERED. /MSG $N XDCC SEND #N for autosend pack #N
+           @ COUNT3 = 1
+           while (COUNT3 <= TOTPACK)
+                  { say #$COUNT3  $ARRAYDESC[$COUNT3]
+                   @ COUNT3 = COUNT3 + 1 } }
+         { echo [XDCC] There are no files offered }
+}
+# +--------------------------------------------------------------------------+
+# | This is the Multi NICK/FILE file send command. Wildcards allowed         |
+# +--------------------------------------------------------------------------+
+alias SENDmcommand {
+      @ TMPVAR = []
+      ^assign TMPVAR $"[XDCC] Files to send: "
+      if ([$TMPVAR])
+         { if ([$getdir()] == [OK])
+              { ^assign NICKLIST $"[XDCC] Nicks: "
+                if ([$NICKLIST])
+                   { dosend
+                     xdccecho Send finished }
+                   {} }
+              { echo [XDCC] Please check the files ... } }
+         {}
+}
+# +--------------------------------------------------------------------------+
+# | Internal alias, WARNING: don't use it                                    |
+# +--------------------------------------------------------------------------+
+alias getdir {
+      @ FILECOUNT = 0
+      ^on -exec_error "DIR1 *" {
+           echo [XDCC] Error: $1- }
+      ^on ^exec "DIR1 *" addfile $$1-
+      @ COUNT4 = 0
+      while (word($COUNT4 $TMPVAR))
+            { @ TMPFILE = word($COUNT4 $TMPVAR)
+              if ([$[1]TMPFILE] == [/])
+                 {}
+                 { @ TMPFILE = [$W/$TMPFILE] }
+              ^exec -name DIR1 ls -ld $TMPFILE
+              ^wait %DIR1
+              @ COUNT4 = COUNT4 + 1 }
+      if ( FILECOUNT == 0 )
+         { @ function_return = [ERROR] }
+         { @ function_return = [OK] }
+}
+# +--------------------------------------------------------------------------+
+# | Internal alias, WARNING: don't use it                                    |
+# +--------------------------------------------------------------------------+
+alias addfile {
+      if ([$[1]0] == [-])
+         { @ FILECOUNT = FILECOUNT + 1
+           if ([$8])
+              { @ FILELIST[$FILECOUNT] = [$8]
+                @ FILELENG[$FILECOUNT] = [$4] }
+              { @ FILELIST[$FILECOUNT] = [$7]
+                @ FILELENG[$FILECOUNT] = [$3] } }
+         {}
+}
+# +--------------------------------------------------------------------------+
+# | Internal alias, WARNING: don't use it                                    |
+# +--------------------------------------------------------------------------+
+alias dosend {
+      @ COUNT5 = 0
+      while (word($COUNT5 $NICKLIST))
+            { @ COUNT6  = 1
+              @ SENDTOT = 0
+              while (COUNT6 <= FILECOUNT)
+                    { dcc send $word($COUNT5 $NICKLIST) $FILELIST[$COUNT6]
+                      @ SENDTOT = SENDTOT + FILELENG[$COUNT6]
+                      @ COUNT6  = COUNT6 + 1 }
+              ^notice $word($COUNT5 $NICKLIST) $SENDTOT Bytes on $FILECOUNT file/es
+              @ COUNT5 = COUNT5 + 1 }
+}
+# +--------------------------------------------------------------------------+
+# | Status alias                                                             |
+# +--------------------------------------------------------------------------+
+alias STATUSmcommand {
+      echo [XDCC] AUTOGET  : $AUTOGET
+      echo [XDCC] AUTOSEND : $AUTOSEND
+      echo [XDCC] AUTOCLOSE: $AUTOCLOSE
+      echo [XDCC] NOISE    : $NOISE
+      echo [XDCC] OFFERED  : $TOTPACK
+      echo [XDCC] GET COUNT: $GETCOUNT
+      echo [XDCC] CHSTATUS : $CHANGEST
+      echo [XDCC] SECURITY : $SECURITYFLAG
+      echo [XDCC] DIR      : $W
+}
+# +--------------------------------------------------------------------------+
+# | This alias add files to the offer list                                   |
+# +--------------------------------------------------------------------------+
+alias OFFERmcommand {
+      @ TMPVAR  = []
+      @ TMPDESC = []
+      ^assign TMPVAR $"[XDCC] Files: "
+      if ([$TMPVAR])
+         { if ([$getdir()] == [OK])
+              { ^assign TMPDESC $"[XDCC] Description: "
+                if ([$TMPDESC])
+                   { @ TOTPACK = TOTPACK + 1
+                     @ COUNT = 1
+                     while (COUNT <= FILECOUNT)
+                           { @ ARRAYFILE[$TOTPACK][$COUNT] = [$FILELIST[$COUNT]]
+                             @ ARRAYLENG[$TOTPACK][$COUNT] = [$FILELENG[$COUNT]]
+                             @ ARRAYDESC[$TOTPACK]         = [$TMPDESC]
+                             @ ARRAYTOTF[$TOTPACK]         = [$FILECOUNT]
+                             @ COUNT                       = COUNT + 1 }
+                     xdccecho $FILECOUNT files added to Pack #$TOTPACK
+                     change_statusline }
+                   {} }
+              { echo [XDCC] Error: one or more of this files don't exist. } }
+         {}
+}
+# +--------------------------------------------------------------------------+
+# | This alias take off files from the offer list                            |
+# +--------------------------------------------------------------------------+
+alias DOFFERmcommand {
+      if (TOTPACK > 0)
+         { @ TMPNUM = []
+           ^assign TMPNUM $"Pack to remove (* for all) #"
+           if ([$TMPNUM])
+              { if ([$TMPNUM] == [*])
+                   { @ TOTPACK = 0
+                     change_statusline
+                     echo [XDCC] All packs removed from offer list. }
+                   { if ((TMPNUM <= TOTPACK) && (TMPNUM > 0))
+                        { @ COUNT7 = TMPNUM
+                          while (COUNT7 < TOTPACK)
+                                { @ COUNT8 = ARRAYTOTF[${COUNT7+1}]
+                                  while (COUNT8 > 0)
+                                        { @ ARRAYFILE[$COUNT7][$COUNT8] = [$ARRAYFILE[${COUNT7+1}][$COUNT8]]
+                                          @ ARRAYLENG[$COUNT7][$COUNT8] = [$ARRAYLENG[${COUNT7+1}][$COUNT8]]
+                                          @ COUNT8 = COUNT8 - 1 }
+                                  @ ARRAYDESC[$COUNT7] = [$ARRAYDESC[${COUNT7+1}]]
+                                  @ ARRAYTOTF[$COUNT7] = [$ARRAYTOTF[${COUNT7+1}]]
+                                  @ COUNT7             = COUNT7 + 1 }
+                          @ TOTPACK = TOTPACK - 1
+                          echo [XDCC] Pack #$TMPNUM removed from offer list
+                          change_statusline }
+                        { echo [XDCC] Try between 1 - $TOTPACK ... } } }
+             {} }
+         { echo [XDCC] There are no files offered. }
+}
+# +--------------------------------------------------------------------------+
+# | Switch AutoGet status ON/OFF                                             |
+# +--------------------------------------------------------------------------+
+alias AUTOGETmcommand {
+      if ([$AUTOGET] == [ON])
+         { @ AUTOGET = [OFF] }
+         { @ AUTOGET = [ON] }
+      echo [XDCC] AUTOGET: $AUTOGET
+      change_statusline
+}
+# +--------------------------------------------------------------------------+
+# | Switch AutoSend status ON/OFF                                            |
+# +--------------------------------------------------------------------------+
+alias AUTOSENDmcommand {
+      if ([$AUTOSEND] == [ON])
+         { @ AUTOSEND = [OFF] }
+         { @ AUTOSEND = [ON] }
+      echo [XDCC] AUTOSEND: $AUTOSEND
+      change_statusline
+}
+# +--------------------------------------------------------------------------+
+# | Switch AutoClose status ON/OFF                                           |
+# +--------------------------------------------------------------------------+
+alias AUTOCLOSEmcommand {
+      if ([$AUTOCLOSE] == [ON])
+         { @ AUTOCLOSE = [OFF] }
+         { @ AUTOCLOSE = [ON] }
+      echo [XDCC] AUTOCLOSE: $AUTOCLOSE
+      change_statusline
+}
+# +--------------------------------------------------------------------------+
+# | Switch Noise status ON/OFF                                               |
+# +--------------------------------------------------------------------------+
+alias NOISEmcommand {
+      if ([$NOISE] == [ON])
+         { @ NOISE = [OFF] }
+         { @ NOISE = [ON] }
+      echo [XDCC] NOISE: $NOISE
+      change_statusline
+}
+# +--------------------------------------------------------------------------+
+# | Switch Change_status_line ON/OFF                                         |
+# +--------------------------------------------------------------------------+
+alias CSTATmcommand {
+      if ([$CHANGEST] == [ON])
+         { @ CHANGEST = [OFF] }
+         { @ CHANGEST = [ON] }
+      echo [XDCC] CHANGE_STATUS_LINE: $CHANGEST
+      change_statusline
+}
+# +--------------------------------------------------------------------------+
+# | Display Info if NOISE is ON                                              |
+# +--------------------------------------------------------------------------+
+alias xdccecho {
+      if ([$NOISE] == [ON])
+         { echo [XDCC] $0- }
+         {}
+}
+# +--------------------------------------------------------------------------+
+# | Parse all files offered                                                  |
+# +--------------------------------------------------------------------------+
+alias dccrequest {
+      @ DCCFILE = [$X_FILE($1)]
+      if ([$AUTOGET] == [ON])
+         { dcc get $0 $DCCFILE
+           xdccecho Autogetting $DCCFILE from $0 }
+         { if ([$AUTOCLOSE] == [ON])
+              { xdccecho DCC SEND $DCCFILE from $0 request ignored.
+                dcc close get $0 }
+              { xdccecho DCC SEND $DCCFILE from $0 added to request list
+                adddccrequest $DCCFILE $0 } }
+}
+# +--------------------------------------------------------------------------+
+# | Extract file name from a full path file name                             |
+# +--------------------------------------------------------------------------+
+alias x_file {
+      ^assign TMP $0
+      if (rindex(/ $TMP))
+         { @ function_return = right(${@TMP-rindex(/ $0)+1} $0) }
+         { @ function_return = [$0] }
+}
+# +--------------------------------------------------------------------------+
+# | Add a nick and a file to the get array                                   |
+# +--------------------------------------------------------------------------+
+alias adddccrequest {
+      @ GETCOUNT = GETCOUNT + 1
+      @ ARRAYFILEGET[$GETCOUNT] = [$0]
+      @ ARRAYNICKGET[$GETCOUNT] = [$1]
+      change_statusline
+}
+# +--------------------------------------------------------------------------+
+# | Delete files from get array                                              |
+# +--------------------------------------------------------------------------+
+alias CLOSEmcommand {
+      if (GETCOUNT > 0)
+         { @ TMPNICK = []
+           ^assign TMPNICK $"Nick to remove get files (* for all) :"
+           if ([$TMPNICK])
+              { if ([$TMPNICK] == [*])
+                   { @ GETCOUNT = 0
+                     foreach ARRAYFILEGET XX
+                             { ^dcc close get $ARRAYNICKGET[$XX] }
+                     change_statusline
+                     echo [XDCC] All files removed from get list. }
+                   { @ COUNT8 = 1
+                     @ COUNT9 = 1
+                     @ COUNT10 = GETCOUNT
+                     while (COUNT9 <= COUNT10)
+                           { if ([$ARRAYNICKGET[$COUNT9]] != [$TMPNICK])
+                                { @ ARRAYFILEGET[$COUNT8] = [$ARRAYFILEGET[$COUNT9]]
+                                  @ ARRAYNICKGET[$COUNT8] = [$ARRAYNICKGET[$COUNT9]]
+                                  @ COUNT8 = COUNT8 + 1 }
+                                { ^dcc close get $TMPNICK
+                                  @ GETCOUNT = GETCOUNT - 1 }
+                             @ COUNT9 = COUNT9 + 1 }
+                     change_statusline } }
+              {} }
+         { echo [XDCC] There are no pending files. }
+}
+# +--------------------------------------------------------------------------+
+# | DIR files                                                                |
+# +--------------------------------------------------------------------------+
+alias DIRmcommand {
+      @ TMPVAR = []
+      ^assign TMPVAR $"[XDCC] DIR ? :"
+      if ([$getdir()] == [OK])
+         { @ COUNT8 = 1
+           echo [XDCC] Length     File
+           while (COUNT8 <= FILECOUNT)
+                 { echo [XDCC] $[10]FILELENG[$COUNT8] $FILELIST[$COUNT8]
+                   @ COUNT8 = COUNT8 + 1 } }
+         {}
+}
+# +--------------------------------------------------------------------------+
+# | GET files from some1                                                     |
+# +--------------------------------------------------------------------------+
+alias GETmcommand {
+      if (GETCOUNT > 0)
+         { @ TMPNICK = []
+           ^assign TMPNICK $"Nick to get files (* for all) #"
+           if ([$TMPNICK])
+              { if ([$TMPNICK] == [*])
+                   { @ GETCOUNT = 0
+                     foreach ARRAYFILEGET XX
+                             { ^dcc get $ARRAYNICKGET[$XX] $ARRAYFILEGET[$XX] }
+                     change_statusline
+                     echo [XDCC] All files got from get list. }
+                   { @ COUNT8 = 1
+                     @ COUNT9 = 1
+                     @ COUNT10 = GETCOUNT
+                     echo [XDCC] Getting all files offered from $TMPNICK
+                     while (COUNT9 <= COUNT10)
+                           { if ([$ARRAYNICKGET[$COUNT9]] != [$TMPNICK])
+                                { @ ARRAYFILEGET[$COUNT8] = [$ARRAYFILEGET[$COUNT9]]
+                                  @ ARRAYNICKGET[$COUNT8] = [$ARRAYNICKGET[$COUNT9]]
+                                  @ COUNT8 = COUNT8 + 1 }
+                                { ^dcc get $TMPNICK $ARRAYFILEGET[$COUNT9]
+                                  @ GETCOUNT = GETCOUNT - 1 }
+                             @ COUNT9 = COUNT9 + 1 }
+                     change_statusline } }
+              {} }
+         { echo [XDCC] There are no files offered. }
+}
+# +--------------------------------------------------------------------------+
+# | GLIST list files pending to get                                          |
+# +--------------------------------------------------------------------------+
+alias GLISTmcommand {
+      if (GETCOUNT > 0)
+         { @ TMPNICK = []
+           ^assign TMPNICK $"Nick to list pending files (* for all) #"
+           if ([$TMPNICK])
+              { @ COUNT11 = 1
+                echo [XDCC] Nick      File
+                while (COUNT11 <= GETCOUNT)
+                      { if (match($TMPNICK $ARRAYNICKGET[$COUNT11]))
+                           { echo [XDCC] $[9]ARRAYNICKGET[$COUNT11] $ARRAYFILEGET[$COUNT11] }
+                           {}
+                        @ COUNT11 = COUNT11 + 1 } }
+              {} }
+         { echo [XDCC] There are no pending files. }
+}
+# +--------------------------------------------------------------------------+
+# | Change the status line                                                   |
+# +--------------------------------------------------------------------------+
+alias change_statusline {
+      if ([$CHANGEST] == [ON])
+         { if ([$SECURITYFLAG] == [ON])
+              { @ TMP = [X] }
+              { @ TMP = [|] }
+           if ([$AUTOGET] == [ON])
+              { @ TMP = [$TMP]##[G] }
+              { @ TMP = [$TMP]##[|] }
+           if ([$AUTOSEND] == [ON])
+              { @ TMP = [$TMP]##[S] }
+              { @ TMP = [$TMP]##[|] }
+           if ([$NOISE] == [ON])
+              { @ TMP = [$TMP]##[N] }
+              { @ TMP = [$TMP]##[|] }
+           if ([$AUTOCLOSE] == [ON])
+              { @ TMP = [$TMP]##[C] }
+              { @ TMP = [$TMP]##[|] }
+           if (TOTPACK < 10)
+              { @ TMP = [$TMP]##[0]##[$TOTPACK]##[-] }
+              { @ TMP = [$TMP]##[$TOTPACK]##[-] }
+           if (GETCOUNT < 10)
+              { @ TMP = [$TMP]##[0]##[$GETCOUNT] }
+              { @ TMP = [$TMP]##[$GETCOUNT] }
+           @ TMP = [[$TMP]]##[$OLD_STATUS] }
+         { @ TMP = [$OLD_STATUS] }
+      ^set STATUS_FORMAT $TMP
+}
+# +--------------------------------------------------------------------------+
+# | Load file of offered ones                                                |
+# +--------------------------------------------------------------------------+
+alias LOADmcommand {
+      if ([$0])
+         { echo [XDCC] Loading file .....
+           @ OLDNUM     = TOTPACK
+           @ LOAD_ERROR = [NO]
+           @ LINECOUNT  = 0
+           @ COUNT12    = [desc comment]
+           ^on exec_error "load_files *" {
+               echo [XDCC] Error: $1-
+               @ LOAD_ERROR = [YES] }
+           ^on ^exec "load_files *" add_line $$1-
+           ^exec -name load_files cat $0
+           ^wait %load_files
+           if ([$LOAD_ERROR] == [NO])
+              { ^echo [XDCC] Checking file .....
+                @ COUNT = 1
+                while (COUNT <= LINECOUNT)
+                      { add_file $XDCCFILELINE[$COUNT]
+                        @ COUNT = COUNT + 1 }
+                if (ARRAYTOTF[$TOTPACK] == 0)
+                   { @ TOTPACK = TOTPACK - 1 }
+                   {}
+                change_statusline }
+              {}
+           if ([$LOAD_ERROR] == [NO])
+              { echo [XDCC] File loaded ok }
+              { @ TOTPACK = OLDNUM } }
+         { echo [XDCC] What file? Try /XDCC HELP LOAD }
+}
+# +--------------------------------------------------------------------------+
+# | Save a file of packs                                                     |
+# +--------------------------------------------------------------------------+
+alias SAVEmcommand {
+      if ([$0])
+         { echo [XDCC] Saving file .....
+           @ TEMP1      = [$1-]
+           @ SAVE_ERROR = [NO]
+           @ TEMP2 = []
+           @ COUNT = 0
+           @ LINECOUNT = 0
+           if ([$1])
+              { while (word($COUNT $TEMP1))
+                      { if ([$[1]word($COUNT $TEMP1)] != [#])
+                           { ^echo [XDCC] Error: $word($COUNT $TEMP1) is not a valid pack format.
+                             @ SAVE_ERROR = [YES] }
+                           { @ TEMP = word($COUNT $TEMP1)
+                             @ NUM  = right(${@TEMP-1} $TEMP)
+                             if (NUM > TOTPACK)
+                                { ^echo [XDCC] Error: #$NUM does't exist.
+                                  @ SAVE_ERROR = [YES] }
+                                { @ TEMP2 = [$TEMP2] ## [ $NUM] } }
+                        @ COUNT = COUNT + 1 } }
+              { while (COUNT < TOTPACK)
+                      { @ COUNT = COUNT + 1
+                        @ TEMP2 = [$TEMP2] ## [ $COUNT] } }
+           if ([$SAVE_ERROR] != [YES])
+              { @ COUNT = 0
+                @ SAVE_ERROR = [NO]
+                while (word($COUNT $TEMP2))
+                      { add_line Comment Pack $COUNT
+                        add_line desc $ARRAYDESC[$word($COUNT $TEMP2)]
+                        @ COUNT1 = 0
+                        while (COUNT1 < ARRAYTOTF[$word($COUNT $TEMP2)])
+                              { @ COUNT1 = COUNT1 + 1
+                                add_line files $ARRAYFILE[$word($COUNT $TEMP2)][$COUNT1] }
+                        @ COUNT = COUNT + 1 }
+                ^on exec_error "save_xdcc_file *" {
+                    echo ^V[XDCC]^V Error: $1-
+                    @ SAVE_ERROR = [YES] }
+                @ COUNT = 0
+                while (COUNT < LINECOUNT)
+                      { @ COUNT = COUNT + 1
+                        ^exec -name s_xdcc_f echo $XDCCFILELINE[$COUNT] >> $0
+                        wait %s_xdcc_f }
+                if ([$SAVE_ERROR] = [NO])
+                   { echo [XDCC] File saved Ok }
+                   {} }
+              {} }
+         { echo [XDCC] What file? Try /XDCC HELP SAVE }
+}
+# +--------------------------------------------------------------------------+
+# | Add a line from the file                                                 |
+# +--------------------------------------------------------------------------+
+alias add_line {
+      @ LINECOUNT                = LINECOUNT + 1
+      @ XDCCFILELINE[$LINECOUNT] = [$0-]
+}
+# +--------------------------------------------------------------------------+
+# | Add a file from the offerfile                                            |
+# +--------------------------------------------------------------------------+
+alias add_file {
+      if (match($0 $COUNT12))
+         { if ([$0] == [desc])
+              { @ OLDNUM = TOTPACK
+                if ((TOTPACK >= 0) && (ARRAYTOTF[$TOTPACK] == 0))
+                   {}
+                   { @ TOTPACK = TOTPACK + 1 }
+                @ ARRAYDESC[$TOTPACK] = [$1-]
+                @ ARRAYTOTF[$TOTPACK] = 0
+                @ COUNT12             = [files comment] }
+              { if ([$0] == [files])
+                   { @ COUNT12 = [desc files comment]
+                     @ TMPVAR = [$1-]
+                     if ([$getdir()] == [OK])
+                        { @ COUNT13 = 1
+                          while (COUNT13 <= FILECOUNT)
+                                { @ ARRAYTOTF[$TOTPACK] = ARRAYTOTF[$TOTPACK] + 1
+                                  @ ARRAYFILE[$TOTPACK][$ARRAYTOTF[$TOTPACK]] = [$FILELIST[$COUNT13]]
+                                  @ ARRAYLENG[$TOTPACK][$ARRAYTOTF[$TOTPACK]] = [$FILELENG[$COUNT13]]
+                                  @ COUNT13 = COUNT13 + 1 } }
+                        {} }
+                   {} }
+              {} }
+         { @ LOAD_ERROR = [YES]
+           echo [XDCC] Error loading offer file on line:
+           echo [XDCC] [$COUNT] $0-
+           echo [XDCC] First word on line isn't [$COUNT12]
+           @ COUNT = LINECOUNT }
+}
+# +--------------------------------------------------------------------------+
+# |  Return 'YES' if a person is on Security List                            |
+# +--------------------------------------------------------------------------+
+alias isonsecurlist {
+      if (rmatch($0 $SECURITY_LIST))
+         { @ FUNCTION_RETURN = [YES] }
+         { @ FUNCTION_RETURN = [NO] }
+}
+# +--------------------------------------------------------------------------+
+# | Load file of offered at script load time                                 |
+# +--------------------------------------------------------------------------+
+if ([$LOADFILE] == [ON])
+   { eval LOADmcommand $OFFERFILE }
+   {}
+# +--------------------------------------------------------------------------+
+# | Load Security file at script load time                                   |
+# +--------------------------------------------------------------------------+
+if ([$SECURITYFLAG] == [ON])
+   { eval SECLOAD }
+   {}
+# +--------------------------------------------------------------------------+
+# | Change status line a load script time
+# +--------------------------------------------------------------------------+
+eval change_statusline
+# +--------------------------------------------------------------------------+
+# | Echo load script info                                                    |
+# +--------------------------------------------------------------------------+
+eval echo [XDCC] XDCC Script $XDCCVER Loaded OK.
+echo [XDCC] Type /XDCC HELP or /XDCC HELP [Command] for help.

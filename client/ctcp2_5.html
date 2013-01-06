@@ -1,0 +1,288 @@
+<BASE HREF="http://www.invlogic.com/irc/ctcp2_5.html">
+<TITLE>Internet Relay Chat</TITLE>
+<META name="description" content="computer consulting services, internet and
+intranet desing, and custom software development">
+<META name="keywords" content="computer, consulting, web, internet, intranet, 
+WWW, world wide web, services, software, development, OS/2, Linux, Windows, 
+hosting, virtual host, design, graphic, multimedia, Washington, Baltimore, Maryland, 
+scanning, CD-Rom, computers, consultant, programming, scanner, IRC/2, Internet 
+Relay Chat, IRC">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="/images/backdrop.gif">
+
+
+<P>
+*** NOTE: Section 5 has not been subjected to sanity checks yet. ***
+
+<P>
+*** Therefore some of this may be wildly inaccurate. ***
+
+<P>
+
+<H2>5. DCC Requests</H2>
+<P>
+[...explain DCC...]
+
+<H3>5.1 DCC Over Firewalls</H3>
+
+<P>
+When CTCP and DCC were originally designed, firewalls were relatively
+uncommon.  However, in recent years, firewalls (and other security measures)
+have become increasingly commonplace, so it is prudent to define a protocol
+that will allow a client to initiate a DCC request from behind a firewall.
+For this purpose, we assume that "behind a firewall" means that the client
+may not accept incoming connections from the internet, but may make outgoing
+connections (either directly, or via socks or some other firewall protocol).
+The requirement that a client be able to make outgoing connections is safe,
+since a client would need to be able to do this in order to connect to an
+IRC server in the first place.
+
+<P>
+A firewall DCC request has special values for the IP and port fields.
+
+<P>
+[...???????...]
+
+<P>
+[further explanation...]
+
+<P>
+[???]
+
+<P>
+
+<H3>5.2 DCC CHAT</H3>
+
+<P>
+Request: "DCC" SP "CHAT" SP unused SP ip SP port
+CHAT is used to initiate a conversation directly between clients. 
+Often used to bypass the IRC network, and its associated latencies in
+delivering messages.  It may also be used for other unspecified 
+purposes.
+
+<P>
+The unused parameter is historical.  It should be set to "chat" in
+requests, but some clients put effectively random strings here, so
+don't count on any meaningful data in this field.
+All messages recieved via the DCC CHAT connection should be treated 
+in the same fashion as messages received from the IRC network via a
+PRIVMSG.  This extention of the current protocol allows further 
+requests or text attributes to be exchanged once the connection is
+established.
+
+<P>
+If the recipient of the offer does not accept within a given time 
+frame (5 minutes seems appropriate), or the recipient declines to 
+enter a chat with the initiator, a negative acknowledgement should be 
+sent, subject to flood control.  The format of this rejection should 
+be a CTCP reply message of:
+
+"ERRMSG" SP "DCC" SP "CHAT" SP unused SP "declined"
+Upon reciept of this message, the initiator should inform its user 
+and clear the offered connection.
+Should the cause of the failure be for a reason other than timeout or 
+user rejection, the rejection message should be a CTCP reply message,
+taking the following format:
+"ERRMSG" SP "DCC" SP "CHAT" SP unused SP error-message
+CTCP messages and format codes may be sent over a DCC CHAT connection.
+A CTCP reply via DCC CHAT is distinguished from a request by preceding
+the keyword with a forward slash ("/").  For example, a CTCP PING request
+would have a keyword of "PING", while the reply would have a keyword of
+"/PING".  A DCC CHAT connection is a separate CTCP domain from IRC: all
+requests sent over DCC CHAT must be answered via that DCC CHAT connection
+(not via an IRC connection).
+
+<H3>5.3 MIME DCC Protocol</H3>
+
+<P>
+Request: "DCC" SP mime-type SP filename SP ip SP port [SP size]
+MIME transfers over DCC are intended to act as a replacement and
+enhancement of the original DCC SEND protocol.  One of the main failings
+of the older file exchange is that it required an acknowledgement of
+receipt of data prior to more data being sent.  This is a direct
+duplication of TCP streams, and as such is redundant.  DCC SEND also
+lacks the capacity to restart a failed transmission from any other
+point than the beginning of the file, and could not be used to send
+a file to an IRC channel.
+
+<P>
+A MIME type can be differentiated from other DCC types by the presense
+of a "/" (forward slash) in the DCC type.  That is, a DCC of type
+"image/gif" is a MIME transfer, while a DCC of type "CHAT" is not.
+The size field is optional.  The recipient client should provide
+adequate means to create a local file from the offered data stream.
+Alternatively the stream may be directed to another program for handling.
+The filename should be presented without path information.  However,
+path separators (for example, "/" on a Unix system) differ between
+operating systems, so an IRC client should be prepared to accept a
+filename that contains characters which may be invalid under that
+client's operating system.  It is the client's perogative to convert
+the filename into a locally acceptable form, or to prompt the user to
+do so.
+
+<P>
+If the stream has no specific filename, the filename must be specified
+as "-" (a single dash).  A file which has the filename "-" on a local
+system must be renamed in transit to avoid confusion with this placeholder.
+         
+<P>
+If the recipient of the offer does not accept within a given time 
+frame (5 minutes seems appropriate), or the recipient declines to 
+accept the offer from the initiator, a negative acknowledgement 
+should be sent, subject to flood control.  The format of this 
+rejection should be:
+
+<P>
+"ERRMSG" SP "DCC" SP mime-type SP filename SP "declined"
+Upon reciept of this message, the initiator should inform its user 
+and clear the offered connection.
+
+<P>
+Should the cause of the failure be for a reason other than timeout or 
+user rejection, the rejection message should take the following 
+format:
+
+<P>
+"ERRMSG" SP "DCC" SP mime-type SP filename SP user-text
+The destination for a MIME DCC request may be a single IRC user or an
+entire channel.  If the request is sent to an entire channel, this is
+referred to as a "channel DCC", and the client must behave a little
+differently.
+
+<P>
+For a channel DCC, the initiator should be prepared to accept more
+than one connection to its listening port.  Each connection, once
+established, must be treated as if it were a separate DCC request.
+The listening port may be closed at any time by the initiating client
+(usually after a reasonable timeout), but this must not affect any
+previously established DCC connections.
+
+<P>
+MIME transfers over DCC have two stages after the connection is
+established: a negotiation phase, and a data transmit phase.
+
+<P>
+
+<H3>5.3.1 MIME DCC Negotiation</H3>
+
+<P>
+Immediately upon connection to a MIME DCC request, the two sides begin
+making option queries to each other.  Option queries are a method of
+negotiating optional features in a MIME DCC transfer, such as resuming
+a disconnected transfer, or encrypting the transfer.  Future improvements
+or enhancements will probably appear as new option queries.
+
+<P>
+Each option query follows this format (loosely based on the telnet command
+protocol, RFC854):
+
+<PRE>
+OPTION-QUERY	= QUERY OPTION PARAM-LEN PARAM-LEN(octet)
+QUERY		= DO | DON'T | WILL | WON'T | END
+END		= &lt;octet 255 (octal 0377)&gt;
+DON'T		= &lt;octet 254 (octal 0376)&gt;
+DO		= &lt;octet 253 (octal 0375)&gt;
+WON'T		= &lt;octet 252 (octal 0374)&gt;
+WILL		= &lt;octet 251 (octal 0373)&gt;
+OPTION		= octet
+PARAM-LEN	= octet
+</PRE>
+
+<P>
+The PARAM-LEN specifies how many octets of parameters follow (0 indicates
+no parameters).  This is to allow a client to detect the end of an option
+that it doesn't understand.  Therefore an option may be a total of from
+4 to 259 bytes in length, depending on the length of the parameters.
+A client sends a query of "END" to indicate that it is done sending option
+queries, and will send no more queries.  OPTION and PARAM-LEN must both be
+zero (0) for and "END" query, and there is no response.  The meanings of
+the other queries (DO, DON'T, WILL, WON'T) are dependent on the option,
+but have general meanings as follows.
+
+<P>
+A client sends "DO" to indicate that it would like the other client to use
+an option.  The other client may respond "WILL" if it intends to comply,
+or "WON'T" if it will not or can not comply.  A client that does not
+understand the option must always reply "WON'T" to a "DO" option query.
+
+<P>
+A client sends "WILL" to indiciate that it would like to use an option.
+The other client may respond "DO" if it agrees that the client should use
+that option, or "DON'T" if it does not want the client to use the option.
+A client that does not understand the option must always reply "DON'T" to
+a "WILL" query.
+
+<P>
+Typically, each client should transmit all of its option queries in one
+burst, followed by an "END" query.  Upon receiving each query, the client
+must respond appropriately -- for every request, there must be a response.
+Once each side has received an "END" query, and has received answers to
+each of its queries, the option query phase is over, and the data transfer
+begins.
+
+<P>
+Here is a diagram showing a typical option query negotiation.
+
+<PRE>
+   FILE SERVER				FILE CLIENT
+   -----------				-----------
+   transmit 4-byte timestamp
+		----- 33 9D F3 29 ----&gt;
+					(check the timestamp)
+					transmit 4-byte requested offset
+                &lt;---- 00 00 00 00 -----
+   transmit a query (4 bytes): "WILL option #0" (4 parameters)
+   option 0 is RESUME (see Appendix C)
+                --- FB 00 04 33 CD 53 16 ---&gt;
+   transmit a query (5 bytes): "WILL option #F0" (1 parameter: 5F)
+   option F0 is a fake for the purpose of example
+                --- FB F0 01 5F ------------&gt;
+   transmit end of queries
+                --- FF 00 00 ---------------&gt;
+                                        transmit end of queries
+                                        (the client has no option queries)
+                &lt;--------------- FF 00 00 ---
+                                        respond to option #0 query: DO
+					resume at offset 1024
+                &lt;--- FD 00 04 00 00 04 00 ---
+                                        respond to option #F0 query: DON'T
+                &lt;--------------- FE F0 00 ---
+   data transfer begins...
+</PRE>
+
+<P>
+In this diagram, the file client elected to start receiving at offset 1024,
+indicating that this is probably a file resume.  The file server made
+two option queries.  It offered to do option #0 (resume), which the file
+client accepted.  It also asked to use option #F0 (with a parameter of 5F,
+or 95 decimal), which the file client rejected.  The file client made no
+option queries.
+
+<P>
+A list of currently-defined option queries is in Appendix C.
+
+<P>
+
+<H3>5.3.2 MIME DCC Data Transfer</H3>
+
+<P>
+After the negotiation is completed, the file server begins transmitting
+data to the file client.  This data channel is considered 8-bit clean --
+there is no quoting necessary on the contents.  The transfer is completed
+when the connection terminates.  If a file length was specified in the
+DCC XMIT request, either side may terminate the connection once the
+specified number of bytes have been transferred.
+
+<P>
+Some MIME transfers may involve two-way protocols.  For the purposes of
+the IRC client, once the option negotiation is complete, the DCC connection
+should be treated as a two-way TCP pipe (possibly encrypted).  If the
+connection is being directed to an external program, the data pipe must
+be bi-directional.
+<P>
+<FONT SIZE=2>
+Maintained by: <A HREF="mailto:webmaster_at_invlogic.com">Webmaster, Innovative Logic Corp.</A>.<BR>
+Last modified: 17-Sep-2004 01:04PM.<BR>
+</FONT>
+</BODY>
+</HTML>

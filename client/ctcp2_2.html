@@ -1,0 +1,452 @@
+<BASE HREF="http://www.invlogic.com/irc/ctcp2_2.html">
+<TITLE>Internet Relay Chat</TITLE>
+<META name="description" content="computer consulting services, internet and
+intranet desing, and custom software development">
+<META name="keywords" content="computer, consulting, web, internet, intranet, 
+WWW, world wide web, services, software, development, OS/2, Linux, Windows, 
+hosting, virtual host, design, graphic, multimedia, Washington, Baltimore, Maryland, 
+scanning, CD-Rom, computers, consultant, programming, scanner, IRC/2, Internet 
+Relay Chat, IRC">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" BACKGROUND="/images/backdrop.gif">
+
+
+<H2>2. Text Attributes</H2>
+
+<P>
+The primary task of an IRC Client program is to display text to the
+user, and allow text messages to be sent to other users. As such, there
+is a need for the ability to change the format of this text (for example,
+to cause a certain word or phrase to appear in boldface) -- these changes
+in text format will hereafter be known as "text attributes". It is up to
+each client to determine which (if any) requests for an attribute change
+to permit.
+
+<P>
+Text attributes are valid in at least the following areas:
+
+<UL>
+<LI>in the body of a PRIVMSG or NOTICE
+<LI>in the text of a DCC CHAT connection
+<LI>user-displayed text inside a CTCP (such as ACTION)
+<LI>in a channel's topic
+<LI>in the "comment" (text displayed to users) portion of any IRC command
+  (such as KICK)
+</UL>
+
+<P>
+All attributes are cumulative, that is to say, no specific attribute
+overrides any other attribute type. All attribute requests may be
+ignored, and any particular combination of attributes may be ignored,
+either by design or by user request. Certain combinations may not make
+sense in all environments; therefore there is no requirement that all
+possible combinations be implemented by any client.
+
+<P>
+Attributes are reset to client defaults at the receipt of any CR (ASCII
+13) and/or LF (ASCII 10).  Thus attribute changes only have a lifetime
+of one line of text.
+
+<P>
+All attribute changes are preceded and followed by the format character,
+ASCII character 6 (control-F, hereafter referred to as &lt;^F&gt;).  Only one
+attribute change may be encoded within each pair of format characters.
+This encoding allows IRC client programs to easily detect and ignore any
+attribute changes they don't wish to implement.  It also allows attributes
+to have optional arguments, and allows for the possible expansion of
+arguments in future revisions of CTCP.
+
+<P>
+The first character (octet) of an attribute change is the name of the
+attribute, which is case-sensitive.  Any following characters determine
+what changes are to be made.  There is no whitespace between the format
+character and the attribute, between the attribute and its arguments, or
+between the arguments and the closing format character.  Therefore, the
+format of an attribute change is:
+&lt;^F&gt; &lt;attribute&gt; [optional-args...] &lt;^F&gt;
+
+<P>
+Here follows a list of the attributes and what effect they are intended
+to have.
+
+<P>
+
+<H3>2.1 Bold</H3>
+
+<P>
+Specification: &lt;^F&gt; "B" ["+"|"-"] &lt;^F&gt;
+
+<P>
+The bold attribute turns on or off "bold text".  Clients may display
+this by using the "bold" attribute of the current font, or by choosing
+a predefined color combination, based on the capabilities of the terminal
+being used.
+
+<P>
+A "+" turns on bold mode; "-" turns it off.  If no "+" or "-" follows,
+a "+" should be assumed -- that is, the default action is to turn the
+attribute on.
+
+<P>
+If the bold attribute is turned "on" multiple times, the client should
+leave bold mode on until the attribute has been turned "off" an equal
+number of times.  (Each "B-" turns off exactly one previous "B+" request.)
+Extra "off" ("B-") requests should be ignored.  This behavior holds for
+all of the on/off attributes: bold, reverse, underline, overstrike, and
+italics.
+
+<P>
+
+<H3>2.2 Inverse (Reverse)</H3>
+
+<P>
+Specification: &lt;^F&gt; "V" ["+"|"-"] &lt;^F&gt;
+
+<P>
+The inverse attribute should reverse the foreground and background colors
+currently in use.  If this behavior is not readily available to the client,
+due to terminal type restrictions, user-defined colors may be used to
+indicate this state.
+
+<P>
+
+<H3>2.3 Underline</H3>
+
+<P>
+Specification: &lt;^F&gt; "U" ["+"|"-"] &lt;^F&gt;
+
+<P>
+This attribute should turn on and off the "underline" attribute of the
+current font.  It may be displayed using predefined color combinations
+if the terminal lacks underline capabilities.
+
+<P>
+
+<H3>2.4 Overstrike</H3>
+
+<P>
+Specification: &lt;^F&gt; "S" ["+"|"-"] &lt;^F&gt;
+
+<P>
+The overstrike attribute is typically a solid horizontal line through
+the middle of text.  It may also be displayed using predefined color
+combinations if the terminal lacks overstrike capabilities.
+
+<P>
+
+<H3>2.5 Italics</H3>
+
+<P>
+Specification: &lt;^F&gt; "I" ["+"|"-"] &lt;^F&gt;
+
+<P>
+This attribute turns on or off the "italics" attribute of the current
+font, typically causing text to be displayed at a slant.  It may also
+be displayed using predefined color combinations if the terminal lacks
+overstrike capabilities.
+
+<P>
+
+<H3>2.6 Colours</H3>
+
+<P>
+Specification: &lt;^F&gt; "C" [foreground-color [background-color]] &lt;^F&gt;
+
+<P>
+This allows the requestor to specify the desired colours in which the
+text following this attribute will be displayed.  This attribute is
+cumulative as well, within the restrictions of the terminal in use.
+Colours may be chosen in two methods, either from an indexed colour
+table, or by specifying an RGB value.
+
+<P>
+Indexed colors are indicated with a single hexidecimal digit, from the
+range "0".."9" inclusive, or "A".."F" inclusive, which map to RGB colors
+as per Appendix A.  The index color is case-sensitive; characters "a"
+through "f" are reserved for possible future use.
+
+<P>
+RGB colors are indicated with a "#" followed by six hexidecimal digits. 
+Each pair of digits represents a single 8-bit value, making up three
+8-bit values in total. These values indicate the intensities of red,
+green, and blue, respectively.  The hexidecimal digits "A".."F" are
+case-sensitive.  Therefore the format of an RGB color specification is:
+
+<P>
+"#" &lt;2-digit-hexidecimal-RED-value&gt; &lt;2-digit-hexidecimal-GREEN-value&gt;
+&lt;2-digit-hexidecimal-BLUE-value&gt;
+
+<P>
+For example, one possible RGB color specification for grey is:
+"#CCCCCC"
+
+<P>
+In addition to indexed and RGB colors, the following special characters
+are defined:
+
+<DL>
+<DT>"-"
+<DD>A dash indicates that the color should remain unchanged.  This is
+intended to be a place holder.  For example, to change only the
+background color, a color-change attribute would be specified with the
+foreground color as "-".
+<DT>"."
+<DD>A dot indicates that the color should be returned to the default colors
+of the client.  A client's default colors are never guaranteed to be any
+value, and may possibly have been set by the user.
+</DL>
+
+<P>
+The background color of a color-change attribute may be omitted, in
+which case it is equivalent to "-" (the background color is left
+unchanged).
+
+<P>
+The foreground AND background colors may BOTH be omitted, in which case
+they are both equivalent to "." and the foreground and background colors
+are reset to the default values for the client.
+
+<P>
+Some example color-change attributes:
+
+<DL>
+<DT>"CF"
+<DD>The foreground color is changed to index-value "F" (white) while leaving
+the background color unchanged.
+<DT>"C#FFBBBB0"
+<DD>The foreground color is changed to RGB value "FFBBBB" (which will
+probably be some shade of pink), and the background color is changed to
+index-value "0" (black).
+<DT>"C#FFBBBB#000000"
+<DD>This has the same effect as the previous change.
+<DT>"C"
+<DD>The foreground and background colors are reset to the client's default
+colors.
+</DL>
+
+<P>
+[FIXME: explain what R1, R2 etc mean!]
+
+<P>
+Some clients may wish to ignore color changes within certain ranges. 
+This is valid. For example, a client may choose to ignore color changes
+that cause the foreground and background colors to be too similar.  One
+possible means of comparison would be:
+
+<PRE>
+            R1 &lt; R2 - 8 or R1 &gt; R2 + 8
+            G1 &lt; G2 - 8 or G1 &gt; G2 + 8
+            B1 &lt; B2 - 8 or B1 &gt; B2 + 8
+</PRE>
+
+<P>
+If a pair of colours passes these 3 tests, then it should be considered
+different enough for display purposes, based on constraints of the
+current display screen. The choice of a range of 16 values is arbitrary
+for the example, and individual clients could of course choose larger
+or smaller values at their discretion. 
+
+<P>
+CTCP format color changes are independent of the ANSI color-code standard.
+CTCP color changes may be made interchangably with ANSI color changes if
+the IRC client supports it.  However, the results are largely undefined,
+since ANSI supports a much smaller color set, and has rules about when
+terminal settings will be reset.
+
+<P>
+
+<H3>2.7 Size</H3>
+
+<P>
+Specification: &lt;^F&gt; "F" ["+"|"-" [number]] &lt;^F&gt;
+
+<P>
+Choice of typeface point sizes is expected to vary wildly between IRC
+clients on different machines and architectures; therefore specifying an
+exact point size for text display would be meaningless.  Instead, a
+method of asking for a change relative to the default size is given.
+
+<P>
+A "+" indicates an increase in text size (ie, larger text), and a "-"
+indicates a decrease (ie, smaller text).  A digit following the "+" or
+"-" specifies how much to grow or shrink the text size.  If no digit
+follows, a "1" is assumed.
+
+<P>
+Clients may (and are expected to) enforce a limit on the allowed
+variation of text sizes.  For example, a client may refuse to let text
+grow beyond 4 units larger or smaller than the default.  Each unit
+should approximate a growth/shrinkage of about 10%.  (An increase of
+font size by 10 units, if allowed, should cause the font size to
+approximately double.)
+
+<P>
+If a size attribute is given with no "+" or "-", it is a request to
+return the text to the default size.
+
+<P>
+
+<H3>2.8 Universal Resource Locator</H3>
+
+<P>
+Specification: &lt;^F&gt; "L" &lt;^F&gt;
+
+<P>
+IRC clients may wish to highlight or otherwise process Universal Resource
+Locators (URLs) in messages.  This attribute toggles "URL mode"; text
+which arrives in URL mode is considered to be a URL, and may be displayed
+appropriately.
+
+<P>
+
+<H3>2.9 Character Spacing</H3>
+
+<P>
+Specification: &lt;^F&gt; "P" ["P"|"F"] &lt;^F&gt;
+
+<P>
+The default spacing by an IRC client may be either proportional (each
+character uses a varying amount of horizontal space -- like a textbook)
+or fixed (each character uses the same amount of horizontal space -- like
+a typewriter).  A client may suggest switching to a proportional or fixed
+character width by using this attribute.
+
+<P>
+A spacing of "P" requests proportional width, while a spacing of "F"
+requests a fixed width.  If the spacing type is omitted, the client should
+revert to its default spacing, which could be either proportional or fixed.
+
+<P>
+
+<H3>2.10 Encoding</H3>
+
+<P>
+Specification: &lt;^F&gt; "E" [encoding] &lt;^F&gt;
+
+<P>
+Because IRC was developed in Finland, it has historically used Latin-1 for
+encoding text.  Latin-1 (ISO 8859-1) is ASCII, with the upper 128 characters
+making up national symbols from several European countries.  Latin-1 is
+sufficient for most English speakers and those using a handful of European
+languages, but cannot be used to send characters from other languages.
+
+<P>
+For this purpose, the "E" encoding attribute may be used to change the
+default "encoding" of text.  The following encodings are valid:
+
+<P>
+A number between 1 and 10 may be used to specify the ISO character sets
+ISO 8859-1 through ISO 8859-10.  These character sets all use ASCII for
+the lower 128 characters.  They span most European and Latin-based langauges,
+as well as the Cyrillic, Greek, Arabic, and Hebrew character sets.
+
+<P>
+An encoding of "U" indicates UTF-8 encoding.  This is a method of encoding
+Unicode (16-bit) characters in an 8-bit character set.  The lower 128
+characters remain ASCII.
+
+<P>
+All other encodings are reserved for future use.
+
+<P>
+Specifying no encoding must return the IRC client to the default encoding.
+If no user selected default is chosen, it should return to Latin-1
+encoding.
+
+<P>
+Please note that all encodings preserve the lower 128 characters for
+ASCII.  Therefore all CTCP control characters remain identical.
+
+<P>
+
+<H3>2.11 Normal</H3>
+
+<P>
+Specification: &lt;^F&gt; "N" &lt;^F&gt;
+
+<P>
+In order to facilitate the clearing of all currently set text
+attributes, a means of specifying a return to baseline is desired. This
+code will clear all attributes and return to displaying text in the client's
+currently defined 'normal' attribute set.
+
+<P>
+
+<H3>2.12 Extensions</H3>
+
+<P>
+Specification: &lt;^F&gt; "X" [optional-arguments] &lt;^F&gt;
+
+<P>
+In order to facilitate the extension of this protocol, a client may
+indicate such an extension as follows:
+
+<P>
+Clients are expected to use some sort of identifier following "X" to
+prevent conflicts between the attribute extensions of differing
+clients.  These "extension attributes" exist only for testing or for
+implementing client-specific features.  THEY SHOULD NOT BE CONSIDERED
+VALID UNIVERSAL ATTRIBUTES.
+
+<P>
+
+<H3>2.13 Deprecations</H3>
+
+<P>
+Currently implemented standard codes are ^B for Bold, ^V for Inverse or
+Reverse (as in ircII), ^_ for Underline, and ^O to turn off all
+attributes. These are being replaced by the above formatting
+specifications, and should no longer be sent by IRC clients, per section
+2. Clients receiving these messages may either strip the codes from the
+text or display them as previously defined. 
+
+<P>
+There are also several competing non-standard format codes, some involving
+^C or ^L to change colors, or various other codes to change format modes.
+These should be ignored or converted to the CTCP/2 format standard.  We
+have intentionally tried to pick a format character (^F) which is currently
+not in use by any client for special codes.
+
+<P>
+
+<H3>2.14 Examples</H3>
+
+<P>
+These examples demonstrate how format codes might be used in a typical
+IRC session.  Only the message text is shown, for clarity.  Beneath each
+example is a description of the desired formatting.  In these examples,
+the sequence "^F" is taken to indicate ASCII code 6 (the format character).
+
+<DL>
+<DT>
+My name is ^FB^FLinda^FB^F.
+<DD>   The text is "My name is Linda."
+   The word "Linda" should be displayed in boldface.  The trailing period
+   and the preceding text ("My name is ") are displayed in the default
+   attributes.
+<P>
+<DT>
+^FC#FFCC33^FKangaroos^FC^F are pretty -- ^FU^Ffrom a ^FI^Fdistance^FN^F.
+<DD>   The text is "Kangaroos are pretty -- from a distance."
+   The word "Kangaroos" should appear in RGB color #FFCC33, with the
+   background color left unchanged.  The rest of the text should be
+   displayed using default colors.  The text "from a distance" should
+   be underlined, and the word "distance" should be underlined and in
+   italics.  Note that the trailing period is displayed using the
+   default attributes.
+<P>
+<DT>
+Please look at my ^FF+^Fhomepage^FF^F: ^FL^Fhttp://www.xyzzy.zz^F^L^F :)
+<DD>   The text is "Please look at my homepage: http://www.xyzzy.zz :)"
+   The word "homepage" should be displayed in a slightly larger font
+   and the text "http://www.xyzzy.zz" should be marked as a URL
+   (possibly a "hot link" that a user can use to reach the resource).
+</DL>
+
+<P>
+<FONT SIZE=2>
+Maintained by: <A HREF="mailto:webmaster_at_invlogic.com">Webmaster, Innovative Logic Corp.</A>.<BR>
+Last modified: 17-Sep-2004 01:04PM.<BR>
+</FONT>
+</BODY>
+</HTML>

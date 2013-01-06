@@ -1,0 +1,195 @@
+A treatise on DCC REVERSE
+Prepared on May 9, 2002
+$EPIC: DCC_REVERSE,v 1.3 2002/05/10 05:05:50 jnelson Exp $
+-------------------------------------------------------------------------------
+
+Prologue
+--------
+All p2p (peer-to-peer) systems fundamentally revolve around two clients
+making a bi-lateral internet connection and swapping data across that 
+connection.  On a technical IP level, this requires that one of the peers
+act as a server and one of the peers acts as a client.  In this age the 
+proliferation of firewalls (both voluntary and involuntary) make it 
+more difficult to act as an internet server.
+
+About DCC
+---------
+DCC (Direct Client Connection) is the internet's oldest semi-anonymous
+p2p data transmission mechanism, dating back to 1991.  It is rooted in 
+and part of the IRC culture and so is widely available in IRC clients.  
+There are two applications of DCC: one is to exchange text messages 
+directly with another user (without sending them through normal IRC 
+channels), and the other is to share a file with another user.  The
+DCC specification limits conforming implementations to use IPv4 only.
+
+The Problem
+-----------
+The construction of the DCC system requires that the peer who wishes to 
+share his file with another peer must have the ability to act as an 
+internet server.  Some users are unable to act as internet servers and 
+thus cannot share files via the DCC system.
+
+A modest proposal
+-----------------
+It would be adventageous for a user who wishes to share a file with 
+another user to be able to do so without having the requirement of 
+being an internet server.  A user should be able to ask offer a file
+to another user coupled with a request for the other user to act as
+the server.  The direction of this connection is thus "reversed" where
+the reciever is the server and the sender is the client.
+
+
+STAGE ONE: The offer
+--------------------
+The sender may send to the reciever some such handshake:
+
+	PRIVMSG reciever :^ADCC REVERSE <name> <size> <key>^A\r\n
+
+Where the symbolic tags have the following meaning:
+<name>  - The name of the file with no directory components.
+<size>  - The size in full of the file.  Number is represented as ascii
+          digit characters.  The number may be a 64 bit integer.
+<key>   - A string containing random characters with ascii values 33 to 
+          126 inclusive chosen by the sender.  The <key> may be from 1
+          to 50 characters in length, but 12 is probably a good size.
+	  The purpose of this key is to act as a unique identification
+	  mark for the transaction and to authenticate the legitimacy
+	  of an assent from the other peer.  The client should avoid 
+	  using duplicate keys.
+
+STAGE TWO: The response
+-----------------------
+If the recipient wishes to reject the offer he may send an affirmative
+cancellation of the offer by a *CTCP REPLY*:
+
+	NOTICE sender :^ADCC REJECT REVERSE <key>^A\r\n
+
+If the recipient wishes to indicate his assent to the transfer, he may
+do so by sending back a *CTCP REPLY*:
+
+	NOTICE sender :^ADCC REVERSE <key> <start> <p-addr> <port>^A\r\n
+
+Where the symbolic tags have the following meaning:
+<key>    - The exact same <key> as passed in the original handshake.
+	   Please see notes on "Unrequested reverse transfers" below.
+<start>  - The number of characters at the beginning of the file that the
+	   reciever wishes the sender to skip.  This permits a "restart" of
+	   a previously canceled transfer from the place the transfer was lost.
+           Ordinarily, this value would be 0 to recieve the entire file.
+<p-addr> - A "presentation address" representing the reciepient's IP address;
+           either a dotted-quad string for IPv4 (A.B.C.D), or a colon-separated
+	   string for IPv6 (A::B::C).
+<port>   - The port where the reciepient is listening for a connection.  This
+	   must be as ascii digits, in host order ("human readable").
+
+Please see APPENDIX 1 for information how to parse this data.
+
+STAGE THREE: The connection
+---------------------------
+It is acceptable for the sender's client to immediately begin the transmission
+upon the receipt of any legitimite assent.  It is acceptable for the sender's
+client to require the sender to affirmatively begin the transmission.  In 
+either case, the sender is permitted the privelege of revoking the offer 
+by sending an affirmative cancellation of the offer by a *CTCP REPLY*:
+
+	NOTICE reciever :^ADCC REJECT REVERSE <key>^A\r\n
+
+If the sender has not revoked the offer, the sender's client is to connect
+to the recipient's client using the address and port given by the DCC REVERSE
+reply.  If the connection cannot be established, the sender's client may send
+an affirmative cancellation to the sender in the manner described above.
+
+Once the connection has been successfully established, the transmission
+shall continue as though the connection had been established via DCC SEND.
+
+
+UNREQUESTED REVERSE TRANSFERS: [WORK IN PROGRESS]
+-------------------------------------------------
+There may be circumstances where it is more convenient for a reciever to
+ask for a specific file from a sender than it is to wait for the sender
+to extend an offer to transmit.  An "unrequested reverse transfer" is 
+a request by a receiver to be sent a file without having received an 
+invitation.  A reciever may make an unrequested reverse transfer by sending
+a *CTCP REPLY*:
+
+	NOTICE sender :^ADCC REVERSE <key> <start> <p-addr> <port>^A\r\n
+
+Where the symbolic tags have the same meanings as in STAGE TWO, except that
+<key> shall be made up by the the reciepient. [PROBLEM] There is no way to
+identify the file you want.  Should DCC REVERSE assents be extended to 
+include the filename, or should unrequested reverse transfers not be accepted?
+Even if we did include the filename, how would you map that to a file on
+the local filesystem?  There could be many such filenames present [PROBLEM]
+
+It would be unwise for a client to automatically accept unrequested reverse
+transfers because malicious users could transfer sensitive data from the
+receiver's machine without their affirmative consent.
+
+Notwithstanding this, a client may choose to present an unrequested reverse
+transfer to the user for their assent.  If the user assents to the transfer,
+the connection shall proceed directly to STAGE THREE.
+
+Unrequested reverse transfers might be useful for clients to automatically
+requested that a transmission that failed to complete be restarted.
+
+Clients are under no obligation to accept or present unrequested reverse 
+transfers or to their user.  They may silently ignore them.  Sending back
+a DCC REJECT is not encouraged unless it is rate-throttled, to prevent
+floodnet attacks.
+
+APPENDIX 1: PARSING DCC REVERSE HANDSHAKES
+------------------------------------------
+The DCC REVERSE affirmation has the following form:
+
+	NOTICE sender :^ADCC REVERSE <key> <start> <p-addr> <port>^A\r\n
+
+You may save the <p-addr> and <port> data by using the following code:
+(This code is placed into the public domain and may be used for any purpose)
+
+	int retcode;
+	struct addrinfo hints;
+	struct addrinfo *ai;
+	struct sockaddr_storage ss;
+	int sslen;
+
+	/* AI_NUMERICHOST means that we are giving it a p-addr */
+	/* PF_UNSPEC means we don't care if it's IPv4 or IPv6 */
+	memset(&hints, 0, sizeof(hints));
+	hints.ai_flags = AI_NUMERICHOST;
+	hints.ai_family = PF_UNSPEC;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = 0;
+
+	if ((retval = getaddrinfo(p_addr, port, &hints, &ai))) {
+		/* Error is in gai_strerror(error) */
+	}
+
+	/* 
+	 * Save the (struct sockaddr *) by copying it into a 
+	 * (struct sockaddr_storage), which we will use later in connect().
+	 * And no, I don't believe in using memcpy() for this.
+	 */
+	ss = *(struct sockaddr_storage *)ai->ai_addr;
+
+	/*
+	 * connect() double checks to make sure that the address family 
+	 * in the sockaddr agrees with this length.  Save this value or
+	 * otherwise we'll have to figure out again later.
+	 */
+	sslen = ai->ai_addrlen;
+
+	freeaddrinfo(ai);
+
+You may then later go back and connect to the receiver with:
+
+	struct sockaddr *sa;
+
+	sa = (struct sockaddr *)&ss;
+	if ((fd = socket(sa->sa_family, SOCK_STREAM, 0))) {
+		/* Socket failed */
+	}
+	if (connect(fd, sa, sslen)) {
+		/* Connect failed */
+	}
+
+#End of document
