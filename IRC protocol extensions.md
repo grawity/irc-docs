@@ -35,6 +35,20 @@ Server-server protocol:
      * [EUID][ts6-euid], [SAVE][ts6-save], other [CAPABs][ts6-capab]
  * ircu: [P10][p10]
 
+## CTCP messages and DCC
+
+Client-To-Client Protocol (CTCP) messages are carried over standard PRIVMSGs and NOTICEs. The [original specification][ctcp] allows for quoting special characters, sending "extended data" and commands.
+
+However, most clients do not implement the quoting, and only recognize messages consisting entirely of a single "extended data" command.
+
+ * [DCC protocol][dcc-ircii] as implemented by IRCII
+
+ * [Later CTCP draft][ctcp-1997] (no known implementations)
+
+ [ctcp]: http://www.irchelp.org/irchelp/rfc/ctcpspec.html
+ [dcc-ircii]: http://www.irchelp.org/irchelp/rfc/dccspec.html
+ [ctcp-1997]: http://web.archive.org/web/20100209042300/http://www.invlogic.com/irc/ctcp.html
+
 ## RPL_ISUPPORT (current; all ircds)
 
 Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) Many extensions in ISUPPORT deal with core IRC features; for example, supported channel types (e.g. `CHANTYPES=#&`) or the longest permitted nickname (`NICKLEN`).
