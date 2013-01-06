@@ -15,10 +15,11 @@ Client-server protocol:
 
 Server-server protocol:
 
- * Hybrid → Charybdis: [TS3][ts3], [TS5][ts5], [TS6][ts6], [TS6 v7][ts6v7], [TS6 v8][ts6v8]
-     * TS extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
+ * TS (Hybrid → Charybdis)
+     * Versions: [TS3][ts3], [TS5][ts5], [TS6][ts6], [TS6 v7][ts6v7], [TS6 v8][ts6v8]
+     * Extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
      * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
- * ircu: [P10][p10]
+ * [P10][p10] (ircu)
 
   [rfc1459]: http://tools.ietf.org/html/rfc1459
   [rfc2810]: http://tools.ietf.org/html/rfc2810
@@ -31,8 +32,8 @@ Server-server protocol:
   [ts6v7]: https://github.com/grawity/irc-docs/blob/master/server/ts6v7.txt
   [ts6v8]: https://github.com/grawity/irc-docs/blob/master/server/ts6v8.txt
   [ts-encap]: http://www.leeh.co.uk/ircd/encap.txt
-  [ts-capab]: https://github.com/grawity/irc-docs/blob/master/server/capab.txt
-  [ts6-save]: https://github.com/grawity/irc-docs/blob/master/server/ts-collision-fnc.txt
+  [ts-capab]: https://github.com/grawity/irc-docs/blob/master/server/ts-capab.txt
+  [ts6-save]: https://github.com/grawity/irc-docs/blob/master/server/ts6-save-collision-fnc.txt
   [ts6-euid]: https://github.com/grawity/irc-docs/blob/master/server/ts6-euid.txt
   [p10]: http://web.mit.edu/klmitch/Sipb/devel/src/ircu2.10.11/doc/p10.html
   [ircv3]: http://ircv3.atheme.org/
@@ -62,6 +63,16 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
  [dcc-reverse]: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/DCC_REVERSE?rev=1.4
  [dcc-xdcc]: http://xa.bi/files/irc/xdcc.3.3.0b.irc
 
+## User identification
+
+ * SASL (IRCv3 style)
+ * SASL (IRCX style)
+ * privileged bots – NickServ, Q
+ * RFC 1459 server password (`PASS` command)
+ * [Ident][rfc1413] (OS-level authentication)
+
+ [rfc1413]: http://tools.ietf.org/html/rfc1413
+
 ## Capability negotiation
 
  * The 005 numeric, aka `RPL_ISUPPORT`
@@ -70,7 +81,7 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
  * `PROTOCTL`
  * Microsoft IRCX
 
-## `RPL_ISUPPORT`
+## ISUPPORT
 
 Implemented by almost all servers. Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) Many extensions in ISUPPORT deal with core IRC features; for example, supported channel types (e.g. `CHANTYPES=#&`) or the longest permitted nickname (`NICKLEN`).
 
@@ -94,7 +105,7 @@ Known extensions:
   [watch]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/draft-meglio-irc-watch-00.txt
   [whox]: http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who
 
-## IRCv3
+## CAP and IRCv3
 
 The **IRCv3 Working Group** defines a standard set of extensions to IRCv2. The central part of IRCv3 is [capability negotiation][v3-cap] using `CAP`, which is implemented by all current servers.
 
@@ -105,12 +116,12 @@ Known extensions:
  * [extended JOIN][v3-extended-join] (Charybdis, Unreal)
  * `identify-msg` (Charybdis)
  * [multi-prefix NAMES][v3-multi-prefix]
- * [message tags][v3-message-tags] (used for `server-time` by ZNC)
+ * [message tags][v3-message-tags] (ZNC)
  * [metadata][v3-metadata]
  * [server time][v3-server-time] (ZNC)
- * [SASL authentication][v3-sasl]
+ * [SASL authentication][v3-sasl] (Atheme, Anope)
  * [STARTTLS][v3-tls] (InspIRCd, Unreal)
- * `userhost-in-names` (Unreal)
+ * `userhost-in-names` – equivalent to NAMESX (Unreal)
 
 Features:
 
