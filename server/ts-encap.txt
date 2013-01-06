@@ -1,0 +1,35 @@
+ENCAP DEFINITION
+----------------
+
+Preamble
+--------
+
+This document defines the specification for the ENCAP command.
+
+ENCAP is designed to help fix the situation where new commands do
+not propagate over hub servers running older code.
+
+Definition
+----------
+
+Support for the ENCAP command is given by the CAPAB token "ENCAP".
+
+The format of ENCAP is:
+  :<source> ENCAP <destination> <subcommand> <parameters>
+
+<source>        - The entity generating the command.
+
+<destination>   - The entity the command is destined for.  This may
+                  include wildcards for servers, but not clients.
+
+                  If the wildcard does not match the current server, the 
+                  command should be propagated and ignored.
+
+<subcommand>    - The subcommand we're propagating over ENCAP.  If the
+                  subcommand is not recognised by the current server, the
+                  command should be propagated and ignored.
+
+<parameters>    - The parameters that the subcommand have.
+
+
+
