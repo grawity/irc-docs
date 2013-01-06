@@ -8,6 +8,18 @@ Original protocol (IRCv2): [RFC 1459][rfc1459]
 
 Later updated by [RFC 2810][rfc2810], [RFC 2811][rfc2811], [RFC 2812][rfc2812], [RFC 2813][rfc2813], but few servers follow these completely. IRCnet is probably the most complete implementation.
 
+Client-server protocol:
+
+ * [Jilles' IRC protocol documentation](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/)
+ * [IRC v3 Working Group][ircv3]
+
+Server-server protocol:
+
+ * Hybrid → Charybdis: [TS3][ts3], [TS5][ts5], [TS6][ts6], [TS6 v7][ts6v7], [TS6 v8][ts6v8]
+     * TS extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
+     * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
+ * ircu: [P10][p10]
+
   [rfc1459]: http://tools.ietf.org/html/rfc1459
   [rfc2810]: http://tools.ietf.org/html/rfc2810
   [rfc2811]: http://tools.ietf.org/html/rfc2811
@@ -18,59 +30,73 @@ Later updated by [RFC 2810][rfc2810], [RFC 2811][rfc2811], [RFC 2812][rfc2812], 
   [ts6]: https://github.com/grawity/irc-docs/blob/master/server/ts6.txt
   [ts6v7]: https://github.com/grawity/irc-docs/blob/master/server/ts6v7.txt
   [ts6v8]: https://github.com/grawity/irc-docs/blob/master/server/ts6v8.txt
-  [ts6-euid]: https://github.com/grawity/irc-docs/blob/master/server/ts6-euid.txt
+  [ts-encap]: http://www.leeh.co.uk/ircd/encap.txt
+  [ts-capab]: https://github.com/grawity/irc-docs/blob/master/server/capab.txt
   [ts6-save]: https://github.com/grawity/irc-docs/blob/master/server/ts-collision-fnc.txt
-  [ts6-capab]: https://github.com/grawity/irc-docs/blob/master/server/capab.txt
+  [ts6-euid]: https://github.com/grawity/irc-docs/blob/master/server/ts6-euid.txt
   [p10]: http://web.mit.edu/klmitch/Sipb/devel/src/ircu2.10.11/doc/p10.html
-  [isupport-draft]: http://www.irc.org/tech_docs/draft-brocklesby-irc-isupport-03.txt
+  [ircv3]: http://ircv3.atheme.org/
 
-Client-server protocol:
+## CTCP and DCC
 
- * [Jilles' IRC protocol documentation](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/)
- * [IRC v3 Working Group][v3]
-
-Server-server protocol:
-
- * Hybrid → Charybdis: [TS3][ts3], [TS5][ts5], [TS6][ts6], [TS6 v7][ts6v7], [TS6 v8][ts6v8]
-     * [EUID][ts6-euid], [SAVE][ts6-save], other [CAPABs][ts6-capab]
- * ircu: [P10][p10]
-
-## CTCP messages and DCC
-
-Client-To-Client Protocol (CTCP) messages are carried over standard PRIVMSGs and NOTICEs. The [original specification][ctcp] allows for quoting special characters, sending "extended data" and commands.
+**Client-To-Client Protocol** (CTCP) messages are carried over standard PRIVMSGs and NOTICEs. The [original specification][ctcp] allows for quoting special characters, sending "extended data" and commands.
 
 However, most clients do not implement the quoting, and only recognize messages consisting entirely of a single "extended data" command.
 
- * [DCC protocol][dcc-ircii] as implemented by IRCII
-
  * [Later CTCP draft][ctcp-1997] (no known implementations)
+ * [CTCP/2][ctcp2] (no known implementations)
+
+IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC" refers specifically to the file transfer part.
+
+ * [DCC protocol][dcc-ircii] as implemented by IRCII
+ * [Turbo DCC][dcc-turbo] (entire file as bytestream)
+ * [Reverse DCC][dcc-reverse] (receiver listens for connection)
+ * FSERV (opens a chat session with FTP-like commands)
+ * [XDCC][dcc-xdcc] 
 
  [ctcp]: http://www.irchelp.org/irchelp/rfc/ctcpspec.html
- [dcc-ircii]: http://www.irchelp.org/irchelp/rfc/dccspec.html
  [ctcp-1997]: http://web.archive.org/web/20100209042300/http://www.invlogic.com/irc/ctcp.html
+ [ctcp2]: http://web.archive.org/web/20080723170128/http://www.invlogic.com/irc/ctcp2_intro.html
+ [dcc-ircii]: http://www.irchelp.org/irchelp/rfc/dccspec.html
+ [dcc-turbo]: http://www.visualirc.net/tech-tdcc.php
+ [dcc-reverse]: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/DCC_REVERSE?rev=1.4
+ [dcc-xdcc]: http://xa.bi/files/irc/xdcc.3.3.0b.irc
 
-## RPL_ISUPPORT (current; all ircds)
+## Capability negotiation
 
-Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) Many extensions in ISUPPORT deal with core IRC features; for example, supported channel types (e.g. `CHANTYPES=#&`) or the longest permitted nickname (`NICKLEN`).
+ * The 005 numeric, aka `RPL_ISUPPORT`
+ * IRCv3 `CAP`
+ * Dancer/Hyperion `CAPAB`
+ * `PROTOCTL`
+ * Microsoft IRCX
 
-Implemented by almost all ircds. [Draft specification][isupport-draft] exists.
+## `RPL_ISUPPORT`
+
+Implemented by almost all servers. Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) Many extensions in ISUPPORT deal with core IRC features; for example, supported channel types (e.g. `CHANTYPES=#&`) or the longest permitted nickname (`NICKLEN`).
+
+Draft specifications:
+
+ * [E. Brocklesby, 2004][isupport-eb-2004]
+ * [Lee Hardy, 2005][isupport-leeh-2005]
 
 Known extensions:
 
+ * [List of common extensions][isupport-list]
  * [`CALLERID`][callerid]
  * [`MONITOR`][monitor] and [`WATCH`][watch]
  * [`WHOX`][whox]
- * [List of other extensions](http://www.irc.org/tech_docs/005.html)
 
-  [v3]: http://ircv3.atheme.org/
+  [isupport-eb-2004]: http://tools.ietf.org/html/draft-brocklesby-irc-isupport-03
+  [isupport-leeh-2005]: http://tools.ietf.org/html/draft-hardy-irc-isupport-00
+  [isupport-list]: http://www.irc.org/tech_docs/005.html
   [callerid]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/modeg.txt
   [monitor]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/monitor.txt
   [watch]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/draft-meglio-irc-watch-00.txt
   [whox]: http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who
 
-## IRCv3 – CAP (current; many ircds)
+## IRCv3
 
-[Capability negotiation][v3-cap] using `CAP` is part of [IRCv3][v3]
+The **IRCv3 Working Group** defines a standard set of extensions to IRCv2. The central part of IRCv3 is [capability negotiation][v3-cap] using `CAP`, which is implemented by all current servers.
 
 Known extensions:
 
