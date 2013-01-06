@@ -4,7 +4,7 @@
 <head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="robots" content="index,follow" />
-    <meta name="creator" content="rfcmarkup version 1.99" />
+    <meta name="creator" content="rfcmarkup version 1.102" />
     <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
 <meta name="DC.Identifier" content="urn:ietf:id:baudis-irc-capab" />
 <meta name="DC.Creator" content="Baudis, Petr" />
@@ -305,7 +305,7 @@ Table of Contents
    reduce bandwidth usage, client side connections still make up the
    bulk of bandwidth usage.
 
-   Due to the expanded format of original <a href="./rfc1459">RFC 1459</a> [<a href="#ref-1" title='"Internet Relay Chat Protocol"'>1</a>], there is a
+   Due to the expanded format of original <a href="./rfc1459">RFC 1459</a> [<a href="#ref-1" title="&quot;Internet Relay Chat Protocol&quot;">1</a>], there is a
    substantially large number of ways to address this problem without
    rewriting the protocol entirely.
 
@@ -321,7 +321,7 @@ Table of Contents
 <span class="grey">Internet-Draft    IRC client capabilities negotiation      November 2002</span>
 
 
-   could violate the original IRC specification (<a href="./rfc1459">RFC 1459</a> [<a href="#ref-1" title='"Internet Relay Chat Protocol"'>1</a>]) and
+   could violate the original IRC specification (<a href="./rfc1459">RFC 1459</a> [<a href="#ref-1" title="&quot;Internet Relay Chat Protocol&quot;">1</a>]) and
    introduce some incompatibilities to the client-server communication,
    resulting in problems with some clients.  Using this specification,
    client could select only those of these changes which it could
@@ -394,7 +394,7 @@ Table of Contents
 <span class="h3"><a class="selflink" name="section-2.1" href="#section-2.1">2.1</a> Handshake message</span>
 
    The special handshake is started by the HANDSHAKE command.  The ABNF
-   [<a href="#ref-2" title='"ABNF for Syntax Specifications"'>2</a>] representation for this message is:
+   [<a href="#ref-2" title="&quot;ABNF for Syntax Specifications&quot;">2</a>] representation for this message is:
 
    message   =  "HANDSHAKE" CRLF
 
@@ -411,7 +411,7 @@ Table of Contents
 
    This command is used by client to indicate that it considers its part
    of the handshake done and expects 001 numeric from the server.  The
-   ABNF [<a href="#ref-2" title='"ABNF for Syntax Specifications"'>2</a>] representation for this message is:
+   ABNF [<a href="#ref-2" title="&quot;ABNF for Syntax Specifications&quot;">2</a>] representation for this message is:
 
    message   =  "REGISTER" &lt;CRLF&gt;
 
@@ -503,7 +503,7 @@ Table of Contents
 <span class="h3"><a class="selflink" name="section-3.1" href="#section-3.1">3.1</a> Capab message</span>
 
    Capabilities negotiation happens through the CAP (short for
-   CAPabilities) command.  The ABNF [<a href="#ref-2" title='"ABNF for Syntax Specifications"'>2</a>] representation for this message
+   CAPabilities) command.  The ABNF [<a href="#ref-2" title="&quot;ABNF for Syntax Specifications&quot;">2</a>] representation for this message
    is:
 
    message =  "CAP" 1*SP type [ 1*SP ":" token ] CRLF
@@ -989,10 +989,9 @@ Acknowledgement
 
 
 Baudis &amp; Wiebe            Expires May 5, 2003                  [Page 15]
-</pre><!--NewPage--><pre class='newpage'>
 
 </pre><br />
-<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.99, available from
+<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.102, available from
 <a href="http://tools.ietf.org/tools/rfcmarkup/">http://tools.ietf.org/tools/rfcmarkup/</a>
 </small></small></span>
 </body></html>

@@ -1,0 +1,173 @@
+Client Capab Proposal (v5)
+Authors: fl and Beeth
+--------------------------
+
+
+This document aims to define a protocol for capabilities between a server
+and a client.  These capabs help servers introduce changes to the protocol
+that could cause problems with clients that do not support the changes.
+
+This specification defines the "CAP" command, and the available subcommands.
+This is sent in the form:
+	CAP [subcommand [parameters]]
+
+CAP
+---
+
+A client that supports this specification must send one of three things at
+the earliest stage of registration.  To enter capab negotiation it can either 
+send the command "CAP" without parameters to request a list of capabs, or it
+can send the subcommand "REQ" to request capabs without first seeing the
+list of available capabs.  A client which does not wish to enter capab
+negotiation but supports this spec must send the subcommand "END" to notify
+support of the specification.
+
+The "CAP" command may be used at any time during the connection to request a
+list of capabs.  If the user enters capab negotiation the server must
+postpone registration until the client issues the subcommand "END".
+
+A server receiving the parameterless "CAP" command from a client must reply
+to this command with a list of capabs supported by the server using the "LS"
+and "LSL" subcommands.  The "LS" subcommand is used when the capab list must
+be spread across multiple lines and is used for all except the last line.
+The subcommand "LSL" is used to finish the list of capabs.
+
+The subcommands "LS" and "LSL" are sent in the form:
+	CAP <subcommand> :<capab> [capab]*
+
+CAP: REQ
+--------
+
+The "REQ" subcommand is used by a client to give a list of capabs it
+wishes to use.
+
+The subcommand "REQ" is sent in the form:
+	CAP REQ :<capab> [capab]*
+
+If any of the requested capabs are prefixed with '-' then the client is
+notifying the server that it wishes the specified capab to be disabled for
+the client.
+
+The responsibility is placed on the client to request a valid list of capabs.
+The server must either accept the request as issued or reject it.  A server
+must not partially accept parameters of the subcommand "REQ".
+
+CAP: ACK
+--------
+
+The "ACK" subcommand is used by a server to acknowledge that the
+given capabilities are now being used.  The "ACK" subcommand is used by a
+client to acknowledge the given capabilities are now being used.
+
+The server places the capabilities it is acknowledging as parameters.  The
+parameters of the subcommand "ACK" will be identical to the parameters issued
+in the subcommand "REQ" from the client if the request is valid.  If any of 
+the requested capabs modify the protocol stream, after sending the subcommand 
+"ACK" the server must then transmit any following messages in the modified 
+protocol stream form.
+
+The client must issue the subcommand "ACK" for any capabilities that modify
+the protocol stream, using the capabs that modify the protocol stream as the
+subcommand "ACK" parameters.  A client must know which capabs modify the
+protocol stream and send the subcommand "ACK" before transmitting any
+messages in the modified protocol stream.  A client must not issue the
+subcommand "ACK" for a capab without first receiving the subcommand "ACK"
+containing that capab from the server.  
+
+A client must not issue the subcommand "ACK" for capabs that do not modify 
+the protocol stream.
+
+The subcommand "ACK" is sent in the following form:
+	CAP ACK :<capab> [capab]*
+
+CAP: NAK
+--------
+
+The "NAK" subcommand is used by a server to notify a client that the
+requested list of capabs are invalid.
+
+A client receiving the subcommand "NAK" must request again the capabs it
+wishes to use.  The parameters of the subcommand "NAK" will be identical 
+to the parameters issued in the subcommand "REQ" from the client if the
+request is invalid.
+
+The subcommand "NAK" is sent in the following form:
+	CAP NAK :<capab> [capab]*
+
+CAP: CLEAR
+----------
+
+The "CLEAR" subcommand is used by a server to notify a client that all
+capabs have been cleared.  The "CLEAR" subcommand is used by a client to
+request that a server clears its current capab list.
+
+A server receiving the subcommand "CLEAR" must issue back the subcommand
+"CLEAR" using the current protocol stream.  It must then clear the stored 
+list of capabs and revert to receiving/sending a 'normal' protocol stream 
+from/to the client.
+
+A client receiving the subcommand "CLEAR" must then revert to expecting to
+receive a 'normal' protocol stream.
+
+The subcommand "CLEAR" is sent in the form:
+	CAP CLEAR
+
+CAP: END
+--------
+
+The "END" subcommand is used by a client to notify the server it has
+finished capab negotiation and the server can proceed with registration.
+
+The subcommand "END" is sent in the form:
+	CAP END
+
+
+Examples
+--------
+
+CLIENT: indicates what client sends
+SERVER: indicates what server sends
+
+This example shows a client which doesnt support this specification:
+
+CLIENT: NICK FOO
+CLIENT: USER FOO FOO FOO FOO
+SERVER: :SERVERNAME 001 ...
+
+This example shows a client supporting this specification but not
+wishing to use capabs for the connection:
+
+CLIENT: CAP END
+CLIENT: PASS FOO
+CLIENT: NICK FOO
+CLIENT: USER FOO FOO FOO FOO
+SERVER: :SERVERNAME 001 ....
+
+This example shows a client requesting a list of capabs then successfully
+requesting the capabs.
+
+CLIENT: CAP
+CLIENT: NICK FOO
+CLIENT: USER FOO FOO FOO FOO
+SERVER: CAP LS :A B C D E F G H
+SERVER: CAP LSL :I J
+CLIENT: CAP REQ :A B C D E F
+SERVER: CAP ACK :A B C D E F
+CLIENT: CAP END
+SERVER: :SERVERNAME 001 ...
+
+This example shows a client requesting an invalid list of capabs.
+
+CLIENT: CAP
+CLIENT: NICK FOO
+CLIENT: USER FOO FOO FOO FOO
+SERVER: CAP LSL :A B C D E F G H
+CLIENT: CAP REQ :A B
+SERVER: CAP NAK :A B
+CLIENT: CAP REQ :A
+SERVER: CAP ACK :A
+CLIENT: CAP REQ :C
+SERVER: CAP ACK :C
+CLIENT: CAP END
+SERVER: :SERVERNAME 001 ...
+
