@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+   <title>Visual IRC 2 - DCC Whiteboard Specification</title>
+</head>
+<body>
+<div align=center><table width="95%" bgcolor="#CCCCCC" >
+  <tr>
+    <td width=150><a href="http://www.hansprestige.com/">
+    <img src="/hanslogo2.gif" width=150 height=60 alt="Hans Prestige" border=0></a></td>
+    <td><font size="+2">DCC Whiteboard Specification</font>
+    <div style="float:right">
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-3335742208683618";
+        google_ad_width = 468;
+        google_ad_height = 60;
+        google_ad_format = "468x60_as";
+        google_color_link = "000000";
+        google_color_url = "666666";
+        google_color_text = "333333";
+        google_color_border = "CCCCCC";
+        google_color_bg = "FFFFFF";
+        //--></script>
+        <script type="text/javascript"
+          src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
+    </td>
+  </tr>
+  <tr>
+    <td width=150 bgcolor="#FFFFFF" valign=top><font face="Verdana" size="-3">
+    <a href="http://www.visualirc.net/">Visual IRC</a><br>
+    <b>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/features.php">Features &amp; Screenshots</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/download.php">Download ViRC!</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/scripts/">Scripts</a><br>
+    <br>
+    &nbsp; &nbsp;<a href="http://groups.google.com/group/virc">Visual IRC Forum</a><br>
+    &nbsp; &nbsp;<a href="irc://us.undernet.org/virc">Chat in Undernet #ViRC</a><br>
+    </b>
+    <br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/awards.php">Awards and Reviews</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/author.php">About the Author</a><br>
+    &nbsp; &nbsp;<a href="http://www.visualirc.net/tech.php">About the Technology</a>
+    <hr width="100%" size=1 noshade>
+    <a href="http://www.visualirc.net/old/">ViRC Antique Shop</a><br>
+    <hr width="100%" size=1 noshade>
+    <center>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="jmcgrew@hansprestige.com">
+    <input type="hidden" name="item_name" value="Visual IRC development">
+    <input type="hidden" name="no_shipping" value="1">
+    <input type="hidden" name="return" value="http://www.hansprestige.com/">
+    <input type="hidden" name="cancel_return" value="http://www.hansprestige.com/">
+    <input type="image" src="http://images.paypal.com/images/x-click-butcc-donate.gif" style="border: none" name="submit" alt="Support ViRC development with a secure PayPal donation">
+    </form>
+    <!--BUY.COM WISHLIST?
+    <br style="clear: both">
+    or
+    <a href="http://www.buy.com/retail/giftcenter/mywishlist.asp?email=%6A%6D%63%67%72%65%77%40%68%61%6E%73%70%72%65%73%74%69%67%65%2E%63%6F%6D">
+    see the buy.com wish list</a>
+    -->
+    </center>
+    </font></td>
+    
+    <td bgcolor="#FFFFFF">
+  
+<h2>CTCP Handshake</h2>
+
+<blockquote>
+<tt>DCC CHAT wboard <i>encoded-ip</i> <i>port</i></tt>
+</blockquote>
+
+<ul>
+<li><b>encoded-ip</b> - The sender's IPv4 address, expressed as a single
+number. The number is obtained by interpreting the 32-bit IP address as an
+unsigned integer in network byte order (most significant byte first).
+<li><b>port</b> - The port on which the sender is listening for a DCC
+Whiteboard connection.
+</ul>
+
+<h2>Overview</h2>
+
+<p>DCC Whiteboard sessions are line-based, similar to DCC Chat. Each line is
+terminated by LF or CRLF. Lines that begin with any character other than
+ASCII 001 (^A) are <em>chat messages</em> to be sent to the user's DCC
+console. Lines that begin with ^A are <em>whiteboard commands</em> to be
+processed by the client.</p>
+
+<p>A session typically starts with <em>option negotiation</em>, where the two
+clients exchange commands to agree on a set of features they may use during
+the session. Only features that are supported by both clients may be
+used.</p>
+
+<h2>Chat Messages</h2>
+
+<p>Any line that does not start with ASCII 001 (^A) is a chat message. Chat
+messages allow users to talk to each other, as in DCC Chat. They may contain
+IRC formatting codes.</p>
+
+<h2>Whiteboard Commands</h2>
+
+<p>Each command is on its own line, introduced by ASCII 001 (^A) and
+optionally terminated by another ^A. Commands that accept parameters are
+separated from the parameter list with a single space, and the parameters
+themselves are separated by single commas.</p>
+
+<ul>
+<li><a href="#BLT">BLT</a>
+<li><a href="#CAN">CAN</a>
+<li><a href="#CANT">CANT</a>
+<li><a href="#CLIP">CLIP</a> (not implemented in ViRC 2.0)
+<li><a href="#CLS">CLS</a>
+<li><a href="#DO">DO</a>
+<li><a href="#DONT">DONT</a>
+<li><a href="#DR">DR</a>
+<li><a href="#ENTRY">ENTRY</a> (not implemented in ViRC 2.0)
+<li><a href="#IMG">IMG</a> (not implemented in ViRC 2.0)
+<li><a href="#IMGDATA">IMGDATA</a> (not implemented in ViRC 2.0)
+<li><a href="#MAKEIMG">MAKEIMG</a> (not implemented in ViRC 2.0)
+<li><a href="#NOCLIP">NOCLIP</a> (not implemented in ViRC 2.0)
+<li><a href="#SETSTAMP">SETSTAMP</a> (not implemented in ViRC 2.0)
+<li><a href="#SETTOOL">SETTOOL</a> (not implemented in ViRC 2.0)
+<li><a href="#STAMP">STAMP</a> (not implemented in ViRC 2.0)
+<li><a href="#TXT">TXT</a>
+<li><a href="#TXTEX">TXTEX</a>
+</ul>
+
+<h3><a name="BLT">BLT</a></h3>
+
+<p><tt>BLT <var>x1src</var>,<var>y1src</var>,<var>x2src</var>,<var>y2src</var>,<var>xdest</var>,<var>ydest</var></tt></p>
+
+<p>Copies a rectangular region from one area of the canvas to another.
+<var>x2src</var> must be greater than <var>x1src</var>, and <var>y2src</var>
+must be greater than <var>y1src</var>; the column <var>x2src</var> and the
+row <var>y2src</var> are not included in the region.</p>
+
+<h3><a name="CAN">CAN</a></h3>
+
+<p><tt>CAN <var>option</var></tt></p>
+
+<p>Indicates that the sender supports the named option. If the recipient
+also supports the option, it should respond with a DO command and begin
+using the indicated feature; otherwise, the recipient should respond with a
+DONT command.</p>
+
+<h3><a name="CANT">CANT</a></h3>
+
+<p><tt>CANT <var>option</var></tt></p>
+
+<p>Indicates that the sender does not support the named option. The
+recipient must not use the corresponding features, and must not respond to
+this command with a DO or DONT.</p>
+
+<h3><a name="CLIP">CLIP</a></h3>
+
+<p><tt>CLIP <var>x1</var>,<var>y1</var>,<var>x2</var>,<var>y2</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) Sets the canvas's clipping region to the
+specified rectangle. <var>x2</var> must be greater than <var>x1</var> and
+<var>y2</var> must be greater than <var>y1</var>; the column <var>x2</var>
+and the row <var>y2</var> are not included in the region.</p>
+
+<p>Once a CLIP command is received, the recipient should not allow the user
+to start or end any drawing command outside the clipping region, until it
+receives a NOCLIP command.</p>
+
+<h3><a name="CLS">CLS</a></h3>
+
+<p><tt>CLS</tt></p>
+
+<p>Clears the canvas to all white.</p>
+
+<h3><a name="DO">DO</a></h3>
+
+<p><tt>DO <var>option</var></tt></p>
+
+<p>Indicates that the sender supports the named option, and wants the recipient
+to use it. If the recipient also supports the option, it should respond with a
+CAN command (unless it has already sent a CAN for this option) and begin using
+the indicated feature; otherwise, the recipient should respond with a CANT
+command.</p>
+
+<h3><a name="DONT">DONT</a></h3>
+
+<p><tt>DONT <var>option</var></tt></p>
+
+<p>Indicates that the sender does not support the named option, and does not
+want the recipient to use it. The recipient must not use the corresponding
+features, and must not respond to this command with a CAN or CANT.</p>
+
+<h3><a name="DR">DR</a></h3>
+
+<p><tt>DR <var>tooltype</var>,<var>width</var>,<var>pencolor</var>,<var>brushcolor</var>,<var>x1</var>,<var>y1</var>,<var>x2</var>,<var>y2</var></tt></p>
+
+<p>Draws with the specified tool. The exact behavior of this command depends
+on <var>tooltype</var> (see below). Not all parameters are used with all
+tool types; when sending a DR command, the unused parameters should be 0.</p>
+
+<p><var>pencolor</var> and <var>brushcolor</var> are given as decimal integers
+representing an RGB color, where the low byte is R, second lowest byte is G,
+and third lowest byte is B. For example, the color orange (100% red, 50%
+green, 0% blue) can be converted to hex as $007FFF, and then converted to
+decimal and sent as "32767".</p>
+
+<p>Tool types and their behaviors:</p>
+<ul>
+<li>0 (pencil), 1 (line): Draws a straight line between (<var>x1,y1</var>)
+and (<var>x2,y2</var>) using the pen color. <var>width</var> is the width of
+the line in pixels. The only difference between pencil and line is on the
+sending side: when the user is drawing with a pencil, his client should send a
+DR command for each mouse movement; when he's drawing with a line, the DR
+command should only be sent once he has chosen the line's start and end
+points.
+<li>3 (rectangle): Draws the outline of a rectangle with the top left corner
+at (<var>x1,y1</var>) and the bottom right corner at (<var>x2</var>-1,
+<var>y2</var>-1), using the pen color. <var>width</var> is the width of the
+outline in pixels. The interior of the rectangle is not
+changed. The column <var>x2</var> and the row <var>y2</var> are not included
+in the rectangle.
+<li>4 (ellipse): Same as 3 (rectangle), except instead of drawing the outline
+of the rectangle, an ellipse is inscribed inside the rectangle and drawn
+using the pen color.
+<li>5 (filled rectangle) and 6 (filled ellipse): Same as 3 and 4,
+respectively, except that the interior of the rectangle or ellipse is filled
+with the brush color.
+<li>8 (eraser): Same as 0 (pencil), except the line is drawn in white instead
+of the pen color.
+<li>9 (flood fill): Uses a flood fill algorithm to change the pixel at
+(<var>x1,y1</var>), and any other connected pixels of the same color, to the
+pen color. <var>x2</var> and <var>y2</var> are ignored.
+<li>10 (arrow): Same as 1 (line), except the line also has an arrow head at
+the (<var>x2,y2</var>) end.
+</ul>
+
+<h3><a name="ENTRY">ENTRY</a></h3>
+
+<p><tt>ENTRY <var>x</var>,<var>y</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) Prompts the user to enter text at the
+location (<var>x,y</var>), as if he had clicked there with the text tool
+selected.</p>
+
+<h3><a name="IMG">IMG</a></h3>
+
+<p><tt>IMG <var>???</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) To be discussed. IMG and IMGDATA will work
+together to transfer small bitmap images over the DCC Whiteboard connection,
+so that they can be placed with the STAMP command.</p>
+
+<h3><a name="IMGDATA">IMGDATA</a></h3>
+
+<p><tt>IMGDATA <var>???</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) To be discussed. See IMG above.</p>
+
+<h3><a name="MAKEIMG">MAKEIMG</a></h3>
+
+<p><tt>MAKEIMG <var>name</var>,<var>x1</var>,<var>y1</var>,<var>x2</var>,<var>y2</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) Copies a rectangular region from the canvas,
+specified by the corners (<var>x1,y1</var>) and (<var>x2</var>-1,<var>y2</var>-1),
+and saves it with the specified name for use with the STAMP command.</p>
+
+<h3><a name="NOCLIP">NOCLIP</a></h3>
+
+<p><tt>NOCLIP</tt></p>
+
+<p>(Not implemented in ViRC 2.0.) Cancels a previous CLIP command, allowing
+the user to draw anywhere on the canvas.</p>
+
+<h3><a name="SETSTAMP">SETSTAMP</a></h3>
+
+<p><tt>SETSTAMP <var>name</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) Selects the rubber stamp tool and the
+stamp image identified by <var>name</var>, which has previously been created
+with IMG or MAKEIMG. This is intended for automated whiteboard systems or
+games, which may want to force a user to use a specific tool at a certain time,
+and it should be used sparingly.</p>
+
+<h3><a name="SETTOOL">SETTOOL</a></h3>
+
+<p><tt>SETTOOL <var>tooltype</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) Selects the tool identified by
+<var>tooltype</var>, which must be one of the tool types that can be used with
+the DR command. This is intended for automated whiteboard systems or games,
+which may want to force a user to use a specific tool at a certain time, and
+it should be used sparingly.</p>
+
+<h3><a name="STAMP">STAMP</a></h3>
+
+<p><tt>STAMP <var>tooltype</var>,<var>x</var>,<var>y</var>,<var>name</var></tt></p>
+
+<p>(Not implemented in ViRC 2.0.) Draws the stamp image identified by
+<var>name</var>, centered at the location (<var>x,y</var>). <var>tooltype</var>
+is reserved for future use and should be left as 0.</p>
+
+<h3><a name="TXT">TXT</a></h3>
+
+<p><tt>TXT <var>x</var>,<var>y</var>,<var>text</var></tt></p>
+
+<p>Writes <var>text</var> with its upper left corner at (<var>x,y</var>). The
+font, text color, and background color are unspecified and should be set to
+defaults chosen by the client. (ViRC 2.0 uses Tahoma 8 point, in the system
+default window text color, on a white background.)</p>
+
+<h3><a name="TXTEX">TXTEX</a></h3>
+
+<p><tt>TXTEX <var>x</var>,<var>y</var>,<var>fontname</var>,<var>ptsize</var>,<var>style</var>,<var>textcolor</var>,<var>bgcolor</var>,<var>text</var></tt></p>
+
+<p>Writes <var>text</var> with its upper left corner at (<var>x,y</var>),
+using the specified font and style information. <var>ptsize</var> is the
+text size in points. <var>textcolor</var> and <var>bgcolor</var> are given as
+decimal integers, as in the DR command. <var>style</var> is a decimal integer
+formed by adding the constants for the desired text style: 1 for bold, 2 for
+italic, 4 for underline, and 8 for strikeout.</p>
+
+<h2>Option Negotiation</h2>
+
+<p>There is one option defined at the time of this writing: <tt>use-wb2</tt>.
+If this option is not enabled, only the <a href="#CLS">CLS</a>,
+<a href="#DR">DR</a>, and <a href="#TXT">TXT</a> commands may be used. Also,
+the DR command may only be used with tools 0 through 6. All clients that
+implement this specification should support the <tt>use-wb2</tt> option.</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2 align=left><font size="-3">&copy; Jesse McGrew 2001-2007</font></td>
+  </tr>
+</table></div>
+</body>
+</html>
+  
