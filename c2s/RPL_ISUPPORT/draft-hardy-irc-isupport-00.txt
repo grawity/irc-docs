@@ -1,0 +1,1612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="creator" content="rfcmarkup version 1.102" />
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Identifier" content="urn:ietf:id:hardy-irc-isupport" />
+<meta name="DC.Creator" content="Lee Hardy &lt;lee@leeh.co.uk&gt;" />
+<meta name="DC.Date.Issued" content="2005-02-10" />
+<meta name="DC.Title" content="IRC RPL_ISUPPORT Numeric Definition" />
+
+    <link rel="icon" href="/images/id.png" type="image/png" />
+    <link rel="shortcut icon" href="/images/id.png" type="image/png" />
+    <title>draft-hardy-irc-isupport-00 - IRC RPL_ISUPPORT Numeric Definition</title>
+    
+    
+    <style type="text/css">
+	body {
+	    margin: 0px 8px;
+            font-size: 1em;
+	}
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style>
+    <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]-->
+
+    <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>          <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>            <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>    <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>     <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td><td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td><td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard:</td>   <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>         <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>         <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script>
+</head>
+<body onload="addHeaderTags()">
+   <div style="height: 13px;">
+      <div onmouseover="this.style.cursor='pointer';"
+         onclick="showElem('legend');"
+         onmouseout="hideElem('legend')"
+	 style="height: 6px; position: absolute;"
+         class="pre noprint docinfo bgred"
+         title="Click for colour legend." >                                                                        </div>
+      <div id="legend"
+           class="docinfo noprint pre legend"
+           style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; "
+           onmouseover="showElem('legend');"
+           onmouseout="hideElem('legend');">
+      </div>
+   </div>
+<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="http://tools.ietf.org/id/draft-hardy-irc-isupport-00.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/draft-hardy-irc-isupport-00.txt" title="PDF version of this document">pdf</a>] [<a href='https://datatracker.ietf.org/doc/draft-hardy-irc-isupport' title='IESG Datatracker information for this document'>Tracker</a>] [<a href="mailto:draft-hardy-irc-isupport@tools.ietf.org?subject=draft-hardy-irc-isupport%20" title="Send email to the document authors">Email</a>] [<a href="/idnits?url=http://tools.ietf.org/id/draft-hardy-irc-isupport-00.txt" title="Run an idnits check of this document">Nits</a>]                               </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<span class="pre noprint docinfo">Versions: <a href="./draft-hardy-irc-isupport-00">00</a>                                                            </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<pre>
+Network Working Group                                           L. Hardy
+Internet-Draft                                             E. Brocklesby
+Expires: July 2, 2005                                        ircd-ratbox
+                                                             K. Mitchell
+                                                    Undernet IRC Network
+                                                            January 2005
+
+
+                  <span class="h1">IRC RPL_ISUPPORT Numeric Definition</span>
+                      <span class="h1">draft-hardy-irc-isupport-00</span>
+
+Status of this Memo
+
+   This document is an Internet-Draft and is subject to all provisions
+   of <a href="./rfc3667#section-3">section&nbsp;3 of RFC 3667</a>.  By submitting this Internet-Draft, each
+   author represents that any applicable patent or other IPR claims of
+   which he or she is aware have been or will be disclosed, and any of
+   which he or she become aware will be disclosed, in accordance with
+   <a href="./rfc3668">RFC 3668</a>.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as
+   Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at
+   <a href="http://www.ietf.org/ietf/1id-abstracts.txt">http://www.ietf.org/ietf/1id-abstracts.txt</a>.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   <a href="http://www.ietf.org/shadow.html">http://www.ietf.org/shadow.html</a>.
+
+   This Internet-Draft will expire on July 2, 2005.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2005).
+
+Abstract
+
+   IRC (Internet Relay Chat) is a long-standing protocol for real-time
+   chatting.  Servers often provide features that are backward
+   compatible with older clients, but do not provide a reliable method
+   for making clients aware of what extensions exist.  This memo
+   presents a method for servers to advertise such extensions to
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 1]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-2" id="page-2" href="#page-2" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   clients.
+
+Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in <a href="./rfc2119">RFC</a>
+   <a href="./rfc2119">2119</a> [<a href="#ref-1" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">1</a>].
+
+Table of Contents
+
+   <a href="#section-1">1</a>.   Introduction . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-4">4</a>
+
+   <a href="#section-2">2</a>.   Problems to be Solved  . . . . . . . . . . . . . . . . . . .   <a href="#page-5">5</a>
+
+   <a href="#section-3">3</a>.   The RPL_ISUPPORT numeric . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+
+   <a href="#section-4">4</a>.   Parameters . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+     <a href="#section-4.1">4.1</a>  CASEMAPPING  . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+     <a href="#section-4.2">4.2</a>  CHANLIMIT  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+     <a href="#section-4.3">4.3</a>  CHANMODES  . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-9">9</a>
+     <a href="#section-4.4">4.4</a>  CHANNELLEN . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-9">9</a>
+     <a href="#section-4.5">4.5</a>  CHANTYPES  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+     <a href="#section-4.6">4.6</a>  CNOTICE  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+     <a href="#section-4.7">4.7</a>  CPRIVMSG . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+     <a href="#section-4.8">4.8</a>  ELIST  . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-11">11</a>
+     <a href="#section-4.9">4.9</a>  EXCEPTS  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-11">11</a>
+     <a href="#section-4.10">4.10</a>   INVEX  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-12">12</a>
+     <a href="#section-4.11">4.11</a>   MAXLIST  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-12">12</a>
+     <a href="#section-4.12">4.12</a>   MODES  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-12">12</a>
+     <a href="#section-4.13">4.13</a>   NETWORK  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+     <a href="#section-4.14">4.14</a>   NICKLEN  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+     <a href="#section-4.15">4.15</a>   PREFIX . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+     <a href="#section-4.16">4.16</a>   SAFELIST . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-14">14</a>
+     <a href="#section-4.17">4.17</a>   SILENCE  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-14">14</a>
+     <a href="#section-4.18">4.18</a>   STATUSMSG  . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-14">14</a>
+     <a href="#section-4.19">4.19</a>   TARGMAX  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-15">15</a>
+     <a href="#section-4.20">4.20</a>   TOPICLEN . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-15">15</a>
+     <a href="#section-4.21">4.21</a>   WATCH  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-16">16</a>
+
+   <a href="#section-5">5</a>.   Differences to existing implementations  . . . . . . . . . .  <a href="#page-17">17</a>
+     <a href="#section-5.1">5.1</a>  Conflicts with <a href="./rfc2812">RFC2812</a> . . . . . . . . . . . . . . . . . .  <a href="#page-17">17</a>
+     <a href="#section-5.2">5.2</a>  Traditional EXCEPTS/INVEX usage  . . . . . . . . . . . . .  <a href="#page-17">17</a>
+     <a href="#section-5.3">5.3</a>  MAXBANS  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-17">17</a>
+     <a href="#section-5.4">5.4</a>  MAXCHANNELS  . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-17">17</a>
+     <a href="#section-5.5">5.5</a>  MAXTARGETS . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-17">17</a>
+     <a href="#section-5.6">5.6</a>  WALLCHOPS  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-18">18</a>
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 2]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-3" id="page-3" href="#page-3" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   <a href="#section-6">6</a>.   IANA Considerations  . . . . . . . . . . . . . . . . . . . .  <a href="#page-19">19</a>
+
+   <a href="#section-7">7</a>.   Security Considerations  . . . . . . . . . . . . . . . . . .  <a href="#page-20">20</a>
+
+   <a href="#section-8">8</a>.   Acknowledgments  . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-21">21</a>
+
+   <a href="#section-9">9</a>.   References . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-21">21</a>
+
+        Authors' Addresses . . . . . . . . . . . . . . . . . . . . .  <a href="#page-21">21</a>
+
+   <a href="#appendix-A">A</a>.   Examples . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-23">23</a>
+
+   <a href="#appendix-B">B</a>.   ABNF Description of Capabilities . . . . . . . . . . . . . .  <a href="#page-24">24</a>
+
+   <a href="#appendix-C">C</a>.   ChangeLog  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-25">25</a>
+
+        Intellectual Property and Copyright Statements . . . . . . .  <a href="#page-26">26</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 3]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-4" id="page-4" href="#page-4" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-1" href="#section-1">1</a>.  Introduction</span>
+
+   The IRC protocol, as originally documented by <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] and
+   updated by <a href="./rfc2812">RFC 2812</a> [<a href="#ref-3" title="&quot;Internet Relay Chat: Client Protocol&quot;">3</a>], is a simple, text-based conferencing
+   protocol, involving a number of users spread across a number of
+   interconnected servers.  These users may chat with other individual
+   users, or may chat with groups of users on "channels"--what other
+   chat systems refer to as "rooms" or "chat rooms".  These channels
+   have various "modes" which can alter the behaviour of the channel.
+
+   Over the years, various modifications to the basic IRC protocol have
+   been made by IRC server programmers.  These modifications may amongst
+   other things, introduce features available to users and remove some
+   features that were available to users.  Due to the wildly varying
+   nature between IRC servers of what features are supported and how the
+   protocol differs from <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] and <a href="./rfc2119">RFC 2119</a> [<a href="#ref-1" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">1</a>], it is
+   problematic for clients to determine just how a server differs from
+   these specifications.
+
+   A de facto standard emerged in the community, originally implemented
+   by the Undernet's IRC server software based on the 005 numeric from
+   DALnet's IRC server.  This standard allows the server to advertise to
+   the client upon connection which extensions to the protocol are
+   supported.  This reply, termed RPL_ISUPPORT, uses the non-standard
+   numeric 005.
+
+   Unfortunately, whilst the numeric itself has become a de-facto
+   standard, differences have emerged between the meaning of extensions
+   advertised.  This memo attempts to standardise the format of the
+   RPL_ISUPPORT numeric, as well as standardising the definition of
+   extensions given within this numeric.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 4]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-5" id="page-5" href="#page-5" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-2" href="#section-2">2</a>.  Problems to be Solved</span>
+
+   The IRC protocol is no longer standardised in many aspects.  This
+   means that various IRC daemons support features others do not, and
+   clients need a reliable method of determining which features a server
+   supports.  The de-facto standard that emerged to counter this has
+   itself suffered from a lack of standards.
+
+   The solution to these problems is to formally define a method for
+   servers to advertise to clients the features it supports, and to
+   formally define the features advertised.  The client may then rely on
+   this method for reliably determining what features a server supports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 5]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-6" id="page-6" href="#page-6" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-3" href="#section-3">3</a>.  The RPL_ISUPPORT numeric</span>
+
+   The extension for informing clients about available features is
+   implemented by the addition of one numeric, RPL_ISUPPORT, which
+   contains a list of features supported by the server.  Clients SHOULD
+   NOT assume a server supports a feature unless it has been advertised
+   in RPL_ISUPPORT.
+
+   In ABNF [<a href="#ref-4" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">4</a>] notation:
+
+          isupport     =  [ ":" servername SP ] "005" SP nick SP
+                          1*13( token SP ) ":are supported by this server"
+
+          token        = *1"-" parameter / parameter *1( "=" value )
+          parameter    = 1*20letter
+          value        = *letpun
+          letter       = ALPHA / DIGIT
+          punct        = %d33-47 / %d58-64 / %d91-96 / %d123-126
+          letpun       = letter / punct
+
+   where SP is as designated in <a href="./rfc2234#appendix-A">Appendix&nbsp;A of RFC 2234</a> [<a href="#ref-4" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">4</a>], and
+   servername and nick are as designated in <a href="./rfc1459#section-2.3.1">section&nbsp;2.3.1 of RFC 1459</a>
+   [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>].  As with other local numerics, when RPL_ISUPPORT is delivered
+   remotely, it MUST be converted into a "105" numeric before delivery
+   to the client.
+
+   A token is of the form "-PARAMETER", "PARAMETER" or
+   "PARAMETER=VALUE".  A server MAY send an empty value field and a
+   parameter MAY have a default value.  A server MUST send the parameter
+   in upper-case text.  Unless otherwise stated, when a parameter
+   contains a value, the value MUST be treated as being case sensitive.
+   The value MAY contain multiple fields, if this is the case the fields
+   MUST be delimited with a comma character (',').
+
+   Due to the increasingly modular nature of IRC server software, it is
+   possible that the status of features previously advertised to clients
+   in RPL_ISUPPORT can change.  When this happens, a server SHOULD
+   reissue the RPL_ISUPPORT numeric with the relevant parameters that
+   have changed.  If a feature becomes unavailable, the server MUST
+   prefix the parameter with the dash character ('-') when issuing the
+   updated RPL_ISUPPORT.
+
+   As <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] limits the maximum parameters of any reply to 15, the
+   maximum amount of extensions that may be advertised is 13.  To
+   counter this, a server MAY issue multiple RPL_ISUPPORT numerics.  A
+   server MUST issue the RPL_ISUPPORT numeric after client registration
+   has completed.  It MUST be issued after the RPL_WELCOME (XXX -
+   reference?) welcome and MUST be issued before any further commands
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 6]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-7" id="page-7" href="#page-7" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   from the client are processed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 7]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-8" id="page-8" href="#page-8" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-4" href="#section-4">4</a>.  Parameters</span>
+
+   Servers MAY send parameters that are not covered in this
+   specification.
+
+<span class="h3"><a class="selflink" name="section-4.1" href="#section-4.1">4.1</a>  CASEMAPPING</span>
+
+   CASEMAPPING=string
+
+   The CASEMAPPING parameter is used to indicate what method is used by
+   the server to compare equality of case-insensitive strings.  Possible
+   values are:
+   o  "ascii": The ASCII characters 97 to 122 (decimal) are defined as
+      the lower-case characters of ASCII 65 to 90 (decimal).  No other
+      character equivalency is defined.
+
+   o  "<a href="./rfc1459">rfc1459</a>": The ASCII characters 97 to 126 (decimal) are defined as
+      the lower-case characters of ASCII 65 to 94 (decimal).  No other
+      character equivalency is defined.
+
+   o  "strict-rfc1459": The ASCII characters 97 to 125 (decimal) are
+      defined as the lower-case characters of ASCII 65 to 93 (decimal).
+      no other character equivalency is defined.
+
+   The value MUST be specified.  Whilst <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] defines character
+   equivalency in terms of "strict-rfc1459" encoding, this is believed
+   to be a mistake as the majority of IRC server implementations treat
+   character equivalency in terms of "<a href="./rfc1459">rfc1459</a>" encoding with the tilde
+   character ('~') and caret character ('^') being equivalent.
+
+   An example CASEMAPPING token:
+   CASEMAPPING=<a href="./rfc1459">rfc1459</a>
+
+<span class="h3"><a class="selflink" name="section-4.2" href="#section-4.2">4.2</a>  CHANLIMIT</span>
+
+   CHANLIMIT=prefix:number[,prefix:number[,...]]
+
+   The CHANLIMIT parameter is used to indicate the maximum amount of
+   channels that a client may join.  The value is a series of
+   "prefix:number" pairs, where "prefix" refers to one or more prefix
+   characters defined in the PREFIX (<a href="#section-4.15">Section 4.15</a>) token, and "number"
+   indicates how many channels of the given type combined may be joined.
+   The number parameter MAY be omitted if no limit is placed on the
+   number of channels.
+
+   A client SHOULD NOT make any assumptions about how many channels
+   other clients may join based on the CHANLIMIT parameter.
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 8]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-9" id="page-9" href="#page-9" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   An example CHANLIMIT token:
+   CHANLIMIT=#+:25,&amp;:
+   Indicates that a client may join up to 25 channels with the prefix
+   '#' and '+', and an unlimited amount of channels with the '&amp;' prefix.
+
+<span class="h3"><a class="selflink" name="section-4.3" href="#section-4.3">4.3</a>  CHANMODES</span>
+
+   CHANMODES=A,B,C,D
+
+   The CHANMODES parameter is used to indicate the channel modes
+   available and the arguments they take.  There are four categories of
+   modes, defined as follows:
+   o  Type A: Modes that add or remove an address to or from a list.
+      These modes MUST always have a parameter when sent from the server
+      to a client.  A client MAY issue the mode without an argument to
+      obtain the current contents of the list.
+
+   o  Type B: Modes that change a setting on a channel.  These modes
+      MUST always have a parameter.
+
+   o  Type C: Modes that change a setting on a channel.  These modes
+      MUST have a parameter when being set, and MUST NOT have a
+      parameter when being unset.
+
+   o  Type D: Modes that change a setting on a channel.  These modes
+      MUST NOT have a parameter.
+
+   To allow for future extensions, a server MAY send additional types,
+   delimeted by the comma character (',').  The behaviour of any
+   additional types is undefined.
+
+   The IRC server MUST NOT list modes in the CHANMODES parameter that
+   are contained within the PREFIX (<a href="#section-4.15">Section 4.15</a>) parameter.  However,
+   for completeness, modes within the PREFIX (<a href="#section-4.15">Section 4.15</a>) parameter
+   may be treated as type B modes.
+
+   An example CHANMODES token:
+   CHANMODES=b,k,l,imnpst
+
+<span class="h3"><a class="selflink" name="section-4.4" href="#section-4.4">4.4</a>  CHANNELLEN</span>
+
+   CHANNELLEN=number
+
+   The CHANNELLEN parameter specifies the maximum length of a channel
+   name that a client may join.  A client elsewhere on the network MAY
+   join a channel with a name length of higher value.  The value MUST be
+   specified and MUST be numeric.
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                  [Page 9]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-10" id="page-10" href="#page-10" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   An example CHANNELLEN token:
+   CHANNELLEN=50
+   Limits the length of a channel name that a user may join to 50
+   characters.
+
+<span class="h3"><a class="selflink" name="section-4.5" href="#section-4.5">4.5</a>  CHANTYPES</span>
+
+   CHANTYPES=[string]
+
+   Special characters used as prefixes are reserved to differentiate
+   channels from other namespaces within the IRC protocol.  The
+   CHANTYPES parameter specifies these characters.
+
+   The value is OPTIONAL and when is not specified indicates that no
+   channel types are supported.
+
+   An example CHANTYPES token:
+   CHANTYPES=&amp;#
+   Denotes the ampersand ('&amp;') and hash ('#') characters as channel
+   prefixes.
+
+<span class="h3"><a class="selflink" name="section-4.6" href="#section-4.6">4.6</a>  CNOTICE</span>
+
+   CNOTICE
+
+   The CNOTICE parameter indicates that the server supports the
+   "CNOTICE" command.  An extension for the NOTICE command, as defined
+   in <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] <a href="#section-4.4.2">section 4.4.2</a>, it allows users with a specific status
+   in a channel to issue a NOTICE command to a user within that channel,
+   free of certain restrictions a server MAY apply to NOTICE.
+
+   The CNOTICE parameter MUST NOT be specified with a value.
+
+   An example CNOTICE token:
+   CNOTICE
+
+<span class="h3"><a class="selflink" name="section-4.7" href="#section-4.7">4.7</a>  CPRIVMSG</span>
+
+   CPRIVMSG
+
+   The CPRIVMSG parameter indicates that the server supports the
+   "CPRIVMSG" command.  An extension for the PRIVMSG command, as defined
+   in <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] <a href="#section-4.4.1">section 4.4.1</a>, it allows users with a specific status
+   in a channel to issue a PRIVMSG command to a user within that
+   channel, free of certain restrictions a server MAY apply to PRIVMSG.
+
+   The CPRIVMSG parameter MUST NOT be specified with a value.
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 10]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-11" id="page-11" href="#page-11" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   An example CPRIVMSG token:
+   CPRIVMSG
+
+<span class="h3"><a class="selflink" name="section-4.8" href="#section-4.8">4.8</a>  ELIST</span>
+
+   ELIST=string
+
+   The ELIST parameter indicates that the server supports search
+   extensions to the LIST command.  The value is required, and is a
+   non-delimited set of letters which each denote an extension.  The
+   following extensions, which a client MUST treat as being case
+   insensitive are defined:
+   o  C: Searching based on creation time, via the "C&lt;val" and "C&gt;val"
+      modifiers to search for a channel creation time that is lower or
+      higher than val respectively.
+
+   o  M: Searching based on mask.
+
+   o  N: Searching based on !mask.
+
+   o  P: To explain
+
+   o  T: Searching based on topic time, via the "T&lt;val" and "T&gt;val"
+      modifiers to search for a topic time that is lower or higher than
+      val respectively.
+
+   o  U: Searching based on user count within the channel, via the
+      "&lt;val" and "&gt;val" modifiers to search for a channel that has less
+      than or more than val users respectively.
+
+   An example ELIST token:
+   ELIST=CMNTU
+
+<span class="h3"><a class="selflink" name="section-4.9" href="#section-4.9">4.9</a>  EXCEPTS</span>
+
+   EXCEPTS[=letter]
+
+   The EXCEPTS parameter indicates that the server supports "ban
+   exceptions", as defined in <a href="./rfc2811">RFC 2811</a> [<a href="#ref-5" title="&quot;Internet Relay Chat: Channel Management&quot;">5</a>] <a href="#section-4.3.1">section 4.3.1</a>.  The value is
+   OPTIONAL and when is not specified indicates that that the letter 'e'
+   is used as the channel mode for ban exceptions.  When the value is
+   specified, it indicates the letter which is used for ban exceptions.
+
+   An example EXCEPTS token:
+   EXCEPTS
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 11]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-12" id="page-12" href="#page-12" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h3"><a class="selflink" name="section-4.10" href="#section-4.10">4.10</a>  INVEX</span>
+
+   INVEX[=letter]
+
+   The INVEX parameter indicates that the server supports "invite
+   exceptions", as defined in <a href="./rfc2811">RFC 2811</a> [<a href="#ref-5" title="&quot;Internet Relay Chat: Channel Management&quot;">5</a>] <a href="#section-4.3.2">section 4.3.2</a>.  The value is
+   OPTIONAL and when is not specified indicates that the letter 'I' is
+   used as the channel mode for invite exceptions.  When the value is
+   specified, it indicates the letter which is used for invite
+   exceptions.
+
+   An example INVEX token:
+   INVEX
+
+<span class="h3"><a class="selflink" name="section-4.11" href="#section-4.11">4.11</a>  MAXLIST</span>
+
+   MAXLIST=mode:number[,mode:number[,...]]
+
+   The MAXLIST parameter limits how many "variable" modes of type A that
+   have been defined in the CHANMODES (<a href="#section-4.3">Section 4.3</a>) token a client may
+   set in total on a channel.  The value MUST be specified and is a set
+   of "mode:number" pairs, where "mode" refers to a type A mode defined
+   in the CHANMODES (<a href="#section-4.3">Section 4.3</a>) token and "number" indicates how many
+   of the given modes combined a client may issue on a channel.
+
+   A client MUST NOT make any assumptions about how many of the given
+   modes may actually exist on the channel.  The limit applies only to
+   the client setting new modes of the given types.
+
+   Example MAXLIST tokens:
+   MAXLIST=beI:25
+   Indicates that a client may set up to a total of 25 of a combination
+   of "+b", "+e" and "+I" modes.
+   MAXLIST=b:25,eI:50
+   Indicates that a client may set up to a total of 25 "+b" modes and up
+   to a total of 50 of a combination of "+e" and "+I" modes.
+
+<span class="h3"><a class="selflink" name="section-4.12" href="#section-4.12">4.12</a>  MODES</span>
+
+   MODES=[number]
+
+   The MODES parameter limits how many "variable" modes may be set on a
+   channel by a single MODE command from a client.  A "variable" mode is
+   defined as being type A, B and C as defined for the CHANMODES
+   (<a href="#section-4.3">Section 4.3</a>) parameter, and the channel modes specified in the
+   PREFIX (<a href="#section-4.15">Section 4.15</a>) parameter.
+
+   A client SHOULD NOT issue more "variable" modes than this in a single
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 12]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-13" id="page-13" href="#page-13" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   MODE command.  A server MAY however issue more "variable" modes than
+   this value in a single MODE command.  The value is OPTIONAL and when
+   is not specified indicates that no limit is placed upon "variable"
+   modes.  The value, if specified, MUST be numeric.
+
+   An example MODES token:
+   MODES=3
+   Limits the number of "variable" modes from a client to the server to
+   3 per MODE command.
+
+<span class="h3"><a class="selflink" name="section-4.13" href="#section-4.13">4.13</a>  NETWORK</span>
+
+   NETWORK=string
+
+   The NETWORK parameter is for informational purposes only and defines
+   the name of the IRC network that the client is connected to.  The
+   value MUST be specified.  A client SHOULD NOT use the value to make
+   assumptions about supported features on the server.
+
+   An example NETWORK token:
+   NETWORK=EFnet
+   Indicates the client is connected to the EFnet IRC network.
+
+<span class="h3"><a class="selflink" name="section-4.14" href="#section-4.14">4.14</a>  NICKLEN</span>
+
+   NICKLEN=number
+
+   The NICKLEN parameter specifies the maximum length of a nickname that
+   a client can use.  A client elsewhere on the network MAY use a nick
+   length of higher value.  The value MUST be specified and MUST be
+   numeric.
+
+   An example NICKLEN token:
+   NICKLEN=9
+   Limits the length of a nickname to 9 characters
+
+<span class="h3"><a class="selflink" name="section-4.15" href="#section-4.15">4.15</a>  PREFIX</span>
+
+   PREFIX=[(modes)prefixes]
+
+   Within channels, clients can have various different statuses, denoted
+   by single character "prefixes".  The PREFIX parameter specifies these
+   prefixes and the channel mode character that it is mapped to.  There
+   is a one-to-one mapping between prefixes and channel modes.  The
+   prefixes are in descending order, from the prefix that gives the most
+   privileges to the prefix that gives the least.
+
+   The value is OPTIONAL and when it is not specified indicates that no
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 13]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-14" id="page-14" href="#page-14" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   prefixes are supported.
+
+   An example PREFIX token:
+   PREFIX=(ov)@+
+   Denotes the at character ('@') as mapping to the channel mode denoted
+   by the letter 'o', and the plus character ('+') as mapping to the
+   channel mode denoted by the letter 'v'.
+
+<span class="h3"><a class="selflink" name="section-4.16" href="#section-4.16">4.16</a>  SAFELIST</span>
+
+   SAFELIST
+
+   The SAFELIST parameter indicates that the client may request a "LIST"
+   command from the server, without being disconnected by the large
+   volume of data the LIST command generates.  The SAFELIST parameter
+   MUST NOT be specified with a value.
+
+   An example SAFELIST token:
+   SAFELIST
+
+<span class="h3"><a class="selflink" name="section-4.17" href="#section-4.17">4.17</a>  SILENCE</span>
+
+   SILENCE=number
+
+   The SILENCE parameter indicates the maximum number of entries a user
+   may have in their silence list.  The value is OPTIONAL and if it is
+   not specified indicates SILENCE support is not available.
+
+   Whilst a formal definition of the SILENCE command is outside the
+   scope of this document, it is generally a list of masks of equivalent
+   form to those defined as type A in the CHANMODES (<a href="#section-4.3">Section 4.3</a>)
+   parameter.  Any messages, as defined in <a href="./rfc2812">RFC 2812</a> [<a href="#ref-3" title="&quot;Internet Relay Chat: Client Protocol&quot;">3</a>] <a href="#section-3.3">section 3.3</a>,
+   that originate from another client matching the given mask, with a
+   destination of the client itself will be dropped by the server.
+
+   An example SILENCE token:
+   SILENCE=15
+   Indicates a client may have upto 15 masks in their silence list.
+
+<span class="h3"><a class="selflink" name="section-4.18" href="#section-4.18">4.18</a>  STATUSMSG</span>
+
+   STATUSMSG=string
+
+   The STATUSMSG parameter indicates that the server supports a method
+   for the client to send a message via the NOTICE command to those
+   people on a channel with the specified status.
+
+   The value MUST be specified and MUST be a non-delimited list of
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 14]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-15" id="page-15" href="#page-15" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   prefixes that have been defined in the PREFIX (<a href="#section-4.15">Section 4.15</a>)
+   parameter.  The server MUST NOT advertise a character in STATUSMSG
+   which is also present in CHANTYPES (<a href="#section-4.5">Section 4.5</a>).
+
+   An example STATUSMSG token:
+   STATUSMSG=@+
+   Presuming the hash character ('#') is defined within the CHANTYPES
+   (<a href="#section-4.5">Section 4.5</a>) parameter, allows the client to send a NOTICE command
+   to "@#channel" and "+#channel".
+
+<span class="h3"><a class="selflink" name="section-4.19" href="#section-4.19">4.19</a>  TARGMAX</span>
+
+   TARGMAX=[cmd:number,cmd:number,...]
+
+   Certain commands from a client MAY contain multiple targets,
+   delimited by a comma character (',').  The TARGMAX parameter defines
+   the maximum number of targets allowed for commands which accept
+   multiple targets.  The value is OPTIONAL and is a set of "cmd:number"
+   pairs, where "cmd" refers to a command the client MAY send to the
+   server, and "number" refers to the maximum targets for this command.
+   A client MUST treat the "cmd" field as case insensitive.
+
+   If the number is not specified for a particular command, then the
+   command does not have a limit on the number of targets.  The server
+   MUST specify all commands available to the user which support
+   multiple targets.
+
+   If the TARGMAX parameter is not advertised, or a value is not sent
+   then a client SHOULD assume that no commands except the "JOIN" and
+   "PART" commands accept multiple parameters.
+
+   An example TARGMAX token:
+   TARGMAX=PRIVMSG:3,WHOIS:1,JOIN:
+   Indicates that a client could issue 3 targets to a PRIVMSG command, 1
+   target to a WHOIS command and an unlimited amount of targets to a
+   JOIN command.
+
+<span class="h3"><a class="selflink" name="section-4.20" href="#section-4.20">4.20</a>  TOPICLEN</span>
+
+   TOPICLEN=number
+
+   The TOPICLEN parameter specifies the maximum length of a topic,
+   defined in <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] <a href="#section-4.2.4">section 4.2.4</a> that a client may set on a
+   channel.  A channel on the network MAY have a topic with a longer
+   length.  The value MUST be specified and MUST be numeric.
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 15]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-16" id="page-16" href="#page-16" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   An example TOPICLEN token:
+   TOPICLEN=120
+   Limits the length of a topic to 120 characters.
+
+<span class="h3"><a class="selflink" name="section-4.21" href="#section-4.21">4.21</a>  WATCH</span>
+
+   WATCH=number
+
+   The WATCH parameter indicates the maximum number of nicknames a user
+   may have in their watch list.  The value MUST be specified.
+
+   Whilst a formal definition of the WATCH command is outside the scope
+   of this document, it is generally used a method for clients to have
+   the server notify them when a given nickname joins or leaves the
+   network.  It is designed to replace repetitive use by clients of the
+   ISON command, as defined in <a href="./rfc1459">RFC 1459</a> [<a href="#ref-2" title="&quot;Internet Relay Chat Protocol&quot;">2</a>] <a href="#section-5.8">section 5.8</a>.
+
+   An example WATCH token:
+   WATCH=100
+   Indicates that a client may have upto 100 nicks in their watch list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 16]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-17" id="page-17" href="#page-17" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-5" href="#section-5">5</a>.  Differences to existing implementations</span>
+
+   A number of differences exist between this specification and existing
+   implementations in current IRC server software.
+
+<span class="h3"><a class="selflink" name="section-5.1" href="#section-5.1">5.1</a>  Conflicts with <a href="./rfc2812">RFC2812</a></span>
+
+   <a href="./rfc2812">RFC 2812</a> [<a href="#ref-3" title="&quot;Internet Relay Chat: Client Protocol&quot;">3</a>] <a href="#section-5.1">section 5.1</a>, defines a numeric reply "RPL_BOUNCE" with
+   the associated numeric "005".  This conflicts with the numeric
+   defined within this document for RPL_ISUPPORT.  As <a href="./rfc2812">RFC 2812</a> [<a href="#ref-3" title="&quot;Internet Relay Chat: Client Protocol&quot;">3</a>] is an
+   Informational RFC and 005 has been widely adopted as the de-facto
+   standard numeric for RPL_ISUPPORT, this is not seen as problematic.
+   Moreover, the only server implementation known to implement <a href="./rfc2812">RFC 2812</a>
+   [<a href="#ref-3" title="&quot;Internet Relay Chat: Client Protocol&quot;">3</a>] moved the RPL_BOUNCE numeric to 010 and adopted the RPL_ISUPPORT
+   numeric as 005.
+
+<span class="h3"><a class="selflink" name="section-5.2" href="#section-5.2">5.2</a>  Traditional EXCEPTS/INVEX usage</span>
+
+   The EXCEPTS (<a href="#section-4.9">Section 4.9</a>) and INVEX (<a href="#section-4.10">Section 4.10</a>) parameters
+   traditionally take no argument.  Whilst they indicate the presence of
+   these features on the server, they rely on these features using the
+   +e and +I channel modes respectively.  The argument value described
+   provides extra flexibility whilst retaining backwards compatibility.
+
+<span class="h3"><a class="selflink" name="section-5.3" href="#section-5.3">5.3</a>  MAXBANS</span>
+
+   The MAXBANS parameter was replaced by the MAXLIST (<a href="#section-4.11">Section 4.11</a>)
+   parameter.  MAXBANS was considered non-useful, because of its
+   ambiguous meaning; two of the largest IRC networks for example could
+   not agree whether "MAXBANS=n" was equivalent to "MAXLIST=beI:n" or
+   "MAXLIST=b:n,e:n,I:n".  MAXLIST is also considered considerably more
+   flexible and can more accurately define the servers behaviour.
+
+<span class="h3"><a class="selflink" name="section-5.4" href="#section-5.4">5.4</a>  MAXCHANNELS</span>
+
+   The MAXCHANNELS parameter was replaced by the CHANLIMIT (<a href="#section-4.2">Section 4.2</a>)
+   parameter.  Some IRC server implementations did not apply any limits
+   to server-local "&amp;" channels, the MAXCHANNELS parameter did not
+   reflect this and so the CHANLIMIT (<a href="#section-4.2">Section 4.2</a>) parameter was
+   introduced to replace MAXCHANNELS, as it can more accurately define
+   the server implementation.
+
+<span class="h3"><a class="selflink" name="section-5.5" href="#section-5.5">5.5</a>  MAXTARGETS</span>
+
+   The MAXTARGETS parameter was replaced by the TARGMAX (<a href="#section-4.19">Section 4.19</a>)
+   parameter.  As which commands MAXTARGETS applied to is unclear and
+   different target limits can often apply to different commands, it was
+   believed the TARGMAX parameter could more accurately define which
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 17]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-18" id="page-18" href="#page-18" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   commands may contain multiple targets.
+
+<span class="h3"><a class="selflink" name="section-5.6" href="#section-5.6">5.6</a>  WALLCHOPS</span>
+
+   The WALLCHOPS parameter was replaced by the STATUSMSG (<a href="#section-4.18">Section 4.18</a>)
+   parameter.  It is believed the STATUSMSG (<a href="#section-4.18">Section 4.18</a>) parameter is
+   more flexible.  Some IRC server implementations also implemented a
+   "WALLCHOPS" command, and it was unclear whether the parameter
+   indicated support for this command or not.  This behaviour is still
+   unclear.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 18]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-19" id="page-19" href="#page-19" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-6" href="#section-6">6</a>.  IANA Considerations</span>
+
+   This memo does not raise any IANA considerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 19]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-20" id="page-20" href="#page-20" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-7" href="#section-7">7</a>.  Security Considerations</span>
+
+   This memo does not raise any security considerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 20]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-21" id="page-21" href="#page-21" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="section-8" href="#section-8">8</a>.  Acknowledgments</span>
+
+   The authors gratefully acknowledges the contributions of Bill Fenner
+   ("fenestro"), Perry Lorier ("Isomer"), Kurt Roeckx ("Q") and John
+   Midgley ("CrazyEddy") in the preparation of this document.
+
+   This document is heavily based on a previous document entitled "The
+   005 numeric".
+
+<span class="h2"><a class="selflink" name="section-9" href="#section-9">9</a>  References</span>
+
+   [<a name="ref-1" id="ref-1">1</a>]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", <a href="./bcp14">BCP 14</a>, <a href="./rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name="ref-2" id="ref-2">2</a>]  Oikarinen, J. and D. Reed, "Internet Relay Chat Protocol", <a href="./rfc1459">RFC</a>
+        <a href="./rfc1459">1459</a>, May 1993.
+
+   [<a name="ref-3" id="ref-3">3</a>]  Kalt, C., "Internet Relay Chat: Client Protocol", <a href="./rfc2812">RFC 2812</a>,
+        April 2000.
+
+   [<a name="ref-4" id="ref-4">4</a>]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+        Specifications: ABNF", <a href="./rfc2234">RFC 2234</a>, November 1997.
+
+   [<a name="ref-5" id="ref-5">5</a>]  Kalt, C., "Internet Relay Chat: Channel Management", <a href="./rfc2811">RFC 2811</a>,
+        April 2000.
+
+   [<a name="ref-6" id="ref-6">6</a>]  Bradner, S., "IETF Rights in Contributions", <a href="./bcp78">BCP 78</a>, <a href="./rfc3667">RFC 3667</a>,
+        February 2004.
+
+
+Authors' Addresses
+
+   Lee Hardy
+   ircd-ratbox development team
+
+   EMail: lee@leeh.co.uk
+   URI:   <a href="http://www.leeh.co.uk">http://www.leeh.co.uk</a>
+
+
+   Edward Brocklesby
+   ircd-ratbox development team
+   57 Williamson Way
+   Oxford  OX4 4TU
+   UK
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 21]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-22" id="page-22" href="#page-22" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+   Kevin L. Mitchell
+   Undernet IRC Network
+   38 Eighth St., Apt. 7
+   Cambridge, Massachusetts  02141
+   US
+
+   Phone: +1-617-230-1021
+   EMail: klmitch@mit.edu
+   URI:   <a href="http://www.mit.edu/~klmitch/">http://www.mit.edu/~klmitch/</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 22]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-23" id="page-23" href="#page-23" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="appendix-A" href="#appendix-A">Appendix A</a>.  Examples</span>
+
+   The following examples show various RPL_ISUPPORT messages from
+   various IRC server software.
+
+   Example network
+
+          :server 005 nickname foo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 23]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-24" id="page-24" href="#page-24" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="appendix-B" href="#appendix-B">Appendix B</a>.  ABNF Description of Capabilities</span>
+
+   This section summarizes the ABNF [<a href="#ref-4" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">4</a>] description of the RPL_ISUPPORT
+   extension.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 24]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-25" id="page-25" href="#page-25" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+<span class="h2"><a class="selflink" name="appendix-C" href="#appendix-C">Appendix C</a>.  ChangeLog</span>
+
+   Note to RFC Editor: This section may be removed on publication as an
+   RFC.
+
+   Here is a log of changes to this document:
+
+   2005-01-28 LH Initial draft written, borrowing heavily from the old
+      i-d by Edward Brocklesby.
+   2005-01-29 LH
+      *  Fleshed out information on CPRIVMSG, CNOTICE, WATCH and SILENCE
+         tokens.
+      *  Added CHANNELLEN token.
+      *  Added TOPICLEN token.
+      *  Added TARGMAX token.
+
+   2005-02-02 LH
+      *  Documented differences to traditional EXCEPTS/INVEX usage.
+      *  Added the old WALLCHOPS token under differences.
+      *  Added the old MAXBANS token under differences.
+      *  Added the old MAXTARGETS token under differences.
+      *  Added the old MAXCHANNELS token under differences.
+
+   2005-02-03 LH
+      *  "Add r remote" to "Add or remove" in CHANMODES.
+      *  Make SILENCE= indicate its unsupported.
+      *  Remove some stuff from STATUSMSG thats beyond the scope of this
+         document.
+      *  Clarify ETRACE modifiers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Hardy, et al.             Expires July 2, 2005                 [Page 25]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-26" id="page-26" href="#page-26" class="invisible"> </a>
+<span class="grey">Internet-Draft              IRC RPL_ISUPPORT                January 2005</span>
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in <a href="./bcp78">BCP 78</a> and <a href="./bcp79">BCP 79</a>.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   <a href="http://www.ietf.org/ipr">http://www.ietf.org/ipr</a>.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at
+   ietf-ipr@ietf.org.
+
+
+Disclaimer of Validity
+
+   This document and the information contained herein are provided on an
+   "AS IS" basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY AND THE INTERNET
+   ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+   INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE
+   INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Copyright Statement
+
+   Copyright (C) The Internet Society (2005).  This document is subject
+   to the rights, licenses and restrictions contained in <a href="./bcp78">BCP 78</a>, and
+   except as set forth therein, the authors retain all their rights.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+Hardy, et al.             Expires July 2, 2005                 [Page 26]
+
+</pre><br />
+<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.102, available from
+<a href="http://tools.ietf.org/tools/rfcmarkup/">http://tools.ietf.org/tools/rfcmarkup/</a>
+</small></small></span>
+</body></html>
