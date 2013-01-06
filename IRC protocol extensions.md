@@ -213,4 +213,4 @@ Features:
  * All supported extensions are part of the specification.
  * Supported SASL mechanisms are advertised by server during registration.
 
- [ircx-draft]: http://static.ignition-project.com/ircxdraft/
+ [ircx-draft]: http://web.archive.org/web/20110713004824/http://static.ignition-project.com/ircxdraft/
