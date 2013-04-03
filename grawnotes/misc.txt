@@ -1,0 +1,24 @@
+On the meaning of "TS6ow"
+(staticbox.#charybdis @ 2013-04-03 17:52 +0300)
+
+<grawity> jilles: I'm curious what "ow" means in the "TS:ow" or "TS6ow"
+	in the version strings
+<@jilles> grawity, pretty much obsolete -- o = TS only, w = TS warnings
+	(when a non-TS server is connected remotely)
+<@jilles> the warnings are long gone but the 'w' has stayed
+
+On the meaning of "TS3ora"
+(staticbox.#ircv3 @ 2013-02-26 18:14 +0200)
+
+<sdaugherty> relaative chans was roger's earlier proposal that was never
+	fully built
+<mogri> RogerY as in author of OPAS and Austhex?
+<sdaugherty> vchans was the actual implementation of relative chans, but
+	relative chans was envisioned to have servcerside ignore emulating
+	channel modes.
+<sdaugherty> no, roger as in TS3ora
+<sdaugherty> Efnet's original TS implementation IIRC
+<sdaugherty> roger espel llima I think
+<mogri> aha, yes
+<mogri> well, the 'ora' comes from orabidoo
+
