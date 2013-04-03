@@ -1,0 +1,188 @@
+(Not everything in this file is 100% accurate...)
+
+This version of epic contains J. Kean Johnston's color stripping
+code.  This code is an attempt at making color support more UNIX friendly
+in IRC clients.  The color parsing code has been designed to fit in with
+my term.c replacement as well.
+
+The aim of this code is to strip all incoming messages of non-portable
+color codes, and to convert those color codes to the codes specific to the
+terminal type of the user, if such codes exist. It also extends mIRC and
+PIRCH's Ctrl-C color codes to allow for an easier set of supported colors.
+Please encourage the authors of those programs to adhere to this set, so
+that we can have uniformity amongst the competing clients out there.
+
+Since ANSI escape codes have been around for so long, and are so widely
+used in so many environments, this code uses the ANSI escape codes as its
+base.  That is, it can understand ANSI escape sequences in incoming
+strings, and map those sequences down to terminal-specific escape
+sequences.  The color numbers supported in Ctrl-C type strings also match
+the ANSI color set.  For your reference, here are the extended Ctrl-C
+sequences this code recognises, and the ANSI escape sequences recognised.
+These map down to a specific color on the display:
+
++---------------------------------------------------------------------+
+|                   Extended Ctrl-C color numbers                     |
++-----------------+-----------------------+---------------------------+
+| Ctrl-C Number   |  ANSI Escape Sequence | Color                     |
++-----------------+-----------------------+---------------------------+
+|       30        | ESC [ 0; 30 m         | Black foreground          |
+|       31        | ESC [ 0; 31 m         | Red foreground            |
+|       32        | ESC [ 0; 32 m         | Green foreground          |
+|       33        | ESC [ 0; 33 m         | Brown foreground          |
+|       34        | ESC [ 0; 34 m         | Blue foreground           |
+|       35        | ESC [ 0; 35 m         | Magenta foreground        |
+|       36        | ESC [ 0; 36 m         | Cyan foreground           |
+|       37        | ESC [ 0; 37 m         | White foreground          |
+|       40        | ESC [ 40 m            | Black background          |
+|       41        | ESC [ 41 m            | Red background            |
+|       42        | ESC [ 42 m            | Green background          |
+|       43        | ESC [ 43 m            | Brown background          |
+|       44        | ESC [ 44 m            | Blue background           |
+|       45        | ESC [ 45 m            | Magenta background        |
+|       46        | ESC [ 46 m            | Cyan background           |
+|       47        | ESC [ 47 m            | White background          |
+|       50        | ESC [ 1; 30 m         | Grey foreground           |
+|       51        | ESC [ 1; 31 m         | Bright red foreground     |
+|       52        | ESC [ 1; 32 m         | Bright green foreground   |
+|       53        | ESC [ 1; 33 m         | Yellow foreground         |
+|       54        | ESC [ 1; 34 m         | Bright blue foreground    |
+|       55        | ESC [ 1; 35 m         | Bright magenta foreground |
+|       56        | ESC [ 1; 36 m         | Bright cyan foreground    |
+|       57        | ESC [ 1; 37 m         | Bright white foreground   |
++-----------------+-----------------------+---------------------------+
+
+In order to support existing mIRC color codes, the following map is applied
+to Ctrl-C colors with the given values.  Note that each color can have a
+slightly different value when interpreted as a foreground or a background
+color. This is the problem with the color set the mIRC author chose. Unless
+the user is on a graphics device with a large color pallete, the mappings
+are inaccurate.
+
++-------------------------------------------------------------------------+
+|                     mIRC Ctrl-C color mappings                          |
++----------+-----------------+-----------------+--------------------------+
+| Ctrl-C # | Foreground ANSI | Background ANSI | Fore / back Color        |
++----------+-----------------+-----------------+--------------------------+
+|    0     | ESC [ 1; 37 m   | ESC [ 47 m      | Bright white / White     |
+|    1     | ESC [ 0; 30 m   | ESC [ 40 m      | Black / Black            |
+|    2     | ESC [ 0; 34 m   | ESC [ 44 m      | Blue / Blue              |
+|    3     | ESC [ 0; 32 m   | ESC [ 42 m      | Green / Green            |
+|    4     | ESC [ 0; 31 m   | ESC [ 41 m      | Red / Red                |
+|    5     | ESC [ 0; 33 m   | ESC [ 43 m      | Brown / Brown            |
+|    6     | ESC [ 0; 35 m   | ESC [ 45 m      | Magenta / Magenta        |
+|    7     | ESC [ 1; 31 m   | ESC [ 41 m      | Bright red / Red         |
+|    8     | ESC [ 1; 33 m   | ESC [ 43 m      | Yellow / brown           |
+|    9     | ESC [ 1; 32 m   | ESC [ 42 m      | Bright green / Green     |
+|    10    | ESC [ 0; 36 m   | ESC [ 46 m      | Cyan / Cyan              |
+|    11    | ESC [ 1; 36 m   | ESC [ 46 m      | Bright Cyan  Cyan        |
+|    12    | ESC [ 1; 34 m   | ESC [ 44 m      | Bright blue / Blue       |
+|    13    | ESC [ 1; 35 m   | ESC [ 45 m      | Bright Magenta / Magenta |
+|    14    | ESC [ 1; 30 m   | ESC [ 40 m      | Grey / Black             |
+|    15    | ESC [ 0; 37 m   | ESC [ 40 m      | Grey / White             |
++----------+-----------------+-----------------+--------------------------+
+
+By special dispensation, there is also a function which can be used for
+preparing strings with color in scripts or in settable variables.  There is
+a function which will replace these special formatting variables with the
+appropriate Ctrl-C colors, if colorization is turned on.  The table below
+lists the escape sequences recognised, and what they are replaced with.
+
++-------------------------------------------------------------+
+|              Embedded color escape sequences                |
++---------+-----------------------+---------------------------+
+| % char  |  ANSI Escape Sequence | Color                     |
++---------+-----------------------+---------------------------+
+|   %k    | ESC [ 0; 30 m         | Black foreground          |
+|   %K    | ESC [ 1; 30 m         | Grey foreground           |
+|   %r    | ESC [ 0; 31 m         | Red foreground            |
+|   %R    | ESC [ 1; 31 m         | Bright red foreground     |
+|   %g    | ESC [ 0; 32 m         | Green foreground          |
+|   %G    | ESC [ 1; 32 m         | Bright green foreground   |
+|   %y    | ESC [ 0; 33 m         | Brown foreground          |
+|   %Y    | ESC [ 1; 33 m         | Yellow foreground         |
+|   %b    | ESC [ 0; 34 m         | Blue foreground           |
+|   %B    | ESC [ 1; 34 m         | Bright blue foreground    |
+| %m / %p | ESC [ 0; 35 m         | Magenta foreground        |
+| %M / %P | ESC [ 1; 35 m         | Bright magenta foreground |
+|   %c    | ESC [ 0; 36 m         | Cyan foreground           |
+|   %C    | ESC [ 1; 36 m         | Bright cyan foreground    |
+|   %w    | ESC [ 0; 37 m         | White foreground          |
+|   %W    | ESC [ 1; 37 m         | Bright white foreground   |
+|   %F    | ESC [ 5 m             | Turn blinking on          |
+|   %f    | ESC [ 6 m             | Turn blinking off         |
+|   %n    | Variable              | All colors turned off     |
+|   %N    | Nothing               | Dont clear colors at EOS  |
+|   %%    | %                     | A litteral % character    |
++---------+-----------------------+---------------------------+
+
+What colors.c does
+------------------
+The colorization module provides several utility functions designed to ease
+the display of strings on the local client.  These functions should be used
+to prepare the final output string to the clients screen.  Firstly, there
+is a "stripper" function.  This will remove all color formatting characters
+and escape sequences from the specified string, and return it.  This
+fucntion can optionally repove any graphics characters from the string as
+well (upper PC ASCII characters, and all lower ASCII characters).  NOTE:
+this will remove characters such as ^B, ^V and ^_, the characters used to
+turn on bold, inverse and underline in a string.  This function is rather
+brutal in its removal of string characters.
+
+Another function provided will take the given input string and convert any
+embedded ANSI or Ctrl-C color codes to the color codes supported by the
+users terminal.  It will also insert the escape sequences for turning on
+and off the bold, inverse and underline modes when ^B, ^V and ^_ are
+encountered in the string.  This function can be used to prepare a "final"
+string for display.  The function will optionally convert any upper and
+lower ASCII characters to their graphics equivalents if your terminal
+supports them, or will inverse the characters or strip off the high bit if
+your terminal does not support the display of special PC characters.
+
+A third function is basically an extension of the second, except it takes
+"fill prefix" and width arguments, and will prepare a set of strings ready
+to display to the client, including wrapping and insertion of the fill
+string.  This correctly calculates the string lengths so as to exclude
+special characters when calculating when to wrap the string.
+
+User control over the colorization process
+------------------------------------------
+There are a few variables the user can set to control the colorization and
+stripping process.  They are:
+
+/set CONTROL_C_COLOR
+	OFF - Dont allow any color codes at all
+	ON  - Allow all coolors codes
+
+/set DISPLAY_ANSI
+	OFF - Do not do any ansi-code translation, Mangle escapes
+	ON  - Translate all 'safe' codes to their logical equivalents.
+	      Strip out all other codes.
+
+DISPLAY_PC_CHARACTERS
+  Legal values: 0, 1, 2, 3, 4, 5
+  0  - Strip all upper ASCII and lower ASCII strings except for ^B, ^V,
+       ^_ and ^F.
+  1  - If the terminal has dispc/S1 capability, use it.
+       Otherwise, use the "traditional" 7-bit interverted translation.
+       (eg: (x | 0x40 & 0x7f) (you have to see it to understand)) (default)
+  2  - Same as #1, except the translation is done in a more 'sane' way and
+       attempts to render in a way more friendly to scripts that are using
+       8 bit characters to "draw".  Translated characters are inverted so
+       that you know they were translated.
+  3  - Same as #2, except translated characters are not inverted.
+  4  - Always display characters without translation.
+  5  - Always display characters with "sane" translation.
+
+Things still to do
+------------------
+a) Preparing long display strings for display optimization
+b) Making the input stuff color / ROM CHAR friendly  (done!)
+c) Make the graphics character translation map configurable
+d) Some minor cleanups which reduce function overhead
+e) Calculate more values at the start of the display calc loop for speed
+f) Much more testing
+g) Handle things where terminal cant turn off auto-margins (I think this
+   is already handled correctly). (durn bogus terminals!)
+h) Make more code use the accululator to speed up displays
+i) Actually write the accumulator :-)
