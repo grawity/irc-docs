@@ -1,5 +1,4 @@
-On the meaning of "TS6ow"
-(staticbox.#charybdis @ 2013-04-03 17:52 +0300)
+# On the meaning of "TS6ow"
 
 <grawity> jilles: I'm curious what "ow" means in the "TS:ow" or "TS6ow"
 	in the version strings
@@ -7,8 +6,9 @@ On the meaning of "TS6ow"
 	(when a non-TS server is connected remotely)
 <@jilles> the warnings are long gone but the 'w' has stayed
 
-On the meaning of "TS3ora"
-(staticbox.#ircv3 @ 2013-02-26 18:14 +0200)
+(staticbox.#charybdis @ 2013-04-03 17:52 +0300)
+
+# On the meaning of "TS3ora"
 
 <sdaugherty> relaative chans was roger's earlier proposal that was never
 	fully built
@@ -22,3 +22,6 @@ On the meaning of "TS3ora"
 <mogri> aha, yes
 <mogri> well, the 'ora' comes from orabidoo
 
+("orabidoo" appears to be Roger Espel Llima's nickname)
+
+(staticbox.#ircv3 @ 2013-02-26 18:14 +0200)
