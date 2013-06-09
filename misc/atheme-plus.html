@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>What Atheme+ is/will be</title>
+</head>
+<body>
+	<h1>What Atheme+ is/will be</h1>
+	<p>
+		Atheme+ is an exciting new service that will be offered by atheme.org's IRC activity for users of the Atheme IRC platform.  This document is intended to explain
+		what Atheme+ is, what it will eventually do, as well as attempt to dispel myths about it.
+	</p>
+	<h2>Current problems with IRC identity management</h2>
+	<p>
+		IRC, including public-facing networks running the Atheme IRC platform, is generally fragmented and lacks infrastructure for maintaining identity across multiple
+		networks.  Such a lack of centralised identity-verification services causes a significant problem for extending IRC with semantic information about users people
+		are interacting with via IRC.
+	</p>
+	<p>
+		Atheme+ solves this issue by providing cross-network identity validation and management for all individuals using Atheme-based networks.  It accomplishes this by:
+	</p>
+	<ul>
+		<li>taking advantage of new Atheme 7 features such as <strong>unique entity identifiers</strong> (UEIDs) and mapping them to <strong>Atheme+ network entities</strong>:
+		    <ul>
+			<li>consider two networks, StaticBox and freenode.</li>
+			<li>on StaticBox, your account's UEID is AAY781EZQ.</li>
+			<li>on freenode, your account's UEID is HGYAEZ87D.</li>
+			<li>
+			    Atheme+ can correlate both of these accounts to a known Atheme+ account and denote that data in NickServ INFO output:
+			    <blockquote>
+				<code>-NickServ- Atheme+ ID: nenolod@dereferenced.org</code>
+			    </blockquote>
+			</li>
+		     </ul>
+		</li>
+		<li>providing synchronization of account settings, ensuring a consistent user experience across all networks linked to an Atheme+ ID</li>
+		<li>providing synchronization of channel settings, ensuring a consistent channel ACL across all networks linked to an Atheme+ ID:
+		    <ul>
+			<li>like in our previous example, consider two networks, StaticBox and freenode.</li>
+			<li>on StaticBox, you have founder-level access on #atheme as Atheme+ mapped UEID: StaticBox:AAY781EZQ.</li>
+			<li>on freenode, you have founder-level access on #atheme as Atheme+ mapped UEID: freenode:HGYAEZ87D.</li>
+			<li>now consider another account registered to both networks, as StaticBox:YZN2AENCZ and freenode:XEZAN71E5.</li>
+			<li>because you have founder-level access to #atheme on both networks, Atheme+ will give channel access to both
+			    StaticBox:YZN2AENCZ and freenode:XEZAN71E5 when you change flags on either network because Atheme+ knows that
+			    it is the same person.</li>
+		    </ul>
+		</li>
+	</ul>
+	<h2>Current problems with IRC and the web</h2>
+	<p>
+		While Atheme's XMLRPC API server has enabled the creation of a large ecosystem of applications designed to integrate with Atheme,
+		(such as Iris, Atheme-Web, phpAtheme and EGS,) many of the applications are cumbersome to configure or provide an incomplete user experience.
+	</p>
+	<p>
+		Atheme+ solves this issue by providing a consistent UI for managing all accounts linked to an Atheme+ identity, which allows for
+		plug-and-play web integration.
+	</p>
+	<h2>Current problems with discovering IRC content</h2>
+	<p>
+		While IRC search engines, such as <a href="http://www.searchirc.com/">SearchIRC</a> and <a href="http://www.ircdriven.com">IRCDriven</a>
+		provide a fairly decent way of discovering content, the actual experience is rather poor, and depends on indexing bots.
+	</p>
+	<p>
+		Atheme+ solves this issue through an optional statistics-push module, which provides channel lists and other general information about
+		a network, updated in near-realtime.  Additionally, the statistics-push module can provide information like URL to a qwebirc/iris instance
+		for optimal integration of new users into the network.
+	</p>
+	<h2>Dispeling myths</h2>
+	<ul>
+		<li><strong>Atheme+ is not OPT-IN</strong>: in reality, you don't have to use Atheme+ at all, networks do not have to use it either, and
+		    if networks/users don't want to use Atheme+, then things continue as they always have.</li>
+		<li><strong>Atheme+ is a security risk</strong>: honestly, not really. the people who designed Atheme, and Atheme+ have considerable experience
+		    in the information security field.  using Atheme+ is no more risky than using the XMLRPC server.</li>
+		<li><strong>Atheme+ will allow spammers to register resources on my network without using them</strong>: Atheme+ doesn't have any facility for
+		    pre-registering a channel.</li>
+		<li><strong>Atheme+ will have an Anope 1.9 module</strong>: this may or may not happen depending on how successful it is on Atheme networks.
+		    Integration would be somewhat limited with Anope networks, but we will see what we can do.</li>
+	</ul>
+</body>
+</html>
