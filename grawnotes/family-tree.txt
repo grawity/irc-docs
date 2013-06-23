@@ -1,5 +1,57 @@
 # IRC server family tree
 
+Distinctive features
+
+    Bahamut
+    - has "TS5ow-r[RELEASE] RPL𝒏 NP[.....]" in /VERSION reply
+        RPL𝒏 – Ridiculous Paranoia Level
+    - has "ELIST=cmntu" in RPL_ISUPPORT
+
+    Nefarious
+    - replies to /ISNEF with numeric 371 saying "NI <version>"
+      << ISNEF
+      >> :EU.Beirut.Com 371 grawity :NI u2.10.11.07+Nefarious(1.3.0) [2807 2010-11-18]
+
+    ircu and derivatives (asuka, Nefarious)
+    - mention "DESYNCH", "END_OF_BURST", "EOB_ACK" in /HELP reply
+
+    UltimateIRCd
+    - has ServOpts=... and Proto=... in /VERSION reply
+    - has "EXCEPTS=e CHANTYPES=#& PREFIX=(aohv)!@%+" ... "STD=i-d" in RPL_ISUPPORT
+    - has excepts but not invex
+    - replies to /IRCDHELP
+
+    Unreal, others
+    - replies to /DALINFO
+    - replies to /BOTMOTD
+    - replies to /RULES
+    - replies to /RPING?
+
+    csircd
+    - one of few ircds to have "STD=i-d" in RPL_ISUPPORT
+
+Todo:
+    austnet.org
+    dynastynet.net – Unreal-Modified
+    euirc.net – euIRCd 1.3.3 [perry]
+    fef.net – FEF-7.5; disconnect (crash?) on /version, looks like Charybdis
+    forestnet.org – Pride-2.2(21) from Bahamut? "TS5ow-r[CURRENT] RPL1 ..."
+    galaxynet.org – glx2.0.4, looks like ircu (END_OF_BURST)
+    ircnet.ru – PTlink7.1.0-rc2
+    krey.net – vantage-1.1.0 with IRCnet timestamping, CHANTYPES=#&!+
+    ptnet.org – dal.4.6.Based.PTnet1.7.00
+    starchat.net – StarIRCD-7.0 "CHANMODES=beH,... NOQUIT TOKEN STD=i-d", has JINX, AKILLEX
+    virtualife.com.br – vlife.ircd, TODO: what numeric is used for /vlife?
+    worldnet.net – solid-ircd-3.4
+    TTnet
+    RusNet
+        irc.tom.ru – 1.5.18/uk_UA.KOI8-U
+        irc.seb.org.ua:+9996 for UTF – 2.0.5/uk... (CHANTYPES=#&!+)
+        irc.anarxi.st:+9996
+Done:
+    ircnode.org – "charybdis-nodeircd"
+    sorcery.net – SorIRCd
+
 TS3
     ircd-hybrid 6.0
     ircd-comstud 1.12
@@ -12,68 +64,101 @@ TS5
 legend:
     [d] - dead
     [<-foo] - forked from what ircd
-    {foo} - protocol (TS, P10) in latest version
-    {foo; vX=bar} - protocol in older versions
+    {foo} - protocol spoken by latest version (from source code)
+    {foo <-bar,baz} - protocols spoken by older versions
+    {"foo"} - protocol advertised (unknown if other versions supported)
     (@ foo) - main networks
     (foo = bar) - branch codenames
+    (foo -> bar) - renamed
 
-(scratch)
-    ircd 2.x {RFC1459}
+(from scratch)
+    ircd2.x {RFC1459}
         <http://www.nic.funet.fi/~irc/server/>
-        ircu [<-ircd 2.7] {P10}
-            Asuka [d]
-            Nefarious
-                ircd-darenet
-            snircd (@ QuakeNet)
-            Austhex v7 [d]
-        DreamForge [d]
-            bIRCd
-            EliteIRCd [d]
-                UnrealIRCd [<-EliteIRCd 2.0b13]
-                    gs-ircd (@ GeekShed)
-                    QuakeIRCd [d]
-            Faerion
-            SorIrcd/Sorcery v1.x [d]
-        ircd-hybrid [<-ircd 2.8/th.v5a.3] {TS6~TS5; v7.3=TS6~TS3}
-            Bahamut [<-ircd-hybrid 5.3?] {TS5~TS3}
-                (pelennor = Bahamut 1.0)
-                (halcyon = Bahamut ??)
-                ??? Chimera (TR-IRCD4)
-                    ??? Kenora (TR-IRCD5)
-                        ??? Austhex v8 {TS7~TS3}
-                LiquidIRC
-                solid-ircd [d]
-                UlimateIRCd <http://www.shadow-realm.org> {TS5~3}
-                    CritenIRCd (@ Criten/Abjects)
-                TR-IRCD [<-Bahamut 1.4]
-                ??? fqircd
-            dancer-ircd [d <-ircd-hybrid 6.2] {TS4+DNCR}
-                Hyperion [d] {TS4+DNCR} (Atheme has 5~3+DNCR)
-            oftc-hybrid
-                oftc-hybrid/bc
-            PlexusIRCd (@ Rizon)
-                Rizon IRCd
-            PTLink [d] (Atheme has TS10~3+PTS4)
-                Vlife.IRCd "PTS:ow"
-            ??? Aurora [d]
-            ircd-ratbox {TS6, r25521=TS6~TS3}
-                Charybdis [<-ircd-ratbox 2.1.5] {TS6; 3.0=TS6~TS5}
-                    NeoIRCd
-                    ShadowIRCd {TS6}
-                        SporksIRCd
-                    ircd-seven (@ freenode) [<-Charybdis 3.0.1] {TS6}
-                        cherry-ircd
-                            ircd-cherry
-    DarkIRCd
-    beware ircd
+        ircd2.8.21+CSr [<-ircd2.8.21] {RFC1459, TSora}
+            ircd2.8.21+CSr29+LT [<-ircd2.8.21+CSr29]
+        ircd.dal [d]
+            DreamForge (@ DALnet) [d] [<-dal4.6.1]
+                bIRCd
+                DarkFire (@ DarkFire.net) [<-dal4.6.5.DreamForge]
+                    (twilight = df-1.0)
+                EliteIRCd [d]
+                    UnrealIRCd [<-EliteIRCd 2.0b13]
+                        gs-ircd (@ GeekShed)
+                        QuakeIRCd [d]
+                Faerion
+                SorIRCd/Sorcery v1.x [d]
+            PTnet [<-dal4.6]
+        ircd2.8/th [patch <-ircd2.8]
+            ircd-hybrid5 [<-ircd2.8/th.v5a.3] {TS6~TS5; v7.3=TS6~TS3}
+                ??? Aurora [d]
+                Bahamut (@ DALnet) [<-ircd-hybrid 5.3?] {TS5 <-TS3,TS1}
+                    (dfhybrid, in the beginning)
+                    (pelennor = Bahamut 1.0)
+                    (halcyon = Bahamut ??)
+                    Azzura Bahamut (@ Azzura.org) [<-Bahamut 1.4.34] {TS5~TS3}
+                    ??? Chimera (TR-IRCD4)
+                        ??? Kenora (TR-IRCD5)
+                            ??? Austhex v8 {TS7~TS3}
+                    ??? fqircd
+                    LiquidIRC
+                    ??? Pride (@ ForestNet.org) {"TS5"}
+                    ircd-RU! (@ RusNet, WeNet) [<-Bahamut 1.4.3x]
+                        (wudan 1.0.2 -> ircd-RU! 1.0.3)
+                    solid-ircd (@ Worldnet) [d] [<-Bahamut 1.8]
+                    TR-IRCD [<-Bahamut 1.4]
+                    ??? UltimateIRCd <http://www.shadow-realm.org> {TS5~3}
+                        CritenIRCd (@ Criten/Abjects)
+                        nemesis (@ Criten) {"TS5"}
+                    ircd-tiamat [d<-bahamut 1.8]
+                dancer-ircd [d<-ircd-hybrid 6.2] {TS4+DNCR}
+                    Hyperion [d<-dancer-ircd 1.0.35+pre2] {TS4+DNCR} (Atheme has 5~3+DNCR)
+                oftc-hybrid
+                    oftc-hybrid/bc
+                plexus [<-ircd-hybrid 7.2.3] (@ Rizon)
+                    Rizon IRCd
+                PTLink [d] (Atheme has TS10~3+PTS4)
+                    Vlife.IRCd "PTS:ow"
+                ircd-ratbox {TS6 <-TS5,TS3}
+                    Bluebox (@ Azzura.org) [<-ircd-ratbox 3.0.4]
+                    Charybdis [<-ircd-ratbox 2.1.5] {TS6 <-TS5}
+                        ArinityIRCd [d] [<-Charybdis 3.4]
+                        FreeBG ircd [<-Charybdis 3.4]
+                        ircd-seven (@ freenode) [<-Charybdis 3.0.1] {TS6}
+                            cherry-ircd [d]
+                                ircd-cherry [d]
+                        ShadowIRCd {TS6}
+                            NeoIRCd
+                            SporksIRCd
+                        SorIRCd 3.x (@ Sorcery.Net) {"TS6"}
+                    ircd-evangelion [d<-ircd-ratbox 2.2.6]
+        ircd2.8/TSpre7
+            ircu [<-ircd2.7] {P10 <-TSpre8,TSpre7}
+                Asuka [d]
+                Austhex v7 [d]
+                Nefarious
+                    Nefarious2
+                    ircd-darenet
+                Othernet (@ Othernet.org) [<-ircu2.9]
+                dream-ircu [d<-u2.10.12.10]
+                ircd-sakura [d<-u2.10.12.10]
+                snircd (@ QuakeNet)
+                ??? glx2.0.4 (@ Galaxynet.org)
+        ??? StarIRCD (@ StarChat.net)
     ConferenceRoom
-    csircd [d] {TS5}
+    DarkIRCd {TS6}
     InspIRCd {InspIRCd TS6}
-    ithildin [d] {TS5~3}
+        +Xynotyro [d]
+            ircd-sakura [d<-InspIRCd-1.1.11+Xynotyro]
+    beware ircd
+    csircd [d] {TS5}
+    IRCNode/ts6-base {TS6}
+    ircd-micro {TS6}
+    ithildin [d] (@ DarkMyst.org) {TS5.bahamut14, dreamforge, TS3}
     ngIRCd {RFC 1459}
     pircd [d]
     Pure IRCD
         ignitionServer
+            WavServ
     Synchronet IRCd
     tethys
     WeIRCd
@@ -85,15 +170,64 @@ legend:
     <http://www.dal.net/?page=bahamut>
     <http://web.archive.org/web/*/http://bahamut.dal.net/>
     (branch 1.0 = "pelennor"?)
+    protocol: TS5 (as of 1.4.36 g417c5e9)
+    - TS1..TS3 (up to g417c5e9)
+            ~TS3; v1.4.35=TS5~TS1}
 
 ## Charybdis
-    url: <http://www.atheme.org/project/charybdis>
+    <http://www.atheme.org/project/charybdis>
     base: ratbox 2.1.5+datadrain (+ ircu 2.11)
+    protocol: TS6 (as of v3.1)
+    - TS5..TS6 (up to v3.0)
 
     "Charybdis is originally based on ratbox 2.0, with some additional code
     from ircu 2.11, but a large number of features from Charybdis were
     integrated back into ratbox with ratbox 3, and ircu 2.12, and contributions
     are contributed bi-directionally on a regular basis."
+
+## Hyperion
+    base: dancer-ircd 1.0.35+pre2
+
+## ircd2.8+CSr
+    protocol: TSora (as of 2.8.21+CSr16)
+
+## ircd-ru
+    <http://web.archive.org/web/*/http://www.ircd.ru/ru/>
+    base: Bahamut 1.4.30
+
+## ircd-seven
+    <http://www.freenode.net/seven.shtml>
+    base: Charybdis 3.0.1 ⇆ (+ Hyperion)
+
+## ratbox
+    protocol: TS6 (as of r25522)
+    - TS3..TS6 (r14623 up to r25522)
+    - TS3..TS5 (r11494 up to r14622)
+    - TS3..TS5 (up to r11493)
+
+## tethys
+    <https://github.com/atheme/tethys>
+
+    "there are a few reasons why it is desirable to replace charybdis:
+
+      - it does not integrate will into the rest of the atheme platform due to
+        being a ratbox fork, i.e. we decided to follow ratbox upstream and work
+        with them on libratbox, meaning that we have our own libmowgli and
+        there is also this libratbox thing and there's a lot of feature
+        overlap...
+      - bitrot from changes to changes to changes to 2.8.21 code, which is not
+        well understood in terms of side effects, etc.
+      - legal issues with the ratbox/hybrid-7 origin of charybdis, including:
+          - diane bruce's decision to strip copyrights from headers, giving us
+            very little idea of the origin of most 2.8.21 code ("ircd
+            contributors past and present")
+          - multiple licenses used in the code (GPLv1, GPLv2, BSD-likes), some
+            authors no longer being alive to relicense their code to BSD-like
+            or allowing an exception to allow openssl to be linked against it
+          - binary redistributions of charybdis linked to openssl are illegal
+            because of the above
+      - many components of mowgli (VIO, for example) were designed with the
+        intention of replacing charybdis"
 
 ## TR-IRCD
     <http://tr-ircd.sourceforge.net/>
@@ -121,32 +255,40 @@ legend:
     TR-IRCd 5.0 which unites many of the best features of Bahamut and Hybrid
     and our own new ideas..."
 
-## ircd-seven
-    <http://www.freenode.net/seven.shtml>
-    base: Charybdis 3.0.1 (bidirectional)
+## dream-ircu
+    <https://code.google.com/p/dream-ircu/>
+    base: ircu2.10.12.10 (+ asuka 1.2.1) (+ nefarious 1.0.1)
 
-## tethys
-    <https://github.com/atheme/tethys>
+    "Dream IRCu is an IRCd made especially for russian undernet-like network."
 
-    "there are a few reasons why it is desirable to replace charybdis:
+## ircd-evangelion
+    <https://code.google.com/p/efnetru/>
+    base: ircd-ratbox 2.2.6 (+ Charybdis)
 
-      - it does not integrate will into the rest of the atheme platform due to
-        being a ratbox fork, i.e. we decided to follow ratbox upstream and work
-        with them on libratbox, meaning that we have our own libmowgli and
-        there is also this libratbox thing and there's a lot of feature
-        overlap...
-      - bitrot from changes to changes to changes to 2.8.21 code, which is not
-        well understood in terms of side effects, etc.
-      - legal issues with the ratbox/hybrid-7 origin of charybdis, including:
-          - diane bruce's decision to strip copyrights from headers, giving us
-            very little idea of the origin of most 2.8.21 code ("ircd
-            contributors past and present")
-          - multiple licenses used in the code (GPLv1, GPLv2, BSD-likes), some
-            authors no longer being alive to relicense their code to BSD-like
-            or allowing an exception to allow openssl to be linked against it
-          - binary redistributions of charybdis linked to openssl are illegal
-            because of the above
-      - many components of mowgli (VIO, for example) were designed with the
-        intention of replacing charybdis"
+## ircd-micro
+    <https://github.com/aji/ircd-micro>
+    base: none (+ Charybdis)
+
+    "ircd-micro is an attempt to write an IRC daemon from scratch for the 4.3
+    BSD architecture. This was done more as a personal challenge rather than as
+    a real practical project."
+
+    "The goal is to be fully compatible with most modern TS6 IRC daemons, in
+    particular charybdis ircd and atheme-services. This will allow a 4.3 BSD
+    system running ircd-micro to be linked into existing TS6 networks."
+
+## ircd-sakura
+    <https://code.google.com/p/efnetru/>
+    base [1]: ircu2.10.12.10
+
+    <https://code.google.com/p/ircd-sakura/>
+    base [2]: InspIRCd-1.1.11+Xynotyro (+ Unreal 3.x) (+ Unreal 4)
+
+    "Sakura Internet Relay Chat Daemon is a fork of InspIRCd, developed
+    especially for eFNet(RU) IRC Network."
+
+## ircd-tiamat
+    <https://code.google.com/p/efnetru/>
+    base: Bahamut 1.8
 
 vim: ts=4:sw=4:et

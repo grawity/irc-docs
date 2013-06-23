@@ -920,6 +920,10 @@ irc2numerics = {
 };
 
 irc2numerics = {
+
+};
+
+irc2numerics = {
    name		= "RPL_VCHANEXIST";
    numeric	= "276";
 };

@@ -1,0 +1,209 @@
+# NOTE: full syntax is :<server> <numeric> <mynick> {format}
+
+generics:
+	<modechar> : "@" | "+" | other prefixes
+		(depending on user status in a particular channel)
+		(all prefixes if 'multi-prefix' enabled, highest prefix otherwise)
+
+001 RPL_WELCOME
+	format = :Welcome to <network>, <nick>
+	origin = RFC 2812
+
+002 RPL_YOURHOST
+	format = :Your host is <hostname>, running version <version>
+	origin = RFC 2812
+
+003 RPL_CREATED
+	format = :This server was created <date>
+	origin = RFC 2812
+
+004 RPL_MYINFO
+	format = <hostname> <version> <user-modes> <channel-modes>
+	where = <user-modes> :== all supported user mode letters
+	where = <channel-modes> :== all supported channel mode letters
+	origin = RFC 2812
+
+005 RPL_ISUPPORT
+	format = <token>... :are supported by this server
+	where = <token> :== <token-name> | <token-name> "=" <token-value>
+	origin = ircu ???
+
+005 RPL_BOUNCE
+	format = :Try server <hostname>, port <port>
+	origin = RFC 2812
+
+276 RPL_WHOISCERTFP
+	format = <target> :has client certificate fingerprint <fingerprint>
+	origin = oftc-hybrid
+
+276 RPL_STATSRLINE
+	format = <command> <alias-name> <alias-prepend> <alias-target>
+	origin = ircu
+
+276 RPL_VCHANEXIST
+	origin = ircd-hybrid 7.0
+
+277 RPL_VCHANLIST
+	origin = ircd-hybrid 7.0
+
+278 RPL_VCHANHELP
+	origin = ircd-hybrid 7.0
+
+280 RPL_ACCEPTLIST
+	format = <accepted-nick>...
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+281 RPL_ENDOFACCEPT
+	format = :End of /ACCEPT list.
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+300 RPL_NONE
+	Not used.
+
+301 RPL_AWAY
+	format = <nick> :<away-message>
+	origin = RFC 1459
+
+302 RPL_USERHOST
+	format = :<reply>...
+	where = <reply> :== <nick>[<operchar>] "=" <awaychar><host>
+	where = <operchar> :== if <nick> is oper then "*" else nil
+	where = <awaychar> :== if <nick> is away then "-" else "+"
+	origin = RFC 1459
+
+303 RPL_ISON
+	format = :<nick>...
+	origin = RFC 1459
+
+305 RPL_UNAWAY
+	format = :You are no longer marked as being away
+	origin = RFC 1459
+
+306 RPL_NOWAWAY
+	format = :You have been marked as being away
+	origin = RFC 1459
+
+311 RPL_WHOISUSER
+	format = <nick> <user> <host> * :<real-name>
+	origin = RFC 1459
+
+312 RPL_WHOISSERVER
+	format = <nick> <server> :<server-info>
+	origin = RFC 1459
+
+313 RPL_WHOISOPERATOR
+	format = <nick> :is an IRC operator
+	origin = RFC 1459
+
+314 RPL_WHOWASUSER
+	format = <nick> <user> <host> * <real-name>
+	origin = RFC 1459
+
+317 RPL_WHOISIDLE
+	format = <nick> <seconds> :seconds idle
+	origin = RFC 1459
+
+318 RPL_ENDOFWHOIS
+	format = <nick> :End of /WHOIS list
+	origin = RFC 1459
+
+319 RPL_WHOISCHANNELS
+	format = <nick> :<prefixed-channel>...
+	where = <prefixed-channel> :== [<modechar>]<channel>
+	origin = RFC 1459
+
+321 RPL_LISTSTART
+	format = Channel :Users  Name
+	origin = RFC 1459
+
+322 RPL_LIST
+	format = <channel> <num-users> :<topic>
+	origin = RFC 1459
+
+323 RPL_LISTEND
+	format = :End of /LIST
+	origin = RFC 1459
+
+324	RPL_CHANNELMODEIS
+	format = <channel> <modes> [<mode-params>]
+	origin = RFC 1459
+
+331 RPL_NOTOPIC
+	format = <channel> :No topic is set
+	origin = RFC 1459
+
+332 RPL_TOPIC
+	format = <channel> :<topic>
+	origin = RFC 1459
+
+341 RPL_INVITING
+	format = <channel> <nick>
+	origin = RFC 1459
+
+342 RPL_SUMMONING
+	format = <user> :Summoning user to IRC
+	origin = RFC 1459
+
+351 RPL_VERSION
+	format = <version> <hostname> :<details>
+	origin = RFC 1459
+
+352 RPL_WHOREPLY
+	format = <channel> <user> <host> <server> <nick> <awaychar>[<operchar>][<modechar>] :<hops> <real-name>
+	where = <awaychar> :== if <nick> is away then "G" else "H"
+	where = <operchar> :== if <nick> is oper then "*" else nil
+
+369 RPL_ENDOFWHOWAS
+	format = <nick> :End of WHOWAS
+	origin = RFC 1459
+
+401 ERR_NOSUCHNICK
+	format = <nick> :No such nick/channel
+	origin = RFC 1459
+
+402 ERR_NOSUCHSERVER
+	format = <server> :No such server
+	origin = RFC 1459
+
+403 ERR_NOSUCHCHANNEL
+	format = <channel> :No such channel
+	origin = RFC 1459
+
+404 ERR_CANNOTSENDTOCHAN
+	format = <channel> :Cannot send to channel
+	origin = RFC 1459
+
+405 ERR_TOOMANYCHANNELS
+	format = <channel> :You have joined too many channels
+	origin = RFC 1459
+
+406 ERR_WASNOSUCHNICK
+	format = <nick> :There was no such nickname
+	origin = RFC 1459
+	# Returned by WHOWAS
+
+456 ERR_ACCEPTFULL
+	format = :Accept list is full
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+457 ERR_ACCEPTEXIST
+	format = <target> :is already on your accept list
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+458 ERR_ACCEPTNOT
+	format = <target> :is not on your accept list
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+716 ERR_TARGUMODEG
+	format = <target> :is in +g mode (server-side ignore.)
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+717 RPL_TARGNOTIFY
+	format = <target> :has been informed that you messaged them.
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+718 RPL_UMODEGMSG
+	format = <target> <user>@<host> :is messaging you, and you have umode +g.
+	origin = modeg.txt (hybrid, ratbox, charybdis)
+
+# vim: nowrap:ts=4:sw=4:ft=desktop
