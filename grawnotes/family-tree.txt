@@ -127,7 +127,7 @@ legend:
                             cherry-ircd [d]
                                 ircd-cherry [d]
                         ShadowIRCd {TS6}
-                            NeoIRCd
+                            NeoIRCd [d]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net) {"TS6"}
                     ircd-evangelion [d<-ircd-ratbox 2.2.6]
