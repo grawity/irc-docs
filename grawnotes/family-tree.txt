@@ -161,6 +161,7 @@ legend:
             WavServ
     Synchronet IRCd
     tethys
+    urcd
     WeIRCd
 ?
     Titan IRCd
@@ -290,5 +291,13 @@ legend:
 ## ircd-tiamat
     <https://code.google.com/p/efnetru/>
     base: Bahamut 1.8
+
+## urcd
+    <http://anonet2.biz/URC>
+    <git://anonet2.biz/urcd.git>
+
+    Small urc daemon (IRC protocol fork made for anonymity and lack of 
+    power for server operators). Very decentralized, no password needed
+    for linking. 
 
 vim: ts=4:sw=4:et
