@@ -48,6 +48,12 @@ Todo:
         irc.tom.ru – 1.5.18/uk_UA.KOI8-U
         irc.seb.org.ua:+9996 for UTF – 2.0.5/uk... (CHANTYPES=#&!+)
         irc.anarxi.st:+9996
+    gimpnet – 2.8/gimpnet-0.1beta3+ipv6-0.2 oOiwszcrkfydnxb biklmnopstve
+       probably hybrid-6)
+        $Id: Hybrid-team,v 1.29 2002/01/18 00:01:51 db Exp $
+            at/later than 8ba677341ec15b9a30a8104bd2140fced2de9eab (/info)
+            at/later than e3a75c85074ddf8fc99f23cef785e46559074cfa (005 maxbans)
+            earlier than 74ba3877176ab257ec695b2bcc439643194066cc (/info)
 Done:
     ircnode.org – "charybdis-nodeircd"
     sorcery.net – SorIRCd
@@ -89,7 +95,8 @@ legend:
                 SorIRCd/Sorcery v1.x [d]
             PTnet [<-dal4.6]
         ircd2.8/th [patch <-ircd2.8]
-            ircd-hybrid5 [<-ircd2.8/th.v5a.3] {TS6~TS5; v7.3=TS6~TS3}
+            ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS6~TS5; v7.3=TS6~TS3}
+                ircd2.8/gimpnet (@ GIMPnet) [<-ircd-hybrid 6.3]
                 ??? Aurora [d]
                 Bahamut (@ DALnet) [<-ircd-hybrid 5.3?] {TS5 <-TS3,TS1}
                     (dfhybrid, in the beginning)
@@ -128,6 +135,8 @@ legend:
                                 ircd-cherry [d]
                         ShadowIRCd {TS6}
                             NeoIRCd [d]
+                            pendulum [<-ShadowIRCd 6.3.4]
+                            ponychat-ircd [<-ShadowIRCd 6.3.4]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net) {"TS6"}
                     ircd-evangelion [d<-ircd-ratbox 2.2.6]
