@@ -49,7 +49,7 @@ Todo:
         irc.seb.org.ua:+9996 for UTF – 2.0.5/uk... (CHANTYPES=#&!+)
         irc.anarxi.st:+9996
     gimpnet – 2.8/gimpnet-0.1beta3+ipv6-0.2 oOiwszcrkfydnxb biklmnopstve
-       probably hybrid-6)
+        irc.acc.umu.se ACeGHiMpYZ TS5ow
         $Id: Hybrid-team,v 1.29 2002/01/18 00:01:51 db Exp $
             at/later than 8ba677341ec15b9a30a8104bd2140fced2de9eab (/info)
             at/later than e3a75c85074ddf8fc99f23cef785e46559074cfa (005 maxbans)
