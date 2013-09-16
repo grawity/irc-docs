@@ -68,14 +68,17 @@ TS5
 ## Family tree
 
 legend:
-    [d] - dead
-    [<-foo] - forked from what ircd
-    {foo} - protocol spoken by latest version (from source code)
+    ???             - I am not sure if this ircd fits here
+    foo             - ircd name
+    aka bar         - other equally official names
+    (@ foo)         - main networks
+    [d]             - dead
+    [<-foo]         - forked from what ircd
+    {foo}           - protocol spoken by latest version (from source code)
     {foo <-bar,baz} - protocols spoken by older versions
-    {"foo"} - protocol advertised (unknown if other versions supported)
-    (@ foo) - main networks
-    (foo = bar) - branch codenames
-    (foo -> bar) - renamed
+
+    (foo = bar)     - branch codenames
+    (foo -> bar)    - renamed between versions (i.e. not a real fork)
 
 sorted alphabetically with "ircd-" prefix removed
 
@@ -124,10 +127,10 @@ sorted alphabetically with "ircd-" prefix removed
                     Hyperion [d<-dancer-ircd 1.0.35+pre2]
                 oftc-hybrid
                     oftc-hybrid/bc
-                plexus [<-ircd-hybrid 7.2.3] (@ Rizon)
+                plexus aka ircd-rizon (@ Rizon) [<-ircd-hybrid 7.2.3]
                     Rizon IRCd
-                PTLink [d] (Atheme has TS10~3+PTS4)
-                    Vlife.IRCd "PTS:ow"
+                PTLink [d]
+                    Vlife.IRCd
                 ircd-ratbox {TS6 <-TS3/TS5}
                     Bluebox (@ Azzura.org) [<-ircd-ratbox 3.0.4]
                     Charybdis [<-ircd-ratbox 2.1.5] {TS6 <-TS5}
