@@ -48,13 +48,13 @@ Todo:
         irc.tom.ru – 1.5.18/uk_UA.KOI8-U
         irc.seb.org.ua:+9996 for UTF – 2.0.5/uk... (CHANTYPES=#&!+)
         irc.anarxi.st:+9996
+Done:
     gimpnet – 2.8/gimpnet-0.1beta3+ipv6-0.2 oOiwszcrkfydnxb biklmnopstve
         irc.acc.umu.se ACeGHiMpYZ TS5ow
         $Id: Hybrid-team,v 1.29 2002/01/18 00:01:51 db Exp $
             at/later than 8ba677341ec15b9a30a8104bd2140fced2de9eab (/info)
             at/later than e3a75c85074ddf8fc99f23cef785e46559074cfa (005 maxbans)
             earlier than 74ba3877176ab257ec695b2bcc439643194066cc (/info)
-Done:
     ircnode.org – "charybdis-nodeircd"
     sorcery.net – SorIRCd
 
@@ -77,6 +77,8 @@ legend:
     (foo = bar) - branch codenames
     (foo -> bar) - renamed
 
+sorted alphabetically with "ircd-" prefix removed
+
 (from scratch)
     ircd2.x {RFC1459}
         <http://www.nic.funet.fi/~irc/server/>
@@ -96,61 +98,61 @@ legend:
                 SorIRCd/Sorcery v1.x [d]
             PTnet [<-dal4.6]
         ircd2.8/th [patch <-ircd2.8]
-            ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS6~TS5; v7.3=TS6~TS3}
+            ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS5/TS6 <-TS3}
                 ircd2.8/gimpnet (@ GIMPnet) [<-ircd-hybrid 6.3]
                 ??? Aurora [d]
-                Bahamut (@ DALnet) [<-ircd-hybrid 5.3?] {TS5 <-TS3,TS1}
+                Bahamut (@ DALnet) [<-ircd-hybrid 5.3?] {TS5 <-TS1/TS3}
                     (dfhybrid, in the beginning)
                     (pelennor = Bahamut 1.0)
                     (halcyon = Bahamut ??)
-                    Azzura Bahamut (@ Azzura.org) [<-Bahamut 1.4.34] {TS5~TS3}
+                    Azzura Bahamut (@ Azzura.org) [<-Bahamut 1.4.34] {TS3/TS5}
                     ??? Chimera (TR-IRCD4)
                         ??? Kenora (TR-IRCD5)
                             ??? Austhex v8 {TS7~TS3}
                     ??? fqircd
                     LiquidIRC
-                    ??? Pride (@ ForestNet.org) {"TS5"}
+                    ??? Pride (@ ForestNet.org)
                     ircd-RU! (@ RusNet, WeNet) [<-Bahamut 1.4.3x]
                         (wudan 1.0.2 -> ircd-RU! 1.0.3)
                     solid-ircd (@ Worldnet) [d] [<-Bahamut 1.8]
                     TR-IRCD [<-Bahamut 1.4]
-                    ??? UltimateIRCd <http://www.shadow-realm.org> {TS5~3}
+                    ??? UltimateIRCd <http://www.shadow-realm.org> {TS3/TS5}
                         CritenIRCd (@ Criten/Abjects)
-                        nemesis (@ Criten) {"TS5"}
+                        nemesis (@ Criten)
                     ircd-tiamat [d<-bahamut 1.8]
                 dancer-ircd [d<-ircd-hybrid 6.2] {TS4+DNCR}
-                    Hyperion [d<-dancer-ircd 1.0.35+pre2] {TS4+DNCR} (Atheme has 5~3+DNCR)
+                    Hyperion [d<-dancer-ircd 1.0.35+pre2]
                 oftc-hybrid
                     oftc-hybrid/bc
                 plexus [<-ircd-hybrid 7.2.3] (@ Rizon)
                     Rizon IRCd
                 PTLink [d] (Atheme has TS10~3+PTS4)
                     Vlife.IRCd "PTS:ow"
-                ircd-ratbox {TS6 <-TS5,TS3}
+                ircd-ratbox {TS6 <-TS3/TS5}
                     Bluebox (@ Azzura.org) [<-ircd-ratbox 3.0.4]
                     Charybdis [<-ircd-ratbox 2.1.5] {TS6 <-TS5}
                         ArinityIRCd [d] [<-Charybdis 3.4]
                         FreeBG ircd [<-Charybdis 3.4]
-                        ircd-seven (@ freenode) [<-Charybdis 3.0.1] {TS6}
+                        ircd-seven (@ freenode) [<-Charybdis 3.0.1]
                             cherry-ircd [d]
                                 ircd-cherry [d]
-                        ShadowIRCd [d?] {TS6}
+                        ShadowIRCd [d?]
                             NeoIRCd [d]
                             pendulum [d?] [<-ShadowIRCd 6.3.4]
                             ponychat-ircd [<-ShadowIRCd 6.3.4]
                             SporksIRCd
-                        SorIRCd 3.x (@ Sorcery.Net) {"TS6"}
-                    ircd-evangelion [d<-ircd-ratbox 2.2.6]
+                        SorIRCd 3.x (@ Sorcery.Net)
+                    ircd-evangelion [d] [<-ircd-ratbox 2.2.6]
         ircd2.8/TSpre7
-            ircu [<-ircd2.7] {P10 <-TSpre8,TSpre7}
+            ircu [<-ircd2.7] {P10 <-TSpre7,TSpre8}
                 Asuka [d]
                 Austhex v7 [d]
                 Nefarious
                     Nefarious2
                     ircd-darenet
                 Othernet (@ Othernet.org) [<-ircu2.9]
-                dream-ircu [d<-u2.10.12.10]
-                ircd-sakura [d<-u2.10.12.10]
+                dream-ircu [d] [<-u2.10.12.10]
+                ircd-sakura [d] [<-u2.10.12.10]
                 snircd (@ QuakeNet)
                 ??? glx2.0.4 (@ Galaxynet.org)
         ??? StarIRCD (@ StarChat.net)
@@ -158,7 +160,7 @@ legend:
     DarkIRCd {TS6}
     InspIRCd {InspIRCd TS6}
         +Xynotyro [d]
-            ircd-sakura [d<-InspIRCd-1.1.11+Xynotyro]
+            ircd-sakura [d] [<-InspIRCd-1.1.11+Xynotyro]
     beware ircd
     csircd [d] {TS5}
     IRCNode/ts6-base {TS6}
@@ -171,11 +173,11 @@ legend:
             WavServ
     Synchronet IRCd
     tethys
-    urcd
     WeIRCd
 ?
     Titan IRCd
         ViagraIRCd [d] <http://www.viagraircd.com/>
+    urcd
 
 ## Bahamut
     <http://www.dal.net/?page=bahamut>
