@@ -91,6 +91,7 @@ legend:
                     UnrealIRCd [<-EliteIRCd 2.0b13]
                         gs-ircd (@ GeekShed)
                         QuakeIRCd [d]
+                        rabbitircd [<-UnrealIRCd 3.4]
                 Faerion
                 SorIRCd/Sorcery v1.x [d]
             PTnet [<-dal4.6]
@@ -133,9 +134,9 @@ legend:
                         ircd-seven (@ freenode) [<-Charybdis 3.0.1] {TS6}
                             cherry-ircd [d]
                                 ircd-cherry [d]
-                        ShadowIRCd {TS6}
+                        ShadowIRCd [d?] {TS6}
                             NeoIRCd [d]
-                            pendulum [<-ShadowIRCd 6.3.4]
+                            pendulum [d?] [<-ShadowIRCd 6.3.4]
                             ponychat-ircd [<-ShadowIRCd 6.3.4]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net) {"TS6"}
@@ -182,7 +183,6 @@ legend:
     (branch 1.0 = "pelennor"?)
     protocol: TS5 (as of 1.4.36 g417c5e9)
     - TS1..TS3 (up to g417c5e9)
-            ~TS3; v1.4.35=TS5~TS1}
 
 ## Charybdis
     <http://www.atheme.org/project/charybdis>
@@ -208,6 +208,16 @@ legend:
 ## ircd-seven
     <http://www.freenode.net/seven.shtml>
     base: Charybdis 3.0.1 ⇆ (+ Hyperion)
+
+## rabbitircd
+    <https://github.com/rabbitircd/rabbitircd>
+    base: UnrealIRCd 3.4
+
+    "RabbitIRCD is a fork of the now-defunct UnrealIRCd 3.4 tree, originated by
+    developers on the Weresource IRC network."
+
+    (in other words: kaniini became a developer of Unreal 3.4, then got bored
+    and decided to fork it instead)
 
 ## ratbox
     protocol: TS6 (as of r25522)
@@ -305,8 +315,19 @@ legend:
     <http://anonet2.biz/URC>
     <git://anonet2.biz/urcd.git>
 
-    Small urc daemon (IRC protocol fork made for anonymity and lack of 
+    Small urc daemon (IRC protocol fork made for anonymity and lack of
     power for server operators). Very decentralized, no password needed
-    for linking. 
+    for linking.
+
+
+-------------------------------------------------------------------------------
+
+Note: I'm kinda lazy at `git commit`ing this, so you might find a newer
+      version at <https://dl.dropboxusercontent.com/u/167566/family-tree.txt>
+
+© 2003 Mantas Mikulėnas <grawity@gmail.com>
+
+Released under WTFPL v2.0 <http://sam.zoy.org/wtfpl/>. Do what the fuck you want
+to this, it's all yours.
 
 vim: ts=4:sw=4:et
