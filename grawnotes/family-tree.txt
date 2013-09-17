@@ -139,10 +139,10 @@ sorted alphabetically with "ircd-" prefix removed
                         ircd-seven (@ freenode) [<-Charybdis 3.0.1]
                             cherry-ircd [d]
                                 ircd-cherry [d]
-                        ShadowIRCd [d?]
+                        ShadowIRCd [d]
                             NeoIRCd [d]
-                            pendulum [d?] [<-ShadowIRCd 6.3.4]
-                            ponychat-ircd [<-ShadowIRCd 6.3.4]
+                            pendulum [d] [<-ShadowIRCd 6.3.3]
+                            ponychat-ircd [<-ShadowIRCd 6.3.3]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net)
                     ircd-evangelion [d] [<-ircd-ratbox 2.2.6]
