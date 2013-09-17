@@ -122,9 +122,9 @@ sorted alphabetically with "ircd-" prefix removed
                     ??? UltimateIRCd <http://www.shadow-realm.org> {TS3/TS5}
                         CritenIRCd (@ Criten/Abjects)
                         nemesis (@ Criten)
-                    ircd-tiamat [d<-bahamut 1.8]
-                dancer-ircd [d<-ircd-hybrid 6.2] {TS4+DNCR}
-                    Hyperion [d<-dancer-ircd 1.0.35+pre2]
+                    ircd-tiamat [d] [<-bahamut 1.8]
+                dancer-ircd [d] [<-ircd-hybrid 6.2] {TS4+DNCR}
+                    Hyperion [d] [<-dancer-ircd 1.0.35+pre2]
                 oftc-hybrid
                     oftc-hybrid/bc
                 plexus aka ircd-rizon (@ Rizon) [<-ircd-hybrid 7.2.3]
@@ -141,7 +141,6 @@ sorted alphabetically with "ircd-" prefix removed
                                 ircd-cherry [d]
                         ShadowIRCd [d]
                             NeoIRCd [d]
-                            pendulum [d] [<-ShadowIRCd 6.3.3]
                             ponychat-ircd [<-ShadowIRCd 6.3.3]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net)
