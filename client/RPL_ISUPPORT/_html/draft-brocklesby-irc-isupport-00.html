@@ -1,0 +1,995 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="creator" content="rfcmarkup version 1.104" />
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Identifier" content="urn:ietf:id:brocklesby-irc-isupport" />
+<meta name="DC.Creator" content="Edward Brocklesby &lt;ejb@hades.skumler.net&gt;" />
+<meta name="DC.Date.Issued" content="2004-01-07" />
+<meta name="DC.Title" content="IRC RPL_ISUPPORT Numeric Definition" />
+
+    <link rel="icon" href="/images/id.png" type="image/png" />
+    <link rel="shortcut icon" href="/images/id.png" type="image/png" />
+    <title>draft-brocklesby-irc-isupport-00 - IRC RPL_ISUPPORT Numeric Definition</title>
+    
+    
+    <style type="text/css">
+	body {
+	    margin: 0px 8px;
+            font-size: 1em;
+	}
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style>
+    <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]-->
+
+    <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script>
+</head>
+<body onload="addHeaderTags()">
+   <div style="height: 13px;">
+      <div onmouseover="this.style.cursor='pointer';"
+         onclick="showElem('legend');"
+         onmouseout="hideElem('legend')"
+	 style="height: 6px; position: absolute;"
+         class="pre noprint docinfo bgred"
+         title="Click for colour legend." >                                                                        </div>
+      <div id="legend"
+           class="docinfo noprint pre legend"
+           style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; "
+           onmouseover="showElem('legend');"
+           onmouseout="hideElem('legend');">
+      </div>
+   </div>
+<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="http://tools.ietf.org/id/draft-brocklesby-irc-isupport-00.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/draft-brocklesby-irc-isupport-00.txt" title="PDF version of this document">pdf</a>] [<a href='https://datatracker.ietf.org/doc/draft-brocklesby-irc-isupport' title='IESG Datatracker information for this document'>Tracker</a>] [<a href="mailto:draft-brocklesby-irc-isupport@tools.ietf.org?subject=draft-brocklesby-irc-isupport%20" title="Send email to the document authors">Email</a>] [<a href="/idnits?url=http://tools.ietf.org/id/draft-brocklesby-irc-isupport-00.txt" title="Run an idnits check of this document">Nits</a>]                               </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<span class="pre noprint docinfo">Versions: <a href="./draft-brocklesby-irc-isupport-00">00</a> <a href="./draft-brocklesby-irc-isupport-01">01</a> <a href="./draft-brocklesby-irc-isupport-02">02</a> <a href="./draft-brocklesby-irc-isupport-03">03</a>                                                   </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<pre>
+Network Working Group                                      E. Brocklesby
+INTERNET-DRAFT                                            September 2002
+Expires: March 2003
+
+                  <span class="h1">IRC RPL_ISUPPORT Numeric Definition</span>
+                    <span class="h1">draft-brocklesby-irc-isupport-00</span>
+
+Status of this Document
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of <a href="./rfc2026#section-10">Section&nbsp;10 of RFC2026</a>.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as Internet-
+   Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at
+   <a href="http://www.ietf.org/ietf/1id-abstracts.txt">http://www.ietf.org/ietf/1id-abstracts.txt</a>
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   <a href="http://www.ietf.org/shadow.html">http://www.ietf.org/shadow.html</a>.
+
+
+   This document is a product of an individual.  Comments are solicited
+   and should be addressed to the author.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2002). All Rights Reserved.
+
+Abstract
+
+     This memo presents a way for the server to unobtrusively advertise
+     the ways in which it differs from the IRC specification defined in
+     <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>]. It is a primary goal to implement this in a way which
+     is completely backwards-compatible with the original protocol, and
+     also with current non-standard implementations of the ISUPPORT
+     numeric.
+
+
+
+
+
+
+
+<span class="grey">Brocklesby                                                      [Page 1]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-2" id="page-2" href="#page-2" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+                           Table of Contents
+
+
+<a href="#section-1">1</a>. Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+ <a href="#section-1.1">1.1</a>. Terminology. . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+ <a href="#section-1.2">1.2</a>. Motivation . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+<a href="#section-2">2</a>. Protocol outline. . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-2">2</a>
+<a href="#section-3">3</a>. Currently defined tokens. . . . . . . . . . . . . . . . . . . . .   <a href="#page-4">4</a>
+ <a href="#section-3.1">3.1</a>. PREFIX . . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-4">4</a>
+ <a href="#section-3.2">3.2</a>. CHANTYPES. . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-5">5</a>
+ <a href="#section-3.3">3.3</a>. CHANMODES. . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-5">5</a>
+ <a href="#section-3.4">3.4</a>. MODES. . . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+ <a href="#section-3.5">3.5</a>. MAXCHANNELS. . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-6">6</a>
+ <a href="#section-3.6">3.6</a>. NICKLEN. . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-7">7</a>
+ <a href="#section-3.7">3.7</a>. MAXBANS. . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-7">7</a>
+ <a href="#section-3.8">3.8</a>. NETWORK. . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-7">7</a>
+ <a href="#section-3.9">3.9</a>. EXCEPTS. . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+ <a href="#section-3.10">3.10</a>. INVEX . . . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+ <a href="#section-3.11">3.11</a>. STATUSMSG . . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-8">8</a>
+ <a href="#section-3.12">3.12</a>. CASEMAPPING . . . . . . . . . . . . . . . . . . . . . . . . .   <a href="#page-9">9</a>
+ <a href="#section-3.13">3.13</a>. SAFELIST. . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+ <a href="#section-3.14">3.14</a>. TOPICLEN. . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+ <a href="#section-3.15">3.15</a>. KICKLEN . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+ <a href="#section-3.16">3.16</a>. CHANNELLEN. . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-10">10</a>
+ <a href="#section-3.17">3.17</a>. CHARSET . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-11">11</a>
+ <a href="#section-3.18">3.18</a>. CHIDLEN . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-11">11</a>
+ <a href="#section-3.19">3.19</a>. STD . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-12">12</a>
+<a href="#section-4">4</a>. Differences to existing implementations . . . . . . . . . . . . .  <a href="#page-12">12</a>
+ <a href="#section-4.1">4.1</a>. PREFIX token without value . . . . . . . . . . . . . . . . . .  <a href="#page-12">12</a>
+ <a href="#section-4.2">4.2</a>. EXCEPTS and INVEX value argument . . . . . . . . . . . . . . .  <a href="#page-12">12</a>
+ <a href="#section-4.3">4.3</a>. STATUSMSG. . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+ <a href="#section-4.4">4.4</a>. Conflicts with <a href="./rfc2812">RFC 2812</a>. . . . . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+ <a href="#section-4.5">4.5</a>. Default value for CASEMAPPING. . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+<a href="#section-5">5</a>. Acknowledgements. . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+<a href="#section-6">6</a>. References. . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-13">13</a>
+<a href="#section-7">7</a>. Author's Address. . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-14">14</a>
+<a href="#section-8">8</a>. Full Copyright Statement. . . . . . . . . . . . . . . . . . . . .  <a href="#page-14">14</a>
+
+<span class="h2"><a class="selflink" name="section-1" href="#section-1">1</a>.  Introduction</span>
+
+<span class="h3"><a class="selflink" name="section-1.1" href="#section-1.1">1.1</a>.  Terminology</span>
+
+     Original IRC protocol: The original IRC protocol as described in
+     <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>].
+
+     The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+     "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in
+     this document are to be interpreted as described in <a href="./rfc2119">RFC 2119</a> [<a href="#ref-2" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">2</a>].
+
+
+
+<span class="grey">Brocklesby                                        <a href="#section-1.1">Section 1.1</a>.  [Page 2]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-3" id="page-3" href="#page-3" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     The ABNF syntax used in this document is defined in <a href="./rfc2234">RFC 2234</a> [<a href="#ref-3" title="&quot;Augmented BNF for Syntax Specifications: ABNF&quot;">3</a>].
+
+<span class="h3"><a class="selflink" name="section-1.2" href="#section-1.2">1.2</a>.  Motivation</span>
+
+     Since the publication of <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>] in 1993, a number of changes
+     and extensions have been made to the IRC protocol.  This has led to
+     a problem whereby clients are unable to correctly interpret some
+     server replies, because the reply, channel mode, and so on may have
+     different meanings on different implementations of the IRC server.
+     It is also difficult for the client to ascertain which protocol
+     extensions may be available on a specific server.  A de-facto
+     standard has emerged in the community, originally implemented by
+     the Undernet's IRC server software based on the 005 numeric from
+     DALnet's IRC server, which allows the server to advertise to the
+     client upon connection which protocol extensions it supports.  This
+     reply, termed RPL_ISUPPORT, uses the non-standard numeric 005.
+
+     Unfortunately, since there is no standard document describing the
+     ISUPPORT numeric, differences have emerged between implementations
+     in IRC server software; it is believed that this reduces the
+     potential usefulness of the feature.  This memo attempts to
+     standardise the format and content of the ISUPPORT method in an
+     extensible way, such that IRC clients can use the information
+     provided to the maximum extent.
+
+<span class="h2"><a class="selflink" name="section-2" href="#section-2">2</a>.  Protocol outline</span>
+
+     The ISUPPORT numeric consists of a series of tokens, each of which
+     maps to a protocol extention supported by the IRC server.  A token
+     may have an associated value, typically a numeric or string value,
+     which provides additional information on the extension.
+
+     The format of the ISUPPORT numeric is the same as other server
+     numeric replies currently used.  A client which does not understand
+     the numeric may ignore it; however, it is recommended that IRC
+     clients understand ISUPPORT, in order to allow users the full
+     benefit of features implemented by the IRC server.  The ABNF
+     grammar for the numeric is as follows:
+
+       isupport = ":" servername SP "005" SP nickname SP
+               1*13( token SP ) ":are supported by this server"
+
+       token = *1"-" parameter / parameter *1( "=" *1value )
+       parameter = 1*20letter
+       value = 1*20letter
+       letter = ALPHA / DIGIT / "-" / ","
+
+
+
+
+
+<span class="grey">Brocklesby                                          <a href="#section-2">Section 2</a>.  [Page 3]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-4" id="page-4" href="#page-4" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     The format of the postfix descriptive text is not fixed, and may be
+     any string subject to the requirements of <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>] regarding
+     numeric replies.  Servername and nickname are as defined in <a href="./rfc1459">RFC</a>
+     <a href="./rfc1459">1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>].
+
+     The server MUST send parameter and value in upper-case text, and it
+     is RECOMMENDED that clients treat capabilities in a case-
+     insensitive manner.  <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>] defines a maximum of 15
+     parameters to any reply, including the nickname and the text;
+     therefore, only 13 capabilities are possible per reply.
+
+     In order to allow flexibility in the protocol, and future
+     expansion, the server may send more than one ISUPPORT reply per
+     connection.  It is RECOMMENDED that consecutive ISUPPORT replies
+     are sent adjacent to each other.  The client MUST support receiving
+     multiple ISUPPORT replies, and should merge them to produce the
+     final list of supported protocol extentions.  While it is
+     recommended that the server attempt to send 13 tokens per line
+     before sending multiple replies, this is not required.
+
+     A token is of the form "TOKEN[=[VALUE]]" or "-TOKEN".  Absence of a
+     token implies that the default value should be used; except as
+     explicitly stated below, this is, in order of preference: the
+     behaviour that <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>] defines; the accepted behaviour in the
+     IRC community; and undefined.  Except as explicitly stated below, a
+     token should not be sent unless it changes this default value, or
+     the default value is vague, badly defined, or differs between IRC
+     server implementations.  When in doubt, the token should be sent.
+     If a token which accepts a VALUE specifier is given without the any
+     VALUE parameter, it should be ignored by the client and the default
+     value used as if it was not specified, except as explicitly stated
+     below.  A token with a null value, of the form "TOKEN=", should be
+     treated as having an empty value specifier.  If the token does not
+     allow an empty value specifier, the client should ignore the entire
+     token, as if it was not specified.
+
+     The form "-TOKEN" is used to negate a previously specified token;
+     that is, revert to the behaviour that would occur if the token had
+     not been specified. This is intended to allow servers to change
+     their capabilities without disconnecting clients. Both tokens with
+     and without a value argument may be negated; however, the value
+     argument should not be given.  It is not required to negate a token
+     in order to change its value, the server should merely re-advertise
+     the token with the new value.
+
+     The server may negate tokens which have not been previously
+     advertised to the client; in this case, the client should ignore
+     the negation.
+
+
+
+<span class="grey">Brocklesby                                          <a href="#section-2">Section 2</a>.  [Page 4]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-5" id="page-5" href="#page-5" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     The server may not advertise and negate the same token in one
+     ISUPPORT numeric reply, nor may it advertise the same token with
+     different value specifiers.  The client's behaviour in this case is
+     undefined, however it is recommended that the client honour the
+     tokens in order; that is, the latter specification of a token
+     overrides the former.
+
+<span class="h2"><a class="selflink" name="section-3" href="#section-3">3</a>.  Currently defined tokens</span>
+
+     A number of tokens are currently used in the IRC community, and it
+     is believed to be beneficial to standardise these.  They are listed
+     below, with relevant information.
+
+<span class="h3"><a class="selflink" name="section-3.1" href="#section-3.1">3.1</a>.  PREFIX</span>
+
+     PREFIX=[(modes)prefixes]
+
+     The PREFIX token specifies a list of channel status flags (the
+     "modes" parameter) that clients may have on channels, followed by a
+     mapping to the to channel status flags ("prefixes"), which are used
+     in NAMES and WHO replies.  There is a one to one mapping between
+     each mode and prefix; for example, (ab)&amp;* maps the channel mode 'a'
+     to the channel status flag "&amp;", and channel mode "b" to the channel
+     status flag *.  The order of the most should be from the status
+     which gives most privileges on the channel, to that which gives the
+     least.
+
+     Example: PREFIX=(ohv)@%+ maps channel mode +o to status @, +h to
+          status %, and +v to status +.
+
+     The default value for PREFIX is "PREFIX=(ov)@+", which corresponds
+     to <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>]. It should not be specified if the server provides
+     only these modes.  If a server provides ANY additional status
+     flags, it should also provide (ov)@+.  The PREFIX token may be
+     advertised with a null value specifier; this indicates that no
+     prefixes are supported by the IRC server.
+
+<span class="h3"><a class="selflink" name="section-3.2" href="#section-3.2">3.2</a>.  CHANTYPES</span>
+
+     CHANTYPES=chars
+
+     The CHANTYPES token specifies the valid characters to begin a
+     channel name.
+
+
+     Example: CHANTYPES=+#&amp; defines that channels names may begin with
+          either +, #, or &amp;; for example, #mychannel.
+
+
+
+
+<span class="grey">Brocklesby                                        <a href="#section-3.2">Section 3.2</a>.  [Page 5]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-6" id="page-6" href="#page-6" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     The default value for CHANTYPES is "CHANTYPES=#&amp;", which
+     corresponds to <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>]. It should not be specified if the
+     server supports exactly these channel types.  The CHANTYPES token
+     requires a non-null value specifier; if no value is given, or it is
+     null, the client should ignore the entire token.
+
+<span class="h3"><a class="selflink" name="section-3.3" href="#section-3.3">3.3</a>.  CHANMODES</span>
+
+     CHANMODES[=A,B,C,D]
+
+     The CHANMODES specifies the modes that may be set on a channel.
+     These modes are split into four categories, as follows:
+
+     Type A: Modes that add or remove an address to or from a list.
+          These modes always take a parameter.
+
+     Type B: Modes that change a setting on the channel.  These modes
+          always take a parameter.
+
+     Type C: Modes that change a setting on the channel.  These modes
+          take a parameter only when set; the parameter is absent when
+          the mode is removed.
+
+     Type D: Modes that change a setting on the channel.  These modes
+          never take a parameter.
+
+     The IRC server should not list modes in CHANMODES which are also
+     present in the PREFIX token; however, for completeness, modes
+     described in PREFIX may be treated as type B modes.
+
+     If the server sends a mode which is missing from both CHANMODES and
+     PREFIX, the client should treat it as a type D mode. However, this
+     is a protocol violation by the server.
+
+
+     Example: CHANMODES=b,k,l,imnpst
+
+     The CHANMODES token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.  The default value for CHANMODES is "b,k,l,imnpst", which
+     corresponds to <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>].
+
+<span class="h3"><a class="selflink" name="section-3.4" href="#section-3.4">3.4</a>.  MODES</span>
+
+     MODES=number
+
+     This token specifies the maximum number of "variable" modes which
+     may be set on a channel via a single MODE command from a client.  A
+
+
+
+<span class="grey">Brocklesby                                        <a href="#section-3.4">Section 3.4</a>.  [Page 6]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-7" id="page-7" href="#page-7" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     variable mode is defined as a mode which takes a parameter and may
+     be specified multiple times in a single MODE command; for example,
+     "+o" and "+v" are variable modes.  Note that "+l" and "+k" are NOT
+     variable modes, because they may only appear once in a single MODE
+     command.  It does not specify how many modes the client may receive
+     in one MODE command from the server.
+
+
+     Example: MODES=3 indicates that 3 modes may be set with a MODE
+          command.
+
+     The default value for the MODES token is 3, which corresponds to
+     <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>]. The MODES token requires a non-null value specifier;
+     if no value is given, or it is null, the client should ignore the
+     entire token.
+
+<span class="h3"><a class="selflink" name="section-3.5" href="#section-3.5">3.5</a>.  MAXCHANNELS</span>
+
+     MAXCHANNELS=number
+
+     This token specifies the maximum number of channels that a client
+     may join.  This should include all types of channels available on
+     the server (as indicated by CHANTYPES).
+
+
+     Example: MAXCHANNELS=10 indicates that a client may join up to 10
+          channels.
+
+     The MAXCHANNELS token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.  There is no default value for the MAXCHANNELS token.
+
+<span class="h3"><a class="selflink" name="section-3.6" href="#section-3.6">3.6</a>.  NICKLEN</span>
+
+     NICKLEN=number
+
+     This token specifies the maximum nickname length that any client on
+     the network may have.
+
+
+     Example: NICKLEN=9 indicates that clients may have nicknames up to
+          9 characters in length.
+
+     The  token requires a non-null value specifier; if no value is
+     given, or it is null, the client should ignore the entire token.
+     The default value for NICKLEN is 9, which corresponds to <a href="./rfc1459">RFC 1459</a>
+     [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>].
+
+
+
+
+<span class="grey">Brocklesby                                        <a href="#section-3.6">Section 3.6</a>.  [Page 7]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-8" id="page-8" href="#page-8" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+<span class="h3"><a class="selflink" name="section-3.7" href="#section-3.7">3.7</a>.  MAXBANS</span>
+
+     MAXBANS=number
+
+     This token specifies the maximum numbers of bans that may be set on
+     a channel at one time.  Note that this should only be interpreted
+     as applying to new bans which are set by clients -- it should not
+     be used to infer the maximum length of the ban list returned by the
+     server.
+
+
+     Example: MAXBANS=30 indicates that 30 bans may be set on a channel
+          at one time.
+
+     The MAXBANS token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     There is no default value for the MAXBANS token.
+
+     Note that separate limits are used for each "nick!user@host" list
+     on the channel, if more than one is available; that is, if MAXBANS
+     is 25, it is possible to set both 25 bans and (for example) 25
+     invite exceptions on any one channel at the same time.
+
+<span class="h3"><a class="selflink" name="section-3.8" href="#section-3.8">3.8</a>.  NETWORK</span>
+
+     NETWORK=name
+
+     The NETWORK token defines the name of the IRC network that the
+     client is connected to.
+
+
+     Example: NETWORK=EFnet indicates that the client is connected to
+          the EFnet IRC network.
+
+     Note that this token is intended only for user display purposes;
+     the client SHOULD NOT assume further capabilities or features of
+     the IRC server based on the value of the NETWORK token.  The
+     NETWORK token requires a non-null value specifier; if no value is
+     given, or it is null, the client should ignore the entire token.
+     There is no default value for the NETWORK token.
+
+<span class="h3"><a class="selflink" name="section-3.9" href="#section-3.9">3.9</a>.  EXCEPTS</span>
+
+     EXCEPTS[=modechar]
+
+     The EXCEPTS token indicates that the server supports "ban
+     exceptions" (channel mode +e), as defined in <a href="./rfc2811">RFC 2811</a> [<a href="#ref-5" title="&quot;Internet Relay Chat: Channel Management&quot;">5</a>], sections
+     4.3.1.  The optional value argument to EXCEPTS indicates which
+
+
+
+<span class="grey">Brocklesby                                        <a href="#section-3.9">Section 3.9</a>.  [Page 8]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-9" id="page-9" href="#page-9" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     channel mode is used for ban exceptions. If no value is specified,
+     or it is null, it is assumed that mode +e is used.
+
+<span class="h3"><a class="selflink" name="section-3.10" href="#section-3.10">3.10</a>.  INVEX</span>
+
+     INVEX[=modechar]
+
+     The INVEX token indicates that the server supports "invite
+     exceptions", as defined in <a href="./rfc2811">RFC 2811</a> [<a href="#ref-5" title="&quot;Internet Relay Chat: Channel Management&quot;">5</a>], section 4.3.2.  The
+     optional value argument to INVEX indicates which channel mode is
+     used for invite exceptions.  If no value is specified, or it is
+     null, it is assumed that mode +I is used.
+
+
+<span class="h3"><a class="selflink" name="section-3.11" href="#section-3.11">3.11</a>.  STATUSMSG</span>
+
+     STATUSMSG=string
+
+     The server supports a method of sending a notice or message to only
+     those people on a channel with the specified status.  This is done
+     via a NOTICE or PRIVMSG command, with the channel prefixed by the
+     desired status flag as the target; for example:
+
+     NOTICE @#channel :Hi there
+
+     The server should deliver the message to all users on the specified
+     channel with equal or higher status on the channel as the status
+     flag indicates; for example, a message to "+#channel" would deliver
+     the message to all voiced and opped users on #channel, assuming
+     that the server supported the PREFIX value (ov)@+.
+
+     The required value argument to STATUSMSG indicates which prefixes
+     (from the PREFIX= token) are valid status values for use in NOTICE
+     and PRIVMSG commands.
+
+     The STATUSMSG token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.
+
+<span class="h3"><a class="selflink" name="section-3.12" href="#section-3.12">3.12</a>.  CASEMAPPING</span>
+
+     CASEMAPPING=string
+
+     The CASEMAPPING token allows the server to specify which method it
+     uses to compare case equality.  Possible values are:
+
+     "ascii": The ASCII characters 97 to 122 (decimal) are defined as
+          the lower-case characters of ASCII 65 to 90 (decimal).  No
+
+
+
+<span class="grey">Brocklesby                                       <a href="#section-3.12">Section 3.12</a>.  [Page 9]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-10" id="page-10" href="#page-10" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+          other character equivalency is defined.
+
+     "<a href="./rfc1459">rfc1459</a>": The ASCII characters 97 to 126 (decimal) are defined as
+          the lower-case characters of ASCII 65 to 94 (decimal).  No
+          other character equivalency is defined.
+
+     "strict-rfc1459": The ASCII characters 97 to 125 (decimal) are
+          defined as the lower-case characters of ASCII 65 to 93
+          (decimal).  No other character equivalency is defined.
+
+     Note that the only difference between "<a href="./rfc1459">rfc1459</a>" and "strict-
+     <a href="./rfc1459">rfc1459</a>" is that the characters "~" and "^" are not considered
+     equivalent in the "strict-rfc1459" encoding.  This is believed to
+     be an mistake in the specification of character equivalency in <a href="./rfc1459">RFC</a>
+     <a href="./rfc1459">1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>]; the majority of IRC server implementations known to the
+     author treat these characters as equivalent (however, see <a href="#section-4.5">section</a>
+     <a href="#section-4.5">4.5</a>).
+
+     The CASEMAPPING token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.
+
+     The default value for CASEMAPPING is "<a href="./rfc1459">rfc1459</a>".  While this differs
+     from the historical definition in <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>], it is believed to
+     reflect current IRC server implementations, and is as such more
+     useful.
+
+<span class="h3"><a class="selflink" name="section-3.13" href="#section-3.13">3.13</a>.  SAFELIST</span>
+
+     SAFELIST
+
+     The SAFELIST token indicates that the client may request a "LIST"
+     command from the server, without being disconnected due to the
+     large amount of data generated by the command.
+
+     The SAFELIST token must not be specified with a value; if a value
+     is given, the client should treat the token as if it was specified
+     without a value.
+
+<span class="h3"><a class="selflink" name="section-3.14" href="#section-3.14">3.14</a>.  TOPICLEN</span>
+
+     TOPICLEN=number
+
+     The TOPICLEN token specifies the maximum length of the topic
+     specified in the TOPIC command for a channel.  Note that it only
+     specifies the length of topic that may be set -- the server is free
+     to return topics longer than this length to the client.
+
+
+
+
+<span class="grey">Brocklesby                                      <a href="#section-3.14">Section 3.14</a>.  [Page 10]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-11" id="page-11" href="#page-11" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     The TOPICLEN token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     There is no default value for the TOPICLEN token.
+
+<span class="h3"><a class="selflink" name="section-3.15" href="#section-3.15">3.15</a>.  KICKLEN</span>
+
+     KICKLEN=number
+
+     The KICKLEN token specifies the maximum length of a KICK message
+     that a client may use.  Note that it only specifies the length the
+     client should send to the server -- the server may send KICK
+     messages with a length longer than this value.
+
+     The KICKLEN token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     There is no default value for the KICKLEN token.
+
+<span class="h3"><a class="selflink" name="section-3.16" href="#section-3.16">3.16</a>.  CHANNELLEN</span>
+
+     CHANNELLEN=number
+
+     The CHANNELLEN token specifies the maximum length of a channel's
+     name.  The server MUST NOT make known to the client any channels
+     with a name longer than that specified in this value -- that is,
+     the client may depend on a channel's name never being longer than
+     this.
+
+     The CHANNELLEN token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.  The default value for CHANNELLEN is 200; this corresponds
+     to <a href="./rfc1459">RFC 1459</a> [<a href="#ref-4" title="&quot;Internet Relay Chat Protocol&quot;">4</a>].
+
+<span class="h3"><a class="selflink" name="section-3.17" href="#section-3.17">3.17</a>.  CHARSET</span>
+
+     CHARSET=string
+
+     The CHARSET token is used to indicate which region language
+     encoding is used in server replies (numerics) and NOTICE commands
+     to the user.  It does not apply to nicknames, channel names, client
+     to client messages or any other text.
+
+     Possible values for the CHARSET token are:
+
+          "ascii": All server messages will be sent in 7-bit US-ASCII
+               format.
+
+          "UTF-8": All server messages will be sent in Unicode UTF-8
+               encoding.
+
+
+
+<span class="grey">Brocklesby                                      <a href="#section-3.17">Section 3.17</a>.  [Page 11]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-12" id="page-12" href="#page-12" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+          "iso_xxxx_x": All server messages will be sent in the
+               specified ISO regional language encoding; for example
+               "iso_8859_15".
+
+     The CHARSET token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     The default value for the CHARSET token is "ascii".
+
+<span class="h3"><a class="selflink" name="section-3.18" href="#section-3.18">3.18</a>.  CHIDLEN</span>
+
+     CHIDLEN=number
+
+     The CHIDLEN token specifies the length of the "ID" portion of
+     "safe" channels specified in <a href="./rfc2811">RFC 2811</a> [<a href="#ref-5" title="&quot;Internet Relay Chat: Channel Management&quot;">5</a>].
+
+
+     Example: CHIDLEN=5 means the client should expect IDs which are 5
+          characters in length; for example "!JNB4Sircd".
+
+     The CHIDLEN token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     The default value for CHIDLEN is 5; this corresponds to <a href="./rfc2811">RFC 2811</a>
+     [<a href="#ref-5" title="&quot;Internet Relay Chat: Channel Management&quot;">5</a>].
+
+<span class="h3"><a class="selflink" name="section-3.19" href="#section-3.19">3.19</a>.  STD</span>
+
+     STD=version[,version[,...]]
+
+     The STD token indicates which form(s) of the ISUPPORT numeric are
+     used by the server.  Currently, one only possible value is defined;
+     that is "i-d", which refers to this document.
+
+     The STD token is intended to be extensible, so that if later
+     standards emerge which update this document, the server may be able
+     to advertise this.  The "version" string is free-form subject to
+     the requirements in <a href="#section-2">section 2</a>, however, protocol updates defined in
+     RFCs should be named "rfcxxxx", where "xxxx" is the relevant RFC
+     number.
+
+     A server may support any number of STD versions. However, in order
+     to reduce space being needlessly wasted by this token, care should
+     be taken before adding another version. It is expected that most
+     new features may be advertised simply by tokens, in which case a
+     new version string is not required.
+
+     The I-D token requires a non-null value specifier; if no value is
+     given, or it is null, the client should ignore the entire token.
+     The default value for the I-D token is none; that is, no
+
+
+
+<span class="grey">Brocklesby                                      <a href="#section-3.19">Section 3.19</a>.  [Page 12]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-13" id="page-13" href="#page-13" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     standardised ISUPPORT is available.
+
+     Note that it is expected that the "i-d" string will be replaced
+     with an equivalent "rfcxxxx" token if this document is
+     standardised.
+
+<span class="h2"><a class="selflink" name="section-4" href="#section-4">4</a>.  Differences to existing implementations</span>
+
+     A number of differences exist between the ISUPPORT defined in this
+     document and traditional implementations of the ISUPPORT numeric.
+
+<span class="h3"><a class="selflink" name="section-4.1" href="#section-4.1">4.1</a>.  PREFIX token without value</span>
+
+     The PREFIX token is traditionally not sent without a value
+     parameter; indeed, the author is not aware of any IRC server
+     implementations where this would be appropriate. However, it is
+     believed that this support is desired to allow extra flexibility,
+     while retaining compatibility with traditional PREFIX
+     implementations.
+
+<span class="h3"><a class="selflink" name="section-4.2" href="#section-4.2">4.2</a>.  EXCEPTS and INVEX value argument</span>
+
+     EXCEPTS and INVEX traditionally take no argument -- while they
+     indicate presence of these features on the server, they do not
+     specify the channel mode which is associated with these features.
+     It is believed that the argument value described here provides
+     extra flexibility while retaining backwards compatibility.
+
+<span class="h3"><a class="selflink" name="section-4.3" href="#section-4.3">4.3</a>.  STATUSMSG</span>
+
+     The STATUSMSG token replaces the traditional WALLCHOPS token used
+     by some current implementations.  It is believed that the name
+     STATUSMSG better reflects the functionality; since the argument to
+     STATUSMSG is not optional, it would break backwards compatibility
+     to use the name WALLCHOPS. It was not considered beneficial to
+     allow a STATUSMSG flag without a value.
+
+<span class="h3"><a class="selflink" name="section-4.4" href="#section-4.4">4.4</a>.  Conflicts with <a href="./rfc2812">RFC 2812</a></span>
+
+     <a href="./rfc2812">RFC 2812</a> [6], <a href="#section-5.1">section 5.1</a>, defines a numeric reply "RPL_BOUNCE",
+     with the associated number "005".  While this conflicts with the
+     ISUPPORT numeric, it is considered that ISUPPORT has received much
+     more widespread support, and is the de-facto standard for use of
+     the 005 numeric.  It is believed that the use of 005 as RPL_BOUNCE
+     is being deprecated.
+
+     <a href="./rfc2812">RFC 2812</a> [6] is an Informational RFC and does not not specify an
+     Internet standard.
+
+
+
+<span class="grey">Brocklesby                                       <a href="#section-4.4">Section 4.4</a>.  [Page 13]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-14" id="page-14" href="#page-14" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+<span class="h3"><a class="selflink" name="section-4.5" href="#section-4.5">4.5</a>.  Default value for CASEMAPPING</span>
+
+     The default value for CASEMAPPING ("<a href="./rfc1459">rfc1459</a>") was chosen because it
+     reflects the prevailing implementations of the IRC server software
+     currently in use. While some IRC servers have moved to the "ascii"
+     case mapping, those known to the author indicate this via
+     CASEMAPPING=ascii; therefore this is not believed to introduce any
+     compatibility problems.
+
+<span class="h2"><a class="selflink" name="section-5" href="#section-5">5</a>.  Acknowledgements</span>
+
+     The author gratefully acknowledges the contributions of Bill Fenner
+     and Perry Lorier in the preparation of this document.
+
+     This document is heavily based on a previous document entitled "The
+     005 numeric" [<a href="#ref-1" title="&quot;The 005 numeric&quot;">1</a>].
+
+<span class="h2"><a class="selflink" name="section-6" href="#section-6">6</a>.  References</span>
+
+     [<a name="ref-1" id="ref-1">1</a>] Roeckx, K., "The 005 numeric", September 2002.
+
+     [<a name="ref-2" id="ref-2">2</a>] Bradner, S., "Key words for use in RFCs to Indicate Requirement
+          Levels", <a href="./rfc2119">RFC 2119</a>, March 1997.
+
+     [<a name="ref-3" id="ref-3">3</a>] Crocker, D. and P. Overell, "Augmented BNF for Syntax
+          Specifications: ABNF", <a href="./rfc2234">RFC 2234</a>, November 1997.
+
+     [<a name="ref-4" id="ref-4">4</a>] Oikarinen, J. and D. Reed, "Internet Relay Chat Protocol", <a href="./rfc1459">RFC</a>
+          <a href="./rfc1459">1459</a>, May 1993.
+
+     [<a name="ref-5" id="ref-5">5</a>] Kalt, C., "Internet Relay Chat: Channel Management", <a href="./rfc2811">RFC 2811</a>,
+          April 2000.  [6] Kalt, C., "Internet Relay Chat: Client
+          Protocol", <a href="./rfc2812">RFC 2812</a>, April 2000.
+
+<span class="h2"><a class="selflink" name="section-7" href="#section-7">7</a>.  Author's Address</span>
+
+     Edward Brocklesby
+     57 Williamson Way
+     Oxford  OX4 4TU
+     UK
+
+     Phone: +44 1865 452230
+     EMail: ejb@hades.skumler.net
+
+<span class="h2"><a class="selflink" name="section-8" href="#section-8">8</a>.  Full Copyright Statement</span>
+
+     Copyright (C) The Internet Society (2002). All Rights Reserved.
+
+
+
+
+<span class="grey">Brocklesby                                         <a href="#section-8">Section 8</a>.  [Page 14]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-15" id="page-15" href="#page-15" class="invisible"> </a>
+<span class="grey">INTERNET-DRAFT             Expires: March 2003            September 2002</span>
+
+
+     This document and translations of it may be copied and furnished to
+     others, and derivative works that comment on or otherwise explain
+     it or assist in its implementation may be prepared, copied,
+     published and distributed, in whole or in part, without restriction
+     of any kind, provided that the above copyright notice and this
+     paragraph are included on all such copies and derivative works.
+     However, this document itself may not be modified in any way, such
+     as by removing the copyright notice or references to the Internet
+     Society or other Internet organizations, except as needed for the
+     purpose of developing Internet standards in which case the
+     procedures for copyrights defined in the Internet Standards process
+     must be followed, or as required to translate it into languages
+     other than English.
+
+     The limited permissions granted above are perpetual and will not be
+     revoked by the Internet Society or its successors or assigns.
+
+     This document and the information contained herein is provided on
+     an "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET
+     ENGINEERING TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+     THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+     WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Brocklesby                                         <a href="#section-8">Section 8</a>.  [Page 15]
+
+</pre><br />
+<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.104, available from
+<a href="http://tools.ietf.org/tools/rfcmarkup/">http://tools.ietf.org/tools/rfcmarkup/</a>
+</small></small></span>
+</body></html>

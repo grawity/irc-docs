@@ -1,0 +1,836 @@
+Network Working Group                                      E. Brocklesby
+INTERNET-DRAFT                                            September 2002
+Expires: March 2003
+
+                  IRC RPL_ISUPPORT Numeric Definition
+                    draft-brocklesby-irc-isupport-00
+
+Status of this Document
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as Internet-
+   Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at
+   http://www.ietf.org/ietf/1id-abstracts.txt
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+
+   This document is a product of an individual.  Comments are solicited
+   and should be addressed to the author.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2002). All Rights Reserved.
+
+Abstract
+
+     This memo presents a way for the server to unobtrusively advertise
+     the ways in which it differs from the IRC specification defined in
+     RFC 1459 [4]. It is a primary goal to implement this in a way which
+     is completely backwards-compatible with the original protocol, and
+     also with current non-standard implementations of the ISUPPORT
+     numeric.
+
+
+
+
+
+
+
+Brocklesby                                                      [Page 1]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+                           Table of Contents
+
+
+1. Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . .   2
+ 1.1. Terminology. . . . . . . . . . . . . . . . . . . . . . . . . .   2
+ 1.2. Motivation . . . . . . . . . . . . . . . . . . . . . . . . . .   2
+2. Protocol outline. . . . . . . . . . . . . . . . . . . . . . . . .   2
+3. Currently defined tokens. . . . . . . . . . . . . . . . . . . . .   4
+ 3.1. PREFIX . . . . . . . . . . . . . . . . . . . . . . . . . . . .   4
+ 3.2. CHANTYPES. . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+ 3.3. CHANMODES. . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+ 3.4. MODES. . . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
+ 3.5. MAXCHANNELS. . . . . . . . . . . . . . . . . . . . . . . . . .   6
+ 3.6. NICKLEN. . . . . . . . . . . . . . . . . . . . . . . . . . . .   7
+ 3.7. MAXBANS. . . . . . . . . . . . . . . . . . . . . . . . . . . .   7
+ 3.8. NETWORK. . . . . . . . . . . . . . . . . . . . . . . . . . . .   7
+ 3.9. EXCEPTS. . . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+ 3.10. INVEX . . . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+ 3.11. STATUSMSG . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+ 3.12. CASEMAPPING . . . . . . . . . . . . . . . . . . . . . . . . .   9
+ 3.13. SAFELIST. . . . . . . . . . . . . . . . . . . . . . . . . . .  10
+ 3.14. TOPICLEN. . . . . . . . . . . . . . . . . . . . . . . . . . .  10
+ 3.15. KICKLEN . . . . . . . . . . . . . . . . . . . . . . . . . . .  10
+ 3.16. CHANNELLEN. . . . . . . . . . . . . . . . . . . . . . . . . .  10
+ 3.17. CHARSET . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
+ 3.18. CHIDLEN . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
+ 3.19. STD . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  12
+4. Differences to existing implementations . . . . . . . . . . . . .  12
+ 4.1. PREFIX token without value . . . . . . . . . . . . . . . . . .  12
+ 4.2. EXCEPTS and INVEX value argument . . . . . . . . . . . . . . .  12
+ 4.3. STATUSMSG. . . . . . . . . . . . . . . . . . . . . . . . . . .  13
+ 4.4. Conflicts with RFC 2812. . . . . . . . . . . . . . . . . . . .  13
+ 4.5. Default value for CASEMAPPING. . . . . . . . . . . . . . . . .  13
+5. Acknowledgements. . . . . . . . . . . . . . . . . . . . . . . . .  13
+6. References. . . . . . . . . . . . . . . . . . . . . . . . . . . .  13
+7. Author's Address. . . . . . . . . . . . . . . . . . . . . . . . .  14
+8. Full Copyright Statement. . . . . . . . . . . . . . . . . . . . .  14
+
+1.  Introduction
+
+1.1.  Terminology
+
+     Original IRC protocol: The original IRC protocol as described in
+     RFC 1459 [4].
+
+     The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+     "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in
+     this document are to be interpreted as described in RFC 2119 [2].
+
+
+
+Brocklesby                                        Section 1.1.  [Page 2]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     The ABNF syntax used in this document is defined in RFC 2234 [3].
+
+1.2.  Motivation
+
+     Since the publication of RFC 1459 [4] in 1993, a number of changes
+     and extensions have been made to the IRC protocol.  This has led to
+     a problem whereby clients are unable to correctly interpret some
+     server replies, because the reply, channel mode, and so on may have
+     different meanings on different implementations of the IRC server.
+     It is also difficult for the client to ascertain which protocol
+     extensions may be available on a specific server.  A de-facto
+     standard has emerged in the community, originally implemented by
+     the Undernet's IRC server software based on the 005 numeric from
+     DALnet's IRC server, which allows the server to advertise to the
+     client upon connection which protocol extensions it supports.  This
+     reply, termed RPL_ISUPPORT, uses the non-standard numeric 005.
+
+     Unfortunately, since there is no standard document describing the
+     ISUPPORT numeric, differences have emerged between implementations
+     in IRC server software; it is believed that this reduces the
+     potential usefulness of the feature.  This memo attempts to
+     standardise the format and content of the ISUPPORT method in an
+     extensible way, such that IRC clients can use the information
+     provided to the maximum extent.
+
+2.  Protocol outline
+
+     The ISUPPORT numeric consists of a series of tokens, each of which
+     maps to a protocol extention supported by the IRC server.  A token
+     may have an associated value, typically a numeric or string value,
+     which provides additional information on the extension.
+
+     The format of the ISUPPORT numeric is the same as other server
+     numeric replies currently used.  A client which does not understand
+     the numeric may ignore it; however, it is recommended that IRC
+     clients understand ISUPPORT, in order to allow users the full
+     benefit of features implemented by the IRC server.  The ABNF
+     grammar for the numeric is as follows:
+
+       isupport = ":" servername SP "005" SP nickname SP
+               1*13( token SP ) ":are supported by this server"
+
+       token = *1"-" parameter / parameter *1( "=" *1value )
+       parameter = 1*20letter
+       value = 1*20letter
+       letter = ALPHA / DIGIT / "-" / ","
+
+
+
+
+
+Brocklesby                                          Section 2.  [Page 3]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     The format of the postfix descriptive text is not fixed, and may be
+     any string subject to the requirements of RFC 1459 [4] regarding
+     numeric replies.  Servername and nickname are as defined in RFC
+     1459 [4].
+
+     The server MUST send parameter and value in upper-case text, and it
+     is RECOMMENDED that clients treat capabilities in a case-
+     insensitive manner.  RFC 1459 [4] defines a maximum of 15
+     parameters to any reply, including the nickname and the text;
+     therefore, only 13 capabilities are possible per reply.
+
+     In order to allow flexibility in the protocol, and future
+     expansion, the server may send more than one ISUPPORT reply per
+     connection.  It is RECOMMENDED that consecutive ISUPPORT replies
+     are sent adjacent to each other.  The client MUST support receiving
+     multiple ISUPPORT replies, and should merge them to produce the
+     final list of supported protocol extentions.  While it is
+     recommended that the server attempt to send 13 tokens per line
+     before sending multiple replies, this is not required.
+
+     A token is of the form "TOKEN[=[VALUE]]" or "-TOKEN".  Absence of a
+     token implies that the default value should be used; except as
+     explicitly stated below, this is, in order of preference: the
+     behaviour that RFC 1459 [4] defines; the accepted behaviour in the
+     IRC community; and undefined.  Except as explicitly stated below, a
+     token should not be sent unless it changes this default value, or
+     the default value is vague, badly defined, or differs between IRC
+     server implementations.  When in doubt, the token should be sent.
+     If a token which accepts a VALUE specifier is given without the any
+     VALUE parameter, it should be ignored by the client and the default
+     value used as if it was not specified, except as explicitly stated
+     below.  A token with a null value, of the form "TOKEN=", should be
+     treated as having an empty value specifier.  If the token does not
+     allow an empty value specifier, the client should ignore the entire
+     token, as if it was not specified.
+
+     The form "-TOKEN" is used to negate a previously specified token;
+     that is, revert to the behaviour that would occur if the token had
+     not been specified. This is intended to allow servers to change
+     their capabilities without disconnecting clients. Both tokens with
+     and without a value argument may be negated; however, the value
+     argument should not be given.  It is not required to negate a token
+     in order to change its value, the server should merely re-advertise
+     the token with the new value.
+
+     The server may negate tokens which have not been previously
+     advertised to the client; in this case, the client should ignore
+     the negation.
+
+
+
+Brocklesby                                          Section 2.  [Page 4]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     The server may not advertise and negate the same token in one
+     ISUPPORT numeric reply, nor may it advertise the same token with
+     different value specifiers.  The client's behaviour in this case is
+     undefined, however it is recommended that the client honour the
+     tokens in order; that is, the latter specification of a token
+     overrides the former.
+
+3.  Currently defined tokens
+
+     A number of tokens are currently used in the IRC community, and it
+     is believed to be beneficial to standardise these.  They are listed
+     below, with relevant information.
+
+3.1.  PREFIX
+
+     PREFIX=[(modes)prefixes]
+
+     The PREFIX token specifies a list of channel status flags (the
+     "modes" parameter) that clients may have on channels, followed by a
+     mapping to the to channel status flags ("prefixes"), which are used
+     in NAMES and WHO replies.  There is a one to one mapping between
+     each mode and prefix; for example, (ab)&* maps the channel mode 'a'
+     to the channel status flag "&", and channel mode "b" to the channel
+     status flag *.  The order of the most should be from the status
+     which gives most privileges on the channel, to that which gives the
+     least.
+
+     Example: PREFIX=(ohv)@%+ maps channel mode +o to status @, +h to
+          status %, and +v to status +.
+
+     The default value for PREFIX is "PREFIX=(ov)@+", which corresponds
+     to RFC 1459 [4]. It should not be specified if the server provides
+     only these modes.  If a server provides ANY additional status
+     flags, it should also provide (ov)@+.  The PREFIX token may be
+     advertised with a null value specifier; this indicates that no
+     prefixes are supported by the IRC server.
+
+3.2.  CHANTYPES
+
+     CHANTYPES=chars
+
+     The CHANTYPES token specifies the valid characters to begin a
+     channel name.
+
+
+     Example: CHANTYPES=+#& defines that channels names may begin with
+          either +, #, or &; for example, #mychannel.
+
+
+
+
+Brocklesby                                        Section 3.2.  [Page 5]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     The default value for CHANTYPES is "CHANTYPES=#&", which
+     corresponds to RFC 1459 [4]. It should not be specified if the
+     server supports exactly these channel types.  The CHANTYPES token
+     requires a non-null value specifier; if no value is given, or it is
+     null, the client should ignore the entire token.
+
+3.3.  CHANMODES
+
+     CHANMODES[=A,B,C,D]
+
+     The CHANMODES specifies the modes that may be set on a channel.
+     These modes are split into four categories, as follows:
+
+     Type A: Modes that add or remove an address to or from a list.
+          These modes always take a parameter.
+
+     Type B: Modes that change a setting on the channel.  These modes
+          always take a parameter.
+
+     Type C: Modes that change a setting on the channel.  These modes
+          take a parameter only when set; the parameter is absent when
+          the mode is removed.
+
+     Type D: Modes that change a setting on the channel.  These modes
+          never take a parameter.
+
+     The IRC server should not list modes in CHANMODES which are also
+     present in the PREFIX token; however, for completeness, modes
+     described in PREFIX may be treated as type B modes.
+
+     If the server sends a mode which is missing from both CHANMODES and
+     PREFIX, the client should treat it as a type D mode. However, this
+     is a protocol violation by the server.
+
+
+     Example: CHANMODES=b,k,l,imnpst
+
+     The CHANMODES token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.  The default value for CHANMODES is "b,k,l,imnpst", which
+     corresponds to RFC 1459 [4].
+
+3.4.  MODES
+
+     MODES=number
+
+     This token specifies the maximum number of "variable" modes which
+     may be set on a channel via a single MODE command from a client.  A
+
+
+
+Brocklesby                                        Section 3.4.  [Page 6]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     variable mode is defined as a mode which takes a parameter and may
+     be specified multiple times in a single MODE command; for example,
+     "+o" and "+v" are variable modes.  Note that "+l" and "+k" are NOT
+     variable modes, because they may only appear once in a single MODE
+     command.  It does not specify how many modes the client may receive
+     in one MODE command from the server.
+
+
+     Example: MODES=3 indicates that 3 modes may be set with a MODE
+          command.
+
+     The default value for the MODES token is 3, which corresponds to
+     RFC 1459 [4]. The MODES token requires a non-null value specifier;
+     if no value is given, or it is null, the client should ignore the
+     entire token.
+
+3.5.  MAXCHANNELS
+
+     MAXCHANNELS=number
+
+     This token specifies the maximum number of channels that a client
+     may join.  This should include all types of channels available on
+     the server (as indicated by CHANTYPES).
+
+
+     Example: MAXCHANNELS=10 indicates that a client may join up to 10
+          channels.
+
+     The MAXCHANNELS token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.  There is no default value for the MAXCHANNELS token.
+
+3.6.  NICKLEN
+
+     NICKLEN=number
+
+     This token specifies the maximum nickname length that any client on
+     the network may have.
+
+
+     Example: NICKLEN=9 indicates that clients may have nicknames up to
+          9 characters in length.
+
+     The  token requires a non-null value specifier; if no value is
+     given, or it is null, the client should ignore the entire token.
+     The default value for NICKLEN is 9, which corresponds to RFC 1459
+     [4].
+
+
+
+
+Brocklesby                                        Section 3.6.  [Page 7]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+3.7.  MAXBANS
+
+     MAXBANS=number
+
+     This token specifies the maximum numbers of bans that may be set on
+     a channel at one time.  Note that this should only be interpreted
+     as applying to new bans which are set by clients -- it should not
+     be used to infer the maximum length of the ban list returned by the
+     server.
+
+
+     Example: MAXBANS=30 indicates that 30 bans may be set on a channel
+          at one time.
+
+     The MAXBANS token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     There is no default value for the MAXBANS token.
+
+     Note that separate limits are used for each "nick!user@host" list
+     on the channel, if more than one is available; that is, if MAXBANS
+     is 25, it is possible to set both 25 bans and (for example) 25
+     invite exceptions on any one channel at the same time.
+
+3.8.  NETWORK
+
+     NETWORK=name
+
+     The NETWORK token defines the name of the IRC network that the
+     client is connected to.
+
+
+     Example: NETWORK=EFnet indicates that the client is connected to
+          the EFnet IRC network.
+
+     Note that this token is intended only for user display purposes;
+     the client SHOULD NOT assume further capabilities or features of
+     the IRC server based on the value of the NETWORK token.  The
+     NETWORK token requires a non-null value specifier; if no value is
+     given, or it is null, the client should ignore the entire token.
+     There is no default value for the NETWORK token.
+
+3.9.  EXCEPTS
+
+     EXCEPTS[=modechar]
+
+     The EXCEPTS token indicates that the server supports "ban
+     exceptions" (channel mode +e), as defined in RFC 2811 [5], sections
+     4.3.1.  The optional value argument to EXCEPTS indicates which
+
+
+
+Brocklesby                                        Section 3.9.  [Page 8]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     channel mode is used for ban exceptions. If no value is specified,
+     or it is null, it is assumed that mode +e is used.
+
+3.10.  INVEX
+
+     INVEX[=modechar]
+
+     The INVEX token indicates that the server supports "invite
+     exceptions", as defined in RFC 2811 [5], section 4.3.2.  The
+     optional value argument to INVEX indicates which channel mode is
+     used for invite exceptions.  If no value is specified, or it is
+     null, it is assumed that mode +I is used.
+
+
+3.11.  STATUSMSG
+
+     STATUSMSG=string
+
+     The server supports a method of sending a notice or message to only
+     those people on a channel with the specified status.  This is done
+     via a NOTICE or PRIVMSG command, with the channel prefixed by the
+     desired status flag as the target; for example:
+
+     NOTICE @#channel :Hi there
+
+     The server should deliver the message to all users on the specified
+     channel with equal or higher status on the channel as the status
+     flag indicates; for example, a message to "+#channel" would deliver
+     the message to all voiced and opped users on #channel, assuming
+     that the server supported the PREFIX value (ov)@+.
+
+     The required value argument to STATUSMSG indicates which prefixes
+     (from the PREFIX= token) are valid status values for use in NOTICE
+     and PRIVMSG commands.
+
+     The STATUSMSG token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.
+
+3.12.  CASEMAPPING
+
+     CASEMAPPING=string
+
+     The CASEMAPPING token allows the server to specify which method it
+     uses to compare case equality.  Possible values are:
+
+     "ascii": The ASCII characters 97 to 122 (decimal) are defined as
+          the lower-case characters of ASCII 65 to 90 (decimal).  No
+
+
+
+Brocklesby                                       Section 3.12.  [Page 9]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+          other character equivalency is defined.
+
+     "rfc1459": The ASCII characters 97 to 126 (decimal) are defined as
+          the lower-case characters of ASCII 65 to 94 (decimal).  No
+          other character equivalency is defined.
+
+     "strict-rfc1459": The ASCII characters 97 to 125 (decimal) are
+          defined as the lower-case characters of ASCII 65 to 93
+          (decimal).  No other character equivalency is defined.
+
+     Note that the only difference between "rfc1459" and "strict-
+     rfc1459" is that the characters "~" and "^" are not considered
+     equivalent in the "strict-rfc1459" encoding.  This is believed to
+     be an mistake in the specification of character equivalency in RFC
+     1459 [4]; the majority of IRC server implementations known to the
+     author treat these characters as equivalent (however, see section
+     4.5).
+
+     The CASEMAPPING token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.
+
+     The default value for CASEMAPPING is "rfc1459".  While this differs
+     from the historical definition in RFC 1459 [4], it is believed to
+     reflect current IRC server implementations, and is as such more
+     useful.
+
+3.13.  SAFELIST
+
+     SAFELIST
+
+     The SAFELIST token indicates that the client may request a "LIST"
+     command from the server, without being disconnected due to the
+     large amount of data generated by the command.
+
+     The SAFELIST token must not be specified with a value; if a value
+     is given, the client should treat the token as if it was specified
+     without a value.
+
+3.14.  TOPICLEN
+
+     TOPICLEN=number
+
+     The TOPICLEN token specifies the maximum length of the topic
+     specified in the TOPIC command for a channel.  Note that it only
+     specifies the length of topic that may be set -- the server is free
+     to return topics longer than this length to the client.
+
+
+
+
+Brocklesby                                      Section 3.14.  [Page 10]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     The TOPICLEN token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     There is no default value for the TOPICLEN token.
+
+3.15.  KICKLEN
+
+     KICKLEN=number
+
+     The KICKLEN token specifies the maximum length of a KICK message
+     that a client may use.  Note that it only specifies the length the
+     client should send to the server -- the server may send KICK
+     messages with a length longer than this value.
+
+     The KICKLEN token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     There is no default value for the KICKLEN token.
+
+3.16.  CHANNELLEN
+
+     CHANNELLEN=number
+
+     The CHANNELLEN token specifies the maximum length of a channel's
+     name.  The server MUST NOT make known to the client any channels
+     with a name longer than that specified in this value -- that is,
+     the client may depend on a channel's name never being longer than
+     this.
+
+     The CHANNELLEN token requires a non-null value specifier; if no
+     value is given, or it is null, the client should ignore the entire
+     token.  The default value for CHANNELLEN is 200; this corresponds
+     to RFC 1459 [4].
+
+3.17.  CHARSET
+
+     CHARSET=string
+
+     The CHARSET token is used to indicate which region language
+     encoding is used in server replies (numerics) and NOTICE commands
+     to the user.  It does not apply to nicknames, channel names, client
+     to client messages or any other text.
+
+     Possible values for the CHARSET token are:
+
+          "ascii": All server messages will be sent in 7-bit US-ASCII
+               format.
+
+          "UTF-8": All server messages will be sent in Unicode UTF-8
+               encoding.
+
+
+
+Brocklesby                                      Section 3.17.  [Page 11]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+          "iso_xxxx_x": All server messages will be sent in the
+               specified ISO regional language encoding; for example
+               "iso_8859_15".
+
+     The CHARSET token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     The default value for the CHARSET token is "ascii".
+
+3.18.  CHIDLEN
+
+     CHIDLEN=number
+
+     The CHIDLEN token specifies the length of the "ID" portion of
+     "safe" channels specified in RFC 2811 [5].
+
+
+     Example: CHIDLEN=5 means the client should expect IDs which are 5
+          characters in length; for example "!JNB4Sircd".
+
+     The CHIDLEN token requires a non-null value specifier; if no value
+     is given, or it is null, the client should ignore the entire token.
+     The default value for CHIDLEN is 5; this corresponds to RFC 2811
+     [5].
+
+3.19.  STD
+
+     STD=version[,version[,...]]
+
+     The STD token indicates which form(s) of the ISUPPORT numeric are
+     used by the server.  Currently, one only possible value is defined;
+     that is "i-d", which refers to this document.
+
+     The STD token is intended to be extensible, so that if later
+     standards emerge which update this document, the server may be able
+     to advertise this.  The "version" string is free-form subject to
+     the requirements in section 2, however, protocol updates defined in
+     RFCs should be named "rfcxxxx", where "xxxx" is the relevant RFC
+     number.
+
+     A server may support any number of STD versions. However, in order
+     to reduce space being needlessly wasted by this token, care should
+     be taken before adding another version. It is expected that most
+     new features may be advertised simply by tokens, in which case a
+     new version string is not required.
+
+     The I-D token requires a non-null value specifier; if no value is
+     given, or it is null, the client should ignore the entire token.
+     The default value for the I-D token is none; that is, no
+
+
+
+Brocklesby                                      Section 3.19.  [Page 12]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     standardised ISUPPORT is available.
+
+     Note that it is expected that the "i-d" string will be replaced
+     with an equivalent "rfcxxxx" token if this document is
+     standardised.
+
+4.  Differences to existing implementations
+
+     A number of differences exist between the ISUPPORT defined in this
+     document and traditional implementations of the ISUPPORT numeric.
+
+4.1.  PREFIX token without value
+
+     The PREFIX token is traditionally not sent without a value
+     parameter; indeed, the author is not aware of any IRC server
+     implementations where this would be appropriate. However, it is
+     believed that this support is desired to allow extra flexibility,
+     while retaining compatibility with traditional PREFIX
+     implementations.
+
+4.2.  EXCEPTS and INVEX value argument
+
+     EXCEPTS and INVEX traditionally take no argument -- while they
+     indicate presence of these features on the server, they do not
+     specify the channel mode which is associated with these features.
+     It is believed that the argument value described here provides
+     extra flexibility while retaining backwards compatibility.
+
+4.3.  STATUSMSG
+
+     The STATUSMSG token replaces the traditional WALLCHOPS token used
+     by some current implementations.  It is believed that the name
+     STATUSMSG better reflects the functionality; since the argument to
+     STATUSMSG is not optional, it would break backwards compatibility
+     to use the name WALLCHOPS. It was not considered beneficial to
+     allow a STATUSMSG flag without a value.
+
+4.4.  Conflicts with RFC 2812
+
+     RFC 2812 [6], section 5.1, defines a numeric reply "RPL_BOUNCE",
+     with the associated number "005".  While this conflicts with the
+     ISUPPORT numeric, it is considered that ISUPPORT has received much
+     more widespread support, and is the de-facto standard for use of
+     the 005 numeric.  It is believed that the use of 005 as RPL_BOUNCE
+     is being deprecated.
+
+     RFC 2812 [6] is an Informational RFC and does not not specify an
+     Internet standard.
+
+
+
+Brocklesby                                       Section 4.4.  [Page 13]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+4.5.  Default value for CASEMAPPING
+
+     The default value for CASEMAPPING ("rfc1459") was chosen because it
+     reflects the prevailing implementations of the IRC server software
+     currently in use. While some IRC servers have moved to the "ascii"
+     case mapping, those known to the author indicate this via
+     CASEMAPPING=ascii; therefore this is not believed to introduce any
+     compatibility problems.
+
+5.  Acknowledgements
+
+     The author gratefully acknowledges the contributions of Bill Fenner
+     and Perry Lorier in the preparation of this document.
+
+     This document is heavily based on a previous document entitled "The
+     005 numeric" [1].
+
+6.  References
+
+     [1] Roeckx, K., "The 005 numeric", September 2002.
+
+     [2] Bradner, S., "Key words for use in RFCs to Indicate Requirement
+          Levels", RFC 2119, March 1997.
+
+     [3] Crocker, D. and P. Overell, "Augmented BNF for Syntax
+          Specifications: ABNF", RFC 2234, November 1997.
+
+     [4] Oikarinen, J. and D. Reed, "Internet Relay Chat Protocol", RFC
+          1459, May 1993.
+
+     [5] Kalt, C., "Internet Relay Chat: Channel Management", RFC 2811,
+          April 2000.  [6] Kalt, C., "Internet Relay Chat: Client
+          Protocol", RFC 2812, April 2000.
+
+7.  Author's Address
+
+     Edward Brocklesby
+     57 Williamson Way
+     Oxford  OX4 4TU
+     UK
+
+     Phone: +44 1865 452230
+     EMail: ejb@hades.skumler.net
+
+8.  Full Copyright Statement
+
+     Copyright (C) The Internet Society (2002). All Rights Reserved.
+
+
+
+
+Brocklesby                                         Section 8.  [Page 14]
+
+INTERNET-DRAFT             Expires: March 2003            September 2002
+
+
+     This document and translations of it may be copied and furnished to
+     others, and derivative works that comment on or otherwise explain
+     it or assist in its implementation may be prepared, copied,
+     published and distributed, in whole or in part, without restriction
+     of any kind, provided that the above copyright notice and this
+     paragraph are included on all such copies and derivative works.
+     However, this document itself may not be modified in any way, such
+     as by removing the copyright notice or references to the Internet
+     Society or other Internet organizations, except as needed for the
+     purpose of developing Internet standards in which case the
+     procedures for copyrights defined in the Internet Standards process
+     must be followed, or as required to translate it into languages
+     other than English.
+
+     The limited permissions granted above are perpetual and will not be
+     revoked by the Internet Society or its successors or assigns.
+
+     This document and the information contained herein is provided on
+     an "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET
+     ENGINEERING TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+     THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+     WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Brocklesby                                         Section 8.  [Page 15]
