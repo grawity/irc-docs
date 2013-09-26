@@ -102,7 +102,8 @@ sorted alphabetically with "ircd-" prefix removed
             PTnet [<-dal4.6]
         ircd2.8/th [patch <-ircd2.8]
             ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS5/TS6 <-TS3}
-                ircd2.8/gimpnet (@ GIMPnet) [<-ircd-hybrid 6.3]
+                (ircd-hybrid 6.x {TS3, TS3/TS5, TS5})
+                ircd2.8/gimpnet (@ GIMPnet) [<-ircd-hybrid 6.3] {TS5}
                 ??? Aurora [d]
                 Bahamut (@ DALnet) [<-ircd-hybrid 5.3?] {TS5 <-TS1/TS3}
                     (dfhybrid, in the beginning)
