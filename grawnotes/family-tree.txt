@@ -141,8 +141,10 @@ sorted alphabetically with "ircd-" prefix removed
                             cherry-ircd [d]
                                 ircd-cherry [d]
                         ShadowIRCd [d]
+                            elemental-ircd [<-ShadowIRCd 6.3.3]
+                                (ShadowIRCd 6.3.3 => ponychat-ircd)
+                                (ponychat-ircd 6.5.1 -> elemental-ircd)
                             NeoIRCd [d]
-                            ponychat-ircd [<-ShadowIRCd 6.3.3]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net)
                     ircd-evangelion [d] [<-ircd-ratbox 2.2.6]
