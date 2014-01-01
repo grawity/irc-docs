@@ -1,0 +1,1152 @@
+                       Protocol changes for TSora4  (beta2.2)
+                       ---------------------------
+
+
+The changes described here apply over the TSora3 protocol, as described
+in README.TSora at
+http://www.eleves.ens.fr:8080/home/espel/ircd/protocol.html
+
+General information about the EFnet TS protocol can be found at
+http://www.eleves.ens.fr:8080/home/espel/ircd/
+
+
+IMPORTANT NOTE
+--------------
+
+The server and protocol changes as documented in the README.TS4 file
+describe what has been known as the "TS4" patch set for EFnet ircds.
+
+This will most likely NOT be used on EFnet in its present form, but
+parts of it will be integrated into EFnet ircds, starting with Hybrid 6.
+
+
+
+Overview of new or changed features in TS4
+------------------------------------------
+
+  * new channel mode: "+c".  This mode acts like +k in that it takes an
+    argument which is stored globally for the channel.  Mode +c lets the
+    channel operators set a password;  a channel with a +c password
+    isn't deleted when it empties, and anyone joining with the password
+    gets ops.  This allows channels to be "registered", while keeping
+    the principle that current operators "own" the channel.  
+
+  * new channel mode: "+h".  This mode applies to users, like "+v" does.
+    Users with +h are called "half-ops" or "helpers"; they can change
+    modes on the channel, except for +o, -o, +c, -c and +h under some
+    conditions.  They can kick only non-ops.
+
+  * new channel mode: "+e".  This mode associates a list of patterns to
+    a channel, much like "+b".  These patterns are called exceptions. 
+    The effect is that anyone matching an exception can join even if they 
+    are banned (but not if the channel is +k or +i and they're missing
+    the key or the invite).
+
+  * server link compression.  Links between TS4 servers are now
+    compressed, in the zlib format as described by RFC 1950 and RFC
+    1951.  This saves a lot of bandwith, at the expense of some CPU
+    time.
+
+  * nick kill recovery: when a user would be killed for technical
+    reasons such as a nick collision, his connection will not be reset.
+    Instead, he will be sent a numeric message to that effect, and told
+    that he has parted all his channels.  At this point, the client only
+    needs to send a nick change command, and he will be signed on again
+    with the new nick.
+
+  * short-term op recovery: every user that signs on is given a randomly
+    generated 'magic cookie' by the server.  When the client disconnects,
+    the server will remember the list of channels the user was operator
+    on, associated to the cookie.  If the user signs on again and
+    identifies himself with the cookie from the previous session, he will
+    be automatically regain ops if he joins one of those channels.  This
+    information is kept only for 15 minutes, and only on the user's local
+    server.
+
+  * connection ID's:  in the server-to-server protocol between TS4-capable
+    servers, users are referred to by their ID rather than their nick.
+    The ID is assigned by the user's local server at the time the user
+    signs on, and doesn't change during the session.  This means that
+    the combination of repeated nick changes and lag will no longer be a
+    source of ghosts.  It also ensures that messages will always reach
+    the intended user, rather than someone who happens to have taken
+    that nick in the meantime.  Other than this, this change is entirely
+    transparent to the users.
+
+  * automatic removal of dependent clients:  when a server sees a SQUIT
+    for a remote server, it will immediately remove all clients and
+    servers behind that one, obviating the need for QUIT and SQUIT bursts.
+    These bursts are no longer sent to TS4 servers (except for SQUITs
+    affecting servers behind a hostmask, where they are unavoidable).
+    This is also transparent to the users.
+
+  * bans and exceptions are now timestamped: when a server on the younger
+    side of a split sees an incoming SJOIN with an older TS and some
+    ops, it will also remove all local bans and exceptions.  In connect
+    bursts between TS4 servers, the ban and exception lists are sent as
+    part of the SJOIN parameters rather than as server MODEs.
+
+  * added a new syntax to send messages only to the chanops of a given
+    channel, or to the chanops and halfops, or to the chanops, halfops
+    and voices.
+
+  * a way to completely clear channels (for opers on servers where this is
+    allowed, and once the whole net is TS4)
+
+  * various changes in the handling of versions; servers can now negotiate
+    their capabilities at connection-time.  Everything that was obsoleted
+    by TS3 (or earlier) has been removed; that includes server-to-server 
+    JOIN, some server-originated mode changes, and TS-less clients.  There
+    are also a number of new and changed numerics.
+
+
+Versioning, time and capabilities
+---------------------------------
+
+In the SVINFO line, servers that can handle TS4 must identify themselves
+as running TS version 4; they may or not be compatible with TS version
+3, but must refuse to connect to any earlier TS versions.  A TS4 server
+which is compatible with TS3 ones must make sure to send only TS3
+commands to TS3 servers.  TS4 servers will no longer be compatible with
+servers earlier than TS3, connected locally or remotely.
+
+The SVINFO line becomes:
+
+SVINFO <TS_CURRENT> <TS_MIN> <TIMEDELTA-FLAG> :<UTC-TIME>
+
+Where TS_CURRENT is 4 and TS_MIN is 3 or 4.  TIMEDELTA-FLAG is 1 if the
+server is standalone and implements timedelta (i.e is willing to
+compensate for any clock difference), and 0 otherwise.  UTC-TIME is the
+server's idea of the current time, corrected with any timedelta.
+
+Servers are not required to implement timedelta correction; if they have
+a reliable clock (or better, use an external time synchronization
+protocol like NTP), they should send a TIMEDELTA-FLAG of 0.  When
+parsing the SVINFO line, servers should check that, after any
+corrections have been applied, the difference between their time and the
+other server's isn't too large.
+
+A generic command has been added for servers to describe their
+capabilities to each other, at connection time.  Each capability has a
+symbolic name.  The list of capabilities is sent before the SERVER
+command; a server can refuse to link to servers that lack a certain
+capability.  
+
+Capabilities are advertised with the CAPAB command; its syntax is:
+
+CAPAB :<CAP-NAME> [<CAP-NAME> ... ]
+
+Two capabilities are defined so far: "TS4" and "ZIP".  All TS4 servers
+must announce at least capability "TS4".  This is somewhat redundant
+with the SVINFO line, but it is still needed, as capabilities need to be
+known before processing the SERVER command, and SVINFO is sent
+afterwards.  The extra argument ("TS") to the PASS command is no longer
+necessary between TS4 servers, as it is implied by the TS4 capability.
+
+The capability "ZIP" is used to announce the ability to compress server
+links, as described below.
+
+New capabilities can be defined for things like link-level encryption.
+
+
+Server link compression
+-----------------------
+
+When a TS4 server has announced the capability "ZIP" to another server,
+and that server has also announced the same capability, then all traffic
+after the "SERVER" line is compressed.
+
+The compression format used is the zlib format, as defined by RFC 1950
+and RFC 1951, with the added restriction that no more than 8k of data
+will be compressed in one single block.  No preset dictionary is used.
+The compression level is arbitrary; the compression window is at most
+32k (and will normally be exactly 32k).
+
+Since link compression is dependent on the CAPAB command, it cannot be
+done in servers earlier than TS4.
+
+In the implementation of TS4, the compression code uses InfoZip's zlib
+(version 1.1.2 or greater), and the ``glue'' code was adapted from
+IRCnet's ircd2.9.5.
+
+Server admins don't need to change the ircd.conf file to benefit from
+compression: it is turned on by default.  It can be turned off by using
+lower-case 'c' instead of 'C', in the server's C:lines.  Compression
+will only be active if both servers have a C:line with a capital C.
+
+This is the OPPOSITE to what is done on IRCnet; there compression is
+only active if the admin changed the C:line to a c:line.
+
+
+MODE +h  ("half-op" or "helper")
+--------------------------------
+
+For each user on a channel, the servers keep an extra flag (together
+with chanop status, voice, etc), specifying if the user has +h.
+
+MODE +h requests are allowed from users, with the format:
+
+    MODE channel +h nickname
+
+If the server enforces compatibility with remote non-TS4 servers, 
+MODE +/-h cannot be mixed with any other modes on the same MODE request
+from a local user.  Up to four +h or -h requests are allowed on the same
+command, such as in:
+
+    MODE channel +hhh-h nick1 nick2 nick3 nick4
+
+Local MODE +h commands are not allowed on channels with a TS of 0.
+
+Remote MODE +h commands from users on other servers may be mixed with
+other MODEs, and must be propagated to other servers and users as such.
+
+MODE +/-h is accepted from any local users which are +o, and from any
+remote users unless they are marked as being deopped (i.e having had a
++h or +c for them ignored on a previous SJOIN).  
+
+MODE +/-h is also taken from local who are +h but not operators, but
+only if the channel does not have mode +p set.  On a +p channel, only
+ops can give out or take away +h.  Obviously, +h users who aren't ops
+cannot set or remove mode +p.  Setting +p no longer resets +s, and
+setting +s no longer resets +p.
+
+The deopped flag is also cleared when a user receives MODE +h, and set
+when a user who had MODE +h is demoted by a remote SJOIN.
+
+MODE +/-h commands are not propagated to any servers older than TS4.
+
+On net.bursts, MODE +h on a user is marked with a % in front of the
+nickname, in the nick list of the SJOIN command sent to other
+TS4-compatible servers.  If TS3 servers are connected, the information
+about the mode +h must not be passed to them in any way.  The '%' must
+appear after any '@' or '+' flags for the same nickname.
+
+The format for the SJOIN command becomes:
+
+  SJOIN <TS> <channel> <modes> :[@][+][%]<nick|ID> | b)<ban> | e)<ex> ...
+
+In processing an SJOIN command and determining which side's modes are
+kept, a channel will be considered opless if it has no +o's, even if it
+has some +h's.
+
+In NAMES, WHO and WHOIS replies to users where @ is used as a flag for
+ops and + as a flag for +v, % will be used as a flag for +h.  Flags don't
+necessarily override each other, so a user who is an op, a half op and
+has a voice all at the same time will appear as '@%+nick'.
+
+As a compatibility measure, and on NAMES replies only, servers can use
+'+' for halfops instead of '%' (i.e showing them as voices), and show
+at most one of '@' and '+', with '@' overriding '+'.
+
+Users who are +h on channels with a non-zero TS are locally allowed to
+do all MODE changes except for MODE +/-o, MODE +/-c, and MODE +/-p.  If
+the channel is not +p, they are allowed to do MODE +/-h, otherwise MODE
++/-h is reserved to channel operators.  Half-ops are allowed to KICK any
+users that are not channel operators.  They are allowed to speak even if
+the channel is moderated.
+
+Until the transition to TS4 is complete, half-ops who are not chanops
+are not allowed to set mode +s when mode +p is set.  With TS4, modes +p
+and +s no longer invalidate each other.
+
+MODE +/-h commands are not allowed to be originated from servers; those
+will be ignored.  Servers always pass half-op information via SJOIN.
+The same goes for MODE +/-o and MODE +/-v.
+
+There is a new possible numeric replies for MODE +h: ERR_TSLESSCHAN
+
+
+MODE +c (channel passwords)
+---------------------------
+
+MODE +c allows lets channels have an associated password, which gives
+ops on join, and lets the channel stay, even empty, for a limited amount
+of time (2 days).
+
+For each channel, servers will keep two additional timestamps: the
+password TS, and the opless TS.  The first is exact, the second is
+approximate.  On a newly created channel, both of these are 0.  Also,
+servers will keep a flag for the channel telling if there is a channel
+password, and if there is, the server will remember the password in
+hashed form, and possibly in plaintext too.
+
+Channel passwords are case sensitive, unlike channel keys.  All
+printable non-whitespace characters are allowed in channel passwords,
+including 8-bit ones, except for ':'.  The maximum password length is
+set to 23 characters, as with channel keys.
+
+Passwords are run through a one-way hash (like Unix passwords in
+/etc/passwd, but with a different algorithm based on md5).  Clear channel
+passwords are kept in memory only for a short time (half an hour by
+default), so that clients can query them.  Afterwards, the server
+remembers only the hash.
+
+The servers define an additional internal mode, MODE +C (with a capital
+C), which is never shown to or taken from users.  On channels that have
+this mode set, users cannot set channel passwords.  This mode cannot be
+set or removed manually; it can only be specified at channel creation
+time.  The command "/join #channel none" creates #channel with MODE +C
+implicitly set, which disables MODE +c on that channel.  Otherwise, this
+mode acts like all others as far as TS and SJOIN commands are concerned.
+No information about MODE +C is passed to pre-TS4 servers ever.  MODE +C
+is the server-side representation of the +c opt-out mechanism.
+
+The commands MODE +c and MODE -c are accepted from users on a #channel,
+on the following conditions:
+
+. the user is a channel operator; this is checked even for remote users
+. the user does not have the deopped flag
+. the channel has a non-zero TS which is older than 48 hours, and older
+  than some (as of yet unspecified) starting date
+. the channel doesn't have the internal MODE +C set
+. the channel's TS is the same or older than the channel's password TS,
+  OR the channel's password TS is zero
+
+A MODE +c will be allowed even if the channel already has a password; in
+this case the new password will replace the old one.  The MODE -c
+command will take an optional argument, but not verify that the argument
+matches the password.
+
+MODE +c and -c requests from users (local or remote) cannot be mixed
+with any other MODEs, and only one +c or -c is allowed in a MODE
+command.  
+
+To make the transition to channel passwords easier, and to give channels
+time to get used to MODE +h first, MODE +c requests from local users may
+be rejected up to a certain, unspecified date.  The first implementation
+of TS4 will include this restriction, with all servers using the same
+date.
+
+A MODE +c change on a channel has the following effects:
+
+. setting the +c flag
+. storing the password
+. setting the password TS to the channel's main TS
+
+A MODE -c has the opposite effect:
+
+. clearing the +c flag
+. clearing the passowrd
+. setting the password TS to zero
+
+MODE +c/-c commands must be propagated to all locally connected
+TS4-compatible servers, and not to older ones.  On server-to-server
+links, the argument to MODE +c is the hashed password, optionally
+followed by a ':' and the clear password.  On server-to-server links,
+the argument to MODE -c may or not be present, and may or not match the
+channel's password (servers currently send a "*").
+
+Any user being opped (locally or remotely) on a channel where the
+password TS, if any, is lower or equal to the channel TS, sets the
+opless TS to zero.
+
+A MODE request without arguments, such as "MODE #channel", returns 'c'
+in the list of channel modes if the channel has a password, but does not
+return the password.  The request "MODE #channel +c" or "MODE #channel
+c" alone shows the password, and is accepted from the same users that
+are allowed to set a channel password.  The server replies with a
+numeric (RPL_CHPASSUNKNOWN) if it doesn't know the clear password.
+The numeric (RPL_CREATIONTIME) that specifies a channel's TS now also
+includes the password TS and the opless TS, in this order.  These two are
+shown as -1 if the channel can never have a channel key (because of being
+created before the introduction date, or because of being a created with
+"/join #channel none").
+
+When MODE +/-c commands from a user are being shown to other users, the
+argument does not appear in any case.  An operator who sees a channel
+password being set must do a "MODE #channel c" to see the actual
+password.  Alternatively, he can remove it without knowing the password,
+with just "MODE #channel -c".
+
+Channels with a +c have their behavior altered in the following way:
+
+. when the last user leaves the channel, the channel's state information
+  (name, hash entry) is not deleted.  Instead, some channel modes are
+  cleared (but +s, +p, +n, +t are left alone), the ban and exception
+  list are cleared, the channel's TS is set to the password TS, and the
+  opless TS is set to the current time if it is zero.  The channel's
+  topic may or not be cleared.
+
+. empty +c channels and are not propagated in net.bursts.  They do count
+  in the channel counts for LUSERS.  They may or not appear in responses
+  to LIST commands.
+
+. if a user joins a channel with a +c password, and gives a second
+  argument to the JOIN command (as with channel keys) that matches the
+  channel's password, and if the channel's password TS is older or equal
+  to the channel's TS, the user is introduced to the channel regardless
+  of any other modes (bans, +i, +k, etc), and is given operator status;
+  this is forwarded to other servers (TS4 or not) with a SJOIN using the
+  password TS.  The joining client, as well as the rest of the channel, 
+  are sent the line ":<server-name> MODE <channel> +o <nick>".  
+
+  Finally, if the password TS at that point is older than the channel
+  TS, any other modes (including other ops) on the channel are locally
+  removed, setting the deopped flag on any operators or half-ops, and
+  the channel's TS is set to the password TS. 
+
+. a special value for the +c password is "none"; if the password is set
+  to that value, then no JOIN password will be considered to match it.
+
+. if a user joins an empty channel that has a +c password, and does not
+  use the password, they will not get ops; they are introduced with an
+  SJOIN with no ops and the existing channel TS.  normal JOIN permission
+  checks (against +i, +k, etc) will apply in that case.
+
+
+In net.bursts, information about the +c password on non-empty channels
+is passed in the SJOIN line to TS4-compatible servers only, together
+with the channel's TS and other modes.
+
+The <modes> field in the SJOIN line becomes:
+
+  * <modes> is the list of global channel modes, starting with a +
+    and a letter for each of the active modes (spmntkilc), followed
+    by an argument for +l if there is a limit, an argument for +k if
+    there's a key, and two arguments for +c if there is a channel
+    password.  
+    
+    The first argument for +c is the hashed channel password, optionally
+    followed by a ':' and the clear password; the second is the
+    channel's TS minus the channel's password TS, which will always be
+    non-negative, and most often 0.
+
+
+When parsing an SJOIN, the incoming password TS is reconstructed as
+the incoming channel TS plus the difference value.
+
+The following cases are possible (given in order of priority: the first
+that matches applies):
+
+  . if the existing channel TS is 0, or the incoming channel TS is 0
+       -> skip any incoming +c, remove current +c if present.
+
+  . if there is a channel passwd, with a passwd TS older than the
+    incoming passwd TS
+       -> ignore the incoming +c, leave the current one alone.
+
+  . if there is a channel password, with the same passwd TS as the
+    incoming one
+       -> skip the incoming +c password if it is alphabetically lower
+	  than the existing one.  otherwise take it.
+
+  . if there is an incoming channel password, and either we're taking the
+    new modes, or the incoming password TS is alphabetically lower than
+    the existing one, or there isn't one and the incoming TS is smaller
+    or equal than the existing channel TS
+       -> take the new +c and set the password TS to the incoming 
+          password TS.
+
+  . if there is no incoming channel password, and there is a key on the
+    channel with a password TS strictly later than the incoming channel
+    TS, remove the existing channel password and set the password TS to 
+    zero.
+
+  . if there is a key in the channel, and no incoming key, leave the
+    current one.
+
+At regular intervals (of, for example, 5 minutes), servers must do a
+global cleanup, examining all channels.  For each channel, they must:
+
+. check if the channel has a +c password and no TS; if so, the +c must
+  be locally removed.
+
+. check if the channel has a +c password, is opless and halfop-less
+  (or empty), and its opless TS is zero; if so, the opless TS must be
+  set to the current time.  a channel with ops or halfops, but with
+  a password TS strictly lower than the channel TS will also have its
+  opless TS set to the current time.
+
+. check if the channel has a +c password and a non-zero opless TS that
+  is 48 hours old or more.  if so, they must:
+
+    * if the channel is empty, locally drop all information about it
+      without propagating anything
+    * otherwise, locally drop its +c password, set the password TS and
+      the opless TS to zero, and send a "MODE #channel -c" message to
+      any locally connected users on the channel.
+
+. check if the channel is empty and has no password; if so, delete it.
+
+. check if the channel has had a clear password for more than a given
+  time (15 minutes by default); if so, forget the clear password and
+  keep the hash only.
+
+Note that this results in servers dropping +c passwords for long-time
+opless channels at different moments; the whole +c system is setup so
+that servers don't necessarily have to have the same +c information, for
+it to work.
+
+Finally, there is a new syntax, to let users check if a channel password
+is valid for a given channel, without having to JOIN it, and usable even
+when the server doesn't have the channel's clear password anymore.
+Anyone can check a password, with the command "/mode #channel =c pass",
+and get a numeric reply back (RPL_CHANNPASSOK or RPL_BADCHANPASS).  This
+can be done even without ops, or without being on the channel.  The
+special "none" password does not match itself with "mode =c" either.
+
+For the sake of generality, the '=' modifier for modes also works in
+these cases:
+
+	. "/mode channel =c"  returns the channel's password in the clear,
+	  the server knows it and you have sufficient rights
+	
+	. "/mode channel =b" and "/mode channel =e" return the channel's
+	  ban and exception lists, respectively, without even looking at 
+	  any arguments.  These can be mixed with other mode requests, so
+	  "/mode channel =b+k blah" will return the ban list and then
+	  set "blah" as the channel key.
+
+No MODE commands with '=' modifiers are ever passed on server links.
+
+MODE +/-c commands are not allowed to be originated from servers; those
+will be ignored.  
+
+In SJOINs belonging to connect bursts, the servers may or not pass the
+clear passwords (tagged to the end of the hash, separated by a ':') if
+they know them.  Currently they don't.
+
+The new numerics associated with MODE +c are: ERR_CHANTOORECENT,
+ERR_TSLESSCHAN, RPL_CHANNELPASSIS, RPL_NOCHANPASS, RPL_CHANPASSOK,
+RPL_BADCHANPASS, RPL_CREATIONTIME.
+
+
+MODE +e (exceptions to bans)
+----------------------------
+
+For each channel, the server holds a list of active exception patterns;
+in the absence of a special condition such as a channel password, a
+local JOIN is allowed if and only if
+
+. it matches one of the exception patterns,   OR
+. it doesn't match any of the bans.
+
+MODE +e is allowed from users and servers, with the format:
+
+    MODE channel +e pattern
+
+If the server enforces compatibility with (possibly remote) servers
+older than TS4, MODE +e cannot be mixed with any other MODEs than +e and
+-e in the same command from a local user.  Up to four +e or -e requests
+will be accepted on a command.  
+
+MODE +e is accepted from any local users which are +o or +h, and from
+any remote users.  Local MODE +e is not accepted on channels without a TS.
+
+Servers can have a limit on the number of exception patterns that are
+allowed for each channel; these can be counted together with bans or
+not.  Remote MODE +e and +b's must always be accepted, regardless of
+this limit.
+
+On net.bursts, exceptions are passed in the SJOIN params, just like bans
+on TS4 servers.  Exceptions are not passed to non-TS4 servers.   Even
+when MODE +e is not allowed to mix with other modes in user lines, the
+server must be able to understand such lines coming from servers.
+
+The new numerics associated with MODE +e are: ERR_TSLESSCHAN,
+RPL_EXCEPTLIST, RPL_ENDOFEXCEPTLIST.
+
+
+Timestamps on bans and exceptions
+---------------------------------
+
+TS4 servers fully timestamp bans and exceptions.  In net.bursts, and
+between TS4 servers, bans and exceptions are passed as SJOIN parameters
+rather than MODE changes.  Bans are still sent as MODEs when talking to
+older servers.
+
+When a TS4 server receives a SJOIN command that causes it to locally
+drop all modes on a channel, it will also reset the ban and exception
+lists, showing MODE -b and -e commands to its local users.
+
+To pass net.burst bans and exceptions using SJOIN, they will be listed
+in the last argument of SJOIN (mixed with nicknames and ID's), and
+prefixed with "b)" for bans, and "e)" for exceptions.
+
+The syntax for the SJOIN command is:
+
+  SJOIN <TS> <channel> <modes> :[@][+][%]<nick|ID> | b)<ban> | e)<ex> ...
+
+When parsing such an SJOIN, any bans and exceptions that are added to
+the channel are also shown as MODE changes to the local users, and, if
+there are any directly connected non-TS4 servers, any added bans must
+also be sent to them in the form of MODE +b changes.
+
+
+Nick kill recovery
+------------------
+
+This change is strictly local to the server.  
+
+A server that implements nick kill recovery will take a special action
+when one of its local users is set to be KILLed for any reason other
+than an IRC operator kill.
+
+In that case, the client will get, for each channel he is on, the
+message ":<CLIENT-NICK> PART channel".  This will be followed by an
+ERR_NICKLOST numeric; no ERR_NICKCOLLISION will be sent.  
+
+At this point, the client will be dropped to the state of clients who
+have sent the "USER" command but not "NICK".  The user can then send a
+"NICK <NEWNICK>" command, and he will be signed back on the network with
+the new given nickname.  He will not be shown the MOTD; instead, he will
+get the message ":<OLDNICK> NICK <NEWNICK>".
+
+As far as all other servers are concerned, such a user has left IRC and
+then signed on again.
+
+The only new numeric associated with nick kill recovery is ERR_NICKLOST.
+
+
+Connection ID's
+---------------
+
+TS4 introduces the notion of connection ID's (from here on, ID's), in
+the server-to-server protocol.  A client is assigned an ID by his local
+server at signon time.  This server passes the ID along with the nick
+introduction to other servers; from there on, the ID can be used instead
+of the nick in the server-to-server protocol.  Since the ID never
+changes during a client's IRC session, this ensures that servers always
+know which client they are referring to.
+
+ID's are generated randomly by the user's server.  They always start
+with a period ('.'); they are case-sensitive, and at most 12 characters
+long, counting the initial period.  They may contain characters with the
+8th bit set, but may not include whitespace, any more periods, any
+characters lower than 0x20, or between 0x7f and 0xa0, or any of the
+following characters:
+
+  '*' (star)	':' (colon)	',' (comma)	'!' (bang)
+  '(' (lparen)	')' (rparen)	'@' (at)	'+' (plus)
+  '%' (percent)	'#' (hash)	'&' (and)	'?' (question)
+
+
+The function that generates IDs randomly needs to be strong enough to
+avoid collisions between IDs generated roughly at the same time by
+different servers.  To be on the safe side, this is implemented using
+MD5, re-seeded sometimes with the current time, and using 56 bits of
+randomness every time.  This gives IDs that are 9 characters long, and
+an expected mean time between ID clashes of over one thousand years.
+
+A TS4 server can send IDs instead of nicknames, to other servers,
+everywhere in the protocol where a nickname would be expected, except in
+the arguments of the NICK and CLIENT commands.  Servers compatible with
+TS3 must translate these commands to include nicks instead of IDs, when
+talking to TS3 servers.  
+
+Care should be taken to never send an ERR_NOSUCHNICK numeric to a user,
+with an ID as the argument.  In that case, it is preferable to not
+report the error.
+
+A client that has been killed, where the connection has been kept alive
+for nick kill recovery, must be given a new ID before propagating it
+again to the other servers.
+
+When dealing with a nickname collision, if an ID is available for the
+remote clients, it is now possible to send KILLs for them, even though
+their nick may have been superceded by another one.  In these cases,
+these KILLs should be sent.
+
+A TS4 server, when introducing a client for which it has an ID, to other
+TS4 servers, will use the new CLIENT command, rather than NICK.  The
+syntax of the CLIENT command is:
+
+:<SERVER> CLIENT <ID> <TS> <NICK> <HOPCOUNT> <UMODE> <USER> <HOST> :<IRCNAME>
+
+This is almost identical to the existing NICK command, except that the
+server is passed as the prefix (which must always be present with
+CLIENT), and the ID is given too.  If there is no ID, the NICK command
+must be used instead.
+
+Between TS4 servers, and for clients with ID's, using the NICK command
+to introduce new clients is deprecated, as it doesn't pass the ID.
+Implementations that are explicitly not compatible with older protocols
+may warn of this, or refuse such introductions.
+
+New numeric associated with ID's: ERR_IDCOLLISION.  This is like
+ERR_NICKCOLLISION, and results in a KILL  (which may be locally
+recovered).  Note that ERR_IDCOLLISION is more likely to happen due to
+routing breakage, where the same user is introduced twice from different
+directions, than because of actual collisions in the generation of ID's.
+
+
+Cookie-based short-term op recovery
+-----------------------------------
+
+This change is, once again, strictly local to the server.  
+
+Its goal is to make it harder to take a channel by doing denial of
+service attacks on its operators.
+
+A server that implements op recovery will give a randomly generated
+"magic cookie" to each of its local users; this cookie can be used
+shortly the client disconnects, to identify a new connection as being
+from the same user.  This new connection will then be able to get
+operator status automatically on any channel that the user was
+previously an operator on, for a short time.
+
+More precisely:
+
+. when a client connects, a random cookie is generated.  The random
+  generator must be strong enough that a user cannot, by observing his
+  own cookie or anything else, guess another user's cookie.  The cookie
+  is sent to the user with the RPL_YOURCOOKIE numeric.
+
+. when a local client disconnects, for any reason other than an IRC
+  operator KILL, the server makes a list of all the channels the user
+  was an operator on (if any), with their channel TS's.  This list (if
+  not empty) is kept, for at most 15 minutes, associated with the client's
+  cookie.  Channels created less than one hour before, or without a TS,
+  are not counted.  For each channel in the cookie's list, the server
+  also remembers if the channel had mode +C (the internal +c opt-out mode)
+  or not.
+
+. a local registered client can identify itself by sending the command
+  "COOKIE <PREVIOUS-CONNECTION-COOKIE>.  If there is a list of channels
+  for the cookie, it will be associated to the client itself.  This can
+  only be done once for a given cookie.
+
+. if, within 15 minutes of having disconnected, and after identifying
+  himself with the COOKIE command, a client joins a channel for which
+  his ops were saved on the list, it will be just as if he had joined
+  with a channel password and the saved TS.  The client will get ops on
+  the channel, see himself being opped by the server.   This can only be
+  done once for a given channel.
+
+  Also, if the channel has been re-created in between, and the channel's
+  TS is strictly younger than the saved TS, any other modes (including
+  other ops) on the channel are locally removed, setting the deopped
+  flag on any operators or half-ops, and the channel's TS is set to the
+  saved TS, and setting or removing mode +C according to the saved
+  information with the cookie.
+
+  Only if the channel has *not* been re-created in between, ordinary
+  mode checks also apply, so the user cannot join a channel he is banned
+  on, or a +i channel without being invited, even after identifying with
+  a cookie that would give him ops on that channel.
+
+. when a client disconnects, any saved ops that the client had, after
+  having identified himself with a previous cookie, are also saved along
+  with his current list of ops on channels, unless they have expired.
+
+
+The COOKIE command is only taken from clients, after they have registered
+with NICK and USER.  No replies are sent in response.  Its syntax is:
+
+COOKIE <CLIENT-COOKIE>
+
+There is no way for a client to find out his current list of saved ops,
+short of joining the channels the user was previously on.  The servers
+can send a notice when the server sends its cookie, informing it if the
+cookie was matched or not.
+
+The only numeric associated with cookies is RPL_YOURCOOKIE, which is
+sent when the client signs on.
+
+
+Removal of dependent clients
+----------------------------
+
+When a TS4 server gets or generates a SQUIT for a server, local or
+remote, it will immediately remove all clients and servers that depend,
+directly or not, on that server.  In the process of removing these
+clients, only the minimal QUITs and SQUITs are sent to other TS4
+servers, in the knowledge that they can do this operation themselves.
+
+In order to do this, every TS4 server must keep information for all
+remote clients and servers, specifying which server introduced them.
+
+If any TS3 servers are directly connected, and when processing a SQUIT
+for a server, local or remote, they must be sent QUITs for all clients
+on or behind the exiting server, and SQUITs for all servers behind the
+exiting server, unless these servers fall within a hostmask, and
+therefore were never introduced to the TS3 server to begin with.  If the
+SQUIT command came from a TS3 link, these QUITs and SQUITs must be sent
+back through that link too.
+
+For TS4 links, there are three cases:
+
+  . nothing should be sent back to the link through which the SQUIT came
+    (but it's acceptable to send back the same SQUIT).
+
+  . only the SQUIT must be sent to in the direction of the SQUITted 
+    server, if this server is not local
+
+  . for all other directions, TS4 servers must be sent QUITs for any
+    clients on servers that are quitting but are hostmasked (i.e, such
+    that the local server's name is the same as the exiting server's, as
+    far as the destination server is concerned).  Other than that, they
+    must be sent a SQUIT for the quitting server if they can see it, and
+    for every first server behind it that they can see otherwise.
+
+    A WALLOPS message must also be sent, stating the origin and reason
+    of the SQUIT.
+
+
+This all ensures that QUIT/SQUIT bursts are kept to the strict minimum
+when servers split.  Also, immediately removing dependent clients makes
+it impossible to have "dangling clients" from a connection, where the
+server has been exited (possibly because of a routing collision), but
+its clients remain behind it, ready to cause nick or ID collisions when
+the same clients are introduced along with their server, from another
+link.
+
+
+Sending messages to ops/halfops/voices only
+-------------------------------------------
+
+Three new targets for PRIVMSG and NOTICE are defined:
+
+	@#channel	sends only to the chanops on the channel
+	@%#channel	sends to the chanops and halfops on the channel
+	@+#channel	sends to the chanops, halfops and voices on the channel
+
+The channel can be global (#channel) or local (&channel).
+
+Any messages for all of these targets are not passed at all to non-TS4
+links.
+
+If the channel does not have mode +n set, anyone can send to these
+targets, from inside or outside the channel.  
+
+If the channel has mode +n, then users can only send to the targets if
+they belong to them.  In other words, only chanops can send to
+@#channel; chanops and halfops can send to @%#channel, and chanops,
+halfops and voices can send to @+#channel.
+
+Messages like ":someone PRIVMSG @%#channel :blah blah blah" are passed
+both to TS4 links and to the appropriate clients.
+
+The syntax for this has been taken and extended from DALnet's @#channel
+and @+#channel; the +n rule doesn't exist on DALnet though, and neither
+do half-ops and @%#channel.
+
+
+Clearing channels
+-----------------
+
+TS4 introduces the possibility for opers to completely reset and clear
+channels.  Whether this is activated or not in the definitive version
+remains to be seen; the current code has it as an option, for opers
+whose O:lines has the value "8" in the port field, as in
+
+		O:<host>:<pass>:<nick>:8:<class>
+
+To clear a channel, an oper uses the CLEARCHAN command.  This locally
+removes all users (even opers) from the channel, showing them as kicked by
+their local server, resets the channel's mode to "+z", sets the channel's
+TS to the channel's existing TS minus one, and removes any channel key.
+
+The syntax for CLEARCHAN is:
+
+	CLEARCHAN #channelname :comment
+
+where the comment is optional, but strongly recommended.
+
+CLEARCHAN and MODE +z should NEVER be used before all servers have 
+switched to TS4.  This is very important; CLEARCHAN creates a big
+mess of a desync on a mixed network.
+
+MODE +z can never be set manually by an oper; CLEARCHAN is used instead.
+Servers use "MODE +z" to mean that a channel is in the "cleared" state.
+
+When an oper has cleared a channel, his server sends the command
+
+	:oper CLEARCHAN #channel TS :comment
+
+to all neighboring TS4 servers, where TS is the channel TS that was just
+set to the previous TS - 1.  The comment is set to "(no comment given)"
+if there wasn't one.
+
+A channel in the "cleared" state (i.e with MODE +z set) behaves in this
+way:
+
+. Non-opers cannot join it, see it, nor send messages to it (it behaves
+  like it's mode +isn).
+. Global opers can join it, and they get chanops on joining it
+. Global opers on it can set MODE -z, which makes the channel normal
+  again.
+. Mode +z expires after a few minutes (currently 15); each server
+  keeps track of this, and when a server expires the mode, it does send
+  the mode change ("MODE #chan -z") to its neighboring servers.  This
+  mode change is NOT passed along for a channel that already was -z,
+  to avoid generating a storm.
+. An empty +z channel does not disappear until mode +z expires; empty
+  +z channels are actually passed in net.bursts to TS4 links (unlike
+  empty +c channels), using a '*' as the userlist.
+
+In SJOIN commands, +z is passed as any other mode, and without a
+parameter.  The channel's TS is passed in the usual way as the first
+argument to SJOIN.
+
+When processing an incoming SJOIN with a +z, the server sets MODE +z on
+the channel locally, removes all users, modes and keys as it would have
+done with a /clearchan (unless the channel was already +z), and goes on
+to process the incoming userlist.
+
+For a channel that already has MODE +z, when processing an incoming
+SJOIN that does not specify MODE +z, the TS is not changed, and the
+incoming mode and userlist is ignored except for opers.
+
+Note that the whole MODE +z system is not absolutely perfect, and the
+right combination of splits and joins can get the channel desynced.
+This is still acceptable, because when MODE +z is being used, very few
+people are actually on the channel, and they are all ircops cooperating
+in resetting a channel.  To make a system like MODE +z work perfectly
+would require something like another oper-only op level that lets people
+stay through a channel reset.
+
+
+Other changes
+-------------
+
+Since server-originated MODE +o and +v have been replaced by SJOIN
+options in the server-to-server protocol, remote MODE +/-o, v, c and h
+commands originating from servers will not be honored, and will generate
+warnings.  Also, servers no longer set a channel's TS to zero after
+receiving a server-originated MODE +o for it;  instead, the mode change
+is ignored.
+
+Servers will no longer send out a MODE +o back in response to a nick
+chasing failure on a MODE +o command, even on TS-less channels.  This
+has never been necessary.  
+
+All remains of local and remote compatibility with servers older than
+TS3 are dropped with TS4.  TS-less NICK introductions and
+server-originated JOIN commands are ignored and generate warnings
+(except for ":user JOIN 0", which is not deprecated).
+
+Permission checking for mode changes is now strictly done at the local
+server level, for all modes except +c, where every server does the check.
+
+Servers now allow "MODE +k" with a new key from users even when there is
+already a key set; the new key overrides the old.  In "MODE -k" commands
+from clients, the argument is no longer required; if it is given, it
+doesn't need to match the current key.
+
+SJOIN commands are now allowed to have an empty user/ban list; in that
+case, a single "*" is sent as the last argument, instead of the list.
+This is actually useful to pass modes along (and avoid a desync), when
+the SJOIN contained some modes, but all the users it mentioned were
+killed or invalid.  Such an SJOIN is only passed to TS4 servers.
+
+On servers which implement timedelta, the command "STATS n" will return
+the value of the timedelta.
+
+On user commands that expect a nickname, the characters '@', '%' and
+'+' will be ignored at the start of a nick, to accomodate clients that
+don't expect multiple flags on a nick, in a names/who/whois reply.
+
+Ban patterns are not generated in a more friendly way (as in Undernet),
+so that "MODE #channel +b user@host" sets the ban "*!user@host", not
+"user@host!*@*".
+
+Servers now drop the connection when they receive an unknown command from
+another server, instead of ignoring it.  Servers shouldn't be sending
+commands that the other side won't understand; they should negotiate with
+"CAPAB" instead.
+
+
+Numerics
+--------
+
+The following numerics were added or altered in TS4;  "*" means changed,
+and "+" means added.
+
+	004	RPL_MYINFO
+			"<server name> <server version> oiws biklmnopstvche"
+
+		* The letters 'c', 'h' and 'e' were added to the list of
+		  available channel modes.
+
+
+	014	RPL_YOURCOOKIE
+			"<cookie> :is your reconnection cookie"
+
+		+ Sent just after the user signs on, with the cookie.
+
+
+	452	ERR_IDCOLLISION
+			":ID collision KILL"
+
+		+ Sent to a client when the server detects an ID collision
+		  (the same ID is in use by another server).  This is not
+		  sent if the collision will be recovered.
+
+
+	453	ERR_NICKLOST
+			"<nick> :Nickname collision; please enter a new nick"
+
+		+ Sent to clients whenever a technical KILL for the user
+		  has been generated, and the connection is being kept
+		  alive.  The client should at this point send a nick
+		  change command.  Any client commands between the server
+		  raising the nick-lost condition and the client setting 
+		  a new nick will result in ERR_NOTREGISTERED errors.
+
+
+	487	ERR_CHANTOORECENT
+			"<channel> :Channel created too recently"
+
+		+ Returned by the server as a response to some command that
+		  requires a channel to have existed for a set time, when
+		  this condition isn't met.
+
+	488	ERR_TSLESSCHAN
+		     "<channel> :Mode <mode> not available on TS-less channel"
+
+		+ Returned by the server when a MODE command is attempted
+		  on a TS-less channel, which is only available on TS
+		  channels.  This can happen for modes +/-c, +/-h and +/-e.
+
+
+	325	RPL_CHANNELPASSIS
+			"<channel> <password>"
+
+		+ Returned as an answer to a "MODE #channel c" query.
+
+
+	326	RPL_NOCHANPASS
+			"<channel> :No channel password"
+
+		+ Returned as an answer to "MODE #channel c" when there is
+		  no password.
+
+
+	329	RPL_CREATIONTIME
+			"<channel> <channelTS> <passwdTS> <oplessTS>"
+
+		* Returned as an answer to "MODE #channel", this now
+		  includes the 3 TS values for the channel.
+
+
+	338	RPL_CHANPASSOK
+			"<channel> :Channel password OK"
+
+		* Sent as an answer to "MODE #channel =c password", this
+		  indicates that the password was correct.
+
+	339	RPL_BADCHANPASS
+			"<channel> :Invalid channel password"
+
+		* Sent as an answer to "MODE #channel =c password", this
+		  indicates that the password was NOT correct.
+
+
+	348	RPL_EXCEPTLIST
+			"<channel> <exceptionmask>"
+	349	RPL_ENDOFEXCEPTLIST
+			"<channel> :End of Channel Exception List"
+
+		+ When listing the exception masks for a channel, the server
+		  sends out an RPL_EXCEPTLIST for each of the exceptions (if
+		  any), followed by an RPL_ENDOFEXCEPTLIST.
+
+
+	200	RPL_TRACELINK
+			"Link <version> <destination> <next server> \
+			<next-server-TS-version><zflag> <link-time> <sendQ> \
+			<prev-server-sendQ>"
+
+		+ Some information added after the next server name,
+		  including the TS version and the zip information on
+		  the next server link, the time this link has been
+		  active, the sendQ, and also the sendQ for the previous
+		  server.
+
+
+	206	RPL_TRACESERVER
+			"Serv <class> <int>S <int>C <server> \
+			<nick!user|*!*>@<host|server> <TS-version><zflag>"
+		
+		* A parameter has been added at the end, which is "TS3" 
+		  or "TS4" depending on the TS version supported by that
+		  link, followed by a "z" if the link is compressed.
+
+
+	274	RPL_STATSDELTA
+			"<timedelta>"
+
+		+ Returns the timedelta value, as a response to "STATS n".
+
+
+The hashing algorithm for channel passwords
+-------------------------------------------
+
+Since servers send hashed passwords to each other, and later use them to
+verify clear passwords entered by users, the hashing password must be
+well defined and act the same on all servers.
+
+The hashing algorithm is defined by these steps:
+
+	.  Convert the password (which cannot be longer than 23
+	   characters, so there's more than enough room) to an array of
+	   32-bit integers, by reading the letters 4 by 4 in little
+	   endian mode.  If any padding is required, it is taken to be
+	   all null characters.  This array is extended (with zeroes) to
+	   the length of 16 integers.
+
+	.  Choose a salt, made of two random characters from the following
+	   list of 64 characters:  
+	   'a' to 'z', 'A' to 'Z', '0' to '9', '[', ']', '{' and '}'.
+
+	.  Make an array of 4 integers (the IV), the first of which is
+	   the salt read as a little-endian 16-bit integer, and the
+	   others are 0x2564547, 0x42424242, and 0x13717421, respectively.
+
+	.  Run an MD5 step (all four rounds of it), with the initial
+	   values of the registers set to the IV, using the converted
+	   password as the data to hash, and including the operation of
+	   adding the IV to the values of the registers, after the four
+	   rounds.  (see rfc 1321 for the definition of MD5.)
+
+	.  Run a second MD5 step, with the registers set to the result
+	   of the preceding step, and with the data to hash consisting
+	   of all zeros.  The purpose of this step is to make it to
+	   later use the intermediary result between the two steps as
+	   some kind of second password.
+
+	.  Decode the output in the following way: the values of the four
+	   registers are read in little-endian order as 16 unsigned
+	   characters.  The last 6 are discarded; the lowest 7 bits of
+	   each of the first 10 is taken as an index into a table of 128
+	   "printable" characters.
+	
+	.  The hash is made of the two-character salt, followed by the 
+	   10 decoded characters.
+
+
+The table of 127 printable characters is:
+
+	abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[\
+	]{|}^¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ¯˘˙˚¸
+
+A few examples of hashed passwords:
+
+		[clear pass]	[salt]	   [hashed pass]
+		blah		oZ	   oZÁaÏp8MUMŒd
+		zoinx		f0	   f0h›SÚCFV3Ïq
+		dedelamnio	Rh	   RhÕ…„fK‰√«¿o
+		azabunka	LL	   LLdÊKƒYoˆÚw€
+
+
+A sample TS4 connect burst
+--------------------------
+
+This is the beginning of a sample TS4 connect burst (except for the
+compression) between two TS4 servers.  The client ID's (but not the
+hashed passwords) have been changed to avoid accented characters.
+
+PASS tanaga :TS
+CAPAB :TS4
+SERVER yoyo.com 1 :TS4 is cool
+SVINFO 4 4 0 :889533498
+:yoyo.com SERVER *.blast.com 2 :[123.45.67.89] witty quote here
+:doink.blast.com SERVER urf.nl 3 :hello
+:urf.nl CLIENT .PzKKdz3fi 889532926 toina 3 + ~user bloblo.yay.org :bah
+:urf.nl SJOIN 889533293 +vic20-warez +sc Kae¸ıÌÚoZ¬»Y:c64sucks 0 :%.PzKKdz3fi 
+:yoyo.com CLIENT .Najae75i 889532962 la3er 1 +ow ~odar yoyo.com :what?
+:foo.blast.com CLIENT .zWjnUCdz 889532394 esane 3 +i ulaier ppp3.blah.com :(())
+:yoyo.com SJOIN 889531938 #so`i +tin :@.zWjnUCdz %.Najae75. 
+:yoyo.com SJOIN 889533099 +bluh +tnc 4dÿ≈«qÍ»ŒNNL 0 :@.Najae75i b)*!*@* e)*!*@*.blah.com e)*!*@*.nl
+
