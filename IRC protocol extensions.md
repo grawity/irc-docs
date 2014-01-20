@@ -15,11 +15,14 @@ Client-server protocol:
 
 Server-server protocol:
 
- * TS (Hybrid → Charybdis)
+ * TSora (Hybrid → Charybdis)
      * Versions: [TS3][ts3], [TS5][ts5], [TS6][ts6], [TS6 v7][ts6v7], [TS6 v8][ts6v8]
      * Extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
      * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
+     * some TS6 ircds (Plexus) have mutated incompatible versions :(
  * [P10][p10] (ircu)
+ * [UnrealIRCd][sts-unreal] (? DreamForge variant?)
+ * SASL encapsulation in [various link protocols][sts-sasl]
 
   [rfc1459]: http://tools.ietf.org/html/rfc1459
   [rfc2810]: http://tools.ietf.org/html/rfc2810
@@ -36,7 +39,9 @@ Server-server protocol:
   [ts6-save]: https://github.com/grawity/irc-docs/blob/master/server/ts6-save-collision-fnc.txt
   [ts6-euid]: https://github.com/grawity/irc-docs/blob/master/server/ts6-euid.txt
   [p10]: http://web.mit.edu/klmitch/Sipb/devel/src/ircu2.10.11/doc/p10.html
+  [sts-unreal]: http://www.unrealircd.com/files/docs/technical/serverprotocol.html
   [ircv3]: http://ircv3.atheme.org/
+  [sts-sasl]: https://gist.github.com/grawity/8389307
 
 ## CTCP and DCC
 
@@ -74,7 +79,6 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
 
  [rfc1413]: http://tools.ietf.org/html/rfc1413
  [nef-loc]: https://github.com/grawity/irc-docs/blob/master/server/p10-login-on-connect.txt
- [sts-sasl]: https://gist.github.com/grawity/8389307
 
 ## Capability negotiation
 
