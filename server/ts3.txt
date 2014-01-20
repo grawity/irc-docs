@@ -1,4 +1,7 @@
+$Id: README.TSora,v 7.1 2003/10/13 02:15:20 metalrock Exp $
+<edits: also seen>
 $Id: ts3.txt 33 2005-10-02 20:50:00Z knight $
+</edits>
                        Protocol changes for +TSora
                        ---------------------------
 
