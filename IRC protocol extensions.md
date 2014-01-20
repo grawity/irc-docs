@@ -17,7 +17,7 @@ Server-server protocol:
 
  * TSora (Hybrid, Charybdis)
      * Current version: [TS6 v8][ts6v8]
-     * Old versions: [TS1][ts1], [TS3][ts3], [TS5][ts5], [TS6 v?][ts6], [TS6 v7][ts6v7]
+     * Old versions: [TS1][ts1] → [TS3][ts3] → [TS5][ts5] → with UIDs: [TS6 v?][ts6], [TS6 v7][ts6v7]
      * Extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
      * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
      * Some TS6 ircds (Plexus) have mutated incompatible versions :(
