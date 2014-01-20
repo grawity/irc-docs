@@ -34,6 +34,7 @@ Server-server protocol:
   [rfc2812]: http://tools.ietf.org/html/rfc2812
   [rfc2813]: http://tools.ietf.org/html/rfc2813
   [ts3]: https://github.com/grawity/irc-docs/blob/master/server/ts3.txt
+  [ts4]: http://web.archive.org/web/20091202102553/http://www.iagora.com/~espel/ircd/README.TS4
   [ts5]: https://github.com/grawity/irc-docs/blob/master/server/ts5.txt
   [ts6]: https://github.com/grawity/irc-docs/blob/master/server/ts6.txt
   [ts6v7]: https://github.com/grawity/irc-docs/blob/master/server/ts6v7.txt
