@@ -67,11 +67,13 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
 
  * SASL (IRCv3 style)
  * SASL (IRCX style)
- * privileged bots – NickServ, Q
+ * /msg to privileged bots – NickServ, Q
  * RFC 1459 server password (`PASS` command)
+ * Nefarious ["Login On Connect"][nef-loc] (extended `PASS`)
  * [Ident][rfc1413] (OS-level authentication)
 
  [rfc1413]: http://tools.ietf.org/html/rfc1413
+ [nef-loc]: https://github.com/grawity/irc-docs/blob/master/server/p10-login-on-connect.txt
 
 ## Capability negotiation
 
