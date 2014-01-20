@@ -1,0 +1,234 @@
+
+The Relative-Chanops idea
+-------------------------
+
+(written by orabidoo; the idea has probably been floating around for a
+very long time, I'm sure some IRCnet people would claim to have thought
+about it too)
+
+(this thing should have a neater name)
+
+
+Let's take a radical idea and see where it brings us:
+
+	To make channel wars a thing of the past, let's make it 
+	possible for everyone to op themselves on any channel of 
+	their choice.
+
+
+Now, we obviously don't want the current IRC chanop system, with just an
+added command that would let anyone grab ops on any channel.  That would
+just make all channels instant hell.
+
+So it seems appropriate that, if I join a channel, on which I'm not an
+op, and then later I op myself and start kicking people, then only *I*
+should see these people as being kicked.  No-one else in the channel
+should even notice.  And their view of the channel should be consistent
+with it, just like my view of the channel is consistent with me having
+ops on it, and those people having been kicked.
+
+So we come to the idea that, for any of this to work, different people
+must be able to have different, but consistent, views of the same
+channel.  No, it's not a mess, because I said "consistent".
+
+What this means is that such notions as "user Somenick is on #channel"
+and "user Somenick has ops on #channel" now become subjective truths,
+rather than absolute ones (under control of the single authority, the
+server).  In more practical terms, it means that the servers need to
+keep track of "who sees who (with ops)" instead of just "who is there
+(with ops)".
+
+While this may appear like a daunting task (switching from n to n^2 in
+lots of places, if it's done in the "obvious" ways), I believe it is
+algorithmically feasible, without too much of an increase in server
+bandwith/cpu/memory demands.
+
+
+The whole point of this system is to reach a situation where none of the
+various existing views on a channel has any intrinsic privilege over
+another.  Views only die or live based on popularity; the "regular"
+crowd of a channel are just the ones with the most common, lasting view.
+They use their chanops as usual (opping regulars, kicking annoying
+people), and all is well.  However, at the same time, another crowd of
+dissenters may be on the same channel, having ops, and having kicked the
+regulars.  And a few random just-joined non-regulars may be there,
+seeing both and being seen by both.
+
+Ops and control are only interesting when they can be shared by a group;
+this system should make it easy for such a group (say, the group of
+regulars, or the group of dissenters) to hold together and keep a
+consistent view of the channel among themselves.
+
+To make any kind of channel wars truly irrelevant, someone who joins a
+channel with "JOIN #channel" must not be assigned to any specific view
+from the start.  So instead they should enter the channel in a state
+where they can see everyone (except those who, in their view, woulnd't
+have let the user enter, because the channel is +i or +k or +l for
+them), and has no ops, and no-one has ops.  This is the bare, modeless
+view, and it's the default when you join a channel.
+
+In order to associate yourself with an existing group, after joining,
+you need to explicitly ask the system to sync you up to their view.  So
+say you joined #channel, and recognize SomeReg as a regular that you
+trust.  You type "/sync #channel SomeReg", and then the server gives
+you the same view SomeReg has: some people have ops, others don't, some
+people aren't on the channel anymore, and so on.  You may or not have
+ops at this point.  If SomeReg gives you ops, or if someone that SomeReg
+sees as having ops gives you ops, then you get them.
+
+(Having ops yourself is never a big deal under this scheme; you see
+yourself with ops if the current view that you've chosen does, which
+just means that using ops won't make you a dissenter.  If you don't have
+ops, you can always op yourself, but noone else will see you do that,
+and your view will now be different from other people's, although
+largely overlapping).
+
+As a shortcut, "/join #channel SomeReg" could join you *and* sync you up
+with SomeReg's view.
+
+If you make a mistake in trusting someone, and end up syncing up to the
+wrong person, it's no big deal either!  Just do another /sync with
+someone else, or just dissent (i.e op yourself) and then deop everyone,
+or part and rejoin.  For that matter, there should be a way to get back
+to the modeless view without parting, maybe something like "/sync #chan 0".
+
+
+So from the user point of view this is mostly clear.  The problem now
+remains of, how would servers go about implementing any of this?
+
+I have two possible solutions for this.  One is more radical than the
+other.  I like the radical one better, but I'm not sure just how
+realistic it is ...
+
+
+a) The Radical Solution.
+
+Let me call this exo-ops.  In this solution, servers no longer really
+manage ops or modes.  Since ops and modes have now degenerated to a
+matter of trust by each client, you could say, only each client ever
+needs to keep track of what modes it sees, and who it trusts.
+
+So just make the server broadcast MODE, KICK, TOPIC and the like,
+without any checking, and put all the checking on the client side.
+
+Servers don't even have a notion of CHFL_CHANOP anymore.  They don't
+care what goes in a MODE, or what a TS is.
+
+Clients keep track of everything.  /SYNC is a CTCP; even MODE, KICK and
+TOPIC could be implemented as CTCPs.  "/SYNC #chan 0" is a local client
+command to drop all information for a channel.  For each other user on a
+channel, the client has 3 possible values:
+
+          1) I can see that client and it has ops
+          2) I can see that client and it doesn't have ops
+	  3) I can't see that client and it can't see me (e.g. I've
+	     kicked him or he's kicked me at some point).
+
+For 3) to work right, a kind of server-side reverse ignore (let's call
+it BLOCK) is needed.  When I BLOCK someone on a channel, that user can't
+see any of my channel messages anymore.  This requires server help, but
+it's not too expensive (only the blocker and the blockee's servers need
+to know of it).
+
+When I kick a user, his client doesn't have to honor my kick, but he
+shouldn't be seeing any further messages from me on that channel.  So
+this means that, when a client is accepting a KICK for which it isn't
+the target (because it's sending it out itself, or because it came from
+another client that it trusts), then it should send a BLOCK command to
+the server, so the kicked person doesn't see him anymore.  BLOCKs
+automatically disappear when either the blocker or the blockee leave the
+channel.
+
+
+As an additional bonus with exo-ops, no channel commands are complete
+broadcasts anymore; with this solution, they can all be routed as
+PRIVMSGS, so parts of the net without users on those channels don't have
+to hear about them.
+
+And, to top it all, this moves *all* channel policy out of the server,
+which means that clients are free to implement half-ops, or 371 levels
+of ops, or whatever, as long as they can agree on a syntax to pass them.
+
+
+The big problem about this solution, of course, is that it requires all
+clients to be rewritten with a whole lot of new logic.  And that's not
+going to happen.
+
+So here's how you palliate that: you let the server do a lot of this
+processing, for its local clients.  This means, for each local client,
+keeping a separate list of users (with ops status) for each channel the
+user is on.  That isn't *too* bad, because it's limited to the server's
+local users only, which are a tiny fraction of the net's.  
+
+Of course, that removes the advantage of "let clients make new rules
+like halfops or whatever", but not completely.  A client that *does*
+include the logic to handle exo-ops can very well tell the server at
+connect time, and from that point on the server just passes it the info
+as it receives it.  Non-exo-ops-enabled clients just behave like an
+exo-op-enabled one would if it had a "standard" model of ops.
+
+I *think* this all works; i.e it would be consistent, people wouldn't be
+seeing messages from people they've seen as kicked, and so on and so on.
+
+And it'd be great, for once, to move policy OUT of the server.  Even if
+that means building an emulation layer for poor old legacy clients.
+
+
+
+b) The Hierarchical Solution
+
+This one is more conventional, less fun, probably takes more memory on
+servers, but it also does the work, and it doesn't turn KICKs into
+little storms.
+
+Basically, you subdivide channels into "views", and each view gets a
+label, which can be a random 64-bit number (let me call it a view ID, or
+vID).
+
+Each channel has a set of vIDs;  vID 0 is special, and is always the
+modeless view.  When you join #channel, you actually join #channel.0.
+
+When you "dissent" (i.e op yourself), you are creating a new view, so
+the system allocates a new vID for the channel (e.g by generating a
+64-bit random number, or just a sequence number), and gives you ops on
+#channel.vID.
+
+All the usual server-to-server commands keep working in the usual way;
+each server holds, for each channel, a list of vIDs with their
+associated mode lists.  There should be relatively few views per channel
+in average, so this would still be tolerable in memory requirements.
+
+Note that a user can hold ops in more than one view, which means that
+you can't just do ":user MODE #channel.view +whatever" ; instead, you
+need to send a good old ":user MODE #channel +whatever", and each server
+needs to figure out for which of #channel's views this is a no-op, and
+update the mode list for those where it isn't.  In fact, actual vID
+numbers would only get passed at connect burst time, at view creation
+time (when someone dissents), and possibly in /sync commands.  The rest
+of the times, the servers would just talk to each other about plain
+#channels.
+
+
+What this does, in a way, is put a 2-level hierarchy on channels, where
+the bottom level is not, or only partially, shown to users.  Not showing
+it entirely to users is quite important: if users did get the vID, or
+even worse, could choose it, then people would get attached to
+#blah.31337 or to #blah.3194938750 instead of getting attached to #blah,
+which means channel wars would continue in some way or other.
+
+However, this is in no way incompatible with making channels
+hierarchical with more than 2 levels, *and* hiding the bottom level in
+this way.  So you could have #unix.users, #unix.lusers and #unix.haters,
+each of them with a multitude of views.
+
+And this is the case, no matter whether "views" are actual server
+objects, or simulated by the clients with the "radical" approach.
+
+
+TODO: for each of the two models (unless one gets discarded outright),
+check and make sure that all the important semantics of current channels
+can be preserved within a view.  look at how splits get handled.
+specify the protocols in detail.  then try to convince the rest of the
+world that this is a good idea.
+
+
