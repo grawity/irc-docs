@@ -81,7 +81,7 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
  * `PROTOCTL`
  * Microsoft IRCX
 
-## ISUPPORT
+## ISUPPORT (current)
 
 Implemented by almost all servers. Only advertises extensions; they are assumed to be always enabled, unless declared otherwise. (For example, `UHNAMES` has to enabled by client.) Many extensions in ISUPPORT deal with core IRC features; for example, supported channel types (e.g. `CHANTYPES=#&`) or the longest permitted nickname (`NICKLEN`).
 
@@ -105,7 +105,7 @@ Known extensions:
   [watch]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/draft-meglio-irc-watch-00.txt
   [whox]: http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who
 
-## CAP and IRCv3
+## CAP and IRCv3 (current)
 
 The **IRCv3 Working Group** defines a standard set of extensions to IRCv2. The central part of IRCv3 is [capability negotiation][v3-cap] using `CAP`, which is implemented by all current servers.
 
