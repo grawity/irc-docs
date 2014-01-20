@@ -1,0 +1,132 @@
+$Id: vchans.txt,v 1.2 2002/04/27 12:20:36 leeh Exp $
+
+                  "Virtual Channels"
+		======================
+
+		Non flat channels	
+		Or relative ops take 3
+
+		Diane Bruce (db@db.net)
+		Roger Espel Llima (espel@iagora.net)
+		David Harmelin (lunah@mach.unseen.org)
+
+Introduction
+------------
+
+IRC has many problems with attacks on channels.  The singular
+namespace only allows for one channel per name and people can
+fight over this singular namespace.  The vchannel proposal allows
+two competing groups to both run a channel under the same namespace.
+
+Description:
+
+The scheme works like this. ircd is modified to allow the creation
+of a copy of a channel name. An additional command is added to irc
+called "CJOIN" for "create on join." This allows the creation of
+multiple versions of the same channel behind one channel name.
+
+eg.
+Using ClientA,B,C,D and channel #cats for examples.
+
+
+Scenario 1
+----------
+
+ClientA  /join #cats
+
+There is a single channel known as "#cats" there is no difference
+so far. Any other client joining "#cats" shows up on the same channel
+as client A.
+
+ClientB /join #cats
+
+There are two clients on channel #cats. No difference from standard IRC
+so far. As it happens it behaves as standard IRC completely in this scenario.
+
+
+Scenario 2
+----------
+
+ClientA ops ClientB on #cats T0, Client B "takes over."
+
+ClientA /parts #cats (or has been kicked) ClientA attempts
+to rejoin #cats, discovers they have been banned. ClientA then
+does /quote cjoin #cats, thus creating a new version of #cats.  The channels
+are identifiable to users via a 'key'.  This key is the nick of a user
+currently in the channel.
+
+    We now have (where T0 is earlier timestamp then T1)
+
+        T1
+             / ClientA with ops
+       #cats/
+            \
+        T0   \ ClientB with ops, this version of #cats has ClientA banned.
+
+
+Thus in this scenario the keys of the channel are 'ClientA' and 'ClientB'.
+
+Newbie irc user ClientC connects and sends /join #cats, the ircd will 
+then present them with a list of #cats variants to join.
+
+This is in the form of numerics:
+   RPL_VCHANEXIST (276) - Tells the client the channel they are trying
+                          to join has vchannels available.
+   RPL_VCHANLIST  (277) - A list of the keys the user can select.
+   RPL_VCHANHELP  (278) - A little help numeric detailing how to join
+                          a vchannel.
+
+ClientC would then pick a key and join that channel.
+
+
+Scenario 3
+----------
+
+Classic "Channel faction war". In this scenario two competing
+factions for the same channel fight it out. In todays IRC one faction
+"wins" kicking and deopping the other faction. With this modified model
+the "loser" faction can /cjoin #cats and create their own version of the
+channel.
+
+Established "regulars" can choose to join the "other" version of
+the channel with a key on /join.
+
+This key can be the nick of any user (or bot) currently on the channel.
+this alternative version of the channel. Note this automatically means
+one nick cannot be on two variants of the same channel.
+
+   i.e. ClientD does /join #cats !catbot
+
+   Where catbot is the nick of a bot on #cats.
+
+
+   T1     /Clients A,D,catbot
+         /
+   #cats/
+        \
+         \
+   T0     \Client B
+
+
+
+
+Implementation
+--------------
+
+All a CJOIN does, is link a new channel with the base name of the
+current channel into the IRC namespace. i.e. #cats T1 is actually
+##cats_970165390 with a link list from the base channel name of #cats.
+This allows clients on non "virtual channel" servers to join, as the
+name maps into "normal" old fashioned IRC channel name space.
+
+Using a namespace with "##" to map sub channels lessens the parsing
+needed for vchan aware servers to pick up new vchans.
+
+Name space collision is dealt with by the ircd by changing the name
+slightly. i.e. CJOIN tries to create ##cats_970165390 but discovers
+the channel already exists. In this case the name is pertubed by 1
+until successful creation happens.  The TS of the channel must be the
+same as the TS in the channel name, else the vchan is not created.
+
+"JOIN" is modified to allow the addition of a nick "tag" which has the
+prefix '!'.

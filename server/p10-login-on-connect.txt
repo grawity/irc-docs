@@ -1,0 +1,68 @@
+Login-on-connect documentation
+Last updated 22 Jun 2004 by Vampire-
+
+1. This feature is experimental.
+
+2. The main point is to allow clients to log in to a service bot (i.e., X)
+*before* being announced to the network. Otherwise, a combination of a
+malicious user, /ISON, /USERIP and low latency can reveal it's real host/IP
+before he gets a chance to log in and set himself +x
+
+3. Client<->Server changes:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The PASS command now has the following syntax:
+
+PASS [optional I-line password] <bot nick> <username> :<passphrase>
+
+If the client sends such a password message, after sending NICK,
+USER and PONG, it's username/passphrase are sent to the specified bot
+for validation, while holding the client in the 'registration' state.
+If the authentication succeeds, the client's account and umode +x are set,
+after which he is introduced to the network, continuing the regular connect
+phase. If authentication fails (or the bot is not on the network), the user
+is given a chance to retry (he can do this by sending another PASS command),
+or to disconnect from the server. If he wishes to connect without a hidden
+hostmask, he can send a PASS command with no parameters.
+
+Update: For buggy clients that send ("PASS :%s", whatever-the-user-typed)
+and thus are incapable of sending multiple arguments, there's a hack in
+mr_pass that splits up the argument if the first character is a ':'.
+This way users might use ":bot user :pass phrase" in their clients.
+The example above would be, in raw form:
+
+PASS ::[optional I-line password] <bot nick> <username> :<passphrase>
+
+4. Server<->Server changes:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The ACCOUNT message now has the following syntax:
+
+Auth check: 
+<client's server numeric> AC <bot's numeric> C <request-id> <username> :<passphrase>
+Servers send this message to request a service bot to authenticate the client.
+<request-id> is not processed neither by the servers along the way nor the
+service bot. Currently this is:
+	 '.' <fd> '.' <cookie>
+The inital '.' makes sure that the ID is not a valid integer, which is part of
+the hack required to support old-style ACCOUNT messages. The cookie is used to
+validate replies, since the user might disconnect and the fd be reused before
+the reply comes back from the service. Hubs propagate this message as-is
+towards the service bot, not unlike PRIVMSG.
+
+Auth reply:
+<bot's server numeric> AC <client's server numeric> A|D <request-id>
+Service bots send this in reply to an 'auth check' message from a server.
+"A" stands for "accepted", "D" for "denied". Again, hubs will have
+to proagate this message back to the client's server.
+
+Remote auth:
+<bot's server numeric> AC <client numeric> R <account> [<timestamp>]
+This is the current message used by service bots to announce the network
+that a user has logged in. The old format is still supported:
+<bot's server numeric> AC <client numeric> <account> [<timestamp>]
+
+5. ircu code changes
+~~~~~~~~~~~~~~~~~~~~
+A new feature, FEAT_LOGIN_ON_CONNECT (default FALSE) will specify whether
+ircu will honour the login scheme as specified above for the PASS command.
+ircu will route ACCOUNT messages anyway, regardless of this feature's value.
+
