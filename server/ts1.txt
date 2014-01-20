@@ -11,9 +11,6 @@ are not exactly the same as the ones used on Undernet; the nick-kill
 handling is very similar and must be credited to Run, while the 
 "TimeStamped channel description" protocol is quite different.
 
-Note:
-
-This document has been updated for TS3.
 
 
 TSora servers keep track of which version of the TS protocol (if any) 
@@ -24,7 +21,7 @@ servers into a non-TS net, and for upgrades of the protocol.
 Each server knows which is the lowest and the highest version of the
 TS protocol it can interact with; currently both of these are set to 1:
 
-#define TS_CURRENT 3		/* the highest TS ver we can do */
+#define TS_CURRENT 1		/* the highest TS ver we can do */
 #define TS_MIN 1		/* the lowest TS ver we can do  */
 
 
@@ -147,7 +144,7 @@ Explanations:
   newer.
 
   When talking to a non-TS server, we need to behave exactly like one
-  because it expects us to. When talking to a TS server, we don't kill
+  because it expects us to. When talkign to a TS server, we don't kill
   the nicks it's introducing, as we know it'll be smart enough to do it
   itself when seeing our own introduced nick.
 
@@ -264,10 +261,6 @@ TimeStamped channel descriptions (avoiding hacked ops and desynchs):
       flags; propagate without the flags and with our TS.
     + if we don't have ops: set our TS to the received one, propagate
       with the flags.
-
-. When a local user joins a channel, whether this channel exists or
-  not, an SJOIN must be generated, and not a JOIN, to send to other TS
-  servers.
 
 
 Explanations:
