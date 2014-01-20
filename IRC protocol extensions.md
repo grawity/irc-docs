@@ -21,7 +21,7 @@ Server-server protocol:
      * Extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
      * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
      * Some TS6 ircds (Plexus) have mutated incompatible versions :(
-     * [TS4][ts4] was an unpopular attempt to add many features. TS5 is therefore a direct update of TS3.
+     * [TS4][ts4] ([FAQ][ts4-faq]) was an attempt to add many features; wasn't popular. TS5 is a direct update of TS3.
  * Undernet TSpre (ircu)
      * Current version: [P10][p10]
      * Old versions: [TSpre7, TSpre8][undernet-ts]
@@ -35,7 +35,8 @@ Server-server protocol:
   [rfc2813]: http://tools.ietf.org/html/rfc2813
   [ts1]: https://github.com/grawity/irc-docs/blob/master/server/ts1.txt
   [ts3]: https://github.com/grawity/irc-docs/blob/master/server/ts3.txt
-  [ts4]: http://web.archive.org/web/20091202102553/http://www.iagora.com/~espel/ircd/README.TS4
+  [ts4]: https://github.com/grawity/irc-docs/blob/master/server/ts4.txt
+  [ts4-faq]: https://github.com/grawity/irc-docs/blob/master/server/ts4-faq.txt
   [ts5]: https://github.com/grawity/irc-docs/blob/master/server/ts5.txt
   [ts6]: https://github.com/grawity/irc-docs/blob/master/server/ts6.txt
   [ts6v7]: https://github.com/grawity/irc-docs/blob/master/server/ts6v7.txt
