@@ -21,6 +21,8 @@ Distinctive features
     - has excepts but not invex
     - replies to /IRCDHELP
 
+    [irchighway] -!- UltimateIRCd(Tsunami)-3.0(02).m5 zathras.mo.us.irchighway.net RelStatus=RELEASE ServOpts=CiIp(TS5ow)-SSL Proto=3000
+
     Unreal, others
     - replies to /DALINFO
     - replies to /BOTMOTD
@@ -30,16 +32,30 @@ Distinctive features
     csircd
     - one of few ircds to have "STD=i-d" in RPL_ISUPPORT
 
+    ConferenceRoom
+        irc.webchat.org/7000
+        004: ConferenceRoom/4.0.7-SEC
+        005: CONFERENCEROOM WHISPER SM ELIST=MUCTLOX RATING SSL=994
+        strange token in 014
+        377: z-default 618 1328901086 :Last MOTD change ...: Fri, 10 Feb 2012 11:11:26 -0800
+        221: +ixpemJMn
+        has ACCESS, SET, AUTH, AVATAR...
+	
+
 Todo:
     austnet.org
     dynastynet.net – Unreal-Modified
     euirc.net – euIRCd 1.3.3 [perry]
     fef.net – FEF-7.5; disconnect (crash?) on /version, looks like Charybdis
     forestnet.org – Pride-2.2(21) from Bahamut? "TS5ow-r[CURRENT] RPL1 ..."
-    galaxynet.org – glx2.0.4, looks like ircu (END_OF_BURST)
+        aABCDEFhiMrt/Hop TS5ow-r[CURRENT] RPL1 utf-8e (ssl) OP[IKMNOPSTUW] 512
     ircnet.ru – PTlink7.1.0-rc2
-    krey.net – vantage-1.1.0 with IRCnet timestamping, CHANTYPES=#&!+
     ptnet.org – dal.4.6.Based.PTnet1.7.00
+	irc.ptnet.org
+        004: dal4.6.Based.PTnet1.7.00 oiwsghOkcfrRaAb bcdiklmnopstvR
+        005: NOQUIT TOKEN WATCH=128 SAFELIST VERSION=PTnet1.7.00 NETPROTO=32 LINKPROTO=100
+        VERSION: PTnet1.7.00. VIANETWORKS.ptnet.org ACHiIMpnY 32
+        (very short 005; delayed ident)
     starchat.net – StarIRCD-7.0 "CHANMODES=beH,... NOQUIT TOKEN STD=i-d", has JINX, AKILLEX
     virtualife.com.br – vlife.ircd, TODO: what numeric is used for /vlife?
     worldnet.net – solid-ircd-3.4
@@ -74,16 +90,16 @@ legend:
     (@ foo)         - main networks
     [d]             - dead
     [<-foo]         - forked from what ircd
+    (<-foo)         - renamed between versions (i.e. not a real fork)
     {foo}           - protocol spoken by latest version (from source code)
-    {foo <-bar,baz} - protocols spoken by older versions
+    {foo <- bar, baz} - protocols spoken by older versions
 
     (foo = bar)     - branch codenames
-    (foo -> bar)    - renamed between versions (i.e. not a real fork)
 
 sorted alphabetically with "ircd-" prefix removed
 
 (from scratch)
-    ircd2.x {RFC1459}
+    ircd2.8 {IRCnet <- RFC1459, RFC2812}
         <http://www.nic.funet.fi/~irc/server/>
         ircd2.8.21+CSr [<-ircd2.8.21] {RFC1459, TSora}
             ircd2.8.21+CSr29+LT [<-ircd2.8.21+CSr29]
@@ -99,25 +115,25 @@ sorted alphabetically with "ircd-" prefix removed
                         rabbitircd [<-UnrealIRCd 3.4]
                 Faerion
                 SorIRCd/Sorcery v1.x [d]
-            PTnet [<-dal4.6]
+            PTnet (@ PTnet.org) [<-dal4.6]
         ircd2.8/th [patch <-ircd2.8]
-            ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS5/TS6 <-TS3}
+            ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS5/TS6 <- TS3}
                 (ircd-hybrid 6.x {TS3, TS3/TS5, TS5})
                 ircd2.8/gimpnet (@ GIMPnet) [<-ircd-hybrid 6.3] {TS5}
                 ??? Aurora [d]
-                Bahamut (@ DALnet) [<-ircd-hybrid 5.3?] {TS5 <-TS1/TS3}
+                Bahamut (@ DALnet) [<-ircd-hybrid 5.3?] {TS5 <- TS1/TS3}
                     (dfhybrid, in the beginning)
                     (pelennor = Bahamut 1.0)
                     (halcyon = Bahamut ??)
                     Azzura Bahamut (@ Azzura.org) [<-Bahamut 1.4.34] {TS3/TS5}
-                    ??? Chimera (TR-IRCD4)
-                        ??? Kenora (TR-IRCD5)
+                    ??? Chimera (TR-IRCD4) {TS3}
+                        ??? Kenora (TR-IRCD5) {TS5}
                             ??? Austhex v8 {TS7~TS3}
                     ??? fqircd
                     LiquidIRC
-                    ??? Pride (@ ForestNet.org)
-                    ircd-RU! (@ RusNet, WeNet) [<-Bahamut 1.4.3x]
-                        (wudan 1.0.2 -> ircd-RU! 1.0.3)
+                    ??? Pride (@ ForestNet.org) {TS5}
+                    wudan (@ RusNet, WeNet) [<-Bahamut 1.4.3x]
+                        ircd-RU! (<-wudan 1.0.2)
                     solid-ircd (@ Worldnet) [d] [<-Bahamut 1.8]
                     TR-IRCD [<-Bahamut 1.4]
                     ??? UltimateIRCd <http://www.shadow-realm.org> {TS3/TS5}
@@ -130,20 +146,20 @@ sorted alphabetically with "ircd-" prefix removed
                     oftc-hybrid/bc
                 plexus aka ircd-rizon (@ Rizon) [<-ircd-hybrid 7.2.3]
                     Rizon IRCd
+                Plexus4 (@ Rizon) [<-ircd-hybrid 8.0]
                 PTLink [d]
                     Vlife.IRCd
-                ircd-ratbox {TS6 <-TS3/TS5}
+                ircd-ratbox {TS6 <- TS3, TS5}
                     Bluebox (@ Azzura.org) [<-ircd-ratbox 3.0.4]
-                    Charybdis [<-ircd-ratbox 2.1.5] {TS6 <-TS5}
+                    Charybdis [<-ircd-ratbox 2.1.5] {TS6 <- TS5}
                         ArinityIRCd [d] [<-Charybdis 3.4]
                         FreeBG ircd [<-Charybdis 3.4]
                         ircd-seven (@ freenode) [<-Charybdis 3.0.1]
                             cherry-ircd [d]
                                 ircd-cherry [d]
                         ShadowIRCd [d]
-                            elemental-ircd [<-ShadowIRCd 6.3.3]
-                                (ShadowIRCd 6.3.3 => ponychat-ircd)
-                                (ponychat-ircd 6.5.1 -> elemental-ircd)
+                            ponychat-ircd [d] [<-ShadowIRCd 6.3.3]
+                                elemental-ircd (<-ponychat-ircd 6.5.1)
                             NeoIRCd [d]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net)
@@ -157,19 +173,22 @@ sorted alphabetically with "ircd-" prefix removed
                     ircd-darenet
                 Othernet (@ Othernet.org) [<-ircu2.9]
                 dream-ircu [d] [<-u2.10.12.10]
+                glx2.x (@ Galaxynet.org)
                 ircd-sakura [d] [<-u2.10.12.10]
                 snircd (@ QuakeNet)
-                ??? glx2.0.4 (@ Galaxynet.org)
         ??? StarIRCD (@ StarChat.net)
+        ircd2.11 {RFC2812+UIDs/SIDs}
+		vantage (@ Krey.net)
     ConferenceRoom
     DarkIRCd {TS6}
     InspIRCd {InspIRCd TS6}
-        +Xynotyro [d]
+        InspIRCd+Xynotyro [d]
             ircd-sakura [d] [<-InspIRCd-1.1.11+Xynotyro]
     beware ircd
     csircd [d] {TS5}
     IRCNode/ts6-base {TS6}
-    ircd-micro {TS6}
+    ircd-micro [d] {TS6}
+        tethys (<-ircd-micro 0.1)
     ithildin [d] (@ DarkMyst.org) {TS5.bahamut14, dreamforge, TS3}
     ngIRCd {RFC 1459}
     pircd [d]
@@ -177,7 +196,6 @@ sorted alphabetically with "ircd-" prefix removed
         ignitionServer
             WavServ
     Synchronet IRCd
-    tethys
     WeIRCd
 ?
     Titan IRCd
