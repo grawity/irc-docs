@@ -17,7 +17,7 @@ Server-server protocol:
 
  * TSora (Hybrid, Charybdis)
      * Current version: [TS6 v8][ts6v8]
-     * Old versions: [TS3][ts3], [TS5][ts5], [TS6 v?][ts6], [TS6 v7][ts6v7]
+     * Old versions: [TS1][ts1], [TS3][ts3], [TS5][ts5], [TS6 v?][ts6], [TS6 v7][ts6v7]
      * Extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
      * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
      * Some TS6 ircds (Plexus) have mutated incompatible versions :(
@@ -33,6 +33,7 @@ Server-server protocol:
   [rfc2811]: http://tools.ietf.org/html/rfc2811
   [rfc2812]: http://tools.ietf.org/html/rfc2812
   [rfc2813]: http://tools.ietf.org/html/rfc2813
+  [ts1]: https://github.com/grawity/irc-docs/blob/master/server/ts1.txt
   [ts3]: https://github.com/grawity/irc-docs/blob/master/server/ts3.txt
   [ts4]: http://web.archive.org/web/20091202102553/http://www.iagora.com/~espel/ircd/README.TS4
   [ts5]: https://github.com/grawity/irc-docs/blob/master/server/ts5.txt
