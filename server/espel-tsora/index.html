@@ -1,0 +1,225 @@
+<html>
+
+<head>
+<title>EFnet TS protocol</title>
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#0000c0"
+vlink="#000090" alink="#0000ff">
+
+<h1>EFnet's protocol changes</h1>
+
+sections:
+[<a href="#TS4">TS4</a>]
+[<a href="#overview">overview</a>]
+[<a href="#specs">specs</a>]
+[<a href="#imp">implementation</a>]
+[<a href="#patches">patches</a>]
+[<a href="#debug">debugging</a>]
+[<a href="#history">history</a>]
+<br>
+
+pages:
+[<a href="../index.html">index</a>]
+[<a href="../hacks.html">hacks</a>]
+[<a href="../sirc/sirc.html">sirc</a>]
+[<a href="../ytalk/ytalk.html">ytalk</a>]
+[<a href="../utalk.html">utalk</a>]
+[<a href="../ircd/index.html">ircd</a>]
+[<a href="../xtris/xtris.html">xtris</a>]
+
+<br clear=all>
+<hr>
+
+<a name="TS4"></a><h2>The TS4 patches</h2>
+
+<p>
+&quot;TS4&quot; is a patch-set for EFnet's ircd code, which adds a lot
+of more or less related features, such as password-based channel
+persistency, two levels of ops, exception lists for bans, server-side
+unique session IDs, cookie-based short-term op recovery, nick kill
+recovery, server link compression, and a bunch of other things.
+
+<p>
+I developped the TS4 code during 1997-1998, as an experimental proposal
+for the technical evolution of EFnet.  This lead to a huge controversy,
+where the most political parts of TS4 (channel passwords and half-ops)
+were voted down.  Since then, many of the other TS4 features have been
+slowly integrated into EFnet's mainstream ircds.
+
+<p>
+This section documents the original TS4 code, which as far as I know is
+not currently in use in any IRC network.
+
+<h3>Documentation</h3>
+<ul>
+<li><a href="TS4.FAQ">the TS4 FAQ</a> for users.
+<li><a href="README.TS4">the protocol specs</a>.
+is <b>up to date</b> with the implementation. 
+</ul>
+
+<h3>Download</h3>
+<p>The current version of the TS4 code is the 1.0 release.  You can 
+download:
+<ul>
+<li><a href="ftp://quatramaran.ens.fr/pub/orabidoo/ircd/TS4-dev/irc2.8.21+TSora4-rel1.tar.gz">the reference implementation, irc2.8.21+TSora4</a>
+<li><a href="ftp://quatramaran.ens.fr/pub/orabidoo/ircd/TS4-dev/ircd-hybrid-5+TS4-rel1.tar.gz">the Hybrid version, ircd-hybrid-5.3+TS4</a>
+<li><a href="ftp://quatramaran.ens.fr/pub/orabidoo/ircd/TS4-dev/irc2.8.21+CSr31pl1+TS4-rel1.tar.gz">the +CS version, irc2.8.21+CSr31pl1+TS4</a>
+<li>Feel free to browse the files in the <a href="ftp://quatramaran.ens.fr/pub/orabidoo/ircd/TS4-dev/">ftp directory</a>
+</ul>
+
+<h3>Testing</h3>
+The test servers have been shut down; the beta testing was successful,
+and helped uncover a large number of bugs.
+
+<h3>News</h3>
+Things that have changed recently:
+<ul>
+<li>Release 1.0 is out, and all the debugging stuff is gone.  This is
+    the TS4 code as was originally intended; maybe some small net will
+    want to try what EFnet didn't quite end up liking.
+</ul>
+
+<a name="overview"></a><h2>Overview of EFnet's TS protocol</h2>
+
+<p>
+Long before TS4, I developped the original TimeStamping patches for
+EFnet, which borrowed the main idea from Undernet's TS code, but adapted
+to EFnet's servers, and with some differences in the design of the
+protocol.
+
+<p>
+TimeStamping allows IRC servers to react more intelligently to nickname 
+clashes (collisions), and makes it harder to hack chanops using netsplits.
+It was first introduced on <a href="http://www.undernet.org">Undernet</a>.
+
+<p>
+With TS, when a nickname collision occurs, only the most recently 
+introduced nick is killed. There are two exceptions to this: if if they 
+were introduced exactly at the same time, or the collision occurs 
+between a TS and a non-TS server then both are killed, and if the
+user@hosts are the same, then only the oldest is killed.
+
+<p>
+For channels, TS servers keep track of the creation time for channels,
+and on a net-join they will only keep ops on the older side if the times
+differ, unless the older side has no ops at all.  This is accomplished
+using timestamped channel descriptions, which makes all the servers take
+the same decisions rather than bouncing MODEs back as is done on
+Undernet.
+
+<p>
+Since TS was introduced on EFnet when the network was already large,
+existing channels without a TS had to be accomodated; channels with a TS
+of 0 act like on old non-TS servers.  This makes TS on channels quite
+ineffective on a mixed net.  A previous version which was more
+'aggressive' was found to be unstable.
+
+<p>
+The current version of the TS code and protocol, TS3, fixes a race 
+condition that affected channels being created only on part of the net;
+it also introduces new warnings, and makes compatibility with non-TS
+servers optional.
+
+<a name="specs"></a><h2>Specifications</h2>
+
+<p>
+Read the complete specifications of version 3 of the TS protocol in <a
+href="protocol.html"> HTML format</a>, or in <a href="protocol">plain
+text.</a>
+
+<p>
+And here are the specifications for <a href="README.TS4">version 4 of
+the protocol</a>, available only in text format (sorry!).
+
+<a name="imp"></a><h2>Implementation</h2>
+
+<p>
+The TS base code is implemented on top of a clean ircd2.8.21
+distribution.  This is meant as a reference to be ported to +CS, +th,
++hybrid and other versions, not as actual code to use on EFnet.
+
+<ul>
+<li>
+You can download the full TSora code in the form of a patch file against
+a stock ircd2.8.21 distribution: <a href="TSora.diff">[TSora.diff]</a>.
+
+<li>
+Or you can download the whole ircd2.8.21+TSora distribution: <a 
+href="irc2.8.21+TSora3.tar.gz"> [irc2.8.21+TSora3.tar.gz]</a>. 
+</ul>
+
+<p>
+TS code is included in all the EFnet ircd versions currently available,
+including +CS and +hybrid.  Look at the /version string to see if a 
+server includes the TS3 code.  If it does, it will show "TS3" (or
+"TS3o" or "TS3ow"...) instead of just "TS" at the end of the version
+string.
+
+<a name="patches"></a><h2>Patches</h2>
+
+Since the original TS implementation, a number of bugs have been found,
+some in the TS code itself and some in the stock ircd code.  These
+patches have been integrated with the current version of ircd+TSora,
+but are provided here for completeness.
+
+<p>
+Old patches:
+<ul>
+<li>Patch against <a href="channel.post">spurious server deops with
+multiple splits</a> (found by slackie):
+<a href="channel.diff">[channel.diff]</a>.
+<li>Patch to fix a race condition in NICK handling (reported by
+Taner): <a href="s_user.diff">[s_user.diff]</a>.
+<li>Patch against a desynch when all ops get nick killed (reported by Core):
+<a href="channel.newdiff">[channel.newdiff]</a>.
+<li>Patch against a bug (affecting both TS and non-TS servers) in NICK
+handling: <a href="s_user.newdiff">[s_user.newdiff]</a>.
+<li>Patch against a bug (affecting both TS and non-TS servers) in MODE +k
+handling: <a href="channel.diff-keybug">[channel.diff-keybug]</a>
+<li>Patch against another bug in NICK handling (reported by ComStud):
+<a href="s_user.diff.3">[s_user.diff.3]</a>.
+<li>Patch to upgrade a +CSr29 server to TS3: <a
+href="CSr29-TS3.diff">CSr29-TS3.diff</a> (use CSr30.5 instead).
+<li>Patch to upgarde a 2.8.21+TSora server to TS3: <a 
+href="TSora3.diff">[TSora3.diff]</a>
+</ul>
+
+<a name="debug"></a><h2>Debugging</h2>
+
+<p>
+For debugging of the TS servers, compile them with the option -DTSDEBUG,
+which adds a command ("TS") to dump all the known TS's. Servers
+compiled with -DTSDEBUG should <em>never</em> be linked to a real net,
+as they let anyone get a list of all nicks and channels.
+
+<p>
+The TS3 code introduces one new debugging options: TS_WARNINGS.  If
+enabled, situations like servers doing MODE +o changes (which should
+never happen on an all-TS net) or users remotely JOINing instead of
+SJOINing an empty channel (which causes the bug that brought TS3), are
+flagged to +s users.
+
+<a name="history"></a><h2>History</h2>
+
+<p>
+Timestamping was first introduced on Undernet when it had a few hundred users;
+their protocol is described in <a href="Undernet-TS">this document</a>.
+
+<p>
+Around December 95, a large number of EFnet IRC admins showed <a 
+href="lets-do-TS">interest</a> in introducing a TimeStamp protocol for 
+EFnet servers, to reduce the problems caused by collides and channel 
+op-hacking.
+
+<p>
+After some <a href="announcement">discussion</a> on operlist, I wrote the
+specifications and the patches to the server code to add TimeStamping to the
+EFnet IRC protocol.  The third version of this protocol is now in use on
+EFnet.
+
+<br>
+
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+Return-Path: <operlist-request@kei.com>
+Resent-Date: Tue, 5 Dec 1995 12:07:20 -0500 (EST)
+Subject: LETS DO TS
+To: operlist@kei.com, irc-eu@grasp.insa-lyon.fr
+Date: Tue, 5 Dec 1995 09:05:34 -0800 (PST)
+Resent-Message-Id: <"gLRt43.0.2o5.7n7nm"@kei.com>
+Resent-From: operlist@kei.com
+X-Mailing-List: <operlist@kei.com> archive/latest/216
+X-Loop: operlist@kei.com
+Precedence: list
+Resent-Sender: operlist-request@kei.com
+
+
+Ok people..  after ruffling everyone's feathers, I have decided to take
+down the channel.un service (the UN bot will go back to being a normal
+channel bot as it was before). The results of "voting" were in favor
+of a channel-service, those who voted against one were out numbered.
+
+I have taken the service down because I think TS is a better solution
+to our problems. I hope we don't need to vote on whether to use
+TS or not.
+
+Can we make a TS (patch) that is compatible with non-TS servers? I'd
+like to see something on the table within the next few weeks at least.
+
+If people are going to sit on their butts again and let this thing
+go without doing anything, I will consider bringing the channel
+service back up since a majority of those who voted were for it. I'd
+rather not do this, I'd rather see TS.
+
+Those wanting to help with the move to TS, please subscribe to the
+emailing ircd2-patches@kei.com by emailing ircd2-patches-request@kei.com
+with the word SUBSCRIBE in the subject of the message. We need people
+who will code the patches and people who will help plan the installation
+and MOVE.
+
+Thanks to the numerous people who supported my efforts by letting me
+know in private email, I appreciate it and am glad to see that I'm not
+the only one who is sick of trying to operate a broken protocol.
+
+LET'S DO IT! TS IS COMING! TS IS COMING!
+
+-- 
+Damon M. Pike (piker)     [UN-Net/UIRC/*.portal.com IRC Administrator]
+----------------------------------------------------------------------
+ Email: piker@shell.portal.com      WWW: http://www.portal.com/~piker 
+----------------------------------------------------------------------
+- United Internet Relay Chatters - Email: uirc@shell.portal.com
+- UN-Net Emergency/News hub on /server irc.portal.com 9111
+----------------------------------------------------------------------
+NOTE: Comments/opinions expressed are Piker's unless otherwise noted.
+

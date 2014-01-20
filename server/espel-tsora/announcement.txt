@@ -1,0 +1,135 @@
+Return-Path: <ircd2-patches-request@kei.com>
+Resent-Date: Tue, 5 Dec 1995 16:42:53 -0500 (EST)
+Subject: Re: LETS DO TS
+To: ircd2-patches@kei.com
+Date: Tue, 5 Dec 1995 22:42:20 +0100 (MET)
+Resent-Message-Id: <"0A3wk.0.n2.SpBnm"@kei.com>
+Resent-From: ircd2-patches@kei.com
+X-Mailing-List: <ircd2-patches@kei.com> archive/latest/158
+X-Loop: ircd2-patches@kei.com
+Precedence: list
+Resent-Sender: ircd2-patches-request@kei.com
+
+Master of Puppets said:
+
+> Can we make a TS (patch) that is compatible with non-TS servers? I'd
+> like to see something on the table within the next few weeks at least.
+
+I'd be willing to code such a patch within the next few weeks. It will 
+do TS on nicks (for collisions) and on channel creation time (for 
+chanops after a split), and nothing more. I'll make it a patch on the 
+current standard ircd (2.8.21), and see if much work is needed to make 
+it work with +CS and other common ircd performance patches.. once I have 
+something working I'll just run it on a test server and it can be linked 
+to other test servers, some running the patches and some not, with bots 
+introducing fake users, and so on, to see how it stands.
+
+Craig A. Huegen said:
+
+> But it *IS* broken.  We don't want to see what happened with uoknor 
+> again. You need to make sure that it will run well and not cause 
+> unexpected problems with non-TS stuff.  It has been proven in the past 
+> to cause such problems.
+> Actually, if I remember right, it was just the undernet's TS code 
+> slapped into a normal server.  There was nothing in the patch to only 
+> send timestamps to TS-capable servers, or just basically somehow phase 
+> TS in.
+
+That's precisely why we need a new patch written to work with EFnet
+servers, and to change as little as possible in them.
+
+Brian Tackett said:
+
+> With the current way that TS works, I don't see any easy way off the top 
+> of my head to make TS work with non-TS servers, unless you use automatic 
+> protocol checking to determine whether the server sending a mode is a TS 
+> server or not. But that's a whole other story. 
+
+But not an overly complicated one. Have the server send a special 
+command, like "TSVER" with some parameters to be determined, between 
+PASS and SERVER. Non-TS servers just ignore this (and they don't even 
+send anythign to the IrcOPS because the server hasn't registered as one 
+yet, at that point). TS servers know which of the servers that are 
+linked to them have the TS patch and which don't, and act accordingly.
+
+The whole compatibility code can be #ifdef'ed and not compiled in later 
+if the move is successful (or just when all of a server's uplinks have 
+TS too).
+
+Jim Benson said:
+
+> Because TS *is* an either/or situation - you go all TS, or you do not go 
+> TS at all. Things in life that are overly comlicated are usually wrong. 
+> This is actually rather simple - fix EFnet or not. Fix it woth TS or 
+> not.
+
+But it can be introduced gradually. Asking everyone to change to another 
+entirely incompatible version at the same time won't work, just think of 
+EU or of .jp. Putting out a version that can talk to TS and non-TS 
+servers, and having people who think it's a good idea switch to it, and 
+then if the decision is made, having the rest switch to it too, that can 
+work.
+
+And the best incentive to switch to TS, once major hubs run it, will be 
+that the non-TS servers will be getting all the clonebotters :-)
+
+Brian Tackett said:
+
+> As I see it here, the issue is not whether TS works or does not work. 
+> The issue is whether TS can be phased in with non-TS server, in such a 
+> way that the net's stability isn't destroyed. TS has been deployed on 
+> Undernet IRC server for a couple of years now, and has shown no signs of 
+> breaking as the number of clients tops 5k or so. Will it work with 
+> 15,000? I don't know, but you are very correct in pointing out that the 
+> answer lies in a test net. Get a dozen or so servers, put TS on half, 
+> non-TS on the other half, write some protocol detection code, and then 
+> load each server with a few thousand dummy clients. See what happens, 
+> observe the results, and revise the code accordingly.
+
+That needs to be done before any TS-patched server runs on EFnet,
+obviously. *Then* we can follow Jim Benson's idea.
+
+So........
+
+Here's my proposal for the TS patch:
+
+1. servers that run TS patches announce it when connecting to another
+   server or when one connects to them.
+
+2. they keep a timestamp for each nick and one for each channel, 
+   validating the date of creation of the nick and the date of creation of 
+   the channel
+
+3. they use this information to bounce modes and kill only one nick
+   out of the 2 conflicting ones, only when the offending mode change
+   or nick introduction is coming from another TS-aware server.
+
+This in particular means that this patch would not attempt to avoid 
+desynchs caused by two valid ops deopping (or kicking) each other 
+through the lag - that kind of test is much more complicated to do, and 
+if we avoid all the desynchs caused by people trying to hack, it's 
+already a huge improvement. The case in which two valid ops deop each 
+other for some reason can be left as it is now; they still have ops each 
+on half the net, and they can fix it by reopping each other.
+
+The main problem is dealing with clocks that are not set to the same 
+exact time, and deciding whether the TS's that get sent are universal 
+(always kept the same) or are adjusted by each server according to the 
+time differences between directly connected servers.
+
+Either way, this should be possible to get to work without any kind of 
+central clock, mainly because the TS comparisons will be between rather 
+different values almost all the time (a channel created hours ago vs. 
+one created a minute ago, or the same with nicks), so a few seconds
+of desynchronization wouldn't really hurt the protocol.
+
+I'll be looking at this more closely, and at the Undernet code, and post 
+again when I have something more definite... I'd like to see some talk 
+on here about the actual protocol to be used between TS servers, so be
+sure to complain if you see something wrong with my idea :-)
+
+-- 
+e-mail: roger.espel.llima@ens.fr                     IRC: orabidoo
+
+"You don't possess me, don't impress me, just upset my mind
+ Can't instruct me or conduct me, just use up my time" -King Crimson
