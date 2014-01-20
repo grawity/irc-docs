@@ -65,7 +65,7 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
 
 ## User identification
 
- * SASL (IRCv3 style)
+ * SASL (IRCv3 style) – [client proto][v3-sasl], [server proto][sts-sasl]
  * SASL (IRCX style)
  * /msg to privileged bots – NickServ, Q
  * RFC 1459 server password (`PASS` command)
@@ -74,6 +74,7 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
 
  [rfc1413]: http://tools.ietf.org/html/rfc1413
  [nef-loc]: https://github.com/grawity/irc-docs/blob/master/server/p10-login-on-connect.txt
+ [sts-sasl]: https://gist.github.com/grawity/8389307
 
 ## Capability negotiation
 
@@ -113,15 +114,15 @@ The **IRCv3 Working Group** defines a standard set of extensions to IRCv2. The c
 
 Known extensions:
 
- * [account notification][v3-account-notify] (Charybdis, Unreal)
+ * [account notification][v3-account-notify] (Charybdis, InspIRCd, Unreal)
  * [away notification][v3-away-notify] (Charybdis, Unreal)
- * [extended JOIN][v3-extended-join] (Charybdis, Unreal)
+ * [extended JOIN][v3-extended-join] (Charybdis, InspIRCd, Unreal)
  * `identify-msg` (Charybdis)
- * [multi-prefix NAMES][v3-multi-prefix]
- * [message tags][v3-message-tags] (ZNC)
+ * [multi-prefix NAMES][v3-multi-prefix] (many!)
+ * [message tags][v3-message-tags] (ZNC, Weechat)
  * [metadata][v3-metadata]
- * [server time][v3-server-time] (ZNC)
- * [SASL authentication][v3-sasl] (Atheme, Anope)
+ * [server time][v3-server-time] (ZNC, Weechat)
+ * [SASL authentication][v3-sasl] (Atheme, Anope, X3)
  * [STARTTLS][v3-tls] (InspIRCd, Unreal)
  * `userhost-in-names` – equivalent to NAMESX (Unreal)
 
