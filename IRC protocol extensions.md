@@ -15,12 +15,16 @@ Client-server protocol:
 
 Server-server protocol:
 
- * TSora (Hybrid → Charybdis)
-     * Versions: [TS3][ts3], [TS5][ts5], [TS6][ts6], [TS6 v7][ts6v7], [TS6 v8][ts6v8]
+ * TSora (Hybrid, Charybdis)
+     * Current version: [TS6 v8][ts6v8]
+     * Old versions: [TS3][ts3], [TS5][ts5], [TS6 v?][ts6], [TS6 v7][ts6v7]
      * Extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
      * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
-     * some TS6 ircds (Plexus) have mutated incompatible versions :(
- * [P10][p10] (ircu)
+     * Some TS6 ircds (Plexus) have mutated incompatible versions :(
+     * [TS4][ts4] was an attempt to add many features to TS3; never got popular. TS5 is therefore an update to TS3.
+ * Undernet TSpre (ircu)
+     * Current version: [P10][p10]
+     * Old versions: [TSpre7, TSpre8][undernet-ts]
  * [UnrealIRCd][sts-unreal] (? DreamForge variant?)
  * SASL encapsulation in [various link protocols][sts-sasl]
 
@@ -38,6 +42,7 @@ Server-server protocol:
   [ts-capab]: https://github.com/grawity/irc-docs/blob/master/server/ts-capab.txt
   [ts6-save]: https://github.com/grawity/irc-docs/blob/master/server/ts6-save-collision-fnc.txt
   [ts6-euid]: https://github.com/grawity/irc-docs/blob/master/server/ts6-euid.txt
+  [undernet-ts]: http://web.archive.org/web/20110831120432/http://www.iagora.com/~espel/ircd/Undernet-TS
   [p10]: http://web.mit.edu/klmitch/Sipb/devel/src/ircu2.10.11/doc/p10.html
   [sts-unreal]: http://www.unrealircd.com/files/docs/technical/serverprotocol.html
   [ircv3]: http://ircv3.atheme.org/
