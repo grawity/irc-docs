@@ -21,7 +21,7 @@ Server-server protocol:
      * Extensions: [ENCAP][ts-encap], various [CAPAB][ts-capab]'s
      * TS6-specific: [EUID][ts6-euid], [SAVE][ts6-save]
      * Some TS6 ircds (Plexus) have mutated incompatible versions :(
-     * [TS4][ts4] was an attempt to add many features to TS3; never got popular. TS5 is therefore an update to TS3.
+     * [TS4][ts4] was an unpopular attempt to add many features. TS5 is therefore an update to TS3.
  * Undernet TSpre (ircu)
      * Current version: [P10][p10]
      * Old versions: [TSpre7, TSpre8][undernet-ts]
