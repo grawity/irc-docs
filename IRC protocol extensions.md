@@ -68,6 +68,10 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
  * FSERV (opens a chat session with FTP-like commands)
  * [XDCC][dcc-xdcc] 
 
+IRCX had commands DATA and REQUEST/REPLY to replace CTCP.
+
+IRCv3 has "message tags" which could act as a replacement.
+
  [ctcp]: http://www.irchelp.org/irchelp/rfc/ctcpspec.html
  [ctcp-1997]: http://web.archive.org/web/20100209042300/http://www.invlogic.com/irc/ctcp.html
  [ctcp2]: http://web.archive.org/web/20080723170128/http://www.invlogic.com/irc/ctcp2_intro.html
