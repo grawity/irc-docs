@@ -32,21 +32,17 @@ Distinctive features
     csircd
     - one of few ircds to have "STD=i-d" in RPL_ISUPPORT
 
-    ConferenceRoom
-        irc.webchat.org/7000
-        004: ConferenceRoom/4.0.7-SEC
-        005: CONFERENCEROOM WHISPER SM ELIST=MUCTLOX RATING SSL=994
-        strange token in 014
-        377: z-default 618 1328901086 :Last MOTD change ...: Fri, 10 Feb 2012 11:11:26 -0800
-        221: +ixpemJMn
-        has ACCESS, SET, AUTH, AVATAR...
-	
+    ConferenceRoom (irc.webchat.org/7000)
+    - has "ConferenceRoom/4.0.7-SEC" in 004
+    - has "CONFERENCEROOM WHISPER SM ELIST=MUCTLOX RATING SSL=994" in RPL_ISUPPORT
+    - has strange token in 014
+    - 377: z-default 618 1328901086 :Last MOTD change ...: Fri, 10 Feb 2012 11:11:26 -0800
+    - 221: +ixpemJMn
+    - has /ACCESS, /SET, /AUTH, /AVATAR...
 
 Todo:
     austnet.org
-    dynastynet.net – Unreal-Modified
     euirc.net – euIRCd 1.3.3 [perry]
-    fef.net – FEF-7.5; disconnect (crash?) on /version, looks like Charybdis
     forestnet.org – Pride-2.2(21) from Bahamut? "TS5ow-r[CURRENT] RPL1 ..."
         aABCDEFhiMrt/Hop TS5ow-r[CURRENT] RPL1 utf-8e (ssl) OP[IKMNOPSTUW] 512
     ircnet.ru – PTlink7.1.0-rc2
@@ -58,7 +54,6 @@ Todo:
         (very short 005; delayed ident)
     starchat.net – StarIRCD-7.0 "CHANMODES=beH,... NOQUIT TOKEN STD=i-d", has JINX, AKILLEX
     virtualife.com.br – vlife.ircd, TODO: what numeric is used for /vlife?
-    worldnet.net – solid-ircd-3.4
     TTnet
     RusNet
         irc.tom.ru – 1.5.18/uk_UA.KOI8-U
@@ -73,13 +68,6 @@ Done:
             earlier than 74ba3877176ab257ec695b2bcc439643194066cc (/info)
     ircnode.org – "charybdis-nodeircd"
     sorcery.net – SorIRCd
-
-TS3
-    ircd-hybrid 6.0
-    ircd-comstud 1.12
-    CS r31pl4
-TS5
-    ircd-hybrid 6.1
 
 ## Family tree
 
@@ -103,20 +91,7 @@ sorted alphabetically with "ircd-" prefix removed
         <http://www.nic.funet.fi/~irc/server/>
         ircd2.8.21+CSr [<-ircd2.8.21] {RFC1459, TSora}
             ircd2.8.21+CSr29+LT [<-ircd2.8.21+CSr29]
-        ircd.dal [d]
-            DreamForge (@ DALnet) [d] [<-dal4.6.1]
-                bIRCd
-                DarkFire (@ DarkFire.net) [<-dal4.6.5.DreamForge]
-                    (twilight = df-1.0)
-                EliteIRCd [d]
-                    UnrealIRCd [<-EliteIRCd 2.0b13]
-                        gs-ircd (@ GeekShed)
-                        QuakeIRCd [d]
-                        rabbitircd [<-UnrealIRCd 3.4]
-                Faerion
-                SorIRCd/Sorcery v1.x [d]
-            PTnet (@ PTnet.org) [<-dal4.6]
-        ircd2.8/th [patch <-ircd2.8]
+        ircd2.8/th [<-ircd2.8]
             ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS5/TS6 <- TS3}
                 (ircd-hybrid 6.x {TS3, TS3/TS5, TS5})
                 ircd2.8/gimpnet (@ GIMPnet) [<-ircd-hybrid 6.3] {TS5}
@@ -127,14 +102,15 @@ sorted alphabetically with "ircd-" prefix removed
                     (halcyon = Bahamut ??)
                     Azzura Bahamut (@ Azzura.org) [<-Bahamut 1.4.34] {TS3/TS5}
                     ??? Chimera (TR-IRCD4) {TS3}
-                        ??? Kenora (TR-IRCD5) {TS5}
+                        ??? Kenora (TR-IRCD5) {TS5} [scratch]
                             ??? Austhex v8 {TS7~TS3}
+                    Chunky Monkey
                     ??? fqircd
                     LiquidIRC
                     ??? Pride (@ ForestNet.org) {TS5}
                     wudan (@ RusNet, WeNet) [<-Bahamut 1.4.3x]
                         ircd-RU! (<-wudan 1.0.2)
-                    solid-ircd (@ Worldnet) [d] [<-Bahamut 1.8]
+                    solid-ircd (@ Worldnet.net) [d] [<-Bahamut 1.8]
                     TR-IRCD [<-Bahamut 1.4]
                     ??? UltimateIRCd <http://www.shadow-realm.org> {TS3/TS5}
                         CritenIRCd (@ Criten/Abjects)
@@ -147,7 +123,7 @@ sorted alphabetically with "ircd-" prefix removed
                 plexus aka ircd-rizon (@ Rizon) [<-ircd-hybrid 7.2.3]
                     Rizon IRCd
                 Plexus4 (@ Rizon) [<-ircd-hybrid 8.0]
-                PTLink [d]
+                PTLink [d] [<-ircd-hybrid 6.?]
                     Vlife.IRCd
                 ircd-ratbox {TS6 <- TS3, TS5}
                     Bluebox (@ Azzura.org) [<-ircd-ratbox 3.0.4]
@@ -163,9 +139,24 @@ sorted alphabetically with "ircd-" prefix removed
                             NeoIRCd [d]
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net)
+                        ircd-FEF (@ FEF.net)
                     ircd-evangelion [d] [<-ircd-ratbox 2.2.6]
         ircd2.8/TSpre7
-            ircu [<-ircd2.7] {P10 <-TSpre7,TSpre8}
+            ircd.dal [d]
+                DreamForge (@ DALnet) [d] [<-dal4.6.1]
+                    bIRCd
+                    DarkFire (@ DarkFire.net) [<-dal4.6.5.DreamForge]
+                        (twilight = df-1.0)
+                    Shadow
+                        EliteIRCd [d] [1.0<-Shadow3.9]
+                            UnrealIRCd [<-EliteIRCd 2.0b13]
+                                gs-ircd (@ GeekShed)
+                                QuakeIRCd [d]
+                                rabbitircd [<-UnrealIRCd 3.4]
+                    Faerion
+                    SorIRCd/Sorcery v1.x [d]
+                PTnet (@ PTnet.org) [<-dal4.6]
+            ircu [<-ircd2.7] {P10<-TSpre7,TSpre8,P9}
                 Asuka [d]
                 Austhex v7 [d]
                 Nefarious
@@ -176,30 +167,30 @@ sorted alphabetically with "ircd-" prefix removed
                 glx2.x (@ Galaxynet.org)
                 ircd-sakura [d] [<-u2.10.12.10]
                 snircd (@ QuakeNet)
+        ircd2.11 {RFC2812+UIDs}
         ??? StarIRCD (@ StarChat.net)
-        ircd2.11 {RFC2812+UIDs/SIDs}
 		vantage (@ Krey.net)
+    beware-ircd {P10}
     ConferenceRoom
+    csircd [d] {TS5}
     DarkIRCd {TS6}
     InspIRCd {InspIRCd TS6}
         InspIRCd+Xynotyro [d]
             ircd-sakura [d] [<-InspIRCd-1.1.11+Xynotyro]
-    beware ircd
-    csircd [d] {TS5}
     IRCNode/ts6-base {TS6}
+    ithildin [d] (@ DarkMyst.org) {TS5.bahamut14, dreamforge, TS3}
     ircd-micro [d] {TS6}
         tethys (<-ircd-micro 0.1)
-    ithildin [d] (@ DarkMyst.org) {TS5.bahamut14, dreamforge, TS3}
-    ngIRCd {RFC 1459}
+    ngIRCd {RFC2812}
     pircd [d]
-    Pure IRCD
-        ignitionServer
-            WavServ
     Synchronet IRCd
     WeIRCd
 ?
     Titan IRCd
         ViagraIRCd [d] <http://www.viagraircd.com/>
+        Pure IRCD
+            ignitionServer
+                WavServ
     urcd
 
 ## Bahamut
@@ -232,7 +223,7 @@ sorted alphabetically with "ircd-" prefix removed
 
 ## ircd-seven
     <http://www.freenode.net/seven.shtml>
-    base: Charybdis 3.0.1 ⇆ (+ Hyperion)
+    base: ⇆ Charybdis 3.0.1 (+ Hyperion)
 
 ## rabbitircd
     <https://github.com/rabbitircd/rabbitircd>
@@ -245,9 +236,10 @@ sorted alphabetically with "ircd-" prefix removed
     and decided to fork it instead)
 
 ## ratbox
+    <http://www.ratbox.org/>
     protocol: TS6 (as of r25522)
-    - TS3..TS6 (r14623 up to r25522)
-    - TS3..TS5 (r11494 up to r14622)
+    - TS3..TS6 (in r14623..r25522)
+    - TS3..TS5 (in r11494..r14622)
     - TS3..TS5 (up to r11493)
 
 ## tethys
@@ -340,17 +332,36 @@ sorted alphabetically with "ircd-" prefix removed
     <http://anonet2.biz/URC>
     <git://anonet2.biz/urcd.git>
 
-    Small urc daemon (IRC protocol fork made for anonymity and lack of
-    power for server operators). Very decentralized, no password needed
-    for linking.
+    Small urc daemon (IRC protocol fork made for anonymity and lack of power
+    for server operators). Very decentralized, no password needed for linking.
 
+## Viagra IRCd
+    <http://www.schiffner.com/programming-orphaned/viagra-ircd/>
+
+    "Viagra IRCd is an IRC Daemon I developed while attending college at
+    Rochester Institute of Technology. Its code base was Titan IRCd (of which
+    development ended prematurely). The last version of Titan IRCd was
+    unsuitable for production use do to its incomplete state. It crashed
+    constantly lending to Viagra IRCd’s original development name of “Titanic”.
+    Though only available to a few select networks the development version
+    quickly created a buzz. After many late nights the IRCd reached a stable
+    code base. So stable that many of the test networks joked that we should
+    name it “Viagra IRCd” and use “Rock Solid Stability” as its catch phrase…
+    Perhaps it was the lack of sleep but I applied the name and it stuck."
+
+    "The daemon was based on the titan and bahamut code bases and incorporated
+    many of the popular features found in daemons like Unreal IRCd and Ultimate
+    IRCd. It was/is supported by Anope Services, Auspice Services, Neo Stats, a
+    custom distribution of Epona (available for download here, although it
+    contains many security vulnerabilities and should not be used in an
+    unpatched state), and Floodworld."
 
 -------------------------------------------------------------------------------
 
 Note: I'm kinda lazy at `git commit`ing this, so you might find a newer
       version at <https://dl.dropboxusercontent.com/u/167566/family-tree.txt>
 
-© 2003 Mantas Mikulėnas <grawity@gmail.com>
+© 2013 Mantas Mikulėnas <grawity@gmail.com>
 
 Released under WTFPL v2.0 <http://sam.zoy.org/wtfpl/>. Do what the fuck you want
 to this, it's all yours.
