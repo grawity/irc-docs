@@ -78,8 +78,8 @@ IRCII introduced the **Direct Client Connection** (DCC) subprotocol. Often, "DCC
 
 ## User identification
 
- * SASL (IRCv3 style) – [client proto][v3-sasl], [server proto][sts-sasl]
- * SASL (IRCX style)
+ * SASL (current, IRCv3 style) – [client proto][v3-sasl], [server proto][sts-sasl]
+ * SASL (obsolete, IRCX style) – [client proto][ircx-sasl]
  * /msg to privileged bots – NickServ, Q
  * RFC 1459 server password (`PASS` command)
  * Nefarious ["Login On Connect"][nef-loc] (extended `PASS`)
@@ -229,6 +229,7 @@ Features:
  * Supported SASL mechanisms are advertised by server during registration.
 
  [ircx-draft]: http://web.archive.org/web/20110713004824/http://static.ignition-project.com/ircxdraft/
+ [ircx-sasl]: http://web.archive.org/web/20110713005133/http://static.ignition-project.com/ircxdraft/ch03s02.html
 
 ## Other extensions
 
