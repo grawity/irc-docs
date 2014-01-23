@@ -1,0 +1,31 @@
+$Id: server-version-info,v 1.3 2005/08/27 16:23:49 jpinto Exp $
+Updated for Hybrid 6 (2000/11/26)
+
+When you type /version you will often see something like this:
+*** 2.8/hybrid-6rc6(20001110_1). irc.ins.net.uk ACHiIMpY TS3ow
+
+Ever wondered what those funny chars mean after the version number? Well
+here they are:
+
+'A'	SENDQ_ALWAYS
+'C'	CMDLINE_CONFIG
+'D'	DEBUGMODE
+'e'	CHANMODE_E
+'g'	NO_FAKE_GLINES
+'G'	GLINES
+'H'	HUB
+'i'	SHOW_INVISIBLE_LUSERS
+'K'	USE_KNOCK
+'M'	IDLE_FROM_MSG
+'p'	CRYPT_OPER_PASSWORD
+'P'	CRYPT_LINK_PASSWORD
+'T'     IGNORE_BOGUS_TS
+'Y'	USE_SYSLOG
+'Z'	ZIP_LINKS
+
+'TS'    Supports TS
+'3'     TS Version 3 (Gives ops on splits, on opless channels)
+'5'	TS Version 5 (Impossible to gain ops after a netsplit)
+'o'     TS Only
+'w'     TS Warnings
+'c'	TS Current and higher only.

@@ -1,0 +1,27 @@
+ Virtual Links
+- - - - - - - - 
+Originally implemented at Brasnet by fabulous@t7ds.com.br
+ - - - - - - - -
+Virtual links allow to setup virtual server names.
+Virtual server names will allow to fake various irc servers from the same 
+irc net running on the same host/port depending on the client's 
+connection request.
+This is done by looking into the server name field sent by the client 
+during on connection USER message. If the server name matches an 
+existing virtual link, all messages sent to that client will look like 
+originating from the virtual server. 
+Note that its a single ircd process handling connections at a common 
+host/port 
+
+Commands covered by vlinks:
+ VERSION*  
+ WHO*
+ WHOIS*
+ NAMES*
+ MODE*
+ MOTD*
+ HELPSYS*
+ NEWMASK*
+ LINKS*
+ STATS*
+* = done

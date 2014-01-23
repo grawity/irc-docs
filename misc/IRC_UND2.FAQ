@@ -1,0 +1,927 @@
+Path: bloom-beacon.mit.edu!gatech!swrinde!cs.utexas.edu!convex!convex!constellation!mmmirash
+From: mmmirash@mailhost.ecn.uoknor.edu (Mandar M. Mirashi)
+Newsgroups: alt.irc.undernet,alt.irc.questions,alt.irc,alt.irc.ircii,alt.answers,news.answers
+Subject: IRC Undernet Frequently Asked Questions (FAQ) (Part 2 of 2)
+Supersedes: <irc/undernet-faq-2-784622675@constellation.ecn.uoknor.edu>
+Followup-To: poster
+Date: 21 Nov 1994 16:00:55 GMT
+Organization: Engineering Computer Network, University of Oklahoma, Norman, OK, USA
+Lines: 900
+Approved: news-answers-request@MIT.EDU
+Distribution: world
+Expires: Wednesday, 21 Dec 94 10:00:45 (Z)
+Message-ID: <irc/undernet-faq-2-785433645@constellation.ecn.uoknor.edu>
+References: <irc/undernet-faq-1-785433645@constellation.ecn.uoknor.edu>
+Reply-To: mmmirash@mailhost.ecn.uoknor.edu (Mandar M. Mirashi)
+NNTP-Posting-Host: vinson.ecn.uoknor.edu
+Summary: This posting contains useful information regarding IRC and an
+        alternative network to the EFnet - the Undernet IRC network. Please
+        read this before posting to alt.irc.undernet, alt.irc.questions,
+        alt.irc, or alt.irc.ircii
+Keywords: IRC irc Undernet faq FAQ client server telnet
+X-Posting-Frequency: Posted each week to the IRC newgroups
+X-Content-Currency: This FAQ changes regularly.  When a saved or printed copy
+   is over 3 months old, please obtain a new one.  
+Originator: mmmirash@vinson.ecn.uoknor.edu
+Xref: bloom-beacon.mit.edu alt.irc.undernet:350 alt.irc.questions:1782 alt.irc:23122 alt.irc.ircii:1722 alt.answers:5775 news.answers:29720
+
+Posted-By: auto-faq 3.1.1.2
+Archive-name: irc/undernet-faq/part2
+Version: $Id: undernet-faq, v3.1.4 1994/10/8 13:23 mmmirash Exp $
+
+
+      Undernet IRC FAQ [Part II] (updated 28th July 1994) - Weekly Repost
+
+                Version 1 By Paul Grant (Grant)
+
+                Version 2-3   -   written by Mandar Mirashi (Mmmm)
+                                  mmmirash@mailhost.ecn.uoknor.edu
+
+The FAQ consists of answers to several frequently asked questions on the
+IRC newsgroups. Please don't ask these questions again, they've been
+answered plenty of times already - and please don't flame someone just 
+because they may not have read this particular posting.  Thank you.
+
+The FAQ consists of the following sections.
+
+I)       IRC for the newcomer
+II)      The Undernet (for the newcomer)
+III)     The Undernet (for the EFnetter)
+IV)      The Undernet (how can you participate?) 
+V)       Acknowledgements/References
+VI)      Undernet IRC server list
+
+This article covers sections II - VI, and includes answers to:
+
+
+Section II: The Undernet (for the irc newcomer)
+-----------------------------------------------
+2-1)  Well, I understand what a server is. Now what's a net?
+2-2)  So far, so good. Now, why's this net called the "Undernet"?
+2-3)  How do I find the closest Undernet server to me?
+2-4)  Whom do I approach if I have questions?
+2-5)  What are some good channels to try?
+2-6)  Say...can I join some mailing list which helps with IRC questions,
+      or discusses IRC in general?
+2-7)  Are there any Undernet ftp/www/gopher sites?
+
+
+Section III : The Undernet (for the EFnetter)
+-----------------------------------------------
+3-1)  What is the Undernet? Where does the term EFnet come from?
+3-2)  Why does the Undernet exist? Do we need another IRC?
+3-3)  How is the Undernet IRC protocol different from/better than the
+      EFnet?
+3-4)  So, can you summarise the advantages of the Undernet?
+3-5)  Cool! Do I need to make any changes to my .ircrc file?
+3-6)  How do I get to the Undernet from the EFnet?
+3-7)  Hmm..someone was foolish enough to hand out ops to an untrustworthy
+      person on our channel, who proceeded to do a mass deop, and left.
+      Can something be done?
+3-8)  Can I move my channel to the Undernet? What are the advantages of
+      doing so?
+3-9)  Can I communicate with someone on the EFnet once I'm on the Undernet?
+      (or vice-versa)
+3-10) Hmm..can you help dispel some of the aspersions that I have heard
+      about the Undernet from EFnet opers?
+3-11) Who are the Undernet programmers?
+3-12) What does the future hold for the Undernet?
+
+
+Section IV: The Undernet (How can I participate?)
+-------------------------------------------------
+4-1)  So, how do I get to be an "IRC op"? Why can't I be one?
+4-2)  How do I apply for a link for my server to the Undernet? What are the
+      requirements?
+4-3)  How do I volunteer to do some work for the Undernet? No, I'm not
+      looking for an O line.  I just like being nice and helpful to people.
+      How do I participate?
+4-4)  I have some ideas for the future design of ircd. I may also be
+      interested in doing some programming for the Undernet. Whom do I
+      approach?
+
+
+If you're looking for the answer to, say, question 2-5, and want to skip
+everything else, you can search ahead for the regular expression "^2-5".
+(/2-5  in case you use vi). 
+
+While I have tried my best to keep the FAQ updated, there may be 
+inadvertent mistakes or omissions. Is there a question that you find
+frequently asked, but not mentioned? Please send all suggested additions/
+corrections/deletions/comments/etc. to mmmirash@mailhost.ecn.uoknor.edu
+
+This FAQ (both parts) can be obtained via anonymous ftp from ftp.undernet.org 
+or ftp.undernet.org under  /irc/docs, or from rtfm.mit.edu under 
+/pub/usenet/alt.irc/    If ftp does not work from your site, then try
+the mail server: send email to mail-server@rtfm.mit.edu with
+
+send usenet/news.answers/irc/undernet-faq/part1
+send usenet/news.answers/irc/undernet-faq/part2
+
+URL's on the World Wide Web for this FAQ are:
+
+	http://www.undernet.org/~agifford/undernet/underfaq/
+	http://www2.undernet.org:8080/~cs93jtl/underfaq/
+
+------------------------------------------------------------------------------
+Section II: The Undernet (for the irc newcomer)
+================================================
+
+2-1)  Well, I understand what a server is. Now what's a net?
+
+      IRC servers are connected together in a 'tree' like fashion
+      (an undirected acyclic graph to be precise). A collection of
+      IRC servers is called an IRC net. The command /links will 
+      display all servers on a net. The command /lusers will display
+      the number of users, servers, and channels on a given net.
+
+------------------------------------------------------------------------------
+2-2)  So far, so good. Now, why's this net called the "Undernet"?
+
+      The term "Undernet" was suggested in jest by some of the original
+      operators (dl, Wildthang and Whizzard) who started it. As time
+      went by, the name stuck. :-) Upon hearing the name people often
+      think that it's a net where something illegal goes on - which isn't
+      quite the case. On the other hand, the name also imparts a mysterious
+      angle to the IRC net. On the whole, it's a very friendly net with
+      an easy going atmosphere. Most people are nice and helpful to
+      newcomers. 
+
+------------------------------------------------------------------------------
+2-3)  How do I find the closest Undernet server to me?
+
+      Luckily for you, all Undernet servers follow names of the format:
+
+           city.state.country.undernet.org               or,
+           city.country.continent.undernet.org
+
+      Thus, you can easily locate the closest server to you. In most
+      cases, this also turns out to be closest netwise as well. The
+      command /links lists all servers. Choose one which is closest
+      to you, and simply type  /server servername. Also, the following
+      aliases are set up, country/continent wise:
+         us.undernet.org  - USA
+         eu.undernet.org  - Europe
+         au.undernet.org  - Australia
+         ca.undernet.org  - Canada
+      You can try a /server countrycode.undernet.org and see if that works
+      for you.
+
+------------------------------------------------------------------------------
+2-4)  Whom do I approach if I have questions?
+
+      You are always welcome on #wasteland - the help channel. Please
+      remember that depending upon the time, #wasteland volunteers may be
+      slow in responding since most peek into the window once in a while.
+      However, someone or the other is sure to help you out!
+
+      Another avenue is the ircnet@undernet.org (general irc help) and
+      wastelanders@undernet.org (irc oper mailing list)mailing lists - try
+      mailing your question to these. You may even mail your server admin
+      for more information (/admin will return information on the admin 
+      for that server and his/her email address).
+
+------------------------------------------------------------------------------
+2-5)  What are some good channels to try?
+
+      New channels are starting up on the Undernet almost everyday. Given
+      the dynamic nature of channels, the channel names can vary, but a few
+      are fairly stable.
+
+       General chat: #chatzone, #chat, #friendly, #hotsex, #popcorn, 
+                        #ark, #gayteen
+               Help: #wasteland, #help, #irchelp, #vmshelp
+              Games: #jeopardy, #balderdash
+          Countries: #canada, #dutch, #india, #slovenija, #ireland,
+                        #england, #korea, #russian
+           Religion: #Christians (with TheBook, an on-line bible), 
+               	        #Ccm, #Christian, #wicca
+          Technical: #unix, #hack, #appleiigs, #linux
+          Languages: #espanol, #francais
+      Fantasy/Role-playing:  #waste
+
+      Feel free to try any of these. New channels are created each day.
+      you can check out these with a /names or a /list command.
+
+------------------------------------------------------------------------------
+2-6)  Say...can I join some mailing list which helps with IRC questions,
+      or discusses IRC in general?
+
+      The list  ircnet@undernet.org  has been set up for people requesting
+      general help regarding irc questions. The list
+      wastelanders@undernet.org  has been set up as a medium for IRC opers
+      to communicate, and discuss ideas, amongst other things. To join
+      either of these, send mail to listserv@undernet.org with the word
+      "help" in the body  which will send you back further information.
+
+------------------------------------------------------------------------------
+2-7)  Are there any Undernet ftp/www/gopher sites?
+
+       Undernet FTP sites -> ftp.undernet.org  (aka sci.dixie.edu)
+                             ftp2.undernet.org, ftp3.undernet.org 
+                             ftp.eu.undernet.org (Europe)
+
+       Undernet WWW URLs -> 
+          http://sci.dixie.edu/~agifford/IRC.html
+          http://esquilino.enserb.u-bordeaux.fr:8001/TOP/irc/index.html
+          http://http2.brunel.ac.uk:8080/~cs93jtl/Undernet.html
+          http://http2.brunel.ac.uk:8080/~cs93jtl/IRC.html
+                            
+          www.undernet.org is an alias for sci.dixie.edu
+          www2.undernet.org is an alias for http2.brunel.ac.uk
+
+       Undernet gopher site -> gopher.undernet.org (aka sci.dixie.edu)
+
+          To get to the Undernet gopher site, follow these directions:
+          Main menu 
+            -> Other Gopher and Information Servers/
+              -> North America/    
+                -> USA/
+                  -> Utah/
+                    -> Dixie College Science Gopher (St. George, Utah)/ 
+                      -> IRC (Internet Relay Chat)/
+           
+
+------------------------------------------------------------------------------
+Section III : The Undernet (for the EFnetter)
+=============================================
+
+
+3-1)  What is the Undernet? Where does the term EFnet come from?
+
+      The Undernet is a separate collection of IRC servers on a different
+      network. The servers follow a much better server-server protocol,
+      while maintaining the same server-client protocol. It's much smaller
+      than its counterpart the EFnet, and was designed to supplement the
+      EFnet. The term EFnet stands for eris-free net. (eris.berkeley.edu
+      was a server on the net which is now no longer there) The small size
+      of the Undernet also works to advantage and is often considered by
+      many as a good thing. On the Undernet all the operators know one
+      another, people are more friendly and there are (as yet) no unsavoury
+      characters.
+
+------------------------------------------------------------------------------
+3-2)  Why does the Undernet exist? Do we need another IRC?
+
+      Why not? At the moment the EFnet IRC is overloaded with users. There 
+      are frequent netsplits involving not just the odd servers, but in 
+      increasing cases a significant number of servers. Too much pressure 
+      is put onto the EFnet IRC due to the (unforeseen) explosion of users 
+      it has gained. Many people don't ask _if_ the EFnet irc will survive, 
+      but when will it go...
+
+      For this reason the Undernet stands out as a Good Thing (tm). It can
+      help take the load off of the EFnet IRC and prolong its day of 
+      judgement, hopefully for long enough that a solution to its problems 
+      can be found. The Undernet consists of some very highly motivated and 
+      dedicated people enthusiastic to make a success of their venture.
+
+      There is another reason why the Undernet is here. EFnet IRC is becoming
+      more and more politicized, day by day. With various EFnet IRC admins
+      forming groups against one another, the amount of co-operation between 
+      them has become almost nil. The time which they could spend in serving 
+      you, the user, is instead spent in endless bickering.
+
+      Undernet is a net where the operators are friendly easy going folks, and 
+      are always happy to help the users as far as possible. Abusing users is 
+      *highly* frowned upon, and opers follow a certain "Undernetiquette". 
+      Feel free to ask any questions that you may have, and though you may 
+      not always be guaranteed of an answer, we will surely do our best to 
+      help you in any way whenever possible, and in making your stay more 
+      comfortable.
+
+      Yet another goal of the Undernet is to provide a better environment
+      for users to communicate in, with protection against malicious users
+      who try to work *against* IRC and its principles. The Undernet has an
+      improved server-server protocol which disallows netsplit op riders,
+      with no channel desynchs, or intentional nick collides possible.
+
+------------------------------------------------------------------------------
+3-3)  How is the Undernet IRC protocol different from/better than the
+      EFnet?
+
+      As time has gone by, Undernet IRC programmers have come forward with
+      innovative solutions to stem some of the problems plaguing the
+      current EFnet. A lot of creative solutions have been coded  by our
+      major ircd programmer - Run (carlo@sg.tn.tudelft.nl), and implemented 
+      on the Undernet servers. These include:
+
+      * TSpre8 - This patch makes it impossible for anyone to abuse
+        netsplits and ride ops and do mass deops on your channel or lock it
+        up. Mode changes are followed with a channel creation TS (timestamp) 
+        which is used to then reverse invalid mode changes.  TS pre8 also
+        includes code which makes it difficult for even irc admins to hack
+        their server to do fake mode changes without HACK notices being 
+        sent to all opers. TSpre8 also enables oper wallops.
+
+      * bquiet - This patch prevents someone banned on the channel to send
+        to it or change nicks. Extremely useful since /kick is almost never
+        needed, and counters annoying nick changing automatons with a
+        single ban until they flood themselves out.
+
+      * silence - This patch cuts off flooding at the *local* server. Thus,
+        unlike /ignore where your client continues to receive floods (even
+        though you don't see them) and gets ping timed out, silence enables
+        you to completely get rid of intentional flooders. To use silence,
+        the syntax is: /silence +user@host   or /silence nick.
+
+      * ANC - The anti-nick collide patch foils intentional nick colliders
+        who try changing servers during netsplits on the EFnet and obtain 
+        the same nick in order to collide you when the net rejoins. With
+        the anc patch, this is no longer possible, and the person who 
+        signs on *later* is rejected from the server.
+      
+      In addition to the above obligatory patches for all Undernet servers
+      (all developed by Run), many Undernet servers also run the foll. 
+      optional patches:
+     
+      * ban - Developed FIRST on the Undernet by SIO, it was soon adopted 
+        by some servers on the EFnet. This patch allows you to see who
+        set bans and when on a channel.
+
+      * To - topic info - Also developed first on the Undernet by SIO, this 
+        patch allows you to see who set the topic on a channel and the time 
+        that it was set.
+
+      * S - Signon time  - Another Undernet first, coded by SIO, this patch
+        allows you to see when another person on the same server as
+        yourself, signed on.
+
+      The foll. patches which are also optionally installed, are more of 
+      interest to IRC admins:
+
+      * KL - Kill line comments - Developed by Mmmm. Allow you to specify
+        a comment on the K line instead of the plain stupid error message
+        of "ghosts are not allowed". You may even choose to have a file
+        output to a K lines client.
+
+      * TT - Trace times - Developed by Tonto. Appends a number indicating 
+        in milliseconds, the amount of time lapse since the server last heard 
+        from the server/ client. Depending upon your Y lines setup, you can
+        use this as a judge to determine ping timeouts.
+
+      * Cl - Client connect - Developed by Twilight1. Notifies you of local
+        client connects/disconnects. Useful for spotting clone bots.
+
+      * sw - /stats w - Developed on the EFnet by mlv. Lets you gather
+        statistics on average client connects per hour, day, etc. and keeps
+        track on maxconnections on the server so far.
+
+      * MC - mixed case - Developed by Jon2/mlv. Helpful patch to disallow
+        users with mixed case userids (usually fake) from connecting.
+
+      * OF - oper fail - Developed by Jon2/bry. Notifies local opers when
+        a local user tried to /oper and failed.
+
+      For more information on these patches and how they work, you can
+      ftp to ftp2.undernet.org and fetch /irc/servers/README.patches 
+
+------------------------------------------------------------------------------
+3-4)  So, can you summarise the advantages of the Undernet?
+
+      The Undernet offers users the following advantages:
+
+      * Lesser lag due to more intelligent routing based solely on ping
+        times and traceroutes.
+      * Fewer netsplits (these too are attended to by an automatic
+        routing service which reconnects on splits).
+      * No netsplit op riders to harass channels.
+      * No channel desynchs and servers telling you that you aren't opped.
+      * No nick colliders.
+      * All the useful patches discussed in the earlier answer are
+        implemented on most servers.
+      * User friendly operators willing to help you.
+      * Innovative new services such as MURC (check out channel #waste)
+
+------------------------------------------------------------------------------
+3-5)  Cool! Do I need to make any changes to my .ircrc file?
+
+      Yes, you will need to add the following lines to your .ircrc if you
+      use ircII, and would like to take full advantage of all the patches.
+
+# Ban patch
+on ^367 * if ([$4] != []) {echo *** $1 \($3 - $stime($4)) $2} {echo *** $1-}
+
+# Topic info patch
+on ^333 * echo *** Topic for $1 set by $2 on $stime($3)
+
+# Signon time patch
+on ^317 * if (index(012345679 $3) != -1) {echo *** $1 has been idle for $2 seconds.  Signon at $stime($3)} {echo *** $1 has been idle for $2 seconds.}
+
+# TSpre8 - channel creation time
+On ^329 "*" echo *** $1 : created $stime($2)
+
+# handy aliases for the silence command and a required on raw_irc
+alias silence quote silence
+alias sile quote silence
+on ^raw_irc "% SILENCE %" echo *** $*
+
+# If you use Daveman's toolbox or any auto rejoin line, remove the old
+# on raw_irc for KICK, and use the foll. one instead: (Run)
+# [Remove the # symbol at the beginning to uncomment the lines of course]
+#
+#on ^raw_irc "% KICK % % *" {
+#    if ([$3]==[$N])
+#      {
+#        //quote join $2
+#        echo $mid(11 5 $stime($time())) * You have been kicked off channel $2 by $left($index(! $0) $0) \($mid(1 256 $4-)\)
+#       }
+#     {
+#        echo $mid(11 5 $stime($time())) * $3 has been kicked off channel $2 by $left($index(! $0) $0) \($mid(1 256 $4-)\)
+#      }
+#                           }
+
+------------------------------------------------------------------------------
+3-6)  How do I get to the Undernet from the EFnet?
+
+      It is very easy to switch to the Undernet if you're currently on the
+      EFnet. Simply use the command,   
+            /server servername
+      or if a port is specified  (all European Undernet servers run on
+      port  7000)
+            /server servername port#
+
+      Sometimes, the "symbolic" name for the server may not work, and you
+      may need the "numeric" address (a string of numbers) instead. Listed
+      in the Appendix is a list of Undernet servers along with their
+      numeric addresses and ports wherever relevant.
+
+      All Undernet servers are registered in the undernet.org domain. Also,
+      they follow the format: city.state.country.undernet.org or,
+      city.country.continent.undernet.org E.g US servers are
+                *.US.undernet.org
+      and european servers are 
+                *.eu.undernet.org
+      This will make it easy for you to remember how to get to the Undernet.
+
+------------------------------------------------------------------------------
+3-7)  Hmm..someone was foolish enough to hand out ops to an untrustworthy
+      person on our channel, who proceeded to do a mass deop, and left.
+      Can something be done?
+
+      The Undernet has a special service known as Uworld which takes care
+      of reopping channels, and is accessible by operators. However, strict
+      guidelines are in effect for its use. An oper will refuse to use
+      Uworld if there already exist chanops on the channel. Uworld can be
+      used if a channel has lost channel ops for some reason *and* channel
+      users are unhappy about it *and* they are decided upon who's to be 
+      opped. To make sure that users realise the responsibility of the
+      decision of sharing ops with someone else, a time delay may occur
+      before the channel is reopped. Above all, it is *your* responsibility
+      that you do not lose ops on your channel - an oper is not *obliged*
+      to reop channels who lose ops due to carelessness on behalf of the
+      current chanops.
+
+------------------------------------------------------------------------------
+3-8)  Can I move my channel to the Undernet? What are the advantages of
+      doing so?
+
+      You're welcome to start up your favourite channel on the Undernet as
+      well. Consider the many advantages. Much better facilities for
+      chatting, without the annoyingly frequent netsplits; much lesser lag
+      (check with /ping #channelname for yourself :); protection against
+      netsplit op riders who try to disrupt channels; no channel desynchs;
+      amongst the other advantages listed earlier.  We may even be able to
+      set up a gateway service between the same channels on both nets, if
+      all channel members are willing. (email wastelanders@undernet.org,
+      if you wish to do this; or email dvmitche@mailhost.ecn.uoknor.edu or
+      carlo@sg.tn.tudelft.nl). Undernet operators are always willing to
+      help you in this endeavour, so don't hesitate to ask us.
+
+------------------------------------------------------------------------------
+3-9)  Can I communicate with someone on the EFnet once I'm on the Undernet?
+      (or vice-versa)
+
+      Occasionally, a few gateway services can be found on the Undernet
+      which allow you to communicate to someone not on the same net, or
+      which link channels. These include 'ul' - programmed by Tonto 
+      (vencill@bga.com), || - programmed by Wildthang (dvmitche@mailhost.
+      ecn.uoknor.edu), Orac - programmed by Ensor (dholmes@rahul.net),
+      and miscellaneous others (including some by Run). Look around if
+      any of these is present, and if so, try /msg servicename help.
+
+      You can also be simultaneously on *both* nets if you use ircII. Try
+      the command:
+                    /window new server servername
+      where servername is the name of a server on the other net. This will
+      split your screen into two windows, with each window on different
+      servers. If you specify a server on a different net, then you will be 
+      on different nets. You can use Ctrl-x p  (hit ctrl-x, release, then 
+      hit p) to flip between windows. (if that doesn't work, you may try 
+      /window goto 1 and  /window goto 2) Type /help window   to get more 
+      extensive help.
+      
+------------------------------------------------------------------------------
+3-10) Hmm..can you help dispel some of the aspersions that I have heard about
+      the Undernet from EFnet opers?
+
+      Not surprisingly, many EFnet opers resent the existence of the
+      Undernet, and go to great lengths to deny it the credit it deserves.
+      Some of the often quoted "statements" are:
+
+      * "The Undernet is lame."
+
+        Response: The word "lame" seems to have permeated into the
+        vocabulary of most EFnet operators. So much so that the Undernet's
+        dubbed "lame" without any concrete reasons, out of *sheer*
+        prejudice. Many do not even make an effort to understand the
+        philosophy behind the Undernet before wantonly flaming it.
+
+      * "The Undernet has no users" or "The Undernet has more servers 
+         than users".
+
+         It's often amusing for most Undernetters to see this argument
+         from the horse's mouth. To quote from a previous version  of the 
+         doc/US-Admin/Networking document: (those doubting the validity
+         of this quote can ftp any server version before 2.8.16, and 
+         verify it for themselves)
+
+         "In August of 1990, IRC suffered a critical split in viewpoints of
+          key people in the IRC hierarchy. The result was IRC split into two 
+          networks, EFnet (Eris Free network) and Anet (Anarchy network). This 
+          split continues today. There is some debate over whether IRC will 
+          ever reunite, however, neither side is willing to bend from their 
+          standpoint.  Currently, there are about 95 servers on EFnet (and 
+          the same number of users) and 15 servers on Anet (and about half the 
+          number of users)."
+
+         Thus in August 1990, the EFnet had 95 users on 95 servers. Many
+         opers who trumpet its userbase of "thousands of users" seem to
+         neglect this very fact. (On a sidenote, the Anet no longer exists
+         and died after a few months of existence) It took many years for 
+         the EFnet to arrive at its current userbase. Not to mention that
+         after the death of the Anet, it had almost no competition from
+         other nets until 1993. While it may not make sense to have as many 
+         servers as users, a skeletal network was needed with servers in 
+         good locations to provide access points to users. 
+
+         The Undernet has long since crossed the "users == servers" ratio.
+         People who tell you this are mistaken, and haven't checked up
+         since July '93. The user record at the time of writing (July 94)
+         stands at 239 users on approximately 25 servers. 
+    
+      * "The Undernet was formed by people who couldn't get to be IRC
+         operators on the EFnet"
+
+        Wrong. The Undernet was formed by people who already were IRC
+        operators on the EFnet. It was started as an experiment to get away
+        from the ways of the EFnet.
+
+      * "The Undernet servers are run on-the-sly with no approval from
+         system administrators"
+       
+        Wrong again. System admin approval is a standard prerequisite for
+        sites requesting new links. In many cases, the people running
+        servers are sysadmins themselves. While this statement may have been
+        true in the early days of the Undernet, it is no longer the case.
+
+      * "The Undernet solutions to protocol work only on a small net. They
+         do not work on large nets."
+
+        This was an oft quoted remark by people who were prejudiced against
+        Undernet ircd developments, for the sole fact that they stemmed 
+        from the Undernet. To prove this wrong, we need to consider the 
+        foll.: First of all, all test ircd versions on the EFnet are run
+        on a test net *much* smaller that the Undernet. Secondly, the pre-
+        releases that run on the EFnet are by *no means* bug free. Thirdly,
+        a TSpre7 server ran on the EFnet for *six* months without any
+        major problems. It would have worked optimally if everyone had
+        changed to TSpre7, but the fact that it ran without major problems
+        for such a long time speaks for itself. In fact, it was much much
+        more trouble free than the server versions which had either the oper
+        bug in it, or the server/nick collide bug.
+
+      * "The Undernet operators are clueless and know nothing about
+        routing."
+         
+        This perhaps is the most humorous of all allegations :-) On the
+        Undernet, all routing decisions are done based on maps of the
+        physical nets and subnets (NSFnet, ANSnet, Alternet, Midnet, CICnet,
+        Suranet, Cerfnet, Barrnet, Ebone, etc), and on the basis of pings
+        and traceroutes. This is very unlike the EFnet where links are
+        often handed out to someone else due to nepotism. Further, the
+        Undernet now also has an automatic router designed by Run, which
+        keeps track of ping times between servers and the average net
+        mean ping time.
+
+      PS: The statements mentioned above should not be taken as reflective
+          of *all* EFnet opers. To be fair, some EFnet opers have no
+          problems with the existence of the Undernet and have even been
+          supportive. We can only show our deep appreciation for their
+          impartial opinions.
+
+------------------------------------------------------------------------------
+3-11) Who are the Undernet programmers?
+
+      The Undernet programming team has many members - all of them very
+      enthusiastic and deeply dedicated to the cause. Here's a brief 
+      description of what each person does/codes/maintains:
+
+      * Run (carlo@sg.tn.tudelft.nl) - Our magic ircd programmer. He
+        coded the foll. important patches:
+         o TSpre8    o ANC    o bquiet   o silence
+        In addition, Run also maintains Undernet's automatic Router. He
+        also coded Underworld.nl, a backup for Uworld. 
+      
+      * WildThang (danny@mailhost.ecn.uoknor.edu) - Our magic "user services"
+        programmer. Wildthang is the coder for Uworld, Murc, quick
+        ircIIhelp, and telnet client services. The Undernet hosts the
+        world's first MURC (Join #waste on the Undernet to find out what
+        a murc is :). Wildthang's also the coder for the gateway service ||.
+
+      * SIO (pfoley@vuw.ac.nz) - Coder for the Undernet Nickserv. Also
+        coded the ban, topic and signon info patches which are found with
+        the .mu versions of the server.
+
+      * hop (jnelson@iastate.edu) - Our magic ircII client enhancer. Hop
+        has done an extensive facelift to current ircII versions. His latest
+        version was ircII2.3.17+10.4. The UPDATES file which reflect new
+        additions to the client is 500 lines in size! You can ftp this from
+        ftp2.undernet.org under /irc/clients
+
+      * Mmmm (mmmirash@mailhost.ecn.uoknor.edu) - He's responsible for
+        maintaining the auto-magic ircII install on sci.dixie.edu. He also
+        codes and maintains the smallirc client, and does minor  ircd
+        patches and releases.
+
+      * Karll (agifford@sci.dixie.edu) - Multipurpose programmer. He has
+        coded useful routines for both ircd as well as hop's client.
+
+      * Tonto (vencill@bga.com) - He was the author of the gateway service
+        'ul'. He's also done some ircd programming for the Undernet.
+
+      * dl/President/S_Avatar/TheJester/epa/Snarf - these are our other 
+        programmers who have chipped in useful things from time to time.
+
+------------------------------------------------------------------------------
+3-12) What does the future hold for the Undernet?
+
+      All of us envisage a bright future for the Undernet. Userbase has
+      been slowly rising. So has the stability of servers in general. 
+      More and more improvements have been done to the protocol in
+      general, and have proven successful. 
+
+      Given the surprising success of the Undernet, many attempts have
+      been made to imitate it in the form of other nets. Other nets such
+      as the Lamenet, 3l33tnet, and the Overnet sprung up in recent years.
+      None of these however have exhibited the originality of ideas or
+      creativity  shown by innovative Undernet programmers. The Overnet
+      at the time of writing, switched to using the Undernet ircd code
+      *without* even giving credit to the Undernet in its version numbers. 
+      A famous saying goes: "Imitation is the best form of flattery".
+
+      We hope that you will take time to visit us on the Undernet, and
+      share in its bright future. The final goal of Undernet ircd 
+      programmers is to eliminate or minimize all problems that plague
+      the current EFnet. The journey has just begun....
+
+------------------------------------------------------------------------------
+
+Section IV: The Undernet (How can you participate?) 
+=================================================
+
+4-1)  So, how do I get to be an "IRC op"? Why can't I be one?
+
+      The Undernet admins do not give ops to people who *ask* for them.
+      If you participate in the net by helping people, and in general
+      following proper Undernetiquette, you might merit attention and
+      your name may be suggested on the wastelanders mailing list. IRC
+      ops are scrutinized carefully before being added. Basically, no
+      ops are handed out to people who (i) are hardly around or (ii)
+      ignore pleas for help or (iii) want ops just for kill power or
+      (iv) want ops because it gives them a sense of "power" over other 
+      users, and to look "cool". Remember, asking for ops only makes your
+      case *worse*. If you're worthy, and other feel that you're competent
+      enough, you'll be approached to volunteer for oper. IRC ops are
+      expected to have been on IRC for a long time, and must possess an
+      adequate amount of knowledge to help Undernet users. They are also
+      responsible for keeping servers connected and abiding by the general
+      guidelines of the Undernet.
+
+------------------------------------------------------------------------------
+4-2)  How do I apply for a link for my server to the Undernet? What are the 
+      requirements?
+     
+      At the time of writing this document, the Undernet will not consider
+      any more links unless you're situated in an exceptionally good
+      location (read "one hop off the T3 backbone in the US, or other
+      equivalent backbone networks in Europe/elsewhere"). Use traceroute
+      and ping to determine your location. If you feel you are eligible
+      for a link, read the files in the /irc/newlinks directory at ftp.
+      undernet.org. Post your proposal to the wastelanders mailing list
+      - wastelanders@undernet.org. Remember, all Undernet servers *must*
+      run with the approval of the system admin at that site. If you do not
+      receive a response within a week, you can safely assume that the 
+      Undernet cannot provide you links (though usually, a response, either
+      positive or negative will be sent). For a more elaborate discussion,
+      you may join #wasteland and talk to other IRC admins to discuss your
+      proposal.
+
+------------------------------------------------------------------------------
+4-3)  How do I volunteer to do some work for the Undernet? No, I'm not
+      looking for an O line.  I just like being nice and helpful to people. 
+      How do I participate?
+
+      The Undernet is *always* looking for people like you. We are always
+      short of volunteers to help other people. Have you benefitted from
+      your experience with the Undernet? Have you enjoyed your time on
+      IRC here? We encourage you to give back to the net what you got from
+      it. You are encouraged to help. Even if you lurk around on #wasteland
+      and familiarize yourself with frequently asked questions on the
+      channel, and their answers, it would take a BIG load off many of the
+      operators who were quite selflessly devoted to helping you, when you
+      started off. You can join the wastelanders mailing list (mail
+      listserv@undernet.org with the word "help" in the body for
+      information on how to subscribe). Please do what you can. Every little 
+      bit counts! 
+
+------------------------------------------------------------------------------
+4-4)  I have some ideas for the future design of ircd. I may also be
+      interested in doing some programming for the Undernet. Whom do I
+      approach?
+
+      The Undernet is always on the search of new solutions to existing
+      problems. If you think you can help us in this endeavour, welcome
+      aboard! Subscribe to the wastelanders mailing list (send mail to
+      listserv@undernet.org with "subscribe wastelanders" in the body)
+      and tell us about your ideas. After a period of discussion, and
+      depending upon everyone's views, we may give you the "go ahead"
+      to program it! Yes, watch *your* code being run on servers around
+      the world, with your name in our acknowledgements. The Undernet
+      programming team is a tightly knit set of enthusiastic individuals.
+      Feel free to participate.
+
+------------------------------------------------------------------------------
+ACKNOWLEDGEMENTS
+=================
+
+* First off, to Jarkko Oikarinen (WiZ) for this wonderful invention.
+* To the telnet site maintainers at bradenville where I first accessed irc.
+* To the ircII coders (Mike Sandrof, Troy Rollo, Matthew Green, Ian
+  Frechette, Jeremy Nelson).
+* To Run for his magic improvements to Undernet ircd.
+* To Wildthang(Danny) for his advice as a friend and as an awesome
+  Undernet irc services programmer.
+* To TikTok (Donna) who's gonna bear the misery of proofing this.
+* To all wastelanders/Undernetters for helpful tips and comments.
+* Thanks to all others who have helped me in this faq - you are too 
+  numerous to mention - you know who you are.
+* Thanks also to my critics and enemies. Without your existence, I
+  wouldn't have had the inspiration to go on.
+
+------------------------------------------------------------------------------
+REFERENCES
+==========
+
+* The ircII help pages.
+* RFC1459
+* IRCprimer by Nicholas Pioch.
+* alt.irc FAQ by Helen Trillian Rose Davis.
+
+------------------------------------------------------------------------------
+
+APPENDIX: The Undernet Server List
+==================================
+
+
+Updated:  8th Oct 1994
+
+----------------------
+Explanation of entries
+----------------------
+  line  1: server name and port number
+  line  2: machine name and IP numeric
+  line  3: location
+
+--------------------
+Undernet server list
+======================
+
+NORTH AMERICA (some of these also run on ports 7000/7777)
+=============
+CANADA
+------
+  server: Montreal.QU.CA.undernet.org 6667
+ machine: aiken.info.polymtl.ca 132.207.12.13
+location: Montreal, Quebec, Canada
+
+  server: Toronto.ON.CA.undernet.org 6667  (temporarily unavailable)
+ machine: nic.hookup.net 165.154.1.1
+location: Toronto, Ontario, Canada
+
+USA
+---
+  server: Pasadena.CA.US.undernet.org 6667
+ machine: cancun.caltech.edu 131.215.48.152
+location: California Institute of Technology, Pasadena, CA, USA
+
+  server: Norman.OK.US.undernet.org 6667
+ machine: vinson.ecn.uoknor.edu 129.15.22.33
+location: University of Oklahoma, Oklahoma, USA
+
+  server: Boston.MA.US.undernet.org 6667
+ machine: iota.coe.neu.edu  129.10.22.11
+location: Northeastern University, Boston, MA, USA
+
+  server: Albany.NY.US.undernet.org 6667
+ machine: helios.acm.rpi.edu 128.213.5.17
+location: Rensselaer Polytechnic Institute, Troy, New York, USA
+
+  server: Manhattan.KS.US.undernet.org 6667
+ machine: fubar.ksu.ksu.edu 129.130.8.12
+location: Kansas State University, Manhattan, Kansas, USA
+
+  server: Milwaukee.WI.US.undernet.org 6667
+ machine: rush.cc.edu 140.104.4.169
+location: Carroll College, Waukesha, WI, US
+
+  server: StGeorge.UT.US.undernet.org 6667
+ machine: sci.dixie.edu 144.38.16.2
+location: Dixie College, St. George, Utah, USA
+
+  server: Tampa.FL.US.undernet.org 6667
+ machine: nosferatu.cas.usf.edu  131.247.31.19
+location: University of South Florida, Tampa, FL, USA.
+
+  server: Davis.CA.US.undernet.org 6667
+ machine: zen.ucdavis.edu  128.120.2.8
+location: Davis, CA, USA
+
+  server: Austin.TX.US.undernet.org 6667 (temporarily unavailable)
+ machine: hougen.che.utexas.edu 128.83.162.106
+location: Austin, Texas, USA
+
+  server: Rochester.MI.US.undernet.org 6667
+ machine: oak.oakland.edu 141.210.10.117
+location: Rochester/Detroit, Michigan, USA
+
+  server: SanJose.CA.US.undernet.org 6667
+ machine: jive.rahul.net  192.160.13.4
+location: San Jose, California, USA
+
+CHILE
+-----
+  server: Santiago.CL.undernet.org 6667  
+ machine: 146.83.1.1
+location: Reuna, Red Universitaria Nacional
+
+
+EUROPE  (most of these also run on port 7000)
+=======
+  server: Lausanne.CH.EU.undernet.org 6667
+ machine: anatsg1.unil.ch 130.223.201.6
+location: University of Lausanne, Institute of Anatomy, Lausanne,
+Switzerland
+
+  server: Crete.GR.EU.undernet.org 6666
+ machine: cyprus.csd.uch.gr 147.52.16.1
+location: University of Crete, Computer Science Department, Greece
+
+  server: Caen.FR.EU.undernet.org 7000 
+ machine: ns.ensicaen.ismra.fr 192.93.101.16
+location: Ecole Nationale Superieure d'Ingenieurs de Caen, France
+
+  server: Paderborn.DE.EU.undernet.org 6667
+ machine: pbhrzx.uni-paderborn.de 131.234.128.204
+location: University of Paderborn, Pderborn, Germany.
+
+  server: Delft.NL.EU.undernet.org 6667
+ machine: sg.tn.tudelft.nl 130.161.188.188
+location: Netherlands
+
+  server: Vienna.AT.EU.undernet.org 6667
+ machine: olymp.wu-wien.ac.at 127.208.3.30
+Location: Vienna, Austria
+
+  server: Ljubljana.Si.Eu.undernet.org 6668
+ machine: cmir.arnes.si 193.2.1.67
+Location: Ljubljana, Slovenia
+
+  server: Oslo.No.EU.undernet.org 6667
+ machine: eros.nki.no  128.39.107.112
+Location: NKI Ingenioerhoegskolen, Oslo, Norway
+
+  server: Gothenburg.Se.EU.undernet.org 6667
+ machine: alcazar.cd.chalmers.se  129.16.79.30
+Location: Chalmers Tekniska Lekskola, Gothenburg, Sweden
+
+  server: Uxbridge.UK.EU.undernet.org 6667
+ machine: tcws-15.brunel.ac.uk   134.83.32.97
+Location: Brunel University, Uxbridge, London, UK
+
+
+AUSTRALIA
+=========
+  server: Wollongong.NSW.AU.undernet.org 6667
+ machine: gorgon.cs.uow.edu.au 130.130.64.75
+location: U of Wollongong, Dept of Computer Science, Wollongong, Australia
+
+
+TEST SERVERS / SERVICES
+=======================
+Delft2.NL.EU.undernet.org
+Uworld.undernet.org
+Underworld.nl
+undernet.org  (Nickserv)
+Fantasy.Worlds.Murc.undernet.org  (Murc)
+Router.nl.eu.undernet.org  (Router)
