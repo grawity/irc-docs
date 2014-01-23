@@ -1,0 +1,57 @@
+When you type /version you will often see something like this:
+bahamut-1.8(02). server aABCdFhistTY/HoS TS5ow-r[RELEASE] RPL1 NP[U]
+
+Ever wondered what those funny chars mean after the version number? Well
+here they are:
+
+The first set before the '/' are compile-time flags:
+'a' config.h ANTI_SPAMBOT
+'A' config.h ALWAYS_SEND_DURING_SPLIT
+'B' config.h MAXBUFFERS
+'C' config.h CMDLINE_CONFIG
+'d' config.h DO_IDENTD
+'D' config.h DEBUGMODE
+'E' configure encryption support enabled
+'F' config.h FLUD
+'h' config.h SHOW_HEADERS
+'i' config.h SHOW_INVISIBLE_LUSERS
+'I' config.h NO_DEFAULT_INVISIBLE
+'J' config.h NO_DEFAULT_JOINRATE
+'M' configure module support enabled
+'N' config.h DNS_DEBUG
+'r' config.h DENY_SERVICES_MSGS
+'s' config.h SUPER_TARGETS_ONLY
+'t' config.h MSG_TARGET_LIMIT
+'T' config.h THROTTLE_ENABLE
+'u' config.h IRCII_KLUDGE
+'Y' config.h USE_SYSLOG
+
+The first set after the '/' are runtime flags:
+'H' ircd.conf servtype = hub
+'m' ircd.conf short_motd
+'o' ircd.conf allow_split_ops
+'p' ircd.conf crypt_oper_pass
+'S' ircd.conf servtype = serviceshub
+'w' ircd.conf wgmonhost/wgmonurl
+
+The next part, 'TS5ow', is mostly historical.  The release tag is provided
+after it.
+
+If 'RPL#' shows up, oper hostmasking is enabled.  The number is the level:
+ 1  All +A users can see real IP
+ 2  Local +A users can see real IP
+ 3  Noone can see real IP (but it's still logged)
+
+The last part, 'NP[]', contains network information hiding flags:
+'A' config.h FORCE_EVERYONE_HIDDEN
+'I' config.h ALLOW_HIDDEN_OPERS
+'K' config.h HIDE_KILL_ORIGINS
+'L' ircd.conf no show_links (hiding LINKS)
+'M' config.h HIDE_SERVERMODE_ORIGINS
+'N' config.h HIDE_NUMERIC_SOURCE
+'O' config.h NO_USER_OPERTARGETED_COMMANDS
+'P' config.h HIDE_SPLIT_SERVERS
+'S' config.h NO_USER_STATS
+'T' config.h NO_USER_TRACE
+'U' config.h HIDEULINEDSERVS
+'W' config.h NO_USER_SERVERNOTICES

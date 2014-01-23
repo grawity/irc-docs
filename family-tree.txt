@@ -76,13 +76,12 @@ legend:
     foo             - ircd name
     aka bar         - other equally official names
     (@ foo)         - main networks
-    [d]             - dead
-    [<-foo]         - forked from what ircd
-    (<-foo)         - renamed between versions (i.e. not a real fork)
+    (foo)           - minor rename
+    (foo = bar)     - branch codenames
+    bar (<-foo)     - major rename (not a fork)
+    bar [<-foo]     - forked from ircd foo
     {foo}           - protocol spoken by latest version (from source code)
     {foo <- bar, baz} - protocols spoken by older versions
-
-    (foo = bar)     - branch codenames
 
 sorted alphabetically with "ircd-" prefix removed
 
@@ -95,11 +94,10 @@ sorted alphabetically with "ircd-" prefix removed
             ircd-hybrid5 aka ircd2.8/hybrid-5 [<-ircd2.8/th.v5a.3] {TS5/TS6 <- TS3}
                 (ircd-hybrid 6.x {TS3, TS3/TS5, TS5})
                 ircd2.8/gimpnet (@ GIMPnet) [<-hybrid 6.3] {TS5}
-                ??? Aurora [d]
+                ??? Aurora
                 Bahamut (@ DALnet) [<-hybrid 5.3?] {TS5 <- TS1/TS3}
-                    (dfhybrid, in the beginning)
-                    (pelennor = Bahamut 1.0)
-                    (halcyon = Bahamut ??)
+                    (<-dfhybrid)
+                    (1.0 = pelennor)
                     Azzura Bahamut (@ Azzura.org) [<-Bahamut 1.4.34] {TS3/TS5}
                     ??? Chimera (TR-IRCD4) {TS3}
                         ??? Kenora (TR-IRCD5) {TS5} [scratch]
@@ -109,93 +107,108 @@ sorted alphabetically with "ircd-" prefix removed
                     LiquidIRC
                     ??? Pride (@ ForestNet.org) {TS5}
                     Prometheus 2.0.0 (@ Habber.net) [<-Bahamut 1.4.23]
+                    RageIRCd 2.0 aka rage(bluemoon) [<-Bahamut 1.4.23, hybrid, ratbox]
                     wudan (@ RusNet, WeNet) [<-Bahamut 1.4.3x]
                         ircd-RU! (<-wudan 1.0.2)
-                    solid-ircd (@ Worldnet.net) [d] [<-Bahamut 1.8]
-                    ircd-tiamat [d] [<-bahamut 1.8]
+                    solid-ircd (@ Worldnet.net) [<-Bahamut 1.8]
+                    ircd-tiamat [<-bahamut 1.8]
                     TR-IRCD [<-Bahamut 1.4]
                     UltimateIRCd (@ Shadow-Realm.org) [<-Bahamut 1.4.8]
+                        (3.0 = Tsunami)
                         CritenIRCd (@ Criten/Abjects)
                         nemesis (@ Criten)
-                dancer-ircd [d] [<-hybrid 6.2] {TS4+DNCR}
-                    Hyperion [d] [<-dancer-ircd 1.0.35+pre2]
+                        ShadowIRCd 1.2 [<-UltimateIRCd 3.0, OpenIRCd]
+                dancer-ircd [<-hybrid 6.2] {TS4+DNCR}
+                    Hyperion [<-dancer-ircd 1.0.35+pre2]
                 oftc-hybrid
                     oftc-hybrid/bc
                 plexus aka ircd-rizon (@ Rizon) [<-hybrid 7.2.3]
                     Rizon IRCd
                 Plexus4 (@ Rizon) [<-hybrid 8.0]
-                PTLink 6 [d] [<-hybrid 6.0] {PTS10<-PTS9,TS5…}
+                PTLink 6 [<-hybrid 6.0] {PTS10<-PTS9,TS5…}
                     Vlife.IRCd
                 ircd-ratbox {TS6 <- TS3, TS5}
                     Bluebox (@ Azzura.org) [<-ratbox 3.0.4]
                     Charybdis [<-ircd-ratbox 2.1.5] {TS6 <- TS5}
-                        ArinityIRCd [d] [<-Charybdis 3.4]
+                        ArinityIRCd [<-Charybdis 3.4]
                         FreeBG ircd [<-Charybdis 3.4]
                         ircd-seven (@ freenode) [<-Charybdis 3.0.1]
-                            cherry-ircd [d]
-                                ircd-cherry [d]
-                        ShadowIRCd [d]
-                            ponychat-ircd [d] [<-ShadowIRCd 6.3.3]
+                            cherry-ircd
+                                ircd-cherry
+                        ShadowIRCd 6.x
+                            ponychat-ircd [<-ShadowIRCd 6.3.3]
                                 elemental-ircd (<-ponychat-ircd 6.5.1)
-                            NeoIRCd [d]
+                            NeoIRCd
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net)
                         ircd-FEF (@ FEF.net)
-                    ircd-evangelion [d] [<-ircd-ratbox 2.2.6]
+                    ircd-evangelion [<-ircd-ratbox 2.2.6]
+                ShadowIRCd 2.x-4.x [<-hybrid 6.3.1/6.4.1]
+                    (2.1 = Cyclops)
+                    (2.4 = Pyrashi)
+                    (3.0 = Cortana)
+                    (3.1 = Moonlight)
         ircd2.8/TSpre7 {TSpre7}
-            ircd2.8.mu
-                ircd2.8+Dal (@ DALnet) [d] [<-ircd2.8.20.mu2] {TSpre8}
-                    ircd-dal4.3 [d] (<-2.8.21.mu3.dal4.2)
-                        DreamForge (@ DALnet) [d] [<-dal4.6.1]
-                            bIRCd
-                            DarkFire (@ DarkFire.net) [<-dal4.6.5.DreamForge]
-                                (twilight = df-1.0)
-                            ShadowX-ircd [d] [1.0<-dal4.4.8]
-                                EliteIRCd [d] [1.0<-Shadow3.9]
-                                    UnrealIRCd [<-EliteIRCd 2.0b13]
-                                        gs-ircd (@ GeekShed)
-                                        QuakeIRCd [d]
-                                        rabbitircd [<-UnrealIRCd 3.4]
-                            Faerion
-                            ircd-sor [d] [1.0<-dal4.4.10]
-                        ircd-star2.00 (@ Starchat.net)
-                            PTLink 5 [<-star5.10.fx4.Velocity]
-                    PTnet (@ PTnet.org) [<-dal4.6]
+            ircd2.8.20.mu2+Dal (@ DALnet) {TSpre8}
+                ircd-dal4.3 (<-2.8.21.mu3.dal4.2)
+                    DreamForge (@ DALnet) [<-dal4.6.1]
+                        bIRCd
+                        DarkFire (@ DarkFire.net) [<-dal4.6.5.DreamForge]
+                            (twilight = df-1.0)
+                        ShadowX-ircd [1.0<-dal4.4.8]
+                            EliteIRCd [1.0<-Shadow3.9]
+                                UnrealIRCd [<-EliteIRCd 2.0b13]
+                                    gs-ircd (@ GeekShed)
+                                    QuakeIRCd
+                                    rabbitircd [<-UnrealIRCd 3.4]
+                        faerion (@ ForestNet.org) (<-???-1.14.1)
+                        ircd-sor [1.0<-dal4.4.10]
+                    ircd-star2.00 (@ Starchat.net)
+                        (star5.x = Velocity)
+                        PTLink 5 [<-star5.10.fx4.Velocity]
+                PTnet (@ PTnet.org) [<-dal4.6]
+            ircd2.9.31.mu3.AUSThex4 (@ Austnet.org)
+                (austhex2.9.mu3.servd4)
+                (austhex.servd7)
             ircu [<-ircd2.7] {P10 <- TSpre7, TSpre8, P9}
-                Asuka [d]
-                Auslink/Austhex v7 [d]
-                Nefarious
+                Asuka
+                austhex.servd6.2 {P10 – maybe austhex-specific}
+                    austhex.servd7 {P11}
+                        austhex.servd7.5 {P13}
+                        Wonkhex [<-austhex7.5]
+                Nefarious [<-u2.10.11.4]
                     Nefarious2
                     ircd-darenet
                 Othernet (@ Othernet.org) [<-ircu2.9]
-                dream-ircu [d] [<-u2.10.12.10]
+                dream-ircu [<-u2.10.12.10]
                 glx2.x (@ Galaxynet.org)
                 ircu2.10.12.12+valterius1.1
-                ircd-sakura [d] [<-u2.10.12.10]
+                ircd-sakura [<-u2.10.12.10]
                 snircd (@ QuakeNet)
         ircd2.11 {RFC2812+UIDs}
 		vantage (@ Krey.net)
     beware-ircd {P10}
     ConferenceRoom
-    csircd [d] {TS5}
+    csircd {TS5}
     DarkIRCd {TS6}
     InspIRCd {InspIRCd TS6}
-        InspIRCd+Xynotyro [d]
-            ircd-sakura [d] [<-InspIRCd-1.1.11+Xynotyro]
+        InspIRCd+Xynotyro
+            ircd-sakura [<-InspIRCd-1.1.11+Xynotyro]
     IRCNode/ts6-base {TS6}
-    ithildin [d] (@ DarkMyst.org) {TS5.bahamut14, dreamforge, TS3}
-    ircd-micro [d] {TS6}
+    ithildin (@ DarkMyst.org) {TS5.bahamut14, dreamforge, TS3}
+    ircd-micro {TS6}
         tethys (<-ircd-micro 0.1)
     ngIRCd {RFC2812}
-    pircd [d]
+    pircd
+    Pure-IRCd (in VB)
+        ignitionServer
+            WavServ
     Synchronet IRCd
     WeIRCd
 ?
     Titan IRCd
-        ViagraIRCd [d] [<-Titan + Bahamut 1.4.30]
+        ViagraIRCd [<-Titan + Bahamut 1.4.30]
         Pure IRCD
-            ignitionServer
-                WavServ
     urcd
 
 ## Bahamut
