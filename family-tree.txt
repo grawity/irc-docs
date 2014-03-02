@@ -112,7 +112,7 @@ sorted alphabetically with "ircd-" prefix removed
                         ircd-RU! (<-wudan 1.0.2)
                     solid-ircd (@ Worldnet.net) [<-Bahamut 1.8]
                     ircd-tiamat [<-bahamut 1.8]
-                    TR-IRCD [<-Bahamut 1.4]
+                    TR-IRCD 4.x [<-Bahamut 1.4]
                     UltimateIRCd (@ Shadow-Realm.org) [<-Bahamut 1.4.8]
                         (3.0 = Tsunami)
                         CritenIRCd (@ Criten/Abjects)

@@ -25,3 +25,9 @@
 ("orabidoo" appears to be Roger Espel Llima's nickname)
 
 (staticbox.#ircv3 @ 2013-02-26 18:14 +0200)
+
+# On "login on connect"
+
+(Jobe) well with SASL the idea is to phase LOC out as the preferred anyway
+(Jobe) doc/readme.login-on-connect is out of date anyway
+(Jobe) the current syntax for PASS when using LOC is "PASS [<serverpass> ][[[/<accountservice>]/<account>]/<password>]
