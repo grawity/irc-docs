@@ -131,7 +131,7 @@ The **IRCv3 Working Group** defines a standard set of extensions to IRCv2. The c
 Known extensions:
 
  * [account notification][v3-account-notify] (Charybdis, InspIRCd, Unreal)
- * [away notification][v3-away-notify] (Charybdis, Unreal)
+ * [away notification][v3-away-notify] (Charybdis, InspIRCd, Unreal)
  * [extended JOIN][v3-extended-join] (Charybdis, InspIRCd, Unreal)
  * `identify-msg` (Charybdis)
  * [multi-prefix NAMES][v3-multi-prefix] (many!)
@@ -140,7 +140,9 @@ Known extensions:
  * [server time][v3-server-time] (ZNC, Weechat)
  * [SASL authentication][v3-sasl] (Atheme, Anope, X3)
  * [STARTTLS][v3-tls] (InspIRCd, Unreal)
- * `userhost-in-names` – equivalent to NAMESX (Unreal)
+ * `userhost-in-names` – equivalent to NAMESX (InspIRCd, Unreal)
+
+<i>(The supported software lists are incomplete.)</i>
 
 Features:
 
