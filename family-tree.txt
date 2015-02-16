@@ -59,6 +59,8 @@ Todo:
         irc.tom.ru – 1.5.18/uk_UA.KOI8-U
         irc.seb.org.ua:+9996 for UTF – 2.0.5/uk... (CHANTYPES=#&!+)
         irc.anarxi.st:+9996
+    ChatHispano
+        u2.10.H.10.217. miranda.chathispano.com B96eEFfI+KMpt6vW.IRC-HISPANO.2048.40.JG+CS+CSF+DB-C+CFG+.Z+.W(128)+.TS(30)+CH+Cr-C+VIP++-.G
 Done:
     gimpnet – 2.8/gimpnet-0.1beta3+ipv6-0.2 oOiwszcrkfydnxb biklmnopstve
         irc.acc.umu.se ACeGHiMpYZ TS5ow
@@ -138,10 +140,12 @@ sorted alphabetically with "ircd-" prefix removed
                         ShadowIRCd 6.x
                             ponychat-ircd [<-ShadowIRCd 6.3.3]
                                 elemental-ircd (<-ponychat-ircd 6.5.1)
+                                    syntaxIRCd 1.0 [<-elemental-ircd 6.5.2]
                             NeoIRCd
                             SporksIRCd
                         SorIRCd 3.x (@ Sorcery.Net)
                         ircd-FEF (@ FEF.net)
+                        thelfylda [<-Charybdis 3.5pre]
                     ircd-evangelion [<-ircd-ratbox 2.2.6]
                 ShadowIRCd 2.x-4.x [<-hybrid 6.3.1/6.4.1]
                     (2.1 = Cyclops)
