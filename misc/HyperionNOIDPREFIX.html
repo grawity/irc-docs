@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="KEYWORDS" content="HyperionNOIDPREFIX" />
+<meta name="robots" content="index,follow" />
+<link rel="shortcut icon" href="/favicon.ico" />
+    <title>HyperionNOIDPREFIX - FreenodeDevelopmentWiki</title>
+    <style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/wiki/skins/monobook/main.css"; /*]]>*/</style>
+    <link rel="stylesheet" type="text/css" media="print" href="/wiki/skins/common/commonPrint.css" />
+    <!--[if lt IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE50Fixes.css";</style><![endif]-->
+    <!--[if IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE55Fixes.css";</style><![endif]-->
+    <!--[if IE 6]><style type="text/css">@import "/wiki/skins/monobook/IE60Fixes.css";</style><![endif]-->
+    <!--[if IE]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+    <script type="text/javascript" src="/wiki/index.php?title=-&amp;action=raw&amp;gen=js"></script>    <script type="text/javascript" src="/wiki/skins/common/wikibits.js"></script>
+    <style type="text/css">/*<![CDATA[*/
+@import "/wiki/index.php?title=MediaWiki:Monobook.css&action=raw&ctype=text/css&smaxage=18000";
+@import "/wiki/index.php?title=-&action=raw&gen=css";
+/*]]>*/</style>          </head>
+  <body         class="ns-0">
+    <div id="globalWrapper">
+      <div id="column-content">
+	<div id="content">
+	  <a name="top" id="contentTop"></a>
+	  	  <h1 class="firstHeading">HyperionNOIDPREFIX</h1>
+	  <div id="bodyContent">
+	    <h3 id="siteSub">From FreenodeDevelopmentWiki</h3>
+	    <div id="contentSub"></div>
+	    	    	    <!-- start content -->
+	    <table border="0" id="toc"><tr id="toctitle"><td align="center">
+<b>Table of contents</b> <script type="text/javascript">showTocToggle("show","hide")</script></td></tr><tr id="tocinside"><td>
+<div class="tocline"><a href="#The_NOIDPREFIX_Capability_and_Hyperion_SVSLOGIN.2FSIGNON_Support">1 The NOIDPREFIX Capability and Hyperion SVSLOGIN/SIGNON Support</a><br /></div>
+<div class="tocindent">
+<p><a href="#Introduction">1.1 Introduction</a><br />
+<a href="#General">1.2 General</a><br />
+<a href="#Syntax">1.3 Syntax</a><br />
+<a href="#Connect_Processing">1.4 Connect Processing</a><br />
+<a href="#Behavior_For_Unregistered_Users">1.5 Behavior For Unregistered Users</a><br />
+<a href="#Signon_Process">1.6 Signon Process</a><br />
+<a href="#Behavior_for_Registered_Users">1.7 Behavior for Registered Users</a><br />
+<a href="#Implications_For_Tab_Completion">1.8 Implications For Tab Completion</a><br />
+</p>
+<div class="tocindent">
+<p><a href="#Simple_Conformance">1.8.1 Simple Conformance</a><br />
+<a href="#Complex_Conformance">1.8.2 Complex Conformance</a><br />
+</p>
+</div>
+</div>
+</td></tr></table>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=1" title="HyperionNOIDPREFIX">edit</a>]</div><a name="The_NOIDPREFIX_Capability_and_Hyperion_SVSLOGIN.2FSIGNON_Support"></a><h2>The NOIDPREFIX Capability and Hyperion SVSLOGIN/SIGNON Support</h2>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=2" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Introduction"></a><h3>Introduction</h3>
+<p>Hyperion 1.0 provides the NOIDPREFIX ISUPPORT capability to enforce the ownership of registered nicknames, and to distinguish between registered and unregistered users.
+</p><p><b>Note:</b> More rationale and discussion can be found on <a href="/wiki/index.php/HyperionNOIDPREFIXPurpose" title="HyperionNOIDPREFIXPurpose">HyperionNOIDPREFIXPurpose</a> and
+<a href="/wiki/index.php/Talk:HyperionNOIDPREFIXPurpose" title="Talk:HyperionNOIDPREFIXPurpose">its talk page</a>.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=3" title="HyperionNOIDPREFIX">edit</a>]</div><a name="General"></a><h3>General</h3>
+<p>When a NOIDPREFIX token is advertised in an ISUPPORT (numeric 005) message, generally at client connect time, NOIDPREFIX mode is entered. The NOIDPREFIX token appears in the following format:
+</p>
+<dl><dd> NOIDPREFIX=char
+</dd></dl>
+<p>where 'char' is any valid nickname character, or the tilde ('~'). The use of tilde is strongly recommended.
+</p><p>This mode creates two nickname domains:
+</p>
+<ol><li> <i>Unregistered users.</i> These users are assigned IRC nicknames prefixed with the NOIDPREFIX character.
+</li><li> <i>Registered users.</i> These users are assigned IRC nicknames not specifically prefixed with the NOIDPREFIX character.
+</li></ol>
+<p>Unregistered user nicknames may contain any valid IRC nickname characters, but are prefixed with a single instance of the NOIDPREFIX character. Registered nicknames consist of a framework of special and other characters built around an easily-identified alphanumeric BASENAME.
+</p><p>The syntax of unregistered user nicknames is the same as that of non-NOIDPREFIX-mode nicknames, except that they always prefixed by a single instance of the NOIDPREFIX character.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=4" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Syntax"></a><h3>Syntax</h3>
+<p>Unregistered user nickname syntax is as follows:
+</p>
+<dl><dd> <i>NOIDPREFIX VALID...</i>
+</dd></dl>
+<p>Registered user nickname syntax is as follows:
+</p>
+<dl><dd> <i>[ SPECIAL... ] [ BASENAME [ SPECIAL [ VALID... ] ] ]</i>
+</dd></dl>
+<p>The individual tokens are:
+</p>
+<dl><dd> <i>ALPHA</i>, an upper- or lower-case alphanumeric character
+</dd></dl>
+<dl><dd> <i>ALPHANUMERIC</i>, an ALPHA or a numeric character
+</dd></dl>
+<dl><dd> <i>BASENAME</i>, the core registered nickname, defined as:
+<dl><dd> <i>ALPHA [ ALPHANUMERIC... ]</i>
+</dd></dl>
+</dd></dl>
+<dl><dd> <i>NOIDPREFIX</i>, a single character denoting an unregistered user, usually a tilde ('~')
+</dd></dl>
+<dl><dd> <i>SPECIAL</i>, any valid non-alphanumeric nickname character (does not include <i>NOIDPREFIX</i> when it's a tilde)
+</dd></dl>
+<dl><dd> <i>VALID</i>, any valid nickname character
+</dd></dl>
+<dl><dd> <i>...</i>, one or more occurrences of the immediately-preceding character or sequence
+</dd></dl>
+<p><br />
+<b>NOTES:</b>
+</p>
+<ol><li> The NOIDPREFIX character prefixed to the nickname of an unregistered user is considered <i>part of the nickname, not a flag.</i>  Hyperion must change the nickname of the user in order to remove this special character.
+</li><li> The tilde ('~') may only appear once in an IRC nickname, as the NOIDPREFIX value.
+</li><li> While any valid nickname character can be used as the NOIDPREFIX character, in practice, tilde ('~') is recommended. Alphanumeric characters in particular are discouraged, except in special circumstances. If tilde is used, the nicknames of registered users will never be prefixed with the NOIDPREFIX character.
+</li></ol>
+<p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=5" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Connect_Processing"></a><h3>Connect Processing</h3>
+<p>At connect time, hyperion processes the nickname offered by the IRC client, stripping off any leading instances of the NOIDPREFIX character. It then prefixes the nickname with one instance of the NOIDPREFIX character and uses the resulting nickname for the IRC session. (This processing and renaming of the IRC nickname is accomplished as part of the connect process, and no client incompatibilities have been observed to date.)
+</p><p>The NOIDPREFIX capability is advertised in an ISUPPORT (numeric 005) message at the beginning of the IRC session. It appears as follows:
+</p>
+<dl><dd> <i>NOIDPREFIX=x</i>
+</dd></dl>
+<p>where 'x', the NOIDPREFIX character, may be any valid IRC nickname character, or the tilde ('~') character.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=6" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Behavior_For_Unregistered_Users"></a><h3>Behavior For Unregistered Users</h3>
+<p>When an unregistered user attempts to change his or her IRC nickname, leading instances of the NOIDPREFIX character are stripped from the user-supplied nickname. A single NOIDPREFIX character is then prefixed to the nickname. It is not possible for the user to change his or her nickname to one which has no NOIDPREFIX at the beginning.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=7" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Signon_Process"></a><h3>Signon Process</h3>
+<p>The NOIDPREFIX capability is designed to be used with Hyperion SVSLOGIN/SIGNON support. A registry entity such as IRC services uses this support to identify the user as "signed-on", by issuing an SVSLOGIN message to the user's local server. The change is subsequently propagated to all servers through the SIGNON message. Both the SVSLOGIN and SIGNON As part of the signon process, SVSLOGIN sets the user's nickname to one which is not prefixed with the NOIDPREFIX character.
+</p><p>SVSLOGIN also adds a set of "reserved nicknames" to the user's session record. Each reserved nickname consists of a BASENAME as defined in the <a href="#Syntax" title="">#Syntax</a> section.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=8" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Behavior_for_Registered_Users"></a><h3>Behavior for Registered Users</h3>
+<p>A registered user can change his or her nickname to any variant of any of the BASENAME values provided provided as reserved nicknames via the SVSLOGIN message. For example, if a user is provided with the allowed nickname <i>foo,</i> he or she can change to:
+</p>
+<dl><dd> <i>foo</i>
+</dd><dd> <i>foo_</i>
+</dd><dd> <i>foo`</i>
+</dd><dd> <i>`foo`</i>
+</dd><dd> <i>foo-1</i>
+</dd><dd> <i>[foo]</i>
+</dd><dd> <i>foo|ATHOME</i>
+</dd><dd> <i>foo[WORK]</i>
+</dd></dl>
+<p>or one of a number of other possible variations.
+</p><p>The user cannot change to an unregistered nickname or to a registered nickname not in its list. Further, the BASENAME value must be the first alphanumeric token in the nickname. So, for a hyperion session with the ISUPPORT token:
+</p>
+<dl><dd> <i>NOIDPREFIX=~</i>
+</dd></dl>
+<p>and a single reserved nickname of 'foo,' the following are examples of disallowed nicknames:
+</p>
+<dl><dd> <i>foo2</i>
+</dd><dd> <i>fred[foo]</i>
+</dd><dd> <i>~foo</i>
+</dd></dl>
+<p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=9" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Implications_For_Tab_Completion"></a><h3>Implications For Tab Completion</h3>
+<p>IRC clients often provide TAB completion, a method of specifying a nickname which involves the user optionally typing one or more characters as a prefix and then hitting the TAB key. The client may offer selections of possible nicks and allow the user to repeat the process. At the end of the process, a complete IRC nickname is inserted into the command line.
+</p><p>Two general methods exist for TAB completion:
+</p>
+<ol><li> <i>Choice completion.</i> The nickname is completed if there is one and only one nickname beginning with the specified prefix. Otherwise, the user is offered one of several choices of nicknames beginning with the prefix. If a complete nickname is not yet provided, the user may type additional characters and repeat the process.
+</li><li> <i>Cyclic completion.</i> The nickname is completed with the first or only nickname beginning with the specified prefix. If more than one nickname matches the prefix, the user may continue to hit the <i>TAB</i> key, replacing the current nickname with the next matching nickname. The client may optionally cycle from the last match back to the first match and allow the user to continue the selection process; the client may also allow the user to add characters to or subtract characters from the prefix to narrow or broaden the selection process.
+</li></ol>
+<p>Special characters specified as part of a nickname prefix may be handled in one of two ways during TAB completion:
+</p>
+<ol><li> <i>Special characters required.</i> In this case, you must specify any special characters as part of the prefix.
+</li><li> <i>Special characters optional.</i> In this case, you need not specify any special characters as part of the prefix. If specified, they may be processed as any other character would be processed; if omitted, the prefix characters will be compared against the first alphanumeric characters in the nickname list in order to find matches.
+</li></ol>
+<p>Two general approaches to TAB completion processing provide improved nickname completion facilities for clients connecting to a server with the NOIDPREFIX capability:
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=10" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Simple_Conformance"></a><h4>Simple Conformance</h4>
+<p>Clients which utilize <i>special characters optional</i> nickname completion provide the minimum necessary support for the NOIDPREFIX capability. These include irssi 0.8.9 and earlier, as well as irssi 0.8.10+ with the <i>strict_completion</i> setting turned off (the default).
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit&amp;section=11" title="HyperionNOIDPREFIX">edit</a>]</div><a name="Complex_Conformance"></a><h4>Complex Conformance</h4>
+<p>Enhanced nickname completion facilities can be provided for clients connecting to a server with the NOIDPREFIX capability by conforming to the following recommendations:
+</p>
+<ol><li> <i>Special characters should be optional.</i> Registered nicks are reserved by BASENAME when the Hyperion NOIDPREFIX capability is active. Making special characters optional allows the user to specify nicknames purely in terms of a BASENAME prefix.
+</li><li> <i>Candidate nicknames produced by TAB completion should be sorted by BASENAME.</i> This allows the user to more easily find nicknames owned by a specific user.
+</li><li> <i>Candidate nicknames with the same BASENAME and a tilde ('~') should be sorted after candidate nicknames with the same BASENAME and no tilde.</i> NOIDPREFIX is designed for networks with a relatively high percentage of registered users.
+</li><li> <i>Candidate nicknames with the same BASENAME and no leading nickname special characters should be sorted first.</i> NOIDPREFIX is designed for networks with relatively few nicknames containing special characters.
+</li></ol>
+<p>So, for example, when the following nicknames occur on a channel, the following is the recommended order in which they would be offered by client TAB completion:
+</p>
+<dl><dd> <i>fanboy</i>
+</dd><dd> <i>[fantasy]</i>
+</dd><dd> <i>~fantasy</i>
+</dd><dd> <i>~[fantasy]</i>
+</dd><dd> <i>foo</i>
+</dd><dd> <i>`foo`</i>
+</dd><dd> <i>[foo]</i>
+</dd><dd> <i>~foo</i>
+</dd><dd> <i>fred_</i>
+</dd></dl>
+<p><br />
+<small >NOIDPREFIX Specification v0.1.1 2005/8/7 19:15</small >
+</p><p><small >&copy; 2005 Peer-Directed Projects Center</small >
+</p>
+<!-- Saved in parser cache with key gxti_web:pcache:idhash:973-1!1!0!1!0!1!0!!en and timestamp 20051030052657 -->
+<div class="printfooter">
+Retrieved from "<a href="http://www.partiallystapled.com/wiki/index.php/HyperionNOIDPREFIX">http://www.partiallystapled.com/wiki/index.php/HyperionNOIDPREFIX</a>"</div>
+	    	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+      </div>
+      <div id="column-one">
+	<div id="p-cactions" class="portlet">
+	  <h5>Views</h5>
+	  <ul>
+	    <li id="ca-nstab-main"
+	       class="selected"	       ><a href="/wiki/index.php/HyperionNOIDPREFIX">Article</a></li><li id="ca-talk"
+	       	       ><a href="/wiki/index.php/Talk:HyperionNOIDPREFIX">Discussion</a></li><li id="ca-edit"
+	       	       ><a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=edit">Edit</a></li><li id="ca-history"
+	       	       ><a href="/wiki/index.php?title=HyperionNOIDPREFIX&amp;action=history">History</a></li>	  </ul>
+	</div>
+	<div class="portlet" id="p-personal">
+	  <h5>Personal tools</h5>
+	  <div class="pBody">
+	    <ul>
+	    <li id="pt-login"><a href="/wiki/index.php?title=Special:Userlogin&amp;returnto=HyperionNOIDPREFIX">Create an account or log in</a></li>	    </ul>
+	  </div>
+	</div>
+	<div class="portlet" id="p-logo">
+	  <a style="background-image: url(/wiki/skins/common/images/wiki.png);"
+	    href="/wiki/index.php/Main_Page"
+	    title="Main Page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="portlet" id="p-nav">
+	  <h5>Navigation</h5>
+	  <div class="pBody">
+	    <ul>
+	      	      <li id="n-mainpage"><a href="/wiki/index.php/Main_Page">Main Page</a></li>	      <li id="n-portal"><a href="/wiki/index.php/FreenodeDevelopmentWiki:Community_Portal">Community portal</a></li>	      <li id="n-currentevents"><a href="/wiki/index.php/Current_events">Current events</a></li>	      <li id="n-recentchanges"><a href="/wiki/index.php/Special:Recentchanges">Recent changes</a></li>	      <li id="n-randompage"><a href="/wiki/index.php/Special:Randompage">Random page</a></li>	      <li id="n-help"><a href="/wiki/index.php/Help:Contents">Help</a></li>	    </ul>
+	  </div>
+	</div>
+	<div id="p-search" class="portlet">
+	  <h5><label for="searchInput">Search</label></h5>
+	  <div class="pBody">
+	    <form name="searchform" action="/wiki/index.php/Special:Search" id="searchform">
+	      <input id="searchInput" name="search" type="text"
+	        accesskey="f" value="" />
+	      <input type='submit' name="go" class="searchButton" id="searchGoButton"
+	        value="Go"
+	        />&nbsp;<input type='submit' name="fulltext"
+	        class="searchButton"
+	        value="Search" />
+	    </form>
+	  </div>
+	</div>
+	<div class="portlet" id="p-tb">
+	  <h5>Toolbox</h5>
+	  <div class="pBody">
+	    <ul>
+		  		  <li id="t-whatlinkshere"><a href="/wiki/index.php?title=Special:Whatlinkshere&amp;target=HyperionNOIDPREFIX">What links here</a></li>
+		  		  <li id="t-recentchangeslinked"><a href="/wiki/index.php?title=Special:Recentchangeslinked&amp;target=HyperionNOIDPREFIX">Related changes</a></li>
+		  	      	      	      	      	      	      	      	      	      <li id="t-specialpages"><a href="/wiki/index.php/Special:Specialpages">Special pages</a></li>	      	    </ul>
+	  </div>
+	</div>
+	      </div><!-- end of the left (by default at least) column -->
+      <div class="visualClear"></div>
+      <div id="footer">
+    <div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/wiki/skins/common/images/poweredby_mediawiki_88x31.png" alt="MediaWiki" /></a></div>		<ul id="f-list">
+	  <li id="f-lastmod"> This page was last modified 11:28, 11 Oct 2005.</li>	  <li id="f-viewcount">This page has been accessed 1117 times.</li>	  	  	  <li id="f-about"><a href="/wiki/index.php/FreenodeDevelopmentWiki:About" title="FreenodeDevelopmentWiki:About">About FreenodeDevelopmentWiki</a></li>	  <li id="f-disclaimer"><a href="/wiki/index.php/FreenodeDevelopmentWiki:General_disclaimer" title="FreenodeDevelopmentWiki:General disclaimer">Disclaimers</a></li>	</ul>
+      </div>
+    </div>
+    <!-- Served by egg.friedhosting.com in 0.30 secs. -->
+  </body>
+</html>
