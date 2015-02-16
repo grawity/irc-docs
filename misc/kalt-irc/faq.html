@@ -1,0 +1,822 @@
+<html><head>
+
+<script type="text/javascript" src="/static/js/analytics.js" ></script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+
+<title>IRCD FAQ</title></head>
+<body>
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script> if (window.archive_analytics) { window.archive_analytics.values['server_name']="wwwb-app17.us.archive.org";}; </script>
+
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript" src="/static/jflot/jquery.min.js" ></script>
+<script type="text/javascript">
+//<![CDATA[
+var firstDate = 820454400000;
+var lastDate = 1420070399999;
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http:\/\/www.stealth.net\/~kalt\/irc\/faq.html";
+
+var curYear = -1;
+var curMonth = -1;
+var yearCount = 18;
+var firstYear = 1996;
+var imgWidth = 475;
+var yearImgWidth = 25;
+var monthImgWidth = 2;
+var trackerVal = "none";
+var displayDay = "8";
+var displayMonth = "Apr";
+var displayYear = "2002";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function showTrackers(val) {
+	if(val == trackerVal) {
+		return;
+	}
+	if(val == "inline") {
+		document.getElementById("displayYearEl").style.color = "#ec008c";
+		document.getElementById("displayMonthEl").style.color = "#ec008c";
+		document.getElementById("displayDayEl").style.color = "#ec008c";		
+	} else {
+		document.getElementById("displayYearEl").innerHTML = displayYear;
+		document.getElementById("displayYearEl").style.color = "#ff0";
+		document.getElementById("displayMonthEl").innerHTML = displayMonth;
+		document.getElementById("displayMonthEl").style.color = "#ff0";
+		document.getElementById("displayDayEl").innerHTML = displayDay;
+		document.getElementById("displayDayEl").style.color = "#ff0";
+	}
+   document.getElementById("wbMouseTrackYearImg").style.display = val;
+   document.getElementById("wbMouseTrackMonthImg").style.display = val;
+   trackerVal = val;
+}
+function getElementX2(obj) {
+	var thing = jQuery(obj);
+	if((thing == undefined) 
+			|| (typeof thing == "undefined") 
+			|| (typeof thing.offset == "undefined")) {
+		return getElementX(obj);
+	}
+	return Math.round(thing.offset().left);
+}
+function trackMouseMove(event,element) {
+
+   var eventX = getEventX(event);
+   var elementX = getElementX2(element);
+   var xOff = eventX - elementX;
+	if(xOff < 0) {
+		xOff = 0;
+	} else if(xOff > imgWidth) {
+		xOff = imgWidth;
+	}
+   var monthOff = xOff % yearImgWidth;
+
+   var year = Math.floor(xOff / yearImgWidth);
+	var yearStart = year * yearImgWidth;
+   var monthOfYear = Math.floor(monthOff / monthImgWidth);
+   if(monthOfYear > 11) {
+       monthOfYear = 11;
+   }
+   // 1 extra border pixel at the left edge of the year:
+   var month = (year * 12) + monthOfYear;
+   var day = 1;
+	if(monthOff % 2 == 1) {
+		day = 15;
+	}
+	var dateString = 
+		zeroPad(year + firstYear) + 
+		zeroPad(monthOfYear+1,2) +
+		zeroPad(day,2) + "000000";
+
+	var monthString = prettyMonths[monthOfYear];
+	document.getElementById("displayYearEl").innerHTML = year + 1996;
+	document.getElementById("displayMonthEl").innerHTML = monthString;
+	// looks too jarring when it changes..
+	//document.getElementById("displayDayEl").innerHTML = zeroPad(day,2);
+
+	var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+	document.getElementById('wm-graph-anchor').href = url;
+
+   //document.getElementById("wmtbURL").value="evX("+eventX+") elX("+elementX+") xO("+xOff+") y("+year+") m("+month+") monthOff("+monthOff+") DS("+dateString+") Moy("+monthOfYear+") ms("+monthString+")";
+   if(curYear != year) {
+       var yrOff = year * yearImgWidth;
+       document.getElementById("wbMouseTrackYearImg").style.left = yrOff + "px";
+       curYear = year;
+   }
+   if(curMonth != month) {
+       var mtOff = year + (month * monthImgWidth) + 1;
+       document.getElementById("wbMouseTrackMonthImg").style.left = mtOff + "px";
+       curMonth = month;
+   }
+}
+//]]>
+</script>
+
+<style type="text/css">body{margin-top:0!important;padding-top:0!important;min-width:800px!important;}#wm-ipp a:hover{text-decoration:underline!important;}</style>
+<div id="wm-ipp" lang="en" class="__wb_banner_div" style="display:none; position:relative;padding:0 5px;min-height:70px;min-width:800px">
+
+
+<div id="wm-ipp-inside" class="__wb_banner_div" style="position:fixed;padding:0!important;margin:0!important;width:97%;min-width:780px;border:5px solid #000;border-top:none;background-image:url(/static/images/toolbar/wm_tb_bk_trns.png);text-align:center;-moz-box-shadow:1px 1px 3px #333;-webkit-box-shadow:1px 1px 3px #333;box-shadow:1px 1px 3px #333;font-size:11px!important;font-family:'Lucida Grande','Arial',sans-serif!important;">
+   <table style="border-collapse:collapse;margin:0;padding:0;width:100%;"><tbody><tr>
+   <td style="padding:10px;vertical-align:top;min-width:110px;">
+   <a href="/web/" title="Wayback Machine home page" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0"/></a>
+   </td>
+   <td style="padding:0!important;text-align:center;vertical-align:top;width:100%;">
+
+       <table style="border-collapse:collapse;margin:0 auto;padding:0;width:570px;"><tbody><tr>
+       <td style="padding:3px 0;" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb" style="margin:0!important;padding:0!important;"><input type="text" name="url" id="wmtbURL" value="http://www.stealth.net/~kalt/irc/faq.html" style="width:400px;font-size:11px;font-family:'Lucida Grande','Arial',sans-serif;" onfocus="javascript:this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20020408131601" /><input type="submit" value="Go" style="font-size:11px;font-family:'Lucida Grande','Arial',sans-serif;margin-left:5px;width: inherit !important" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td style="vertical-align:bottom;padding:5px 0 0 0!important;" rowspan="2">
+           <table style="border-collapse:collapse;width:110px;color:#99a;font-family:'Helvetica','Lucida Grande','Arial',sans-serif;"><tbody>
+			
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr style="width:110px;height:16px;font-size:10px!important;">
+           	<td style="padding-right:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20000816034425/http://www.stealth.net/~kalt/irc/faq.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="16 Aug 2000"><strong>AUG</strong></a>
+		                
+               </td>
+               <td id="displayMonthEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight:bold;text-transform:uppercase;width:34px;height:15px;padding-top:1px;text-align:center;" title="You are here: 13:16:01 Apr 8, 2002">APR</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20020601084628/http://www.stealth.net/~kalt/irc/faq.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="1 Jun 2002"><strong>JUN</strong></a>
+		                
+               </td>
+           </tr>
+
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr>
+               <td style="padding-right:9px;white-space:nowrap;overflow:visible;text-align:right!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+		                <a href="/web/20000816034425/http://www.stealth.net/~kalt/irc/faq.html" title="3:44:25 Aug 16, 2000" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0" /></a>
+		                
+               </td>
+               <td id="displayDayEl" style="background:#000;color:#ff0;width:34px;height:24px;padding:2px 0 0 0;text-align:center;font-size:24px;font-weight: bold;" title="You are here: 13:16:01 Apr 8, 2002">8</td>
+				<td style="padding-left:9px;white-space:nowrap;overflow:visible;text-align:left!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+		                <a href="/web/20020601084628/http://www.stealth.net/~kalt/irc/faq.html" title="8:46:28 Jun 1, 2002" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wm_tb_nxt_on.png" alt="Next capture" width="14" height="16" border="0"/></a>
+		                
+			    </td>
+           </tr>
+
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr style="width:110px;height:13px;font-size:9px!important;">
+				<td style="padding-right:9px;font-size:11px!important;font-weight: bold;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20000816034425/http://www.stealth.net/~kalt/irc/faq.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="16 Aug 2000"><strong>2000</strong></a>
+		                
+               </td>
+               <td id="displayYearEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight: bold;padding-top:1px;width:34px;height:13px;text-align:center;" title="You are here: 13:16:01 Apr 8, 2002">2002</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight: bold;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20030605145501/http://www.stealth.net/~kalt/irc/faq.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="5 Jun 2003"><strong>2003</strong></a>
+		                
+				</td>
+           </tr>
+           </tbody></table>
+       </td>
+
+       </tr>
+       <tr>
+       <td style="vertical-align:middle;padding:0!important;">
+           <a href="/web/20020408131601*/http://www.stealth.net/~kalt/irc/faq.html" style="color:#33f;font-size:11px;font-weight:bold;background-color:transparent;border:none;" title="See a list of every capture for this URL"><strong>47 captures</strong></a>
+           <div class="__wb_banner_div" style="margin:0!important;padding:0!important;color:#666;font-size:9px;padding-top:2px!important;white-space:nowrap;" title="Timespan for captures of this URL">6 Dec 98 - 23 Jan 13</div>
+       </td>
+       <td style="padding:0!important;">
+       <a style="position:relative; white-space:nowrap; width:475px;height:27px;" href="" id="wm-graph-anchor">
+       <div class="__wb_banner_div" id="wm-ipp-sparkline" style="position:relative; white-space:nowrap; width:475px;height:27px;background-color:#fff;cursor:pointer;border-right:1px solid #ccc;" title="Explore captures for this URL">
+			<img id="sparklineImgId" style="position:absolute; z-index:9012; top:0px; left:0px;"
+				onmouseover="showTrackers('inline');" 
+				onmouseout="showTrackers('none');"
+				onmousemove="trackMouseMove(event,this)"
+				alt="sparklines"
+				width="475"
+				height="27"
+				border="0"
+				src="/web/jsp/graph.jsp?graphdata=475_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000001_1999:-1:000200000110_2000:-1:000012010000_2001:-1:000000000000_2002:3:000101000000_2003:-1:000101010101_2004:-1:000201010101_2005:-1:020100000001_2006:-1:110101111100_2007:-1:010000210300_2008:-1:000000000000_2009:-1:100010000000_2010:-1:000000000000_2011:-1:000000100000_2012:-1:000000100010_2013:-1:100000000000_2014:-1:000000000000"></img>
+			<img id="wbMouseTrackYearImg" 
+				style="display:none; position:absolute; z-index:9010;"
+				width="25" 
+				height="27"
+				border="0"
+				src="/static/images/toolbar/transp-yellow-pixel.png"></img>
+			<img id="wbMouseTrackMonthImg"
+				style="display:none; position:absolute; z-index:9011; " 
+				width="2"
+				height="27" 
+				border="0"
+				src="/static/images/toolbar/transp-red-pixel.png"></img>
+       </div>
+		</a>
+
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td style="text-align:right;padding:5px;width:65px;font-size:11px!important;">
+       <a href="javascript:;" onclick="document.getElementById('wm-ipp').style.display='none';" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_close.png) no-repeat 100% 0;color:#33f;font-family:'Lucida Grande','Arial',sans-serif;margin-bottom:23px;background-color:transparent;border:none;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_help.png) no-repeat 100% 0;color:#33f;font-family:'Lucida Grande','Arial',sans-serif;background-color:transparent;border:none;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+
+</div>
+</div>
+<script type="text/javascript">
+ var wmDisclaimBanner = document.getElementById("wm-ipp");
+ if(wmDisclaimBanner != null) {
+   disclaimElement(wmDisclaimBanner);
+ }
+</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+<H1 align=center>IRCD Frequently Asked Questions</H1>
+
+<hr>
+
+<IMG SRC="/web/20020408131601im_/http://www.stealth.net/~kalt/gears.gif" ALT="hole" ALIGN=right width=93 height=70>
+<H1>Table of Content</H1>
+<ol>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#faq">About this FAQ...</A>
+<p>
+<ol>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#faq-1">What versions of IRCD does this FAQ cover?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#faq-2">Who maintains this FAQ?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#faq-3">I have this question that is not answered in the FAQ...</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#faq-4">Hey, your FAQ is wrong!</A>
+</ol>
+<hr>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#ircd">About IRCD...</A>
+<p>
+<ol>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#ircd-1">Who writes IRCD?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#ircd-2">Where is the protocol documented?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#ircd-3">Where can I find more information about it then?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#ircd-4">Where can I get IRCD?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#ircd-5">How can I report bugs?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#ircd-6">I've made changes to the source, can they be included in future releases?</A>
+</ol>
+<hr>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc">Miscellaneous common questions</A>
+<p>
+<ol>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-1">What server versions can I connect my 2.9.x server to?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-2">What is ND, CD, TS?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-3">What is ``flood control''?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-4">What is ``penalty''?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-5">What is a service?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-6">What does that character mean in the user log?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-7">What are those 4 last numbers in the logs?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-8">What are all those prefixes used for usernames?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-9">What do the comments in server kills mean?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#misc-10">Is ircd vulnerable to the DNS cache bug?</A>
+</ol>
+<hr>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#compil">Compiling</A>
+<p>
+<ol>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#compil-1">How do I...?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#compil-2">What is #define DEBUGMODE?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#compil-3">"parse error before `z_stream'" problems</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#compil-4">Undefined symbol errors compiling the client</A>
+</ol>
+<hr>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#config">Configuration</A>
+<p>
+<ol>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#config-1">How do I...?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#config-2">What are restricted connections?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#config-3">What is ``ircd.tune'', when/how is it created?</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#config-4">How do I use ``ircd.tune''?</A>
+</ol>
+<hr>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime">Runtime</A>
+<p>
+<ol>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-1">My server is up and running, but it refuses connections</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-2">The server ``lags''</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-3">What happenned to global messages?</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-4">What happenned to the +s usermode?</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-5">My server complains about ``Too many open files''</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-6">The ``is now operator'' notice is wrong</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-7">The ``KLINE'' command doesn't work</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-8">What are these errors: "udp port recvfrom (my.server.name): Connection refused"?</a>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html#runtime-9">The server hangs when auto connecting to an unreachable host</a>
+</ol>
+</ol>
+
+<hr>
+
+<A NAME="faq">
+<H1>About this FAQ...</H1>
+
+The latest version of this FAQ is available at
+<A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/faq.html">http://www.stealth.net/~kalt/irc/faq.html</A>.
+If you mirror this FAQ somewhere, please, notify me at <A
+HREF="/web/20020408131601/mailto:ircd-faq@irc.org">ircd-faq@irc.org</A>.
+Thanks.
+
+<ol><ol>
+<A NAME="faq-1">
+<P><LI><B>What versions of IRCD does this FAQ cover?</B></P>
+This FAQ was started in february 1997.  At that time, irc
+2.9.2 was the current version, and 2.9.3 in beta.
+Hopefully, the FAQ will always be updated to cover the
+latest version.
+<P>
+Versions 2.10.x will soon be covered.
+<A NAME="faq-2">
+<P><LI><B>Who maintains this FAQ?</B></P>
+This FAQ was created by <em>Christophe Kalt</em> &lt;<A
+HREF="/web/20020408131601/mailto:ircd-faq@irc.org">ircd-faq@irc.org</A>&gt;,
+the current IRC Software maintainer.
+<A NAME="faq-3">
+<P><LI><b>I have this question that is not answered in the FAQ...</B></P>
+Make sure you have read the documentation in the package and
+that the answer is not there either.  Then, you should know
+where to send your question
+(<A HREF="/web/20020408131601/mailto:ircd-users@irc.org">ircd-users@irc.org</A>).
+<P>
+This might seem a bit harsh, but most questions do have
+their answer in the documentation files.
+<A NAME="faq-4">
+<P><LI><B>Hey, your FAQ is wrong!</B></P>
+Oops, please notify me at
+<A HREF="/web/20020408131601/mailto:ircd-faq@irc.org">ircd-faq@irc.org</A>.
+</ol></ol>
+<hr>
+
+<A NAME="ircd">
+<H1>About IRCD...</H1>
+
+<ol><ol>
+<A NAME="ircd-1">
+<P><LI><b>Who writes IRCD?</B></P>
+<em>Christophe Kalt</em> &lt;<A HREF="/web/20020408131601/mailto:kalt@stealth.net">kalt@stealth.net</A>&gt;,
+is the current maintainer.<p>
+There are several other people working on IRCD, and helping
+testing it.  The list of contributors is long, and can be
+found in the packages, or by issuing an INFO command to the
+server.
+<A NAME="ircd-2">
+<P><LI><b>Where is the protocol documented?</b></P>
+The <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/rfc1459.html">RFC 1459</A> is the best
+documentation about the IRC protocol.  Note that this
+document is experimental and outdated.  In particular,
+version 2.9 and higher introduce many new extensions and
+changes.
+<p>
+If something is not documented anywhere, the best way to
+find about it is to RTFS.  Developers are known to often use
+this answer.  I do sometimes, either because I really don't
+have the time to answer such an (easy) question, or simply
+because <em>I do not know the answer myself</em>.  The code
+is huge, I don't know everything, and forget about some of
+the things I wrote myself.
+<A NAME="ircd-3">
+<P><LI><b>Where can I find more information about it then?</b></P>
+First of all, you should look in the <b>doc</b> directory.
+Lots of information is there.  Check the README as a
+starting point.
+<p>
+Here are some links of interest:
+<ul>
+<LI><A HREF="/web/20020408131601/http://www.funet.fi/~irc/server/">http://www.funet.fi/~irc/server/</A>
+<LI><A HREF="/web/20020408131601/http://www.ludd.luth.se/irc/">http://www.ludd.luth.se/irc/</A>
+</ul>
+<A NAME="ircd-4">
+<P><LI><b>Where can I get IRCD?</B></P>
+<ol>
+<LI> <B><A HREF="/web/20020408131601/ftp://ftp.irc.org/irc/server/">ftp://ftp.irc.org/irc/server</A></B>
+<LI> <A HREF="/web/20020408131601/ftp://ftp.funet.fi/pub/unix/irc/server/">ftp://ftp.funet.fi/pub/unix/irc/server</A>
+<LI> <A HREF="/web/20020408131601/ftp://coombs.anu.edu.au/pub/irc/">ftp://coombs.anu.edu.au/pub/irc</A>
+<LI> <A HREF="/web/20020408131601/ftp://ftp.ircnet.org/pub/irc/servers/">ftp://ftp.ircnet.org/pub/irc/servers/</A>
+</ol>
+<A NAME="ircd-5">
+<P><LI><b>How can I report bugs?</B></P>
+Make sure you are running the last version.  Bug reports
+should be sent to
+<A HREF="/web/20020408131601/mailto:ircd-bugs@irc.org">ircd-bugs@irc.org</A>.
+<A NAME="ircd-6">
+<P><LI><b>I've made changes to the source, can they be
+included in future releases?</B></P>
+May be, may be not.<p>
+Send a diff (preferably unified) to
+<A HREF="/web/20020408131601/mailto:ircd-users@irc.org">ircd-users@irc.org</A>
+explaining its purpose.  We'll review it, and let you know
+what we think about it.
+<p>
+When sending a diff, make sure you follow the same kind of
+rules as the rest of the code about formatting, presentation
+and comments.  Otherwise, your diff has little chances to
+get included.
+</ol></ol>
+
+<hr>
+
+<A NAME="misc">
+<H1>Miscellaneous common questions</H1>
+
+<ol><ol>
+<A NAME="misc-1">
+<P><LI><B>What server versions can I connect my 2.9.x server to?</B></P>
+2.9.x are fully compatible with 2.8.x servers.  Be sure to
+<A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/config.html#NoV28">#undef NoV28Links</A> in the
+config.h file<p>
+<B>Only</B> versions 2.9.1 and 2.9.2 can be linked on a net
+where 2.7.x servers are present.
+<p>
+<B>Only</B> versions 2.9.1, 2.9.2 and 2.9.3 can be <em>directly</em>
+linked to a 2.8.x server.
+<p>
+For many reasons (bandwidth usage, ND, CD) it is better to
+run a homogenous network.  (Either all 2.8.x, or all 2.9.x).
+<A NAME="misc-2">
+<P><LI><B>What is ND, CD, TS?</B></P>
+ND stands for Nick Delay which is a mechanism to prevent
+nickname collisions,<br>
+CD stands for Channel Delay which is a mechanism to prevent
+channel collisions (op riding),<br>
+TS stand for TimeStamp which is a mechanism to solve
+nickname and channel collisions by deciding which of the two
+concerned parties is right, and which is wrong.
+<p>
+Here are some links to documents that should help you:
+<ul>
+<LI> <A HREF="/web/20020408131601/http://www.irc.org/~irc/server/delays.html">Description
+of 2.9 ND and CD</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/TS-Delay.html">Long comparaison of ND/CD and TS.</A>
+<LI> <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/stats/collisions.html">Some comparative statistics between ND and TS.</A>
+</ul>
+<p>
+2.9.x are the only versions implementing Nick and Channel Delay.
+These two mechanisms have proven to be effective in greatly
+reducing the number of channel takeovers, and nickname collisions.
+<A NAME="misc-3">
+<P><LI><B>What is ``flood control''?</B></P>
+This is the name for the feature which prevents the server
+to be flooded by clients.  It can be tuned via the
+<A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/config.html#FLOOD">CLIENT_FLOOD</A> define.  It is
+different from the penalty system described below.  Both are
+complementary.
+<p>
+If a client sends too much data to the server, its
+connection will be closed.
+<A NAME="misc-4">
+<P><LI><B>What is ``penalty''?</B></P>
+This feature appeared in 2.9.1 in replacement of some old
+less flexible equivalent mechanism.  Each command of the
+server has a penalty which will be applied to the client
+running this command.
+<p>
+The penalty is defined in seconds.  If a user's penalty
+exceeds 10 seconds, any incoming data is delayed, and only
+processed when the penalty goes under 10 seconds again.
+<p>
+Many people would like a list of penalties, unfortunately,
+it is quite difficult to make one.  The only way to know is
+to RTFS.  
+
+Most of the time, commands which affect the net
+have a high penalty.  (For example, doing a remote WHOIS is
+more penalized than doing a WHOIS locally).
+<A NAME="misc-5">
+<P><LI><B>What is a service?</B></P>
+Bjørn Borud wrote ``<em>A service is something between a
+client and a server connection.  if you read the docs
+accompanying ircd 2.9.2 you will get some idea as to what it
+can be used for given some knowledge of the IRC
+protocol.</em>''
+<p>
+The code implementing services in the 2.9.2 server is not
+complete, and a bug prevents services to be seen on the
+whole irc network.  2.9.3 is the first version fully supporting
+services (which abilities have been slightly enhanced).
+<p>
+Commands that a user can issue:
+<ul>
+<P><LI>SERVLIST &lt;pattern&gt; &lt;type&gt;</P>
+This will return a list of matching services.
+<P><LI>SQUERY &lt;pattern&gt; &lt;query&gt;</P>
+This will send the string &lt;query&gt; to the first service
+found which name matches &lt;pattern&gt;.
+</ul>
+<p>
+Services can<B>not</B> join channels.
+<p>
+It is also interesting to note that services are not necessarily
+seen by the whole IRC network.  A service which you cannot see
+cannot see you either.  Services distribution is controlled by
+a mask, for example *.fr would restrict a service to be present
+only on french servers.
+<p>
+<A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/service.html">Here</A> is a small perl script which
+behaves as a service.
+<A NAME="misc-6">
+<P><LI><B>What does that character mean in the user log?</B></P>
+This is defined in the common/struct_def.h file (previously
+named include/struct.h) (see below) and tells why the client
+connection was closed.
+<pre>
+#define EXITC_UNDEF     '-'     /* unregistered client */
+#define EXITC_REG       '0'     /* normal exit */
+#define EXITC_DIE       'd'     /* server died */
+#define EXITC_DEAD      'D'     /* socket died */
+#define EXITC_ERROR     'E'     /* socket error */
+#define EXITC_FLOOD     'F'     /* client flooding */
+#define EXITC_KLINE     'k'     /* K-lined */
+#define EXITC_KILL      'K'     /* KILLed */
+#define EXITC_MBUF      'M'     /* mem alloc error */
+#define EXITC_PING      'P'     /* ping timeout */
+#define EXITC_SENDQ     'Q'     /* send queue exceeded */
+#define EXITC_RLINE     'r'     /* R-lined */
+#define EXITC_REF       'R'     /* Refused */
+</pre>
+<A NAME="misc-7">
+<P><LI><B>What are those 4 last numbers in the logs?</B></P>
+2.9.3 extends logging information by providing the amount of
+data transferred during the connection between the client
+and the server:
+<P>
+<UL>
+<LI> number of messages sent to the client.
+<LI> Kbytes sent to the client.
+<LI> number of messages received by the server.
+<LI> Kbytes received by the server.
+</UL>
+<A NAME="misc-8">
+<P><LI><B>What are all those prefixes used for usernames?</B></P>
+See <A HREF="/web/20020408131601/http://www.irc.org/~irc/server/prefixes.html">http://www.irc.org/~irc/server/prefixes.html</A>.
+<A NAME="misc-9">
+<P><LI><B>What do the comments in server kills mean?</B></P>
+See <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/kills.html">http://www.stealth.net/~kalt/irc/kills.html</A>
+for a complete description of KILL notices.
+<P>
+Note that the description field of server kills has changed
+several times, this document describes the notices which can
+be generated by the version 2.9.3 of the server.
+<A NAME="misc-10">
+<P><LI><B>Is ircd vulnerable to the DNS cache bug?</B></P>
+Yes.
+<P>
+However, it is possible to protect the server from such abuse.
+ircd reads the /etc/resolv.conf file to setup its own resolver
+and will use the nameservers defined in this file.  There are
+two ways ircd can be tricked to accept a wrong answer, both can be
+defeated if the abusers cannot find the DNS server used by ircd.
+<P>
+The file used by ircd to setup its resolver can be changed at
+compile time.  The default path (/etc/resolv.conf) is set in
+include/resolv.h up to version 2.9.3
+<P>
+The 2.9.4 version introduces the option --resconf to configure
+which makes it easy to use an alternate file.
+<P><LI><B></B></P>
+</ol></ol>
+
+<hr>
+
+<A NAME="compil">
+<H1>Compiling</H1>
+
+<ol><ol>
+<A NAME="compil-1">
+<P><LI><B>How do I...?</B></P>
+The compilation procedure is quite simple.  It is described
+in the <B>doc/INSTALL.txt</B> file.  Good luck!
+<A NAME="compil-2">
+<P><LI><B>What is <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/config.html#DEBUG">#define DEBUGMODE</A>?</B></P>
+It's a special mode that enable debugging code and notices.
+It can be useful for people developping, but <B>it should
+NEVER be used on a production network</B>.  It makes the
+server to be much slower, and some special commands could be
+used to crash it.
+<A NAME="compil-3">
+<P><LI><B>"parse error before `z_stream'" problems</A>?</B></P>
+A common problem with the configuration leads to the following errors:
+<pre>
+In file included from ../ircd/s_defines.h:30,
+                 from ../common/bsd.c:27:
+../common/struct_def.h:317: parse error before `z_stream'
+../common/struct_def.h:317: warning: no semicolon at end of struct or union
+common/struct_def.h:318: warning: data definition has no type or s torage class
+../common/struct_def.h:323: parse error before `}'
+make: *** [bsd.o] Error 1
+</pre>
+<P>
+These are caused by the fact that you have defined ZIP_LINKS, but configure
+has not found the zlib which is required to support link compression.  Check
+the <A HREF=/web/20020408131601/http://www.stealth.net/~kalt/irc/INSTALL-1.html#ss1.1>section
+about configure in the INSTALL file</A> for clues on how to make configure
+find the zlib (provided that it is installed on your system).
+<A NAME="compil-4">
+<p><LI><B>Undefined symbol errors compiling the client</B></P>
+Some systems (in particular FreeBSD) have a weird ncurses library which
+autoconf detects and decides to use to compile the client.  Unfortunately,
+it doesn't work and results in errors when linking the client.  To get
+around this problem, run configure with the --without-ncurses option,
+and recompile the client.
+<P><LI><B></B></P>
+</ol></ol>
+
+<hr>
+
+<A NAME="config">
+<H1>Configuration</H1>
+
+<ol><ol>
+<A NAME="config-1">
+<P><LI><B>How do I...?</B></P>
+Most questions about the configuration file should have an
+answer in the <B>doc/INSTALL.txt</B> document file.
+<B>example.conf</B> also has many interesting examples.
+<P>
+If you have a problem configuring the server, make sure to
+check these two files.  They probably have the answer you're
+looking for.
+<P>
+<B>chkconf</B> is a small utility which I encourage you to
+use to find what is wrong in your ircd.conf.
+<A NAME="config-2">
+<P><LI><B>What are restricted connections?</B></P>
+A restricted user:
+<ul>
+<li> cannot act as channel operator on normal #channels
+(/mode, /kick, ..)
+<li>cannot change nickname (/nick)
+<li>can chat normally.
+</ul>
+The purpose of these connections is to allow access to the
+server for people but limit their ability to abuse this
+connection.  More information can be found at <A HREF="/web/20020408131601/http://www.irc.org/~irc/server/restricted.html">http://www.irc.org/~irc/server/restricted.html</A>
+<A NAME="config-3">
+<P><LI>What is ``ircd.tune'', when/how is it created?</B></P>
+This file is used by the server to optimize memory usage, no
+manual editing is required, nor should be needed.  As of
+version 2.9 of the server, several data which were
+statically allocated were changed to be allocated
+dynamically, and allowed to grow in size when needed in
+order to improve performance.  The server stores these
+structures sizes in the ``ircd.tune'' file so the values are
+known and used upon restart which improves the memory
+allocation.
+<P>
+The file is overwritten everytime a value changes (grows),
+upon rehashing the server, and when a ``/die'' or
+``/restart'' command is issued.
+<A NAME="config-4">
+<P><LI>How do I use ``ircd.tune''?</B></P>
+Typically you don't.  However, here are couple facts you
+should know about the file:
+<ul>
+<LI> If you have never ran the server, and intend to run it
+on a big IRC network, you should restart it within 48 hours,
+and then about 1 week later (crashes not withstanding) to
+build up a good idea of how it should start up.
+<LI> If you have ran the server on a big IRC network, and
+are no longer connecting to a big IRC network, the values
+stored in the file are no longer adapted to your needs.
+Remove the ``ircd.tune'' file, and restart the server.
+</ul>
+<P><LI><B></B></P>
+</ol></ol>
+
+<hr>
+
+<A NAME="runtime">
+<H1>Runtime</H1>
+
+<ol><ol>
+<A NAME="runtime-1">
+<P><LI><B>My server is up and running, but it refuses connections</B></P>
+<UL>
+<P><LI><B>Connection refused</B></P>
+The server is not listening, your configuration is probably
+wrong, check your P lines.  If you are using the virtual
+host support, check the configuration.
+<P><LI><B>ERROR message</B></P>
+The server is refusing the connection according to its
+configuration file.  Check your ircd.conf
+</UL>
+<A NAME="runtime-2">
+<P><LI><B>The server ``lags''</B></P>
+This is often the first reaction of somebody upgrading from
+an old version, such as 2.8.*; it seems that the server
+lags 2 or 3 seconds with local clients.
+<P>
+This can be tuned with the <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/config.html#HUB">HUB</A>
+define in the config.h file.  2.9.x servers are optimized
+for networking, to the disadvantage of local clients.
+<P>
+Note that if you don't link many servers, HUB can be defined
+to 0.  And if you don't link any server at all, you should
+probably simply #undef'ine HUB.
+<A NAME="runtime-3">
+<P><LI><B>What happenned to global messages?</B></P>
+The code for these has been pretty broken in 2.9.1 and
+2.9.2, but it is fixed in 2.9.3.
+<A NAME="runtime-4">
+<P><LI><B>What happenned to the +s usermode?</B></P>
+2.9.x versions of the server no longer support this user
+mode.  To receive the server notices, you have to join some
+local channels:
+<ul>
+<li> &ERRORS: Error messages concerning server and network.
+<li> &NOTICES: Informative and administrative notices from server.
+<li> &KILLS: Kill messages for users, collisions.
+<li> &CHANNEL: Channel mode desynchronation warnings. 
+<li> &NUMERICS: IRC server protocol errors between servers, misrouted replies. 
+<li> &SERVERS: Introduction of new servers and splits of existing ones. 
+<li> &HASH: Server internal hash lookup table statistics. 
+<li> &LOCAL: Server local configuration warnings. 
+<li> &SERVICES: Introduction of new services, and quits of existing ones.
+</ul>
+<A NAME="runtime-5">
+<P><LI><B>My server complains about ``Too many open files''</B></P>
+This means that your server has opened as many file
+descriptors as it was allowed to.  It is an OS dependant
+issue, but most unix shells have a ``limit'' command which
+can be used to put a limit lower than the actual kernel
+limit per process.
+<p>
+To solve your problem, make sure that your shell doesn't
+limit the number of descriptors.  Then, if you still see
+this notice, it means you are hitting the kernel limit, in
+which case you should reconfigure your kernel.
+<p>
+The <A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/config.html#MAXCONN">MAXCONNECTIONS</A> define
+in the config.h should always be lower than the maximum
+number of file descriptors a process can open.  If this is
+the case, the ``Too many open files'' notice will never show
+up.
+<A NAME="runtime-6">
+<P><LI><B>The ``is now operator'' notice is wrong</B></P>
+This notice was changed to show (lowercase) ``o'' for global
+IRC operators, and (uppercase) ``O'' for local ones.  The
+change was made to be coherent with the IRC protocol
+(<A HREF="/web/20020408131601/http://www.stealth.net/~kalt/irc/rfc1459.html">RFC 1459</A>) between servers.
+<p>
+It seems wrong because it is the opposite of the
+``ircd.conf'' file.
+<A NAME="runtime-7">
+<P><LI><B>The ``KLINE'' command doesn't work</B></P>
+This command was never part of the official distribution.
+There are several reasons which make it unlikely to ever
+be part of it.  The ``KLINE'' command can be seen as a subset
+of commands allowing a client connected to IRC to modify
+the configuration of a server while online.  Implementing
+such a command would mean introducing in the server the means
+of modifying the configuration in an uncomplete maneer.  It also
+means allowing a client to interactively modify a file on disk,
+relying on poor authentication (typically, on IRC operator
+status).
+<P>
+The IRC server configuration file is complex.  Currently there
+is no tool that can be used for remotely administrating it.
+Such a tool should not be implemented in the IRC server itself,
+but as a separate program using strong and secure authentication.
+<A NAME="runtime-8">
+<P><LI><B>What are these errors: "udp port recvfrom (my.server.name): Connection refused"?</B></P>
+When you have uplinks to which you autoconnect, the server
+uses UDP to ping them.  The pings are sent to the same port
+number as the one you use to autoconnect (unless specified
+otherwise, see <B>doc/INSTALL.txt</B>).  If your uplink doesn't
+listen for UDP packets on this particular port, or if there
+is a firewall not letting the UDP packets go through, your
+server complains with the error message above.
+<P>
+You can most likely correct this by fixing either your, or
+your uplink's configuration.  Check <B>doc/INSTALL.txt</B> on M
+and C lines about UDP pings.
+<A NAME="runtime-9">
+<P><LI><B>The server hangs when auto connecting to an unreachable host</B></P>
+When connecting to an unreachable host (manual or auto connect),
+the connection attempt will timeout after 30 seconds or so, at
+which point the ircd process hangs on some Solaris systems.
+The affected versions are 2.3, 2.4, 2.5 and 2.5.1; <B>Solaris 2.6
+doesn't have this problem</B>.
+<P><LI><B></B></P>
+</ol></ol>
+
+<p><hr><p>
+<em>Christophe Kalt</em> &lt;<A HREF="/web/20020408131601/mailto:ircd-faq@irc.org">ircd-faq@irc.org</A>&gt;
+
+<pre>$Id: faq.html,v 1.18 1999/01/14 01:20:32 kalt Exp $</pre>
+
+</body></html>
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 13:16:01 Apr 8, 2002 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 20:26:39 Mar 21, 2014.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->

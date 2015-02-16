@@ -1,0 +1,379 @@
+<html><head>
+
+<script type="text/javascript" src="/static/js/analytics.js" ></script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+
+<title>KILLs statistics</title></head>
+<body>
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script> if (window.archive_analytics) { window.archive_analytics.values['server_name']="wwwb-app12.us.archive.org";}; </script>
+
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript" src="/static/jflot/jquery.min.js" ></script>
+<script type="text/javascript">
+//<![CDATA[
+var firstDate = 820454400000;
+var lastDate = 1420070399999;
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http:\/\/www.stealth.net\/~kalt\/irc\/stats\/collisions.html";
+
+var curYear = -1;
+var curMonth = -1;
+var yearCount = 18;
+var firstYear = 1996;
+var imgWidth = 475;
+var yearImgWidth = 25;
+var monthImgWidth = 2;
+var trackerVal = "none";
+var displayDay = "6";
+var displayMonth = "Jun";
+var displayYear = "2002";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function showTrackers(val) {
+	if(val == trackerVal) {
+		return;
+	}
+	if(val == "inline") {
+		document.getElementById("displayYearEl").style.color = "#ec008c";
+		document.getElementById("displayMonthEl").style.color = "#ec008c";
+		document.getElementById("displayDayEl").style.color = "#ec008c";		
+	} else {
+		document.getElementById("displayYearEl").innerHTML = displayYear;
+		document.getElementById("displayYearEl").style.color = "#ff0";
+		document.getElementById("displayMonthEl").innerHTML = displayMonth;
+		document.getElementById("displayMonthEl").style.color = "#ff0";
+		document.getElementById("displayDayEl").innerHTML = displayDay;
+		document.getElementById("displayDayEl").style.color = "#ff0";
+	}
+   document.getElementById("wbMouseTrackYearImg").style.display = val;
+   document.getElementById("wbMouseTrackMonthImg").style.display = val;
+   trackerVal = val;
+}
+function getElementX2(obj) {
+	var thing = jQuery(obj);
+	if((thing == undefined) 
+			|| (typeof thing == "undefined") 
+			|| (typeof thing.offset == "undefined")) {
+		return getElementX(obj);
+	}
+	return Math.round(thing.offset().left);
+}
+function trackMouseMove(event,element) {
+
+   var eventX = getEventX(event);
+   var elementX = getElementX2(element);
+   var xOff = eventX - elementX;
+	if(xOff < 0) {
+		xOff = 0;
+	} else if(xOff > imgWidth) {
+		xOff = imgWidth;
+	}
+   var monthOff = xOff % yearImgWidth;
+
+   var year = Math.floor(xOff / yearImgWidth);
+	var yearStart = year * yearImgWidth;
+   var monthOfYear = Math.floor(monthOff / monthImgWidth);
+   if(monthOfYear > 11) {
+       monthOfYear = 11;
+   }
+   // 1 extra border pixel at the left edge of the year:
+   var month = (year * 12) + monthOfYear;
+   var day = 1;
+	if(monthOff % 2 == 1) {
+		day = 15;
+	}
+	var dateString = 
+		zeroPad(year + firstYear) + 
+		zeroPad(monthOfYear+1,2) +
+		zeroPad(day,2) + "000000";
+
+	var monthString = prettyMonths[monthOfYear];
+	document.getElementById("displayYearEl").innerHTML = year + 1996;
+	document.getElementById("displayMonthEl").innerHTML = monthString;
+	// looks too jarring when it changes..
+	//document.getElementById("displayDayEl").innerHTML = zeroPad(day,2);
+
+	var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+	document.getElementById('wm-graph-anchor').href = url;
+
+   //document.getElementById("wmtbURL").value="evX("+eventX+") elX("+elementX+") xO("+xOff+") y("+year+") m("+month+") monthOff("+monthOff+") DS("+dateString+") Moy("+monthOfYear+") ms("+monthString+")";
+   if(curYear != year) {
+       var yrOff = year * yearImgWidth;
+       document.getElementById("wbMouseTrackYearImg").style.left = yrOff + "px";
+       curYear = year;
+   }
+   if(curMonth != month) {
+       var mtOff = year + (month * monthImgWidth) + 1;
+       document.getElementById("wbMouseTrackMonthImg").style.left = mtOff + "px";
+       curMonth = month;
+   }
+}
+//]]>
+</script>
+
+<style type="text/css">body{margin-top:0!important;padding-top:0!important;min-width:800px!important;}#wm-ipp a:hover{text-decoration:underline!important;}</style>
+<div id="wm-ipp" lang="en" class="__wb_banner_div" style="display:none; position:relative;padding:0 5px;min-height:70px;min-width:800px">
+
+
+<div id="wm-ipp-inside" class="__wb_banner_div" style="position:fixed;padding:0!important;margin:0!important;width:97%;min-width:780px;border:5px solid #000;border-top:none;background-image:url(/static/images/toolbar/wm_tb_bk_trns.png);text-align:center;-moz-box-shadow:1px 1px 3px #333;-webkit-box-shadow:1px 1px 3px #333;box-shadow:1px 1px 3px #333;font-size:11px!important;font-family:'Lucida Grande','Arial',sans-serif!important;">
+   <table style="border-collapse:collapse;margin:0;padding:0;width:100%;"><tbody><tr>
+   <td style="padding:10px;vertical-align:top;min-width:110px;">
+   <a href="/web/" title="Wayback Machine home page" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0"/></a>
+   </td>
+   <td style="padding:0!important;text-align:center;vertical-align:top;width:100%;">
+
+       <table style="border-collapse:collapse;margin:0 auto;padding:0;width:570px;"><tbody><tr>
+       <td style="padding:3px 0;" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb" style="margin:0!important;padding:0!important;"><input type="text" name="url" id="wmtbURL" value="http://www.stealth.net/~kalt/irc/stats/collisions.html" style="width:400px;font-size:11px;font-family:'Lucida Grande','Arial',sans-serif;" onfocus="javascript:this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20020606022119" /><input type="submit" value="Go" style="font-size:11px;font-family:'Lucida Grande','Arial',sans-serif;margin-left:5px;width: inherit !important" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td style="vertical-align:bottom;padding:5px 0 0 0!important;" rowspan="2">
+           <table style="border-collapse:collapse;width:110px;color:#99a;font-family:'Helvetica','Lucida Grande','Arial',sans-serif;"><tbody>
+			
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr style="width:110px;height:16px;font-size:10px!important;">
+           	<td style="padding-right:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20001216064800/http://www.stealth.net/~kalt/irc/stats/collisions.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="16 Dec 2000"><strong>DEC</strong></a>
+		                
+               </td>
+               <td id="displayMonthEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight:bold;text-transform:uppercase;width:34px;height:15px;padding-top:1px;text-align:center;" title="You are here: 2:21:19 Jun 6, 2002">JUN</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20020814113754/http://www.stealth.net/~kalt/irc/stats/collisions.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="14 Aug 2002"><strong>AUG</strong></a>
+		                
+               </td>
+           </tr>
+
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr>
+               <td style="padding-right:9px;white-space:nowrap;overflow:visible;text-align:right!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+		                <a href="/web/20001216064800/http://www.stealth.net/~kalt/irc/stats/collisions.html" title="6:48:00 Dec 16, 2000" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0" /></a>
+		                
+               </td>
+               <td id="displayDayEl" style="background:#000;color:#ff0;width:34px;height:24px;padding:2px 0 0 0;text-align:center;font-size:24px;font-weight: bold;" title="You are here: 2:21:19 Jun 6, 2002">6</td>
+				<td style="padding-left:9px;white-space:nowrap;overflow:visible;text-align:left!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+		                <a href="/web/20020814113754/http://www.stealth.net/~kalt/irc/stats/collisions.html" title="11:37:54 Aug 14, 2002" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wm_tb_nxt_on.png" alt="Next capture" width="14" height="16" border="0"/></a>
+		                
+			    </td>
+           </tr>
+
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr style="width:110px;height:13px;font-size:9px!important;">
+				<td style="padding-right:9px;font-size:11px!important;font-weight: bold;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20001216064800/http://www.stealth.net/~kalt/irc/stats/collisions.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="16 Dec 2000"><strong>2000</strong></a>
+		                
+               </td>
+               <td id="displayYearEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight: bold;padding-top:1px;width:34px;height:13px;text-align:center;" title="You are here: 2:21:19 Jun 6, 2002">2002</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight: bold;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20030608040155/http://www.stealth.net/~kalt/irc/stats/collisions.html" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="8 Jun 2003"><strong>2003</strong></a>
+		                
+				</td>
+           </tr>
+           </tbody></table>
+       </td>
+
+       </tr>
+       <tr>
+       <td style="vertical-align:middle;padding:0!important;">
+           <a href="/web/20020606022119*/http://www.stealth.net/~kalt/irc/stats/collisions.html" style="color:#33f;font-size:11px;font-weight:bold;background-color:transparent;border:none;" title="See a list of every capture for this URL"><strong>32 captures</strong></a>
+           <div class="__wb_banner_div" style="margin:0!important;padding:0!important;color:#666;font-size:9px;padding-top:2px!important;white-space:nowrap;" title="Timespan for captures of this URL">12 Oct 99 - 25 Feb 09</div>
+       </td>
+       <td style="padding:0!important;">
+       <a style="position:relative; white-space:nowrap; width:475px;height:27px;" href="" id="wm-graph-anchor">
+       <div class="__wb_banner_div" id="wm-ipp-sparkline" style="position:relative; white-space:nowrap; width:475px;height:27px;background-color:#fff;cursor:pointer;border-right:1px solid #ccc;" title="Explore captures for this URL">
+			<img id="sparklineImgId" style="position:absolute; z-index:9012; top:0px; left:0px;"
+				onmouseover="showTrackers('inline');" 
+				onmouseout="showTrackers('none');"
+				onmousemove="trackMouseMove(event,this)"
+				alt="sparklines"
+				width="475"
+				height="27"
+				border="0"
+				src="/web/jsp/graph.jsp?graphdata=475_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000000_1999:-1:000000000110_2000:-1:010111010101_2001:-1:000000000000_2002:5:000001010101_2003:-1:010101000101_2004:-1:001101010101_2005:-1:021000000000_2006:-1:000000000000_2007:-1:010000100100_2008:-1:001000000000_2009:-1:010000000000_2010:-1:000000000000_2011:-1:000000000000_2012:-1:000000000000_2013:-1:000000000000_2014:-1:000000000000"></img>
+			<img id="wbMouseTrackYearImg" 
+				style="display:none; position:absolute; z-index:9010;"
+				width="25" 
+				height="27"
+				border="0"
+				src="/static/images/toolbar/transp-yellow-pixel.png"></img>
+			<img id="wbMouseTrackMonthImg"
+				style="display:none; position:absolute; z-index:9011; " 
+				width="2"
+				height="27" 
+				border="0"
+				src="/static/images/toolbar/transp-red-pixel.png"></img>
+       </div>
+		</a>
+
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td style="text-align:right;padding:5px;width:65px;font-size:11px!important;">
+       <a href="javascript:;" onclick="document.getElementById('wm-ipp').style.display='none';" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_close.png) no-repeat 100% 0;color:#33f;font-family:'Lucida Grande','Arial',sans-serif;margin-bottom:23px;background-color:transparent;border:none;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_help.png) no-repeat 100% 0;color:#33f;font-family:'Lucida Grande','Arial',sans-serif;background-color:transparent;border:none;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+
+</div>
+</div>
+<script type="text/javascript">
+ var wmDisclaimBanner = document.getElementById("wm-ipp");
+ if(wmDisclaimBanner != null) {
+   disclaimElement(wmDisclaimBanner);
+ }
+</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+<H1>History</H1> 
+KILLs, server or operator generated, have long been a plea on IRC networks.
+Some years ago, I was keeping some stats on how many KILLs were generated,
+but stopped.  A year after <em>The Great Split</em>, I felt like it
+was time to have a new look at this topic and see if, as I thought,
+the problem has been improved, or if I was just dreaming.
+<P>
+It is difficult to do any comparison with the past as I don't have any
+good statistics left.  It seems that the net hit <B>20k</B> users in
+February 96.  An old file shows that in October 96, I had recorded
+1726818 server kills, and 16239 operator kills over 137 days.
+<P>
+<table border=2 align=center>
+<tr><th></th><th>Server Kills</th><th>Operator Kills</th></tr>
+<tr><th>137 days</th><th>1726818</th><th>16239</th></tr>
+<tr><th>daily average</th><th>12604</th><th>118</th></tr>
+</table>
+<P>
+It's difficult to use these numbers as there is no track of the
+average number of users during that period.  They are provided
+for your information.
+
+<H1>Now</H1>
+We have two networks to look at, they have both chosen a different path
+in fighting nickname collisions (server kills).  It's extremely difficult
+to do any valuable comparison between them for various reasons:
+<ul>
+<li> lack of past statistics.
+<li> difficulty of getting accurate statistics (especially on EFnet).
+<li> different userbase (meaning possibly different abuse types).
+<li> different userbase size (EFnet peaks at 33K, IRCNet at 17k).
+</ul>
+<P>
+The two different features in short:
+<ul>
+<li>TimeStamping:  The number of kills is reduced by 50% as
+only one of the 2 clients is killed.  The number of collisions
+is unchanged.
+<li>Nick Delay:  Collisions are unchanged but avoided if possible
+by forbidding some nick changes during splits.  (Efficiency goes
+from 0% to 100% depending on circumstances, average unknown).
+</ul>
+<P>
+<b>Counting</b>:
+<ul>
+<li>Since EFnet only sends each KILL in one direction, it's
+difficult to estimate the real number of server kills occurring.
+If server kills are equally distributed on the network, one could
+simply assume that the probability to be on the side that sees the
+KILL is 50%, in which case the number of KILLs seen is half of the
+total number of KILLs.
+<li>On IRCnet, each KILL affects (usually) 2 users, however the
+simplistic "1 kill = 1 collision" formula is valid.
+</ul>
+
+<H1>One day</H1>
+Because I'm just doing this out of curiosity, I have only taken
+a 24 hour sample on both nets (from approximatively 20:30 EDT Monday
+97/09/01).  This isn't the best but should be enough for the
+conclusions I plan to not draw.
+<P>
+<table border=2 align=center>
+<tr><th></th><th>EFnet</th><th>IRCNet</th></tr>
+<tr><th>User count</th><th>18192&lt;24705&lt;32376</th><th>9176&lt;13167&lt;17387</th></tr>
+<tr><th>Oper count</th><th>189&lt;210&lt;230</th><th>112&lt;120&lt;130</th></tr>
+<tr><th>Service count</th><th>N/A</th><th>2&lt;3&lt;4</th></tr>
+<tr><th>Server count</th><th>59&lt;69&lt;70</th><th>61&lt;66&lt;68</th></tr>
+<tr><th>Operator kills</th>
+<th><A HREF=/web/20020606022119/http://www.stealth.net/~kalt/irc/stats/EFnet_oper.html>&gt;=263 (&lt;=284)</A></th>
+<th><A HREF=/web/20020606022119/http://www.stealth.net/~kalt/irc/stats/IRCNet_oper.html>49</A></th></tr>
+<tr><th>Server kills</th>
+<th><A HREF=/web/20020606022119/http://www.stealth.net/~kalt/irc/stats/EFnet_server.html>&gt;=818</A></th>
+<th><A HREF=/web/20020606022119/http://www.stealth.net/~kalt/irc/stats/IRCNet_server.html>580</A></th></tr>
+<tr><th>Same user server kills</th><th>N/A</th><th>&gt;=167</th></tr>
+</table>
+<P>
+<ul>
+<li><B>Operator kills</B>:  There isn't much to say, both nets have
+a different attitude regarding these.  EFnet's number of /kill has
+increased significantly, while IRCNet has seen the opposite change.
+About a third of all KILLs on EFnet now come from an operator.
+<P>
+<li><B>Server kills</B>:  It's obvious in both cases, TS and ND work
+and have led to a significant reduction of nickname collisions.  I'll
+try to go a little bit further, but the above is <em>the only</em>
+certitude.
+<P>
+<ul>
+<li> If we follow the reasoning described above, we then see that
+EFnet has almost 3 times as many collisions as IRCnet, for twice as
+many users (818*2=1636 and 580*2.8=1636).  (<B>If</B> the number of
+collisions is a linear function of the number of users, then we
+could say that TS and ND have a similar efficiency). (2 IFs here)
+<P>
+<li> Why EFnet still has so many collisions is something I don't
+understand.  Unlike ND, TS makes it impossible to collide someone
+if that person doesn't get disconnected and doesn't change nicknames.
+Then, why?
+<P>
+<ol>
+<li>users are stupid and keep trying? (I can't believe it)
+<li>these are just unlucky users? (it seems to be too many to be true)
+<li>Chris Behrens (Comstud) says that he is "really not sure that TS
+is working 100% for nicknames".
+<li>a little bit of 1, 2 and eventually 3 ?
+</ol>
+<P>
+<li>About 30% of IRCNet kills are collisions due to someone changing
+servers. (Something that TS gracefully deals with)
+</ul>
+</ul>
+
+<H1>Conclusion</H1>
+Both methods are very efficient, and since they seem to work in opposite
+ways, I can already see people thinking (again) "let's combine them".
+Well, The Great Split was partly caused because nobody agreed to do
+this, I believe it'd be really sad to see it happen now.  However,
+it isn't the reason why I still think it isn't worth it:
+<ol>
+<li>the gain would be minimum.
+<li>the cost of adding TS would be high (bandwidth & memory wise) [Sorry,
+I don't have any number on this anymore] (However, ND's cost is quite
+low: about 300Kb on IRCNet)
+<li>both methods use a different philosophy and I believe it's good
+to explore various options. (IMO)
+</ol>
+
+<p><hr><p>
+<em>Christophe Kalt</em> &lt;<A HREF="/web/20020606022119/mailto:kalt@stealth.net">kalt@stealth.net</A>&gt;
+
+</body></html>
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 2:21:19 Jun 6, 2002 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 20:26:56 Mar 21, 2014.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
