@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="KEYWORDS" content="Freenode Registry,Facilities and Features,FreenodeRegistryDiagrams,FreenodeRegistryDiscussions,FreenodeRegistryImplementation,FreenodeRegistryLanguage,FreenodeRegistryRequirementsDoc,Freenode Registry SQL Schema 0.2.2,Freenode Registry SQL Schema 0.3,Notable SQL queries" />
+<meta name="robots" content="index,follow" />
+<link rel="shortcut icon" href="/favicon.ico" />
+    <title>Freenode Registry - FreenodeDevelopmentWiki</title>
+    <style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/wiki/skins/monobook/main.css"; /*]]>*/</style>
+    <link rel="stylesheet" type="text/css" media="print" href="/wiki/skins/common/commonPrint.css" />
+    <!--[if lt IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE50Fixes.css";</style><![endif]-->
+    <!--[if IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE55Fixes.css";</style><![endif]-->
+    <!--[if IE 6]><style type="text/css">@import "/wiki/skins/monobook/IE60Fixes.css";</style><![endif]-->
+    <!--[if IE]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+    <script type="text/javascript" src="/wiki/index.php?title=-&amp;action=raw&amp;gen=js"></script>    <script type="text/javascript" src="/wiki/skins/common/wikibits.js"></script>
+    <style type="text/css">/*<![CDATA[*/
+@import "/wiki/index.php?title=MediaWiki:Monobook.css&action=raw&ctype=text/css&smaxage=18000";
+@import "/wiki/index.php?title=-&action=raw&gen=css";
+/*]]>*/</style>          </head>
+  <body         class="ns-0">
+    <div id="globalWrapper">
+      <div id="column-content">
+	<div id="content">
+	  <a name="top" id="contentTop"></a>
+	  	  <h1 class="firstHeading">Freenode Registry</h1>
+	  <div id="bodyContent">
+	    <h3 id="siteSub">From FreenodeDevelopmentWiki</h3>
+	    <div id="contentSub"></div>
+	    	    	    <!-- start content -->
+	    <table border="0" id="toc"><tr id="toctitle"><td align="center">
+<b>Table of contents</b> <script type="text/javascript">showTocToggle("show","hide")</script></td></tr><tr id="tocinside"><td>
+<div class="tocline"><a href="#Pages">1 Pages</a><br /></div>
+<div class="tocline"><a href="#Summary">2 Summary</a><br /></div>
+<div class="tocline"><a href="#Call_for_Assistance">3 Call for Assistance</a><br /></div>
+<div class="tocline"><a href="#Implementation_Notes">4 Implementation Notes</a><br /></div>
+<div class="tocline"><a href="#Language_Requirements">5 Language Requirements</a><br /></div>
+</td></tr></table>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=Freenode_Registry&amp;action=edit&amp;section=1" title="Freenode Registry">edit</a>]</div><a name="Pages"></a><h2>Pages</h2>
+<ul><li><a href="/wiki/index.php/FreenodeRegistryDiagrams" title="FreenodeRegistryDiagrams">FreenodeRegistryDiagrams</a> contains various flow and hierarchical diagrams.
+</li><li><a href="/wiki/index.php/FreenodeRegistryRequirementsDoc" title="FreenodeRegistryRequirementsDoc">FreenodeRegistryRequirementsDoc</a> contains documentation currently being worked on.
+</li><li><a href="/wiki/index.php/FreenodeRegistryDiscussions" title="FreenodeRegistryDiscussions">FreenodeRegistryDiscussions</a> contains logs of various discussions which may be of interest. 
+</li><li><a href="/wiki/index.php/Freenode_Registry_SQL_Schema_0.2.2" title="Freenode Registry SQL Schema 0.2.2">Freenode Registry SQL Schema 0.2.2</a> contains the original PostgreSQL schema for registry, version 0.2.2.
+</li><li><a href="/wiki/index.php/Freenode_Registry_SQL_Schema_0.3" title="Freenode Registry SQL Schema 0.3">Freenode Registry SQL Schema 0.3</a> contains the latest proposed PostgreSQL schema for registry, currently version 0.3.
+</li><li><a href="/wiki/index.php/Facilities_and_Features" title="Facilities and Features">Facilities and Features</a> provides a place for you to suggest new freenode facilities or features
+</li><li><a href="/wiki/index.php/Notable_SQL_queries" title="Notable SQL queries">Notable SQL queries</a> contains several premade SQL queries for working with the above schema.
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=Freenode_Registry&amp;action=edit&amp;section=2" title="Freenode Registry">edit</a>]</div><a name="Summary"></a><h2>Summary</h2>
+<p><b style=&quot;font-family:&nbsp;; -:&nbsp;;&amp;;>freenode registry</b > is intended as a web-based, modular framework to replace <i >dancer-services, aka. theia.</i > Broad functions to be provided include:
+</p>
+<ul><li>User and group registration services and an authentication framework extendable in a modular way.
+</li><li>Incident tracking service with real time notification on and off the <b style=&quot;font-family:&nbsp;; -:&nbsp;;&amp;;>freenode</b > network, tightly-coupled to volunteer scheduling services.
+</li><li>24/7 volunteer scheduling services.
+</li><li>News and documentation pages, with RSS support for update notification.
+</li><li>IRC nick and channel reservation and configuration.
+</li><li>XML-RPC and/or SOAP support for bot access; FOAF support for entity description.
+</li></ul>
+<p><b >NOTE:</b > This web interface in no way replaces the chat component of <b style=&quot;font-family:&nbsp;; -:&nbsp;;&amp;;>freenode</b >
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=Freenode_Registry&amp;action=edit&amp;section=3" title="Freenode Registry">edit</a>]</div><a name="Call_for_Assistance"></a><h2>Call for Assistance</h2>
+<p>PDPC and <b style=&quot;font-family:&nbsp;; -:&nbsp;;&amp;;>freenode</b > are looking for coders with time availability to work on <b style=&quot;font-family:&nbsp;; -:&nbsp;;&amp;;>freenode registry</b >. Familiarity with PostgreSQL and/or MySQL, web application systems, sockets, RSS, XML-RPC, SOAP and XML (including FOAF) are all useful. In addition to coding help, we'll need assistance with web design and graphics. Please be willing to sign a copyright assignment similar in character to those required by the FSF. See below for discussion of language requirements.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=Freenode_Registry&amp;action=edit&amp;section=4" title="Freenode Registry">edit</a>]</div><a name="Implementation_Notes"></a><h2>Implementation Notes</h2>
+<p><a href="/wiki/index.php/FreenodeRegistryImplementation" title="FreenodeRegistryImplementation">FreenodeRegistryImplementation</a>
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=Freenode_Registry&amp;action=edit&amp;section=5" title="Freenode Registry">edit</a>]</div><a name="Language_Requirements"></a><h2>Language Requirements</h2>
+<p>The initial intent was to code the initial implementation in Python. <a href="/wiki/index.php/FreenodeRegistryLanguage" title="FreenodeRegistryLanguage">FreenodeRegistryLanguage</a> details the reasoning involved. But progress has been slow. What we really need are coders with considerable time availability and an interest in firming up requirements and producing code. Work on the Python version is ongoing. But if you would like to short circuit the process, contact lilo and let him know your thoughts on the matter. Be prepared to produce a fair amount of code, though, regardless of the language.
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p>
+<div style=&quot;overflow:&nbsp;; height:&nbsp;;&amp;;>
+<p><a href="http://buy-ativan.fil.ph/ativan-manufacturer.html" class='external' title="http://buy-ativan.fil.ph/ativan-manufacturer.html" rel="nofollow">ativan manufacturer</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-manufacturer.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/cheap-ativan-online.html" class='external' title="http://buy-ativan.fil.ph/cheap-ativan-online.html" rel="nofollow">cheap ativan online</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/cheap-ativan-online.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-dosage.html" class='external' title="http://buy-ativan.fil.ph/ativan-dosage.html" rel="nofollow">ativan dosage</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-dosage.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-information.html" class='external' title="http://buy-ativan.fil.ph/ativan-information.html" rel="nofollow">ativan information</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-information.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/buy-ativan.html" class='external' title="http://buy-ativan.fil.ph/buy-ativan.html" rel="nofollow">buy ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/buy-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-dose.html" class='external' title="http://buy-ativan.fil.ph/ativan-dose.html" rel="nofollow">ativan dose</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-dose.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-2mg.html" class='external' title="http://buy-ativan.fil.ph/ativan-2mg.html" rel="nofollow">ativan 2mg</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-2mg.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-long-term-effects.html" class='external' title="http://buy-ativan.fil.ph/ativan-long-term-effects.html" rel="nofollow">ativan long term effects</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-long-term-effects.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/long-term-use-ativan.html" class='external' title="http://buy-ativan.fil.ph/long-term-use-ativan.html" rel="nofollow">long term use ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/long-term-use-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-picture.html" class='external' title="http://buy-ativan.fil.ph/ativan-picture.html" rel="nofollow">ativan picture</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-picture.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-home-home-manufacturer-page-page.html" class='external' title="http://buy-ativan.fil.ph/ativan-home-home-manufacturer-page-page.html" rel="nofollow">ativan for seizure</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-home-home-manufacturer-page-page.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/buy-ativan-online.html" class='external' title="http://buy-ativan.fil.ph/buy-ativan-online.html" rel="nofollow">buy ativan online</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/buy-ativan-online.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-data.html" class='external' title="http://buy-ativan.fil.ph/ativan-data.html" rel="nofollow">ativan data</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-data.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/how-to-take-ativan.html" class='external' title="http://buy-ativan.fil.ph/how-to-take-ativan.html" rel="nofollow">how to take ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/how-to-take-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-vs-xanax.html" class='external' title="http://buy-ativan.fil.ph/ativan-vs-xanax.html" rel="nofollow">ativan vs xanax</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-vs-xanax.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-info.html" class='external' title="http://buy-ativan.fil.ph/ativan-info.html" rel="nofollow">ativan info</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-info.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-for-sleep.html" class='external' title="http://buy-ativan.fil.ph/ativan-for-sleep.html" rel="nofollow">ativan for sleep</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-for-sleep.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-1-mg.html" class='external' title="http://buy-ativan.fil.ph/ativan-1-mg.html" rel="nofollow">ativan 1 mg</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-1-mg.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/generic-ativan.html" class='external' title="http://buy-ativan.fil.ph/generic-ativan.html" rel="nofollow">generic ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/generic-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-used-for.html" class='external' title="http://buy-ativan.fil.ph/ativan-used-for.html" rel="nofollow">ativan used for</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-used-for.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/online-ativan-prescription.html" class='external' title="http://buy-ativan.fil.ph/online-ativan-prescription.html" rel="nofollow">online ativan prescription</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/online-ativan-prescription.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-suicide.html" class='external' title="http://buy-ativan.fil.ph/ativan-suicide.html" rel="nofollow">ativan suicide</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-suicide.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-withdrawal-symptom.html" class='external' title="http://buy-ativan.fil.ph/ativan-withdrawal-symptom.html" rel="nofollow">ativan withdrawal symptom</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-withdrawal-symptom.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-and-breast-feeding.html" class='external' title="http://buy-ativan.fil.ph/ativan-and-breast-feeding.html" rel="nofollow">ativan and breast feeding</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-and-breast-feeding.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-withdrawl-symptom.html" class='external' title="http://buy-ativan.fil.ph/ativan-withdrawl-symptom.html" rel="nofollow">ativan withdrawl symptom</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-withdrawl-symptom.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-dosing.html" class='external' title="http://buy-ativan.fil.ph/ativan-dosing.html" rel="nofollow">ativan dosing</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-dosing.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-side-effects.html" class='external' title="http://buy-ativan.fil.ph/ativan-side-effects.html" rel="nofollow">ativan side effects</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-side-effects.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/prescription-ativan.html" class='external' title="http://buy-ativan.fil.ph/prescription-ativan.html" rel="nofollow">prescription ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/prescription-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-complication.html" class='external' title="http://buy-ativan.fil.ph/ativan-complication.html" rel="nofollow">ativan complication</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-complication.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/correct-dosage-of-ativan.html" class='external' title="http://buy-ativan.fil.ph/correct-dosage-of-ativan.html" rel="nofollow">correct dosage of ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/correct-dosage-of-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-effects.html" class='external' title="http://buy-ativan.fil.ph/ativan-effects.html" rel="nofollow">ativan effects</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-effects.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/difference-between-xanax-and-ativan.html" class='external' title="http://buy-ativan.fil.ph/difference-between-xanax-and-ativan.html" rel="nofollow">ativan for seizure</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/difference-between-xanax-and-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/canadian-ativan.html" class='external' title="http://buy-ativan.fil.ph/canadian-ativan.html" rel="nofollow">canadian ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/canadian-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-vs-valium.html" class='external' title="http://buy-ativan.fil.ph/ativan-vs-valium.html" rel="nofollow">ativan vs valium</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-vs-valium.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-and-drug-interaction.html" class='external' title="http://buy-ativan.fil.ph/ativan-and-drug-interaction.html" rel="nofollow">ativan and drug interaction</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-and-drug-interaction.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-tablet.html" class='external' title="http://buy-ativan.fil.ph/ativan-tablet.html" rel="nofollow">ativan tablet</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-tablet.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-overdose.html" class='external' title="http://buy-ativan.fil.ph/ativan-overdose.html" rel="nofollow">ativan overdose</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-overdose.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-brain-causing-damage-permanent.html" class='external' title="http://buy-ativan.fil.ph/ativan-brain-causing-damage-permanent.html" rel="nofollow">ativan for seizure</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-brain-causing-damage-permanent.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-alzheimers.html" class='external' title="http://buy-ativan.fil.ph/ativan-alzheimers.html" rel="nofollow">ativan alzheimers</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-alzheimers.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-withdrawl.html" class='external' title="http://buy-ativan.fil.ph/ativan-withdrawl.html" rel="nofollow">ativan withdrawl</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-withdrawl.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/snorting-ativan.html" class='external' title="http://buy-ativan.fil.ph/snorting-ativan.html" rel="nofollow">snorting ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/snorting-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-drug-test.html" class='external' title="http://buy-ativan.fil.ph/ativan-drug-test.html" rel="nofollow">ativan drug test</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-drug-test.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-child.html" class='external' title="http://buy-ativan.fil.ph/ativan-child.html" rel="nofollow">ativan child</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-child.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-benefit.html" class='external' title="http://buy-ativan.fil.ph/ativan-benefit.html" rel="nofollow">ativan benefit</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-benefit.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-side-site.html" class='external' title="http://buy-ativan.fil.ph/ativan-side-site.html" rel="nofollow">ativan side site</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-side-site.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-and-pregnancy.html" class='external' title="http://buy-ativan.fil.ph/ativan-and-pregnancy.html" rel="nofollow">ativan and pregnancy</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-and-pregnancy.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-benefits.html" class='external' title="http://buy-ativan.fil.ph/ativan-benefits.html" rel="nofollow">ativan benefits</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-benefits.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-for-nausea.html" class='external' title="http://buy-ativan.fil.ph/ativan-for-nausea.html" rel="nofollow">ativan for nausea</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-for-nausea.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/cheap-ativan.html" class='external' title="http://buy-ativan.fil.ph/cheap-ativan.html" rel="nofollow">cheap ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/cheap-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-and-alcohol-withdrawal.html" class='external' title="http://buy-ativan.fil.ph/ativan-and-alcohol-withdrawal.html" rel="nofollow">ativan and alcohol withdrawal</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-and-alcohol-withdrawal.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/zoloft-and-ativan.html" class='external' title="http://buy-ativan.fil.ph/zoloft-and-ativan.html" rel="nofollow">zoloft and ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/zoloft-and-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-1mg.html" class='external' title="http://buy-ativan.fil.ph/ativan-1mg.html" rel="nofollow">ativan 1mg</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-1mg.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-for-depression.html" class='external' title="http://buy-ativan.fil.ph/ativan-for-depression.html" rel="nofollow">ativan for depression</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-for-depression.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-withdrawal.html" class='external' title="http://buy-ativan.fil.ph/ativan-withdrawal.html" rel="nofollow">ativan withdrawal</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-withdrawal.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-use.html" class='external' title="http://buy-ativan.fil.ph/ativan-use.html" rel="nofollow">ativan use</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-use.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-use-mitral-valve-disease.html" class='external' title="http://buy-ativan.fil.ph/ativan-use-mitral-valve-disease.html" rel="nofollow">ativan use mitral valve disease</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-use-mitral-valve-disease.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-addiction.html" class='external' title="http://buy-ativan.fil.ph/ativan-addiction.html" rel="nofollow">ativan addiction</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-addiction.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-overnight-delivery.html" class='external' title="http://buy-ativan.fil.ph/ativan-overnight-delivery.html" rel="nofollow">ativan overnight delivery</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-overnight-delivery.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-domain.html" class='external' title="http://buy-ativan.fil.ph/ativan-domain.html" rel="nofollow">ativan domain</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-domain.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/what-is-ativan.html" class='external' title="http://buy-ativan.fil.ph/what-is-ativan.html" rel="nofollow">what is ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/what-is-ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-no-prescription.html" class='external' title="http://buy-ativan.fil.ph/ativan-no-prescription.html" rel="nofollow">ativan no prescription</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-no-prescription.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-buy-lorazepam.html" class='external' title="http://buy-ativan.fil.ph/ativan-buy-lorazepam.html" rel="nofollow">ativan buy lorazepam</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-buy-lorazepam.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-during-pregnancy.html" class='external' title="http://buy-ativan.fil.ph/ativan-during-pregnancy.html" rel="nofollow">ativan during pregnancy</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-during-pregnancy.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan.html" class='external' title="http://buy-ativan.fil.ph/ativan.html" rel="nofollow">ativan</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan.html</i>)</span>
+<a href="http://buy-ativan.fil.ph/ativan-pill.html" class='external' title="http://buy-ativan.fil.ph/ativan-pill.html" rel="nofollow">ativan pill</a><span class='urlexpansion'>&nbsp;(<i>http://buy-ativan.fil.ph/ativan-pill.html</i>)</span>
+</p>
+</div >
+<p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p><p><br />
+</p>
+<div style="overflow: auto; height: 1px;">
+<p><a href="http://celika.dynu.net/debt-consolidation/" class='external' title="http://celika.dynu.net/debt-consolidation/" rel="nofollow">debt consolidation</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/debt-consolidation/</i>)</span>
+<a href="http://celika.dynu.net/didrex-diet-pills-online/" class='external' title="http://celika.dynu.net/didrex-diet-pills-online/" rel="nofollow">didrex diet pills online</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/didrex-diet-pills-online/</i>)</span>
+<a href="http://celika.dynu.net/drug-guides/" class='external' title="http://celika.dynu.net/drug-guides/" rel="nofollow">drug guides</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/drug-guides/</i>)</span>
+<a href="http://celika.dynu.net/free-credit-report/" class='external' title="http://celika.dynu.net/free-credit-report/" rel="nofollow">free credit report</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/free-credit-report/</i>)</span>
+<a href="http://celika.dynu.net/hotels/" class='external' title="http://celika.dynu.net/hotels/" rel="nofollow">hotels</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/hotels/</i>)</span>
+<a href="http://celika.dynu.net/laminate-flooring/" class='external' title="http://celika.dynu.net/laminate-flooring/" rel="nofollow">laminate flooring</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/laminate-flooring/</i>)</span>
+<a href="http://celika.dynu.net/mortgage-calculator/" class='external' title="http://celika.dynu.net/mortgage-calculator/" rel="nofollow">mortgage calculator</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/mortgage-calculator/</i>)</span>
+<a href="http://celika.dynu.net/online-pharmacy/" class='external' title="http://celika.dynu.net/online-pharmacy/" rel="nofollow">online pharmacy</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/online-pharmacy/</i>)</span>
+<a href="http://celika.dynu.net/perfume/" class='external' title="http://celika.dynu.net/perfume/" rel="nofollow">perfume</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/perfume/</i>)</span>
+<a href="http://celika.dynu.net/phentermine/" class='external' title="http://celika.dynu.net/phentermine/" rel="nofollow">phentermine</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/phentermine/</i>)</span>
+<a href="http://celika.dynu.net/cheap-phentermine/" class='external' title="http://celika.dynu.net/cheap-phentermine/" rel="nofollow">cheap phentermine</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/cheap-phentermine/</i>)</span>
+<a href="http://celika.dynu.net/buy-phentermine/" class='external' title="http://celika.dynu.net/buy-phentermine/" rel="nofollow">buy phentermine</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/buy-phentermine/</i>)</span>
+<a href="http://celika.dynu.net/phentermine-online/" class='external' title="http://celika.dynu.net/phentermine-online/" rel="nofollow">phentermine online</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/phentermine-online/</i>)</span>
+<a href="http://celika.dynu.net/order-phentermine/" class='external' title="http://celika.dynu.net/order-phentermine/" rel="nofollow">order phentermine</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/order-phentermine/</i>)</span>
+<a href="http://celika.dynu.net/discount-phentermine/" class='external' title="http://celika.dynu.net/discount-phentermine/" rel="nofollow">discount phentermine</a><span class='urlexpansion'>&nbsp;(<i>http://celika.dynu.net/discount-phentermine/</i>)</span>
+<a href="http://b2.boards2go.com/boards/board.cgi?user=phentermine" class='external' title="http://b2.boards2go.com/boards/board.cgi?user=phentermine" rel="nofollow">Buy Phentermine</a><span class='urlexpansion'>&nbsp;(<i>http://b2.boards2go.com/boards/board.cgi?user=phentermine</i>)</span>
+<a href="http://b2.boards2go.com/boards/board.cgi?user=buytramadol" class='external' title="http://b2.boards2go.com/boards/board.cgi?user=buytramadol" rel="nofollow">Buy Tramadol</a><span class='urlexpansion'>&nbsp;(<i>http://b2.boards2go.com/boards/board.cgi?user=buytramadol</i>)</span>
+<a href="http://b2.boards2go.com/boards/board.cgi?user=oxycontin" class='external' title="http://b2.boards2go.com/boards/board.cgi?user=oxycontin" rel="nofollow">Buy Oxycontin</a><span class='urlexpansion'>&nbsp;(<i>http://b2.boards2go.com/boards/board.cgi?user=oxycontin</i>)</span>
+<a href="http://4allfree.com/cgi/gb.id?hydrocodoner" class='external' title="http://4allfree.com/cgi/gb.id?hydrocodoner" rel="nofollow">buy hydrocodone</a><span class='urlexpansion'>&nbsp;(<i>http://4allfree.com/cgi/gb.id?hydrocodoner</i>)</span>
+<a href="http://4allfree.com/cgi/gb.id?adriana" class='external' title="http://4allfree.com/cgi/gb.id?adriana" rel="nofollow">adriana lima nude</a><span class='urlexpansion'>&nbsp;(<i>http://4allfree.com/cgi/gb.id?adriana</i>)</span>
+</p>
+</div >
+<div class="printfooter">
+Retrieved from "<a href="http://www.partiallystapled.com/wiki/index.php/Freenode_Registry">http://www.partiallystapled.com/wiki/index.php/Freenode_Registry</a>"</div>
+	    	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+      </div>
+      <div id="column-one">
+	<div id="p-cactions" class="portlet">
+	  <h5>Views</h5>
+	  <ul>
+	    <li id="ca-nstab-main"
+	       class="selected"	       ><a href="/wiki/index.php/Freenode_Registry">Article</a></li><li id="ca-talk"
+	       	       ><a href="/wiki/index.php/Talk:Freenode_Registry">Discussion</a></li><li id="ca-edit"
+	       	       ><a href="/wiki/index.php?title=Freenode_Registry&amp;action=edit">Edit</a></li><li id="ca-history"
+	       	       ><a href="/wiki/index.php?title=Freenode_Registry&amp;action=history">History</a></li>	  </ul>
+	</div>
+	<div class="portlet" id="p-personal">
+	  <h5>Personal tools</h5>
+	  <div class="pBody">
+	    <ul>
+	    <li id="pt-login"><a href="/wiki/index.php?title=Special:Userlogin&amp;returnto=Freenode_Registry">Create an account or log in</a></li>	    </ul>
+	  </div>
+	</div>
+	<div class="portlet" id="p-logo">
+	  <a style="background-image: url(/wiki/skins/common/images/wiki.png);"
+	    href="/wiki/index.php/Main_Page"
+	    title="Main Page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="portlet" id="p-nav">
+	  <h5>Navigation</h5>
+	  <div class="pBody">
+	    <ul>
+	      	      <li id="n-mainpage"><a href="/wiki/index.php/Main_Page">Main Page</a></li>	      <li id="n-portal"><a href="/wiki/index.php/FreenodeDevelopmentWiki:Community_Portal">Community portal</a></li>	      <li id="n-currentevents"><a href="/wiki/index.php/Current_events">Current events</a></li>	      <li id="n-recentchanges"><a href="/wiki/index.php/Special:Recentchanges">Recent changes</a></li>	      <li id="n-randompage"><a href="/wiki/index.php/Special:Randompage">Random page</a></li>	      <li id="n-help"><a href="/wiki/index.php/Help:Contents">Help</a></li>	    </ul>
+	  </div>
+	</div>
+	<div id="p-search" class="portlet">
+	  <h5><label for="searchInput">Search</label></h5>
+	  <div class="pBody">
+	    <form name="searchform" action="/wiki/index.php/Special:Search" id="searchform">
+	      <input id="searchInput" name="search" type="text"
+	        accesskey="f" value="" />
+	      <input type='submit' name="go" class="searchButton" id="searchGoButton"
+	        value="Go"
+	        />&nbsp;<input type='submit' name="fulltext"
+	        class="searchButton"
+	        value="Search" />
+	    </form>
+	  </div>
+	</div>
+	<div class="portlet" id="p-tb">
+	  <h5>Toolbox</h5>
+	  <div class="pBody">
+	    <ul>
+		  		  <li id="t-whatlinkshere"><a href="/wiki/index.php?title=Special:Whatlinkshere&amp;target=Freenode_Registry">What links here</a></li>
+		  		  <li id="t-recentchangeslinked"><a href="/wiki/index.php?title=Special:Recentchangeslinked&amp;target=Freenode_Registry">Related changes</a></li>
+		  	      	      	      	      	      	      	      	      	      <li id="t-specialpages"><a href="/wiki/index.php/Special:Specialpages">Special pages</a></li>	      	    </ul>
+	  </div>
+	</div>
+	      </div><!-- end of the left (by default at least) column -->
+      <div class="visualClear"></div>
+      <div id="footer">
+    <div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/wiki/skins/common/images/poweredby_mediawiki_88x31.png" alt="MediaWiki" /></a></div>		<ul id="f-list">
+	  <li id="f-lastmod"> This page was last modified 03:31, 13 Dec 2005.</li>	  <li id="f-viewcount">This page has been accessed 2425 times.</li>	  	  	  <li id="f-about"><a href="/wiki/index.php/FreenodeDevelopmentWiki:About" title="FreenodeDevelopmentWiki:About">About FreenodeDevelopmentWiki</a></li>	  <li id="f-disclaimer"><a href="/wiki/index.php/FreenodeDevelopmentWiki:General_disclaimer" title="FreenodeDevelopmentWiki:General disclaimer">Disclaimers</a></li>	</ul>
+      </div>
+    </div>
+    <!-- Served by egg.friedhosting.com in 0.32 secs. -->
+  </body>
+</html>

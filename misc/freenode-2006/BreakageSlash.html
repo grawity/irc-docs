@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="KEYWORDS" content="BreakageSlash" />
+<meta name="robots" content="index,follow" />
+<link rel="shortcut icon" href="/favicon.ico" />
+    <title>BreakageSlash - FreenodeDevelopmentWiki</title>
+    <style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/wiki/skins/monobook/main.css"; /*]]>*/</style>
+    <link rel="stylesheet" type="text/css" media="print" href="/wiki/skins/common/commonPrint.css" />
+    <!--[if lt IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE50Fixes.css";</style><![endif]-->
+    <!--[if IE 5.5000]><style type="text/css">@import "/wiki/skins/monobook/IE55Fixes.css";</style><![endif]-->
+    <!--[if IE 6]><style type="text/css">@import "/wiki/skins/monobook/IE60Fixes.css";</style><![endif]-->
+    <!--[if IE]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+    <script type="text/javascript" src="/wiki/index.php?title=-&amp;action=raw&amp;gen=js"></script>    <script type="text/javascript" src="/wiki/skins/common/wikibits.js"></script>
+    <style type="text/css">/*<![CDATA[*/
+@import "/wiki/index.php?title=MediaWiki:Monobook.css&action=raw&ctype=text/css&smaxage=18000";
+@import "/wiki/index.php?title=-&action=raw&gen=css";
+/*]]>*/</style>          </head>
+  <body         class="ns-0">
+    <div id="globalWrapper">
+      <div id="column-content">
+	<div id="content">
+	  <a name="top" id="contentTop"></a>
+	  	  <h1 class="firstHeading">BreakageSlash</h1>
+	  <div id="bodyContent">
+	    <h3 id="siteSub">From FreenodeDevelopmentWiki</h3>
+	    <div id="contentSub"></div>
+	    	    	    <!-- start content -->
+	    <p><b>Breakage</b> pages discuss possible changes to the network and the difficulties they might create.
+</p>
+<table border="0" id="toc"><tr id="toctitle"><td align="center">
+<b>Table of contents</b> <script type="text/javascript">showTocToggle("show","hide")</script></td></tr><tr id="tocinside"><td>
+<div class="tocline"><a href="#Intent">1 Intent</a><br /></div>
+<div class="tocline"><a href="#Summary_of_Changes">2 Summary of Changes</a><br /></div>
+<div class="tocline"><a href="#Status">3 Status</a><br /></div>
+<div class="tocline"><a href="#Caveats">4 Caveats</a><br /></div>
+<div class="tocline"><a href="#Server">5 Server</a><br /></div>
+<div class="tocline"><a href="#Client">6 Client</a><br /></div>
+<div class="tocline"><a href="#User_Assumptions">7 User Assumptions</a><br /></div>
+<div class="tocline"><a href="#User_Convenience">8 User Convenience</a><br /></div>
+<div class="tocline"><a href="#Social_Fabric">9 Social Fabric</a><br /></div>
+</td></tr></table>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=1" title="BreakageSlash">edit</a>]</div><a name="Intent"></a><h2>Intent</h2>
+<p>Disambiguate channel names with respect to registered group names and their projects. Currently the use of the characters '.' and '-' can create confusion, since '.' is used to preface both group cloak and DNS TLD's, and '-' is used to separate group names in channel names from channel description material, as in:
+</p>
+<pre> #foo
+ #foo-es
+ #foo-devel
+</pre>
+<p>etc.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=2" title="BreakageSlash">edit</a>]</div><a name="Summary_of_Changes"></a><h2>Summary of Changes</h2>
+<p>1. The following formats would be used for group-registered channels:
+</p>
+<pre> #group
+ #group/project-or-subgroup
+</pre>
+<p>2. Separate #project-or-subgroup channels might be kept or deleted.
+</p><p>3. Cloak hierarchies would be left-major, rather than the right-major hierarchy employed with DNS.
+</p><p>4. General format:
+</p>
+<pre> group/inside-material/uniqueid
+</pre>
+<p>rather than the current
+</p>
+<pre> uniqueid.inside-material.group-or-project
+</pre>
+<p>We might want to go to a more formal cloak specification, such as
+</p>
+<pre> group/[project/][role/]username
+</pre>
+<p>where username would be a unique freenode user name.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=3" title="BreakageSlash">edit</a>]</div><a name="Status"></a><h2>Status</h2>
+<p>Half-baked.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=4" title="BreakageSlash">edit</a>]</div><a name="Caveats"></a><h2>Caveats</h2>
+<p>1. At some point, group cloaks may not even be needed due to having affiliations listed in WHOIS and/or in <a href="/wiki/index.php/FreenodeRegistry" title="FreenodeRegistry">FreenodeRegistry</a>.
+</p><p>2. Various ideas are being bandied about in connection with the essential breakage and they should be addressed separately.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=5" title="BreakageSlash">edit</a>]</div><a name="Server"></a><h2>Server</h2>
+<p>1. Possible semantic ambiguity between user names and cloaks containing neither "/" nor ".". Make sure user cloaks contain a minimum of one of those two characters.
+</p><p>2. Channel moves may require extensive use of <a href="/wiki/index.php/ChannelForwarding" title="ChannelForwarding">ChannelForwarding</a>, which is known to be broken in irssi and possible others. This needs fixing, probably at the server level.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=6" title="BreakageSlash">edit</a>]</div><a name="Client"></a><h2>Client</h2>
+<p>1. In at least one major graphical client (mIRC? xchat?), channels with special characters in their names won't appear on LIST windows unless a specific configuration option is active. Does this apply to '/'?
+</p><p>2. Are there clients which will not accept '/' in a +Iebq hostmask?
+</p><p>3. The '/' has been used in some ircd variants in channel-ban-by-netmask; are there clients or scripts which will be confused by multiple '/' characters or by a '/' in an inappropriate place for a netmask?
+</p><p>4. Will specifying a hostname without a '.' and with a wildcard character break some client or banning script behavior?
+</p><p>5. For clients which accept irc: URI's: are additional '/' characters after the beginning of a channel name just interpreted as channel name characters? If not, we may have problems. Research.
+</p><p>6. Channel moves may require extensive use of <a href="/wiki/index.php/ChannelForwarding" title="ChannelForwarding">ChannelForwarding</a>, which is known to be broken in irssi and possible others. See Server issues.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=7" title="BreakageSlash">edit</a>]</div><a name="User_Assumptions"></a><h2>User Assumptions</h2>
+<p>1. If we have both right-major DNS hostnames with '.' and left-major cloaks with '/', will various common generic bans break? Generic bans are observed to be most common behavior for <a href="/wiki/index.php/TraditionalIRCUsers" title="TraditionalIRCUsers">TraditionalIRCUsers</a>. See Social Fabric issues.
+</p><p>2. Cloaks ending with /[0-9.]* look like ranges (e.g. something/23, something/255.255.254.0) so should not be used
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=8" title="BreakageSlash">edit</a>]</div><a name="User_Convenience"></a><h2>User Convenience</h2>
+<p>1. Channel names could be longer, so typing in the channel name on a join could be less convenient. If channel joins can be done in <a href="/wiki/index.php/FreenodeRegistry" title="FreenodeRegistry">freenodeRegistry</a> or online, via a <a href="/wiki/index.php/StaticJoin" title="StaticJoin">StaticJoin</a> model, that might mitigate the problem.
+</p><p><br />
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/wiki/index.php?title=BreakageSlash&amp;action=edit&amp;section=9" title="BreakageSlash">edit</a>]</div><a name="Social_Fabric"></a><h2>Social Fabric</h2>
+<p>1. Left-major hostnames, with '/' instead of '.', will annoy <a href="/wiki/index.php/TraditionalIRCUsers" title="TraditionalIRCUsers">TraditionalIRCUsers</a>.
+</p><p>2. Any problems with banning scripts may annoy their users, which will be predominantly <a href="/wiki/index.php/TraditionalIRCUsers" title="TraditionalIRCUsers">TraditionalIRCUsers</a>.
+</p><p>3. Major channel naming changes may inconvenience existing groups. Possible workarounds include <a href="/wiki/index.php/ChannelForwarding" title="ChannelForwarding">ChannelForwarding</a>, which will need cleaning up (see Server and Client issues).
+</p>
+<!-- Saved in parser cache with key gxti_web:pcache:idhash:934-1!1!0!1!0!1!0!!en and timestamp 20051215220731 -->
+<div class="printfooter">
+Retrieved from "<a href="http://www.partiallystapled.com/wiki/index.php/BreakageSlash">http://www.partiallystapled.com/wiki/index.php/BreakageSlash</a>"</div>
+	    	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+      </div>
+      <div id="column-one">
+	<div id="p-cactions" class="portlet">
+	  <h5>Views</h5>
+	  <ul>
+	    <li id="ca-nstab-main"
+	       class="selected"	       ><a href="/wiki/index.php/BreakageSlash">Article</a></li><li id="ca-talk"
+	       class="new"	       ><a href="/wiki/index.php?title=Talk:BreakageSlash&amp;action=edit">Discussion</a></li><li id="ca-edit"
+	       	       ><a href="/wiki/index.php?title=BreakageSlash&amp;action=edit">Edit</a></li><li id="ca-history"
+	       	       ><a href="/wiki/index.php?title=BreakageSlash&amp;action=history">History</a></li>	  </ul>
+	</div>
+	<div class="portlet" id="p-personal">
+	  <h5>Personal tools</h5>
+	  <div class="pBody">
+	    <ul>
+	    <li id="pt-login"><a href="/wiki/index.php?title=Special:Userlogin&amp;returnto=BreakageSlash">Create an account or log in</a></li>	    </ul>
+	  </div>
+	</div>
+	<div class="portlet" id="p-logo">
+	  <a style="background-image: url(/wiki/skins/common/images/wiki.png);"
+	    href="/wiki/index.php/Main_Page"
+	    title="Main Page"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="portlet" id="p-nav">
+	  <h5>Navigation</h5>
+	  <div class="pBody">
+	    <ul>
+	      	      <li id="n-mainpage"><a href="/wiki/index.php/Main_Page">Main Page</a></li>	      <li id="n-portal"><a href="/wiki/index.php/FreenodeDevelopmentWiki:Community_Portal">Community portal</a></li>	      <li id="n-currentevents"><a href="/wiki/index.php/Current_events">Current events</a></li>	      <li id="n-recentchanges"><a href="/wiki/index.php/Special:Recentchanges">Recent changes</a></li>	      <li id="n-randompage"><a href="/wiki/index.php/Special:Randompage">Random page</a></li>	      <li id="n-help"><a href="/wiki/index.php/Help:Contents">Help</a></li>	    </ul>
+	  </div>
+	</div>
+	<div id="p-search" class="portlet">
+	  <h5><label for="searchInput">Search</label></h5>
+	  <div class="pBody">
+	    <form name="searchform" action="/wiki/index.php/Special:Search" id="searchform">
+	      <input id="searchInput" name="search" type="text"
+	        accesskey="f" value="" />
+	      <input type='submit' name="go" class="searchButton" id="searchGoButton"
+	        value="Go"
+	        />&nbsp;<input type='submit' name="fulltext"
+	        class="searchButton"
+	        value="Search" />
+	    </form>
+	  </div>
+	</div>
+	<div class="portlet" id="p-tb">
+	  <h5>Toolbox</h5>
+	  <div class="pBody">
+	    <ul>
+		  		  <li id="t-whatlinkshere"><a href="/wiki/index.php?title=Special:Whatlinkshere&amp;target=BreakageSlash">What links here</a></li>
+		  		  <li id="t-recentchangeslinked"><a href="/wiki/index.php?title=Special:Recentchangeslinked&amp;target=BreakageSlash">Related changes</a></li>
+		  	      	      	      	      	      	      	      	      	      <li id="t-specialpages"><a href="/wiki/index.php/Special:Specialpages">Special pages</a></li>	      	    </ul>
+	  </div>
+	</div>
+	      </div><!-- end of the left (by default at least) column -->
+      <div class="visualClear"></div>
+      <div id="footer">
+    <div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/wiki/skins/common/images/poweredby_mediawiki_88x31.png" alt="MediaWiki" /></a></div>		<ul id="f-list">
+	  <li id="f-lastmod"> This page was last modified 06:24, 19 May 2005.</li>	  <li id="f-viewcount">This page has been accessed 471 times.</li>	  	  	  <li id="f-about"><a href="/wiki/index.php/FreenodeDevelopmentWiki:About" title="FreenodeDevelopmentWiki:About">About FreenodeDevelopmentWiki</a></li>	  <li id="f-disclaimer"><a href="/wiki/index.php/FreenodeDevelopmentWiki:General_disclaimer" title="FreenodeDevelopmentWiki:General disclaimer">Disclaimers</a></li>	</ul>
+      </div>
+    </div>
+    <!-- Served by egg.friedhosting.com in 0.20 secs. -->
+  </body>
+</html>
