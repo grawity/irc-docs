@@ -1,0 +1,261 @@
+16:41:40 -!- kevlar [~kevlar@049-517-73-7.google.com] has joined #ircv3
+16:41:50 < kevlar> Howdy
+16:57:23 < nenolod> hi
+16:57:39 < therock247uk> hi
+16:58:32 < nenolod> the following things have been considered for today's meeting, as far as i know
+16:58:53 < DarthGandalf> First thing: please use UTC time for scheduling meetings
+16:58:54 < nenolod> kevlar has an issue with the server-time extension proposal using a time measurement which is not immune to leapseconds
+16:59:05 < nenolod> we will also use UTC for future scheduling
+16:59:08 < nenolod> :)
+16:59:24 < DarthGandalf> hi
+16:59:30  * kevlar waves
+16:59:43 < SaberUK> yeah, UTC would be good =p
+16:59:50 < kevlar> I got here a bit late, I assumed everyone was gone.
+17:00:00 < nenolod> nah you got here early
+17:00:06 < nenolod> this is why we're going to UTC for future times
+17:00:06 < nenolod> ;)
+17:00:44 < kevlar> UTC is ambiguous :<
+17:01:03 < kevlar> your meeting might start a second late/early!
+17:01:23 -!- ChrisTX [~chris@hklisf.rev-crew.info] has joined #ircv3
+17:01:26 < nenolod> second issue, STATUSMSG interpretation needs to be ratified
+17:02:53 -!- SaberUK [~saberuk@95.144.igg.owz] has quit [Read error: Connection reset by peer]
+17:03:09 -!- SaberUK [~saberuk@95.144.igg.owz] has joined #ircv3
+17:03:13 -!- culex [~culex@ptkh-79-811-296-74.adslplus.ch] has joined #ircv3
+17:03:37 < nenolod> other than that, i believe it is just administrivia (numeric reservation request from inspircd)
+17:04:03 < nenolod> so
+17:04:29 < nenolod> lets discuss the server-time message tag extension
+17:04:43 < nenolod> i'll let kevlar explain what is wrong with it from a client perspective
+17:04:59 < nenolod> kevlar: ^
+17:05:01 < kevlar> Yep
+17:05:23 < kevlar> Okay so... the question is what clients do when they're told what time a message happened
+17:05:37 < kevlar> the extension explains that the timestamp is meant to indicate when the event itself occured
+17:05:49 < kevlar> which, to me, implies that you can receive messages out-of-order
+17:06:07 -!- Dagger [~Dagger@hlg62-hedc55-3-5-oeth41.38-2.cable.virginmedia.com] has joined #ircv3
+17:06:37 < kevlar> unfortunately there are a lot of very simple calculations that happen based on timing within clients, bots, etc, and if the time stream is unix timestamps, they are amibiguous
+17:06:55 < kevlar> consider, for instance, a flooder who starts flooding a channel partway through a leap second
+17:07:25 < kevlar> the timestamp will step back and his later messages will be seen as coming before the first messages
+17:08:00 < kevlar> aside from the fact that he gets an extra second to flood, I see the problem that a lot of client authors might not account for the discontinuity and end up crashing
+17:08:54 < kevlar> the "simpler" solution would be to use TAI as the time stamp, which differs from UTC by a fixed offset that only changes at leap seconds
+17:09:28 < kevlar> so, at worst, a client who doesn't understand it would be off by 35 seconds
+17:09:51 < kevlar> but they would never disagree with the server about the ordering of events.
+17:10:13 < nenolod> is there an easy way to derive the TAI timestamp from POSIX?
+17:10:18 < DarthGandalf> Tbh, if client crashes, it's client issue. It's just a data from a socket, noone knows who sends the data from remote (except that most probably it's some kind of ircd)
+17:10:46 < kevlar> nenolod, unfortunately not.  that's why it's an extension, though, right? :)
+17:11:07 < culex> DarthGandalf: Personally, I'd say it's easy to forget about leap seconds happening when writing software, to be honest. Maybe most coders are smarter than I assume, though.
+17:11:09 < kevlar> the extension could be modified to tell clients the current offset and the next leap-second, if any.
+17:11:39 < DarthGandalf> Yes, it's easy to forget about them. But that's not a reason to crash...
+17:12:20 < kevlar> DarthGandalf, I completely understand wanting to let the clients crash, but I also wanted to point it out as it may be a more fundamental misconception that will be used in services and things too
+17:12:50 < nenolod> TS6 is indeed not resilient to leapseconds
+17:13:01 < kevlar> and there are some really scary exploits you can do if you know you can slip messages in at the right time in some protocols
+17:14:11 < nenolod> an alternative would be to use a stamp that assumes there is no such thing as leapseconds
+17:14:37 < culex> nenolod: Then you couldn't trust the time you get from the kernel and would need to work in proactively killing them, if I understand you correctly.
+17:14:40 < kevlar> do you mean one that remains monotonic even through a leap?
+17:14:47 < nenolod> yes
+17:14:57 < nenolod> clock_gettime(CLOCK_MONOTONIC) should work there
+17:14:57 < kevlar> the usual name for that is TAI
+17:15:02 < kevlar> oh, that
+17:15:04 < kevlar> yeah
+17:15:09 < kevlar> that's how you get it from the kernel
+17:15:23 < kevlar> er, how you keep it I guess
+17:15:29 < culex> Hm, I guess it's not that difficult to implement then.
+17:15:32 < kevlar> that doesn't provide you TAI Directly.
+17:15:42 < culex> Not that it should matter for either the client or the server.
+17:15:52 < SaberUK> nenolod: i believe that clock_gettime is linux specific though (i.e. doesnt exist on bsd/darwin/winnt)
+17:15:58 < nenolod> SaberUK: it is part of POSIX.2004
+17:16:11 < DarthGandalf> Where I can read some docs what are TAI and TS6?
+17:16:31 < SaberUK> DarthGandalf: TAI is http://en.wikipedia.org/wiki/International_Atomic_Time
+17:16:33 < culex> TS6 is a linking protocol used by the hybrid family.
+17:16:45 < nenolod> TAI = the time code produced by atomic clocks, TS6 is a linking protocol used by hybrid derivatives
+17:16:51 < nenolod> well,
+17:16:59 < DarthGandalf> thx
+17:17:07 < nenolod> TS6 actually comes from ratbox and charybdis, hybrid implemented it later.
+17:17:24 < kevlar> usually TAI is synthesized by using UTC and adding the current TAI offset
+17:17:44 < culex> Can we assume that no IRCd will run long enough that the error in time if using a monotonic clock will matter?
+17:17:53 < kevlar> the offset only changes at the end of June and December, when there might or might not bea leap second.
+17:18:11 < ChrisTX> culex: since 1970 there have been 25 leap seconds only
+17:18:18 < nenolod> culex: the offset is one second per 6 months
+17:18:22 < nenolod> culex: worst-case
+17:18:40 < nenolod> culex: i think using a leapsecond-ignorant timing source, e.g. CLOCK_MONOTONIC is good enough
+17:18:40 < culex> Hm, I guess that's neglectible.
+17:18:51 < nenolod> linking protocols should use this instead of time(NULL) anyway.
+17:18:54 < culex> I'm not sure if I like it for link---
+17:18:55 < culex> Yeah
+17:19:01 < culex> Wait, what?
+17:19:18 < nenolod> yes, the reason why is because leapsecond changes can be gamed to takeover channels
+17:19:23 < culex> Wouldn't a monotonic clock introduce a one-second offset if one server is started before and one after a leap second?
+17:19:25 < kevlar> CLOCK_MONOTONIC gives the time since system boot on most POSIX systems, right?
+17:19:35 < nenolod> when a leapsecond happens, time can go backwards or forwards.
+17:19:54 < nenolod> basically, a second can happen twice
+17:20:16 < nenolod> kevlar: CLOCK_MONOTONIC does this but guarantees that time will only move forward
+17:20:25 < kevlar> yep.
+17:20:50 < kevlar> so it can be used to synthesize TAI given a UTC timestamp that's unambiguous and a knowledge of the current offset
+17:21:05 < nenolod> CLOCK_MONOTONIC should actually be TAI.
+17:21:10 < nenolod> well
+17:21:13 < nenolod> sort of.
+17:21:21 < culex> And is it on all systems in modern use?
+17:21:47 < culex> (And what about IRCds running on Windows? They do exist and I'm not sure if we can ignore them)
+17:22:19 < kevlar> culex, every OS that I know of has some means of getting a monotonic clock
+17:22:37 < nenolod> anyway, CLOCK_MONOTONIC starts at 0 at boot
+17:22:42 < nenolod> it's the number of ticks
+17:22:45 < culex> I just wanted it cleared; Windows and common sense hardly go hand-in-hand in my experience
+17:22:55 < nenolod> on windows, you would use GetTickCount64()
+17:23:07 < nenolod> so, basically.
+17:23:22 < nenolod> ircd should do the following at startup:
+17:23:29 < DarthGandalf> CLOCK_MONOTONIC isn't guaranteed to be number of ticks, it just moves forward only and with const speed, that's all
+17:23:38 < kevlar> ^ yes.
+17:23:42 < nenolod> yes, it's implementation-specific
+17:24:12 < nenolod> i think two things should happen in terms of ircv3 specification
+17:24:30 < nenolod> 1. the specification should be updated to mention that leapseconds MAY happen (to encourage defensive programming)
+17:24:49 < nenolod> 2. the specification should be updated to strongly advise using a monotonic clock source for timing in ircd
+17:25:06 < nenolod> the other issues should likely go into another advisory as those issues are determined
+17:25:12 < SaberUK> that sounds reasonable
+17:25:17 < nenolod> rather, as answers to those issues are determined
+17:25:20 < culex> Sounds sensible.
+17:25:24 < kevlar> +1
+17:25:26 < nenolod> as leapseconds are a problem that affect IRC and should not
+17:25:52 < nenolod> infact, it is a security problem in TS6 as a channel takeover is possible
+17:26:02 < nenolod> (but only during a leapsecond)
+17:26:10 < kevlar> and you have to be very lucky as well
+17:26:20 < kevlar> but you have 6 months to plan it :)
+17:26:24 < SaberUK> heh
+17:26:33 < nenolod> ircd eventloops should also always use a monotonic clocksource
+17:27:04 < kevlar> server-to-server links should probably use time since link or something
+17:27:15 < DarthGandalf> It can't be just a strong advice. Now it uses a timestamp in the format, and if leapseconds are not ignored on one side, and are ignored on another side.. The result will have an offset of 30 seconds
+17:27:17 < nenolod> well yes, TS deltas should be avoided.
+17:28:05 < nenolod> DarthGandalf: do you have a solution?
+17:28:19 < nenolod> DarthGandalf: the current situation is that leapseconds may be ignored on either side anyway.
+17:28:37 < kevlar> DarthGandalf, it's worse than that actually... if some participants don't know about a leap second, you could end up with people at UTC, UTC+::25 and people at UTC+::26
+17:29:03 < nenolod> yes, and the value of having server-time in the ircd is so that irc logs are synchronized
+17:29:06 < DarthGandalf> nenolod: it should be changed to MUST
+17:29:07 < kevlar> which is why I suggest talking between servers relative to link time
+17:29:11 < DarthGandalf> Advice is not enough
+17:29:30 < kevlar> even if the time stamp is negative
+17:29:40 < ChrisTX> DarthGandalf: CLOCK_MONOTONIC has not a guaranteed const speed, it may slew
+17:29:46 < ChrisTX> CLOCK_MONOTONIC_RAW does
+17:30:09 < kevlar> then they can just apply that to their own internal monotonic clock and you only have to do UTC when you're formatting output
+17:35:15 < nenolod> i suppose the solution is to mandate TAI timescale for irc timestamps
+17:35:48 < nenolod> the problem with that solution is that software upgrades are needed
+17:36:00 < nenolod> everytime TAI is planned to change
+17:36:38 < DarthGandalf> Only a library upgrades
+17:36:49 < DarthGandalf> Like TZs are upgraded
+17:37:46 < nenolod> actually, no.
+17:38:18 < nenolod> the ircv3 working group (or perhaps, atheme) could provide a data file for leapseconds and sample code for working with that file in C/C++
+17:38:42 < nenolod> then projects just include the data file, and end-users can install a new version if needed.
+17:38:58 < culex> I'm in favor of that. I'd say that would help widespread adoption on servers.
+17:39:26 < kevlar> there exists a file format for leap seconds
+17:39:29 < kevlar> let me see if I can find it...
+17:39:36 < DarthGandalf> Why including it is better than having it system-wide?
+17:39:47 < nenolod> DarthGandalf: portability
+17:40:49 < nenolod> anyway, TAI does solve all timing problems on IRC
+17:42:55 < kevlar> ftp://time.nist.gov/pub/leap-seconds.list
+17:45:05 < kevlar> The suggestion I would make is to parse that (or one from whatever international time organization you favor) and to start screaming to opers if it gets too close to the expiration date.
+17:45:31 < DarthGandalf> A 3rd-party file included into project can easily be forgotten about, and noone will update the file...
+17:45:38 < kevlar> They're supposed to publish updates 6 months before it expires, but it's usually closer to 3.
+17:45:53 < kevlar> DarthGandalf, well, you could try to load it on start-up and cache the result...
+17:45:58 < kevlar> pull*
+17:47:07 < nenolod> another solution would be to use something like djb's libtai
+17:47:11 -!- rabbit [~rabbit@y-21-57-723-94.hsd6.wa.comcast.net] has joined #ircv3
+17:47:42 < nenolod> at least in debian, it is up to date.
+17:48:35 < DarthGandalf> yup, <DarthGandalf> Only a library upgrades
+17:49:11 < nenolod> to clarify, it seems to be agreed that ircd should present timestamps to clients using TAI (and most likely using TAI for server-to-server comms as well, but that is out of the scope of this working group)
+17:49:29 < culex> I don't think admins who don't routinely upgrade (and I can imagine that happening) will care enough to check about timezones
+17:49:41 < nenolod> i think the underlying mechanism on how to accomplish that is a project-specific variable
+17:50:05 < nenolod> culex: indeed, but we can't cover all cases.
+17:50:31 < nenolod> we can't say the TAI timestamp is guaranteed to be 100% accurate
+17:50:33 < culex> I guess.
+17:52:43 < nenolod> ok, in terms of specification then, what we should say is
+17:53:09 < nenolod> server-time timestamps use the TAI timescale, not UNIX epoch
+17:53:28 < nenolod> then have an addendum section about timing issues and IRC in general
+17:53:39 < nenolod> outside of the server-time specification
+17:53:47 < culex> Sounds good.
+17:54:04 < nenolod> then ircd vendors should reference that section when updating server protocols
+17:54:24 < nenolod> P10 is less vulnerable to leapsecond-based timing attacks than TS6 is, because they use microseconds.
+17:58:49 < nenolod> DarthGandalf: what is your opinion on updating server-time to use TAI timescale instead of UNIX epoch timescale?
+17:59:07 < DarthGandalf> It has to be done
+17:59:31 < DarthGandalf> Need to notify those who already implemented it that specs were changed
+17:59:50 < nenolod> DarthGandalf: i believe it's only implemented in ZNC as of yet, as it has not been formally ratified as part of IRCv3 yet.
+18:00:18 < DarthGandalf> Few clients (textual, limechat) already have it too
+18:00:33 < nenolod> they use the znc.in/server-time cap
+18:00:45 < nenolod> that is a deprecated cap, so it can remain broken i suppose.
+18:00:49 < DarthGandalf> I'm not sure, maybe.
+18:01:42 < nenolod> can you update the specification with an updated wire format for the timestamp?
+18:01:51 < DarthGandalf> What is formal ratification?
+18:02:03 < nenolod> DarthGandalf: when we say ircv3.2 is done and start discussing 3.3
+18:02:04 < nenolod> ;)
+18:02:57 < SaberUK> nenolod: i believe you mentioned writing a new rfc a few months back, is that still planned?
+18:03:22 < nenolod> yes, it will eventually happen.
+18:05:16 < culex> I wonder if it'll be anywhere near as authoritative as 1459
+18:05:53 < nenolod> i don't think it is an urgent issue, most vendors already implement the specifications we produce here
+18:06:01 < SaberUK> culex: i dont see why not
+18:06:31 < SaberUK> imo the only reasons 281x arent so widespread is that they're not actual standards documents
+18:06:43 < DarthGandalf> nenolod: I can try... But I need to learn about TAI more, I guess.. And certainly not today
+18:09:21 < kevlar> DarthGandalf, you can always bug me on freenode (kevlar and kevlar_work) if you have questions.
+18:10:08 < DarthGandalf> kevlar: ok... Who are you, btw? :) I mean, what type of questions should be directed to you?
+18:10:21 < kevlar> I'm just some guy, you know?
+18:10:50 < kevlar> I happen to have something to do with time at a popular internet company and helped out with shadowircd at some time in the past
+18:10:58 < kevlar> ;-)
+18:11:05 < nenolod> also timing attacks on TS5
+18:16:29 < kevlar> anyway, gotta run.  thanks for humoring my paranoia ;-)
+18:16:42 < nenolod> next up is STATUSMSG
+18:17:16 < nenolod> background here: https://github.com/atheme/ircv3-specifications/issues/2
+18:18:13 < nenolod> if there is no objection to that, i will write a specification for statusmsg
+18:21:26 < culex> "A server MUST NOT support a character as both a STATUSMSG prefix and as a CHANTYPE.(*)" <-- Is there any matching explanation for the (*)?
+18:23:32 < Taros> Seems good to me.
+18:23:54 < SaberUK> A server MUST NOT support a character as both a STATUSMSG prefix and as a CHANTYPE.(*) << wouldnt that cause a problem relating to (the non standard but common) chmode +a and local channels 
+18:24:32 < nenolod> the prefix for +a should be changed in those scenarios
+18:26:09 < SaberUK> nenolod: that would be the correct thing to do, but +a is already very entrenched (is that the right word?)
+18:26:25 < Taros> SaberUK: Do any IRCds even have support for local channels and use +a &?
+18:26:28 < nenolod> +a being & and using & for local channels is already broken.
+18:26:39 < nenolod> good news: no ircd using & for +a also have local channels :P
+18:27:01 < SaberUK> we were planning local channel support for inspircd-next >_<
+18:27:03 < culex> IIRC InspIRCd is...
+18:27:06 < culex> Yeah, planning to
+18:27:23 < nenolod> well you couldn't use & prefix and &channel anyway
+18:27:27 < Taros> Well, you should change the prefix then.
+18:27:29 < nenolod> it will break already in other ways.
+18:27:39 < nenolod> we are just stating the obvious there
+18:27:51 < nenolod> one example of breakage would be WHOIS
+18:27:57 < culex> &&channel, yeah
+18:28:01 < nenolod> what does "&&channel" mean?
+18:28:11 < SaberUK> true
+18:28:45 < nenolod> but it's a non-issue anyway
+18:28:48 < nenolod> since +a requires u:line
+18:28:55 < nenolod> and u:lines are unaware of &channels anyway.
+18:29:21 < SaberUK> not in our implementation =p
+18:29:50 < nenolod> local channels are dumb anyway
+18:30:41 < culex> I'm inclined to agree.
+18:32:06 < nenolod> ok, then the interpretation is fine? :)
+18:32:26 < culex> I'm worried about it, too, personally
+18:33:06 < SaberUK> sec, let me prod Attila 
+18:33:37 < culex> Plus InspIRCd has m_customprefix -- users can make # a status prefix if they wanted to
+18:33:53 < culex> But that's just very silly use.
+18:36:55 < nenolod> would you argue that such usage is rfc1459-incompliant behaviour introduced by user stupidity?
+18:37:02 < nenolod> :)
+18:37:08 < SaberUK> nenolod: i would agree
+18:38:01 < nenolod> then i don't see the problem ;)
+18:40:28 < SaberUK> as atilla is afk i guess we'll have to deal with it when we get around to working on -next
+18:40:35 < SaberUK> no objections sir =p
+18:41:45 < nenolod> alright then
+18:41:55 < nenolod> inspircd guys wanted some numerics reserved
+18:42:01 < nenolod> can you list the ones needed?
+18:42:06 < nenolod> i know about 744, but are there others?
+18:43:08 < nenolod> unrelated to this, there is a proposal to move to 4 digit numerics.
+18:43:46 < nenolod> in which case, i suspect we will allocate vendor-specific numeric blocks.
+18:47:03 < SaberUK> you'd need to ask Attila that
+18:47:57 < DarthGandalf> "vendor.org/123"?
+18:56:01 < culex> Well personally, I'd say we should keep the number of common numerics as high as possible.
+18:56:46 < culex> Similar responses should be grouped and vendors should adopt changes in order to keep them uniform.
+18:57:17 < culex> I think introducing vendor-specific numerics is asking too much from client programmers.
+18:57:45 < SaberUK> not particularly
+18:58:00 < culex> Additionally, changing to four-digit numerics should not be necessary and might break old clients who blindly trust that a numeric has exactly three digits; so there must be another CAP extension.
+18:58:11 < SaberUK> if a specific range was set aside 
+18:58:25 < SaberUK> for vendor specific stuff
+18:58:46 < SaberUK> if (9000...9999) { undefined behaviour }
+18:59:22 < culex> Then you'd have a generic list of numerics that are just undefined; I assumed the idea was to assign a block to every major IRCd vendor.
+18:59:59 < SaberUK> culex: thats how i interpreted what nenolod said
+19:00:03 < SaberUK> you might be correct
+19:00:24 < culex> If your case is the one to apply, then I have no reason to disagree
+19:02:41 < nenolod> alright, i will follow up with atilla on that
+19:02:49 < nenolod> that concludes the meeting for now i suppose
+19:04:27 < culex> Very wellthen.
+19:04:37 < culex> I'd like to thank all participants for their time.
