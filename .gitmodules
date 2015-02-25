@@ -4,3 +4,6 @@
 [submodule "ircv3"]
 	path = ircv3
 	url = git://github.com/atheme/ircv3-specifications.git
+[submodule "server/sasl-sts-protocol"]
+	path = server/sasl-s2s
+	url = https://gist.github.com/8389307.git
