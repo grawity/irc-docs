@@ -1,0 +1,82 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: no create on split<br>
+Date of conclusion : 23 Aug 2003
+Result: PASSED (yes: 22, no: 2, abstain: 0)
+</pre>
+
+Description:<br><br>
+
+<pre>
+The following vote has closed:
+                                                                                
+no create on split
+                                                                                
+This vote will require servers to use either
+NO_CREATE_ON_SPLIT or
+KICK_ON_SPLIT_RIDING.  The features solve the problem of
+people using
+splits to be able to get into +ik channels.
+                                                                                
+Voting YES will require servers to use NO_CREATE_ON_SPLIT or
+KICK_ON_SPLIT_RIDING.  Implementation of this must take
+place within 4 weeks of the close of vote.
+                                                                                
+Voting NO will not require servers to use these features.
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+irc.dks.ca: YES
+efnet.xs4all.nl: YES
+efnet.demon.co.uk: YES
+irc.servercentral.net: YES
+irc.limelight.us: YES
+irc.blessed.net: YES
+irc.aloha.net: YES
+irc.efnet.nl: YES
+irc.efnet.pl: YES
+irc.easynews.com: YES
+irc.umn.edu: NO
+irc.weblook2k.com: YES
+ircd.lagged.org: YES
+irc.du.se: YES
+irc.he.net: YES
+irc.csbnet.se: YES
+irc.arcti.ca: YES
+irc.wh.verio.net: YES
+efnet.skynet.be: YES
+irc.mindspring.com: YES
+irc.banetele.no: NO
+irc.dkom.at: YES
+irc.choopa.net: YES
+irc.foxlink.net: YES
+                                                                                
+YES: 22
+NO: 2
+ABSTAIN: 0
+                                                                                
+The following servers did not vote:
+                                                                                
+irc.umich.edu
+irc.prison.net
+efnet.cs.hut.fi
+irc.homelien.no
+irc.inter.net.il
+irc-efnet.svc.us.xo.net
+irc.isdnet.fr
+irc.daxnet.no
+hub.se
+irc.secsup.org
+irc.aol.com
+irc.inet.tele.dk
+irc.nac.net
+irc.avalonworks.ca
+irc.desync.com
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

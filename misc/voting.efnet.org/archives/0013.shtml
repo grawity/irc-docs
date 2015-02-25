@@ -1,0 +1,51 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Mininum requirement for irc admins<br>
+Called by: ariel (irc.inter.net.il)<br>
+Seconded by: madmax (irc.ins.net.uk)<br>
+Called on: 03/25/01<br>
+Ended on: 04/08/01<br>
+Status: NOT PASSED (yes: 4, no: 6, abstain: 2 elig: ~30)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+A set of minimum requirements for the professional level
+of irc-admins must be added as a part of the server linking
+guidelines. The fact that new admins are kind of clueless
+adversly affects this network, and lowers the overall
+professional quality of EFNet admins, which was/is still
+a thing we take pride in.
+I claim that admins should pass a set of requirements as
+well as the servers they propose. After all, a good server
+is a balance between quality networking/hardware, and it's
+staff. The server admin is the leader of his/her server,
+and the staff will look and act like him/her.
+
+--Ariel
+
+
+Details:
+
+efnet.cs.hut.fi: YES
+efnet.vuurwerk.nl: NO
+irc.plur.net: NO
+irc.lightning.net: ABSTAIN
+irc.total.net: NO
+irc.lagged.org: NO
+irc.stanford.edu: YES
+irc.ins.net.uk: NO
+irc.concentric.net: NO
+irc.light.se: YES
+irc.colorado.edu: YES
+irc.du.se: YES
+irc.umich.edu: ABSTAIN
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

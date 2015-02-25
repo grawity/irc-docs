@@ -1,0 +1,82 @@
+Date: Thu, 16 Aug 2001 20:05:21 -0700
+From: Chris Behrens <cbehrens@codestud.com>
+Reply-To: services@katnap.org
+To: services@katnap.org
+Subject: what chanfix really does
+
+
+This is what I wrote in response to a lot of confusion in what Chanfix
+does..
+
+- Chris
+
+
+First, here's the basics on what Chanfix does:
+
+Chanfix scans the network every 5 minutes and keeps track of the
+channels and their operators.  If the channel has less than 4 users in
+it...or it doesn't have ops, the channel is ignored.  If less than 75%
+of all servers exist on the network, Chanfix doesn't do a scan, nor
+will it automatically reop a channel.  Chanfix keeps only the last 2
+weeks of data.  When Chanfix reops a channel, it will reop at most 5
+clients, and the channel must have been seen on a certain number of
+scans (currently 6, which is basically 30 minutes). Ie, the channel
+must exist for at least 30 minutes for Chanfix to reop.  Chanfix
+automatically reops a channel immediately if it becomes opless and it
+has 4 or more users in it, with at least 1 user that has a score in the
+Chanfix database.  Chanfix also automatically reops a channel if it is
+found to be opless on a scan and it has more than 4 users in it with at
+least 1 user that has a score in the Chanfix database.  This might
+happen when a channel becomes opless, but there's no one found to op
+(no one is left in the channel with a score).  It could also happen if
+the channel is left with 3 users.  If someone then joins that should be
+opped, Chanfix will catch this on its next 5-minute pass.  Note, the
+top 5 scores that are in the database might not actually be the ones
+that get opped.  Those people may not be in the channel.  Chanfix
+actually looks at the current clients in the channel, finds their
+scores, and ops the top 5.  It is entirely possible that Chanfix will
+re-op the people with the lowest 5 scores in the database if they are
+in the channel and the people with higher scores aren't.  This means
+that takeover clients would be the ones to get reopped if they were the
+only ones in the channel, and they had some sort of score in the
+database.  It's also possible that Chanfix will reop a mix of the
+'real' ops and takeover clients, depending on who is in the channel at
+the time.
+
+Is this clear to everyone now?  It doesn't just look at the top 5
+scores in the database and see if they are in the channel and try
+to op them...and if they aren't, do nothing.  Perhaps it should
+work like this, but I didn't interpret the original chanfix proposal
+in this way.  It actually ops the top 5 people in the channel at
+the time, even if their score might be the lowest scores in the
+database.
+
+Now...the so-called 'reverse' command.  This is not really a reverse
+command.  The original name of the command was going to be called
+'reverse', but it doesn't necessarily reverse anything, so that is
+misleading.  The real name of the command is 'chanfix'.  'chanfix'
+works exactly like the automatic version, except that it ends up
+deopping all of the ops on the channel first, if there are any.
+Also, the 'chanfix' command doesn't require that a certain number
+of users be in the channel nor a the channel have existed for a 
+certain period of time.  It does however still require that 75%
+of the servers exist.
+
+Here's how the ops get deopped:
+
+If TS on a channel is greater than 1:
+  an SJOIN of TS minus 1 is sent.  This causes every server to deop
+  all of the clients automagically, because this is how TS works.
+
+If a TS on a channel is 0 or 1:
+  The same TS is sent with an SJOIN, and then MODE -o's are sent
+  to deop the original ops.  The reason for this is because we
+  don't want a channel to send up with a TS of 0 if it had a TS
+  before, or -1 if its TS was 0 before.
+
+Now, the people that get opped are the same people that would get
+opped in the automagic version above.  It looks at everyone in
+the channel, computes their scores, and ops the top 5.  Again,
+this might op people with the lowest scores for the channel or it
+may op a mix of people with really high scores and really low
+scores if they are the only ones in the channel with scores.

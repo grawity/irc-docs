@@ -1,0 +1,66 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Notification of oper additions<br>
+Called by: riedel (efnet.vuurwerk.nl)<br>
+Seconded by: ahnberg (irc.du.se)<br>
+Called on: 04/13/01<br>
+Ended on: 04/27/01<br>
+Status: NOT PASSED (yes: 12, no: 14, abstain: 0, elig: 29)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Hi again,
+
+As per Tsk's suggestion i'm now calling a vote on notification of oper additions,
+instead of advance notification of oper additions.
+
+Proposal :
+
+Every new oper addition must be sent to a designated e-mail address, which will send
+the mail to all subscribed EFNet opers/admins. (Obviously this list has to be set up if
+this vote is passed, and someone needs to 'admin' it... but that's beyond the scope of
+this CFV)
+
+This policy will not affect in-place regional policies regarding notification of oper
+additions, nor will in-place regional policies affect the global policy about said
+notification.
+
+
+Details:
+
+efnet.demon.co.uk: YES
+irc.emory.edu: NO
+irc.mcs.net: NO
+irc.plur.net: NO
+irc.total.net: NO
+irc.lightning.net: NO
+irc.inter.net.il: YES
+irc.solidstreaming.net: NO
+irc.lagged.org: NO
+irc.rt.ru: NO
+irc.concentric.net: YES
+irc.light.se: YES
+irc.colorado.edu: NO
+irc.du.se: YES
+irc.umich.edu: NO
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: NO
+efnet.cs.hut.fi: YES
+efnet.vuurwerk.nl: YES
+irc.stanford.edu: YES
+irc.ins.net.uk: NO
+irc.isdnet.fr: YES
+*.gblx.net: NO
+irc.gigabell.de: YES
+irc.prison.net: YES
+irc.magic.ca: NO
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

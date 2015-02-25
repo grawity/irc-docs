@@ -1,0 +1,56 @@
+<!--#include virtual="../header.html"-->
+
+Topic: jupes.int (FINAL)<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: madmax (irc.ins.net.uk)<br>
+Called on: 04/19/01<br>
+Ended on: 04/26/01<br>
+Status: PASSED (yes: 25, no: 0, abstain: 3, elig: 29)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Jupes tool proposed (and created) by tay and comstud as described at:
+
+http://voting.efnet.org/proposals/jupes.int.txt
+
+
+Details:
+
+efnet.demon.co.uk: YES
+irc.emory.edu: YES
+irc.mcs.net: YES
+irc.plur.net: YES
+irc.lightning.net: YES
+irc.total.net: YES
+irc.inter.net.il: YES
+irc.lagged.org: YES
+irc.solidstreaming.net: YES
+irc.rt.ru: YES
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.colorado.edu: ABSTAIN
+irc.du.se: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: YES
+efnet.cs.hut.fi: YES
+efnet.vuurwerk.nl: YES
+irc.isdnet.fr: ABSTAIN
+irc.exodus.net: YES
+irc.stanford.edu: YES
+irc.ins.net.uk: ABSTAIN
+*.gblx.net: YES
+irc.gigabell.de: YES
+irc.prison.net: YES
+irc.magic.ca: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

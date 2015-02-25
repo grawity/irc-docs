@@ -1,0 +1,145 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: GLINE ACCOUNTABILITY<br>
+Date of conclusion : 12 Sep 2003
+Result: PASSED (yes: 15, no: 8, abstain: 4)
+</pre>
+
+Description:<br><br>
+
+<pre>
+The following vote has closed:
+                                                                                
+                                                                                
+GLINE ACCOUNTABILITY
+                                                                                
+Glines are a useful tool to combat abuse, as they allow an abusive
+client to be quickly removed from most if not all servers. Unfortunatly,
+the inappropriate use of glines endangers the usefulness
+of this tool, as it discourages admins from enabling gline support,
+and has in the past caused at least one admin to disable gline
+support.
+
+Nothing in this vote should be interpeted to mean that GLINES are
+required on EFNet, except where regional policy dictates otherwise,
+they
+are OPTIONAL until such time as this is changed by a future vote.
+                                                                                
+Any of the following abusive activities is an acceptable reason for
+a gline:
+-Controlling hacked machines/clients (drones) via IRC.
+-Mass Advertising (spamming)
+-Hacked machines/clients (drones)
+-Flooding (where servers are adversely affected and/or other reasonable
+actions such as channel bans, ignores, callerid, and klines are not
+effective)
+-Distribution of malicious files (trojans, viruses. etc)
+Attempting to exploit security vulnerabilities in EFnet servers or clients
+                                                                                
+The following are NOT acceptable uses for GLINES and will result in loss
+of privileges:
+                                                                                
+-In order to recover nicknames.
+-For personal or channel matters where ignore or use of channel
+operator authority is clearly more appropriate.
+-In order to deny service to entire regions or providers - this should be
+a local decision.
+-In order to gain control of a channel (except for channels used to store
+drones or to disrupt EFNet)
+-Causing another operator to participate in an abusive gline.
+-Deliberate negligence in placing glines.
+-Circumvention of the 3 opers on 3 servers rule.
+                                                                                
+The following *may* also be considered abusive and need for penalties
+will be decided by individual admins or in extreme cases, by a vote of
+admins.:
+                                                                                
+-Setting glines with broader masks than needed so that non-abusive
+clients are unnecessarily affected.
+-Seconding or triggering an abusive gline, depending on
+circumstances
+-Any other careless use of glines.
+-Automated glines not approved by a policy vote.
+                                                                                
+Any gline for claiming to be for testing purposes MUST use a mask
+which will not affect legitimate clients.
+                                                                                
+Questionable glines: Glines not explicitly covered under this policy are
+considered questionable, and an admins vote may be called to
+determine if they are actually abusive in nature. Opers are advised to
+refrain from setting questionable glines.
+                                                                                
+Minimum Penalties for abuse are as follows:
+First offence: 1 week without G-flag.
+Second offence: 3 months without G-flag.
+Third offence: Permanent revokal of G-flag.
+                                                                                
+The G-flag must be revoked within 72 hours from the time the admin(s)
+in question are notified of the abuse.
+                                                                                
+Note: these penalties are to include all O: lines the oper holds, not just
+the abused one.
+                                                                                
+Should there be a dispute about whether a gline was acceptable or
+abusive and one or more admins refuse to apply penalties, an admins
+vote may be called to decide the matter, and the decision will be final.
+                                                                                
+Should an admins vote need to be called, the results of said vote will be
+considered informal policy and will govern future glines.
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+efnet.xs4all.nl: YES
+efnet.demon.co.uk: NO
+irc.servercentral.net: ABSTAIN
+irc.blessed.net: YES
+irc.inter.net.il: ABSTAIN
+irc.aloha.net: ABSTAIN
+irc.efnet.nl: YES
+irc.umn.edu: NO
+irc.easynews.com: NO
+irc.efnet.pl: YES
+irc.du.se: YES
+irc.he.net: YES
+irc.umich.edu: NO
+irc.csbnet.se: YES
+irc.arcti.ca: NO
+irc.wh.verio.net: NO
+irc.nac.net: NO
+efnet.skynet.be: YES
+irc.mindspring.com: YES
+irc.avalonworks.ca: ABSTAIN
+irc.secsup.org: YES
+irc.banetele.no: YES
+irc.isdnet.fr: YES
+irc.dkom.at: YES
+irc.choopa.net: NO
+irc.foxlink.net: YES
+irc.prison.net: YES
+                                                                                
+YES: 15
+NO: 8
+ABSTAIN: 4
+                                                                                
+The following servers did not vote:
+                                                                                
+efnet.cs.hut.fi
+ircd.lagged.org
+irc.limelight.us
+irc.homelien.no
+irc-efnet.svc.us.xo.net
+irc.weblook2k.com
+irc.daxnet.no
+hub.se
+irc.aol.com
+irc.inet.tele.dk
+irc.desync.com
+irc.dks.ca
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

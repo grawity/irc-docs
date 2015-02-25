@@ -1,0 +1,80 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: Hostname spoofing amendment<br>
+Date of conclusion : 25 Aug 2003
+Result: PASSED (yes: 22, no: 3, abstain: 3)
+</pre>
+
+Description:<br><br>
+
+<pre>
+The following vote has closed:
+                                                                                
+Hostname spoofing amendment
+                                                                                
+Spoofing hostnames/ips of clients used to control drones
+that only
+accept commands from a particular hostname/ip shall be
+allowed when
+used for the sole purpose of obtaining control of those
+drones in
+order to clean/disinfect those drones or to disable those
+drones.
+                                                                                
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+irc.dks.ca: YES
+efnet.xs4all.nl: YES
+irc.servercentral.net: YES
+efnet.demon.co.uk: YES
+irc.limelight.us: YES
+irc.blessed.net: YES
+irc.efnet.nl: YES
+irc.efnet.pl: YES
+irc.easynews.com: NO
+irc.umn.edu: NO
+irc.weblook2k.com: YES
+ircd.lagged.org: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.he.net: YES
+irc.csbnet.se: YES
+irc.arcti.ca: YES
+efnet.skynet.be: ABSTAIN
+irc.wh.verio.net: ABSTAIN
+irc.nac.net: NO
+irc.mindspring.com: YES
+irc.secsup.org: YES
+irc.avalonworks.ca: YES
+irc.banetele.no: YES
+irc.isdnet.fr: YES
+irc.dkom.at: YES
+irc.choopa.net: ABSTAIN
+irc.foxlink.net: YES
+                                                                                
+YES: 22
+NO: 3
+ABSTAIN: 3
+                                                                                
+The following servers did not vote:
+                                                                                
+irc.prison.net
+efnet.cs.hut.fi
+irc.homelien.no
+irc.inter.net.il
+irc-efnet.svc.us.xo.net
+irc.daxnet.no
+hub.se
+irc.aol.com
+irc.inet.tele.dk
+irc.aloha.net
+irc.desync.com
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

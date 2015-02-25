@@ -1,0 +1,52 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Voting admins with multiple servers<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: ahnberg (irc.du.se)<br>
+Called on: 01/30/01<br>
+Ended on: 02/13/01<br>
+Status: PASSED (yes: 16, no: 1, abstain: 0, elig: ~25)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Each organization that runs an EFNet server is given 1 vote, provided that the
+person voting does not already vote for another server.
+
+Specific cases, including but not limited to admins appointing "voting admins" to
+vote on their behalf for multiple servers will be dealt with on a case by case
+basis as detailed in the previous vote:
+
+4) In case one admin represents multiple servers that can be
+seen as one, we (the admins) should discuss the number of
+votes that server gets. If there is failure to agree, it will be decided by vote.
+
+
+Details:
+
+irc.du.se: YES
+irc.lightning.net: YES
+irc.total.net: YES
+irc.emory.edu: YES
+irc.colorado.edu: YES
+irc.isdnet.fr: YES
+irc.umn.edu: YES
+efnet.vuurwerk.nl: YES
+irc.core.com: YES
+irc.stanford.edu: YES
+irc.ins.net.uk: YES
+irc.hemmet.chalmers.se: YES
+irc.light.se: YES
+irc.prison.net: YES
+irc2.magic.ca: YES
+irc.rt.ru: YES
+irc.plur.net: NO
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

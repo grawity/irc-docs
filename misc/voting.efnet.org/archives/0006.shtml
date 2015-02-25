@@ -1,0 +1,63 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Hostname spoofing 2<br>
+Called by: squrl (irc.exodus.net)<br>
+Seconded by: Tsk (irc.lightning.net)<br>
+Called on: 02/28/01<br>
+Ended on: 03/14/01<br>
+Status: PASSED (yes: 14, no: 4, abstain: 1, elig: ~25)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Purpose: To set guidelines for hostname spoofing.
+
+Content: A server admin may only spoof domains for which they or the end-user has
+ownership (i.e. billing contact for) of said domain. Spoofing non-existant domains
+shall be not allowed. However, if it becomes known to the admin or user that the
+domain has been taken or under ownership of a person other than end-user or admin
+and niether party has obtained permission from the domain owner, said spoof shall
+be revoked.
+
+Also, if an admin on a server refuses to remove a spoof, having been shown
+evidence of abuse by the user using a spoof, the admin may be called responsible
+for allowing abuse to continue on their server.
+
+Spoofing is a protection for users on the network, one some say should only be
+limited to opers. That, perhaps, is a bit harsh, although I do agree to some
+extent. However, allowing spoofing to non-registered/non-existant domains because
+someone thinks its cool, but doesn't want to pay for the domain, or have it appear
+as a real address is both childish, and confuses the issue much more than is
+necessary.
+
+
+Details:
+
+irc.core.com: YES
+irc.emory.edu: YES
+irc.plur.net: YES
+irc.lightning.net: YES
+irc.inter.net.il: ABSTAIN
+irc.rt.ru: NO
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.colorado.edu: NO
+irc.umich.edu: NO
+irc2.magic.ca: YES
+efnet.vuurwerk.nl: YES
+irc.isdnet.fr: YES
+irc.exodus.net: YES
+irc.ins.net.uk: YES
+irc.gigabell.de: NO
+irc.prison.net: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

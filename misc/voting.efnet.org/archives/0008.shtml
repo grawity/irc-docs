@@ -1,0 +1,72 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Advance notification of Oper Additions<br>
+Called by: riedel (efnet.vuurwerk.nl)<br>
+Seconded by: madmax (irc.ins.net.uk)<br>
+Called on: 03/10/01<br>
+Ended on: 03/24/01<br>
+Status: NOT PASSED (yes: 12, no: 10, abstain: 2, elig: ~30)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Hi Folks,
+
+EU-EFNet already has a simular policy, but i think it would be a good to have network wide.
+
+The Proposed :
+
+1. When an administrator of a server wants to add a new (local or global) oper, a notification
+of that intent shall be sent approximately 1 week in advance to a designated e-mail address
+which will go to all subscribed EFNet administrators.
+
+The thought behind this is that the administrator has the chance to find out things that were
+unknown to him/her at that time (ie : proposed oper X has a severe record of abuse) and it
+would inform the other administrators about new oper addition & to make comments/remarks/etc.
+
+2. The administrators do _not_ have a formal vote about the addition of the new oper, but
+merely a suggesting function.
+
+3. At no time there are penalties for not following up on the advice of (the majority of) the
+EFNet admin community. New Oper Additions will remain the sole responsibility of the server
+administrator. It's just that an Advance notification of 1 week would be in order.
+
+If this policy contradicts with already in-place regional policies, the existing regional
+policies will take precedence above this one, with exception of what's described under 1,
+advance notification.
+
+Details:
+
+irc.core.com: YES
+irc.plur.net: NO
+irc.emory.edu: NO
+irc.total.net: NO
+irc.lightning.net: NO
+irc.inter.net.il: YES
+irc.lagged.org: NO
+irc.rt.ru: NO
+irc.umn.edu: NO
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.umich.edu: NO
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: YES
+efnet.vuurwerk.nl: YES
+irc.stanford.edu: YES
+irc.ins.net.uk: YES
+irc.isdnet.fr: ABSTAIN
+irc.exodus.net: YES
+*.gblx.net: NO
+irc.gigabell.de: YES
+irc.prison.net: ABSTAIN
+irc.magic.ca: NO
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

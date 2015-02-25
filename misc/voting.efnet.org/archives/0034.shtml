@@ -1,0 +1,145 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: opme chanfix feature<br>
+Date of conclusion : 28 Jul 2003
+Result: NOT PASSED (yes: 12, no: 12, abstain: 4)
+</pre>
+
+Description:<br><br>
+
+<pre>
+
+The following vote has closed:
+                                                                                
+opme chanfix feature
+                                                                                
+This vote covers the proposed "opme" chanfix feature,
+consequences for its abuse, and globally killing large
+numbers of users on remote servers (masskills).
+                                                                                
+A yes vote indicates that your server supports the proposal
+that follows.  A no vote indicates that your server does
+not:
+
+The opme command (which may be renamed upon
+implementation), when issued through chanfix, sets a
+channel's modes -blki+mnst, and ops the issuer if he is in
+the channel.  If the issuer is in the channel, chanfix will
+also deop all other ops.  The command may need to be issued
+twice in some cases: once to unlock the channel, again to
+gain ops.
+                                                                                
+Upon the opme command being issued, chanfix will issue a
+server notice of similar form as operspy notices which are
+bound to umode +Z.  The notice will include the issuer, the
+channel, and a mandatory issuer-supplied reason.
+                                                                                
+The only acceptable use of opme is to take control of a
+drone channel for the purpose of disabling the drones and
+their effects.  Other acceptable uses may be voted-in in
+the future, but any use will be considered abuse if it has
+not specifically been voted in as acceptable.
+                                                                                
+This proposal also provides a solution to the last known
+problem for which opers currently resort to using
+masskills.  Unlike operspy, jupes, and this opme feature,
+masskills have no charter or list of acceptable uses, which
+makes policing its use impossible.  While the act of one
+oper removing many users at once from remote servers
+(masskilling) has always been frowned upon, there has never
+been any official policy voted-in.  Opers have recently
+argued that because no policy exists, it is acceptable.
+                                                                                
+Because no admins have stepped forward to suggest any
+acceptable uses of masskills, if opme is implemented,
+masskills shall be explicitly prohibited.  Consequences for
+abuse of masskills will be handled on a case-by-case basis
+by a server's regional routing group.
+                                                                                
+Consequences for abuse of opme will be handled as follows:
+                                                                                
+First Offense for OPERS:
+1.  The oper will lose access to chanfix for 6 months.
+2.  The oper will lose oper access (including tcm access)
+to the server on which the command was issued from for 6
+months.
+                                                                                
+Second Offense for OPERS:
+1.  The oper will lose access to chanfix for 1 year.
+2.  The oper will lose oper access (including tcm access)
+to all servers for 1 year.
+                                                                                
+First Offense for ADMINS:
+1.  All opers on the server (including the admin) will lose
+access to chanfix for 6 months.
+                                                                                
+Second Offense for ADMINS:
+1.  Call for vote to delink that admins server.
+                                                                                
+**An OPER who's oline is hacked and used to abuse opme will
+not be punished... unless of course they give abusers
+access intentionally.
+                                                                                
+Accidents can happen, and *true* accidents will not be
+punished... and if we have to bring a vote before the
+admins to determine if there was a true accident, we will.
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+efnet.demon.co.uk: YES
+irc.limelight.us: YES
+irc.servercentral.net: ABSTAIN
+irc.blessed.net: NO
+irc.aloha.net: YES
+irc.efnet.nl: NO
+irc.inter.net.il: NO
+irc.homelien.no: NO
+irc.efnet.pl: ABSTAIN
+irc.easynews.com: NO
+irc.umn.edu: NO
+irc.weblook2k.com: NO
+ircd.lagged.org: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.he.net: YES
+irc.inet.tele.dk: YES
+irc.arcti.ca: NO
+irc.wh.verio.net: ABSTAIN
+irc.nac.net: YES
+efnet.skynet.be: NO
+irc.avalonworks.ca: NO
+irc.banetele.no: NO
+irc.isdnet.fr: YES
+irc.mpls.ca: NO
+irc.dkom.at: YES
+irc.foxlink.net: YES
+irc.prison.net: ABSTAIN
+                                                                                
+YES: 12
+NO: 12
+ABSTAIN: 4
+                                                                                
+The following servers did not vote:
+                                                                                
+efnet.cs.hut.fi
+irc.hemmet.chalmers.se
+irc-efnet.svc.us.xo.net
+irc.daxnet.no
+hub.se
+efnet.xs4all.nl
+irc.secsup.org
+irc.aol.com
+irc.qeast.net
+irc.mindspring.com
+irc.choopa.net
+irc.isprime.com
+irc.desync.com
+irc.dks.ca
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

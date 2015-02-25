@@ -1,0 +1,100 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: Acceptable Gline Usage<br>
+Date of conclusion : 12 Sep 2003
+Result: PASSED (yes: 22, no: 1, abstain: 2)
+</pre>
+
+Description:<br><br>
+
+<pre>
+The following vote has closed:
+                                                                                
+Acceptable Gline Usage
+                                                                                
+Admins that choose to enable Glines give hundreds of opers
+the ability to ban clients from their servers at the oper's
+discression.  With the vast number of opers, requiring
+two "seconds", without any guidelines as to what is
+acceptable and what is not, is not effective in preventing
+abuse.
+
+Because the Gline acls admins can set in order to control
+the circumstances in which Glines do/do not take affect on
+their server are primitive at best (and this method is not
+necessarily ideal even if the acls were not primitive), it
+is only fair to expect that opers will only place Glines
+for reasons that are accepted by *most* admins.
+                                                                                
+Accordingly, this vote calls for the restriction of Glines
+to be set only for reasons approved by the admin body.
+Each reason must be voted on individually so admins need
+not compromise at all.
+                                                                                
+This vote, as always, supercedes all others previously
+called where relevant.
+                                                                                
+Note: I will be calling 4 other individual votes on
+reasons.  Admins who would like to see additional reasons
+should feel free to call their own votes as well.  (For
+example, qurve mentioned a benefit in Glining drone runners
+just before taking a drone channel over.  He could call
+that vote...)
+
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+efnet.xs4all.nl: YES
+efnet.demon.co.uk: YES
+irc.limelight.us: YES
+irc.blessed.net: YES
+irc.inter.net.il: YES
+irc.aloha.net: ABSTAIN
+irc.efnet.nl: YES
+irc.efnet.pl: YES
+irc.easynews.com: YES
+irc.umn.edu: YES
+irc.du.se: ABSTAIN
+irc.he.net: YES
+irc.umich.edu: YES
+irc.arcti.ca: YES
+irc.csbnet.se: YES
+irc.wh.verio.net: NO
+efnet.skynet.be: YES
+irc.nac.net: YES
+irc.mindspring.com: YES
+irc.avalonworks.ca: YES
+irc.banetele.no: YES
+irc.isdnet.fr: YES
+irc.choopa.net: YES
+irc.foxlink.net: YES
+irc.prison.net: YES
+                                                                                
+YES: 22
+NO: 1
+ABSTAIN: 2
+                                                                                
+The following servers did not vote:
+                                                                                
+efnet.cs.hut.fi
+ircd.lagged.org
+irc.homelien.no
+irc.servercentral.net
+irc-efnet.svc.us.xo.net
+irc.weblook2k.com
+irc.daxnet.no
+hub.se
+irc.secsup.org
+irc.aol.com
+irc.inet.tele.dk
+irc.dkom.at
+irc.desync.com
+irc.dks.ca
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

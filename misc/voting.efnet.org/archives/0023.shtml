@@ -1,0 +1,91 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Chanfix Notices<br>
+Called by: comstud (irc-efnet.svc.us.xo.net)<br>
+Seconded by: Salvation (irc.blessed.net)<br>
+Called on: 05/14/03<br>
+Ended on: 05/28/03<br>
+Status: PASSED (yes: 28 , no: 5 , abstain: 2 , elig: 41)<br><br>
+
+Description:<br><br>
+
+<pre>
+Chanfix Notices
+
+Notices will be sent to all users logged into Chanfix
+(OPERWALL is NOT to be used):
+
+a) when an 'admin' sends a manual fix - obvious reasons
+b) when the oplist command is used.*
+
+*Oplist is currently being abused by people that are just
+being nosey about the top 10 user@hosts in whatever channel
+they feel like being nosey about.  A notice sent to all
+logged in users will help deter this type of activity.
+:)  I hope.
+
+(Chanfix Opers can sit in the official #chanfix channel if
+they don't want to stay logged in and still want to stay 'on
+top of things' chanfix related.)
+
+
+
+Details:
+
+efnet.xs4all.nl: ABSTAIN
+irc.servercentral.net: YES
+irc.limelight.us: YES
+efnet.demon.co.uk: YES
+irc.blessed.net: YES
+hub.se: YES
+irc.efnet.nl: YES
+irc.inter.net.il: YES
+irc.aloha.net: YES
+irc.easynews.com: YES
+irc.efnet.pl: YES
+irc.umn.edu: YES
+irc.weblook2k.com: YES
+ircd.lagged.org: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.he.net: YES
+irc.inet.tele.dk: YES
+irc.arcti.ca: YES
+irc.isprime.com: NO
+irc.nac.net: YES
+irc.wh.verio.net: YES
+efnet.skynet.be: YES
+irc.mindspring.com: YES
+irc.aol.com: ABSTAIN
+irc.avalonworks.ca: NO
+irc.banetele.no: NO
+irc.isdnet.fr: YES
+irc.mpls.ca: YES
+irc.dkom.at: YES
+irc.daxnet.no: NO
+irc.choopa.net: YES
+irc.prison.net: YES
+irc.qeast.net: NO
+irc.vrfx.com: YES
+
+YES: 28
+NO: 5
+ABSTAIN: 2
+
+The following servers did not vote:
+
+efnet.cs.hut.fi
+irc.homelien.no
+irc.hemmet.chalmers.se
+irc-efnet.svc.us.xo.net
+irc.secsup.org
+irc.desync.com
+
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

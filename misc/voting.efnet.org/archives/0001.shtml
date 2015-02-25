@@ -1,0 +1,66 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Final Voting Policies<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: riedel (efnet.vuurwerk.nl)<br>
+Called on: 01/26/01<br>
+Ended on: 02/09/01<br>
+Status: PASSED (yes: 20, no: 0, abstain: 0, elig: ~25)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+1) Definition of a majority vote
+
+A vote will be considered "passed" if:
+
+(number of yes votes) / (number of cast votes) >= 51%, provided that at least 51%
+of eligible servers cast a vote.
+
+2) Duration of vote process
+
+Vote duration will be left up to the caller.  It is suggested that most votes be
+given 2 weeks to run their course.  In extreme cases where there is good reason to
+call a vote with a shorter duration, the 51% turnout requirement will still hold
+in order to reach a majority.
+
+3) Voter eligibility
+
+It is up to each admin who may vote on behalf of their server.  Admins with more
+than one server may cast votes or elect persons to cast votes for each server
+provided that the servers are considered seperate entities by the admin community
+(i.e. irc.west.gblx.net and irc.east.gblx.net receive one vote, irc.total.net and
+irc.magic.ca receive two votes).
+
+
+Details:
+
+irc.core.com: YES
+irc.emory.edu: YES
+irc.plur.net: YES
+irc.total.net: YES
+irc.lightning.net: YES
+irc.rt.ru: YES
+irc.umn.edu: YES
+irc.light.se: YES
+irc.colorado.edu: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: YES
+efnet.vuurwerk.nl: YES
+irc.stanford.edu: YES
+irc.exodus.net: YES
+irc.ins.net.uk: YES
+irc.isdnet.fr: YES
+irc.gigabell.de: YES
+irc.prison.net: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

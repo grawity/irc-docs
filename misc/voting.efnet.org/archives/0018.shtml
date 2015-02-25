@@ -1,0 +1,54 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Moving clones/drones/stats from services.us into services.int<br>
+Called by: comstud (irc.concentric.net)<br>
+Seconded by: Disciple (irc.solidstreaming.net)<br>
+Called on: 07/06/01<br>
+Ended on: 07/13/01<br>
+Status: PASSED (yes: 19, no: 0, abstain: 1, elig: 32)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Tcms rely on /msging SERVICES for some of their clones and drones checking, and I would
+like to move that nickname over to services.int to use there for the jupes related
+commands and so forth.  However, before I can use it there, it needs to support
+services.us's clones and drones commands in order to not break tcms.  Therefore, I'd
+like to move those commands as well as the stats information into services.int from
+services.us.  The format of the clones and drones commands should remain the same, as
+well as the format of the output.  The stats output may change, but nothing relies
+on that, at least for anything important.
+
+Since this is pretty simple, I've proposed the vote end in a week.
+
+Details:
+
+irc.lightning.net: YES
+irc.solidstreaming.net: YES
+irc.inter.net.il: YES
+irc.carrier1.net.uk: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc2.magic.ca: YES
+efnet.cs.hut.fi: YES
+efnet.vuurwerk.nl: YES
+irc.mindspring.com: YES
+irc.etsmtl.ca: YES
+irc.powersurfr.com: YES
+irc.ins.net.uk: YES
+irc.isdnet.fr: YES
+irc.gigabell.de: YES
+*.gblx.net: ABSTAIN
+irc.prison.net: YES
+irc.magic.ca: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

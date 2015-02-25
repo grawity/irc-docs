@@ -1,0 +1,84 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Global gline requirement<br>
+Called by:  (Hardy)<br>
+Seconded by:  (ik)<br>
+Called on: 26/01/05<br>
+Ended on: 10/02/05<br>
+Status: PASSED (yes: 18 , no: 10, abstain: 3, elig:35 )<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Global gline requirement
+
+This vote will require all servers on EFnet to have glines
+enabled. The gline expiration time may be decided by
+individual servers, but it can not be less than 6 hours, or
+more than 7 days.
+
+If the vote is approved, all servers will be required to
+activate glines within a 14 day period. The 14 days will
+begin on the day this vote closes. Failure to comply will
+result in the server(s) being removed from the network.
+
+If the vote do not pass, it will not affect the european
+regional rule on gline requirement.
+
+The results were as follows (summary at end):
+
+irc.efnet.pl: YES
+irc.arcti.ca: YES
+irc.blessed.net: YES
+irc.homelien.no: NO
+irc.easynews.com: NO
+irc.dks.ca: YES
+ircd.lagged.org: NO
+irc.umn.edu: NO
+irc.umich.edu: NO
+irc.inter.net.il: ABSTAIN
+irc.banetele.no: YES
+irc.choopa.net: NO
+irc.mzima.net: YES
+irc.nac.net: NO
+irc.scnet.net: YES
+irc.desync.com: YES
+irc.dkom.at: YES
+irc.avalonworks.ca: YES
+irc.dataphone.se: YES
+irc.inet.tele.dk: YES
+irc.mindspring.com: YES
+irc.he.net: YES
+irc.daxnet.no: YES
+irc.colosolutions.net: NO
+efnet.xs4all.nl: ABSTAIN
+irc.kagmir.ca: YES
+efnet.demon.co.uk: NO
+irc.du.se: YES
+irc.efnet.nl: YES
+irc.prison.net: NO
+hub.se: ABSTAIN
+
+YES: 18
+NO: 10
+ABSTAIN: 3
+
+The following servers did not vote:
+
+efnet.cs.hut.fi
+irc.limelight.us
+irc.concentric.net
+irc.wh.verio.net
+
+
+
+
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

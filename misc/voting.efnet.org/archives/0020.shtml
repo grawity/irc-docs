@@ -1,0 +1,63 @@
+<!--#include virtual="../header.html"-->
+
+Topic: services.int reverse command<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: throwback (irc.powersurfr.com)<br>
+Called on: 07/13/01<br>
+Ended on: 07/20/01<br>
+Status: PASSED (yes: 19, no: 4, abstain: 3, elig: 32)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+(another 1 week vote due to immediate relevence)
+
+Chris (comstud) has coded a reverse command for the opless channel module of
+services.int, originally Tsk's idea.
+
+In the event that a channel is taken over (via a compromised machine, hacked server,
+etc), any global oper can issue a "/msg services reverse #channel" command.  Services
+will join a client to the channel, lower ts by 1, and op the top-5-most-opped people
+according to its database.
+
+I don't feel the need for more than 1 oper to concur on a reverse command, as more
+than one oper may not know the channel's story and requiring such would create a game
+of opers convincing each other to issue the command.
+
+Details:
+
+efnet.demon.co.uk: YES
+irc.plur.net: YES
+irc.mcs.net: NO
+irc.lightning.net: YES
+irc.solidstreaming.net: YES
+irc.lagged.org: YES
+irc.inter.net.il: YES
+irc.rt.ru: YES
+irc.carrier1.net.uk: YES
+irc.umn.edu: NO
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.colorado.edu: ABSTAIN
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: YES
+efnet.cs.hut.fi: ABSTAIN
+efnet.vuurwerk.nl: YES
+irc.mindspring.com: NO
+irc.powersurfr.com: YES
+irc.isdnet.fr: YES
+irc.ins.net.uk: YES
+*.gblx.net: ABSTAIN
+irc.prison.net: NO
+irc.magic.ca: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

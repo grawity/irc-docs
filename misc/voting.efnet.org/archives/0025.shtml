@@ -1,0 +1,164 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Codercom<br>
+Called by: Disciple (ircd.solidstreaming.net)<br>
+Seconded by: lazymanic (efnet.demon.co.uk)<br>
+Called on: 06/07/02<br>
+Ended on: 06/21/02<br>
+Status: NOT PASSED (yes: 12, no: 1 , abstain: 3 , elig: 29)<br><br>
+
+Description:<br><br>
+
+<pre>
+Codercom
+
+Reasoning
+---------
+
+There is no formal or official structure between the ircd
+coding groups and efnet.  The running of code can often be
+chaotic, with patches of servers enabling code.  More co-
+operation is needed.
+
+
+Before code is accepted on efnet, it needs to be approved.
+Yet code cannot be approved, because there is no method of
+approving code for use.  Many coders are unwilling to
+discuss features with efnet admins as there is no forum for
+such discussions.
+
+
+The TS5 discussion was an example of how the current
+methods are flawed.  Communication was poor and mainly
+consisted of one coder and one admin each relaying
+information and discussions back to their own parties, or
+an admin CC:'ing to a coder in the middle of a thread when
+a question needed answering then reverting straight back to
+the closed list.  This situation whilst it worked for TS5,
+was bad. The method simply does not scale.
+
+
+A coder-com would be the most ideal solution to voting
+about code. ircd-hybrid introduced +e, i: lines, KNOCK and
+serverhiding.  Other ircds will more than likely introduce
+features that need to be discussed and voted on.  For an
+effective vote a full list of advantages, disadvantages,
+possible problems and effects need to be discussed by
+admins and coders.
+
+
+Proposal
+--------
+
+A new group, the efnet coder-com should be setup to discuss
+ircd features.  The coder-com would contain a small
+complement of coders and admins.  The coder-com would then
+aim to research in detail the implications of the feature,
+its advantages, disadvantages and consequences.
+
+
+There would be no specific limit on coders or admins.  Any
+coder or admin who wishes to participate in the discussion
+would be welcome.  Any admin who expects to be
+participating should strongly consider subscribing. There
+would however be appointed secretaries from each group.
+The secretaries from each group would have no extra power
+but would be responsible for compiling and submitting
+proposals.
+
+
+The list should the unite the coder groups of ircds used on
+efnet, and efnet admins with the single goal of improving
+the codebase of efnets ircds. The codercom list will also
+allow efnet admins to make official requests for code,
+which can be discussed with coders.
+
+
+Process
+-------
+
+Features that are defined "global" (affect more servers
+than itself), would be discussed.  If they are going to be
+implemented then the coding teams can discuss the best way
+to proceed, and reach a conclusion.  The efnet admins
+should make comments throughout this process, voicing their
+concerns and opinions.  Once it has been agreed that the
+proposal is sound, it would be passed to voting@blackened
+for a vote.  No more than one discussion should be open on
+the coder-com at any one time.  A new discussion should not
+be started until the vote on the previous proposal has been
+completed.
+
+
+If admins have any questions about a proposal after it has
+been sent to voting@blackened they should direct questions
+to the codercom list. The voting process would use the
+guidelines already set forth by voting.
+
+
+If the feature exists in one ircd, the other coding teams
+should accept the decision and make a request to their
+coding team for it to be written.  However due to the fact
+coders can often be short of time, there should be no
+expectation that code is written immediately.  If the
+feature exists in neither ircd, the admins should listen
+strongly to the coders to prevent unworkable proposals
+being submitted.
+
+
+If the feature requires an upgrade to the server, the
+admins should endeavour to do this within a reasonable time
+limit.
+
+- EFNet codercom proposal written by Lee H <lee@leeh.co.uk>
+
+
+
+Details:
+
+The results were as follows (summary at end):
+
+efnet.demon.co.uk: YES
+irc.inet.tele.dk: YES
+efnet.vuurwerk.nl: YES
+irc.mindspring.com: ABSTAIN
+irc.lightning.net: YES
+irc.rt.ru: YES
+irc.umn.edu: YES
+irc.easynews.com: ABSTAIN
+irc.efnet.pl: YES
+irc.isdnet.fr: YES
+ircd.lagged.org: NO
+irc.du.se: YES
+irc.prison.net: ABSTAIN
+ircd.flamed.net: YES
+irc.umich.edu: YES
+irc.qeast.net: YES
+
+YES: 12
+NO: 1
+ABSTAIN: 3
+
+The following servers did not vote:
+
+efnet.cs.hut.fi
+irc.webgiro.se
+irc.homelien.no
+irc.hemmet.chalmers.se
+irc.inter.net.il
+irc.light.se
+irc.concentric.net
+irc.daxnet.no
+irc.arcti.ca
+hub.se
+*.torix.ca
+irc.secsup.uu.net
+ircd.charter.com
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

@@ -1,0 +1,150 @@
+Below is an application for 'services.int', a server that global opers
+will have access to in order to jupe servers in extreme situations.
+Obviously, this server is very different than normal servers that
+apply, so this is being sent to admins to vote.  Most of the
+new-server-guidelines is not relevent to this server, so I won't
+be using it.  I obviously don't want to give away many details about
+where this server will be running, anyway.  I trust that everyone will
+assume that it is on ample hardware and decent connectivity.  Note,
+this server will not be running in the same location as
+irc.concentric.net or services.us.  Obviously, its IP will need to
+remain hidden, so I will not be specifying an IP address. 'services.int'
+will have links to all of the hub servers that have full H:'s for
+redundancy.  Those hub servers will need to hide services.int's IP
+from everyone, including opers.  The IP should *never* be transmitted
+over IRC.  This likely means that the hub servers will need to run
+some sort of proxy that proxies connections to localhost, such that
+the IP will show up as 127.0.0.1 on IRC.  (Most servers still show the
+real IP to opers, which is why the proxy is needed.)  I, comstud,
+will be releasing a proxy program to the public in the next few
+days which is easy to configure for IRC.  (Details on that will be
+sent to admins upon release.  At that time, I will encourage every
+server to use it, anyway, to hide IPs.)
+
+The admins of 'services.int' will be Taymie Gaver Behrens 
+(tay@katnap.org) and myself, Chris Gaver Behrens (cbehrens@codestud.com).
+The admin email address for the server is tay@katnap.org. 
+
+Purpose:  To allow Admins and Global opers the ability to jupe a server
+if, and only if, the server in question meets the following criteria
+and no other solution is suitable at the time.  IT GOES WITHOUT SAYING 
+THAT A JUPE IS A _LAST RESORT_.
+
+Note: In the future, this server could be used for other approved
+global access priviledges for admins and/or opers, also.  Ie, it
+could be used to do more than jupe, if something is approved in the
+future.
+
+Reasons to jupe:
+
+This is an emergency mechanism which should be used ONLY in the
+following circumstances:
+         1.  server possibly/is compromised/hacked
+         2.  O-lines compromised, nobody around to dline/etc locally
+         3.  trouble with route which breaks the network, causing splits
+
+How it will work:
+
+A jupe command will need to be sent to 'services.int' in order to
+jupe a server.  Likewise, to unjupe, an unjupe command will need to
+be sent.  3 admin requests or 5 global oper requests (from 3 or 5
+*UNIQUE* servers respectively) will need to be made for a jupe to be
+activated or deactivated.  5 global opers on 1 server will not be able
+to jupe or unjupe a server.  For those that have access to more than
+one server, taking advantage of that to jupe a server will be
+considered ABUSE.  If someone simply /squits a jupe, it will
+'reconnect'.  An unjupe command will need to be issued for the jupe to
+go away.
+
+If not enough requests have been met to activate a jupe after 30
+minutes from the first request, the request(s) are forgotten.  Ie,
+after the first request is made, you have 30 minutes to find other
+opers and admins to issue a request.
+
+All jupe/unjupe requests from non-global opers will be ignored.  You
+must be opered (globally) in order for 'services.int' to listen to your
+jupe request.  That includes admin requests, which I describe below.
+
+'services.int' will contain a database of logins for the admins
+(so that it can recognize admin requests vs oper requests).  Each
+login will have a password and a set of user@host/server pairs.
+For 'services.int' to recognize an admin, a username and password must
+be specified with the jupe command.  If the username/password does not
+match an entry in 'services.int''s database, the request will be denied.
+If the user@host or the server of the oper issuing the request does
+not match an allowed user@host/server combination for that username,
+the request will be denied.
+
+An example could be:
+
+login comstud {
+	password "encrypted-pass";
+	allow {
+		cbehrens@irc-w1.concentric.net ircd-w.concentric.net;
+		cbehrens@irc.concentric.net irc.concentric.net;
+	};
+};
+login tay {
+	password "encrypted-pass";
+	allow tay@katnap.org irc.concentric.net;
+};
+
+The above would recognize the following admins if the passwords
+are given correctly:
+
+login of tay:
+   user@host has to be tay@katnap.org and ircing from irc.concentric.net
+login of comstud:
+   user@host has to be cbehrens@irc-w1.concentric.net and ircing
+     from ircd-w.concentric.net
+  *OR*
+   user@host has to be cbehrens@irc.concentric.net and ircing from
+     irc.concentric.net
+
+Note, for the 'comstud' login, a user@host of
+    cbehrens@irc-w1.concentric.net ircing from ircd-w.concentric.net
+    would result in a denied request.
+
+Global opers who are not admins will not specify a login/password with
+their jupe requests.
+
+'services.int' will be logging all requests and any abuse found will
+be acted upon IMMEDIATELY.  Sending jupe requests just to see what will
+happen, and any other type of misuse will be considered abuse.
+
+ANY admin that does not feel each one of their global opers can handle
+this access responsibly, should immediately demote or remove those
+opers.  They should not have been opered to begin with! =)
+
+How abuse of 'services.int' will be handled:
+
+First Offense for OPERS:
+1.  The offending server will have its access suspended for a period of
+    six months.
+2.  The admin of the server will be required to demote the offending
+    oper/admin to local o for a period of six months
+
+**The Admin/s will still have their admin access to jupe**.
+
+Second Offense for OPERS:
+1.  The offending server will have its access suspended for a period of
+    one year.
+2.  The admin will be required to remove the offending oper entirely, 
+    and blacklisted from that server.  If the abuser has access to 
+    other servers, those server admins will be asked to demote or 
+    remove that user.
+
+First Offense for ADMINS:
+1.  Access suspended for 1 year from 'services.int' for the server.
+   
+Second Offense for ADMINS:
+2.  Call for vote to delink that admins server.
+
+**An OPER who's oline is hacked and used to abuse 'services.int' will not
+  be punished... unless of course they give abusers access intentionally ;)
+
+Accidents can happen, and *true* accidents will not be punished... and if we 
+have to bring a vote before the admins to determine if there was a true
+accident, we will.  Fair is fair =)
+
+That's it.  Happy voting.

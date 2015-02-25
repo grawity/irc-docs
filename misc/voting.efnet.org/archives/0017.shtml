@@ -1,0 +1,65 @@
+<!--#include virtual="../header.html"-->
+
+Topic: client hostname spoofing policy (FINAL)<br>
+Called by: wjr (irc.concentric.net)<br>
+Seconded by: Xref (irc.umich.edu)<br>
+Called on: 05/17/01<br>
+Ended on: 05/31/01<br>
+Status: PASSED (yes: 22, no: 3, abstain: 0, elig: 29)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+This vote supercedes (and obsoletes) all previous votes on this topic and will
+hopefully be the last one we ever have to call on this issue. Let this stumbling be the
+lesson we were destined to learn as we grow as a governing body and realize we are all
+human and make mistakes. I hope this proposal is met with the same approval in
+votingland as it was while we were discussing it.
+
+For the text of the proposal, please view it at:
+https://voting.efnet.org/proposals/spoof-proposal.txt
+
+For the record, a vote of "YES" to the above-referenced proposal will result in all
+previous "policies" or "rules" about hostname spoofing on efnet being removed from the
+official record (except for historical reference) and this policy will be instated in
+its place. A vote of "NO" will result in chaos and mass-hysteria -- just kidding,
+actually, a vote of "NO" will effect no change whatsoever to the current policies on
+hostname spoofing on the efnet irc network. An "ABSTAIN" vote will of course merely
+contribute to quorum. Thank you for your time.
+
+Details:
+
+irc.plur.net: YES
+irc.emory.edu: YES
+irc.lightning.net: YES
+irc.lagged.org: YES
+irc.solidstreaming.net: YES
+irc.rt.ru: YES
+irc.homelien.no: YES
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.colorado.edu: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: NO
+efnet.cs.hut.fi: YES
+efnet.vuurwerk.nl: YES
+irc.etsmtl.ca: NO
+irc.isdnet.fr: YES
+irc.ins.net.uk: YES
+irc.gigabell.de: YES
+*.gblx.net: YES
+irc.does-not-exist.com: YES
+irc.prison.net: YES
+irc.magic.ca: NO
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

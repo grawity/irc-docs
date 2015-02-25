@@ -1,0 +1,52 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Relinquish right to vote 2<br>
+Called by: grievah (irc.isdnet.fr)<br>
+Seconded by: ariel (irc.inter.net.il)<br>
+Called on: 02/28/01<br>
+Ended on: 03/14/01<br>
+Status: PASSED (yes: 14, no: 2, abstain: 0, elig: ~25)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+At any given point in time, voting right may be removed from servers that match
+BOTH following criterias:
+
+a. have not voted for (at least) a month
+b. have not voted for the last 4 votes
+
+These servers would then have to re-apply, as specified in the other vote
+"Relinquish right to vote".
+
+Purpose: also limit "useless" numbers in the system, making it more readily
+possible to achieve a majority.
+
+
+Details:
+
+irc.core.com: YES
+irc.emory.edu: NO
+irc.plur.net: YES
+irc.inter.net.il: YES
+irc.rt.ru: YES
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.colorado.edu: NO
+irc.du.se: YES
+irc.umich.edu: YES
+efnet.vuurwerk.nl: YES
+irc.isdnet.fr: YES
+irc.exodus.net: YES
+irc.gigabell.de: YES
+irc.prison.net: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

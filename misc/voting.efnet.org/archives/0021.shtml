@@ -1,0 +1,86 @@
+<!--#include virtual="../header.html"-->
+
+Topic: TS5<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: thomas (irc.magic.ca)<br>
+Called on: 08/25/01<br>
+Ended on: 09/08/01<br>
+Status: PASSED (yes: 22, no: 0, abstain: 0, elig: 29)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+This vote is on the migration from TS3 to TS5 as 
+implemented in the technical document sent to the voting 
+list.  Specifically, this vote will remove the TS exeption 
+making it effectively impossible to hack ops on a split.
+
+This vote should in no way "tie our hands", as we now have 
+services.int.  If realized in the future that we still 
+require an additional way to regain ops (to replace opers 
+being able to hack ops on splits), we can vote on a means 
+to do so in the future.  For now, we need to take this 
+preventative measure to reduce attacks on our servers.
+
+Per this vote, all admins will be required to upgrade their 
+ircds to one that supports TS5 by the end of September.
+
+TS5 should not be enabled on ANY server until Saturday 
+October 6th, at which time admins will have until the end 
+of Sunday October 7th to enable the feature in their ircds 
+(48 hrs).
+
+The TS5 specification is at:
+
+https://voting.efnet.org/docs/ts5.txt
+
+The implementation may be slightly modified, but the 
+effects the same.
+
+The results were as follows (summary at end):
+
+efnet.demon.co.uk: YES
+irc.plur.net: YES
+irc.lightning.net: YES
+irc.solidstreaming.net: YES
+irc.lagged.org: YES
+irc.rt.ru: YES
+irc.carrier1.net.uk: YES
+irc.homelien.no: YES
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.colorado.edu: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: YES
+efnet.cs.hut.fi: YES
+efnet.vuurwerk.nl: YES
+irc.mindspring.com: YES
+irc.isdnet.fr: YES
+*.gblx.net: YES
+irc.magic.ca: YES
+
+YES: 22
+NO: 0
+ABSTAIN: 0
+
+The following servers did not vote:
+
+irc.prison.net
+irc-h.magic.ca
+irc.inter.net.il
+irc.ins.net.uk
+irc.arcti.ca
+irc.qeast.net
+irc.efnet.pl
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

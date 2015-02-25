@@ -1,0 +1,62 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Public key link authentication<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: chris (irc.plur.net)<br>
+Called on: 03/24/01<br>
+Ended on: 04/07/01<br>
+Status: PASSED (yes: 15, no: 2, abstain: 3, elig: ~30)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Recently two servers have been compromised due to the insecurity of plain-text password
+exchanges on server connects.  A public key authentication process will increase security by
+eliminating cleartext password exchanges and theoretically eliminate the ability to masquerade
+as an efnet server by simply obtaining an IP address and password.
+
+The authentication procedure should be similar to that of ssh:
+
+Public key authentication is based on the use of digital  signatures.  Each user creates a
+public / private key pair for authentication pur­poses. The server knows the user's public key,
+and only the user has the private  key.  When the user tries to authenticate himself, the
+server checks for matching public keys and sends a challeng to the user end. The user is
+authenticated by signing the challenge using the private key.  (server/user = server/server)
+
+If approved by admins, a group of coders will be charged with patching the current stable ircd
+versions and including the functionality in future versions.  It will be the first true test of
+whether admins can in fact influence the code they run on their servers.
+
+
+Details:
+
+irc.plur.net: ABSTAIN
+irc.emory.edu: NO
+irc.lightning.net: ABSTAIN
+irc.total.net: YES
+irc.inter.net.il: YES
+irc.lagged.org: YES
+irc.rt.ru: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: YES
+efnet.vuurwerk.nl: ABSTAIN
+irc.isdnet.fr: YES
+irc.ins.net.uk: YES
+irc.stanford.edu: YES
+irc.gigabell.de: YES
+irc.prison.net: NO
+irc.magic.ca: YES
+
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

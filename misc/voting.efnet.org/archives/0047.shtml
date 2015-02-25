@@ -1,0 +1,84 @@
+<!--#include virtual="../header.html"-->
+
+Topic: OCF test period<br>
+Called by:  (Salvation)<br>
+Seconded by:  (Disciple)<br>
+Called on: 27/09/04<br>
+Ended on: 12/10/i04<br>
+Status: PASSED (yes: 18 , no: 4, abstain: 2, elig:35 )<br><br>
+
+Description:<br><br>
+
+<pre>
+
+This vote is to grant services.eu admins a two week period
+to run OpenChanfix in full production. In order for this to
+happen, services.int admins will have to put Chanfix in data
+collection mode only. This vote by no means approves
+OpenChanfix as a replacement of Chanfix. The exact time
+frame is to be worked out with the admins of services.int
+and services.eu. The two week test period must happen before
+the end of 2004. After the two week test period, OpenChanfix
+must return back to data collection only mode and Chanfix to
+return to full production mode.
+
+This two week test period may be canceled if the admins of
+services.eu and services.int collectively agree, due to any
+problem with OpenChanfix.
+
+The results were as follows (summary at end):
+
+irc.efnet.pl: YES
+irc.blessed.net: YES
+irc.foxlink.net: YES
+irc.easynews.com: NO
+ircd.lagged.org: NO
+irc.umn.edu: YES
+irc.inter.net.il: YES
+irc.concentric.net: ABSTAIN
+irc.banetele.no: NO
+irc.choopa.net: YES
+irc.mzima.net: YES
+irc.limelight.us: YES
+irc.nac.net: NO
+irc.scnet.net: YES
+irc.dkom.at: YES
+irc.avalonworks.ca: YES
+irc.dataphone.se: YES
+irc.inet.tele.dk: YES
+irc.mindspring.com: YES
+irc.wh.verio.net: ABSTAIN
+efnet.demon.co.uk: YES
+efnet.xs4all.nl: YES
+irc.du.se: YES
+irc.efnet.nl: YES
+
+YES: 18
+NO: 4
+ABSTAIN: 2
+
+The following servers did not vote:
+
+irc.umich.edu
+irc.prison.net
+efnet.cs.hut.fi
+irc.homelien.no
+irc.kagmir.ca
+irc.daxnet.no
+irc.arcti.ca
+irc.he.net
+hub.se
+irc.desync.com
+irc.dks.ca
+
+
+
+
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

@@ -1,0 +1,221 @@
+<!--#include virtual="../header.html"-->
+
+Topic: US-EFNet Guidelines (US Regional)<br>
+Called by: Disciple (irc.choopa.net)<br>
+Seconded by: jafo (ircd.lagged.org)<br>
+Called on: 04/07/03<br>
+Ended on: 04/15/03<br>
+Status: PASSED (yes: 12, no: 1 , abstain: 0 , elig: ~20)<br><br>
+
+Description:<br><br>
+
+<pre>
+.US-EFNet Guidelines
+
+This vote is for .US-EFnet servers only.
+
+
+The purpose of this document is to outline the guidelines
+and
+procedures for the voting body of the .US portion of EFnet.
+Guidelines set here obsolete those set previously on
+voting.blackened.com and/or anywhere else.
+
+1) Voter Eligibility
+
+ - Each server entity within .US will receive 1 (one) equal
+vote.
+   on all issues that arise.
+
+An EFnet server entity is defined as any server or group of
+servers
+that meet two or more of the following:
+  o Any of the same Administrators (people with any machine
+level
+    access)
+  o On the same network or ASN
+  o Hosted or sponsored by the same company/entity (i.e.
+AOL, etc.)
+  o Same relationship to hosting company/entity (i.e.
+employee)
+  o has the same domain (i.e. *.example.com)
+
+  - If any question is raised as to whether or not a server
+or
+    servers should be considered the same entity, a vote
+with
+    with a simple majority requirement open to all eligible
+    .us-efnet servers may be called.
+
+2) Majorities and Quorums
+
+  - A simple majority is defined as:
+    (number of YES votes) / (number of YES and NO votes) >
+50% (1/2)
+
+  - A 2/3rd majority is defined as:
+    (number of YES votes) / (number of YES and NO votes) >
+66.6% (2/3)
+
+  - A 3/4th majority is defined as:
+    (number of YES votes) / (number of YES and NO votes) >
+75% (3/4)
+
+  - Servers voting "ABSTAIN" will not be counted toward the
+majority,
+    but will count as the server casting a vote.
+
+  - The quorum is set to anything > 50% (1/2). That is >
+50% of all
+    eligible .us-EFnet servers must vote on an item in
+order for
+    the vote to be valid.
+
+3) Voting Definitions
+
+   - The following types of votes require a simple majority
+from
+     all eligible .US EFnet servers:
+     o Determine Server Entity
+     o New Server Applications
+     o "Full Hub" Applications
+     o Trial Server Delink Votes
+     o Trial Server Extension Votes
+     o New-server-guidelines Changes
+     o IRCD Changes with global impact
+     o Define global/local IRCD changes
+     o Changes to this document
+     o Any issue which has not been defined above
+
+   - The following types of votes require a 2/3rd majority
+from
+     all eligible .US EFnet servers:
+     o Delink a post-trial client server
+     o Delink or dehub a current "Full Hub"
+
+   - Votes may be called by any eligible .US EFnet server,
+and
+     require a second by a different server entity to be
+made active.
+
+   - The default voting period is 1 (one) week.  The server
+calling
+     the vote may specify a longer period, but it may not
+be less
+     than 1 (one) week.
+
+   - Votes may be closed early and the results posted to
+the admin
+     community, once the required majority has been reached.
+
+   - If a vote is called to delink or dehub a current post-
+trial
+     server, the server in question IS permitted to vote on
+itself.
+
+   - IRCD changes which do not globally effect the network
+(I.E.
+     remote whois notification) do NOT require a vote.  If
+any
+     question is raised as to whether or not an IRCD change
+is
+     a "global" or "local" change, a vote with a simple
+majority
+     amongst all eligible .US-EFnet servers may be called.
+
+4) Infrastructure
+
+   - To insure that no one small group of servers has
+more "power"
+     or influence over any other, all .US servers are to be
+able
+     to connect to one other, regardless of their client or
+hub
+     server status.
+
+     Client servers should continue to link behind "Full
+Hub"
+     servers whenever possible, however should there be no
+     other alternative, or a situation were to arise, non-
+hub
+     servers would then be permitted to link behind normally
+     non-hubbing (client) servers.
+
+   - Non "Full-Hub" servers are permitted to link outside of
+     .us-efnet while holding other servers behind them.
+
+5) Trial Servers
+
+   - The .US EFnet trial period for new servers is 45
+     (forty-five) Earth days.
+
+   - Rules and guidelines for new servers will be contained
+in the
+     new-server-guidelines which changes must be voted on
+by all
+     eligible .US EFnet servers.
+
+   - There is no automatic or mandatory vote called at the
+end of
+     a new servers trial, however a vote during or at the
+end of
+     a servers trial, may be called to terminate the
+servers link.
+
+   - Servers in trial are NOT eligible to receive partial
+     H:Lines, or hold other servers, and should be L:lined
+on all
+     other servers for the duration of their trial period.
+
+   - Trial servers are permitted read-only access to the
+admin
+     lists, but may not have posting privileges or vote on
+any
+     items.
+
+ Any item NOT covered in this document is implicitly denied
+until
+ it has been passed by a vote with simple majority amongst
+all
+ eligible .US-EFnet servers.
+
+
+Details:
+
+The results were as follows (summary at end):
+
+irc.limelight.us: YES
+irc.isprime.com: YES
+irc.nac.net: YES
+irc.blessed.net: YES
+irc.wh.verio.net: YES
+irc.aol.com: YES
+irc.aloha.net: YES
+irc.concentric.net: NO
+irc.weblook2k.com: YES
+ircd.lagged.org: YES
+irc.choopa.net: YES
+irc.secsup.uu.net: YES
+irc.umich.edu: YES
+
+YES: 12
+NO: 1
+ABSTAIN: 0
+
+The following servers did not vote:
+
+irc.prison.net
+irc.servercentral.net
+irc.umn.edu
+irc.vrfx.com
+irc.easynews.com
+irc.lightning.net
+irc.mindspring.com
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

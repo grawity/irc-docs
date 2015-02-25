@@ -1,0 +1,122 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Addition to the acceptable gline policy <br>
+Status: PASSED (yes:17 , no:4 , abstain:4 , elig: )<br><br>
+
+Description:<br><br>
+
+<pre>
+
+G-line policies
+
+This policy supersedes all previous G-line policies, with
+the exception of the currently effective list of acceptable
+G-line reasons, which should be used as the initial
+'acceptable' list defined by this document.
+
+
+Definitions
+  An 'oper' is any person with local G-line privileges on
+any server
+  An 'admin' is the person(s) listed on the voting interface
+as representatives of a server, with a maximum of 3 admins
+per server entity.
+  A 'caller' is the person actually issuing an initial
+G-line request
+  A 'server entity' is any set of servers that is counted as
+a single voting entity.
+  A 'request' is the action of actually issuing the calling
+and/or seconding G-line request.
+
+
+Policy:
+
+* Any G-line requires 3 requests, from 3 different persons
+and 3 different server entities.
+
+* Requests may only be issued from permanently linked servers.
+
+* Trial servers and experimental/test servers must have
+G-lines enabled.
+
+* Two lists of unambigious G-line reasons will be
+established by vote, one 'acceptable' and one
+'unacceptable'. The acceptable list will initially consist
+of the currently agreed on acceptable g-line reasons.
+
+* Any oper (and admin) may issue requests for any reason
+given in the 'acceptable' list.
+
+* Noone may issue requests for any reason given in the
+'unacceptable' list
+
+* Any admin (not opers), may issue requests for reasons not
+covered by either lists.
+
+* It is the calling opers/admins responsibility to ensure
+that the reason given in any called G-line is not misleading.
+
+* It is the requesting opers/admins responsibility to ensure
+that he/she does not second a G-line which would violate policy.
+
+
+Enforcement:
+
+* Failure to obey these policies will lead to immediate
+removal of G-line privileges for the offending oper(s), for
+a period of 3 months, starting no later than 1 week after
+the offence. Repeated failure to obey these policies will
+lead to a removal of G-line privileges for a period of 1
+year, starting no later than 1 week after the repeated offence.
+
+The results were as follows (summary at end):
+
+irc.efnet.pl: YES
+irc.blessed.net: ABSTAIN
+irc.foxlink.net: YES
+irc.homelien.no: YES
+irc.easynews.com: NO
+irc.dks.ca: YES
+irc.umn.edu: YES
+irc.inter.net.il: NO
+irc.banetele.no: YES
+irc.choopa.net: NO
+irc.mzima.net: YES
+irc.limelight.us: ABSTAIN
+irc.nac.net: NO
+irc.desync.com: ABSTAIN
+irc.dkom.at: ABSTAIN
+irc.avalonworks.ca: YES
+irc.mindspring.com: YES
+irc.he.net: YES
+irc.daxnet.no: YES
+irc.csbnet.se: YES
+efnet.aixit.de: YES
+efnet.demon.co.uk: YES
+efnet.xs4all.nl: YES
+irc.efnet.nl: YES
+irc.du.se: YES
+
+YES: 17
+NO: 4
+ABSTAIN: 4
+
+The following servers did not vote:
+
+irc.umich.edu
+irc.prison.net
+efnet.cs.hut.fi
+ircd.lagged.org
+irc.servercentral.net
+irc.concentric.net
+irc.wh.verio.net
+irc.arcti.ca
+hub.se
+irc.secsup.org
+irc.inet.tele.dk
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

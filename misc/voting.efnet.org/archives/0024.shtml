@@ -1,0 +1,89 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Maximum 3 Chanfix Opers per server entity.<br>
+Called by: comstud (irc-efnet.svc.us.xo.net)<br>
+Seconded by: lazymanic (efnet.demon.co.uk)<br>
+Called on: 05/14/03<br>
+Ended on: 05/29/03<br>
+Status: PASSED (yes: 30, no: 4 , abstain: 1 , elig: 41)<br><br>
+
+Description:<br><br>
+
+<pre>
+Maximum 3 Chanfix Opers per server entity.
+
+Allow 3 Chanfix Opers at maximum per server entity,
+including the admin or admins.  When an admin picks an Oper
+to be a Chanfix Oper (as opposed to picking him/herself), a
+notice must be sent 72 hours in advance to a global Admins
+list (voting?) to allow for objections.
+
+This idea is based off the way EU allows for objections
+against any new global opers.  It won't be possible to end
+up with 5 ppl per server with access.  This should make
+it not necessary to make an oper a co-admin just for the
+sake of chanfix access, (or access to the mailing lists for
+that matter), etc.
+    As some would say 'If you don't have conf access, you're
+not an admin'...
+
+
+
+Details:
+
+efnet.xs4all.nl: YES
+irc.servercentral.net: YES
+irc.limelight.us: YES
+efnet.demon.co.uk: YES
+irc.blessed.net: YES
+hub.se: YES
+irc.efnet.nl: YES
+irc.inter.net.il: NO
+irc.aloha.net: YES
+irc.efnet.pl: YES
+irc.easynews.com: NO
+irc.umn.edu: YES
+irc.weblook2k.com: YES
+ircd.lagged.org: YES
+irc.du.se: YES
+irc.he.net: YES
+irc.umich.edu: YES
+irc.inet.tele.dk: YES
+irc.arcti.ca: ABSTAIN
+irc.isprime.com: YES
+irc.wh.verio.net: YES
+irc.nac.net: YES
+efnet.skynet.be: YES
+irc.mindspring.com: YES
+irc.aol.com: YES
+irc.avalonworks.ca: YES
+irc.banetele.no: YES
+irc.isdnet.fr: YES
+irc.mpls.ca: YES
+irc.dkom.at: YES
+irc.daxnet.no: NO
+irc.choopa.net: YES
+irc.prison.net: YES
+irc.qeast.net: NO
+irc.vrfx.com: YES
+
+YES: 30
+NO: 4
+ABSTAIN: 1
+
+The following servers did not vote:
+
+efnet.cs.hut.fi
+irc.homelien.no
+irc.hemmet.chalmers.se
+irc-efnet.svc.us.xo.net
+irc.secsup.org
+irc.desync.com
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

@@ -1,0 +1,64 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Rescind early vote conclusion entirely (US Regional)<br>
+Called by: ik (irc.nac.net)<br>
+Seconded by: Xref (irc.umich.edu)<br>
+Called on: 04/22/03<br>
+Ended on: 05/07/03<br>
+Status: PASSED (yes: 11, no: 3 , abstain: 0 , elig: ~20)<br><br>
+
+Description:<br><br>
+
+<pre>
+Rescind early vote conclusion entirely
+
+The current US Guidelines state:
+
+- Votes may be closed early and the results posted to the
+admin community, once the required majority has been
+reached.
+
+Vote YES will remove this paragraph from the guidelines
+entirely, meaning votes must last until the specified end
+date.
+
+
+Details:
+
+irc.limelight.us: NO
+irc.servercentral.net: NO
+irc.blessed.net: YES
+irc.aloha.net: YES
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.weblook2k.com: YES
+ircd.lagged.org: YES
+irc.umich.edu: YES
+irc.isprime.com: NO
+irc.nac.net: YES
+irc.aol.com: YES
+irc.choopa.net: YES
+irc.vrfx.com: YES
+
+YES: 11
+NO: 3
+ABSTAIN: 0
+
+(- note : non-eligable server votes purged)
+
+The following servers did not vote:
+
+irc.prison.net
+irc.wh.verio.net
+irc.easynews.com
+irc.lightning.net
+irc.secsup.uu.net
+irc.mindspring.com
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

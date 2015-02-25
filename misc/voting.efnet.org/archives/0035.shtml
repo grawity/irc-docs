@@ -1,0 +1,81 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: chan mode and conf changes<br>
+Date of conclusion : 31 Jul 2003
+Result: PASSED (yes: 21, no: 1, abstain: 1)
+</pre>
+
+Description:<br><br>
+
+<pre>
+The following vote has closed:
+                                                                                
+chan mode and conf changes
+                                                                                
+This vote calls for all servers to enable the channel modes
++e (n!u@h mask exemption to +b) and +I (n!u@h mask exemption
+to +invite-only channels).  Permit all servers to configure
+their MAXBANS value to 100 as policy.
+                                                                                
+Implementation of these changes shall take place within 2
+weeks after the close of vote.
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+efnet.demon.co.uk: YES
+irc.servercentral.net: YES
+irc.blessed.net: YES
+irc.efnet.nl: YES
+irc.inter.net.il: YES
+irc.umn.edu: YES
+irc.efnet.pl: YES
+irc.easynews.com: YES
+ircd.lagged.org: ABSTAIN
+irc.du.se: YES
+irc.he.net: YES
+irc.umich.edu: YES
+irc.arcti.ca: YES
+irc.isprime.com: YES
+efnet.skynet.be: NO
+irc.wh.verio.net: YES
+irc.nac.net: YES
+irc.avalonworks.ca: YES
+irc.banetele.no: YES
+irc.dkom.at: YES
+irc.mpls.ca: YES
+irc.choopa.net: YES
+irc.foxlink.net: YES
+                                                                                
+YES: 21
+NO: 1
+ABSTAIN: 1
+                                                                                
+The following servers did not vote:
+                                                                                
+irc.prison.net
+efnet.cs.hut.fi
+irc.limelight.us
+irc.homelien.no
+irc.csbnet.se
+irc-efnet.svc.us.xo.net
+irc.isdnet.fr
+irc.weblook2k.com
+irc.daxnet.no
+hub.se
+efnet.xs4all.nl
+irc.secsup.org
+irc.aol.com
+irc.inet.tele.dk
+irc.qeast.net
+irc.mindspring.com
+irc.aloha.net
+irc.desync.com
+irc.dks.ca
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

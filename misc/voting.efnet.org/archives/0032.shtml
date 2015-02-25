@@ -1,0 +1,101 @@
+<!--#include virtual="../header.html"-->
+
+Topic: unapproved ircd hacks<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: ik (irc.nac.net)<br>
+Called on: 06/08/03<br>
+Ended on: 06/23/03<br>
+Status: PASSED (yes: 20, no: 5 , abstain: 3 , elig: 41)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+unapproved ircd hacks
+
+The purpose of this vote is to make running
+unapproved "rogue" ircd modifications officially
+unacceptable.  It is intended to allow room for admins to
+modify their ircd, but also allow room for dealing with
+modifications that others may consider unfair, abusive,
+violations of privacy, etc.
+
+Specifically, no server shall run any ircd modification
+that violates user privacy including but not limited to
+operspy capabilities without accountability, and/or
+circumventing channel modes such as +i/+b.  Additionally,
+no server shall sniff privmsg or other traffic at the ircd
+or any other level for purposes other than troubleshooting
+technical problems.
+
+In the event that there is controversy over a particular
+modification, the server(s) in question will remove the
+modification immediately upon request from any admin until
+a vote on the particular modification can be discussed,
+called, and passed.
+
+Violation of this policy is grounds for an immediate jupe
+if deemed necessary by the number of admins required to
+call a jupe, followed by a delink vote should at least 1
+admin decide to call and second such a vote.
+
+
+Details:
+
+The results were as follows (summary at end):
+
+efnet.xs4all.nl: YES
+irc.servercentral.net: NO
+irc.limelight.us: YES
+irc.blessed.net: NO
+irc.efnet.nl: YES
+irc.aloha.net: YES
+irc.umn.edu: YES
+irc.efnet.pl: YES
+irc.easynews.com: YES
+irc.weblook2k.com: ABSTAIN
+ircd.lagged.org: YES
+irc.du.se: NO
+irc.umich.edu: YES
+irc.isprime.com: NO
+irc.nac.net: YES
+irc.wh.verio.net: NO
+efnet.skynet.be: ABSTAIN
+irc.mindspring.com: YES
+irc.avalonworks.ca: YES
+irc.secsup.org: ABSTAIN
+irc.aol.com: YES
+irc-efnet.svc.us.xo.net: YES
+irc.isdnet.fr: YES
+irc.dkom.at: YES
+irc.choopa.net: YES
+irc.prison.net: YES
+irc.vrfx.com: YES
+irc.qeast.net: YES
+
+YES: 20
+NO: 5
+ABSTAIN: 3
+
+The following servers did not vote:
+
+efnet.cs.hut.fi
+irc.banetele.no
+irc.homelien.no
+irc.hemmet.chalmers.se
+efnet.demon.co.uk
+irc.inter.net.il
+irc.daxnet.no
+irc.mpls.ca
+irc.arcti.ca
+irc.he.net
+hub.se
+irc.inet.tele.dk
+irc.desync.com
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

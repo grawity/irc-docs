@@ -1,0 +1,72 @@
+<!--#include virtual="../header.html"-->
+
+Topic: US Voting System (US Regional)<br>
+Called by: jafo (ircd.lagged.org)<br>
+Seconded by: ik (irc.nac.net)<br>
+Called on: 02/09/03<br>
+Ended on: 02/20/03<br>
+Status: PASSED (yes: 12, no: 2 , abstain: 1 , elig: ~19)<br><br>
+
+Description:<br><br>
+
+<pre>
+US Voting System
+
+Open to US admins only, this vote is to determine the will
+of the US admin body as a whole so we can either move
+forward or put this issue to rest.
+
+Do you think the US portion of EFnet should continue with a
+routing committee or do you prefer we form a US-wide voting
+system?
+
+There has been some discussion and proposals put forth but
+participation from the admin body has been very limited
+which leads me to believe there isn't much interest in a US-
+wide voting system.
+
+If we vote in favor of a US-wide system we should see ALL
+admins put forth some suggestions and participate in the
+discussions.
+
+Voting YES indicates favor of a US-wide voting system.
+Voting NO indicates favor of the Routing Committee.
+
+
+
+Details:
+
+irc.servercentral.net: YES
+irc.limelight.us: YES
+irc.nac.net: YES
+irc.wh.verio.net: NO
+irc.mindspring.com: YES
+irc.aol.com: ABSTAIN
+irc.aloha.net: YES
+irc.umn.edu: YES
+irc.weblook2k.com: YES
+irc.concentric.net: YES
+ircd.lagged.org: YES
+irc.choopa.net: YES
+irc.secsup.uu.net: YES
+irc.umich.edu: YES
+irc.vrfx.com: NO
+
+YES: 12
+NO: 2
+ABSTAIN: 1
+
+The following servers did not vote:
+
+irc.prison.net
+irc.easynews.com
+irc.lightning.net
+irc.blessed.net
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

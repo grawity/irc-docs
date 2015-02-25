@@ -1,0 +1,69 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Hostname Spoofing<br>
+Called by: MrPerfect (irc.core.com)<br>
+Seconded by: Xref (irc.umich.edu)<br>
+Called on: 02/22/01<br>
+Ended on: 03/08/01<br>
+Status: PASSED (yes: 16, no: 4, abstain: 0, elig: ~25)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+I'm using the default end date. I hope thats ok.
+
+Purpose: To set guidelines for hostname spoofing.
+
+Content: A server admin may only spoof domains for which they or the end-user 
+has ownership (i.e. billing contact for) of said domain. Spoofing non-existant 
+domains shall be allowed. However, if it becomes known to the admin or user 
+that the domain has been taken or under ownership of a person other than 
+end-user or admin and niether party has obtained permission from the domain 
+owner, said spoof shall be revoked.
+
+Additionally, spoofing non-existant tld's shall be allowed provided fake tld 
+does not exceed 4 characters. (i.e. 5 chars or more is deemed illegal).
+
+The admin takes responsibility for any spoofs on their server and should 
+revoke immediately upon notification of abuse from a "trusted" party. (i.e. 
+an oper)
+
+Reasoning: The top portion is self-explanitory. The TLD portion comes from 
+a concern that I have seen long faked tld's mess with monitor bots and 
+scripts/clients in unpredictable ways. The final part, again should be 
+common sense.
+
+That should do it unless I forgot something or went too far over the edge.
+
+
+Details:
+
+irc.core.com: YES
+irc.emory.edu: NO
+irc.plur.net: YES
+irc.lightning.net: YES
+irc.inter.net.il: YES
+irc.rt.ru: NO
+irc.umn.edu: YES
+irc.light.se: YES
+irc.colorado.edu: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc2.magic.ca: YES
+efnet.vuurwerk.nl: YES
+irc.isdnet.fr: YES
+irc.ins.net.uk: YES
+irc.exodus.net: NO
+irc.gigabell.de: NO
+*.gblx.net: YES
+irc.prison.net: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

@@ -1,0 +1,160 @@
+<!--#include virtual="../header.html"-->
+
+Topic: chanfix modifications, and then some..<br>
+Called by: Tsk (irc.lightning.net)<br>
+Seconded by: Xref (irc.umich.edu)<br>
+Called on: 10/24/01<br>
+Ended on: 11/01/01<br>
+Status: PASSED (yes: 24, no: 0, abstain: 0, elig: 30)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+chanfix modifications, and then some..
+
+This vote will be one vote entirely, but will be in two 
+pieces (ITEMS).  Please read everything very carefully.
+
+ITEM 1
+
+JUPES' chanfix command has already been implemented and 
+gives us a tool to restore ops to the original owners of a 
+channel by de-opping the ops and giving ops to those with 
+the highest score in the database who are currently in the 
+channel.
+
+Unfortunately, an oversight when voting on the 
+implementation of the chanfix command was +ikl channels.  
+This portion of the vote is to modify the chanfix command 
+to grant greater functionality to admins to help restore 
+ops to the 'normal ops' in a channel even if the channel 
+is +i, +k, etc.
+
+If passed, the following changes will take place:
+
+1)  The oplist command will be modified a bit, allowing 
+for more visibility when checking the database for a 
+certain channel.  Often times, simply the "top 5" ops' 
+user@hosts is not enough.  Running the oplist command will 
+now display the top 10 most-opped user@hosts along with 
+their scores (simply doubling the output of what we get 
+now (the top 5)).
+
+The reason for not making this higher than 10 is privacy.  
+People may not want to let the "top 20" ops on a +s 
+channel be known.  This is respectable, and the top 10 
+should be sufficient.
+
+2)  Assume a channel is +i (or +k, etc) and it is being 
+reported as taken over.  Admins have no way of seeing who 
+is in the channel to verify a takeover.  In order to keep 
+away from invading privacy by seeing into +s channels, a 
+command will be added to JUPES to allow admins to compare 
+the scores of the ops currently inside the channel, to 
+those with the highest scores in the database.
+
+This command will not output the nicknames, or the 
+user@hosts of the clients currently opped in the channel, 
+but simply the top 5 scores of those opped at the time.  
+From this information, it should then be easy to tell if 
+it is in fact a takeover or not.
+
+The command would be:
+
+/msg JUPES score #channel      <- subject to change
+
+3)  The way the chanfix command works will be modified as 
+follows:
+
+/msg JUPES chanfix #channel
+
+This command will remove all +oiklb modes on a channel.  
+JUPES will then set the channel +msnt and wait for the 
+next 5-minute pass before proceding further.  This allows 
+time for ops with higher scores to rejoin.  At the next 
+polling interval, JUPES will begin the re-opping procedure.
+
+Problem:  The top-5-most-opped people in the database who 
+are in the channel at the polling intervals may not 
+necessarily be who we want to have opped.  So, a solution 
+will be here, in ITEM 2.
+
+ITEM 2 OBJECTIVE
+
+        To better handle the re-opping of channels such 
+that people with extremely low scores in the database do 
+not gain ops until after a sufficient amount of time has 
+passed.  This will ensure that, combined with clearing 
++ikbl when a channel initially goes opless, the chanops 
+with the highest scores will be able to regain ops in that 
+channel.
+
+ITEM 2 DETAILS
+
+        When a channel with modes +ikl loses ops, 2 things 
+can immediately happen.  If 5 out of the top10 clients in 
+the database are in that channel, it will re-op them and 
+move on.  Otherwise, it will do nothing; leaving it opless 
+until the next 5-minute pass is made where it will be 
+identified as an opless channel.  Each time a pass is 
+made, if the channel continues to remain opless, the score 
+necessary to trigger an OP from chanfix will be lowered 
+until eventually, it will re-op even clients with the 
+lowest scores in the database for that channel.  On the 
+first pass, chanfix will clear +ikbl and set the channel 
++mnst and, if 5 of the top15 clients in the database are 
+present, it will re-op the highest-scoring 5.  If not, it 
+will wait until the next pass and look for 5 of the top20 
+clients, and so on, until 30 minutes have passed at which 
+time it will re-op whatever clients are present with -any- 
+score in the database, similar to simply running the 
+chanfix command as it is currently implemented.
+
+The results were as follows (summary at end):
+
+irc.plur.net: YES
+irc.lightning.net: YES
+hub.se: YES
+irc.lagged.org: YES
+irc.solidstreaming.net: YES
+irc.rt.ru: YES
+irc.carrier1.net.uk: YES
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.colorado.edu: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+irc.arcti.ca: YES
+efnet.vuurwerk.nl: YES
+irc.mindspring.com: YES
+irc-h.magic.ca: YES
+irc.isdnet.fr: YES
+*.gblx.net: YES
+irc.daxnet.no: YES
+irc.prison.net: YES
+irc.magic.ca: YES
+irc.qeast.net: YES
+
+YES: 24
+NO: 0
+ABSTAIN: 0
+
+The following servers did not vote:
+
+efnet.cs.hut.fi
+irc.homelien.no
+efnet.demon.co.uk
+irc.inter.net.il
+irc2.magic.ca
+irc.efnet.pl
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

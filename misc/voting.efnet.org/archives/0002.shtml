@@ -1,0 +1,58 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Addition to the voting policies<br>
+Called by: riedel (efnet.vuurwerk.nl)<br>
+Seconded by: Tsk (irc.lightning.net)<br>
+Called on: 01/28/01<br>
+Ended on: 02/12/01<br>
+Status: PASSED (yes: 20, no: 0, abstain: 0, elig: ~25)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+1) Votes cast will be collected by the voting admin(s) and
+made public after the vote period is over or a majority
+has been reached.
+
+2) Only a representative of a server that has acquired a
+permanent link to EFnet may vote on behalf of his/her server.
+
+3) A representative of a server cannot vote on issues that involve that admin
+and/or the server he/she represents directly.
+
+4) In case one admin represents multiple servers that can be
+seen as one, we (the admins) should discuss the number of
+votes that server gets. If there is failure to agree, it will be decided by vote.
+
+
+Details:
+
+irc.rt.ru: YES
+irc2.magic.ca: YES
+irc.prison.net: YES
+irc.hemmet.chalmers.se: YES
+irc.ins.net.uk: YES
+irc.stanford.edu: YES
+irc.gigabell.de: YES
+irc.core.com: YES
+irc.umn.edu: YES
+irc.colorado.edu: YES
+irc.emory.edu: YES
+irc.total.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.concentric.net: YES
+irc.umich.edu: YES
+irc.isdnet.fr: YES
+irc.lightning.net: YES
+efnet.vuurwerk.nl: YES
+irc.plur.net: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

@@ -1,0 +1,101 @@
+<!--#include virtual="../header.html"-->
+
+Topic: Operspy (local with no accountability)<br>
+Called by: Xref (irc.umich.edu)<br>
+Seconded by: Riedel (irc.efnet.nl)<br>
+Called on: 05/20/03<br>
+Ended on: 06/04/03<br>
+Status: NOT PASSED (yes: 15, no: 19 , abstain: 0 , elig: 41)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Operspy (local with no accountability) [3/3]
+
+This vote covers the following capabilities:
+
+- See all +i clients in /who
+- See all clients on +s/+p chans
+- See +s/+p channels in /whois
+- See channel keys/modes
+
+This is one of three related votes.  Whichever one vote has
+the largest number of YES responses, will be considered
+passed.  The other two will be considered nullified.
+
+If this vote passes, the above capabilities will be built
+into each ircd.  The ircd will not broadcast a notice as
+done with /kill, bound to a usermode, for accountability.
+Policy dictating who will be given accounts will be left to
+the discression of each admin unless voted otherwise in the
+future.
+
+Unless further policy is voted in at a later date, these
+capabilities may only be used to combat drones.  Abuse of
+these capabilities will be handled on a case-by-case basis
+just as would abuse of /kill, /squit, sniffing, chanfix,
+etc (again, until further policy is voted in at a later
+date -- perhaps concurrently with these 3 votes!).
+
+
+Details:
+
+The results were as follows (summary at end):
+
+efnet.xs4all.nl: NO
+efnet.demon.co.uk: YES
+irc.inter.net.il: NO
+irc.aloha.net: NO
+irc.easynews.com: NO
+irc.umn.edu: NO
+irc.weblook2k.com: YES
+irc.du.se: YES
+efnet.skynet.be: YES
+irc.nac.net: NO
+irc.wh.verio.net: YES
+irc.avalonworks.ca: YES
+irc.aol.com: NO
+irc.isdnet.fr: NO
+irc.mpls.ca: YES
+irc.daxnet.no: NO
+irc.prison.net: NO
+irc.qeast.net: YES
+irc.servercentral.net: YES
+irc.limelight.us: YES
+irc.blessed.net: YES
+hub.se: NO
+irc.efnet.nl: NO
+irc.efnet.pl: NO
+ircd.lagged.org: NO
+irc.umich.edu: NO
+irc.inet.tele.dk: YES
+irc.arcti.ca: NO
+irc.isprime.com: YES
+irc.mindspring.com: NO
+irc.banetele.no: YES
+irc.dkom.at: NO
+irc.choopa.net: NO
+irc.vrfx.com: YES
+
+YES: 15
+NO: 19
+ABSTAIN: 0
+
+The following servers did not vote:
+
+efnet.cs.hut.fi
+irc.homelien.no
+irc.hemmet.chalmers.se
+irc-efnet.svc.us.xo.net
+irc.he.net
+irc.secsup.org
+irc.desync.com
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

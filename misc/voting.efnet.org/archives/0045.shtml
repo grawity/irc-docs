@@ -1,0 +1,79 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: Gline list addition: Drone runner with restriction (II)<br>
+Date of conclusion : 29 Sep 2003
+Result: PASSED (yes: 25, no: 1, abstain: 3)
+Note: re-called, passed this time.
+</pre>
+
+Description:<br><br>
+
+<pre>
+The following vote has closed:
+                                                                                
+Gline list addition: Drone runner with restriction
+                                                                                
+This vote is to allow the Glining of drone runners
+immediately before taking control of a channel on which the
+drone runner's drones are controled.
+                                                                                
+As with the other drone runners vote, this vote also gives
+drone runners their own category separate from "distributor
+of trojans/viruses".
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+irc.dks.ca: YES
+efnet.xs4all.nl: YES
+irc.limelight.us: YES
+efnet.demon.co.uk: YES
+irc.blessed.net: YES
+hub.se: ABSTAIN
+irc.aloha.net: YES
+irc.efnet.nl: YES
+irc.efnet.pl: YES
+irc.homelien.no: YES
+irc.easynews.com: NO
+irc.weblook2k.com: YES
+ircd.lagged.org: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.he.net: YES
+irc.arcti.ca: YES
+irc.csbnet.se: YES
+efnet.skynet.be: YES
+irc.nac.net: YES
+irc.wh.verio.net: ABSTAIN
+irc.mindspring.com: YES
+irc.avalonworks.ca: YES
+irc.banetele.no: YES
+irc.isdnet.fr: YES
+irc.dkom.at: ABSTAIN
+irc.choopa.net: YES
+irc.daxnet.no: YES
+irc.foxlink.net: YES
+                                                                                
+YES: 25
+NO: 1
+ABSTAIN: 3
+                                                                                
+The following servers did not vote:
+                                                                                
+irc.prison.net
+efnet.cs.hut.fi
+irc.inter.net.il
+irc.servercentral.net
+irc-efnet.svc.us.xo.net
+irc.umn.edu
+irc.secsup.org
+irc.aol.com
+irc.inet.tele.dk
+irc.desync.com
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

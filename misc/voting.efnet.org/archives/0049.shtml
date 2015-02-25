@@ -1,0 +1,101 @@
+<!--#include virtual="../header.html"-->
+
+Topic: services.int reorganization/replacement of chanfix<br>
+Called by:  (Fraggle)<br>
+Seconded by:  (Disciple)<br>
+Called on: 22/04/05<br>
+Ended on: 07/05/05<br>
+Status: PASSED (yes: 25 , no: 1, abstain: 5, elig:35 )<br><br>
+
+Description:<br><br>
+
+<pre>
+
+services.int reorganization/replacement of chanfix
+
+This vote will ultimately lead to the creation of one
+centralized services, and one set of backup services.
+Openchanfix has proven itself stable, has been ported to
+ratbox2, and by the time this vote comes to a
+conclusion be ready to go into full production mode.
+
+If this vote passes, open chanfix (OCF) will replace the
+current code running on services.int. Garion (as a
+representative from the coding team) plus a representative
+nominated and elected by each region will form the new
+group of services admins responsible for maintaining and
+operating the new services.int. These elected
+representatives, and Garion as representative of the
+coding team, will then assume full responsibility for
+maintaining all services related matters. This includes
+replacing JUPES with an actually operational
+OpenJupes code (when ported to rb2) and any future
+developments requested by the admin community as a whole.
+
+A backup set of services will be run from the current
+services.eu location, but be renamed backup.services.int.
+It will run in passive mode incase of extended failure by
+services.int.
+
+thanks,
+andrew
+irc.easynews.com
+
+
+The results were as follows (summary at end):
+
+irc.efnet.pl: YES
+irc.blessed.net: YES
+irc.easynews.com: YES
+efnet.port80.se: YES
+irc.dks.ca: YES
+irc.umich.edu: YES
+irc.umn.edu: YES
+irc.inter.net.il: YES
+irc.igs.ca: YES
+irc.banetele.no: NO
+irc.choopa.net: YES
+irc.limelight.us: YES
+irc.mzima.net: YES
+irc.scnet.net: YES
+irc.desync.com: ABSTAIN
+irc.dkom.at: ABSTAIN
+irc.dataphone.se: YES
+irc.inet.tele.dk: YES
+irc.mindspring.com: YES
+irc.he.net: YES
+irc.colosolutions.net: YES
+efnet.cs.hut.fi: YES
+irc.wh.verio.net: YES
+efnet.xs4all.nl: YES
+efnet.demon.co.uk: YES
+irc.kagmir.ca: YES
+irc.du.se: YES
+irc.prison.net: YES
+irc.efnet.nl: ABSTAIN
+hub.se: ABSTAIN
+
+YES: 25
+NO: 1
+ABSTAIN: 4
+
+The following servers did not vote:
+
+ircd.lagged.org
+irc.homelien.no
+irc.concentric.net
+irc.daxnet.no
+irc.arcti.ca
+irc.nac.net
+
+
+
+
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

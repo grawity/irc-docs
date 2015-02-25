@@ -1,0 +1,181 @@
+<!--#include virtual="../header.html"-->
+
+Topic: oppless channel fix<br>
+Called by: wjr (irc.concentric.net)<br>
+Seconded by: riedel (efnet.vuurwerk.nl)<br>
+Called on: 04/07/01<br>
+Ended on: 04/21/01<br>
+Status: PASSED (yes: 14, no: 1, abstain: 3, elig: 29)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+Proposal for EFNet Channel Fixer
+William Rockwood, March 28, 2001
+Modified April 07, 2001 by William Rockwood
+
+
+
+PURPOSE:
+
+Prevent channels which lose ops from remaining in an oppless state.
+
+
+BACKGROUND:
+
+There have been a number of solutions proposed informally and even
+tried on the production EFnet network and each have and have had
+their own drawbacks. The common drawbacks among all of the ideas 
+involve human resources or the time of operators to actually intervene. 
+The reason for this resource drain is different in each case and more 
+extreme in two.
+
+The Hybrid 7 implementation of 'vchans' requires an operator to 
+create them, due to scaleability concerns if users were to create 
+thousands of the same vchan. This creates an unacceptable amount 
+of work for the operators and admins who have enough to do already 
+with day to day maintenance of their own server, their day jobs, 
+family life and what not.
+
+The EFNext (ircd-comstud-based) project implemented OJOIN and specified 
+a means of aggregating the channel ops in every channel on the network 
+which would be referenced by server operators when requested to assist 
+with an oppless channel. The administrative overhead of this would also 
+quickly become insane and is unreasonable.
+
+The patch for hybrid (infamously known as "OPME") was released, and run
+without a vote on several servers, and technically worked fine, but 
+completely overlooked many issues which are raised when restoring ops
+to a channel.  Essentially requiring a "leap of faith" on the part of
+the oper involved and left no room for accountability should the decision
+made in the end have been the wrong one.
+
+Further, there is precedent which shows that operator assistance in any 
+of the above ways implies that we as a group of administrators and 
+operators sanction the content of any of the channels which opers
+"interfere" with. This becomes undesirable when opers are asked to "fix" a 
+channel such as #0daywarez or #sexpics (random examples) which 
+potentially encourage the trading of illegal material. While opers could 
+simply refuse to help these channels, a much simpler, cleaner, fairer 
+solution can be managed.
+
+This proposed "channelfix" solution presents a quick fix to the oppless 
+channel problem with a "services-like" server which does, on a constant 
+basis, what the efnext "snapshot" mechanism does--cull a list of 
+chanops, index it and build averages over periods of time. Rather than 
+require server operators to be concerned with it, however, channelfix 
+operates on the client layer with a "fixerbot" client which it uses to 
+restore ops to channels which have become oppless. There are further
+potential uses for the channelfix server which are outside the scope
+of this document but include "repairing" TS0 channels, DCC functionality
+so admins and selected operators could "log in" to the service to watch
+chanfix's activities in realtime.
+
+
+FUNCTIONAL OVERVIEW:
+
+The channelfix server operates as a "services-like" server in that it
+links to the network but does not carry clients, or even have the
+ability to carry clients.  It merely grabs the 8-10meg burst every
+10-30 minutes, distills it to useful information and stores it in
+a database to be held for 3-10 days as a historical datagram of
+information which it will then self-reference when it detects that
+a channel has lost ops.  Once fully functional, channelfix will
+join its "chanfix" client to the affected channel, compare the
+members of the channel to its stored list of people who have been
+opped in that channel and op the 5-most-frequent nicks (by userhost)
+and leave the channel, leaving it once again in a state of having
+ops.
+
+Here's a mock-up of what might happen:
+
+Pub: #fixtest   stranged log @wjr 
+*** #fixtest : End of /NAMES list.
+*** Mode change "-o wjr" on channel #fixtest by wjr
+*** chanfix (bot@chanfix.efnet) has joined channel #fixtest
+*** Mode change "+o chanfix" on channel #fixtest by chanfix.efnet
+*** Mode change "+oo wjr stranged" on channel #fixtest by chanfix.efnet
+*** chanfix (bot@chanfix.efnet) has left channel #fixtest
+Pub: #fixtest   @stranged log @wjr
+*** #fixtest : End of /NAMES list.
+#fixtest        stranged  G@  ~wjr@armitage.concentric.net (0 *Unknown*)
+#fixtest        log       H*  ~wjr@not.real.concentric.net (4 *Unknown*)
+#fixtest        wjr       H@  ~wjr@armitage.concentric.net (0 *Unknown*)
+
+
+As you can see, when wjr deopped himself, chanfix immediately saw it and
+remedied the situation. Since this channel was newly-created and wjr was
+the only one to ever have ops in the channel, log's userhost was not
+included in the op snapshot and thus log was not opped.
+
+
+TERMS AND LIMITATIONS:
+
+1) The channelfix server will not be able to be used to restore
+ops to channels until it has been linked long enough to get enough 
+samples to build averages. 3-5 days will be required for this.
+
+2) The channelfix server will not operate when less than 7/8 of
+the "full network" is linked--in other words, if 6 servers are split,
+and oppless channels exist on the part of the net that the channelfix
+server is connected to, it will do nothing, until the servers rejoin.
+This is to avoid excessive "fixing" during periods of instability. It
+will also not update its "snapshot" database during such times.
+
+3) The channelfix server will log all channels it fixes and who it
+opped.  This information will be available (updated nightly) on a 
+password-protected ssl webserver and made available to all admins.
+
+4) The channelfix server will only track channels with 8 or more
+users in it on a "full net."  Channels with 7 or less users will
+need to coordinate the re-creation of said channels on their own.
+This will cut down on the database size and the amount of "re-ops"
+performed by channelfix tremendously.
+
+5) The channelfix server will only track non-dynamic, idented 
+userhosts. A list of dynamic 'keywords' will be used to "weed out" 
+hosts to ignore.  This prevents Joe Dialup User from stealing 
+John Dialup User's identity in order to take over a channel.
+
+6) The channelfix server will have C/N lines to all hub servers
+with full H:.  This allows it to connect anywhere in the event
+of a network outage due to attacks or natural catastrophe.
+
+
+DETAILED FUNCTIONAL SPECIFICATION:
+
+Awaiting coder input. Non-detailed spec should be sufficient for
+admins to make a determination whether or not this system is 
+appropriate for use on EFnet or not.
+
+
+Details:
+
+irc.plur.net: YES
+irc.emory.edu: YES
+irc.lightning.net: ABSTAIN
+irc.lagged.org: YES
+irc.inter.net.il: ABSTAIN
+irc.rt.ru: YES
+irc.umn.edu: YES
+irc.concentric.net: YES
+irc.light.se: YES
+irc.du.se: YES
+irc.umich.edu: YES
+irc.hemmet.chalmers.se: YES
+efnet.vuurwerk.nl: YES
+irc.ins.net.uk: YES
+irc.isdnet.fr: YES
+irc.stanford.edu: YES
+irc.gigabell.de: ABSTAIN
+irc.prison.net: NO
+
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

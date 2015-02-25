@@ -1,0 +1,86 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: OperSpy Accountability<br>
+Date of conclusion : 30 Jun 2003
+Result: PASSED (yes: 16, no: 11, abstain: 4)
+</pre>
+Description:<br><br>
+
+<pre>
+
+The following vote has closed:
+                                                                                
+Operspy accountability
+                                                                                
+While clients on a local server should rightfully be
+policed by that server staff alone, Information obtained
+by use of operspy features is global. Channels being
+global in nature might reveal information sensitive to
+users on another server, outside jurisdiction of the
+initiating party. This vote calls for accountibility on
+both local and global uses of operspy features.
+                                                                                
+Vote YES will require all uses of operspy, local and
+global, to be broadcast and logged globally.
+                                                                                
+Vote NO will require only global uses of operspy to be
+broadcast and logged.
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+efnet.xs4all.nl: YES
+irc.limelight.us: YES
+efnet.demon.co.uk: NO
+irc.servercentral.net: ABSTAIN
+irc.blessed.net: NO
+irc.inter.net.il: YES
+irc.efnet.nl: YES
+irc.aloha.net: YES
+irc.umn.edu: NO
+irc.efnet.pl: YES
+irc.easynews.com: NO
+irc.weblook2k.com: ABSTAIN
+ircd.lagged.org: YES
+irc.du.se: NO
+irc.umich.edu: YES
+irc.isprime.com: NO
+irc.wh.verio.net: NO
+irc.nac.net: YES
+efnet.skynet.be: YES
+irc.mindspring.com: YES
+irc.secsup.org: ABSTAIN
+irc.aol.com: YES
+irc.avalonworks.ca: NO
+irc.banetele.no: NO
+irc.isdnet.fr: YES
+irc.dkom.at: ABSTAIN
+irc.mpls.ca: NO
+irc.choopa.net: YES
+irc.prison.net: YES
+irc.vrfx.com: YES
+irc.qeast.net: NO
+                                                                                
+YES: 16
+NO: 11
+ABSTAIN: 4
+                                                                                
+The following servers did not vote:
+                                                                                
+efnet.cs.hut.fi
+irc.homelien.no
+irc.hemmet.chalmers.se
+irc-efnet.svc.us.xo.net
+irc.daxnet.no
+irc.arcti.ca
+irc.he.net
+hub.se
+irc.inet.tele.dk
+irc.desync.com
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

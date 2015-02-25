@@ -1,0 +1,72 @@
+<!--#include virtual="../header.html"-->
+
+Topic: US routing reorganization (US admins only please)<br>
+Called by: squrl (irc.exodus.net)<br>
+Seconded by: Tsk (irc.lightning.net)<br>
+Called on: 03/15/01<br>
+Ended on: 03/29/01<br>
+Status: PASSED (yes: 8, no: 0, abstain: 1, elig: 12)<br><br>
+
+Description:<br><br>
+
+<pre>
+
+As some of you may have seen on routing, I would like to call a vote for the restructuring of
+the US routing commitee. As the admins are present here, it seems the best forum, and would be
+appreciated if admins from outside the US would abstain/ignore this issue.
+
+
+For under 10 members of the routing comittee, there be one US representative named for each
+routing server on the comittee. This person need not be associated with a routing server, as
+the admins for the routing server will be on the committe, but must be chosen from the US. The
+representatives must show an understanding of routing, both on irc and in general. It need not
+be a current oper, although that would be preferable, as they can not actually "route" unless
+they are a global oper.
+The representatives would be chosen by a vote of US admins.                     
+The reason for the restriction to the US: 
+Up until this time, it has been agreed that each region maintains responsibility for linking
+and delinking of servers within their region.        
+The global admin list has been doing quite well at policy changes, but it is my feeling we
+should continue to maintain our autonomy with regards to links/delinks in our region.
+As such, I would like to limit the vote, and candidates, should this be accepted to US admins
+only.
+At this time, we would be electing 4 additional members to the routing committee, for the 4
+operational hubs. Once the status of best is determined, a fifth could be elected. In the event
+that the number of routing hubs exceeds 5, the number of elected representatives will either
+remain at 5, or be reduced, based on the current feeling of the committee towards whether or
+not there are too many people involved to be of use. 
+I would recommend a 6 month period for the representatives, to avoid anyone being burnt-out, or
+losing enthusiasm about the job.                    
+Routing will also maintain responsibility for selecting new hubs based on their benefit to the
+network and necessity.
+I would also like to specify that a non-routing admin member of routing may be removed from the
+committee at a majority vote of either US routing or US admins, if his behavior is questionable
+in the eyes of the other members.
+I would also like to stipulate that the elected be of a well demonstrated trust-worthy nature
+and acceptible to their peers on the committe.
+This is not to imply that we are looking for a lack of disagreement, or more of the same voice
+to pass issues with out question. The point of this vote is an attempt to revitalize the US
+portion of efnet and bring in fresh blood and new perspectives. However, someone both competent
+and trustworthy by all would be preferable to someone who is merely "well-liked".
+If this vote is passed, it will then be up to the US admins to select and vote in their
+representatives.
+
+Details:
+
+irc.emory.edu: YES
+irc.lightning.net: YES
+irc.lagged.org: YES
+irc.umn.edu: YES
+irc.stanford.edu: YES
+irc.concentric.net: ABSTAIN
+irc.exodus.net: YES
+*.gblx.net: YES
+irc.umich.edu: YES
+
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->

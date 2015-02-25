@@ -1,0 +1,88 @@
+EFNet Hostname Spoofing Policy Proposal
+William Rockwood, 14 May, 2001
+Updated, 16 May, 2001
+---
+
+PURPOSE:
+
+To create an enforceable, fair, pragmatic policy to serve as 
+the definitive guideline for hostname spoofing on EFNet.
+
+
+DESCRIPTION:
+
+Forged hostnames have become an effective method for deflecting
+Denial of Service attacks against server operators and admins,
+as well as the privileged few who are friends with admins.  Until
+now, there have been only contradictory views regarding hostname
+spoofing.  This proposal is intended to sharpen the line between
+what is, and what is not, acceptable use of our abilities to create
+forged hostnames.  For the purpose of this document, a forged or
+otherwise obscured hostname will be referred to as a "spoof."
+
+
+OVERVIEW:
+
+Spoofs shall be permitted so long as they do not in any way display
+negligence or intentional infringement on the rights of the domain
+owner.  That is, to be very clear, spoofs of non-existant TLDs or of
+hosts on a domain which the admin or oper/user maintains control will 
+be allowed after ownership has been verified by sending an e-mail to 
+the administrative contact of the domain in question.  Server admins 
+may, at their discretion, create a spoof under the same domain as their
+server.  Spoofing hosts on domains which the admin or spoof holder
+can not exhibit ownership will not be permitted, with the exception of
+non-existant domains which nobody is capable of possessing.
+
+Numeric spoofs will not be permitted unless they are all 0's (0.0.0.0) 
+or all 1's (255.255.255.255) or fall within RFC1918 address space 
+(10/8, 172.16/12, 192.168/16,) or if the spoofed address falls within
+netspace owned by the admin or user.  The final limitation is for 
+spoofs which are actually resolvable hostnames.  They may -not- resolve 
+to addresses which are not a part of the end-user or admins network 
+unless they resolve to loopback (127/8) or RFC1918 space.
+
+
+EXAMPLES:
+
+User Joe wants "ride.thehappyrainbow.com" to be his hostname.
+JoeUser is the administrative contact for 'thehappyrainbow.com' and
+after verifying this by sending a mail to the contact address and
+getting an affirmative response, the admin of the server can add the
+spoof.
+
+User Jeff wants "owns.a.ton.of.csco.com" but is not associated
+with the administration of the domain 'csco.com' in any way.  The
+server admin can not add this spoof.
+
+User Sara wants "ridingthebigcows.com" to be her hostname.  Since
+this domain does not (at the time this proposal was written) exist, 
+the server admin can not add this spoof.
+
+User Sally wants "i.am.hot" to be her hostname (she runs the
+channel #hotties and is known for her willingness to go on dates
+with server admins.)  Since there is no '.hot' TLD, this spoof is
+valid and the server admin can add it.
+
+User Fred wants his spoof to be an actual IP address for whatever
+reason (less memorable, perhaps.) Since Fred runs a large network,
+and owns a number of routable netblocks, he chooses an IP that is
+not routed for abuse purposes--so his users, should they do abusive
+things, can be held responsible for their actions.  This is an 
+acceptable spoof, the server admin can add it after verifying that
+Fred is the administrator (or has permission from the administrator)
+of that netblock.
+
+
+LIMITATIONS:
+
+Common sense should be used when creating spoofs.  Obviously, creating 
+a spoof "packet.kiddies.are.dumb.they.can.wank.off," while still a
+valid spoof, would not be recommended.  It should be left to the admin
+of a server whether they wish to use childish hostnames or not.  It
+should be noted, however, that since peer-review is always occurring
+on EFNet, they would likely be looked upon with derision were they to 
+make a habit of using or allowing spoofs with negative connotations such
+as racism or other obscene or profane language. 
+
+

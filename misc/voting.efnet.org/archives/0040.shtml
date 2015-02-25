@@ -1,0 +1,78 @@
+<!--#include virtual="../header.html"-->
+
+<pre>
+Topic: Gline list addition: Spamming<br>
+Date of conclusion : 12 Sep 2003
+Result: PASSED (yes: 20, no: 2, abstain: 2)
+</pre>
+
+Description:<br><br>
+
+<pre>
+The following vote has closed:
+                                                                                
+Gline list addition: Spamming
+                                                                                
+This vote is to add spamming as an acceptable Gline reason.
+                                                                                
+Admins may recommend pursuing other methods of dealing with
+spammers such as reporting them, adding channel bans,
+and/or klining them.  However, this vote will make it an
+acceptable Gline reason should 3 opers decide to Gline a
+spammer.
+                                                                                
+The results were as follows (summary at end):
+                                                                                
+efnet.xs4all.nl: YES
+efnet.demon.co.uk: NO
+irc.limelight.us: YES
+irc.blessed.net: YES
+irc.inter.net.il: YES
+irc.efnet.nl: YES
+irc.aloha.net: ABSTAIN
+irc.efnet.pl: YES
+irc.easynews.com: NO
+irc.umn.edu: YES
+irc.du.se: YES
+irc.he.net: YES
+irc.umich.edu: YES
+irc.csbnet.se: YES
+irc.wh.verio.net: ABSTAIN
+irc.nac.net: YES
+efnet.skynet.be: YES
+irc.mindspring.com: YES
+irc.avalonworks.ca: YES
+irc.banetele.no: YES
+irc.isdnet.fr: YES
+irc.choopa.net: YES
+irc.prison.net: YES
+irc.foxlink.net: YES
+                                                                                
+YES: 20
+NO: 2
+ABSTAIN: 2
+                                                                                
+The following servers did not vote:
+                                                                                
+efnet.cs.hut.fi
+ircd.lagged.org
+irc.homelien.no
+irc.servercentral.net
+irc-efnet.svc.us.xo.net
+irc.weblook2k.com
+irc.daxnet.no
+irc.arcti.ca
+hub.se
+irc.secsup.org
+irc.aol.com
+irc.inet.tele.dk
+irc.dkom.at
+irc.desync.com
+irc.dks.ca
+</pre>
+
+<br><br>
+
+<a href="index.shtml">Click Here</a> to go back.<br>
+
+<!--#include virtual="../footer.html"-->
