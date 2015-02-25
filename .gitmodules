@@ -1,0 +1,6 @@
+[submodule "ircu-proto-doc"]
+	path = server/ircu-proto-doc
+	url = git://undernet-ircu.git.sourceforge.net/gitroot/undernet-ircu/proto-doc
+[submodule "ircv3"]
+	path = ircv3
+	url = git://github.com/atheme/ircv3-specifications.git
