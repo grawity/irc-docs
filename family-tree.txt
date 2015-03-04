@@ -254,9 +254,6 @@ sorted alphabetically with "ircd-" prefix removed
     "RabbitIRCD is a fork of the now-defunct UnrealIRCd 3.4 tree, originated by
     developers on the Weresource IRC network."
 
-    (in other words: kaniini became a developer of Unreal 3.4, then got bored
-    and decided to fork it instead)
-
 ## ratbox
     <http://www.ratbox.org/>
     protocol: TS6 (as of r25522)
