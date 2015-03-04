@@ -120,7 +120,7 @@ Known extensions:
   [isupport-leeh-2005]: http://tools.ietf.org/html/draft-hardy-irc-isupport-00
   [isupport-list]: http://www.irc.org/tech_docs/005.html
   [callerid]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/modeg.txt
-  [monitor]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/monitor.txt
+  [monitor]: https://github.com/ircv3/ircv3-specifications/blob/master/specification/monitor-3.2.md
   [watch]: http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/file/54870aec98e4/reference/draft-meglio-irc-watch-00.txt
   [whox]: http://hg.quakenet.org/snircd/file/37c9c7460603/doc/readme.who
 
@@ -170,7 +170,7 @@ Nonstandard capabilities:
 
 Known extensions:
 
- * `IDENTIFY-MSG` – identical to CAP `identify-msg`
+ * `IDENTIFY-MSG` (Dancer, Hyperion) – identical to the later CAP `identify-msg`
  * `IDENTIFY-CTCP` (Dancer) – merged into `IDENTIFY-MSG` by Hyperion
 
 Features:
