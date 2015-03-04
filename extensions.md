@@ -11,7 +11,7 @@ Later updated by [RFC 2810][rfc2810], [RFC 2811][rfc2811], [RFC 2812][rfc2812], 
 Client-server protocol:
 
  * [Jilles' IRC protocol documentation](http://www.stack.nl/~jilles/cgi-bin/hgwebdir.cgi/irc-documentation-jilles/)
- * [IRC v3 Working Group][ircv3]
+ * [IRCv3 Working Group][ircv3]
 
 Server-server protocol:
 
@@ -128,21 +128,24 @@ Known extensions:
 
 The **IRCv3 Working Group** defines a standard set of extensions to IRCv2. The central part of IRCv3 is [capability negotiation][v3-cap] using `CAP`, which is implemented by all current servers.
 
-Known extensions:
+Some IRCv3-specified extensions:
 
  * [account notification][v3-account-notify] (Charybdis, InspIRCd, Unreal)
  * [away notification][v3-away-notify] (Charybdis, InspIRCd, Unreal)
  * [extended JOIN][v3-extended-join] (Charybdis, InspIRCd, Unreal)
- * `identify-msg` (Charybdis)
  * [multi-prefix NAMES][v3-multi-prefix] (many!)
  * [message tags][v3-message-tags] (ZNC, Weechat)
  * [metadata][v3-metadata]
  * [server time][v3-server-time] (ZNC, Weechat)
  * [SASL authentication][v3-sasl] (Atheme, Anope, X3)
  * [STARTTLS][v3-tls] (InspIRCd, Unreal)
- * `userhost-in-names` – equivalent to NAMESX (InspIRCd, Unreal)
+ * [userhost-in-names][v3-userhost-in-names] – equivalent to NAMESX (InspIRCd, Unreal)
 
-<i>(The supported software lists are incomplete.)</i>
+Note that this list is not up-to-date; visit the main [IRCv3 repository][ircv3] for a full list.
+
+Nonstandard capabilities:
+
+ * [identify-msg][cap-identify-msg] (Charybdis)
 
 Features:
 
@@ -154,6 +157,7 @@ Downsides:
 
  * For `sasl`, supported SASL mechanisms are not advertised. (This may be fixed soon.)
 
+  [cap-identify-msg]: /client/cap-identify-msg.md
   [v3-cap]: http://ircv3.atheme.org/specification/capability-negotiation-3.1
   [v3-account-notify]: http://ircv3.atheme.org/extensions/account-notify-3.1
   [v3-away-notify]: http://ircv3.atheme.org/extensions/away-notify-3.1
@@ -164,6 +168,7 @@ Downsides:
   [v3-tls]: http://ircv3.atheme.org/extensions/tls-3.1
   [v3-message-tags]: http://ircv3.atheme.org/specification/message-tags-3.2
   [v3-metadata]: http://ircv3.atheme.org/specification/metadata-3.2
+  [v3-userhost-in-names]: https://github.com/ircv3/ircv3-specifications/blob/master/extensions/userhost-in-names-3.2.md
 
 ## CAPAB (obsolete; Hybrid, Dancer, Hyperion)
 
