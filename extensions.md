@@ -128,6 +128,12 @@ Known extensions:
 
 The **IRCv3 Working Group** defines a standard set of extensions to IRCv2. The central part of IRCv3 is [capability negotiation][v3-cap] using `CAP`, which is implemented by all current servers.
 
+Features:
+
+ * Server acknowledges successful and failed requests.
+ * Can disable extensions (using `CAP REQ -foo`).
+ * Can list extensions during registration (using `CAP LS`).
+
 Some IRCv3-specified extensions:
 
  * [account notification][v3-account-notify] (Charybdis, InspIRCd, Unreal)
@@ -146,16 +152,6 @@ Note that this list is not up-to-date; visit the main [IRCv3 repository][ircv3] 
 Nonstandard capabilities:
 
  * [identify-msg][cap-identify-msg] (Charybdis)
-
-Features:
-
- * Server acknowledges successful and failed requests.
- * Can disable extensions (using `CAP REQ -foo`).
- * Can list extensions during registration (using `CAP LS`).
-
-Downsides:
-
- * For `sasl`, supported SASL mechanisms are not advertised. (This may be fixed soon.)
 
   [cap-identify-msg]: /client/cap-identify-msg.md
   [v3-cap]: http://ircv3.atheme.org/specification/capability-negotiation-3.1
