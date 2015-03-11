@@ -1,0 +1,1571 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>IRC+ Identity Protocol</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="IRC+ Identity Protocol">
+<meta name="generator" content="xml2rfc v1.32 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">IRC+ Working Group</td><td class="header">A. Uzhva</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">A. Inviolatum</td></tr>
+<tr><td class="header">Intended status: Standards Track</td><td class="header">KVIrc Development Team</td></tr>
+<tr><td class="header">Expires: March 4, 2008</td><td class="header">A. Schrotenboer</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">SurrealServices project</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">W. Pitcock</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">atheme.org</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">C. v. Loesch</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">psyc://psyced.org/~lynX</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Sep 1, 2007</td></tr>
+</table></td></tr></table>
+<h1><br />IRC+ Identity Protocol<br />draft-irc+-identity</h1>
+
+<h3>Status of this Memo</h3>
+<p>
+By submitting this Internet-Draft,
+each author represents that any applicable patent or other IPR claims of which
+he or she is aware have been or will be disclosed,
+and any of which he or she becomes aware will be disclosed,
+in accordance with Section&nbsp;6 of BCP&nbsp;79.</p>
+<p>
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF), its areas, and its working groups.
+Note that other groups may also distribute working documents as
+Internet-Drafts.</p>
+<p>
+Internet-Drafts are draft documents valid for a maximum of six months
+and may be updated, replaced, or obsoleted by other documents at any time.
+It is inappropriate to use Internet-Drafts as reference material or to cite
+them other than as &ldquo;work in progress.&rdquo;</p>
+<p>
+The list of current Internet-Drafts can be accessed at
+<a href='http://www.ietf.org/ietf/1id-abstracts.txt'>http://www.ietf.org/ietf/1id-abstracts.txt</a>.</p>
+<p>
+The list of Internet-Draft Shadow Directories can be accessed at
+<a href='http://www.ietf.org/shadow.html'>http://www.ietf.org/shadow.html</a>.</p>
+<p>
+This Internet-Draft will expire on March 4, 2008.</p>
+
+<h3>Copyright Notice</h3>
+<p>
+Copyright &copy; The IETF Trust (2007).</p>
+
+<h3>Abstract</h3>
+
+<p>Most identification services on IRC share basic common features and
+      syntax and even the name 'NickServ'. Yet
+      IRC clients, automations and robots are unable to interact with these
+      services across IRC networks in a generic way due to varying
+      translations, versions and local modifications.
+</p>
+<p>The goal of this
+      Internet Draft is to make it possible for IRC users to understand IRC's
+      service messages in their native language, and successfully interact
+      with them. Also to allow client applications to produce easy graphical
+      interfaces to fulfil the basic needs of electronic identity on IRC
+      systems.
+</p>
+<h3>Requirements Language</h3>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in RFC 2119.
+</p>
+<h3>TODOs</h3>
+
+<p>The style of this specification still needs clean-ups.
+	It shouldn't address users as "you." It shouldn't say "should" and
+	"must" in non-final lower case. And there are details left to work
+	out. Let us not add anything else to this specification or we
+	just won't finish it! Rather reduce it further than add more, and
+	put future extensions into future IRC+ drafts.
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Introduction<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">1.1.</a>&nbsp;
+Background<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">1.2.</a>&nbsp;
+Overview<br />
+<a href="#anchor4">2.</a>&nbsp;
+Detecting IRC+ network and switching to IRC+ mode<br />
+<a href="#anchor5">3.</a>&nbsp;
+Replies<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_SUPPORTS_IRCPLUS">3.1.</a>&nbsp;
+800 RPL_SERVICES_SUPPORTS_IRCPLUS - List of supported IRC+ features<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_NEEDPASS">3.2.</a>&nbsp;
+801 RPL_SERVICES_NEEDPASS - Need password<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_PASSOK">3.3.</a>&nbsp;
+802 RPL_SERVICES_PASSOK - Auth Ok<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_BADPASS">3.4.</a>&nbsp;
+803 RPL_SERVICES_BADPASS - Password incorrect<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_COMMAND_SUCCESS">3.5.</a>&nbsp;
+804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_COMMAND_ERROR">3.6.</a>&nbsp;
+805 RPL_SERVICES_COMMAND_ERROR - Command Error<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_INFO">3.7.</a>&nbsp;
+806 RPL_SERVICES_INFO - Information about nick/channel<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_INFO_END">3.8.</a>&nbsp;
+807 RPL_SERVICES_INFO_END - End of information about nick/channel<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_ERROR_NEEDREGISTRATION">3.9.</a>&nbsp;
+808 RPL_SERVICES_ERROR_NEEDREGISTRATION - You must register the nick<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_NICKSTATUS">3.10.</a>&nbsp;
+809 RPL_SERVICES_NICKSTATUS - Returns nick status<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_MEMO_READ">3.11.</a>&nbsp;
+810 RPL_SERVICES_MEMO_READ - Your memo was read<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_LIST_START">3.12.</a>&nbsp;
+814 RPL_SERVICES_LIST_START - Start list output<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_LIST">3.13.</a>&nbsp;
+815 RPL_SERVICES_LIST - List output<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_LIST_END">3.14.</a>&nbsp;
+816 RPL_SERVICES_LIST_END - End list output<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_MEMO_START">3.15.</a>&nbsp;
+820 RPL_SERVICES_MEMO_START - Start memo output<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_MEMO">3.16.</a>&nbsp;
+821 RPL_SERVICES_MEMO - Memo output<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_MEMO_END">3.17.</a>&nbsp;
+822 RPL_SERVICES_MEMO_END - End memo output<br />
+<a href="#anchor6">4.</a>&nbsp;
+Queries<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">4.1.</a>&nbsp;
+Common<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ircplus_query">4.1.1.</a>&nbsp;
+IRCPLUS - enabling/disabling IRC+ mode<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">4.1.2.</a>&nbsp;
+IDENTIFY<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">4.1.3.</a>&nbsp;
+INFO<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">4.1.4.</a>&nbsp;
+DROP<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">4.1.5.</a>&nbsp;
+SET<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">4.2.</a>&nbsp;
+Identity Services<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">4.2.1.</a>&nbsp;
+REGISTER<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor14">4.2.2.</a>&nbsp;
+LINK<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor15">4.2.3.</a>&nbsp;
+LOGOUT<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">4.2.4.</a>&nbsp;
+ACCESS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor20">4.2.5.</a>&nbsp;
+RECLAIM<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">4.2.6.</a>&nbsp;
+LIST LINKS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor25">4.2.7.</a>&nbsp;
+STATUS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor26">4.2.8.</a>&nbsp;
+SENDPASS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">4.3.</a>&nbsp;
+Offline Messaging Service<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">4.3.1.</a>&nbsp;
+SEND<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">4.3.2.</a>&nbsp;
+LIST<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor30">4.3.3.</a>&nbsp;
+READ<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor31">4.3.4.</a>&nbsp;
+DEL<br />
+<a href="#rfc.references1">5.</a>&nbsp;
+Normative References<br />
+<a href="#error_codes">Appendix&nbsp;A.</a>&nbsp;
+Error codes<br />
+<a href="#nick_statuses">Appendix&nbsp;B.</a>&nbsp;
+Nick status codes<br />
+<a href="#xml_capab">Appendix&nbsp;C.</a>&nbsp;
+XML definition of the services capabilities<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Authors' Addresses<br />
+<a href="#rfc.copyright">&#167;</a>&nbsp;
+Intellectual Property and Copyright Statements<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Introduction</h3>
+
+<p>
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.1"></a><h3>1.1.&nbsp;
+Background</h3>
+
+<p>One day in 1991, Jupiter killed NickServ. That day marked
+	the beginning of a dark period in the evolution of IRC: Nicknames
+	weren't owned. Virtual identities were not reliable. Sixteen years
+	later, most large IRC networks have overcome this wrong attitude.
+</p>
+<p>Since the IRC protocol does not protect identities natively,
+	external programs called services have been employed. These
+	services were inspired by the original NickServ, but have evolved
+	into many different and incompatible flavors. This specification
+	proposes a common protocol for services to ensure interoperability.
+</p>
+<p>Additionally to the messaging interface the end users are
+	familiar with, although they are different on each network, this
+	protocol adds a more generalized, abstract and client developer
+	friendly interface to the typical functions needed for managing
+	and securing your digital identity on IRC.
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.2"></a><h3>1.2.&nbsp;
+Overview</h3>
+
+<p>Numerics MUST fit RFC 1459 requirements. Services SHOULD send
+        numeric replies, where all meaningful parts SHOULD be message
+        parameters, not the text part.
+</p>
+<p>ABNF for numeric messages or replies from services:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>ServicesMessage</dfn> = <cite class='id'>prefix</cite> <cite class='id'>numeric</cite> <cite class='id'>parameterList</cite> ["<span class='str'>:</span>" <cite class='id'>trailing</cite>]
+<dfn>parameterList</dfn>  = <cite class='id'>singleParameter</cite> [<cite class='id'>parameterList</cite>]
+</pre></div>
+<p>The <tt>prefix</tt> is a standard IRC prefix,
+	containing ":" and server name.
+</p>
+<p>Numerics should be in an otherwise unused range (as of this draft,
+	800-899). This range may be reassigned or reorganized later, and this
+	list is not to be considered authoritative.
+</p>
+<p>Some services provide functionality which isn't covered by this
+	specification. Please keep on sending NOTICEs in that case, do not
+	come up with your own numerics, help IRC+ provide further
+        specifications to fill in the gaps.
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Detecting IRC+ network and switching to IRC+ mode</h3>
+
+<p>An IRC+ compliant IRC server SHOULD include the
+      <tt>IRCPLUS</tt> parameter in its server <a href='http://www.irc.org/tech_docs/005.html'>RPL_ISUPPORT</a>
+      message.
+</p>
+<p>IRC+ compliant services MUST send an 800 code to any
+      client as it enters the IRC network, containing a list of the
+      supported IRC+ features. 
+</p>
+<p>If the IRC client supports IRC+ mode, it MAY send a command to
+      the ircplus service <a class='info' href='#ircplus_query'>enabling IRC+ mode<span> (</span><span class='info'>IRCPLUS - enabling/disabling IRC+ mode</span><span>)</span></a>. IRC+ mode
+      MUST be set on a per-session basis only. If services and the server are
+      not given this request, they MUST NOT use IRC+ mode.
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Replies</h3>
+
+<p>In the subsequent paragraphs MESSAGE_TARGET is the current nickname
+	of the recipient of the message.
+</p>
+<a name="RPL_SERVICES_SUPPORTS_IRCPLUS"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.1"></a><h3>3.1.&nbsp;
+800 RPL_SERVICES_SUPPORTS_IRCPLUS - List of supported IRC+ features</h3>
+
+<p>Tells the client which IRC+ services are available and how to access them.
+</p>
+<p>800 RPL_SERVICES_SUPPORTS_IRCPLUS
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 800 MESSAGE_TARGET IRCPLUS_SERVICES_LIST :TRAILING</pre></div>
+<p>IRCPLUS_SERVICES_LIST is a list of supported services by IRC+.
+	This document defines a IRCPLUS and an IDENTITY service feature set.
+	Further documents will define further services listable in this
+	message.
+</p>
+<p>Each service is assigned a protocol message command to use to
+	submit requests to it. These MAY differ from network to network.
+	It is recommended to use the service name itself as a command, but
+	you MAY use historic nicknames such as NickServ or even a combined
+	command and argument string such as "PRIVMSG NickServ".
+</p>
+<p>TRAILING MAY be used to deliver a visual message to legacy client
+	users. It SHOULD NOT be displayed by IRC+ compliant clients.
+	TRAILING is optional.
+</p>
+<p>Example of Typical Configuration:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:NickServ 800 tabris IRCPLUS="NickServ" IDENTITY="NickServ" :are our IRC+ services</pre></div>
+<p>In this example the command used to send identity service requests is "NickServ". The command used to send generic services requests, like enabling IRC+ mode, is also called "NickServ".
+</p>
+<p>Example of Ideal Configuration:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:irc.example.net 800 WiZ IRCPLUS="IRCPLUS" IDENTITY="IDENTITY"</pre></div>
+<p>Note: The design rationale here is to be able to adapt to existing
+	network infrastructure and not require modification to deployed
+	IRC server software, but also to indicate a path for future
+	simplification, should all networks agree on this common syntax
+	in a distant future, thus making the service to nickname
+	mapping unnecessary.
+</p>
+<a name="RPL_SERVICES_NEEDPASS"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.2"></a><h3>3.2.&nbsp;
+801 RPL_SERVICES_NEEDPASS - Need password</h3>
+
+<p>Requires client to identify or use password with command.
+</p>
+<p>801 RPL_SERVICES_NEEDPASS
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 801 MESSAGE_TARGET SERVICE PASS_TARGET COMMAND [SUPPORTED_AUTH_METHODS]</pre></div>
+<p>Where PASS_TARGET &ndash; registered target. Nick or Channel.
+</p>
+<p>SUPPORTED_AUTH_METHODS SHOULD give a user list of supported auth
+        methods and required tags.
+</p>
+<p></p>
+<ul class="text">
+<li>PLAIN method - pasword will be sended in unsecure plain-text
+            way
+</li>
+<li>SASL method - secure sasl auth.
+</li>
+</ul>
+
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>//both methods
+:prefix 801 Alexey NickServ Alexey PLAIN SASL[...]
+//only secure auth
+:prefix 801 Alexey ChanServ #kvirc SASL[...]</pre></div>
+<a name="RPL_SERVICES_PASSOK"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.3"></a><h3>3.3.&nbsp;
+802 RPL_SERVICES_PASSOK - Auth Ok</h3>
+
+<p>Indicates that the password was accepted.
+</p>
+<p>802 RPL_SERVICES_PASSOK
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 802 MESSAGE_TARGET SERVICE PASS_TARGET :password accepted</pre></div>
+<p>Where PASS_TARGET &ndash; registered target. Nick or Channel.
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 802 Alexey NickServ Alexey :password accepted
+:prefix 802 Alexey ChanServ #kvirc :password accepted</pre></div>
+<a name="RPL_SERVICES_BADPASS"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.4"></a><h3>3.4.&nbsp;
+803 RPL_SERVICES_BADPASS - Password incorrect</h3>
+
+<p>Indicates, that the password is invalid.
+</p>
+<p>803 RPL_SERVICES_BADPASS
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 803 MESSAGE_TARGET SERVICE PASS_TARGET :password wrong</pre></div>
+<p>Where PASS_TARGET &ndash; registered target. Nick or Channel.
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 803 Alexey NickServ Alexey :password wrong
+:prefix 803 Alexey ChanServ #kvirc :password wrong</pre></div>
+<a name="RPL_SERVICES_COMMAND_SUCCESS"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.5"></a><h3>3.5.&nbsp;
+804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</h3>
+
+<p>Indicates, that the command completed successfully.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 804 MESSAGE_TARGET SERVICE COMMAND :command ok</pre></div>
+<p>Where COMMAND &ndash; last used command.
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 804 NickServ SET :command ok</pre></div>
+<a name="RPL_SERVICES_COMMAND_ERROR"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.6"></a><h3>3.6.&nbsp;
+805 RPL_SERVICES_COMMAND_ERROR - Command Error</h3>
+
+<p>Indicates that command failed or is unknown. 805
+        RPL_SERVICES_COMMAND_ERROR
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 805 MESSAGE_TARGET SERVICE COMMAND ERRNO :error text</pre></div>
+<p>Where COMMAND &ndash; last used command. ERRNO &ndash; error
+        code.
+</p>
+<p>See also: <a class='info' href='#error_codes'>Error codes<span> (</span><span class='info'>Error codes</span><span>)</span></a>
+</p>
+<p>Example
+</p>
+<a name="RPL_SERVICES_INFO"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.7"></a><h3>3.7.&nbsp;
+806 RPL_SERVICES_INFO - Information about nick/channel</h3>
+
+<p>806 RPL_SERVICES_INFO
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>prefix 806 MESSAGE_TARGET SERVICE INFO_TARGET INFO_TAG :VALUE</pre></div>
+<p>Where INFO_TAG can be: </p>
+<ul class="text">
+<li>REGISTERED
+</li>
+<li>USED
+</li>
+<li>...
+</li>
+</ul>
+
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 806 Alexey NickServ #kvirc REGISTERED :1000000</pre></div>
+<a name="RPL_SERVICES_INFO_END"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.8"></a><h3>3.8.&nbsp;
+807 RPL_SERVICES_INFO_END - End of information about nick/channel</h3>
+
+<p>Indicates end of information about nick/channel 807
+        RPL_SERVICES_INFO_END
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 807 MESSAGE_TARGET SERVICE INFO_TARGET :End of info</pre></div>
+<p>
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 807 Alexey NickServ #kvirc :End of info</pre></div>
+<a name="RPL_SERVICES_ERROR_NEEDREGISTRATION"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.9"></a><h3>3.9.&nbsp;
+808 RPL_SERVICES_ERROR_NEEDREGISTRATION - You must register the nick</h3>
+
+<p>Indicates that the user is required to register the nick.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 808 MESSAGE_TARGET SERVICE :Your nick must be registered first</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 808 Alexey NickServ :Your nick must be registered first</pre></div>
+<a name="RPL_SERVICES_NICKSTATUS"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.10"></a><h3>3.10.&nbsp;
+809 RPL_SERVICES_NICKSTATUS - Returns nick status</h3>
+
+<p>Returns whether the user using the given nickname is recognized as
+        the owner of the nickname.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 809 NICKNAME STATUS_CODE</pre></div>
+<p>Where nickname is the nickname sent with the command, and
+        status-code is one of the following:
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 809 Inviolatum OWNER_VIA_PASSWORD</pre></div>
+<p>See also: <a class='info' href='#nick_statuses'>Nick status codes<span> (</span><span class='info'>Nick status codes</span><span>)</span></a>
+</p>
+<a name="RPL_SERVICES_MEMO_READ"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.11"></a><h3>3.11.&nbsp;
+810 RPL_SERVICES_MEMO_READ - Your memo was read</h3>
+
+<p>
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 810 MESSAGE_TARGET SERVICE INFO_TARGET :Your memo to &lt;INFO_TARGET&gt; was read.</pre></div>
+<p>Where &lt;INFO_TARGET&gt; is memo recipient.
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 810 Inviolatum MemoServ Alexey :Your memo to Alexey was read.</pre></div>
+<p>
+</p>
+<a name="RPL_SERVICES_LIST_START"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.12"></a><h3>3.12.&nbsp;
+814 RPL_SERVICES_LIST_START - Start list output</h3>
+
+<p>Start list command tag
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 814 MESSAGE_TARGET SERVICE LIST_TITLE [[PARAM1] ...]</pre></div>
+<p>LIST_TITLE - is the type of list; PARAMs is used to identify list
+        targets
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 814 Inviolatum ChanServ AOP #kvirc
+:prefix 814 Inviolatum NickServ ACCESS Alexey
+</pre></div>
+<p>
+</p>
+<a name="RPL_SERVICES_LIST"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.13"></a><h3>3.13.&nbsp;
+815 RPL_SERVICES_LIST - List output</h3>
+
+<p>List item content
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 815 MESSAGE_TARGET SERVICE ITEM_NUM [LEVEL]: ITEM_TEXT</pre></div>
+<p>Where ITEM_NUM is number of item in the list. LEVEL is used for
+        permission lists.
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 815 Inviolatum ChanServ 1 99999 :Inviolatum</pre></div>
+<p>
+</p>
+<a name="RPL_SERVICES_LIST_END"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.14"></a><h3>3.14.&nbsp;
+816 RPL_SERVICES_LIST_END - End list output</h3>
+
+<p>End of list
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 816 MESSAGE_TARGET SERVICE :End of list</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 816 Inviolatum ChanServ :End of list</pre></div>
+<p>
+</p>
+<a name="RPL_SERVICES_MEMO_START"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.15"></a><h3>3.15.&nbsp;
+820 RPL_SERVICES_MEMO_START - Start memo output</h3>
+
+<p>Starts memo output
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 820 MESSAGE_TARGET MemoServ MEMO_SENDER MEMO_TARGET :Memo start</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 820 Inviolatum MemoServ Alexey Inviolatum :Memo start</pre></div>
+<p>This message should provide a time stamp, either as a regular argument or in form of an embedded CTCP TS. The latter has the advantage of being generically embeddable in any message.
+</p>
+<a name="RPL_SERVICES_MEMO"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.16"></a><h3>3.16.&nbsp;
+821 RPL_SERVICES_MEMO - Memo output</h3>
+
+<p>Memo text
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 821 MESSAGE_TARGET MemoServ MEMO_SENDER MEMO_TARGET :TEXT</pre></div>
+<p>Where MEMO_SENDER - sender nick and TEXT is memo text.
+</p>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 821 Inviolatum MemoServ Alexey #kvirc :Hi!
+:prefix 821 Inviolatum MemoServ Alexey Inviolatum :Hi!
+</pre></div>
+<p>
+</p>
+<a name="RPL_SERVICES_MEMO_END"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.17"></a><h3>3.17.&nbsp;
+822 RPL_SERVICES_MEMO_END - End memo output</h3>
+
+<p>End of memo
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 822 MESSAGE_TARGET MemoServ MEMO_SENDER MEMO_TARGET :End of memo</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 822 Inviolatum MemoServ Alexey Inviolatum :End of memo</pre></div>
+<p>
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Queries</h3>
+
+<p>
+</p>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+Common</h3>
+
+<p>
+</p>
+<a name="ircplus_query"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.1"></a><h3>4.1.1.&nbsp;
+IRCPLUS - enabling/disabling IRC+ mode</h3>
+
+<p>Enables or disables IRC+ mode.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>IRCPLUS</span>" ( "<span class='str'>ON</span>" / "<span class='str'>OFF</span>" ) [<cite class='id'>Locale</cite> [ <cite class='id'>CharSet</cite> ]]
+</pre></div>
+<p>Numeric replies:</p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.2"></a><h3>4.1.2.&nbsp;
+IDENTIFY</h3>
+
+<p>Confirm nick or channel ownership.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>IDENTIFY</span>" <cite class='id'>target</cite> [<cite class='id'>method</cite> <cite class='id'>auth-data</cite>]
+</pre></div>
+<p><tt>target</tt> being a target entity to identify,
+          a user nickname in the case of NickServ or a channel in the case of ChanServ.
+	  ServiceNick can thus be one of:
+	  </p>
+<ul class="text">
+<li>NickServ for the nick auth
+</li>
+<li>ChanServ for the channel auth
+</li>
+</ul>
+
+<p>If no METHOD AUTH-DATA given, server SHOULD send a <a class='info' href='#RPL_SERVICES_NEEDPASS'>greeting
+          message<span> (</span><span class='info'>801 RPL_SERVICES_NEEDPASS - Need password</span><span>)</span></a> with a list of supported methods.
+</p>
+<p>PLAIN auth sends password in open and unsecure way. It is not
+          recommended to use it with a non-SSL connection. The syntax of plain
+          auth is:
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>IDENTIFY</span>" <cite class='id'>target</cite> "<span class='str'>PLAIN</span>" <cite class='id'>password</cite>
+</pre></div>
+<p>Where pasword MUST be the password specified before using the REGISTER
+          command.
+</p>
+<p>SASL is a rather better system, that may use Diffie-Hellman
+          key-exchange and Blowfish encryption.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>IDENTIFY</span>" <cite class='id'>target</cite> "<span class='str'>SASL</span>" [<cite class='id'>auth-data</cite>]
+</pre></div>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_PASSOK'>802 RPL_SERVICES_PASSOK - Auth Ok<span> (</span><span class='info'>802 RPL_SERVICES_PASSOK - Auth Ok</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_BADPASS'>803 RPL_SERVICES_BADPASS - Password incorrect<span> (</span><span class='info'>803 RPL_SERVICES_BADPASS - Password incorrect</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.3"></a><h3>4.1.3.&nbsp;
+INFO</h3>
+
+<p>Displays information about the given target
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>INFO</span>" <cite class='id'>target</cite> ["<span class='str'>ALL</span>"]
+</pre></div>
+<p>If the keyword <tt>"ALL"</tt> is appended to the request, additional information will be returned in the reply.
+</p>
+<p>Numeric replies:</p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_INFO'>806 RPL_SERVICES_INFO - Information about nick/channel<span> (</span><span class='info'>806 RPL_SERVICES_INFO - Information about nick/channel</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_INFO_END'>807 RPL_SERVICES_INFO_END - End of information about nick/channel<span> (</span><span class='info'>807 RPL_SERVICES_INFO_END - End of information about nick/channel</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor10"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.4"></a><h3>4.1.4.&nbsp;
+DROP</h3>
+
+<p>Drops a given nickname from the service database. A nickname
+	  that has been dropped is free for anyone to re-register.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>DROP</span>" <cite class='id'>target</cite>
+</pre></div>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_NEEDPASS'>801 RPL_SERVICES_NEEDPASS - Need password<span> (</span><span class='info'>801 RPL_SERVICES_NEEDPASS - Need password</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor11"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.5"></a><h3>4.1.5.&nbsp;
+SET</h3>
+
+<p>Sets various options.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>SET</span>" [<cite class='id'>target</cite>] <cite class='id'>option</cite> <cite class='id'>value</cite>
+</pre></div>
+<p>In order to use this command, the user is required to identify first.
+</p>
+<p>Numeric replies:</p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_NEEDPASS'>801 RPL_SERVICES_NEEDPASS - Need password<span> (</span><span class='info'>801 RPL_SERVICES_NEEDPASS - Need password</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor12"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
+Identity Services</h3>
+
+<p>
+</p>
+<a name="anchor13"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.1"></a><h3>4.2.1.&nbsp;
+REGISTER</h3>
+
+<p>Registers your nickname in the NickServ database.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>REGISTER</cite> [<cite class='id'>password</cite> [<cite class='id'>email</cite>]]
+</pre></div>
+<p>The parameter email is optional and will set the email associated
+          with your nick immediately. However, it may be required on certain
+          networks. Your privacy is respected; this e-mail won't be given to
+          any third-party person.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.2"></a><h3>4.2.2.&nbsp;
+LINK</h3>
+
+<p>This command makes your nickname join the target nickname's
+          group.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>LINK</cite> <cite class='id'>target</cite> <cite class='id'>password</cite>
+</pre></div>
+<p>Where <tt>target</tt> is primary nick with
+          password <tt>password</tt>.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor15"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.3"></a><h3>4.2.3.&nbsp;
+LOGOUT</h3>
+
+<p>This reverses the effect of the IDENTIFY command, i.e. make you
+          not recognized as the real owner of the nick anymore. Note, however,
+          that you won't be asked to reidentify yourself.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>logout</cite>
+</pre></div>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor16"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.4"></a><h3>4.2.4.&nbsp;
+ACCESS</h3>
+
+<p>Modifies or displays the access list for your nick.
+</p>
+<p>
+</p>
+<a name="anchor17"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.4.1"></a><h3>4.2.4.1.&nbsp;
+ACCESS ADD</h3>
+
+<p>Adds allowed hostmask.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>ACCESS</cite> <cite class='id'>ADD</cite> <cite class='id'>mask</cite>
+</pre></div>
+<p>
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor18"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.4.2"></a><h3>4.2.4.2.&nbsp;
+ACCESS DEL</h3>
+
+<p>Delete allowed hostmask.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>ACCESS</cite> <cite class='id'>DEL</cite> <cite class='id'>mask</cite>
+</pre></div>
+<p>
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor19"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.4.3"></a><h3>4.2.4.3.&nbsp;
+ACCESS LIST</h3>
+
+<p>This is the list of addresses which will be automatically
+            recognized by NickServ as allowed to use the registered nick.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>ACCESS</cite> <cite class='id'>LIST</cite>
+</pre></div>
+<p>
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_LIST_START'>814 RPL_SERVICES_LIST_START - Start list output<span> (</span><span class='info'>814 RPL_SERVICES_LIST_START - Start list output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_LIST'>815 RPL_SERVICES_LIST - List output<span> (</span><span class='info'>815 RPL_SERVICES_LIST - List output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_LIST_END'>816 RPL_SERVICES_LIST_END - End list output<span> (</span><span class='info'>816 RPL_SERVICES_LIST_END - End list output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor20"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.5"></a><h3>4.2.5.&nbsp;
+RECLAIM</h3>
+
+<p>Defines situations in which the user needs to reclaim a nickname.
+</p>
+<a name="anchor21"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.5.1"></a><h3>4.2.5.1.&nbsp;
+RECLAIM RECOVER</h3>
+
+<p>Allows you to recover your nickname if someone else has taken
+          it.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>RECLAIM</cite> <cite class='id'>RECOVER</cite> <cite class='id'>nickname</cite> [<cite class='id'>password</cite>]
+</pre></div>
+<p>When you give this command, NickServ will bring a fake user
+          online with the same nickname as the user you're trying to recover
+          your nick from.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor22"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.5.2"></a><h3>4.2.5.2.&nbsp;
+RECLAIM RELEASE</h3>
+
+<p>Instructs NickServ to remove any hold on a user's nickname caused
+	  by automatic kill protection or use of the RECOVER command.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>RECLAIM</cite> <cite class='id'>RELEASE</cite> <cite class='id'>nickname</cite> [<cite class='id'>password</cite>]
+</pre></div>
+<p>In order to use the RECLAIM RELEASE command for a nick, the user's current
+          address (as shown in /WHOIS) MUST be on <tt>nickname</tt>'s access list and the user MUST be
+          identified with a nick in the same group of <tt>nickname</tt>, or the user MUST supply the correct
+          password for <tt>nickname</tt>.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor23"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.5.3"></a><h3>4.2.5.3.&nbsp;
+RECLAIM GHOST</h3>
+
+<p>Terminates a "ghost" IRC session using your nick.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>RECLAIM</cite> <cite class='id'>GHOST</cite> <cite class='id'>nickname</cite> [<cite class='id'>password</cite>]
+</pre></div>
+<p>In order to use the RECLAIM GHOST command for a nick, the user's current
+          address (as shown in /WHOIS) MUST be on <tt>nickname</tt>'s access list and the user MUST be
+          identified with a nick in the same group of <tt>nickname</tt>, or the user MUST supply the correct
+          password for <tt>nickname</tt>.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor24"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.6"></a><h3>4.2.6.&nbsp;
+LIST LINKS</h3>
+
+<p>Lists all nicks in your group.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>LIST</cite> <cite class='id'>LINKS</cite> [<cite class='id'>nick</cite>]
+</pre></div>
+<p>
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_LIST_START'>814 RPL_SERVICES_LIST_START - Start list output<span> (</span><span class='info'>814 RPL_SERVICES_LIST_START - Start list output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_LIST'>815 RPL_SERVICES_LIST - List output<span> (</span><span class='info'>815 RPL_SERVICES_LIST - List output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_LIST_END'>816 RPL_SERVICES_LIST_END - End list output<span> (</span><span class='info'>816 RPL_SERVICES_LIST_END - End list output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor25"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.7"></a><h3>4.2.7.&nbsp;
+STATUS</h3>
+
+<p>Returns whether the user using the given nickname is recognized
+          as the owner of the nickname.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>STATUS</cite> [<cite class='id'>nickname1</cite> [<cite class='id'>nickname2</cite> [<cite class='id'>nickname3</cite>]]]
+</pre></div>
+<p>Up to sixteen nicknames may be sent with each command, the rest
+          will be ignored. The nicknames may be specified either
+          comma-delimited or space delimited. If no nickname is given, the
+          status of the requesting nickname will be returned.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_NICKSTATUS'>809 RPL_SERVICES_NICKSTATUS - Returns nick status<span> (</span><span class='info'>809 RPL_SERVICES_NICKSTATUS - Returns nick status</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor26"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2.8"></a><h3>4.2.8.&nbsp;
+SENDPASS</h3>
+
+<p>Sends the password of the given nickname to the e-mail address
+          set in the nickname record.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>NickServ</cite> <cite class='id'>SENDPASS</cite> <cite class='id'>nickname</cite>
+</pre></div>
+<p>May be limited to IRC operators on certain networks.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor27"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
+Offline Messaging Service</h3>
+
+<p>
+</p>
+<a name="anchor28"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.3.1"></a><h3>4.3.1.&nbsp;
+SEND</h3>
+
+<p>Sends to the specified nick or channel a memo containing
+          memo-text.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>MemoServ</cite> <cite class='id'>SEND</cite> <cite class='id'>memo-target</cite> <cite class='id'>memo-text</cite>
+</pre></div>
+<p>
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor29"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.3.2"></a><h3>4.3.2.&nbsp;
+LIST</h3>
+
+<p>Lists all your currently pending memos.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>MemoServ</cite> "<span class='str'>LIST</span>" [<cite class='id'>Channel</cite> [( <cite class='id'>List</cite> / "<span class='str'>NEW</span>" )]]
+</pre></div>
+<p>
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_LIST_START'>814 RPL_SERVICES_LIST_START - Start list output<span> (</span><span class='info'>814 RPL_SERVICES_LIST_START - Start list output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_LIST'>815 RPL_SERVICES_LIST - List output<span> (</span><span class='info'>815 RPL_SERVICES_LIST - List output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_LIST_END'>816 RPL_SERVICES_LIST_END - End list output<span> (</span><span class='info'>816 RPL_SERVICES_LIST_END - End list output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor30"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.3.3"></a><h3>4.3.3.&nbsp;
+READ</h3>
+
+<p>Sends you the text of the memos specified.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>MemoServ</cite> "<span class='str'>READ</span>" [<cite class='id'>Channel</cite> [( <cite class='id'>Num</cite> / <cite class='id'>List</cite> / "<span class='str'>LAST</span>" / "<span class='str'>NEW</span>" )]]
+</pre></div>
+<p>
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_MEMO_START'>820 RPL_SERVICES_MEMO_START - Start memo output<span> (</span><span class='info'>820 RPL_SERVICES_MEMO_START - Start memo output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_MEMO'>821 RPL_SERVICES_MEMO - Memo output<span> (</span><span class='info'>821 RPL_SERVICES_MEMO - Memo output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_MEMO_END'>822 RPL_SERVICES_MEMO_END - End memo output<span> (</span><span class='info'>822 RPL_SERVICES_MEMO_END - End memo output</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor31"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.3.4"></a><h3>4.3.4.&nbsp;
+DEL</h3>
+
+<p>Deletes the specified memo or memos.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>MemoServ</cite> <cite class='id'>DEL</cite> [<cite class='id'>channel</cite>] (<cite class='id'>list</cite> / "<span class='str'>LAST</span>" / "<span class='str'>ALL</span>")
+</pre></div>
+<p><tt>List</tt> SHOULD be a number range, such
+          as 1-9 or 1-9,12
+</p>
+<p>If <tt>LAST</tt> is given, the last memo will
+          be deleted. If <tt>ALL</tt> is given, deletes all
+          of your memos.
+</p>
+<p>Numeric replies:
+</p>
+<p></p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_COMMAND_SUCCESS'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success<span> (</span><span class='info'>804 RPL_SERVICES_COMMAND_SUCCESS - Command Success</span><span>)</span></a>
+</li>
+<li><a class='info' href='#RPL_SERVICES_COMMAND_ERROR'>805 RPL_SERVICES_COMMAND_ERROR - Command Error<span> (</span><span class='info'>805 RPL_SERVICES_COMMAND_ERROR - Command Error</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>5.&nbsp;Normative References</h3>
+<table width="99%" border="0">
+</table>
+
+<a name="error_codes"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Error codes</h3>
+
+<p></p>
+<ul class="text">
+<li>00001 - USER RECORD NOT
+          FOUND
+</li>
+<li>00002 - UNKNOWN COMMAND
+</li>
+<li>00003 - SYNTAX ERROR
+</li>
+<li>00004 - NO HELP AVAILABLE
+</li>
+<li>00005 - OBSOLETE COMMAND
+</li>
+<li>00006 - BAD USERHOST MASK
+</li>
+<li>00007 - BAD EXPIRY TIME
+</li>
+<li>00008 - USERHOST MASK TOO
+          WIDE
+</li>
+<li>00009 - SERVICE OFFLINE
+</li>
+<li>00010 - READ ONLY MODE
+</li>
+<li>00011 - PASSWORD INCORRECT
+</li>
+<li>00012 - ACCESS DENIED
+</li>
+<li>00013 - PERMISSION DENIED
+</li>
+<li>00014- MORE OBSCURE PASSWORD
+</li>
+<li>00015 - NICK NOT REGISTERED
+</li>
+<li>00016 - NICK X NOT
+          REGISTERED
+</li>
+<li>00017 - NICK X IN USE
+</li>
+<li>00018 - NICK X NOT IN USE
+</li>
+<li>00020 - NICK X FORBIDDEN
+</li>
+<li>00021 - NICK X
+          FORBIDDEN_OPER
+</li>
+<li>00022 - NICK X ILLEGAL
+</li>
+<li>00023 - NICK X TRUNCATED
+</li>
+<li>00024 - NICK X SUSPENDED
+</li>
+<li>00032 - MAIL DISABLED
+</li>
+<li>00033 - MAIL INVALID
+</li>
+<li>00034 - MAIL X INVALID
+</li>
+<li>00035 - MAIL LATER
+</li>
+<li>00036 - MAIL DELAYED
+</li>
+<li>00037 - NO REASON
+</li>
+<li>00038 - UNKNOWN
+</li>
+</ul>
+
+<a name="nick_statuses"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
+Nick status codes</h3>
+
+<p></p>
+<ul class="text">
+<li>NO_SUCH_USER - no such user online or nickname not registered
+</li>
+<li>NOT_OWNER - user not recognized as nickname's owner
+</li>
+<li>OWNER_VIA_ACCESS - user recognized as owner via access list
+          only
+</li>
+<li>OWNER_VIA_PASSWORD - user recognized as owner via password
+          identification
+</li>
+</ul>
+
+<a name="xml_capab"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.C"></a><h3>Appendix C.&nbsp;
+XML definition of the services capabilities</h3>
+
+<p>The example (not ready yet):
+</p>
+<p>Example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt;ircplus&gt;
+
+&lt;identity text="NS"&gt;
+    &lt;REGISTER&gt;&lt;required&gt;
+	    &lt;!-- alternatives: &lt;password/&gt; --&gt;
+	    &lt;page src="http://somewhere/register.pike" /&gt;
+	&lt;/required&gt;
+	&lt;!-- optional email doesn't make sense in this case,
+	     just an example --&gt;
+	&lt;optional&gt;&lt;email/&gt;&lt;/optional&gt;
+    &lt;/REGISTER&gt;
+    &lt;!-- also known as DROP, or should this be an on/off thing? --&gt;
+    &lt;UNREGISTER&gt;&lt;required&gt;&lt;SASL/&gt;&lt;/required&gt;&lt;/UNREGISTER&gt;
+    &lt;CONNECT&gt;
+	&lt;required&gt;&lt;SASL/&gt;&lt;/required&gt;
+	TODO: on/off (= IDENTIFY, LOGOUT)
+    &lt;/CONNECT&gt;
+    &lt;SET&gt;
+	&lt;!-- you can freestyle on properties --&gt;
+	&lt;property&gt;HOMEPAGE&lt;/property&gt;
+    &lt;/SET&gt;
+    &lt;INFO&gt;
+	&lt;required&gt;&lt;entity/&gt;&lt;/required&gt;
+	&lt;optional&gt;&lt;ALL/&gt;&lt;/optional&gt;
+    &lt;/INFO&gt;
+    &lt;RECLAIM&gt;
+	&lt;required&gt;&lt;entity/&gt;&lt;SASL/&gt;&lt;/required&gt;
+	TODO: once (= GHOST), on/off (= RECOVER, RELEASE)
+	    ... technically it's a per-nick setting, right?
+    &lt;/RECLAIM&gt;
+    &lt;NICK&gt;
+	&lt;!-- could be interpreted as account merger in some cases --&gt;
+	&lt;required&gt;&lt;/modifier&gt;&lt;entity/&gt;&lt;SASL/&gt;&lt;/required&gt;
+	&lt;!-- modifier is + or - for LINK or UNLINK --&gt;
+    &lt;/NICK&gt;
+    &lt;ACCESS&gt;
+	&lt;!-- modifier is + or - for ADD or DEL --&gt;
+	&lt;required&gt;&lt;modifier/&gt;&lt;mask/&gt;&lt;/required&gt;
+    &lt;/ACCESS&gt;
+&lt;/identity&gt;
+&lt;memos&gt;
+    &lt;SEND&gt;&lt;optional&gt;&lt;notification/&gt;&lt;/optional&gt;&lt;/SEND&gt;
+&lt;/memos&gt;
+
+&lt;/ircplus&gt;</pre></div>
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Authors' Addresses</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Alexey</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">KVIrc Development Team</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Bibliotechnaya</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Volgograd, Volgograd  </td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Russia</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+7 905 333 50 50</td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:"></a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.kvirc.ru">http://www.kvirc.ru</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Anna Gulchouk</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">KVIrc Development Team</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Maydan Nezalezhnosti</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Kiev,   01140</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Ukraine</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+380 96 978 67 50</td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:inviolatums@gmail.com">inviolatums@gmail.com</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.kvirc.ru">http://www.kvirc.ru</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Adam Schrotenboer</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">SurrealServices project</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">El Camino Real</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Mountain View, California  94040</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">United States</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:"></a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.surrealchat.net/wiki/SurrealServices">http://www.surrealchat.net/wiki/SurrealServices</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">William Pitcock</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">atheme.org</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">1428 S Evanston Ave.</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Tulsa, Oklahoma  74104</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">United States of America</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+1 (918) 814-0311</td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:nenolod@atheme.org">nenolod@atheme.org</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.nenolod.net">http://www.nenolod.net</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Carlo v. Loesch</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">psyc://psyced.org/~lynX</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Berlin, Berlin  </td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:psyc://psyced.org/~lynX">psyc://psyced.org/~lynX</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://my.pages.de/">http://my.pages.de/</a></td></tr>
+</table>
+<a name="rfc.copyright"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Full Copyright Statement</h3>
+<p class='copyright'>
+Copyright &copy; The IETF Trust (2007).</p>
+<p class='copyright'>
+This document is subject to the rights,
+licenses and restrictions contained in BCP&nbsp;78,
+and except as set forth therein,
+the authors retain all their rights.</p>
+<p class='copyright'>
+This document and the information contained herein are provided
+on an &ldquo;AS IS&rdquo; basis and THE CONTRIBUTOR,
+THE ORGANIZATION HE/SHE REPRESENTS
+OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE IETF TRUST
+AND THE INTERNET ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT
+THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+PURPOSE.</p>
+<h3>Intellectual Property</h3>
+<p class='copyright'>
+The IETF takes no position regarding the validity or scope of any
+Intellectual Property Rights or other rights that might be claimed
+to pertain to the implementation or use of the technology
+described in this document or the extent to which any license
+under such rights might or might not be available; nor does it
+represent that it has made any independent effort to identify any
+such rights.
+Information on the procedures with respect to
+rights in RFC documents can be found in BCP&nbsp;78 and BCP&nbsp;79.</p>
+<p class='copyright'>
+Copies of IPR disclosures made to the IETF Secretariat and any
+assurances of licenses to be made available,
+or the result of an attempt made to obtain a general license or
+permission for the use of such proprietary rights by implementers or
+users of this specification can be obtained from the IETF on-line IPR
+repository at <a href='http://www.ietf.org/ipr'>http://www.ietf.org/ipr</a>.</p>
+<p class='copyright'>
+The IETF invites any interested party to bring to its attention
+any copyrights,
+patents or patent applications,
+or other
+proprietary rights that may cover technology that may be required
+to implement this standard.
+Please address the information to the IETF at <a href='mailto:ietf-ipr@ietf.org'>ietf-ipr@ietf.org</a>.</p>
+<h3>Acknowledgment</h3>
+<p class='copyright'>
+Funding for the RFC Editor function is provided by
+the IETF Administrative Support Activity (IASA).</p>
+</body></html>

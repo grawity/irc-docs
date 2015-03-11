@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="KEYWORDS" content="IRCPLUS,IRC,Broad unicast,CTCP,ChanServ,Chat,Draft,Flood control,Friend,IRC" />
+<meta name="robots" content="index,follow" />
+<link rel="shortcut icon" href="/skins/common/images/favicon.ico" />
+    <title>IRCPLUS - about.psyc.eu</title>
+    <style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/skins/stereoZine/main.css"; /*]]>*/</style>
+    <link rel="stylesheet" type="text/css" media="print" href="/skins/common/commonPrint.css" />
+    <!--[if lt IE 5.5000]><style type="text/css">@import "/skins/stereoZine/IE50Fixes.css";</style><![endif]-->
+    <!--[if IE 5.5000]><style type="text/css">@import "/skins/stereoZine/IE55Fixes.css";</style><![endif]-->
+    <!--[if gte IE 6]><style type="text/css">@import "/skins/stereoZine/IE60Fixes.css";</style><![endif]-->
+    <!--[if IE]><script type="text/javascript" src="/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+    <script type="text/javascript" src="/?title=-&amp;action=raw&amp;gen=js"></script>    <script type="text/javascript" src="/skins/common/wikibits.js"></script>
+    <style type="text/css">/*<![CDATA[*/
+@import "/?title=MediaWiki:StereoZine.css&action=raw&ctype=text/css&smaxage=18000";
+@import "/?title=-&action=raw&gen=css&maxage=18000";
+/*]]>*/</style>              </head>
+  <body                 class="ns-0">
+    <div id="globalWrapper">
+      <div id="column-content">
+	<div id="content">
+	  <a name="top" id="top"></a>
+	  	  <h1 class="firstHeading">IRCPLUS</h1>
+	  <div class="psyc"><a href="/"><img alt="" width="130" height="26" src="http://www.psyc.eu/img/minipsyc.png" /></a></div>
+	  <div id="bodyContent">
+	    	    	    <!-- start content -->
+	    <p><br />
+There is a nice initiative to get some standardisation back into <a href="/IRC" title="IRC">IRC</a> networks at <a href="http://www.irc-plus.org" class='external free' title="http://www.irc-plus.org" rel="nofollow">http://www.irc-plus.org</a>
+</p><p>IRC is constantly losing users, and it's not like this initiative can stop it from doing so, but it relieves a lot of pains.
+</p><p>Essentially it produces some standardized interfaces for basic functions, which are slightly different on each IRC network, making it impossible for a client developer to make them just as easy to use like any other <a href="/Chat" title="Chat">chat</a> application.
+</p><p>Thus IRC can become easier to use, even if many problems are not addressed or solved by this.
+</p><p>Nonetheless, <a href="/User:Lynx" title="User:Lynx">lynX</a> has decided to support it in <a href="/Psyced" title="Psyced">psyced</a>, and working on the draft to be streamlined to minimalistically only do what everyone needs and do it in the smartest possible way. This should maximize acceptance for it.
+</p>
+<table id='toc' class='toc'><tr><td><div id='toctitle'><h2>Contents</h2></div>
+<ul>
+<li class='toclevel-1'><a href="#IRC.2B_drafts:_Overview"><span class="tocnumber">1</span> <span class="toctext">IRC+ drafts: Overview</span></a></li>
+<li class='toclevel-1'><a href="#IRC.2B_drafts:_Common_issues"><span class="tocnumber">2</span> <span class="toctext">IRC+ drafts: Common issues</span></a>
+<ul>
+<li class='toclevel-2'><a href="#Reference:_RFC_1459"><span class="tocnumber">2.1</span> <span class="toctext">Reference: RFC 1459</span></a></li>
+<li class='toclevel-2'><a href="#Inspirations_from_Services_Implementations"><span class="tocnumber">2.2</span> <span class="toctext">Inspirations from Services Implementations</span></a>
+<ul>
+<li class='toclevel-3'><a href="#ircservices.za_.28isza.29"><span class="tocnumber">2.2.1</span> <span class="toctext">ircservices.za (isza)</span></a></li>
+<li class='toclevel-3'><a href="#anope-1.7.18.tar.gz_of_http:.2F.2Fwww.anope.org.2F"><span class="tocnumber">2.2.2</span> <span class="toctext">anope-1.7.18.tar.gz of http://www.anope.org/</span></a></li>
+<li class='toclevel-3'><a href="#atheme-1.2.1.tgz_of_http:.2F.2Fwww.atheme.org.2F"><span class="tocnumber">2.2.3</span> <span class="toctext">atheme-1.2.1.tgz of http://www.atheme.org/</span></a></li>
+<li class='toclevel-3'><a href="#PTlink.Services2.26-eol.1.tar.gz"><span class="tocnumber">2.2.4</span> <span class="toctext">PTlink.Services2.26-eol.1.tar.gz</span></a></li>
+<li class='toclevel-3'><a href="#DALnet_Services"><span class="tocnumber">2.2.5</span> <span class="toctext">DALnet Services</span></a></li>
+<li class='toclevel-3'><a href="#Q_on_QuakeNet"><span class="tocnumber">2.2.6</span> <span class="toctext">Q on QuakeNet</span></a></li>
+<li class='toclevel-3'><a href="#Theia_of_freenode"><span class="tocnumber">2.2.7</span> <span class="toctext">Theia of freenode</span></a></li>
+<li class='toclevel-3'><a href="#Magick-1.4.tar.gz"><span class="tocnumber">2.2.8</span> <span class="toctext">Magick-1.4.tar.gz</span></a></li>
+<li class='toclevel-3'><a href="#hybserv-1.9.3.tar.gz"><span class="tocnumber">2.2.9</span> <span class="toctext">hybserv-1.9.3.tar.gz</span></a></li>
+<li class='toclevel-3'><a href="#srvx-1.3.1.tar.gz"><span class="tocnumber">2.2.10</span> <span class="toctext">srvx-1.3.1.tar.gz</span></a></li>
+<li class='toclevel-3'><a href="#SrSv_SurrealServices"><span class="tocnumber">2.2.11</span> <span class="toctext">SrSv SurrealServices</span></a></li>
+<li class='toclevel-3'><a href="#JService"><span class="tocnumber">2.2.12</span> <span class="toctext">JService</span></a></li>
+<li class='toclevel-3'><a href="#modserv2x-2.001.tar.bz2_of_undernet"><span class="tocnumber">2.2.13</span> <span class="toctext">modserv2x-2.001.tar.bz2 of undernet</span></a></li>
+<li class='toclevel-3'><a href="#gnuworld-cvs-20070326.tar.gz_of_http:.2F.2Fwww.gnuworld.org"><span class="tocnumber">2.2.14</span> <span class="toctext">gnuworld-cvs-20070326.tar.gz of http://www.gnuworld.org</span></a></li>
+<li class='toclevel-3'><a href="#ecks.0.7.tar.gz"><span class="tocnumber">2.2.15</span> <span class="toctext">ecks.0.7.tar.gz</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class='toclevel-1'><a href="#IRC.2B_on_Identification"><span class="tocnumber">3</span> <span class="toctext">IRC+ on Identification</span></a>
+<ul>
+<li class='toclevel-2'><a href="#RPL_SERVICES_NEEDPASS"><span class="tocnumber">3.1</span> <span class="toctext">RPL_SERVICES_NEEDPASS</span></a></li>
+<li class='toclevel-2'><a href="#Identity_and_IRC_URI"><span class="tocnumber">3.2</span> <span class="toctext">Identity and IRC URI</span></a></li>
+<li class='toclevel-2'><a href="#Linked_nicknames_to_an_identity"><span class="tocnumber">3.3</span> <span class="toctext">Linked nicknames to an identity</span></a></li>
+</ul>
+</li>
+<li class='toclevel-1'><a href="#IRC.2B_on_Conference_Control"><span class="tocnumber">4</span> <span class="toctext">IRC+ on Conference Control</span></a>
+<ul>
+<li class='toclevel-2'><a href="#Death_the_HALFOP"><span class="tocnumber">4.1</span> <span class="toctext">Death the HALFOP</span></a></li>
+</ul>
+</li>
+<li class='toclevel-1'><a href="#IRC.2B_on_Subscriptions"><span class="tocnumber">5</span> <span class="toctext">IRC+ on Subscriptions</span></a>
+<ul>
+<li class='toclevel-2'><a href="#Metadata_Keywords"><span class="tocnumber">5.1</span> <span class="toctext">Metadata Keywords</span></a>
+<ul>
+<li class='toclevel-3'><a href="#lastfm"><span class="tocnumber">5.1.1</span> <span class="toctext">lastfm</span></a></li>
+<li class='toclevel-3'><a href="#np.2C_away"><span class="tocnumber">5.1.2</span> <span class="toctext">np, away</span></a></li>
+<li class='toclevel-3'><a href="#altloc"><span class="tocnumber">5.1.3</span> <span class="toctext">altloc</span></a></li>
+<li class='toclevel-3'><a href="#www"><span class="tocnumber">5.1.4</span> <span class="toctext">www</span></a></li>
+<li class='toclevel-3'><a href="#rss"><span class="tocnumber">5.1.5</span> <span class="toctext">rss</span></a></li>
+<li class='toclevel-3'><a href="#tag"><span class="tocnumber">5.1.6</span> <span class="toctext">tag</span></a></li>
+</ul>
+</li>
+<li class='toclevel-2'><a href="#SUBSCRIBE"><span class="tocnumber">5.2</span> <span class="toctext">SUBSCRIBE</span></a></li>
+<li class='toclevel-2'><a href="#Why_not_CTCP.3F"><span class="tocnumber">5.3</span> <span class="toctext">Why not CTCP?</span></a></li>
+<li class='toclevel-2'><a href="#What_about_channel_distribution"><span class="tocnumber">5.4</span> <span class="toctext">What about channel distribution</span></a></li>
+<li class='toclevel-2'><a href="#Persistent_metadata"><span class="tocnumber">5.5</span> <span class="toctext">Persistent metadata</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table>
+<p><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=1" title="IRCPLUS">edit</a>]</div><a name="IRC.2B_drafts:_Overview"></a><h1> IRC+ drafts: Overview </h1>
+<p>First of all, I am seriously pondering if IRC+ services draft should be split up into
+</p>
+<ul><li> <b>IRC identification</b> (dealing with NickServ and how to resolve an <a href="/IRC_URI" title="IRC URI">IRC URI</a>)
+</li><li> <b>IRC conference control</b> (dealing with ChanServ etc.)
+</li><li> <b>Further IRC services</b> (leaving memos etc..)
+</li><li> <b>IRC subscriptions</b> (see below)
+</li><li> <b>IRC uniform network identifications</b> (the <a href="/IRC_URI" title="IRC URI">IRC URI</a> syntax in a doable specification)
+</li></ul>
+<p><br />
+Current drafts are located at <a href="http://www.irc-plus.org/specs/" class='external free' title="http://www.irc-plus.org/specs/" rel="nofollow">http://www.irc-plus.org/specs/</a>
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=2" title="IRCPLUS">edit</a>]</div><a name="IRC.2B_drafts:_Common_issues"></a><h1> IRC+ drafts: Common issues </h1>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=3" title="IRCPLUS">edit</a>]</div><a name="Reference:_RFC_1459"></a><h2> Reference: <a href='http://tools.ietf.org/rfcmarkup?doc=1459' class='external' title="http://tools.ietf.org/rfcmarkup?doc=1459">RFC 1459</a> </h2>
+<p>Maybe mention also the other RFCs and our relation to them.
+Proposal:
+</p>
+<dl><dd>RFC2810-2813 describe the protocol of an IRC branch, which has not been adopted by the majority of existing IRC technology implementations.
+</dd></dl>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=4" title="IRCPLUS">edit</a>]</div><a name="Inspirations_from_Services_Implementations"></a><h2> Inspirations from Services Implementations </h2>
+<p>We are comparing major services implementations and make sure the draft actually reflects a fair common denominator.
+</p><p>For the creation of the drafts we are taking the following IRC service implementations under consideration (see comments about each of these in the sources of the drafts):
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=5" title="IRCPLUS">edit</a>]</div><a name="ircservices.za_.28isza.29"></a><h3> <a href="http://www.ircservices.za.net/docs/" class='external text' title="http://www.ircservices.za.net/docs/" rel="nofollow">ircservices.za</a> (isza) </h3>
+<ul><li> Generic SET command for setting variables like language, timezone, homepage etc.
+</li><li> isza comes with a series of AUTH commands for email-address-authentication
+</li><li> isza provides several admin extensions which we of course do not take in consideration
+</li><li> Service-side autojoin list (AJOIN etc).
+</li><li> Several LISTsomething commands.
+</li><li> SENDPASS for ChanServ (paranoid?)
+</li><li> SOP (super-ops), LEVELs and a healthy mess of auto-op/halfop/voice lists.
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=6" title="IRCPLUS">edit</a>]</div><a name="anope-1.7.18.tar.gz_of_http:.2F.2Fwww.anope.org.2F"></a><h3> anope-1.7.18.tar.gz of <a href="http://www.anope.org/" class='external free' title="http://www.anope.org/" rel="nofollow">http://www.anope.org/</a> </h3>
+<ul><li> has all those funny SOP AOP HOP and VOP lists, too
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=7" title="IRCPLUS">edit</a>]</div><a name="atheme-1.2.1.tgz_of_http:.2F.2Fwww.atheme.org.2F"></a><h3> atheme-1.2.1.tgz of <a href="http://www.atheme.org/" class='external free' title="http://www.atheme.org/" rel="nofollow">http://www.atheme.org/</a> </h3>
+<p>Large, popular and well documented. Similar to isza and anope, but slightly different again.
+</p>
+<ul><li> E-mail authentication is done with a VERIFY command instead of isza's AUTH
+</li><li> SET PROPERTY and TAXONOMY (see below)
+</li><li> Operators can set a VHOST for users
+</li><li> It doesn't seem to provide the ACCESS command!?
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=8" title="IRCPLUS">edit</a>]</div><a name="PTlink.Services2.26-eol.1.tar.gz"></a><h3> PTlink.Services2.26-eol.1.tar.gz </h3>
+<ul><li> Service-side autojoin list (AJOIN etc).
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=9" title="IRCPLUS">edit</a>]</div><a name="DALnet_Services"></a><h3> DALnet Services </h3>
+<p>Not sure which software they use, but by looking at <a href="http://www.dal.net/services/" class='external free' title="http://www.dal.net/services/" rel="nofollow">http://www.dal.net/services/</a> it looks like a common denominator of many other service styles I have seen so far. No surprise, since after the 1991's demise of the original NickServ, DALnet was the first network to re-implement NickServ in 1994, and the original inventors of <a href="/ChanServ" title="ChanServ">ChanServ</a>. (whereas MemoServ is similar to 1991's NoteServ and MsgServ). So the DALnet services suite has been the prototype for most following services systems.
+</p><p>Special things:
+</p>
+<ul><li> /NickServ ACCESS WIPE
+</li><li> No nickname links
+</li><li> This is where SOP and AOP come from, but luckily HOP and VOP are missing.
+</li><li> /MemoServ NEWS
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=10" title="IRCPLUS">edit</a>]</div><a name="Q_on_QuakeNet"></a><h3> Q on QuakeNet </h3>
+<p>Since QuakeNet has a registration system totally outside the NickServ tradition, the flow of operations is different at times:
+</p>
+<ul><li> HELLO sends you an email, you AUTH to it, then change the random password to your own using NEWPASS.
+</li><li> REQUESTPASSWORD lets you request a remail of the password in case you lose it
+</li><li> <a href="http://www.quakenet.org/faq/faq.php?c=1" class='external text' title="http://www.quakenet.org/faq/faq.php?c=1" rel="nofollow">Q</a> is a combined something-serv, and having Q as a bot on your channel seems to be a privilege.
+</li><li> If you can't have Q, then you can at least have <a href="http://www.quakenet.org/faq/faq.php?c=3" class='external text' title="http://www.quakenet.org/faq/faq.php?c=3" rel="nofollow">L</a>, whatever that means.
+</li><li> In fact L seems to be the <i>lightweight</i> variant of Q. Now you know it.
+</li><li> There is also R to send requests to, whereas S is a channel bot that takes care of spam.
+</li><li> The CHANLEV etc. commands do all similar things like the ChanServ equivalents, but quite differently (and more rudimentarily).
+</li></ul>
+<p>We can try to make our flow at least a bit Q-friendly, at least concerning registration, by allowing RPL_SUPPORTS_IRCPLUS to say <i>No, we don't accept registration passwords from you. We prefer to generate and email them, so give us an e-mail address only.</i> Still given how Q looks it is to expect that Q will either always remain different, or they are willing to modernize their whole services thing anyhow. I think an IRC+ interface <i>should</i> be able to co-exist with Q, even if using two quite different APIs.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=11" title="IRCPLUS">edit</a>]</div><a name="Theia_of_freenode"></a><h3> Theia of freenode </h3>
+<p><a href="http://svn.freenode.net/theia/trunk/help/" class='external text' title="http://svn.freenode.net/theia/trunk/help/" rel="nofollow">Theia</a>:
+</p>
+<ul><li> No email delivery
+</li><li> LINK/UNLINK
+</li><li> AUTOREM ADD/DEL/LIST (like ACCESS, but for ChanServ) instead of AKICK etc.
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=12" title="IRCPLUS">edit</a>]</div><a name="Magick-1.4.tar.gz"></a><h3> Magick-1.4.tar.gz </h3>
+<p>Pretty similar to Theia.
+</p>
+<ul><li> AKICK instead of AUTOREM.
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=13" title="IRCPLUS">edit</a>]</div><a name="hybserv-1.9.3.tar.gz"></a><h3> hybserv-1.9.3.tar.gz </h3>
+<ul><li> REGISTER with <i>password recovery phrase</i> instead of e-mail
+</li><li> RECOVERPASS
+</li><li> LINK/UNLINK/DROPLINK/SHOWLINK
+</li><li> AKICK
+</li><li> ACCESS for both nickserv <i>and</i> chanserv
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=14" title="IRCPLUS">edit</a>]</div><a name="srvx-1.3.1.tar.gz"></a><h3> srvx-1.3.1.tar.gz </h3>
+<p>By the first glance I can tell srvx likes to do pretty much everything differently than others.
+Let's see the details concerning srvx's NickServ:
+</p>
+<ul><li> REGISTER requires an account name
+</li><li> UNREGISTER instead of DROP
+</li><li> ADDMASK/DELMASK instead of ACCESS ADD/DEL
+</li><li> REGNICK/UNREGNICK instead of LINK/UNLINK
+</li><li> RECLAIM instead of RECOVER/RELEASE/GHOST
+</li></ul>
+<dl><dd>"Depending on configuration, this may do nothing, may ask the user nicely, may force a nick change on them, or may /KILL (disconnect) the target user."
+</dd></dl>
+<ul><li> MERGE allows to merge accounts, cute.
+</li></ul>
+<p>ChanServ also looks quite different, even if it essentially does a similar job like any ChanServ.
+Just MemoServ looks rather familiar, but comes with EXPIRE and EXPIRY.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=15" title="IRCPLUS">edit</a>]</div><a name="SrSv_SurrealServices"></a><h3> SrSv SurrealServices </h3>
+<p><a href="http://www.surrealchat.net/wiki/SurrealServices" class='external free' title="http://www.surrealchat.net/wiki/SurrealServices" rel="nofollow">http://www.surrealchat.net/wiki/SurrealServices</a>
+</p>
+<pre>    &lt;tabris&gt; symlynX: I realize it's probably not much on all of this, but
+             SrSv has been looking at implementing timezones. currently no
+             work has been done on i18n tho, mostly b/c we don't have any
+             translators (and the changes required to how we construct
+             response messages)
+</pre>
+<ul><li> ACC (like STATUS in the draft) comes with an extended set of flags
+</li></ul>
+<pre> 0 - Nickname Unregistered 
+ 1 - Registered, Offline
+ 2 - UnIdentified
+ 3 - Identified via password authentication
+ 4 - Identified via access list
+ 5 - Forbidden Nickname
+</pre>
+<ul><li> NickServ has channel list invitations you can ACCEPT or DECLINE.
+</li><li> MAINNICK is called CHGROOT (even uglier&nbsp;;))
+</li><li> Profile/Settings/Metadata, independently from SET command, like this:
+</li></ul>
+<pre> /ns profile set birthday June 9, 1969
+ /ns profile set mood sassy
+</pre>
+<ul><li> SEEN &lt;nick&gt;
+</li><li> G/SIDENTIFY - variants of identify that kick old instances of your nickname
+</li></ul>
+<p>I presume these two require some user MODE extension that nickserv can send to your server.. a bit back and forth:
+</p>
+<ul><li> SILENCE ADD/DEL/LIST - server-side <a href="/Ignore" title="Ignore">ignore</a> (yeehah.. old friend) ...
+</li><li> WATCH ADD/DEL/LIST - server-side <a href="/Notify" title="Notify">notify</a> (sigh, yeahyeah WiZ didn't like mine..)
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=16" title="IRCPLUS">edit</a>]</div><a name="JService"></a><h3> JService </h3>
+<p><a href="http://irc.smart-coding.com/wiki/doku.php?id=commands" class='external text' title="http://irc.smart-coding.com/wiki/doku.php?id=commands" rel="nofollow">J</a> implements all services functions in a single service bot.
+</p>
+<ul><li> AUTH instead of IDENTIFY
+</li><li> AUTOJOIN on auth
+</li><li> RSS &lt;list|add|del|filter|mute|unmute&gt; [&lt;rssfeed&gt;|&lt;on|off&gt;] ... multiple feeds per channel
+</li><li> built-in command aliases using SCRIPT
+</li></ul>
+<p>etc.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=17" title="IRCPLUS">edit</a>]</div><a name="modserv2x-2.001.tar.bz2_of_undernet"></a><h3> modserv2x-2.001.tar.bz2 of undernet </h3>
+<p>... comes with no useful documentation and no obvious NickServ-like commands. Probably wrong file.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=18" title="IRCPLUS">edit</a>]</div><a name="gnuworld-cvs-20070326.tar.gz_of_http:.2F.2Fwww.gnuworld.org"></a><h3> gnuworld-cvs-20070326.tar.gz of <a href="http://www.gnuworld.org" class='external free' title="http://www.gnuworld.org" rel="nofollow">http://www.gnuworld.org</a> </h3>
+<p>is a very large distribution containing all sorts of experimental extensions and hilarious <i>language</i> options like  christmas and easter-variations of the help messages. I am however unable to find documentation about the actual NickServ etc syntax, neither in the package nor on the website. Strange.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=19" title="IRCPLUS">edit</a>]</div><a name="ecks.0.7.tar.gz"></a><h3> ecks.0.7.tar.gz </h3>
+<p>Distribution of <a href="/Java" title="Java">Java</a> binary classes, no sources, with an MPL license however. No trace of any documentation.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=20" title="IRCPLUS">edit</a>]</div><a name="IRC.2B_on_Identification"></a><h1> IRC+ on Identification </h1>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=21" title="IRCPLUS">edit</a>]</div><a name="RPL_SERVICES_NEEDPASS"></a><h2> RPL_SERVICES_NEEDPASS </h2>
+<p>Can we define an (optional) way to require <a href="/Identity" title="Identity">identity</a> passwords before completing login? In <a href="/PSYC" title="PSYC">PSYC</a> we don't have people hanging around on somebody else's nickname even for a split second. <a href="/SASL" title="SASL">SASL</a> is cool here.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=22" title="IRCPLUS">edit</a>]</div><a name="Identity_and_IRC_URI"></a><h2> Identity and IRC URI </h2>
+<p>I think the nickserv draft should also lead to reliable irc identities with an <a href="/IRC_URI" title="IRC URI">IRC URI</a> syntax worth mentioning.
+Not <a href="irc://somenetwork,andmaybeyoufindmebythenameofXXX" class='external free' title="irc://somenetwork,andmaybeyoufindmebythenameofXXX" rel="nofollow">irc://somenetwork,andmaybeyoufindmebythenameofXXX</a> but being able to say i *am* <a href="irc://network/~nick" class='external free' title="irc://network/~nick" rel="nofollow">irc://network/~nick</a> - even if i am currently using one of my linked nicknames.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=23" title="IRCPLUS">edit</a>]</div><a name="Linked_nicknames_to_an_identity"></a><h2> Linked nicknames to an identity </h2>
+<p>GROUP and GLIST are really bad names for this, LINK, UNLINK and LIST LINKS are much better.
+</p><p>Still the entire concept of having several nicknames connected to an identity should be optional. For simplicity some networks simply do not allow you to switch nicknames (without also changing your identity).
+</p><p>Anope is the only services implementation using "GROUP", the others prefer LINK. Isza also provides UNLINK while none of the others do. I presume DROP is defined to only unlink a nickname, not drop the entire identity, unless the main nickname has been given. I wonder which interface is the best here.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=24" title="IRCPLUS">edit</a>]</div><a name="IRC.2B_on_Conference_Control"></a><h1> IRC+ on Conference Control </h1>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=25" title="IRCPLUS">edit</a>]</div><a name="Death_the_HALFOP"></a><h2> Death the HALFOP </h2>
+<p>i think the irc user levels should not be hardcoded into the
+protocol any further. voice/halfop/chop/whatever should be
+freely choosable strings or numeric values, maybe even bitflags,
+so that each network and ircd implementation uses whatever it finds suitable.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=26" title="IRCPLUS">edit</a>]</div><a name="IRC.2B_on_Subscriptions"></a><h1> IRC+ on Subscriptions </h1>
+<p>Should we get a critical amount of people to support the basic
+Services Protocol, we can come up with extensions to that and
+get them accepted, too.
+</p><p><a href="http://www.irc-plus.org/subscriptions-draft.html" class='external free' title="http://www.irc-plus.org/subscriptions-draft.html" rel="nofollow">http://www.irc-plus.org/subscriptions-draft.html</a> is a follow-up
+Internet <a href="/Draft" title="Draft">draft</a> to provide such seriously interesting enhancement
+to the existing IRC functionality.
+</p><p>It however needs more work:
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=27" title="IRCPLUS">edit</a>]</div><a name="Metadata_Keywords"></a><h2> Metadata Keywords </h2>
+<p>The meta data list is still very random, <a href="/User:Lynx" title="User:Lynx">lynX</a> suggests to postpone it entirely to a later IRC+ version, even though <a href="/User:Lynx" title="User:Lynx">lynX</a> does like the idea as such!
+</p><p>Most of it however isn't presence data but rather metadata. We could call it "<a href="/Semantic" title="Semantic">semantic</a> IRC"!&nbsp;:)
+</p><p>Presence is only about being here or not being here, availability, mood etc. I of course am a fan of our own <a href="/Presence" title="Presence">presence</a> model which you may want to have a look at.
+</p>
+<dl><dd>atheme has a metadata command called <b>SET PROPERTY</b> .. the help file suggests properties like URL (homepage), SIGN (horoscope rather than birthday) and other messaging schemes. According to the source the properties can be chosen freely, but you have a limit on the amount and you need a special privilege to use this.
+</dd></dl>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=28" title="IRCPLUS">edit</a>]</div><a name="lastfm"></a><h3> lastfm </h3>
+<p>Putting one particular commercial social network in here will not scale with the continous growth of <a href="/Social_network" title="Social network">social networks</a>. <a href="/User:Lynx" title="User:Lynx">lynX</a> suggest to have a <b>links</b> or <a href="/URI" title="URI">URIs</a> or <a href="/Uniform" title="Uniform">uniforms</a> field which contains any kind of <a href="http://xxxx" class='external free' title="http://xxxx" rel="nofollow">http://xxxx</a> or other urls, then the clients can figure out what to do with each of them.. provide comment-box-links for <a href="/Myspace" title="Myspace">myspace</a> urls, or music statistic pushing for lastfm. Whatever.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=29" title="IRCPLUS">edit</a>]</div><a name="np.2C_away"></a><h3> np, away </h3>
+<p>They look unfinished too
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=30" title="IRCPLUS">edit</a>]</div><a name="altloc"></a><h3> altloc </h3>
+<p>Absolutely needs to be filled with URIs too, not some clumsy <b>scheme: screenname</b> syntax. In fact URIs look almost the same, just without the space. <a href="xmpp:user@host" class='external free' title="xmpp:user@host" rel="nofollow">xmpp:user@host</a> <a href="psyc://psyced.org/~lynX" class='external free' title="psyc://psyced.org/~lynX" rel="nofollow">psyc://psyced.org/~lynX</a> etc.
+</p><p>Also <b>altloc</b> is cryptic - why not just put them into <b>links</b> as well?
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=31" title="IRCPLUS">edit</a>]</div><a name="www"></a><h3> www </h3>
+<p>Another special case of <b>links</b>, but if it is the main homepage maybe it should be the first http: link in links.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=32" title="IRCPLUS">edit</a>]</div><a name="rss"></a><h3> rss </h3>
+<p><a href="/RSS" title="RSS">RSS</a> is stupid because IRC is a much better medium to announce changes to a website in real-time. Why use a <a href="/Poll" title="Poll">polling</a> technique for that? But if you insist on having that, you can put it into <b>links</b> as well, or have some metadata XML format like <a href="/?title=FOAF&amp;action=edit" class="new" title="FOAF">FOAF</a> point to it.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=33" title="IRCPLUS">edit</a>]</div><a name="tag"></a><h3> tag </h3>
+<p>Tags can be neat, but they are usually used to provide search engine keywords and navigation. What you mean by tag is probably the actual <a href="/Presence" title="Presence">presence</a>. You may want to provide presence availability as a numeric as we do...?
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=34" title="IRCPLUS">edit</a>]</div><a name="SUBSCRIBE"></a><h2> SUBSCRIBE </h2>
+<p>This doesn't seem to take care of user's privacy requirements at all. Do I get that right?
+</p><p>You need to have a friendship subscription model between users before they can agree on sharing event notifications and presence updates between each others.
+</p><p>I was told that his is intended to be either tagged private (nobody sees the info) or public (anyone can see it, like the web or FOAF). No friends modeling here.
+</p><p>Also I am told <a href="/Notification" title="Notification">notifications</a> are unicast to each recipient one by one. That's a scalability no-no.. That's not nice. I hoped they'd use the <a href="/Multicast" title="Multicast">multicast</a> backbone.
+</p><p>Factually subscribing presence is technically equivalent to joining a user's presence channel. Shouldn't it be implemented by listen-only channels?
+</p><p>Bad about channels is, they require network broadcasts for their memberships, and since people come and go, you can't just do the channel membership once forever.
+</p><p>I guess then it depends on the popularity of the sender and the amount of events she generates, whether <a href="/Broad_unicast" title="Broad unicast">broad unicast</a> is okay, network broadcasts are better or setting up a distribution channel.
+</p><p>I propose to postpone this entire presence and <a href="/Subscription" title="Subscription">subscription</a> issue to a future IRC+ draft.
+It is too complex.
+</p><p>Then again we could indeed have a specification for these kind of extensions and leave it open to the implementation to provide any form of <a href="/Privacy" title="Privacy">privacy</a> or efficiency in <a href="/Routing" title="Routing">routing</a>. But that would probably result in <a href="/Psyced" title="Psyced">psyced</a> being the only server implementation which uses actual <a href="/Friend" title="Friend">friendship</a> modeling for privacy and uses actual multicasting for the distribution. are you sure you want to do this? &nbsp;;)
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=35" title="IRCPLUS">edit</a>]</div><a name="Why_not_CTCP.3F"></a><h2> Why not CTCP? </h2>
+<p>When pushing <a href="/CTCP" title="CTCP">CTCP</a> to <i>your</i> channel, or the channel of your favorite peer group, you mostly reach the intended audience of your metadata pushes, you have better privacy as you can apply IRC conference control to the channel, you also get better routing as IRC channels are very efficient.
+</p><p>Why wouldn't you want to standardize things like CTCP PLAYING or CTCP LINKS instead of this services-based approach? Just because old clients can't handle new CTCP messages?
+</p><p>Well, it's a mistake they even show unknown CTCP messages! When I did my release of ircII it had CTCPs invisible by default and only /set verbose_ctcp would turn them on. Too late to change that probably, but at least unknown channel CTCPs should be silently dropped so that future extensions have a chance.
+</p><p>Also all clients should be able to filter certain CTCP codes, like CTCP NP (or PLAYING or MUSIC or SONGPLAY, whatever you wanna call it), if you don't want to see them.
+</p><p>So is there any technical problem with CTCP, or is it just a cultural one gone awry?
+</p><p>Alright, I got some answers:
+</p>
+<ul><li>Server <a href="/Flood_control" title="Flood control">flood control</a> might not even let us submit as many metadata changes as we like.
+</li><li>Doing it on a channel will trigger CTCP flood provisions (this should only happen on channels not intended for CTCP metadata usage - it should be okay on channels of friends that WANT metadata)
+</li><li>Channels have metadata to send, too (and CTCP from channels is not defined so far)
+</li></ul>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=36" title="IRCPLUS">edit</a>]</div><a name="What_about_channel_distribution"></a><h2> What about channel distribution </h2>
+<p>The idea would be as follows: Channel operators set a MODE on inhabitants to allow them to send metadata. Also the channel itself can send metadata. Metadata is distributed as a numeric to that channel and only delivered to clients that have activated irc+ subscription protocol.
+</p><p>This saves good privacy and routing of channels without running into the CTCP abuse trap.
+</p>
+<div class="editsection" style="float:right;margin-left:5px;">[<a href="/?title=IRCPLUS&amp;action=edit&amp;section=37" title="IRCPLUS">edit</a>]</div><a name="Persistent_metadata"></a><h2> Persistent metadata </h2>
+<p>Most metadata should also be available to users entering a channel later on. Unicasting the metadata to these people doesn't scale as well as the IRC network itself: Should 10000 people join a channel because some pop star on TV mentioned it, the network would be overwhelmed by unicasts of information which was supposed to already be there anyway.
+</p><p>The only memory space an ircd has for persistent data of a channel is the TOPIC, and putting metadata in TOPIC is what everybody already does these days - they just don't have a proper format. Here's an example:
+</p>
+<pre>*** Topic for #irc+: <a href="http://www.irc-plus.org" class='external free' title="http://www.irc-plus.org" rel="nofollow">http://www.irc-plus.org</a>&nbsp;: User-friendly IRC is possible!
+   / <a href="http://svn.kvirc.ru/rfc/ircplus-rfc.xml" class='external free' title="http://svn.kvirc.ru/rfc/ircplus-rfc.xml" rel="nofollow">http://svn.kvirc.ru/rfc/ircplus-rfc.xml</a> / www now auto-updates on svn
+   commit / Voting: we need a wiki (5) or forum (6) or ML (3) - Who is
+   implementing the RFC&nbsp;?
+</pre>
+<p>This list is a series of untagged <i>homepage / motto / working-document / news / issues</i> metadata elements.
+</p><p>There are two ways to solve this problem:
+</p><p>1. Introduce a new PROPERTY protocol which keeps persistent metadata on each leaf of the IRC network. This requires all IRC servers to implement this and all clients to deal with it.
+</p><p>2. Define a metadata syntax on top of TOPIC. This may require extending the default length of topics in IRC servers to make it useful, but no change of code. Also all clients already know how to display the metadata to the user, later they can learn to parse it and do fancy things with it. Later a finer grained protocol in form of numerics being sent from the services can be introduced, which only changes parts of the metadata without resending an entire TOPIC, and the servers can learn to accept the /topic command from clients in such a way, that it only changes a part of the TOPIC data - not all.
+</p><p>There is a problem with approach #2, it needs an upgrade of the historic 512 byte limit of IRC messages to be useful, but such an upgrade looks like a completely crazy endeavor when looking at any ircd source code. Ouch! Just look at what my first grep in the include directory produced, so funny it's sad:
+</p>
+<pre>#define BUFSIZE         512     /* WARNING: *DONT* CHANGE THIS!!!! */
+</pre><div class="printfooter">
+Retrieved from "<a href="http://about.psyc.eu/IRCPLUS">http://about.psyc.eu/IRCPLUS</a>"</div>
+	    <div id="catlinks"><p class='catlinks'><a href="/?title=Special:Categories&amp;article=IRCPLUS" title="Special:Categories">Categories</a>: <a href="/Category:IRC" title="Category:IRC">IRC</a></p></div>	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+      </div>
+      <div id="column-one">
+	<div id="p-cactions" class="toplet">
+	  <h5>Views</h5>
+	  <ul>
+	    <li id="ca-nstab-main"
+	       class="selected"	       ><a href="/IRCPLUS">Article</a></li><li id="ca-talk"
+	       class="new"	       ><a href="/?title=Talk:IRCPLUS&amp;action=edit">Discussion</a></li><li id="ca-edit"
+	       	       ><a href="/?title=IRCPLUS&amp;action=edit">Edit</a></li><li id="ca-history"
+	       	       ><a href="/?title=IRCPLUS&amp;action=history">History</a></li>	  </ul>
+	</div>
+	<div id="p-personal" class="toplet">
+	  <h5>Personal tools</h5>
+	  <div class="pBody">
+	    <ul>
+	    <li id="pt-login"><a href="/?title=Special:Userlogin&amp;returnto=IRCPLUS">Create an account or log in</a></li>	    </ul>
+	  </div>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="portlet" id="p-nav">
+	  <div class="pBody">
+	    <ul>
+                <li><a href="/Help:Contents">Help</a></li>
+                <li><a href="/Software">Software</a></li>
+                <li><a href="/">About PSYC</a></li>
+                <li><a href="https://psyced.org/PSYC/">Webchat with us</a></li>
+		<li><a href="http://www.psyc.eu/whitepaper/">White Paper</a></li>
+	    </ul>
+	  </div>
+	</div>
+        <div id="p-search" class="portlet">
+          <div class="pBody">
+            <form name="searchform" action="/Special:Search" id="searchform">       
+              <input id="searchInput" name="search" type="text"
+                accesskey="f" value="" />
+              <input type='submit' name="go" class="searchButton" id="searchGoButton"   
+                value="Go"
+                />&nbsp;<input type='submit' name="fulltext"  
+                class="searchButton"
+                value="Search" />
+            </form>
+          </div>
+        </div>
+	<div class="portlet" id="p-tb">
+	  <div class="pBody">
+	    <ul>
+	    <li><a href="/Special:Recentchanges">Recent Changes</a></li>
+		  		  <li id="t-whatlinkshere"><a href="/Special:Whatlinkshere/IRCPLUS">What links here</a></li>
+		  		  <li id="t-recentchangeslinked"><a href="/Special:Recentchangeslinked/IRCPLUS">Related changes</a></li>
+		  	      	      	      	      	      	      	      	      	      <li id="t-specialpages"><a href="/Special:Specialpages">Special pages</a></li>	      	    </ul>
+	  </div>
+	</div>
+	      </div><!-- end of the left (by default at least) column -->
+      <div class="visualClear"></div>
+      <div id="footer">
+	<ul id="f-list">
+	    <li></li>
+	  <li id="f-lastmod"> This page was last modified 11:08, 21 October 2008.</li>	  <li id="f-viewcount">This page has been accessed 2,785 times.</li>	  	  	</ul>
+<p id="nerdybutts"><a href="http://www.psyc.eu"><img src="http://www.psyc.eu/img/nerds/psyc.png" alt=""/></a><a href="/Sponsor"><img src="http://www.psyc.eu/img/nerds/snafu.png" alt=""/></a><a href="/Category:Folklore"><img src="http://www.psyc.eu/img/nerds/dirty.png" alt=""/></a></p>
+      </div>
+    </div>
+    <!-- Served by about.psyc.eu in 0.27 secs. -->  </body>
+</html>

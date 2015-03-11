@@ -1,0 +1,622 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>IRC Subscriptions Protocol</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="IRC Subscriptions Protocol">
+<meta name="generator" content="xml2rfc v1.32 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">IRC+ Working Group</td><td class="header">A. Uzhva</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">A. Inviolatum</td></tr>
+<tr><td class="header">Intended status: Standards Track</td><td class="header">KVIrc Development Team</td></tr>
+<tr><td class="header">Expires: December 20, 2007</td><td class="header">A. Schrotenboer</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">SurrealServices project</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">W. Pitcock</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">atheme.org</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">June 18, 2007</td></tr>
+</table></td></tr></table>
+<h1><br />IRC Subscriptions Protocol<br />draft-irc-subscriptions</h1>
+
+<h3>Status of this Memo</h3>
+<p>
+By submitting this Internet-Draft,
+each author represents that any applicable patent or other IPR claims of which
+he or she is aware have been or will be disclosed,
+and any of which he or she becomes aware will be disclosed,
+in accordance with Section&nbsp;6 of BCP&nbsp;79.</p>
+<p>
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF), its areas, and its working groups.
+Note that other groups may also distribute working documents as
+Internet-Drafts.</p>
+<p>
+Internet-Drafts are draft documents valid for a maximum of six months
+and may be updated, replaced, or obsoleted by other documents at any time.
+It is inappropriate to use Internet-Drafts as reference material or to cite
+them other than as &ldquo;work in progress.&rdquo;</p>
+<p>
+The list of current Internet-Drafts can be accessed at
+<a href='http://www.ietf.org/ietf/1id-abstracts.txt'>http://www.ietf.org/ietf/1id-abstracts.txt</a>.</p>
+<p>
+The list of Internet-Draft Shadow Directories can be accessed at
+<a href='http://www.ietf.org/shadow.html'>http://www.ietf.org/shadow.html</a>.</p>
+<p>
+This Internet-Draft will expire on December 20, 2007.</p>
+
+<h3>Copyright Notice</h3>
+<p>
+Copyright &copy; The IETF Trust (2007).</p>
+
+<h3>Abstract</h3>
+
+<p>...
+</p>
+<h3>Requirements Language</h3>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in RFC 2119.
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Introduction<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">1.1.</a>&nbsp;
+TODO<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">1.2.</a>&nbsp;
+Background<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">1.3.</a>&nbsp;
+Overview<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">1.4.</a>&nbsp;
+Additional Presence Information<br />
+<a href="#anchor6">2.</a>&nbsp;
+Presence Information<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">2.1.</a>&nbsp;
+Metadata Keywords<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_LASTFM">2.1.1.</a>&nbsp;
+lastfm keyword - User's last.fm URL<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_NP">2.1.2.</a>&nbsp;
+np keyword - User's now playing metadata<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_AWAY">2.1.3.</a>&nbsp;
+away keyword - User's away reason<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_ALTLOC">2.1.4.</a>&nbsp;
+altloc keyword - Alternate contact point for a user<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_WWW">2.1.5.</a>&nbsp;
+www keyword - Website for a user.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_RSS">2.1.6.</a>&nbsp;
+rss keyword - RSS feed for a user (blog, etc)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_LOCATION">2.1.7.</a>&nbsp;
+location keyword - freeform physical location data<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_TAG">2.1.8.</a>&nbsp;
+tag keyword - single word to describe what/where a user is<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PRESENCE_NICK">2.1.9.</a>&nbsp;
+nick keyword - The user's current nickname.<br />
+<a href="#anchor8">3.</a>&nbsp;
+Replies<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#RPL_SERVICES_PRESENCE_INFORMATION">3.1.</a>&nbsp;
+824 - RPL_SERVICES_PRESENCE_INFORMATION - presents presence information in IRC+ form<br />
+<a href="#anchor9">4.</a>&nbsp;
+Queries<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">4.1.</a>&nbsp;
+Common<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">4.1.1.</a>&nbsp;
+INFO<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">4.1.2.</a>&nbsp;
+SUBSCRIBE<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Authors' Addresses<br />
+<a href="#rfc.copyright">&#167;</a>&nbsp;
+Intellectual Property and Copyright Statements<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Introduction</h3>
+
+<p>
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.1"></a><h3>1.1.&nbsp;
+TODO</h3>
+
+<p>Meta-Paragraph about this Internet Draft.
+</p>
+<p>&lt;symlynX&gt; I have several ideas and changes for this document, some of which I described on http://about.psyc.eu/IRCPLUS ... I would work them into the document later, but you are of course welcome to discuss with me first, be it on #irc+ or in my wiki. Thx!
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.2"></a><h3>1.2.&nbsp;
+Background</h3>
+
+<p>...
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.3"></a><h3>1.3.&nbsp;
+Overview</h3>
+
+<p>...
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.4"></a><h3>1.4.&nbsp;
+Additional Presence Information</h3>
+
+<p>IRC+ adds additional presence information which may be optionally
+        supported by Services on the IRC+ capable network. Services SHOULD
+        make an attempt to display this information to non-IRC+ clients in a
+        human-friendly manner.
+</p>
+<p>See the section on Presence Information for details.
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Presence Information</h3>
+
+<p>IRC+ adds additional presence information metadata and allows for the
+      ability to subscribe to updates concerning this metadata.
+</p>
+<p>Metadata is presented to IRC+ clients in the form of a dictionary map
+      using key="value" pairs.
+</p>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1"></a><h3>2.1.&nbsp;
+Metadata Keywords</h3>
+
+<p>The following is a list of RECOMMENDED metadata keywords for IRC+'s
+        presence notification utility.
+</p>
+<a name="PRESENCE_LASTFM"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.1"></a><h3>2.1.1.&nbsp;
+lastfm keyword - User's last.fm URL</h3>
+
+<p>Describes a last.fm URL for a user. Alternate last.fm-like
+          musical profile services can be used instead for this keyword.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>lastfm="url-to-lastfm-page"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>lastfm="http://www.last.fm/user/nenolod"</pre></div>
+<a name="PRESENCE_NP"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.2"></a><h3>2.1.2.&nbsp;
+np keyword - User's now playing metadata</h3>
+
+<p>Describes a track that the user is playing.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>np="string containing np metadata"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>np="Perrra - Ahnberg is Elite"</pre></div>
+<a name="PRESENCE_AWAY"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.3"></a><h3>2.1.3.&nbsp;
+away keyword - User's away reason</h3>
+
+<p>If a user is away or not presently online, this is the reason
+          why, if one was left.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>away="string"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>away="I'm on holiday. I'll be back July 12, 2007."</pre></div>
+<a name="PRESENCE_ALTLOC"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.4"></a><h3>2.1.4.&nbsp;
+altloc keyword - Alternate contact point for a user</h3>
+
+<p>If a user inhabits multiple IRC networks or messaging services,
+          this keyword describes alternate points of contact.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>altloc="service: identification"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>altloc="jabber: nenolod@atheme.org"</pre></div>
+<a name="PRESENCE_WWW"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.5"></a><h3>2.1.5.&nbsp;
+www keyword - Website for a user.</h3>
+
+<p>If a user has a website, this keyword describes how to access the
+          website.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>www="url"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>www="http://www.nenolod.net"</pre></div>
+<a name="PRESENCE_RSS"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.6"></a><h3>2.1.6.&nbsp;
+rss keyword - RSS feed for a user (blog, etc)</h3>
+
+<p>If a user has a blog or other service which generates an RSS
+          feed, this is a URL to that RSS feed.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>rss="url"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>rss="http://www.nenolod.net/rss"</pre></div>
+<a name="PRESENCE_LOCATION"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.7"></a><h3>2.1.7.&nbsp;
+location keyword - freeform physical location data</h3>
+
+<p>This keyword describes a physical location in freeform
+          human-readable data, e.g. a town/state name, or geographical
+          coordinates.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>location="place"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>location="Tulsa, OK, USA"</pre></div>
+<a name="PRESENCE_TAG"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.8"></a><h3>2.1.8.&nbsp;
+tag keyword - single word to describe what/where a user is</h3>
+
+<p>This keyword describes either where a user is, or what a user is
+          doing.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>tag="tagword"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>tag="work"</pre></div>
+<a name="PRESENCE_NICK"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.9"></a><h3>2.1.9.&nbsp;
+nick keyword - The user's current nickname.</h3>
+
+<p>This keyword contains the user's current nickname. Support for
+          this keyword should be carefully considered on networks where
+          privacy is considered important. If the user is offline, this
+          keyword will contain no value, e.g. nick="".
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>nick="current-nick"</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>nick="nenolod"</pre></div>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Replies</h3>
+
+<p>
+</p>
+<a name="RPL_SERVICES_PRESENCE_INFORMATION"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.1"></a><h3>3.1.&nbsp;
+824 - RPL_SERVICES_PRESENCE_INFORMATION - presents presence information in IRC+ form</h3>
+
+<p>Describes a dictionary map of key="value" pairs.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 824 your-nick target :key="value" key="value" ...</pre></div>
+<p>Example
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>:prefix 824 nenolod Alexey :lastfm="http://www.last.fm/user/Alexey" np="some artist - some title" away="sleeping"</pre></div>
+<p>
+</p>
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Queries</h3>
+
+<p>
+</p>
+<a name="anchor10"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+Common</h3>
+
+<p>
+</p>
+<a name="anchor11"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.1"></a><h3>4.1.1.&nbsp;
+INFO</h3>
+
+<p>Displays information about the given target
+</p>
+<p>TODO: Update 'INFO'
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><dfn>Query</dfn> = <cite class='id'>ServiceNick</cite> "<span class='str'>INFO</span>" <cite class='id'>target</cite> ["<span class='str'>ALL</span>" / "<span class='str'>PRESENCE</span>"]
+</pre></div>
+<p>If the keyword <tt>"PRESENCE"</tt> is appended to the request, the
+          presence metadata will be returned instead.
+</p>
+<p>Numeric replies:</p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_PRESENCE_INFORMATION'>824 - RPL_SERVICES_PRESENCE_INFORMATION - presents presence information in IRC+ form<span> (</span><span class='info'>824 - RPL_SERVICES_PRESENCE_INFORMATION - presents presence information in IRC+ form</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="anchor12"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.2"></a><h3>4.1.2.&nbsp;
+SUBSCRIBE</h3>
+
+<p>Subscribes to presence metadata updates for a target.
+</p>
+<p>Syntax
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre><span class='err'>Query = ServiceNick "SUBSCRIBE" [-]target</span></pre></div>
+<p><tt>Target</tt> can be a channel if <tt>ServiceNick</tt> is ChanServ or an user if <tt>ServiceNick</tt> is NickServ. If prefixed with a
+          minus, the target will be removed from the subscription list.
+</p>
+<p>Services MUST retain subscription state across IRC sessions.
+</p>
+<p>Numeric replies:</p>
+<ul class="text">
+<li><a class='info' href='#RPL_SERVICES_PRESENCE_INFORMATION'>824 - RPL_SERVICES_PRESENCE_INFORMATION - presents presence information in IRC+ form<span> (</span><span class='info'>824 - RPL_SERVICES_PRESENCE_INFORMATION - presents presence information in IRC+ form</span><span>)</span></a>
+</li>
+</ul>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Authors' Addresses</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Alexey</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">KVIrc Development Team</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Bibliotechnaya</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Volgograd, Volgograd  </td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Russia</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+7 905 333 50 50</td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:"></a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.kvirc.ru">http://www.kvirc.ru</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Anna Gulchouk</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">KVIrc Development Team</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Maydan Nezalezhnosti</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Kiev,   01140</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Ukraine</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+380 96 978 67 50</td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:inviolatums@gmail.com">inviolatums@gmail.com</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.kvirc.ru">http://www.kvirc.ru</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Adam Schrotenboer</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">SurrealServices project</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">El Camino Real</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Mountain View, California  94040</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">United States</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:"></a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.surrealchat.net/wiki/SurrealServices">http://www.surrealchat.net/wiki/SurrealServices</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">William Pitcock</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">atheme.org</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">1428 S Evanston Ave.</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Tulsa, Oklahoma  74104</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">United States of America</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+1 (918) 814-0311</td></tr>
+<tr><td class="author" align="right">Fax:&nbsp;</td>
+<td class="author-text"></td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:nenolod@atheme.org">nenolod@atheme.org</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.nenolod.net">http://www.nenolod.net</a></td></tr>
+</table>
+<a name="rfc.copyright"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Full Copyright Statement</h3>
+<p class='copyright'>
+Copyright &copy; The IETF Trust (2007).</p>
+<p class='copyright'>
+This document is subject to the rights,
+licenses and restrictions contained in BCP&nbsp;78,
+and except as set forth therein,
+the authors retain all their rights.</p>
+<p class='copyright'>
+This document and the information contained herein are provided
+on an &ldquo;AS IS&rdquo; basis and THE CONTRIBUTOR,
+THE ORGANIZATION HE/SHE REPRESENTS
+OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE IETF TRUST
+AND THE INTERNET ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT
+THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+PURPOSE.</p>
+<h3>Intellectual Property</h3>
+<p class='copyright'>
+The IETF takes no position regarding the validity or scope of any
+Intellectual Property Rights or other rights that might be claimed
+to pertain to the implementation or use of the technology
+described in this document or the extent to which any license
+under such rights might or might not be available; nor does it
+represent that it has made any independent effort to identify any
+such rights.
+Information on the procedures with respect to
+rights in RFC documents can be found in BCP&nbsp;78 and BCP&nbsp;79.</p>
+<p class='copyright'>
+Copies of IPR disclosures made to the IETF Secretariat and any
+assurances of licenses to be made available,
+or the result of an attempt made to obtain a general license or
+permission for the use of such proprietary rights by implementers or
+users of this specification can be obtained from the IETF on-line IPR
+repository at <a href='http://www.ietf.org/ipr'>http://www.ietf.org/ipr</a>.</p>
+<p class='copyright'>
+The IETF invites any interested party to bring to its attention
+any copyrights,
+patents or patent applications,
+or other
+proprietary rights that may cover technology that may be required
+to implement this standard.
+Please address the information to the IETF at <a href='mailto:ietf-ipr@ietf.org'>ietf-ipr@ietf.org</a>.</p>
+<h3>Acknowledgment</h3>
+<p class='copyright'>
+Funding for the RFC Editor function is provided by
+the IETF Administrative Support Activity (IASA).</p>
+</body></html>
