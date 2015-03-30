@@ -247,5 +247,7 @@ Color codes:
  * [ANSI colors in EPIC][epic-ansi-color]
 
  [mirc-color]: http://www.mirc.com/colors.html
- [epic-color]: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/color.txt?rev=1.1.1.1
- [epic-ansi-color]: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/colors?rev=1.1.1.1
+ [epic-color--original]: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/color.txt?rev=1.1.1.1
+ [epic-color]: /client/epic5-colors1.txt
+ [epic-ansi-color--original]: http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/colors?rev=1.1.1.1
+ [epic-ansi-color]: /client/epic5-colors2.txt
