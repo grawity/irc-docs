@@ -139,13 +139,13 @@ Some IRCv3-specified extensions:
  * [account notification][v3-account-notify] (Charybdis, InspIRCd, Unreal)
  * [away notification][v3-away-notify] (Charybdis, InspIRCd, Unreal)
  * [extended JOIN][v3-extended-join] (Charybdis, InspIRCd, Unreal)
- * [multi-prefix NAMES][v3-multi-prefix] (many!)
+ * [multi-prefix NAMES][v3-multi-prefix] – equivalent to NAMESX (many!)
  * [message tags][v3-message-tags] (ZNC, Weechat)
  * [metadata][v3-metadata]
  * [server time][v3-server-time] (ZNC, Weechat)
  * [SASL authentication][v3-sasl] (Atheme, Anope, X3)
  * [STARTTLS][v3-tls] (InspIRCd, Unreal)
- * [userhost-in-names][v3-userhost-in-names] – equivalent to NAMESX (InspIRCd, Unreal)
+ * [userhost-in-names][v3-userhost-in-names] – equivalent to UHNAMES (InspIRCd, Unreal)
 
 Note that this list is not up-to-date; visit the main [IRCv3 repository][ircv3] for a full list.
 
