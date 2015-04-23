@@ -377,12 +377,7 @@ sorted alphabetically with "ircd-" prefix removed
 
 -------------------------------------------------------------------------------
 
-Note: I'm kinda lazy at `git commit`ing this, so you might find a newer
-      version at <https://dl.dropboxusercontent.com/u/167566/family-tree.txt>
-
-© 2013 Mantas Mikulėnas <grawity@gmail.com>
-
-Released under WTFPL v2.0 <http://sam.zoy.org/wtfpl/>. Do what the fuck you want
-to this, it's all yours.
+(c) 2013–2015 Mantas Mikulėnas <grawity@gmail.com>
+Released under WTFPL v2.0 <http://sam.zoy.org/wtfpl/>.
 
 vim: ts=4:sw=4:et
