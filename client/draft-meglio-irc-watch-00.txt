@@ -1,0 +1,898 @@
+
+
+
+Network Working Group                                          D. Meglio
+Internet-Draft                                             June 06, 2004
+Expires: December 5, 2004
+
+
+                Internet Relay Chat (IRC) WATCH Command
+                       draft-meglio-irc-watch-00
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as
+   Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at
+   http://www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on December 5, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2004).  All Rights Reserved.
+
+Abstract
+
+   This document describes an addition to the IRC protocol to allow for
+   an efficient, feature rich, method of determining the status of an
+   IRC user.  This method is meant to supplement the ISON command.
+
+
+
+
+
+
+
+
+
+
+
+
+Meglio                  Expires December 5, 2004                [Page 1]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+Table of Contents
+
+   1.    Conventions  . . . . . . . . . . . . . . . . . . . . . . . .  4
+   1.1   Terminology  . . . . . . . . . . . . . . . . . . . . . . . .  4
+   1.2   Notation . . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   1.3   Examples . . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   2.    Introduction . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.    WATCH Command  . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.1   Description  . . . . . . . . . . . . . . . . . . . . . . . .  5
+   3.2   Syntax . . . . . . . . . . . . . . . . . . . . . . . . . . .  5
+   3.3   Retrieving the WATCH list (L and l parameters) . . . . . . .  5
+   3.3.1 Numeric Replies  . . . . . . . . . . . . . . . . . . . . . .  5
+   3.3.2 Examples . . . . . . . . . . . . . . . . . . . . . . . . . .  5
+   3.4   Clearing the WATCH list (C and c parameters) . . . . . . . .  6
+   3.4.1 Numeric Replies  . . . . . . . . . . . . . . . . . . . . . .  6
+   3.4.2 Example  . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   3.5   Retrieving the WATCH list status (S and s parameters)  . . .  6
+   3.5.1 Numeric Replies  . . . . . . . . . . . . . . . . . . . . . .  6
+   3.5.2 Example  . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   3.6   Adding a WATCH list entry  . . . . . . . . . . . . . . . . .  7
+   3.6.1 Numeric Replies  . . . . . . . . . . . . . . . . . . . . . .  7
+   3.6.2 Examples . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+   3.7   Removing a WATCH list entry  . . . . . . . . . . . . . . . .  7
+   3.7.1 Numeric Replies  . . . . . . . . . . . . . . . . . . . . . .  7
+   3.7.2 Example  . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   3.8   Adding an away WATCH list entry  . . . . . . . . . . . . . .  8
+   3.8.1 Numeric Replies  . . . . . . . . . . . . . . . . . . . . . .  8
+   3.8.2 Examples . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   4.    Notification . . . . . . . . . . . . . . . . . . . . . . . .  9
+   4.1   Online . . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+   4.2   Offline  . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+   4.3   Away . . . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+   4.4   Unaway . . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+   5.    RPL_ISUPPORT Tokens  . . . . . . . . . . . . . . . . . . . . 10
+   5.1   WATCH token  . . . . . . . . . . . . . . . . . . . . . . . . 10
+   5.1.1 Syntax . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+   5.1.2 Explanation  . . . . . . . . . . . . . . . . . . . . . . . . 10
+   5.1.3 Example  . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+   5.2   WATCHOPTS token  . . . . . . . . . . . . . . . . . . . . . . 10
+   5.2.1 Syntax . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+   5.2.2 Explanation  . . . . . . . . . . . . . . . . . . . . . . . . 11
+   6.    Large WATCH lists  . . . . . . . . . . . . . . . . . . . . . 11
+   7.    Numeric Replies  . . . . . . . . . . . . . . . . . . . . . . 11
+   7.1   Errors . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+   7.2   Replies  . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+   8.    Security Considerations  . . . . . . . . . . . . . . . . . . 13
+   8.1   Buffer Size Limitations  . . . . . . . . . . . . . . . . . . 13
+   8.2   WATCH list size  . . . . . . . . . . . . . . . . . . . . . . 13
+
+
+
+Meglio                  Expires December 5, 2004                [Page 2]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   9.    Acknowledgements . . . . . . . . . . . . . . . . . . . . . . 13
+   10.   References . . . . . . . . . . . . . . . . . . . . . . . . . 14
+   10.1  Normative References . . . . . . . . . . . . . . . . . . . . 14
+   10.2  Informative References . . . . . . . . . . . . . . . . . . . 14
+         Author's Address . . . . . . . . . . . . . . . . . . . . . . 14
+         Intellectual Property and Copyright Statements . . . . . . . 15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Meglio                  Expires December 5, 2004                [Page 3]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+1.  Conventions
+
+1.1  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC2119 [1].
+
+1.2  Notation
+
+   The examples presented in this document use the following notation to
+   differentiate incoming and outgoing text.  Incoming text will be
+   preceded by the <- character sequence.  Outgoing text will be
+   preceded by the -> character sequence.
+
+   All of the syntax descriptions presented in this document are
+   described using the ABNF notation as described in RFC2234 [2].
+
+1.3  Examples
+
+   All examples used herein contain domain names that conform to RFC2606
+   Section 3 [3].
+
+2.  Introduction
+
+   When IRC was first created, the protocol only included a rudimentary
+   form of user status detection.  This detection came in the form of
+   the ISON command.  The ISON command allows the user to specify a list
+   of nicknames.  The server then returns a subset of this list that
+   contains the nicknames of users that are currently online.
+   Unfortunately, this method requires the user to poll the server to
+   determine online status.  Clients typically poll the server on
+   average, once every 1-2 minutes; multiplying this by several thousand
+   users results in a signifigant amount of network traffic.  To solve
+   this problem, some implementations of the IRC protocol included a new
+   command, the WATCH command.  This command places the onus on the
+   server rather than the user.  The client simply specifies a list of
+   nicknames, or hostmasks, and the server will notify the client when
+   the online status of any of these users changes.  This method,
+   however, was never widely adopted, in part due to its nonstandard
+   nature.  This document serves to rectify this by standardizing the
+   implementation of the WATCH command as well as enhancing its
+   features.
+
+3.  WATCH Command
+
+
+
+
+
+
+Meglio                  Expires December 5, 2004                [Page 4]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+3.1  Description
+
+   The WATCH command is the command that manages the online status
+   notification list.  The WATCH command includes provisions to add,
+   delete, and list the entries in the list.
+
+3.2  Syntax
+
+   The syntax of the WATCH command is described below in ABNF format as
+   described in RFC2234 [2]
+
+      watchcmd = "WATCH" SP watchflags
+      watchcmd /= "WATCH" SP [watchflags SP] watchparams
+      watchflags = ("l"/"L"/"C"/"c"/"S"/"s")
+      watchcmd /= "WATCH" SP awayflag watchparams
+      awayflag = ("A"/"a")
+      watchparams = 1*(("+"/"-") watchentry)
+      watchentry = (mask / nickname) ; See Section 5.2
+      mask = nickname "!" uhostmask
+      nickname ; See <nick> in RFC1459 Section 2.3.1 [4]
+      uhostmask ; See RFC2812 Section 2.5 [5]
+
+3.3  Retrieving the WATCH list (L and l parameters)
+
+   In order to retrieve the WATCH list, the parameter to the WATCH
+   command must either be an L or an l.  If the parameter is an l, the
+   list contains only the users that are currently online, whereas L
+   would include the list of offline users as well.  If a user is
+   offline, and 'L' was specified, an RPL_NOWOFF is sent for that user.
+   If the user is online, and not away, an RPL_NOWON is sent.  If the
+   user is away, but the <awayflag> was NOT set when adding the entry,
+   then an RPL_NOWON is sent.  If the user is away, and the <awayflag>
+   was set when adding the entry, then an RPL_NOWISAWAY is sent.
+
+3.3.1  Numeric Replies
+
+      RPL_NOWON
+      RPL_NOWOFF
+      RPL_NOWISAWAY
+      RPL_ENDOFWATCHLIST
+
+3.3.2  Examples
+
+
+
+
+
+
+
+
+
+Meglio                  Expires December 5, 2004                [Page 5]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   -> WATCH L
+   <- :example.com 604 foo foobar baz isp.example 1234567890 :is online
+   <- :example.com 605 foo barbaz * * 1234512345 :is offline
+   <- :example.com 607 foo :End of WATCH L
+
+   -> WATCH l
+   <- :example.com 604 foo foobar baz isp.example 1234567890 :is online
+   <- :example.com 607 foo :End of WATCH l
+
+
+3.4  Clearing the WATCH list (C and c parameters)
+
+   To clear the watch list, the parameter must be a C or a c.  Both of
+   these characters are treated equivilently.  Once the WATCH list has
+   been cleared, the server SHOULD reply with a RPL_WATCHCLEAR.
+   However, for compatibility with existing implementations, this is
+   considered OPTIONAL.
+
+3.4.1  Numeric Replies
+
+      RPL_WATCHCLEAR
+
+3.4.2  Example
+
+
+   -> WATCH C
+   <- :example.com 608 foo :Your WATCH list is now empty
+
+
+3.5  Retrieving the WATCH list status (S and s parameters)
+
+   The WATCH list status returns the number of entries in the user's
+   WATCH list, as well as the number of WATCH lists the current user is
+   in.  That is, how many other users have the current user in their
+   WATCH list.  Additionally, a list of all the WATCH list entries is
+   returned.  The list consists of one or more RPL_WATCHLIST replies
+   containing a space seperated list of nicknames, or hostmasks on the
+   WATCH list.
+
+3.5.1  Numeric Replies
+
+      RPL_WATCHSTAT
+      RPL_WATCHLIST
+      RPL_ENDOFWATCHLIST
+
+3.5.2  Example
+
+
+
+
+
+Meglio                  Expires December 5, 2004                [Page 6]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   -> WATCH S
+   <- :example.com 603 foo :You have 2 and are on 6 WATCH entries
+   <- :example.com 606 foo :foobar barbaz
+   <- :example.com 607 foo :End of WATCH S
+
+
+3.6  Adding a WATCH list entry
+
+   In order for the WATCH list to be useful, there must be a method for
+   adding entries to the list.  The WATCH command allows a list of
+   nicknames or hostmasks to be specified, prefixed with a '+'
+   character, to add the nicknames, or hostmasks to the list.  The
+   number of entries that can be specified in a single line is limited
+   only by RFC1459 Section 2.3 [4].  The total number of entries on the
+   WATCH list is limited by the watchlimit parameter of the WATCH
+   RPL_ISUPPORT token (See Section 5.1).  If the user attempts to add a
+   nickname, or hostmask, such that the number of entries is greater
+   than the watchlimit, the server MUST send an ERR_TOOMANYWATCH.  After
+   a nickname, or hostmask, has been successfully added, the server MUST
+   indicate whether the specified user is online or offline by returning
+   either an RPL_NOWON or RPL_NOWOFF, respectively.
+
+3.6.1  Numeric Replies
+
+      ERR_TOOMANYWATCH
+      RPL_NOWON
+      RPL_NOWOFF
+
+3.6.2  Examples
+
+
+   -> WATCH +bar +quxquux
+   <- :example.com 604 foo bar qux isp.example 9876543210 :is online
+   <- :example.com 605 foo quxquux * * 1234542334 :is offline
+
+   -> WATCH +corge
+   <- :example.com 512 foo :Maximum size for WATCH-list is 128 entries
+
+
+3.7  Removing a WATCH list entry
+
+   Removing a WATCH list entry is analogous to adding a nickname, or
+   hostmask, however instead of prefixing with a '+' character, a '-'
+   character is used.
+
+3.7.1  Numeric Replies
+
+
+
+
+
+Meglio                  Expires December 5, 2004                [Page 7]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+      RPL_WATCHOFF
+
+3.7.2  Example
+
+
+   -> WATCH -bar -quxquux
+   <- :example.com 602 foo bar qux isp.example 9876543210
+        :stopped watching
+   <- :example.com 602 foo quxquux * * 1234542334
+        :stopped watching
+
+
+3.8  Adding an away WATCH list entry
+
+   Adding a WATCH list entry that includes away notification works
+   exactly the same as adding a regular WATCH entry, except that the
+   first parameter to the WATCH command must be the <awayflag>.  The
+   <awayflag> applies to all of the nicknames that are listed in that
+   watch command.  After the <awayflag> is a list of nicknames or
+   hostmasks to add, prefixed with a '+' character.  The number of
+   entries that can be specified in a single line is limited only by
+   RFC1459 Section 2.3 [4].  The total number of entries on the WATCH
+   list is limited by the watchlimit parameter of the WATCH RPL_ISUPPORT
+   token (See Section 5).  If the user attempts to add a nickname, or
+   hostmask, such that the number of entries is greater than the
+   watchlimit, the server MUST send an ERR_TOOMANYWATCH.  After a
+   nickname, or hostmask, has been successfully added, the server MUST
+   indicate whether the specified user is online, away, or offline by
+   returning an RPL_NOWON, RPL_NOWISAWAY or RPL_NOWOFF, respectively.
+   Away WATCH entries are only supported if the 'A' character appears in
+   the WATCHOPTS RPL_ISUPPORT token (SECTION ISUPPORT WATCHOPTS).
+   Removing an away WATCH entry works exactly the same as removing a
+   normal WATCH entry.
+
+3.8.1  Numeric Replies
+
+      ERR_TOOMANYWATCH
+      RPL_NOWON
+      RPL_NOWISAWAY
+      RPL_NOWOFF
+
+3.8.2  Examples
+
+
+
+
+
+
+
+
+
+Meglio                  Expires December 5, 2004                [Page 8]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   -> WATCH A +foobar +baz +qux
+   <- :example.com 604 foo foobar quux isp.example 9876543210 :is online
+   <- :example.com 605 foo baz * * 1234542334 :is offline
+   <- :example.com 609 foo qux quuxy isp.example 1234367890 :is away
+
+   -> WATCH A +quux
+   <- :example.com 512 foo :Maximum size for WATCH-list is 128 entries
+
+
+4.  Notification
+
+4.1  Online
+
+   Notification of a user coming online is sent when either the user
+   connects, or the user changes his/her nickname such that the new
+   nickname matches the entry in the WATCH list.  In the event that a
+   user changes his/her nickname such that the new nickname is
+   case-insensitively equivilent to the old nickname, the server SHOULD
+   NOT send any notification.  Case-insensitive equivilence is
+   determined by the method dictated by the CASEMAPPING RPL_ISUPPORT [6]
+   token.  The online notification is sent by way of an RPL_LOGON
+   numeric.
+
+4.2  Offline
+
+   Notification of a user going offline is sent when either a user
+   disconnects (for any reason and by any method), or when a user
+   switches his/her nickname.  In the event that a user changes his/her
+   nickname such that the new nickname is case-insensitively equivilent
+   to the old nickname, the server SHOULD NOT send any notification.
+   Case-insensitive equivilence is determined by the method dictated by
+   the CASEMAPPING RPL_ISUPPORT [6] token.  The offline notification is
+   sent by way of an RPL_LOGOFF numeric.
+
+4.3  Away
+
+   Notification of a user going away is sent when a user issues an AWAY
+   command that contains a parameter.  If the user is already marked as
+   away, and sends another AWAY command with a parameter, e.g.  to
+   change the away reason, the server MUST NOT send any notification.
+   Away notification is only available if the WATCHOPTS RPL_ISUPPORT
+   token (See Section 5) contains the 'A' character, and the WATCH entry
+   was added with the <awayflag> specified.  The away notification is
+   sent by way of the RPL_GONEAWAY numeric.
+
+4.4  Unaway
+
+   Notification of a user returning (unaway) is sent when a user issues
+
+
+
+Meglio                  Expires December 5, 2004                [Page 9]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   an AWAY command with no parameter.  If the user is not currently
+   marked as being away, and sends an AWAY command with no parameter,
+   the server MUST NOT send any notification.  Unaway notification is
+   only available if the WATCHOPTS RPL_ISUPPORT token (See Section 5)
+   contains the 'A' character, and the WATCH entry was added with the
+   <awayflag> specified.  The unaway notification is sent by way of the
+   RPL_NOTAWAY numeric.
+
+5.  RPL_ISUPPORT Tokens
+
+5.1  WATCH token
+
+   In order to use the WATCH command, a client must be informed that it
+   exists.  To notify the client, the server MUST include the WATCH
+   token in the RPL_ISUPPORT message.  [6]
+
+5.1.1  Syntax
+
+      watchtoken = "WATCH=" watchlimit
+      watchlimit = 1*(DIGIT)
+
+5.1.2  Explanation
+
+   When a client encounters the WATCH token, it signals that the WATCH
+   command is supported by the server.  The parameter (watchlimit)
+   defines the maximum number of WATCH list entries that the server will
+   allow the user to specify.  If the WATCH token is not encountered,
+   the client MUST assume that the WATCH command is not available on the
+   server.
+
+5.1.3  Example
+
+   WATCH=128
+
+5.2  WATCHOPTS token
+
+   The WATCHOPTS token defines OPTIONAL features of the WATCH command.
+   A client SHOULD NOT assume that any of the features specified with
+   this token are present if the feature is not mentioned in the
+   WATCHOPTS token, or the WATCHOPTS token is not present.  The presents
+   of the WATCHOPTS token in the RPL_ISUPPORT message [6] is OPTIONAL.
+
+5.2.1  Syntax
+
+      watchoptstoken = "WATCHOPTS=" watchflags
+      watchflags = ('H' / 'A' / 'HA')
+
+
+
+
+
+Meglio                  Expires December 5, 2004               [Page 10]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+5.2.2  Explanation
+
+   The value of the WATCHOPTS token specifies which additional WATCH
+   features the server supports.
+
+   If the 'H' character is present, it signals that the WATCH list can
+   contain a nickname!user@host mask rather than just a nickname.
+   Entering a nickname is the equivilent of entering "nickname!*@*."
+   This feature is designed to deal with the situation in which multiple
+   people use the same nickname.
+
+   If the 'A' character is present, it signals that the 'A' flag to the
+   WATCH command is supported.  This allows a client to not only receive
+   notification of online/offline status, but also away status.
+
+6.  Large WATCH lists
+
+   Since the ISupport WATCH token imposes a limit on the size of the
+   WATCH list, a method to determine the status of more users must
+   exist.  To deal with this situation, the ISON command may be used as
+   a supliment.  If the client wishes to exceed the limit, the first
+   "watchlimit" entries should be added to the WATCH list, and any
+   additional entries may be watched using the ISON command.  However,
+   for the additional nicknames, the additional features that WATCH
+   provides over ISON SHALL NOT be provided.
+
+7.  Numeric Replies
+
+   The following numerics are introduced into the IRC protocol to
+   support this protocol.
+
+7.1  Errors
+
+   512 ERR_TOOMANYWATCH
+       Maximum size for WATCH-list is <watchlimit> entries
+
+       -  Returned when a client attempts to add more than the allowable
+          number of entries to the WATCH list.
+
+7.2  Replies
+
+   598 RPL_GONEAWAY
+       <nickname> <username> <hostname> <awaysince> :is now away
+
+       -  Returned when a user in the WATCH list, that was added with
+          the <awayflag>, goes away.
+
+
+
+
+
+Meglio                  Expires December 5, 2004               [Page 11]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   599 RPL_NOTAWAY
+       <nickname> <username> <hostname> <awaysince> :is no longer away
+
+       -  Returned when a user in the WATCH list, that was added with
+          the <awayflag>, returns from being away.
+
+   600 RPL_LOGON
+       <nickname> <username> <hostname> <signontime> :logged on
+
+       -  Returned when a user in the WATCH list comes online.
+
+   601 RPL_LOGOFF
+       <nickname> <username> <hostname> <lastnickchange> :logged off
+
+       -  Returned to a client when a user in the WATCH list goes
+          offline.
+
+   602 RPL_WATCHOFF
+       <nickname> <username> <hostname> <lastnickchange> :stopped
+       watching
+
+       -  Returned to the client when a WATCH entry is removed from the
+          list.
+
+   603 RPL_WATCHSTAT
+       You have <entrycount> and are on <onlistcount> WATCH entries
+
+       -  Returned as a result to a WATCH S or WATCH s list to report
+          the status of the WATCH list.
+
+   604 RPL_NOWON
+       <nickname> <username> <hostname> <lastnickchange> :is online
+
+       -  Returned after a WATCH entry has been added and the user is
+          currently online.  If the WATCH entry was added with the
+          <awayflag> then this message is NOT sent if the user is away.
+          Also returned in response to a WATCH L/l to show users that
+          are currently online, and not away if the <awayflag> was
+          specified.
+
+   605 RPL_NOWOFF
+       <nickname> <username> <hostname> <lastnickchange> :is offline
+
+       -  Returned after a WATCH entry has been added and the user is
+          currently offline.  Also returned in response to a WATCH L to
+          show users that are offline.
+
+
+
+
+
+Meglio                  Expires December 5, 2004               [Page 12]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   606 RPL_WATCHLIST
+       <entrylist>
+
+       -  Returned when the user requests a WATCH status request to list
+          the nicknames contained in the WATCH list.
+
+   607 RPL_ENDOFWATCHLIST
+       End of WATCH <parameter>
+
+       -  Returned at the end of a WATCH L/l/S/s to indicate that the
+          WATCH list request has been completed.
+
+   608 RPL_CLEARWATCH
+       Your WATCH list is now empty
+
+       -  Returned when a user clears the WATCH list.
+
+   609 RPL_NOWISAWAY
+       <nickname> <username> <hostname> <awaysince> :is away
+       -  Returned when a user is added to the WATCH list with the
+          <awayflag> specified, and is currently away.  Also returned in
+          response to a WATCH L/l to indicate those users who were added
+          with the <awayflag> and are currently away.
+
+
+8.  Security Considerations
+
+8.1  Buffer Size Limitations
+
+   RFC1459 Section 2.3 [4] states that a message may not exceed 512
+   characters.  As a result, care must be taken when responding to a
+   WATCH S or WATCH s request as the list of nicknames, or hostmasks,
+   could exceed this limit.  If the 512 character limit would be
+   exceeded, the server must split the list over multiple replies.
+
+8.2  WATCH list size
+
+   When determining the maximum size of the WATCH list, thought must be
+   given to the amount of memory a WATCH list will use.  If the limit is
+   too high, the WATCH list presents a very tempting means for a dubious
+   user to consume the server's resources.  The RECOMMENDED WATCH list
+   size is 128.  This is currently the most widely accepted WATCH list
+   size.
+
+9.  Acknowledgements
+
+   I would like to take the time to acknowledge those people who have
+   spent time over the years creating an implementing the WATCH command.
+
+
+
+Meglio                  Expires December 5, 2004               [Page 13]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+10.  References
+
+10.1  Normative References
+
+   [1]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", BCP 14, RFC 2119, March 1997.
+
+   [2]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+        Specifications: ABNF", RFC 2234, November 1997.
+
+   [3]  Eastlake, D. and A. Panitz, "Reserved Top Level DNS Names", BCP
+        32, RFC 2606, June 1999.
+
+   [4]  Oikarinen, J. and D. Reed, "Internet Relay Chat Protocol", RFC
+        1459, May 1993.
+
+   [5]  Kalt, C., "Internet Relay Chat: Client Protocol", RFC 2812,
+        April 2000.
+
+   [6]  Brocklesby, E., "IRC RPL_ISUPPORT Numeric Definition",
+        draft-brocklesby-irc-isupport-03 (work in progress), January
+        2004.
+
+10.2  Informative References
+
+   [7]  Rose, M., "Writing I-Ds and RFCs using XML", RFC 2629, June
+        1999.
+
+
+Author's Address
+
+   Dominick Meglio
+
+   EMail: dmeglio AT codemastr.com
+   URI:   http://www.codemastr.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Meglio                  Expires December 5, 2004               [Page 14]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights.  Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11.  Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard.  Please address the information to the IETF Executive
+   Director.
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2004).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+
+
+
+Meglio                  Expires December 5, 2004               [Page 15]
+
+Internet-Draft    Internet Relay Chat (IRC) WATCH Command      June 2004
+
+
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Meglio                  Expires December 5, 2004               [Page 16]
+
+
