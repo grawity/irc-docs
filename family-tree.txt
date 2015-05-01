@@ -1,78 +1,5 @@
 # IRC server family tree
 
-Distinctive features
-
-    Bahamut
-    - has "TS5ow-r[RELEASE] RPL𝒏 NP[.....]" in /VERSION reply
-        RPL𝒏 – Ridiculous Paranoia Level
-    - has "ELIST=cmntu" in RPL_ISUPPORT
-
-    Nefarious
-    - replies to /ISNEF with numeric 371 saying "NI <version>"
-      << ISNEF
-      >> :EU.Beirut.Com 371 grawity :NI u2.10.11.07+Nefarious(1.3.0) [2807 2010-11-18]
-
-    ircu and derivatives (asuka, Nefarious)
-    - mention "DESYNCH", "END_OF_BURST", "EOB_ACK" in /HELP reply
-
-    UltimateIRCd
-    - has ServOpts=... and Proto=... in /VERSION reply
-    - has "EXCEPTS=e CHANTYPES=#& PREFIX=(aohv)!@%+" ... "STD=i-d" in RPL_ISUPPORT
-    - has excepts but not invex
-    - replies to /IRCDHELP
-
-    [irchighway] -!- UltimateIRCd(Tsunami)-3.0(02).m5 zathras.mo.us.irchighway.net RelStatus=RELEASE ServOpts=CiIp(TS5ow)-SSL Proto=3000
-
-    Unreal, others
-    - replies to /DALINFO
-    - replies to /BOTMOTD
-    - replies to /RULES
-    - replies to /RPING?
-
-    csircd
-    - one of few ircds to have "STD=i-d" in RPL_ISUPPORT
-
-    ConferenceRoom (irc.webchat.org/7000)
-    - has "ConferenceRoom/4.0.7-SEC" in 004
-    - has "CONFERENCEROOM WHISPER SM ELIST=MUCTLOX RATING SSL=994" in RPL_ISUPPORT
-    - has strange token in 014
-    - 377: z-default 618 1328901086 :Last MOTD change ...: Fri, 10 Feb 2012 11:11:26 -0800
-    - 221: +ixpemJMn
-    - has /ACCESS, /SET, /AUTH, /AVATAR...
-
-Todo:
-    austnet.org
-    euirc.net – euIRCd 1.3.3 [perry]
-    forestnet.org – Pride-2.2(21) from Bahamut? "TS5ow-r[CURRENT] RPL1 ..."
-        aABCDEFhiMrt/Hop TS5ow-r[CURRENT] RPL1 utf-8e (ssl) OP[IKMNOPSTUW] 512
-    ircnet.ru – PTlink7.1.0-rc2
-    ptnet.org – dal.4.6.Based.PTnet1.7.00
-	irc.ptnet.org
-        004: dal4.6.Based.PTnet1.7.00 oiwsghOkcfrRaAb bcdiklmnopstvR
-        005: NOQUIT TOKEN WATCH=128 SAFELIST VERSION=PTnet1.7.00 NETPROTO=32 LINKPROTO=100
-        VERSION: PTnet1.7.00. VIANETWORKS.ptnet.org ACHiIMpnY 32
-        (very short 005; delayed ident)
-    starchat.net – StarIRCD-7.0 "CHANMODES=beH,... NOQUIT TOKEN STD=i-d", has JINX, AKILLEX
-    virtualife.com.br – vlife.ircd, TODO: what numeric is used for /vlife?
-    TTnet
-    RusNet
-        irc.tom.ru – 1.5.18/uk_UA.KOI8-U
-        irc.seb.org.ua:+9996 for UTF – 2.0.5/uk... (CHANTYPES=#&!+)
-        irc.anarxi.st:+9996
-    ChatHispano
-        u2.10.H.10.217. miranda.chathispano.com B96eEFfI+KMpt6vW.IRC-HISPANO.2048.40.JG+CS+CSF+DB-C+CFG+.Z+.W(128)+.TS(30)+CH+Cr-C+VIP++-.G
-Done:
-    gimpnet – 2.8/gimpnet-0.1beta3+ipv6-0.2 oOiwszcrkfydnxb biklmnopstve
-        irc.acc.umu.se ACeGHiMpYZ TS5ow
-        $Id: Hybrid-team,v 1.29 2002/01/18 00:01:51 db Exp $
-            at/later than 8ba677341ec15b9a30a8104bd2140fced2de9eab (/info)
-            at/later than e3a75c85074ddf8fc99f23cef785e46559074cfa (005 maxbans)
-            earlier than 74ba3877176ab257ec695b2bcc439643194066cc (/info)
-    ircnode.org – "charybdis-nodeircd"
-    sorcery.net – SorIRCd
-
-## Family tree
-
 legend:
     ???             - I am not sure if this ircd fits here
     foo             - ircd name
@@ -214,6 +141,8 @@ sorted alphabetically with "ircd-" prefix removed
         ViagraIRCd [<-Titan + Bahamut 1.4.30]
         Pure IRCD
     urcd
+
+-------------------------------------------------------------------------------
 
 ## Bahamut
     <http://www.dal.net/?page=bahamut>
@@ -374,6 +303,79 @@ sorted alphabetically with "ircd-" prefix removed
     custom distribution of Epona (available for download here, although it
     contains many security vulnerabilities and should not be used in an
     unpatched state), and Floodworld."
+
+-------------------------------------------------------------------------------
+
+Distinctive features
+
+    Bahamut
+    - has "TS5ow-r[RELEASE] RPL𝒏 NP[.....]" in /VERSION reply
+        RPL𝒏 – Ridiculous Paranoia Level
+    - has "ELIST=cmntu" in RPL_ISUPPORT
+
+    Nefarious
+    - replies to /ISNEF with numeric 371 saying "NI <version>"
+      << ISNEF
+      >> :EU.Beirut.Com 371 grawity :NI u2.10.11.07+Nefarious(1.3.0) [2807 2010-11-18]
+
+    ircu and derivatives (asuka, Nefarious)
+    - mention "DESYNCH", "END_OF_BURST", "EOB_ACK" in /HELP reply
+
+    UltimateIRCd
+    - has ServOpts=... and Proto=... in /VERSION reply
+    - has "EXCEPTS=e CHANTYPES=#& PREFIX=(aohv)!@%+" ... "STD=i-d" in RPL_ISUPPORT
+    - has excepts but not invex
+    - replies to /IRCDHELP
+
+    [irchighway] -!- UltimateIRCd(Tsunami)-3.0(02).m5 zathras.mo.us.irchighway.net RelStatus=RELEASE ServOpts=CiIp(TS5ow)-SSL Proto=3000
+
+    Unreal, others
+    - replies to /DALINFO
+    - replies to /BOTMOTD
+    - replies to /RULES
+    - replies to /RPING?
+
+    csircd
+    - one of few ircds to have "STD=i-d" in RPL_ISUPPORT
+
+    ConferenceRoom (irc.webchat.org/7000)
+    - has "ConferenceRoom/4.0.7-SEC" in 004
+    - has "CONFERENCEROOM WHISPER SM ELIST=MUCTLOX RATING SSL=994" in RPL_ISUPPORT
+    - has strange token in 014
+    - 377: z-default 618 1328901086 :Last MOTD change ...: Fri, 10 Feb 2012 11:11:26 -0800
+    - 221: +ixpemJMn
+    - has /ACCESS, /SET, /AUTH, /AVATAR...
+
+Todo:
+    austnet.org
+    euirc.net – euIRCd 1.3.3 [perry]
+    forestnet.org – Pride-2.2(21) from Bahamut? "TS5ow-r[CURRENT] RPL1 ..."
+        aABCDEFhiMrt/Hop TS5ow-r[CURRENT] RPL1 utf-8e (ssl) OP[IKMNOPSTUW] 512
+    ircnet.ru – PTlink7.1.0-rc2
+    ptnet.org – dal.4.6.Based.PTnet1.7.00
+	irc.ptnet.org
+        004: dal4.6.Based.PTnet1.7.00 oiwsghOkcfrRaAb bcdiklmnopstvR
+        005: NOQUIT TOKEN WATCH=128 SAFELIST VERSION=PTnet1.7.00 NETPROTO=32 LINKPROTO=100
+        VERSION: PTnet1.7.00. VIANETWORKS.ptnet.org ACHiIMpnY 32
+        (very short 005; delayed ident)
+    starchat.net – StarIRCD-7.0 "CHANMODES=beH,... NOQUIT TOKEN STD=i-d", has JINX, AKILLEX
+    virtualife.com.br – vlife.ircd, TODO: what numeric is used for /vlife?
+    TTnet
+    RusNet
+        irc.tom.ru – 1.5.18/uk_UA.KOI8-U
+        irc.seb.org.ua:+9996 for UTF – 2.0.5/uk... (CHANTYPES=#&!+)
+        irc.anarxi.st:+9996
+    ChatHispano
+        u2.10.H.10.217. miranda.chathispano.com B96eEFfI+KMpt6vW.IRC-HISPANO.2048.40.JG+CS+CSF+DB-C+CFG+.Z+.W(128)+.TS(30)+CH+Cr-C+VIP++-.G
+Done:
+    gimpnet – 2.8/gimpnet-0.1beta3+ipv6-0.2 oOiwszcrkfydnxb biklmnopstve
+        irc.acc.umu.se ACeGHiMpYZ TS5ow
+        $Id: Hybrid-team,v 1.29 2002/01/18 00:01:51 db Exp $
+            at/later than 8ba677341ec15b9a30a8104bd2140fced2de9eab (/info)
+            at/later than e3a75c85074ddf8fc99f23cef785e46559074cfa (005 maxbans)
+            earlier than 74ba3877176ab257ec695b2bcc439643194066cc (/info)
+    ircnode.org – "charybdis-nodeircd"
+    sorcery.net – SorIRCd
 
 -------------------------------------------------------------------------------
 
