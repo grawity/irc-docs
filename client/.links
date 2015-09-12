@@ -1,4 +1,5 @@
 IRCX/docbook/ http://chatzilla.rdmsoft.com/docs/ircx/docbook/
+RPL_ISUPPORT/irc.org-tech_docs-005.html http://www.irc.org/tech_docs/005.html
 ctcp-1997.html http://www.invlogic.com/irc/ctcp.html
 ctcp-wboard.html http://www.visualirc.net/tech-wboard.php
 ctcp.html http://www.irchelp.org/irchelp/rfc/ctcpspec.html
@@ -15,6 +16,6 @@ dcc-reverse.txt http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/DCC_REVERSE?rev
 dcc-turbo.html http://www.visualirc.net/tech-tdcc.php
 epic5-colors1.txt http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/color.txt?rev=1.1.1.1
 epic5-colors2.txt http://cvs.epicsol.org/cgi/viewcvs.cgi/epic5/doc/colors?rev=1.1.1.1
+modeg.hybrid.txt svn://svn.ircd-hybrid.org/svnroot/ircd-hybrid/trunk/doc/modeg.txt
 troy-dcc.html http://www.irchelp.org/irchelp/rfc/dccspec.html
 xdcc-3.3.0b.irc http://xa.bi/files/irc/xdcc.3.3.0b.irc
-RPL_ISUPPORT/irc.org-tech_docs-005.html http://www.irc.org/tech_docs/005.html
