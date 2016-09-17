@@ -73,6 +73,9 @@ sorted alphabetically with "ircd-" prefix removed
                         SorIRCd 3.x (@ Sorcery.Net)
                         ircd-FEF (@ FEF.net)
                         thelfylda [<-Charybdis 3.5pre]
+                        DomIRCd (@ DomIRC) [<-Charybdis 4-rc3]
+                        ChatIRCd (@ ChatLounge) [<-Charybdis 3.5.x]
+                        neephi [<-Charybdis 3.5.x]
                     ircd-evangelion [<-ircd-ratbox 2.2.6]
                 ShadowIRCd 2.x-4.x [<-hybrid 6.3.1/6.4.1]
                     (2.1 = Cyclops)
