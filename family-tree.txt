@@ -53,7 +53,7 @@ sorted alphabetically with "ircd-" prefix removed
                     oftc-hybrid/bc
                 plexus aka ircd-rizon (@ Rizon) [<-hybrid 7.2.3]
                     Rizon IRCd
-                Plexus4 (@ Rizon) [<-hybrid 8.0]
+                Plexus4 (@ Rizon) [<-hybrid 8.1.20]
                 PTLink 6 [<-hybrid 6.0] {PTS10<-PTS9,TS5…}
                     Vlife.IRCd
                 ircd-ratbox {TS6 <- TS3, TS5}
