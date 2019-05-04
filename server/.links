@@ -8,3 +8,4 @@ ts1.txt ftp://quatramaran.ens.fr/pub/orabidoo/ircd/old/irc2.8.21%2BTSora.tar.gz:
 ts3.txt ftp://quatramaran.ens.fr/pub/orabidoo/ircd/README.TS3
 ts4-faq.txt ftp://quatramaran.ens.fr/pub/orabidoo/ircd/TS4-dev/TS4.FAQ
 ts4.txt ftp://quatramaran.ens.fr/pub/orabidoo/ircd/TS4-dev/README.TS4
+ts6-ufnc.txt https://github.com/freenode/ircd-seven/blob/ufnc/doc/technical/ufnc.txt
