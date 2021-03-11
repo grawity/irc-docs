@@ -76,6 +76,7 @@ sorted alphabetically with "ircd-" prefix removed
                         DomIRCd (@ DomIRC) [<-Charybdis 4-rc3]
                         ChatIRCd (@ ChatLounge) [<-Charybdis 3.5.x]
                         neephi [<-Charybdis 3.5.x]
+                        Solanum [<-Charybdis 4.1.2]
                     ircd-evangelion [<-ircd-ratbox 2.2.6]
                 ShadowIRCd 2.x-4.x [<-hybrid 6.3.1/6.4.1]
                     (2.1 = Cyclops)
@@ -133,6 +134,7 @@ sorted alphabetically with "ircd-" prefix removed
     ircd-micro {TS6}
         tethys (<-ircd-micro 0.1)
     ngIRCd {RFC2812}
+    Oragono
     pircd
     Pure-IRCd (in VB)
         ignitionServer
