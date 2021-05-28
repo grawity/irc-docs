@@ -126,6 +126,8 @@ sorted alphabetically with "ircd-" prefix removed
     ConferenceRoom
     csircd {TS5}
     DarkIRCd {TS6}
+    Ergonomadic
+        Ergo (<-Oragono)
     InspIRCd {InspIRCd TS6}
         InspIRCd+Xynotyro
             ircd-sakura [<-InspIRCd-1.1.11+Xynotyro]
@@ -134,7 +136,6 @@ sorted alphabetically with "ircd-" prefix removed
     ircd-micro {TS6}
         tethys (<-ircd-micro 0.1)
     ngIRCd {RFC2812}
-    Oragono
     pircd
     Pure-IRCd (in VB)
         ignitionServer
