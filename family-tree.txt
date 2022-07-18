@@ -126,8 +126,8 @@ sorted alphabetically with "ircd-" prefix removed
     ConferenceRoom
     csircd {TS5}
     DarkIRCd {TS6}
-    Ergonomadic
-        Ergo (<-Oragono)
+    Ergonomadic {no s2s}
+        Ergo (<-Oragono) {no s2s}
     InspIRCd {InspIRCd TS6}
         InspIRCd+Xynotyro
             ircd-sakura [<-InspIRCd-1.1.11+Xynotyro]
