@@ -1,0 +1,245 @@
+<HTML>
+<Title>XZYZZY REFCARD</title>
+<BODY>
+<H2>VAX/VMS XYZZY Reference Card</H2>
+This file is preformatted, as it is distributed with the XYZZY program.<p>
+<HR>
+<PRE>
+
+                                                              Release 2.10
+                           ++  X Y Z Z Y - V A X  ++                         
+                               -----------------                             
+                                                                            
+                         A "Deluxe" Chatting Program                        
+             Created by David Bolen (Mithrandir) - Y612DB3L@CMCCVB         
+                   Copyright (c) 1987 - All Rights Reserved                 
+                            Quick Reference Card
+                              For Version 2.10
+<HR> 
+Following is a  list of all of  the valid  Xyzzy-Vax commands.  Each command is
+shown along with it's syntax,  and a short explanation.  Note that capitals are
+used to show the minimum legal abbreviation of a command.
+ 
+In  the descriptions  below,  the following conventions  are used  to show  the
+command syntax:
+ 
+     < ... >       Angle Brackets are used to denote optional items.
+     X  |  Y       This shows that either X or Y may be chosen.
+     ( X           A parenthesis shows that X is an option.
+ 
+   When  "id" is specified as part of the syntax, it refers to one of the
+following:
+ 
+       Nickname      - Nickname which is found in your NAMES file
+                       or a local nickname in use within Xyzzy-Vax
+       User          - User at your local node or a user who is in
+                       the Xyzzy-Vax "talking" list
+       User@Node     - User at a remote node as specified
+       User AT Node  - Same as User@Node except using the word "AT"
+       #             - Number of person in the Xyzzy-Vax "talking" list
+ 
+   Any of the above forms may be optionally followed by "!nick" where
+   nick is a temporary nickname for use within Xyzzy-Vax, and (Real Name.
+ 
+   For example:  .ADDN USER@NODE!Nick(Real Name
+ 
+   (See the Xyzzy-Vax help section on Names files for more information)
+ 
+   (Note that in the form user@node or user AT node - the construct
+    user%endnode@Node can be used. This will indicate the person to be
+    user@endnode - with Node being used as an intermediate node for
+    routing.  For more information, see the Xyzzy-Vax help section on
+    the ROUTE command)
+ 
+<HR> 
+                             C O M M A N D S
+Add  id
+     Add a new user to the list of users known to the program
+ADDMacro macro definition
+     Add a macro to the user-defined macro list
+ADDNick  id < (Full Name <,Notebook> >
+     Add person to names file, optionally specifying full name & notebook
+ALarm  hour':'minute<AM|PM|N|M>|(nothing)|'Midnight|Noon'|'RESET'|'OFF'
+     Set/Examine/Reset the time when XYZZY should notify you.
+CHange  id  new_id
+     Change an item in the talking list to another person
+CLs (no arguments)
+     Clear the display screen
+CMD  node  rscs_command
+     Send an RSCS command to the specified node
+Cms  (nothing) | dcl_command
+     Execute a DCL command - for compatibility with XYZZY (VM)
+CP   (nothing) | dcl_command
+     Execute a DCL command - for compatibility with XYZZY (VM)
+DCl  (nothing) | dcl_command
+     Execute a DCL command from within Xyzzy-Vax
+Delete  id | '*'
+     Delete a user from the "talking" list.  * = delete all users
+DELmacro macro
+     Delete a macro from the user defined macro list
+Exit  (no arguments)
+     Exit back to DCL
+Files  (nothing) | 'RESET' | 'CLEAR' | SearchString
+     Display status of sent files
+FINd  id
+     (Same as WI command)
+Group  (nothing) | message
+     Send a message to all defined users
+Help  (nothing) | (partial command)<*> | 'IDINFO' | 'KEYS'
+     Display help on specified command(s)
+HIstory  (nothing) | # | '*' < (id | <string,ALL> >
+     Display or all selected portions of message history
+HOld  (nothing) | id
+     Hold several lines and send them as a single message
+HOOks  (nothing)
+     Unused command.  For compatibility with XYZZY (VM)
+ID  id
+     Sends "id file" to user. (file sent specified by IDFILE setting)
+Ignore  id | *
+     Add user to ignore list (* = ignore all users not in talk list)
+List  (nothing) | 'ignoring' | 'talking'
+     List one or both of the talking and ignoring lists
+LISTMacro (no arguments)
+     List all defined user macros
+LOg  (nothing) | 'ON' <filename> | 'OFF'
+     Controls the logging of screen output to a log file
+MAcro  filename  < (DISPLAY >
+     Interprets lines in file as if you had typed them
+MOds (no arguments)
+     Show modifications added between version 1.0 and version 2.0
+Namezon  nodes | ^nodes | * | ALL  <  (<NO>DSC, <NO>LOG, <NO>NOT  >
+     Sends out queries for names file entries for the given node
+NIck  id nickname
+     Changes nickname for a user in the talking list
+NOignore  id | *
+     Remove user from ignore list (* = remove all ignorees)
+QSetting  (nothing) | (partial setting)<*>
+     Shows values of all settings, or just specified ones
+QTalk  (no arguments)
+     Exit back to DCL - for compatibility with XYZZY (VM)
+Query  id | *
+     Send a query to see if specified user is logged on
+     (* = all users in talking list)
+QUIt  (no arguments)
+     Exit back to DCL - for compatibility with XYZZY (VM)
+REstore (nothing) | option',restore
+     Restore one or all XYZZY settings back to their defaults
+SAVEMacro (no argumetns)
+     Save user defined macros to disk
+Send  id  message
+     Send a message to specified user
+SET  option <=> setting
+     Allows you to change the program "settings"
+ 
+  The following settings are supported (defaults are in parentheses):
+ 
+Beep       Whether or not to beep (if possible) on messages.         (No)
+BEEPCHar   Character string to send to terminal to cause beep.       ('')
+BEEPCMd    Unused setting - for compatibility with XYZZY (VM).       ('')
+BEEPDelay  Delay between msgs needed to cause 2 beeps (# seconds).   (1)
+Clock      Should the time be displayed.  See TStamp.                (No)
+CMdchar    Character signifying an Xyzzy-Vax command.                ('.')
+CNode      CommandNode used to send .Namezon queries thru.    (local node)
+COnvsize   Size (# of ids) of the convert "cache"                    (25)
+Dispform   Standard id display (Y = (node)user, N = user@node)       (Yes)
+Expand     Should outgoing lines be expanded                         (No)
+EXPANDCh   Expansion character for input line expansion              ('$')
+FIletrack  Whether file messages should be "tracked"                 (Yes)
+FMsg       Display RSCS file transmission messages                   (Yes)
+FNotify    Notify when a sent file reaches its destination           (Yes)
+Group      Display note after messages sent to entire list           (Yes)
+HIGh       Character string to set terminal to on high intensity  (varies)
+History    Number of lines logged by the history function.           (15)
+IBMMode    Put screen in HOLDING state rather than scroll.           (No)
+IDfile     Name of file to be sent by the ID command                 ('')
+IGNDelay   Incoming msg delay for two ignore msgs to be sent (secs)  (10)
+IGNMsg     Message sent to an ignored user.  Defaults to: "I'm currently
+             busy, and can't talk now. Your message has been logged."
+Ignore     Whether to announce when a message has been ignored.      (No)
+IGNOREAll  Whether to ignore everyone except those being talked to.  (No)
+INsize     The incoming message "split" size.                        (65)
+Jmsg       Display RSCS "junk" messages                              (Yes)
+Logignore  Whether or not to log all messages that are ignored.      (Yes)
+LOw        Character string to reset term to normal intensity     (varies)
+MPrefix    Prefix string put in front of all outgoing messages       ('')
+MSglocal   Unused setting - for compatibility with XYZZY (VM).       (Yes)
+NAmefile   NAMES file to use.                                   (Username)
+NOPrefix   Character signifying not to use a message prefix          (')')
+NOTify     Whether messages not to current user should say so.       (Yes)
+NOWrap     Character signifying an outoing line shouldn't be split   ('>')
+NUmhist    Default number of history lines to display in .HISTORY.   (3)
+OPMSplit   Split RelayOp msgs (NOTE:will not matter to non-ops)      (Yes)
+Outsize    The outgoing message "split" size.                        (50)
+Pfkeys     Unused setting - for compatibility with XYZZY (VM)        (Yes)
+QUERYDsc   Whether or not to display disconnected query returns.     (Yes)
+QUERYLog   Whether or not to display logged in query returns.        (Yes)
+QUERYNot   Whether or not to display not logged in query returns.    (Yes)
+RNick      Whether to show a relay's nickname in front of msgs.      (No)
+RPrefix    Whether or not to send the msg prefix to relays as well.  (No)
+SHownick   Whether nicknames should be used in front of msgs at all. (Yes)
+Timemark   Whether or not a timemark is needed in front of each msg. (No)
+TIMEDelay  The delay between msgs needed for two timemarks (secs).   (1)
+TStamp     Time delay for showing the clock (min).                   (30)
+XDirectory Directory containing Xyzzy-Vax related files           (varies)
+ 
+SHow  (nothing) | (setting)<*>
+     Shows value of all settings, or just specified ones
+SPawn  (nothing) | dcl_command
+     Executes an interactive or full-screen DCL command from within Xyzzy-Vax
+STop  (no arguments)
+     Exit back to DCL - for compatibility with XYZZY (VM)
+SWitch  id
+     Switch to a different current user
+Time  (no arguments)
+     Displays the current date and time
+Version  (no arguments)
+     Displays the current version of all major Xyzzy-Vax modules
+Who  (no arguments)
+     Display name of person to whom messages are currently sent
+WI  id
+     Displays names file information on a person (WI = WhoIs)
+?  (nothing) | (partial command)
+     (Same as HELP command)
+ 
+NOTES:
+   There  is two exceptions  to the rule  that  a period  must always  be
+followed by a standard command: 
+ 
+Firstly it may also be followed by a "id". If  there is  a message on the 
+line, it  is then  interpreted as  a SEND to that id, otherwise, it is
+considered a SWITCH.  For example: 
+ 
+   (assuming that DAVID is a legal nickname from your names file)
+          .DAVID      is equivalent to   .SWITCH DAVID
+          .DAVID Hi   is equivalent to   .SEND DAVID Hi
+   (or if there exists a user DB3L @ CMUCCVMA in your talking list)
+          .DB3L       is equivalent to   .SWITCH DB3L@CMUCCVMA
+          .DB3L       is equivalent to   .SEND DB3L@CMUCCVMA Hi
+   (and so on...)
+ 
+   Making use of this can make it easier to communicate with people other
+than your "current user", and nicer to switch to a new current user.
+ 
+Secondly a . may be followed by a Macro Command that was defined using the
+.ADDMacro command. Any parameters following the Macro Command will be passed
+on.
+ 
+For eaxmple:
+ 
+.ADDM SHU .DCL SHOW USERS
+ 
+followed by 
+ 
+.SHU ROSK
+ 
+will show if user ROSK is logged on the local node.
+ 
+Macrocommands may contain Expansion sequences. The Macrocommand must be 
+defined with Expand set off, and executed with Expand set on.
+ 
+<HR>
+[Revision 2.10 by Robert Skegg        ROSK@SSCVX1            24 August 1989]
+<HR>
+</PRE>
+</BODY>
+</HTML> 

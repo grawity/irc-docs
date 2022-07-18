@@ -1,0 +1,252 @@
+
+<HTML>
+<HEAD>
+<TITLE>Relay useguide</TITLE>
+<BR>
+<H3>General Guidelines for Relay Usage 8/04/86</H3>
+</HEAD>
+
+<BODY>
+RELAY provides real-time communication between multiple users at
+various
+institutions in the BITNET, EARN, and NetNorth networks.  Use of
+these
+networks for any purposes not directly related to the research,
+
+instructional, and/or administrative tasks for which your userid
+has
+been authorized by your institution may result in the termination
+of
+your ability to use the Relay.
+<P>
+Depending on the network-access policies of your institution and
+the
+usage policies of the network in which your institution resides,
+such
+unauthorized use of these networks may, alternatively, result in
+the
+termination of your userid or its ability to communicate over
+these
+networks for ANY purpose.
+<P>
+INTERNAL use, using and/or limiting the Relay conferencing system
+for
+communication either wholly within one node, or within one
+institution
+over several nodes and/or servers, is the total responsibility
+of that
+institution.
+<P>
+NETWORK-WIDE use, using one or more Relay servers to communicate
+with
+another Relay server(s) at another institution(s), falls under
+the
+established guidelines presented herein.  Failure to adhere to
+these
+guidelines, or where general network usage guidelines may have
+been
+violated may result in the loss of your ability to use Relay; or
+where
+such actions are not administered by the local host institution
+may
+result in expulsion of that server from the authorized sitelist.
+
+
+
+<H3>Background Information and User Responsibilities
+9/02/86</H3>
+
+<BR>
+Relay is a distributed message server which, by selective
+switching and
+redistribution of messages, provides real-time conferencing
+capabilities
+while minimizing the overhead on the network links.  Since the
+potential
+load of uncontrolled message traffic on the network can affect
+transfer
+of files, stringent controls over Relay use are mandatory.  Most
+control
+measures are enforced by Relay automatically, but some are
+necessarily
+the responsibility of the user.  These include:
+
+
+<UL>
+<LI>Each Relay server provides service to a specific collection
+of
+     one or more nodes designated as a "service area".  To
+determine
+     which Relay server(s) you may use, issue the following
+command:
+    <BR>
+
+     In BITNET  :   TELL RELAY AT BITNIC /SERVERS
+         <BR>
+     In EARN    :   TELL RELAY AT DEARN /SERVERS
+             <BR>
+     In NetNorth:   TELL RELAY AT CANADA01 /SERVERS
+
+
+<LI>Excessive queries, channel changes, and other commands which
+must
+     be processed by Relay generate considerable overhead in some
+cases
+     and should be kept to a reasonable number.  In addition, you
+should
+     direct your queries to only your assigned Relay(s).
+
+
+
+<LI>File backlogs, Relay host CPU saturation, link failures, and
+node
+     downtime may make Relay temporarily unavailable or
+restricted.  In
+     such instances you should wait until your Relay is
+available; it is
+     not proper to redirect signons or Relay links in such cases
+where
+     the alternate path will generate a greater network load than
+the
+     primary path.
+
+
+
+<LI>Proper and considerate behavior should be observed at all
+times.
+     Misuses in this category include, but are not limited to:
+<OL>
+<LI>Disguising your identity in a /SIGNUP by not specifying your
+
+        full name, or by specifying someone else's name.
+
+<LI>Transmitting rude or obscene language.
+
+<LI>Channel scanning; attempting to locate a private channel
+without
+        first obtaining an invitation from a user on that
+channel.
+<LI>Annoying other Relay users by transmitting excessive and/or
+
+        repetitive messages (including the use of 'picture'
+EXECs).
+<LI>Failing to cease an activity in response to a request to do
+so
+        from any individual designated as the 'Relay Operator'
+for a
+        Relay server.
+</OL>
+</UL>
+
+
+Repeated violations of the above may result in the termination
+of your
+ability to use the Relay.
+
+
+
+<H3>Relay User Classification System
+9/09/86</H3>
+<BR>
+
+
+Due to previously high volumes of message traffic and the
+popularity of
+the use of Relay for casual conversation, users will be
+classified into
+one of two distinct classes:
+
+
+<OL>
+<LI>Public user class.  Any user may obtain public access to
+Relay by a
+    standard /SIGNUP command.  Public users are limited to the
+public
+    channels 0-999 and are additionally subject to channel
+limits, peak
+    period shutdowns, and limited hours of operation.  In
+general, the
+    prime time period (8:00 AM - 6:00 PM local time of the host)
+will
+    be closed to the public.
+
+
+
+<LI>General user class.  A user may, in certain circumstances,
+be given
+    the general user class for full access to Relay.  General
+users are
+    restricted to only academic conferencing activities.  Abuse
+of the
+    general class will result in the loss of general user
+priviledge.
+    General user class is usually restricted to
+faculty/staff/grads.
+
+<P>
+</ol>
+General user class can only be granted by the host Relay contact
+or his
+designate.  Users from other institutions must submit adequate
+evidence
+of authorization to request general classification, usually by
+a request
+from the listed administrator or contact from the user's
+institution.
+The host Relay contact (or designate) may require additional
+information
+or place further constraints on such services.
+
+<H3>Corrective Actions -- Relay Operator Responsibilities
+8/21/86</H3>
+
+
+The day-to-day maintenance and operation of a Relay server is
+carried out
+by the "Relay Operator", an individual or group of individuals
+who are
+responsible to the institution's network administrative
+authority.  The
+Relay Operator is also responsible for implementing corrective
+action to
+temporarily or permanently terminate a user's access to the Relay
+in
+cases of violation of the guidelines described in other sections
+of this
+document.
+<P>
+Actions that can be taken by any Relay Operator against offending
+users
+of any and all Relay servers:
+<UL>
+<LI>sending an offending user a warning notification by message
+or mail;
+<LI>forcing the offending user from the current Relay session;
+<LI>temporary lockout (2 days or less) of the offending user.
+</UL>
+Actions that can be taken only by the Relay Operator of the
+offending
+user's Relay server:
+<UL>
+<LI>temporary lockout (over 2 days) of the offending user;
+
+<LI>permanent lockout of the offending user from Relay use.
+</UL>
+
+
+Any corrective action taken by a Relay Operator against an
+offending user
+of another institution's Relay server, other than single
+instances of an
+abusive user being forced as a warning, should be documented by
+sending
+mail to that server's Relay Operator outlining the reason for the
+action.
+<p>
+<HR>
+</BODY>
+</HTML>
+
+
+
+

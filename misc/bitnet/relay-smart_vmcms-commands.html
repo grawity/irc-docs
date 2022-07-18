@@ -1,0 +1,327 @@
+<HTML>
+<title>Smart Commands</title>
+<BODY>
+<H2>SMART VM/CMS Commands</H2>
+This text is preformatted.
+<HR>
+<PRE>
+
+/**********************************************************************/
+/*                                                                    */
+/*       File: SMART COMMANDS for SmartChat Program..Ver. 1.00        */
+/*                         Written By:                                */
+/*                                                                    */
+/*              Abdullah Al Sumairi STUCA1D@SAUPM00                   */
+/*                                                                    */
+/*                                                                    */
+/**********************************************************************/
+ 
+------------------------------------------------------------------------
+1) Add:
+  This command adds users to the talking list so you can chat with
+them easily, here are some examples:
+    * .a   USER at NODE   (will add USER@NODE to your  talking list).
+    * .a   USER           (will add USER@LOCAL (LOCAL is your node)).
+    * .a   NICK           (will add USER@NODE if NICK is in your names file).
+    * .a                  (will display users in the talking list).
+------------------------------------------------------------------------
+2) ALL:
+  This command scans the names in your node or in other nodes.
+here are some examples:
+    * .all                (will scan all DSC/LOG names in your node).
+    * .all NODE           (will scan all DSC/LOG names in a remote node).
+    * .all NODE /nodsc    (will not scan Disc. users).
+    * .all NODE /nolog    (will not scan Logged users).
+------------------------------------------------------------------------
+3) AWay:
+  This command set the away on or off, if you want to go for sometime
+logging off, here are some examples:
+    * .away               (will set the away on or off).
+    * .away i'll back     (will set the away message and
+                           set the away on).
+------------------------------------------------------------------------
+4) Block:
+  This command will let you send a block of messages to a user as one
+message, here are some examples:
+    * .b                  (will send the message to the current user).
+    * .b     1            (will send the message to the user no.1 in
+                           the talking list).
+    * .b     USER         (will send the message to USER@LOCAL).
+  SmartChat will wait for you to type your messages and then
+  if you hit  Enter it will send the block to the user.
+------------------------------------------------------------------------
+5) CChange:
+  This command will change SmartChat if you want to change them, here
+are some examples:
+    * .cc block macro 2      (will change the cmd Block to MAcro).
+                              Note: 2 is the least number of char.
+    * .cc help help 4        (will not responed for .h .he .hel).
+------------------------------------------------------------------------
+6) CLS:
+  This command clears the screan and if you want it will  put something in top
+of screan, here are some examples:
+    * .cls                   (will clear the screan).
+    * .cls hello there       (will clear the screan and put
+                              "hello there" in top).
+    * .cls reset             (will reset the cls_string).
+------------------------------------------------------------------------
+7) CMD:
+  This command will send a command to an extrenal node, here is an
+example:
+    * .cmd NODE COMMAND     (will send COMMAND to the node NODE).
+------------------------------------------------------------------------
+8) Cms:
+  This will send a CMS/CP command ,here are some examples:
+    * .c   LIST             (will list your files then return to SMART).
+    * .c                    (will switch you to the CMS/CP).
+------------------------------------------------------------------------
+9) Delete:
+  This command deletes users from the talking list, here are some
+examples:
+    * .d      1             (will delete no.1 in the talking list).
+    * .d      NICK          (will delete user with nick NICK).
+------------------------------------------------------------------------
+10) DIR:
+  This command will list your file ,here are some examples:
+    * .dir * exec           (will list all file with filetype 'EXEC').
+    * .dir smart /w         (will list files in wide form).
+------------------------------------------------------------------------
+11) DNick:
+   This command allow you to erase a nick from your names file,
+for example:
+    * .dn NICK               (will erase all the info about him).
+------------------------------------------------------------------------
+12) DOnt:
+  This command will set or reset users who will be added, answered
+or recorded in AWAY or IGNORE files, for example:
+    * .do add USER@NODE      (will not add him is autoadd is ON).
+    * .do add USER@NODE      (will add him again if he talked to you).
+    * .do answer NICK        (if he ignored he will not be answered).
+    * .do answer NICK        (will answer him again).
+      and the same is for .do record
+------------------------------------------------------------------------
+13) End:
+  This command will end the SmartChat session, here are 2 examples:
+    * .e                    (will stop SmartChat).
+    * .e   LIST             (after stopping SmartChat, it will list
+                             your files).
+------------------------------------------------------------------------
+14) ERase:
+  This command erases SmartChat commands if you want to, for example:
+    * .er   erase          (will erase this command).
+------------------------------------------------------------------------
+15) Group:
+ This command will send the message to all users in the talking list,
+for example:
+    * .g     hello          (will send "Hello" to all users).
+    * .g                    (will switch you to the group send).
+------------------------------------------------------------------------
+16) Help:
+  This command will give you a breif help of a command or some commands,
+here are some examples:
+    * .h  ignore add..etc   (will give help for those commands).
+    * .h  *ad*              (will give help for all commands
+                             having the string "AD").
+------------------------------------------------------------------------
+17) HIstory:
+  This command will display previous messages, here are examples:
+    * .hi 1 15              (will display messages 1 to 15).
+    * .hi 20                (will display last 20 messages).
+    * .hi                   (will display according to NUMhist
+                             setting).
+    * .hi 10 (USER          (will display last 10 message from/to
+                             the user USER).
+    * .hi RESET             (will reset the history).
+------------------------------------------------------------------------
+18) Ignore:
+  This command will add users to the ignoring list, for example:
+    * .i USER@NODE       (will ignore that user).
+    * .i NICK            (will ignore the user in your file names).
+    * .i *               (will ignore all users not in the talking list).
+    * .i                 (will display users in the ignoring list).
+------------------------------------------------------------------------
+19) INfo:
+  This command will give you some information about SmartChat,
+for example:
+    * .in
+    * .in version
+    * .in required
+    * .in author
+------------------------------------------------------------------------
+20) List:
+  This command will list users in the talking/ignoring list,
+for example:
+    * .l                (will list all users in both lists).
+    * .l i              (will list users in the ignoring list).
+    * .l t              (will list users in the talking list).
+    * .l 1              (will show you who is no.1 in the talking list).
+    * .l -2             (will show you who is no.2 in the ignoring list).
+    * .l USER/NICK      (will show you where is that user).
+------------------------------------------------------------------------
+21) Names:
+  This command will send queries to all users in the names file,
+for example:
+   * .n                 (will send queries for local users).
+   * .n all   or:
+   * .n *               (will send queries for all users).
+   * .n all ^NODE       (will send queries to all nodes but the node NODE).
+------------------------------------------------------------------------
+22) NEW:
+ This command will create new commands for you, for example:
+   * .new jack 1 cms tell
+       (now: Jack  is  the name  of the  command,  the  number "1" is
+             the least number  of  characters to type ,"cms" is  the
+             type of the command and "tell" is the value of it,if you
+             later typed ".j USER hello" then the SmartChat will
+             execute this command).
+   * .new snames 2 smart .n all ^NODE1 ^NODE2
+       (now: the type of this command is smart so..it must begin  with
+             the command character "." it's value is :
+             ".n all ^NODE1 ^NODE2" so when you later typed:
+             ".sn "  this  command will be executed...
+             you can type also:
+             ".sn ^NODE3"..etc).
+  There are 2 types of new commands "cms" or "smart".
+Now: if you want many commands to be executed then do this:
+   * .new fff 3 cms list;reader;tell xx hello;logoff;
+     note the ';'  between every two commands..
+------------------------------------------------------------------------
+23) NIck:
+  This command will add nicks to your names file, here are some examples:
+   * .ni USER@NODE !NICK (his_name /notebook ,NO
+     (now: ",NO" means when you use the command ".n all" this id will
+          not  be scanned..if you want it to be scanned then dont put
+          it).
+     (note: you can add this to your names file in front of every nick
+            you dont want it to be scanned by ".n all" ..just add:
+            ":SMART.NO").
+   *  .ni 1 (his_name /notebook
+      (now: no.1 in the talking list will be add to the names file).
+------------------------------------------------------------------------
+24) NOignore:
+  This command will delete users from the ignoring list, for example:
+   * .no -1            (will delete no.1 from the ignoring list).
+   * .no USER          (will delete USER from the ignoring list).
+------------------------------------------------------------------------
+25) QNode:
+   This command is to set a node or several of nodes for the query
+of a node, if QNode for SAUPM00 is the nodes ( SAKSU00 and SAKAAU03)
+for example then all users in SAUPM00 their queries will be sent to
+those 2 nodes instead, for example:
+   * .qn NODE NODE1 NODE2   (will set the qnodes for NODE).
+   * .qn NODE RESET         (will reset the qnodes for NODE).
+   * .qn * RESET            (will reset all qnodes).
+   * .qn                    (will display all qnodes).
+------------------------------------------------------------------------
+26) Query:
+  This command will send single queries, here are some example
+   * .q 1              (will scan no.1 in the talking list).
+   * .q -1             (will scan no.1 in the ignoring list).
+   * .q USER at NODE   (will scan that user).
+   * .q USER           (will scan this users in your node).
+   * .q NICK           (will scan this nick which is in your names file).
+------------------------------------------------------------------------
+27) REplace:
+  This caommand will replace users in the ignoring/talking lists with
+each others or with users not in those lists:
+   * .re 1 -3          (will replace no.1 in the talking list
+                        by no.3 in the ignoring list).
+   * .re 1 2           (will replace no.1 by no.2 in the talking list).
+   * .re -1 -2         (will replace no.1 by no.2 in the ignoring list).
+   * .re 1 NICK        (will delete no.1 and put USER in his place).
+   * .re -1 USER@NODE  (will noignore no.1 and put that user in his
+                        place).
+------------------------------------------------------------------------
+28) RECord:
+  This command will start/stop the record session, for example:
+   * .rec on           (will start the record session).
+   * .rec off A B      (will stop the record and store it in file A B).
+   * .rec off          (will stop the record and store it in a file).
+------------------------------------------------------------------------
+29) RESet:
+  This command will restore some valaues which have been changed,
+for example:
+   * .res commands     (will restore all erased/changed commands).
+   * .res history      (will reset history).
+   * .res newcmd       (will reset all created commands).
+   * .res ignoring     (will reset ignoring list).
+   * .res talking      (will reset talking list).
+------------------------------------------------------------------------
+30) RNick:
+  This command will add users in the relay to your names file,
+for example:
+   * .rn NICK       (will send /whois command to the relay and add it).
+------------------------------------------------------------------------
+31) Route:
+  This command will set routes for nodes if you want to, for example;
+   * .r NODE1 NODE2 NODE3 (will send all messages to NODE1 by this
+                           route).
+   * .r NODE1 RESET       (will reset routes for that node).
+   * .r * RESET           (will reset all routes).
+------------------------------------------------------------------------
+32) ROSe:
+  This command will send a rose to the user you choose, for example:
+   * .ros USER            (will send a rose to that user).
+   * .ros                 (will send the rose to the current user).
+   * .ros NICK /Hi        (will send the rose and put "Hi" infront
+                           of it).
+   * .ros //m relay       (will send the rose to the current user
+                           and put "/m relay" in front of it).
+------------------------------------------------------------------------
+33) SELect:
+  Use this command to select users who can use you account while you
+are using Away, for example:
+   * .sel USER Password     (will set the password for tha user).
+   * .sel USER RESET        (will deselect that user).
+   * .sel * RESET           (will reset all selected users).
+   * .sel                   (will display the userd selected).
+------------------------------------------------------------------------
+34) Set:
+  This command put the settings you want, for example:
+   * .s autoadd off       (will set it to be off).
+   * .s cmdchar /         (will set the command char. to be "/").
+   * .s cmdchar           (will show you the last setting for it).
+   * .s                   (will show you all settings).
+   * .s qnode a b         (will set queries for node a to node b).
+------------------------------------------------------------------------
+35) Time:
+  This command will display the local time or time in other nodes,
+for example:
+   * .t                   (will show you the time).
+   * .t NODE              (will show you the time in the node NODE).
+------------------------------------------------------------------------
+36) TYpe:
+  This command will type the file you want for example:
+   * .ty file1          (will type the file SMART FILE1).
+   * .ty fn ft /hi      (will type FN FT and put "Hi" infront of it).
+------------------------------------------------------------------------
+37) Special:
+  This command set a special message for the users you choose, the
+messages will be sent to them if you ignored them or if you are away,
+for example:
+  * .sp user / sorry i'm out (will set the special msg for that user).
+  * .sp user / reset         (will reset the special msg for him).
+  * .sp * /reset             (will reset all special messages).
+  * .sp                      (will show all special messages).
+------------------------------------------------------------------------
+38) Whois:
+  This command shows you who is the current users or a user in your
+names file here are 2 examples:
+   * .w                  (will show you the current user).
+   * .w NICK             (will show you the users info in your names file).
+------------------------------------------------------------------------
+39) Xnode:
+  This command will give you some information about a node, for example:
+   * .x NODE1            (will send give you some info. about NODE1).
+------------------------------------------------------------------------
+40) Zaddr:
+  This command will send your address to any user,for example:
+   * .z USER             (will send him your address).
+    (note: use the command .F address to set your address..like this:
+           .f ad name/country/city/....etc or the way you like).
+------------------------------------------------------------------------
+
+</PRE>
+<HR>
+</BODY>
+</HTML>

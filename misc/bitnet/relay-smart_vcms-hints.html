@@ -1,0 +1,122 @@
+<HTML>
+<title>Smart hints</title>
+<BODY>
+<H2>SMART Hints for VM/CMS</H2>
+This text is preformatted.
+<HR>
+<PRE>
+
+/*****************************************************************************/
+/*                                                                           */
+/*                      SMART HINTS For SmartChat Exec                       */
+/*                              Programmed by:                               */
+/*                Abdullah AL-Sumairi STUCA1D@SAUPM00.BITNET                 */
+/*                                                                           */
+/*                            SmartChat ver 1.00                             */   
+/*                         This file is written by:                          */   
+/*                           Abdullah Al-Sumairi                             */   
+/*                                                                           */   
+/*                                                                           */   
+/*****************************************************************************/
+ 
+  Please read carefully, these are some hints you may need if you use SmartChat
+  
+1) How to Write the INITIAL, FINAL, BEFORE, AFTER and LOOP files:
+  
+  SmartChat will look for those 5 files before, after and while it  is working. 
+ the SMART INITIAL file  will be executed when SmartChat begins and  the  FINAL 
+ will be in the  end . SMART BEFORE  and  SMART AFTER  files  will  be executed 
+ before abd after the  SmartAway. The SMART LOOP  file will be  executed  while 
+ SmartChat running.  and they  are  all  written in  the  same way in order for 
+ SMART  EXEC  to  understand  them. it is  easy to write  them because they are 
+ written  in  the  same  way  you type  the  commands  while  working  with the 
+ SmartChat. here are some notes about that:
+ 
+  a) the line starting with '*' will not be read by  SMART EXEC so you can  put 
+ there any information and comments you want.
+ 
+  b) the line starting with '.' will considered as a SmartChat command.
+ 
+  c) anything else will be send to the current user or to the CMS.
+ 
+for example lets take this INITIAL file:
+ 
+    * this is my SMART INITIAL file
+    * users not to add:
+    .dont add OPRUTIL
+    .dont add NETSERV@SAUPM00
+    * users not to answer:
+    .dont answer OPERATOR
+    * users not to record:
+    .dont record MAILER@GREARN
+    * user to ignore:
+    .ignore STUQR01@SAKSU00
+    * users to add:
+    .add fire
+    .add relay@uscvm!relay1
+    .add relay@vtbit!relay2
+    * settings:
+    .set insize 50
+    .set outsize 100
+    .set loop yes
+    .set loopdelay 10
+    * Query Nodes:
+    .qnode ITHACA ITHACA1 ITHACA2
+ 
+and this is a sample FINAL File:
+     * i want to logoff after finishing Chatting
+     .cms logoff
+--------------------------------------------------------------------------------
+ 
+  2) How To use the Query Commands:
+  there are three Query Commands, ALL, NAMES and QUERY. each  one of  them has a
+different function:
+ 
+  a) if you want to get the names in one node these are the names of  the  users
+who are logging on disconnected. if you want to scan  only  the logging on users 
+then type:
+          .all NODE /nodsc
+or:
+          .all NODE /nolog to see only the disconnected users.
+ 
+  b) if you want to send queries to all users in your  names file  then use  the
+command:   
+     .NAMES <options>
+here are some examples:
+     .NAMES
+     .NAMES all
+     .NAMES online 
+     .NAMES offline
+     .NAMES all /nodsc
+     .NAMES all /nolog nonot
+     .NAMES all /nodsc nolog
+     .NAMES all ^NODE          (all users but users in that node).
+     .NAMES NODE               (users only in node NODE).
+ NOTE: this command will only send queries for users in your names file.
+for example if you dont want for some users to be scaned then add this  to  your
+names file beside that user:
+first: in the ready  type  : names
+then add this line:
+tag: smart                     value: no
+for example:
+userid: RELAY             NODE: USCVM                  NOTEBOOK:
+name:
+              .
+              .
+              .
+              .
+ 
+tag: smart                      value: no
+ 
+ 
+   c) the QUERY command is only used to send one query only to one user.
+   .QUERY 1          (sends a query to no.1 in the talking list).
+--------------------------------------------------------------------------------
+ 
+  Please if you have problems using SMART EXEC or you have anything to say about
+then contact the Author:
+   Abdullah AL-Sumairi  STUCA1D@SAUPM00.BITNET
+</PRE>
+<HR>
+</BODY>
+</HTML> 

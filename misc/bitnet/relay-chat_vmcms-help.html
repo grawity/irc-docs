@@ -1,0 +1,3066 @@
+<HTML>
+<title>CHAT HELPCMS</title>
+<BODY>
+<H2>Summary CHAT HELP</H2>
+This is a preformatted text, as found on NETSERV.<br>
+Refer to NETSERV (eg. NETSERV@HEARN) to get the accompanying
+files.<p>
+Install this file as CHAT HELPCMS on VM/CMS.
+<HR>
+<PRE>
+.CM File: SUMMARY HELPCHAT A1 (07/08/86 10:31:16)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*             A summary of the Chat help files                        *
+*                                                                     *
+***********************************************************************
+ 
+This file will  tell you where to  find what you are looking  for. If you
+ have  never  used  the  Chat  program,  you  should  select  either  the
+ "Overview" file if you are an  experienced VM/SP user, or the "Tutorial"
+ file  if you  think you  would feel  more comfortable  with a  help file
+ designed for novice VM users.
+ 
+ 
+ 
+ 
+*ChatCMD        A menu of Chat commands (those you enter after the "===>" sign)
+CHATDISC        How to use Chat as a disconnected answering machine program
+CHATFILT        How to use the Chat message filtering facility
+CHATNAMES       Help information for the improved Chat NAMES   command
+CHATRDRL        Technical description of the CHATRDRL reader-scanning module
+CHATRL          Help information for the improved Chat RDRLIST command
+Install         How to install Chat on a public disk or file server
+Layout          A description of screen layout under Chat
+Messages        A description of Chat messages
+Modem           Using Chat on a modem terminal -- selecting the right options
+Nicknames       Chat nicknames conventions
+Options         A description of the Chat options (from nicknames screen)
+Overview        A general overview of Chat for experienced VM users
+PFkeys          PFkeys settings under Chat
+Relay           Communicating with Relays under Chat -- special facilities
+Requires        Technical requirements for running the Chat program
+Summary         The file you are currently reading
+Tags            A description of the status area tags under Chat
+Tutorial        First use tutorial for unexperienced VM users
+ 
+.CM File: TUTORIAL HELPCHAT A1 (05/30/86 18:29:14)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*          First use tutorial for unexperienced VM users              *
+*                                                                     *
+***********************************************************************
+ 
+This help file is a general description of the Chat "Network conversation
+ sifting facility" program -- what it is,  what it is NOT, and how to use
+ it for the first time. Later,  when you have become experienced with the
+ program, you will be able to  learn more from the other menu selections,
+ but right now you will only need to read this file and the "PFkeys" file
+ (and possibly  the "Layout" file too,  if you feel like  reading lots of
+ help) before getting started.
+ 
+In this  introductory file we will  assume that you are  already familiar
+ with the standard IBM  TELL and NAMES commands and that  you know how to
+ query about a user to see if he  is logged on. Well, at least you should
+ have read the IBM helpfiles about  TELL and NAMES and roughly understood
+ them -- you'll  see, Chat is even simpler (more  user-friendly) than the
+ CMS commands for network communication...
+ 
+In this  helpfile and in  all the other ones  we will use  the convention
+ that "Chat" = the program, while  "chat" is the usual english word. Just
+ in case you might come to get confused with the various meanings...
+ 
+First of all you should get a general idea of what Chat does. Chat is not
+ a multi-user Chat machine exec, such as  RELAY or FORUM -- nothing to do
+ with channels,  /SIGNON commands, private  messages, etc. For  those who
+ are familiar with  these programs, Chat is rather a  kind of full-screen
+ TALKTO program  including a GONE-like  answering machine and  much more.
+ But please don't feel discouraged if  you don't know anything about GONE
+ and TALKTO -- you really don't need to!
+ 
+ 
+Chat is a full-screen program that  will interface itself between you and
+ the system to make your life a lot easier when conversing with people on
+ the network. It  will receive messages for you, analyze  them, strip off
+ the nasty unutterable system prefixes  (eg "DMTRGX171I" -- Yuk!), search
+ your NAMES file for the nickname of  the person who sent the message and
+ display it in ENGLISH:
+ 
+ You'll get  "From Christina: Hello, how are you?"
+ 
+ Instead of  "DMTRGX171I FROM CHZRZU1A(K345762): Hello, how are you?"
+ 
+(Note: this  "Christina" is  an imaginary person,  please don't  send any
+       mail to her!)
+ 
+ 
+Furthermore, Chat will sort out the  messages you send and receive accor-
+ ding to  the nickname of  the person you  are talking with,  and display
+ them on  different "logical  screens" (up to  6 different  screens). You
+ will be able to  switch from one logical screen to the  other at will by
+ pressing a single PFkey. Those "screens"  are of the scrolling type, not
+ the "MORE..." type,  so that you lose only one  message (the oldest one)
+ when the screen becomes full.
+ There is an independent command line  for each logical screen so that if
+ you are typing  a message on a  given screen, you can  quickly switch to
+ another one  if needed (eg to  answer an urgent message  from your boss)
+ and then resume the message you had not finished typing by just pressing
+ a PFkey (even the cursor position is preserved across screen switches!).
+ 
+ 
+But anyway  you won't need to  switch screens or do  anything complicated
+ for your first  use of Chat. And  you will only need to  learn about two
+ PFkeys:
+ 
+   - The "QUIT" PFkey is number 12. You can exit the Chat program anytime
+      by just  pressing PF12.  Sorry about  the incompatibility  with the
+      latest IBM standard, but you'll see the reason why QUIT is PF12 and
+      not PF3 when learning the settings of the other PFkeys.
+ 
+   - The "Switch to screen number 1" PFkey  is PF1 (you can use PF13 as a
+      replacement if your terminal is one  of those where pressing PF1 is
+      a real pain, and PF24 = PF12 too). PF1 will be your "home" key, the
+      one to press if something goes  wrong and you don't understand what
+      is happening to you. If  PF1 doesn't succeed, press the "emergency"
+      PF12  key to  exit  from  Chat... and  feel  free  to have  another
+      attempt!
+ 
+Now read carefully before getting started. Find yourself a friend to chat
+ with (preferably an experienced Chat user  on a console not too far from
+ yours), and  define a nickname for  him using the NAMES  command (if not
+ already done). Let's assume his nickname is "Mike" (why not?). When Mike
+ is ready to chat  with you, quit the help files  and issue the following
+ command: (guess what?)
+ 
+       "CHAT"
+ 
+You will  then be  presented with  a screen  with a  darned lot  of input
+ fields (don't panic,  you won't have to  fill them all!) and  a bunch of
+ repelling "options"  to set ON  or OFF and  you'll feel your  right hand
+ irresistibly  going towards  the PF12  key...  No, not  now, you'd  miss
+ something!...
+ 
+Hopefully the cursor is placed on a field that doesn't look too bad -- it
+ just reads "1. ________" -- and the fearsome option fields are far below
+ the cursor...  Now just key-in  "Mike" (no  need to remove  the trailing
+ underscores) and press the PF1 key.
+ 
+The screen layout will then change to a familiar XEDIT-like command line,
+ with "Screen number 1" being displayed  in the status area. And there is
+ a nice "Tell  Mike" command in the  input area, with the  cursor just at
+ the right position. And an empty screen with a red (or just hilighted if
+ your console  is a monochrome one)  message saying that "This  screen is
+ now dedicated to  Mike"... Let's have a try and  type "Hello, Mike!" and
+ then ENTER.  You get  a red (intensified)  message saying  "Starting new
+ Chat  session   on...",  then  a  green   (unintensified)  message  with
+ "To   Mike: Hello, Mike!". Heck!!  That darned  program is  already mal-
+ functionning, it  has put two  nasty spaces before "Mike"!  Doesn't look
+ nice at all!
+ 
+But  it did  send the  message to  Mike, no  problem there.  Some seconds
+ later you get  a "From Mike: hiya!" (intensified  yellow) and understand
+ why  there were  two  additional  blanks after  the  "To"... Don't  feel
+ embarrassed for not having understood it  before when it was so obvious,
+ some experienced VM users have had the same reaction before you...
+ 
+Now you can Chat  with Mike as long as you want (you  just have to type a
+ message,  press ENTER  and wait  for his  reply). Don't  stay too  long,
+ though, because you could get into trouble if another user sent a messa-
+ ge to you while you are trying Chat  -- you don't know yet how to handle
+ multiple messages  from several users...  Not much trouble,  anyway; you
+ would just  have to press your  "home" PF1 key, or  the "emergency" PF12
+ key if you are really lost...
+ 
+Ok, just try it now and come back  to that help file when you've done it.
+ You'll then learn some more about multiple screens and screen switching.
+ 
+ 
+ 
+Well... I guess that I should now change the header to
+***********************************************************************
+*                                                                     *
+*         Second use tutorial for (less) unexperienced users          *
+*                                                                     *
+***********************************************************************
+ 
+Now that you've learnt how to use Chat to communicate with a single user,
+ you're probably wanting to learn more  about the program. If this is not
+ the case, I apologize for having  bothered you with all that reading and
+ testing and will be happy to get an angry mail from you (mail to ERIC at
+ FRECP11).
+ 
+The first  thing you will  have to learn is  the setting of  the "screen-
+ switch" PFkeys:  as you might  have guessed,  PF2 switches to  screen 2,
+ PF3 switches  to screen 3, (...)  PF6 switches to screen  6. This should
+ not be  too difficult to  remember... That's  the reason why  the "quit"
+ key is PF12, not  PF3: PF1 = screen 1, PF2 = screen2,  PF3 = quit, PF4 =
+ screen 4 and PF12 = screen 3 would have been quite a mess...
+ 
+Now assume you want to talk with Mike AND Christina. You get back to Chat
+ by issuing a  "CHAT" command and find yourself back  where you had left.
+ You could resume your conversation with  Mike if you wanted to. But it's
+ with Christina that you want to talk  now. So you press the PF10 key and
+ get back  to that unsightly  "nicknames screen".  The "1." field  is now
+ filled with  Mike's nickname, userid and  node, and the cursor  has been
+ subsequently  placed on  the second  field, which  reads  "2. ________".
+ Quite logically, you  enter "Christina" in that field and  press the PF2
+ key, in much  the same way as  you had entered "Mike" on  field number 1
+ and pressed the PF1 key. You are presented with the second screen, which
+ is now  dedicated to Christina  (of course you  know it is  dedicated to
+ her!! That stupid  program doesn't need to print that  message!). So you
+ start chatting  with Christina on  screen 2, impatiently waiting  to see
+ what will happen when Mike sends a message...
+ 
+Feeling yourself  daring, you  press the  PF1 key to  get back  to Mike's
+ screen, tell  him to send  you a message, and  quickly sneak out  of his
+ screen by pressing PF2... While you  were typing a message for Christina
+ ("Well, I'm  waiting to s"),  you hear a beep,  look at the  console and
+ realize that you have been switched back to Mike's screen... Here is the
+ message you had  asked him to send. You quickly  answer "thanks" and get
+ back to Christina's screen to see  what happened to the message you were
+ keying in  when Mike's message came  in. It was apparently  removed from
+ the command line while the program  switched back to Mike's screen... So
+ you press the PF2 key and, lo  and behold, there it is, the message that
+ you had  been typing  is now back  in the command  line with  the cursor
+ placed in  the exact spot  where you had left  it... You can  now resume
+ your message (..."to see what will happen when Mike sends a message")
+ 
+So you  start relating your  experience with  Chat to Christina  when you
+ hear a beep (again!),  look at the screen and find  yourself on screen 3
+ (three???? Never said  I wanted to use that screen!!!!),  with the usual
+ messages, "This screen  in now dedicated to Bob...",  "Starting new Chat
+ session on..." and a message from that  guy who just wouldn't let you be
+ yesterday at the party...  Curse him!! How do I get  rid of him? Perhaps
+ an angry  message would  do it.  Such as "Sorry,  I'm busy,  another day
+ please!"
+ 
+You send that message and get back to screen 2. Getting curious about it,
+ you press the PF10  key to get back to the  nicknames screen and realize
+ that the  third field is now  filled in with Bob's  nickname, userid and
+ node --  as if you had  yourself asked to  speak with that guy  (How did
+ this stupid  program DARE think  that I might  be wanting to  speak with
+ such a !"$!"+%!=!"$ ????)
+ 
+Still cursing,  you press the PF2  key and start telling  Christina about
+ this guy you can't manage to get  rid off when you are again pulled back
+ to screen 3!  You press the PF2 key immediately,  without even caring to
+ read the message --  and get pulled back to screen 3  again!! Bob is now
+ sending a "love" picture to you!!!! And everytime you press PF2 to resu-
+ me your  message you get switched  back to Bob's screen  because another
+ message has arrived!!! Curse that darned program for being so stupid!
+ 
+Hopefully the picture wasn't too long and  you had time to send a message
+ to Mike  ("Help!! I'm beset  with messages from  everywhere!!!!") before
+ receiving another  "kiss" picture from  Bob, which, along with  the help
+ messages from Mike and the "What's up? You still there?" from Christina,
+ makes the  terminal flash and  erratically jump  from one screen  to the
+ other, beeping as if to announce Doomsday...
+ 
+You helplessly wait for the bombing to end and switch to Mike's screen to
+ read his messages. He tells you to go to the nicknames screen (Yuk!!)
+ and change the "Automatic screen-switch" option to NO. Feeling that you
+ really don't have any other choice, you press the PF10 key and blindly
+ move the cursor towards those unsightly option fields, hoping that you
+ will find the right one and won't do any mistake...
+ 
+"NO" <ENTER>  Phewww... Made it...
+ 
+About three seconds  after you have changed the option  to "NO", you hear
+ a beep  (oh no! Not  again!) and  you see a  blinking yellow tag  at the
+ bottom of the screen: "Incoming message on #3". But this time the screen
+ doesn't switch!...  Good deal! You  neglect the blinking tag  and switch
+ to Mike's screen  to tell him that  you have defeated Bob  and thank him
+ for his irreplaceable  help... The "Incoming message on #3"  tag has now
+ been replaced  with a stubborn  "Message pending on #3"  indication that
+ keeps blinking in the status area...  Not knowing that Bob is an awfully
+ nasty person with whom you don't  want to talk, Chat keeps reminding you
+ that he has  sent you a message  and you didn't switch to  his screen to
+ read it yet... But otherwise it's  convenient to have the nasty messages
+ printed on another screen where you can choose NOT to switch to...
+ 
+Well, now  you'd better be  trying all that  stuff before you  forget it.
+ When you've  become accustomed to  it, you'll  be able to  wander though
+ the other  helpfiles (start  with the  "Nicknames" file),  learning more
+ about the  program -- "lentement, mais  surement" as we froggies  use to
+ say...
+ 
+.CM File: OVERVIEW HELPCHAT A1 (05/30/86 18:28:37)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*      An overview of the Chat program for experienced VM users       *
+*                                                                     *
+***********************************************************************
+ 
+This help file is a general description of the Chat "Network conversation
+ sifting facility" program -- what it is,  what it is not, and how to use
+ it. In this introductory file it will be assumed that you are proficient
+ with the standard IBM TELL and NAMES commands.
+ 
+To avoid a possible confusion  with several other (older) program bearing
+ the same name, I would first like to state that Chat is not a multi-user
+ chat machine exec such as RELAY or  FORUM -- nothing to do with that. It
+ is rather  a kind of full-screen  TALKTO program which includes  a GONE-
+ like answering machine, a message filtering program and much more. Apart
+ from the usual RSCS message trimming and nickname-search, Chat will sort
+ incoming and outcoming messages by  nicknames and display them on diffe-
+ rent "logical screens". There are  6 different logical screens, and each
+ of them can  be "dedicated" to a particular user.  Every message sent to
+ or received from that user will be displayed on that screen and will not
+ mess up the other screens. You can  switch from one screen to another by
+ pressing the corresponding PFkey and the latest messages printed on that
+ screen will  be re-displayed. There  is an independent command  line for
+ each logical screen, which is  automatically pre-set to "Tell nickname",
+ where "nickname"  is the nickname of  the person to which  the screen is
+ dedicated. The contents of the command line is preserved (along with the
+ position of the cursor) whenever you  switch from one screen to another.
+ You can therefore switch to another screen to send an urgent message and
+ switch back to the original screen  to resume typing your message. There
+ is a special screen, called "screen 0", where all messages will be prin-
+ ted regardless of nickname, thereby simulating the usual VM console out-
+ put. Some  messages (eg  RSCS messages)  will be  automatically directed
+ to this screen so as not to mess up the other screens.
+ 
+Getting started  with Chat: assume  you want to  talk to user  Mike (from
+ your NAMES file). All you will have  to do is enter Chat (by issuing the
+ command: "CHAT"), type "Mike" in the first input field and press the PF1
+ key. More  generally speaking, PFn will  switch you to screen  number n,
+ and the  n-th input area on  the nicknames screen corresponds  to screen
+ number n.  You will then  be able to chat  with Mike (the  messages will
+ appear on  the screen  as soon  as they are  received), or  with several
+ users at once. You  may exit Chat at any time by  pressing the PF12 key.
+ If you ever receive a message from a user which has not yet been dedica-
+ ted a screen, Chat will automatically  assign the first "free" screen to
+ him and print the message there.
+ 
+Probably the best thing to do now would  be to have a try at Chat. You'll
+ then be  able to learn  more about it  by reading the  "Layout", "Tags",
+ "Nicknames" and  "Options" helpfiles  (preferrably in that  order). Then
+ you'll  have to  wade  through all  the other  helpfiles  when you  have
+ time... Good luck!
+ 
+.CM File: PFKEYS HELPCHAT A1 (05/30/86 18:28:39)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*            PFkeys and PAkeys settings under Chat                    *
+*                                                                     *
+***********************************************************************
+ 
+The release 1.6 of Chat does not allow the user to change the settings of
+ the  PA/PFkeys.  This  facility  will be  implemented  in  a  subsequent
+ release.
+ 
+ 
+The key settings are currently the following:
+ 
+  CLEAR -- Re-display current screen. All screen modifications are lost.
+ 
+  PA1   --  Nickname screen: Display the Chat HELP menu.
+            Other    screen: Clear the screen output area. The input area
+                              and cursor position are preserved.
+ 
+  PA2   -- Enter CMS SUBSET  mode.  All messages  will be stacked and
+            displayed upon return. Please note that incoming messages
+            in excess of 255 will be irremediably lost to Chat due to
+            CP limitations.
+ 
+           The  CP/VMCONIO  settings will  be  turned  to OFF  before
+            entering CMS SUBSET and possibly  changed back to IUCV if
+            the  "Trap VM  and CP  output" option  is in  effect. You
+            should never try to enter CMS SUBSET by entering "SUBSET"
+            on  screen  0 (at  least  not  when  VM output  is  being
+            trapped).
+ 
+  PF1   -- Switch to Screen 1
+  PF2   -- Switch to Screen 2
+  PF3   -- Switch to Screen 3
+  PF4   -- Switch to Screen 4
+  PF5   -- Switch to Screen 5
+  PF6   -- Switch to Screen 6
+ 
+  PF7   -- Switch to previous screen
+  PF8   -- Switch to next screen
+ 
+  PF9   -- Switch to Screen 0
+ 
+  PF10  -- Switch to Nicknames Screen.
+ 
+  PF11  -- Force screen into holding status.
+ 
+  PF12  -- Exit to CMS. The current settings, including nicknames and
+            all screen displays,  will be preserved in  a file called
+           "CHAT  LASTSESS A0"  and restored  at the  next invocation
+            of Chat.
+ 
+           Please note that  pressing the PF12 key  causes the screen
+            modifications to  be lost (ie  not saved in  the LASTSESS
+            file). You should therefore press the ENTER key, then the
+            PF12 key  if you have  made modifications to  the screen,
+            unless you  do not  care about  losing them.  This little
+            annoyance is the consequence of  the "safety" of the PF12
+            exit function that allows you to exit from Chat even when
+            the screen format has been destroyed or is invalid (which
+            can be the case if you use an unsupported console model).
+            Would the modifications be analyzed and kept, there could
+            be a  chance of your  being irremediably hung  in certain
+            (critical) conditions.
+ 
+ 
+  PF13 = PF1
+  PF14 = PF2
+     (...)
+  PF24 = PF12
+ 
+ 
+  ENTER --  Nickname screen: Validate screen modifications
+            Other    screen: Execute the command typed in the input area
+ 
+ 
+Note for french (and possibly other) users:
+ 
+  PA1 = AP1 and PA2 = AP2
+  PF1 = P1, etc.
+  CLEAR = RAB MEM IN  (yuk!! Can't imagine a worse translation!)
+ 
+.CM File: LAYOUT HELPCHAT A1 (05/30/86 18:28:02)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*                 Screen layout under Chat                            *
+*                                                                     *
+***********************************************************************
+ 
+Here is  a description  of the  "conversation screen"  layout and  of the
+ meaning of the various colours/hilightings used by Chat.
+ 
+ 
+Each of the six "conversation screens" is divided into three parts:
+ 
+1) The "output area", which consist of  the first 22 (or 30, depending on
+    physical screen size) lines. Both incoming and outbound messages will
+    be printed on that area, as  well as possible other messages from the
+    "system" (ie from  the Chat  program). This  area can  be cleared  by
+    pressing the PA1 key.
+ 
+2) The "input  area" (or "command  line"): This 132-character  input area
+    allows you to  enter commands for Chat to execute.  If the screen has
+    been dedicated to a particular  user, that area will be automatically
+    filled  with  a  "Tell  nickname" command  whenever  emptied,  be  it
+    manually (ERASE  INPUT + ENTER)  or as the  result of a  Chat command
+    being executed.
+ 
+3) The "status area",  located in the bottom right corner  of the screen.
+    Chat will  always display  a tag  in that status  area (refer  to the
+    "Tags" selection of main help menu  for more details on the subject).
+ 
+ 
+ 
+Output area messages colour/hilight conventions:
+ 
+- Outbound messages  (from you) are  displayed as nonhilighted  green and
+   are  prefixed with  "To  Nickname: "  or  "<Your_relay_nickname> "  if
+   the screen is a relay screen (see the "Relay" selection of main menu).
+ 
+- Incoming messages  from YOU are  displayed on screen 0  as nonhilighted
+   blue,  without any  header, unless  you have  specifically assigned  a
+   screen to  yourself. Messages  from you  include Single  Console Image
+   Facility (SCIF) messages and VM/CPCONIO output.
+ 
+- Incoming messages  from other users  are displayed as  hilighted yellow
+   and are prefixed  with "From Nickname: " (or unprefixed  if the screen
+   is a relay one).
+ 
+- Incoming  messages of  the "CP  WARNING"  class are  displayed as  red,
+   hilighted and blinking  and are prefixed with  a "WNG From Nickname: "
+   header.
+ 
+  Furthermore,  a WARNING-class  message will  always cause  an automatic
+   screen-switch to occur, regardless of the corresponding option setting
+   (see "Options" selection from main help menu).
+ 
+- Messages from the "system", including  text of user-entered Chat or CMS
+   commands, are displayed as hilighted red.
+ 
+- Messages from the  CHATFILT program (see the  "CHATFILT" selection from
+   main menu for more details on that topic) are displayed on the current
+   screen as  blue & nonhilighted or  red & hilighted, as  decided by the
+   programmer.  See also  the  "SpecialCMD" selection  from the  commands
+   menu for more information on these messages.
+ 
+.CM File: TAGS HELPCHAT A1 (05/30/86 18:29:08)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*              Status area tags under Chat                            *
+*                                                                     *
+***********************************************************************
+ 
+Chat will  often display a  tag in the status  area (at the  bottom right
+ corner of the  screen) to tell you  when a message has  been received or
+ when an error  has occured. Normal-condition tags are  green, error tags
+ are  hilighted, blinking  red and  message receipt  ones are  hilighted,
+ blinking yellow.
+ 
+ 
+Here is a detailed description of the various tags:
+ 
+- "Screen number n"                Green, nonhilighted, nonblinking
+ 
+    This is the default  tag. It tells you the number  of the screen that
+     is currently displayed.
+ 
+ 
+- "*** Be patient ***"              Green, hilighted, blinking
+ 
+    This tag is displayed when you  press the PA1 key while under control
+     of the nicknames screen, thereby invoking the HELP function. Calling
+     CMS to  format the help file  can take some seconds,  and you should
+     NOT press  the ENTER key  until the  help screen is  displayed (that
+     would place you in VM READ status and possibly insert unwanted blank
+     lines in the help text).
+ 
+ 
+- "*** Too long  ***"               Green, hilighted, blinking
+ 
+    This tag is displayed when the  message you are attempting to send is
+     too long  for RSCS (Chat got  a "RSCS NOT RECEIVING;  MSG TOO LARGE"
+     error  from CP).  You  should  move the  cursor  back  and insert  a
+     "logical message-end  character" (see "Options" helpfile  from menu)
+     somewhere in the message, or reduce its length by erasing part of it
+     the input area is preserved).
+ 
+ 
+- "Incoming message on #n"         Yellow, hilighted, blinking
+ 
+    This tag  informs you that a  NEW message has just  been received and
+     directed to the  indicated screen. You should switch  to that screen
+     as soon as  you have finished typing the message  or set of messages
+     that you are currently keying in. Anyway, Chat will remind you about
+     that message  until you switch to  the specified screen to  read it,
+     possibly entering "holding" status to ensure that the message is not
+     lost (see below).
+ 
+    These  tags are  displayed  as the  messages  are received,  possibly
+     overriding a previous tag.
+ 
+ 
+- "Message pending on #n"          Yellow, hilighted, blinking
+ 
+    This tag informs  you that there is  a message waiting to  be read on
+     the  indicated screen.  This is  a  message for  which an  "Incoming
+     message" tag has already been displayed  -- and you have ignored it.
+     You should  switch to  the appropriate screen  to read  that message
+     after finishing  the message  or set of  messages you  are currently
+     typing.
+ 
+    When  a  message-pending condition  occurs  on  several screens,  the
+     message-pending tags are displayed in ascending screen-number order,
+     with only one tag being displayed  at a given instant (ie if screens
+     1, 3 and 6 have  a pending message condition, the tag  for screen #1
+     will be displayed until you move to screen 1, at which time the tag
+     for screen #3 will be displayed, etc.)
+ 
+ 
+- "*** Holding ***"                Yellow, hilighted, blinking
+ 
+    When this  tag is  displayed, you are  automatically switched  to the
+     appropriate  screen (regardless  of  the  "Automatic screen  switch"
+     option  setting), the  bell is  rung and  all incoming  messages are
+     withheld on ALL screens until  you press an interrupting key (ENTER,
+     PF, et al.) You  must then make sure you have  read all the messages
+     on  that screen  and press  ENTER to  release the  condition. Normal
+     scrolling will then be resumed,  possibly leading to another holding
+     condition. Note that while the screen is held and message receipt is
+     withheld, messages in  excess of 255 will be lost  due to CP limita-
+     tions.
+ 
+    If the "Scrolling  window" option is set to something  higher than 1,
+     there might be unused blank lines at  the top of the screen when the
+     holding condition occurs. This is normal since in that case, several
+     lines will be scrolled at once  when the holding condition is relea-
+     sed (ie this is NOT a bug).
+ 
+- "*** Error ***"                  Red, hilighted, blinking
+ 
+    This tag indicates  an error condition in a command  you typed in the
+     command line (eg missing nickname or message text on "Tell" command,
+    "Dismiss" command attempted  from screen 0, et al.)  The command line
+     is not erased so that you can correct the command and re-execute it.
+ 
+ 
+.CM File: NICKNAME HELPCHAT A1 (05/30/86 18:28:17)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*               Chat nicknames conventions                            *
+*                                                                     *
+***********************************************************************
+ 
+In this file you will find information about the conventions used by Chat
+ for  displaying "network  addresses" (ie  nickname or  userid at  node),
+ together  with some  information on  Chat's re-routing  capabilities and
+ SMSG/SEND/CP TO commands support.
+ 
+ 
+I) Displaying nicknames
+ 
+When Chat  receives a message  from a network  user, it will  search your
+ NAMES file for the nickname corresponding to that user. If none is found
+ it will have  to display the network address "as  is". The nickname will
+ be converted  to mixed  case before being  printed, using  the following
+ algorithm:
+ 
+   - First letter in the nickname and first letter following a non alpha-
+      betical character gets capitalized.
+ 
+   - All other letters are converted to lowercase.
+ 
+Examples:  Christina, Mr.Brown, Jean-Jacques
+ 
+The maximum nickname  length under Chat is 14 characters.  This will make
+ it possible to use the person's  first name in (nearly) any case without
+ having to  truncate it. Since  the standard  IBM NAMES command  does not
+ support nicknames longer  than 8 characters, it  is strongly recommended
+ that the Chat-NAMES command be used to maintain the NAMES file, at least
+ when nicknames longer  than 8 characters are to  be added/changed. Refer
+ to  the "CHATNAME"  selection from  main menu  for more  details on  the
+ Chat-NAMES package.
+ 
+If no nickname  could be found for the message  originator, the full net-
+ work address  (USERID at NODE) will  be substituted, with the  "at NODE"
+ prefix  being removed  if the  message originated  from the  local node.
+ Additionally, Chat will automatically (and temporarily) assign a special
+ nickname to that user so that you  don't have to repeat the full network
+ address each time you send a  message to him. That special nickname will
+ be either ":n" or "Relay:n", where "n"  is the number of the screen that
+ was automatically assigned to the user. The latter form is used when the
+ userid of  the message originator is  "RELAY" and allows you  to get the
+ "relay-format" output  without having to  define an actual  nickname for
+ that user. See the "Relay" selection  from main menu for more details on
+ the subject.
+ 
+ 
+Therefore:
+ 
+Nickname          --  nickname from your NAMES file
+USERID at NODE    --  full network address for a user which is not in
+                      your NAMES file
+USERID            --  user of your own node which is not in your NAMES
+                      file
+:n                --  special (temporary) nickname defined for a user not
+                      in your NAMES file
+Relay:n           --  same as above, corresponds to an originator-userid
+                      of "RELAY"
+ 
+ 
+Please note that although a "special nickname" can be used for communica-
+ ting with its associated user in much the same way as a normal nickname,
+ messages to and from this user are still displayed with the full network
+ address, viz USERID at NODE.
+ 
+ 
+II) Assigning/un-assigning screens
+ 
+Chat will automatically  assign a new screen  to any user who  sent you a
+ message and has not yet been dedicated a screen (but this can be changed
+ by means  of the Chat  message filtering  program -- see  the "CHATFILT"
+ selection from main  menu for more details). You will,  however, have to
+ manually assign screens to new users  when you want to initiate the con-
+ versation. To do this, you will have to switch to the "nicknames screen"
+ by pressing the PF10 key; Chat  will then automatically place the cursor
+ on the  field corresponding to  the first  empty screen (unless  all six
+ screens have been assigned), and you  will just have to enter the user's
+ nickname or network address (see  conventions above) and press the ENTER
+ key. You  can then  switch to  that screen  and start  sending messages.
+ A message will be displayed, both on the selected screen and on screen 0
+ confirming that the screen was assigned.
+ 
+To un-assign a screen, you can either:
+ 
+   (1) Switch to the nicknames screen,  move the cursor to the correspon-
+        ding field,  type a (single) blank  and press the ENTER  key. The
+        corresponding screen will  be freed but not cleared  (ie its con-
+        tents will remain unaltered).
+ 
+   (2) Switch to the screen you want to get rid of and type either "Drop"
+        or "Dell" right after the arrow.  The latter can be achieved very
+        easily by pressing  the backward-field ("|<--") key  and typing a
+        "D" over the  "T" of "Tell". The screen will  then be cleared and
+        un-assigned.  See the  "Drop" and  "Dismiss" selections  from the
+        commands menu for more details.
+ 
+ 
+The "R." field  does not correspond to any message-screen.  It is used in
+ conjunction with relays and contains the relay-nickname you are current-
+ ly using. Refer to the "Relay" selection from main menu for more details
+ on this.
+ 
+ 
+III) Re-routing facility
+ 
+It may  sometimes be necessary to  override the default path  used by the
+ system to convey your messages to the  person you intend to talk to, for
+ example when  one of  the lines  in this path  is not  operational. This
+ operation is  called "re-routing"  and allows you  to have  the messages
+ sent "via" a specific node of  the network. This re-routing is not auto-
+ matic since you  must determine yourself which  node is to be  used as a
+ "via" to allow the message to get through.
+ 
+Once you  have determined that there  is a problem with  the default path
+ and you have chosen a suitable  "via" node, you must provide this infor-
+ mation by re-assigning the appropriate  screen to "nickname via vianode"
+ instead of  just "nickname", where  "vianode" is  the node you  want the
+ messages routed  via. Example: you  (CHATUSER at FRECP11)  were speaking
+ with your friend Sylvia  (S_KRONER at AUVM) when on of  the links on the
+ default path  to her (DEARN  - GWUVM) suddenly  went down. You  call for
+ help and the network operator tells you to try to re-route your messages
+ via  BITNIC. You  change the  nicknames-screen entry  for Sylvia,  which
+ looked like this:
+ 
+      1. Sylvia             (S_KRONER at AUVM)
+ to
+      1. Sylvia             (S_KRONER at AUVM via BITNIC)
+ 
+ by entering  "Sylvia via bitnic"  in the corresponding input  area. Chat
+ will then  automatically re-route all  your messages to her  via BITNIC.
+ 
+ 
+*** Important notes ***
+ 
+1) Chat  will  not automatically  reset  the  "via" indication  when  the
+    failing line is  available again. It is your  responsibility to check
+    the default path from time to  time and to reset the "via" indication
+    (by re-entering  the initial definition in  the appropriate nicknames
+    screen field  -- just "Sylvia"  in our  example) when the  link comes
+    back.
+ 
+2) All your messages will be traced to  the RSCS console log when you use
+    re-routing.  This means  that the  system operator  can (technically)
+    intrude into your private conversation --  or he might as well hapha-
+    zardly stumble on one of  your messages while searching for something
+    else, without meaning to "eavesdrop" or anything.
+ 
+3) A "via" indication  can be made permanent by defining  a ":via" tag in
+    the corresponding  entry of your  NAMES file, with the  "via-node" as
+    value. In the above example, you would have to add a
+ 
+      "Tag: VIA          Value: BITNIC"
+ 
+    line in  Sylvia's entry (if using  NAMES; if you use  XEDIT to modify
+    your NAMES file, this will  be a ":via.BITNIC" indication). Note that
+    an explicit "via nodeid" entered along with the user's address on the
+    nickname screen will override the NAMES file indication.
+ 
+4) This Sylvia  Kroner is an imaginary  person, please don't try  to send
+    mail or IDCARDs there!
+ 
+ 
+IV) Alternate message vehicles for messages sent to local users
+ 
+Chat will, by  default, send messages to  users of the local  node with a
+ CP  MSG command,  which will  display a  5-lines message  to the  user's
+ terminal with time  stamp and message text. This is  a fast and reliable
+ way of displaying  messages, and it will work on  any VM/SP system (this
+ is a standard IBM command). It will, however, quickly fill up the screen
+ with blank  lines and time  stamps (4 messages fill  up the screen  on a
+ 24-lines display station). You might  therefore prefer to have Chat send
+ messages via  RSCS (as if  the user were from  a remote node),  in which
+ case they  will appear  as single-line messages  with the  standard RSCS
+ header. Please note that  because of a bug in the  RSCS system, you will
+ get no error message if the target user  is not logged on or did not re-
+ receive the message. Also, the message will not be sent if the RSCS sys-
+ tem is  down or has crashed.  If you want  Chat to send the  message via
+ RSCS, you  must specify  a "fake" re-routing  indication of  "via RSCS",
+ either by  entering it on the  nicknames screen or defining  a "via" tag
+ with value  "RSCS" in the NAMES  file entry corresponding to  this user.
+ 
+Some nodes on the network have installed a general-user command, "CP TO",
+ which  will send  a one-line  message with  time stamp  and originator's
+ userid. This command  is much better than "via RSCS"  because the header
+ will be shorter and you will not have to depend on the RSCS system being
+ operational. It  will also reduce system  overload. Chat can be  made to
+ use that  command by specifying  a "via  CPTO" indication for  the user.
+ Please note that if  the "CP TO" command is not  available at your node,
+ no message will be sent and the alarm will be rung to indicate there was
+ an error.
+ 
+Sometimes it can be useful to  use Chat to communicate with "conversatio-
+ nal" system accounts  such as PVM, MAILER, auto-operator,  etc, which do
+ not accept  commands sent via regular  messages. It is possible  to have
+ Chat automatically  use the "CP  SMSG" command when sending  messages by
+ specifying a "via SMSG" indication, preferrably in the user's NAMES file
+ entry (so that the indication is permanent).
+ 
+A similar facility is offered to users who have "secondary user" privile-
+ ges on one or more virtual machines and want to communicate with them by
+ means of  the "CP SEND"  command: a  re-routing statement of  "via SEND"
+ will  cause Chat  to use  the "CP  SEND" command  when "talking"  to the
+ corresponding user. Here  again, it would be better to  include a tag in
+ your NAMES file to make the change permanent. Refer to the available IBM
+ help for more details on the "CP SEND" command.
+ 
+Last, but not least, the default message vehicle ("CP MSG" command) can
+ be changed to either "RSCS" or "CP TO" by defining a dummy entry in your
+ NAMES file with nickname = any value (will be ignored), userid = '*',
+ node = local node and an adequate "via" tag. For example, the default of
+ "CP MSG" could be changed to "CP TO" by adding the following entry into
+ your NAMES file:
+ 
+ Nickname: Default_Via  Userid: *       Node: FRECP11
+ Tag: VIA               Value: CPTO
+ 
+ (assuming your own network address is CHATUSER at FRECP11)
+ 
+ Since this  setting will be extracted  from your NAMES file  only during
+ initialization (this being for  obvious performance considerations), you
+ will have  to quit Chat  and re-enter it  to place any  "default message
+ vehicle" change online if it was made from within Chat.
+ 
+.CM File: OPTIONS HELPCHAT A1 (05/30/86 18:28:34)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*       A description of the Chat nickname-screen options             *
+*                                                                     *
+***********************************************************************
+ 
+In this file  you will find information about  the various user-definable
+ options of  Chat (those that  are listed  on the nicknames  screen). The
+ settings of these options are saved  in the LASTSESS file, together with
+ the screen contents and associated  nicknames, and will be automatically
+ re-activated at the next invocation of Chat.
+ 
+ 
+Automatic screen switch
+ ---------------------
+ 
+This option indicates whether Chat  will automatically switch the screens
+ upon receipt  of a  message. The  initial setting  is YES,  meaning that
+ whenever a  message is received,  the input  area of the  current screen
+ will be  saved and  the screen  corresponding to  the message-originator
+ will be  automatically displayed. It  is strongly recommended  that this
+ option be changed to NO as soon  as you become proficient with Chat. The
+ reason why the  initial setting is YES  is that it allows  a novice Chat
+ user to get out of a screen  he has inadvertently switched to as soon as
+ he receives a  message (eg from an experienced user  teaching him how to
+ use the program). Setting  this option to YES can be  useful if you have
+ logged on  to VM only  to receive  (possible) messages from  other users
+ while you are busy doing something else.
+ 
+When this option is set to "NO",  an "Incoming message on #n" tag will be
+ displayed in  the status area  whenever a  new message is  received. You
+ will then be reminded about all  messages that you have not already seen
+ by a  "Message pending  on #n" tag  in the status  area. See  the "Tags"
+ selection from main menu for more details on those tags.
+ 
+Note that the screen will  still be automatically switched, regardless of
+ the setting of this option, whenever a screen enters "Holding" status or
+ you receive a "CP WARNING" from a system operator.
+ 
+ 
+Ring alarm upon screen switch
+ ---------------------------
+ 
+This option  controls whether Chat will  ring the bell when  an automatic
+ screen switch  occurs. The default value  is YES, and it  is recommended
+ that it  be left active unless  you leave the "Automatic  screen switch"
+ option active  too. You will  therefore be informed of  any "unexpected"
+ automatic screen switch caused by  a holding condition on another screen
+ or by a warning from a system operator.
+ 
+ 
+Ring alarm upon message receipt
+ -----------------------------
+ 
+This option  controls whether Chat  will ring  the bell when  an incoming
+ message has  been received. The default  option is YES, and  its setting
+ is only a matter of personal taste.
+ 
+ 
+Keep a log of all transactions
+ ----------------------------
+ 
+When this option is set to  YES, all incoming and outcoming messages will
+ be logged in separate disk files ("nickname LOG" or "ALL LOG" for screen
+ 0 messages). The default setting is NO.  You should be aware of the fact
+ that changing this option to YES is likely to use up an important amount
+ of disk space, especially if you  often use RELAY. Note that this option
+ will be automatically cancelled (to avoid repeated error messages) when-
+ ever a severe  disk error occurs (eg disk full,  disk not accessed, disk
+ is R/O). Also,  messages issued by the CHATFILT  filtering program (qqv)
+ will not be logged to disk. The filemode of the LOG files can be changed
+ by means of the "Chat log filemode" option (see below).
+ 
+ 
+Translate: Input to lowercase
+ ---------------------------
+ 
+This option should be set to YES  if (and only if) you use an all-upperca
+ se terminal. This will cause your  output to be translated to lowercase,
+ with capital letters being inserted  wherever required, ie at the begin-
+ ning  of the  sentence, after  punctuation marks  (!?.) and  whenever an
+ isolated "i" appears. Example:
+ 
+    HERE'S A SAMPLE SENTENCE. CHAT WILL MAKE IT NEATER, I'M SURE IT WILL!
+ 
+--> Here's a sample sentence. Chat will make it neater, I'm sure it will!
+ 
+ 
+Trap VM and CP output
+ -------------------
+ 
+This option  controls whether VMCONIO  and CPCONIO output are  trapped by
+ Chat or not (if you do not  know what VM/CPCONIO means, you should leave
+ that option disabled). The default value  is NO, and only experienced VM
+ users should consider  changing it to YES if necessary.  Note that it is
+ not possible to issue a "CP SET VM/CPCONIO OFF/IUCV" command from within
+ Chat  since the  preset value  for these  options will  automatically be
+ re-inforced by Chat after execution of a CMS command (in case a "stupid"
+ exec might have  tampered with them). Chat will  automatically turn both
+ options off before entering CMS SUBSET  (PA2 key) so that you are resto-
+ red to  the normal  CMS environment.  Please note  that VM/CP  output in
+ excess of 255  lines will be directly  output to the screen  (as if they
+ had not  been trapped at  all). This is  a restriction of  the operating
+ system.
+ 
+When trapped,  VM/CP output will be  printed to screen 0  as blue, normal
+ intensity. It will  be logged to the "ALL LOG"  file (if applicable). It
+ will not be  passed to the CHATFILT filtering program  (qqv) for proces-
+ sing.
+ 
+The author will not feel responsible for any hanging/loop condition occur
+ ring under  Chat with this option  active, unless it can  be proved that
+ the problem was due to a bug  in Chat rather than to the inexperience of
+ the user.
+ 
+ 
+Message-end char
+ --------------
+ 
+The  logical message-end  character, if  defined, allows  you to  split a
+ message line  into several "physical"  messages to  be sent to  the same
+ user. For example, if the message-end character is set to "%", issuing a
+ "Tell Eric  Hello!%How are you?%Did  you get  my note?" will  send three
+ different messages to user Eric and is virtually equivalent to:
+ 
+  "Tell Eric Hello!"
+  "Tell Eric How are you?"
+  "Tell Eric Did you get my note?"
+ 
+This option  is particularly useful on  slow modem terminals where  it is
+ necessary to minimize the number of I/O operations. The default value is
+ OFF.
+ 
+ 
+PF-keys simulation
+ ----------------
+ 
+This option  should be  activated if (and  only if) you  use Chat  from a
+ terminal which does not have any PF-key. It will allow you to "simulate"
+ a PF-key depression  by entering its number in the  command line, either
+ directly after the "===>" arrow or  just after a "Tell nickname" command
+ and pressing the ENTER key. For example, both
+ 
+     "===> 10"
+ and "===> Tell Eric 10"
+ 
+ will "press" the PF10 key. Since there is no input area on the nicknames
+ screen which would allow you to switch to a message-screen by typing its
+ number and  pressing ENTER, it  was decided that pressing  ENTER without
+ altering any field will switch you from the nicknames screen to screen 0
+ (from where you will be able to switch to any other screen). Please note
+ that inserting a blank before a  numeric value in a "Tell nickname" com-
+ mand  will disallow  PF-key simulation,  as will  any character  entered
+ after the numeric value itself, making it possible to send messages star
+ ting with  numeric values to a  user even though the  PF-keys simulation
+ option is active. For example,
+ 
+     "===> Tell Eric  10"
+and  "===> Tell Eric 10 miles away."
+ 
+ will both be processed as regular messages.
+ 
+ 
+Scrolling window
+ --------------
+ 
+This option  indicates how many  lines should  be scrolled when  the last
+ line of the screen  has been used and another line  must be printed. The
+ default value  is 1  line and  causes a  line-per-line scrolling.  It is
+ strongly recommended that this value be increased to 6 or more when Chat
+ is used  from a slow  terminal, since it will  reduce I/O transfer  in a
+ significant proportion  (see the  "Modem" selection  from main  menu for
+ more details).  The best way  to understand how this  "scrolling window"
+ actually operates is probably to try setting it to 5 or so and observing
+ the result...
+ 
+ 
+Line-end character
+ ----------------
+ 
+Similar  to the  message-end  character, the  logical line-end  character
+ allows you to enter more than  one Chat/CMS command on a single physical
+ line, thereby decreasing the number  of I/O operations required to enter
+ the  commands. This  option is  strictly  identical to  the CP  TERMINAL
+ LINEND feature. The default setting is OFF.
+ 
+ 
+Translate: Output to uppercase
+ ----------------------------
+ 
+You should set this option to YES  if (and only if) your terminal is una-
+ ble to handle lowercase characters properly. It will convert any and all
+ screen output to uppercase, thereby effecting  a software "A,a / A" key.
+ 
+ 
+Chat log filemode
+ ---------------
+ 
+When used in conjunction with the "Keep a log of all transactions" featu-
+ re, this  option allows you  to change the  default filemode to  be used
+ for the "nickname LOG"  files. The default is "A" and  can be changed to
+ anything in  the A-Z range as  required. Please note that  specifying an
+ invalid filemode will cause an error  message (from CMS) to be displayed
+ and  will automatically  cancel the  "Keep  a log  of all  transactions"
+ option (to avoid repeated error messages).
+ 
+.CM File: MESSAGES HELPCHAT A1 (04/28/87 14:49:18)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*               A description of Chat messages                        *
+*                                                                     *
+***********************************************************************
+ 
+Here is a detailed description of all the messages from Chat. Please note
+ that status area "tags" are dealt with in another section.
+ 
+ 
+- "This screen is now dedicated to Nickname (userid at node)"
+ 
+      (red, hilighted)
+ 
+   This message is automatically issued by  Chat whenever a new screen is
+    allocated to a user,  be it manually (if you entered  his name on the
+    nicknames screen)  or automatically (if he  sent you a message  and a
+    new screen could be allocated for him).
+ 
+ 
+- "Screen number n now dedicated to Nickname (userid at node)"
+ 
+      (red, hilighted)
+ 
+   This message is  displayed on screen 0 whenever a  screen is allocated
+    to a user, while the preceding message ("This screen is now dedicated
+    to...") is issued on the corresponding screen.
+ 
+ 
+- "Starting new Chat session on mm/dd/yy hh:mm:ss"
+ 
+      (red, hilighted)
+ 
+   Whenever Chat must print something on  a screen which had not yet been
+    modified since  you last entered  Chat, it  will be preceded  by that
+    message to introduce a discontinuity in  the screen as well as in the
+    corresponding log-file (if any). That way  you will always be able to
+    tell when a break occured in  any given conversation, and when it was
+    resumed.
+ 
+ 
+- "Disconnected at mm/dd/yy hh:mm:ss"
+ 
+      (red, hilighted)
+ 
+   This message  will be  displayed after you  issue a  Chat "Disconnect"
+    command to provide a useful time  stamp. It will appear only on those
+    screens which have been modified during your disconnection.
+ 
+ 
+- "Reconnected  at mm/dd/yy hh:mm:ss -- nnn message(s) on this screen"
+ 
+      (red, hilighted)
+ 
+   This message  will be displayed  upon reconnection from a  Chat "Disc-
+    onnect" command  to indicate  the amount of  messages that  were dis-
+    played on  the corresponding  screen during your  disconnection. This
+    information is  very useful since  some of them might  have "scrolled
+    out" of  the physical screen. It  will not be printed  on the screens
+    which have not been altered during your disconnection.
+ 
+ 
+- "Unknown CP/CMS command"
+ 
+      (red, hilighted)
+ 
+   Similar to  its CMS equivalent,  this message indicates that  you have
+    attempted a command that is unknown both to Chat and to CMS.
+ 
+ 
+- "Invalid SUBSET command"
+ 
+      (red, hilighted)
+ 
+   Similar to  its CMS equivalent,  this message indicates that  you have
+    attempted  a CMS  command  that is  not valid  when  issued from  CMS
+    "SUBSET" mode.  Note that this  can only  happen if you  have invoked
+    Chat from CMS SUBSET mode, in  which case a warning message will have
+    been displayed at initialization.
+ 
+ 
+- "Chat: command_text"
+ 
+      (red, hilighted)
+ 
+   This  message indicates  that the  command you  have entered  has been
+    interpreted as being  a Chat command and was executed.  This does not
+    necessarily mean that it executed successfully, though: another error
+    message might follow.
+ 
+ 
+- "CMS: command_text"
+ 
+      (red, hilighted)
+ 
+   This  message indicates  that the  command you  have entered  has been
+    interpreted as  being a CMS command  and was executed. This  does not
+    necessarily mean that it executed successfully, though: another error
+    message might follow.
+ 
+ 
+- "Missing argument"
+ 
+      (red, hilighted)
+ 
+   This message is  self-explanatory, and relates only  to Chat commands.
+ 
+ 
+- "Invalid argument"
+ 
+      (red, hilighted)
+ 
+   This message is  self-explanatory, and relates only  to Chat commands.
+    Typical invalid arguments  are: userid or node longer  than 8 charac-
+    ters, non-decimal argument, invalid CMS fileid, etc.
+ 
+ 
+- "File not found"
+ 
+      (red, hilighted)
+ 
+   This message  is self-explanatory.  It relates  to the  Chat "Picture"
+    command.
+ 
+ 
+- "Warning -- disk-logging option has been cancelled."
+ 
+      (red, hilighted)
+ 
+   A  permanent error  occured while  writing  to a  disk logfile.  Since
+    repeated attempts to  write to the logfile disk (as  specified by the
+    "Chat log filemode" option on nicknames screen -- see "Options" selec
+    tion from main menu for more details on the subject) would only cause
+    repeated  occurences of  the error,  and consequently  repeated error
+    messages, the  disk-logging option has been  automatically cancelled.
+    You should  correct the problem  and set it  back to "YES"  to resume
+    disk logging.
+    Typical permanent  errors are:  "disk not  accessed", "disk  is R/O",
+    "disk is full",  etc. Note that "invalid character in  fileid" is not
+    considered as a  permanent error since it might affect  only a speci-
+    fic logfile (invalid character in nickname).
+ 
+ 
+- "Warning: you have entered Chat from CMS SUBSET mode."
+ 
+      (red, hilighted)
+ 
+   This message  is self-explanatory  and is displayed  at initialization
+    when the  CMS SUBSET mode is  found to be active.  Chat will function
+    correctly under  CMS SUBSET  but some commands  might be  rejected by
+    CMS.
+ 
+ 
+ 
+***********************************************************************
+*                                                                     *
+*           Severe errors which cause Chat to terminate               *
+*                                                                     *
+***********************************************************************
+ 
+- "DMSCHT001E Not enough storage to start Chat."
+ 
+   This message is  self-explanatory. There is no other  solution than to
+    free some storage space and call  Chat again. This can be achieved by
+    exiting XEDIT,  FILELIST, RDRLIST, NAMES, or  any similar environment
+    that requires  a lot of  storage; a  "NUCXDROP *" command  might free
+    a little space,  and releasing some (unused) disks  would probably be
+    very efficient.
+ 
+ 
+- "DMSCHT002E Chat should not be called recursively."
+ 
+   You have  attempted to call  Chat recursively, issusing a  second CHAT
+    command from either  the Chat environment itself  or another environ-
+    ment (such as  XEDIT or RDRLIST) that you had  previously called from
+    Chat. In that case you will get back to Chat by successively quitting
+    one (or more) environment.
+ 
+ 
+- "DMSCHT003E Error calling HNDIUCV."
+ 
+   The  CMS internal  command "HNDIUCV"  returned an  error condition  to
+    Chat. You should try  to call Chat anew after a  "cold" start of your
+    virtual machine (ie log off the  system and log on again). Contact an
+    experienced Chat  user or  a system  programmer if  you get  the same
+    error again.
+ 
+ 
+- "DMSCHT004E Error calling CMSIUCV."
+ 
+   The  CMS internal  command "CMSIUCV"  returned an  error condition  to
+    Chat. You should try  to call Chat anew after a  "cold" start of your
+    virtual machine (ie log off the  system and log on again). Contact an
+    experienced Chat  user or  a system  programmer if  you get  the same
+    error again.
+ 
+ 
+- "DMSCHT005E Error calling HNDINT."
+ 
+   The  CMS internal  command  "HNDINT" returned  an  error condition  to
+    Chat. You should try  to call Chat anew after a  "cold" start of your
+    virtual machine (ie log off the  system and log on again). Contact an
+    experienced Chat  user or  a system  programmer if  you get  the same
+    error again.
+ 
+ 
+- "DMSCHT006E Path to "*MSG" unexpectedly severed."
+ 
+   The IUCV-path to  the Message System Service  handler was unexpectedly
+    severed. You  should try to  call Chat anew  after a "cold"  start of
+    your  virtual machine  (ie  log off  the system  and  log on  again).
+    Contact an  experienced Chat user or  a system programmer if  you get
+    the same error again.
+ 
+ 
+- "DMSCHT007W Charlot is in place and already trapped by another program"
+ 
+   You have  tried to invoke Chat  with the Charlot program  being active
+    and  already "trapped"  by  another  message-processing program.  The
+    status of the Charlot trap has been left unchanged. You should termi-
+    nate the  program that is  currently trapping Charlot and  re-issue a
+    CHAT command. A "Charlot Terminate" command,  or a cold start of your
+    virtual machine (log off and log  on again) will clear the problem if
+    the trapping program has abended.
+ 
+ 
+- "DMSCHT008W You must issue a "CHAT NEW" command to place your new
+              version online."
+ 
+   You have received a new version of  the Chat package on your disk, and
+    the version  that is currently loaded  in your virtual storage  is an
+    obsolete one.  You should issue a  "CHAT NEW" command to  discard the
+    version in your virtual storage and  place the new one online. If the
+    problem  persists, try  to order  the "CHAT  EXEC" and  "CHAT MODULE"
+    files from Netserv,  receive them, and try again.  Contact the author
+    if this does not fix the problem.
+ 
+- "DMSCHT009E Chat was started in disconnected mode with console stack
+              empty."
+ 
+   You have started  Chat while your virtual machine  was in disconnected
+    mode (probably from your PROFILE  EXEC, after being AUTOLOG-ged), and
+    the console stack was found to be empty. Chat is not able to function
+    in disconnected mode, except when  under control of the Chat "Discon-
+    nect" command, since it obtains command from the virtual console. The
+    only way to have Chat function from a disconnected virtual machine is
+    to stack a  "Disconnect <message-text>" command in  the console stack
+    prior to  invoking it.  Refer to the  "CHATDISC" selection  from main
+    menu and to  the "DISConn" selection from the commands  menu for more
+    details.
+ 
+ 
+- "DMSCHT010E Chat cannot be used on a teletype terminal."
+ 
+   You have started  Chat from a teletype terminal (ie  one without full-
+    screen  capabilities).  Chat  requires  a  full-screen  terminate  to
+    operate properly.
+ 
+ 
+- "DMSCHT011E Error reading NAMES file."
+ 
+   An I/O error  occured while reading your NAMES file  into storage. You
+    should  try to  enter  Chat again  and, if  the  error occurs  again,
+    contact your system support personnel.
+ 
+ 
+- "DMSCHT012E Cannot read NAMES file from a CDF (blksize 800) disk."
+ 
+   Chat uses a very efficient method to read your NAMES file. This method
+    is about  10 times faster  than the  "normal" one, but  for technical
+    reasons it  cannot work on old  "CDF" architecture disks. If  you get
+    this message, you should  probably consider re-formatting your A-disk
+    to "EDF"  architecture (ie blocksize  512, 1k,  2k or 4k).  This will
+    result in faster and more reliable  I/O operations from CMS. CDF disk
+    support has been kept in CMS only for upwards compatibility reasons.
+.CM File: REQUIRES HELPCHAT A1 (09/20/86 20:41:04)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*               Technical requirements for Chat                       *
+*                                                                     *
+***********************************************************************
+ 
+Chat  requires VM/SP  Release 3  or above  for all  of its  components to
+ function properly. VM/SP  2 is not suitable since it  lacks the CMS IUCV
+ support (HNDIUCV and  CMSIUCV system macros). There is  no problem about
+ running Chat on a VM/SP 4 system -- on the contrary, better performances
+ can be expected on  a VM/SP 4 system due to  CHATFILT and CHATDISC being
+ EXECLOADed by CHAT EXEC.
+ 
+ 
+Console support:  Chat should  support any  kind of  full-screen terminal
+ with a "decent" screen size. All  data streams have been optimized so as
+ to  ensure fastest  possible I/O  response  time and  best operator  eye
+ comfort. Model 5 terminals (27x132) are supported in 24x80 compatibility
+ mode only.
+ 
+Supported models are:
+ 
+  3277-2 (no blinking, no colour, 24 lines)
+  3178-2 (no blinking, no colour, 24 lines)
+  IBM PC (no blinking, no colour, 24 lines)
+  3190   (no blinking, no colour, 24 lines, in 4-sessions mode only)
+ 
+  3278-2 (blinking, no colour, 24 lines)
+  3278-3 (blinking, no colour, 32 lines)
+  3278-4 (blinking, no colour, 43 lines)
+  3278-5 (no blinking, no colour, supported in 24x80 mode only)
+ 
+  3279-2 (blinking, colour, 24 lines)
+  3279-3 (blinking, colour, 32 lines)
+  3279-4 (blinking, colour, 43 lines)
+  3279-5 (no blinking, basic-colour, supported in 24x80 mode only)
+ 
+  3179-G (blinking, colour, various user-definable modes)
+  3180   (blinking, no colour, various user-definable modes)
+ 
+  3278-2A (no blinking, no colour, 20 lines)
+  3279-2C (no blinking, basic-colour, 20 lines)
+ 
+Models known NOT to be supported:
+ 
+  3277-1 (12 lines, 40 columns -- screen is too small)
+  3190   (in native mode, a 3190 is supported only as a 24x80 device in
+          "big characters" mode)
+ 
+ 
+On the  above table, "blinking"  only indicates whether Chat  can support
+ the feature at all on this type  of terminal or not. Some terminals mar-
+ ked as "blinking"  might still not have any  blinking capability because
+ of the controller  they are connected to. A console  marked as "no blin-
+ king" might  have blinking capabilities  but Chat  would not be  able to
+ use them. Similarly, "colour" indicates that 7-colours mode is supported
+ if available.
+ 
+Chat might  still function on other  console models. As a  rule of thumb,
+ Chat should be  able to handle any 3270-compatible  console which either
+ has a  24x80 compatibility  mode or  has a physical  screen width  of 80
+ columns or less and not less  than 20 physical lines. Consoles with more
+ than 43 lines will be supported in 43-lines mode.
+ 
+Please report to the author (Eric  Thomas <ERIC@FRECP11>) if you have any
+ console support problem (Chat can  handle both new-format and old-format
+ data streams, the only problem being to select the correct one).
+ 
+ 
+ 
+Removal of unwanted control characters: Chat changes all characters whose
+ EBCDIC code is in  the X'00' --> X'3F' range to  blanks to avoid hanging
+ the console.  This can  result in  special (printable)  characters being
+ changed to blanks on some console  models, but the same characters would
+ hang some modem-using emulators...
+ 
+ 
+Storage  requirements: Chat  uses a  free  storage work  buffer of  about
+ 30k-bytes.  The total  storage space  used up  by Chat  is approximately
+ 45k-bytes (program + buffer).
+ 
+ 
+CPU  time consideration:  Chat is  an assembler  language program  and is
+ therefore much  faster than any  equivalent REXX or even  EXEC2 program.
+ There are, however,  some operations that intrinsically  require a large
+ amount of  CPU time. The following  steps can be taken  to reduce Chat's
+ CPU usage if really necessary:
+ 
+ 
+1) Turn the "Automatic screen-switch" option off.
+ 
+2) Set the "Scrolling window" option to a larger value.
+ 
+3) Avoid using a CHATFILT exec -- erase it or make it the simplest possi-
+    ble. Do not  issue any CPU-time consuming option from  it, notably no
+    NAMEFIND command.
+ 
+4) Turn the "Keep of log of all transactions" option off.
+ 
+5) Set the "Message-end character" OFF
+ 
+6) Set the "Line-end character" OFF (if not using a modem)
+ 
+7) Avoid using  a personalized  CHATDISC exec  -- just  erase it  and let
+    Chat send the standard message to everybody.
+ 
+8) Turn both "Translate:" options off, if at all possible...
+ 
+ 
+In fact  the options that require  the most important amount  of CPU time
+ are the 3278 to 3277 data  stream conversion (which cannot be turned off
+ and is  required only for  3277-type terminal,  ie those not  capable of
+ blinking)  and the  "Translate output  to uppercase"  option, but  it is
+ impossible or not advisable to turn them off.
+ 
+ 
+I/O speed considerations when used on  modem line: See the "Modem" option
+ from the main menu.
+ 
+.CM File: AMPRSAND HELPCHAT A1 (05/30/86 18:27:18)
+.FO OFF
+& (ampersand sign)
+ 
+ 
+The format of the Chat "&" command is:
+ 
+.BX 1 14 73
+.IN 2
+&            any-command-string
+.BX OFF
+.IN
+ 
+Putting an  ampersand in the  first column of  the command line  before a
+ Chat command  causes it to be  redisplayed in the command  line after it
+ has  been executed.  This is  identical to  automatically issuing  a "?"
+ command after the  command has been executed. The "&"  character must be
+ entered immediately following the prompting arrow ("===> ").
+ 
+.CM File: QUESMARK HELPCHAT A1 (05/30/86 18:28:50)
+.FO OFF
+? (question mark)
+ 
+ 
+The format of the Chat "?" command is:
+ 
+.BX 1 14 73
+.IN 2
+?            (operands are ignored)
+.BX OFF
+.IN
+ 
+The Chat "?"  command will cause the last command  entered on the current
+ screen to be  re-displayed in the command line. You  can then re-execute
+ it by just  pressing ENTER. The "?" command must  be entered immediately
+ after the prompting arrow ("===> ").
+ 
+ 
+Usage notes:
+ 
+1) The cursor  will be placed at  the precise location where  it was left
+    when the command  was executed, ie not necessarily at  the end of the
+    command string. This was felt to be much more convenient when retrie-
+    ving command  such as  "XEDIT FILEn  DATA", where  you would  like to
+    modify "n" and not "DATA".
+ 
+2) Chat keeps a different "last  command buffer" for each screen, thereby
+    making the  6 screens independent  from each other. Although  this is
+    in  most cases  much more  convenient  than a  "global" last  command
+    buffer, it makes it impossible to  retrieve a command that was issued
+    from a screen different than the currently displayed one.
+ 
+3) Successive execution  of a  "?" command  will cause  Chat to  swap its
+    "last command" and "previous-to-last  command" buffers, thereby allo-
+    wing you to retrieve the previous-to-last command with two successive
+    invocations of the "?" command. The previous-to-last command can also
+    be retrieved with a single "??" command (qqv).
+ 
+.CM File: QQ HELPCHAT A1 (05/30/86 18:28:47)
+.FO OFF
+?? (double question mark)
+ 
+ 
+The format of the Chat "??" command is:
+ 
+.BX 1 14 73
+.IN 2
+??           (operands are ignored)
+.BX OFF
+.IN
+ 
+The Chat  "??" command  will cause  the previous-to-last  command entered
+ on the  current screen to be  re-displayed in the command  line. You can
+ then re-execute  it by  just pressing  ENTER. The  "??" command  must be
+ entered immediately after the prompting arrow ("===> ").
+ 
+ 
+Usage notes:
+ 
+1) The cursor  will be placed at  the precise location where  it was left
+    when the command  was executed, ie not necessarily at  the end of the
+    command string. This was felt to be much more convenient when retrie-
+    ving command  such as  "XEDIT FILEn  DATA", where  you would  like to
+    modify "n" and not "DATA".
+ 
+2) Chat keeps a different "last  command buffer" for each screen, thereby
+    making the  6 screens independent  from each other. Although  this is
+    in  most cases  much more  convenient  than a  "global" last  command
+    buffer, it makes it impossible to  retrieve a command that was issued
+    from a screen different than the currently displayed one.
+ 
+.CM File: QUERY HELPCHAT A1 (05/30/86 18:28:49)
+.FO OFF
+QUERY
+ 
+The format of the Chat QUERY command is:
+ 
+.BX 1 14 73
+.IN 2
+Query        nickname
+QELL         userid
+             userid AT node
+.BX OFF
+.IN
+ 
+The Chat  QUERY command will  query about another computer  user, telling
+ you if he is currently logged on, disconnected, or not logged on at all.
+ If the  person you are  querying about is on  the same computer  as you,
+ you will  get the answer immediately  (see usage note 1).  Otherwise the
+ command will be sent through the network to the appropriate computer and
+ there will be a certain delay between your request and the reply.
+ 
+A message saying  "LINK NOT ACTIVE", "LINK NOT CONNECTED",  "NO PATH TO",
+ etc, means  that your request  could not be  processed due to  a problem
+ with the  network lines --  just wait for a  few minutes and  try again.
+ 
+A message  saying "userid - DSC"  means that the person  you are querying
+ about is disconnected, while any  other message starting with "userid -"
+ means  that the  person  is  connected to  the  computer and  (probably)
+ available for chatting.
+ 
+In either case,  the message will be  displayed on screen 0  (use the PF9
+ key to switch to there).
+ 
+ 
+Usage notes:
+ 
+1) Query  requests for  users not  in your  NAMES file  are treated  as a
+    "CMS QUERY" command (see Chat  "CMS" command). It is therefore possi-
+    ble to issue a CMS "QUERY" command from Chat without having to prefix
+    it with "CMS". For instance, you  could issue a "Q DISK" command from
+    Chat without having  to enter "CMS Q DISK", assuming  that you do not
+    have any nickname called "DISK".
+ 
+2) The "QELL" synonym for the Query command allows you to query about the
+    person assigned to the currently displayed logical screen by pressing
+    the  backward-field key  ("|<---" key  located  on the  right of  the
+    second keyboard row -- the one ending with "uiop"), typing a "Q" over
+    the "T" of "Tell Nickname " and pressing ENTER.
+ 
+3) The "AT" keyword can be entered in mixed or upper case.
+ 
+4) The "Query"  command supports  re-routing via  another node  (ie "SMSG
+    RSCS  CMD routenode  CMD targetnode  CPQ  U targetid").  This can  be
+    achieved either by specifying "via nodeid" when entering the nickname
+    on the  nicknames screen or  by defining a  ":via" tag in  your NAMES
+    file.
+ 
+5) The "via SMSG" and "via SEND"  options of the "Tell" command (qqv) are
+    not supported by "Query" and cause  a "CMD SMSG CMD..." command to be
+    issued.
+ 
+6) The CHATFILT program, as shipped with the Chat package, will automati-
+    cally parse the  "userid - DSC" and "userid -  cuu" messages and dis-
+    play  one of  the  following user-friendly  messages  to the  current
+    screen:
+ 
+      Nickname is not logged on.
+      Nickname is disconnected.
+      Nickname is logged on terminal number xxxxxxx.
+ 
+   Note: 'userid at  node' will be substituted to 'nickname'  if the user
+          could not be found in your NAMES file.
+ 
+.CM File: QUIT HELPCHAT A1 (05/30/86 18:28:52)
+.FO OFF
+QUIT
+ 
+The format of the Chat QUIT command is:
+ 
+.BX 1 14 73
+.IN 2
+QUIT         (operands are ignored)
+.BX OFF
+.IN
+ 
+Invoking the QUIT command is identical  to pressing the PF12 key and will
+ exit from the Chat program. This command was intended mainly as an emer-
+ gency exit command for users who inadvertently entered Chat from a cheap
+ terminal which doesn't emulate PFkeys,  making it impossible for them to
+ press the PF12 key (see "PF-keys  simulation" option for more details on
+ the subject).
+ 
+It can also be placed on the console stack by an EXEC program to termina-
+ te the Chat environment.
+ 
+.CM File: TELL HELPCHAT A1 (05/30/86 18:29:12)
+.FO OFF
+TELL
+ 
+The format of the Chat TELL command is:
+ 
+.BX 1 14 73
+.IN 2
+TELL         nickname         message-text
+             userid
+             userid AT node
+.BX OFF
+.IN
+ 
+The Chat  TELL command is  similar to the  CMS TELL command,  causing the
+ message to be sent to the specified computer user. The message text will
+ the be printed on the  appropriate logical screen, using the appropriate
+ header (see "Layout" selection from main menu).
+ 
+Unlike its CMS counterpart, the Chat  TELL command allows you to communi-
+ with any RSCS  machine on the network, local or  remote. For instance, a
+ Chat "Tell Zurich cpq n" could be substituted to the usual "CP SMSG RSCS
+ CMD CZHRZU1A CPQ  N" command, assuming that you have  defined a nickname
+ of Zurich  for RSCS at CZHRZU1A  (note: this assumes that  the userid of
+ the RSCS  virtual machine in  your node  is "RSCS"; modify  the nickname
+ definition accordingly if not the case).
+ 
+ 
+Usage notes:
+ 
+1) The current  version of Chat  does not  support lists of  persons. The
+    supplied  nickname must  therefore be  the one  of a  single computer
+    user. To send messages to a list of users, use the "CMS TELL" command
+    (see information about  the Chat "CMS" command).
+ 
+2) Your NAMES file  will not be sought unless the  specified nickname has
+    not been dedicated a screen. This  will save a considerable amount of
+    CPU time compared to repeated use of the CMS "TELL" command.
+ 
+3) The "AT" keyword,  if present, must immediately follow  the userid (ie
+    there must be only a single blank between userid and "AT"). Otherwise
+    it will be ignored and considered  as being part of the message text.
+    It is  therefore possible to  send a  message starting with  the word
+    "at" to a user by typing  an additional blank before the message text
+    (this blank will  be removed by RSCS if the  person you're talking to
+    is a  remote user). The "at"  keyword can be entered  either in mixed
+    or upper case.
+ 
+4) Chat will  automatically place a "Tell  Nickname " command on  all the
+    screens that  are dedicated to  a user  whenever the command  line is
+    blanked  out. Any  Chat command  to be  entered on  the command  line
+    should be  typed over the word  "Tell". For instance, if  you want to
+    execute a "Disconn"  command, you must move the  cursor backwards and
+    type "Disconn" over the word  "Tell" -- "Tell nickname Disconn" would
+    just  send a  message  to  the specified  nickname.  It is  therefore
+    recommended that  all Chat commands  be entered from screen  0 (where
+    the command line is always left blanked) -- except for "Tell", "Drop"
+    and "Dismiss" which should be entered from a normal screen.
+ 
+5) The "Tell" command allows you to re-route your messages via a specific
+    node if the "via nodeid" option was specified when entering the nick-
+    name or if  a ":via" tag was  found in the appropriate  entry of your
+    NAMES file.  See the  "Nicknames" selection from  main help  menu for
+    more details on the subject.
+ 
+6) If you specify  to re-route the message "via SMSG"  or "via SEND", the
+    message will be sent to the target user with a "CP SMSG" or "CP SEND"
+    command (respectively), ignoring the nodeid. In this case, the messa-
+    ge text will be upcased before  being sent. Note that this option has
+    precedence  over the  implicit use  of  "SMSG RSCS  CMD nodeid"  when
+    applied to a RSCS virtual machine, ie  you can use "via SMSG" or "via
+    SEND" even with the RSCS virtual machine.
+ 
+7) Messages to local node users can be sent either:
+ 
+    - Via a "CP MSG" command (default),
+ 
+    - Via RSCS (if you specified that the message be re-routed "via RSCS"
+       when assigning a  screen to the user on the  nicknames screen), or
+ 
+    - Via a  "CP TO" command  (if you specified  that the message  be re-
+       routed "via CPTO").  The CP "TO" command is a  nonstandard CP com-
+       mand that  is available  at some  nodes and  will send  a one-line
+       message to the indicated user. Please note that if this command is
+       not available  at your node,  all messages  sent via Chat  will be
+       lost (and the console buzzer will  be rung to indicate the error).
+ 
+ 
+   Furthermore, the default option of using  the "CP MSG" command to send
+    messages to  local node users  can be  overriden by defining  a dummy
+    entry  in  your  NAMES  file with  nickname  =  any_value  (ignored),
+    userid = '*', node  = your_node and a ":via" tag  of either "RSCS" or
+    "CPTO" (as  required). Note that a  specific ":via" tag in  the NAMES
+    file entry of the person you are speaking to, or a specific "via xxx"
+    on the nicknames screen, will override this default option.
+    Since this setting will be extracted from your NAMES file only during
+    initialization  (for obvious  performance  considerations), you  will
+    have to quit Chat and re-enter it to place the modification online if
+    it was made from within Chat.
+ 
+.CM File: PICTURE HELPCHAT A1 (05/30/86 18:28:44)
+.FO OFF
+PICTURE
+ 
+The format of the Chat PICTURE command is:
+ 
+.BX 1 14 73
+.IN 2
+PICTURE      filename  nickname
+                       userid
+                       userid AT node
+.BX OFF
+.IN
+ 
+The Chat PICTURE command allows you to send a "picture" to another compu-
+ ter user. The  contents of the file "filename PICTURE  *" will be dumped
+ to  the specified  user, using  several "TELL"  commands. You  should be
+ aware that  sending numerous pictures  across the network can  result in
+ considerable network load  and can be very painful for  1200 bauds modem
+ users. On the other hand, it can  be very useful to dump the contents of
+ a short program or note to someone when the file transmission queues are
+ discouraging....
+ 
+ 
+Usage notes:
+ 
+1) Although a "PICTURE" command will  generate several "TELL" commands to
+    send the file text to its intended target, nothing will be logged in
+    the corresponding screen.  There will not be any  "To nickname: text"
+    message.
+ 
+2) A "PICTURE"  command will always cause  messages to be sent  via RSCS,
+    even when  the destination user is  from the local node.  The reasons
+    for this are obvious.
+ 
+3) The "AT" keyword,  if present, must immediately follow  the userid (ie
+    there must be only a single blank between userid and "AT"). Otherwise
+    it will be ignored and considered  as being part of the message text.
+    It is  therefore possible to  send a  message starting with  the word
+    "at" to a user by typing  an additional blank before the message text
+    (this blank will  be removed by RSCS if the  person you're talking to
+    is a  remote user). The "at"  keyword can be entered  either in mixed
+    or upper case.
+ 
+4) The "Picture" command supports the  "via SEND" and "via SMSG" features
+    of the  "Tell" command (qqv),  as well as  its ability to  "speak" to
+    RSCS virtual  machines by automatically  issuing a "CMD  nodeid text"
+    command when the target userid is  the same as the local RSCS userid.
+    It will NOT,  however, upcase the message text before  sending it, as
+    the "Tell" command does, in much the same way as a CP command entered
+    from the keyboard  is translated to uppercase while  the same command
+    is left in mixed case if executed from an EXEC program.
+ 
+.CM File: NN HELPCHAT A1 (05/30/86 18:28:26)
+.FO OFF
+nn
+ 
+The format of the Chat "nn" (number) commands is:
+ 
+.BX 1 14 73
+.IN 2
+nn
+.BX OFF
+.IN
+ 
+The Chat  "nn" commands, where  "nn" is  a number in  the 1 to  12 range,
+ simulate the depression of a  PFkey: entering "nn" immediately after the
+ prompting arrow  ("===> "),  or immediately after  the "Tell  Nickname "
+ command  text, is  equivalent to  pressing  the PFnn  key. When  entered
+ directly  after the  prompt arrow,  these commands  operate even  if the
+ "PF-keys  simulation" option  is set  to "NO"  (see "Options"  selection
+ from the  main help menu),  but this  option has to  be set to  "YES" if
+ the "nn" command is to be  accepted when entered after a "Tell Nickname"
+ command line.
+ 
+ 
+Example:
+ 
+===> 10
+===> Tell Christina 10
+ 
+ would both "press" the PF10 key,  switching you to the nicknames screen.
+ 
+ 
+Usage notes:
+ 
+1) This command  was designed only  to allow Chat  to run on  those cheap
+    terminals where there is no such thing as a PFkey. The default option
+    is therefore not  to allow the "nn" commands after  a "Tell Nickname"
+    command line.
+ 
+.CM File: EQUAL HELPCHAT A1 (05/30/86 18:27:54)
+.FO OFF
+= (equal sign)
+ 
+ 
+The format of the Chat "=" command is:
+ 
+.BX 1 14 73
+.IN 2
+=            (operands are ignored)
+.BX OFF
+.IN
+ 
+The Chat "="  command will cause the last command  entered on the current
+ screen  to be  re-executed. It  must  be entered  immediately after  the
+ prompting arrow ("===> ").
+ 
+.CM File: DROP HELPCHAT A1 (05/30/86 18:27:52)
+.FO OFF
+DROP
+ 
+The format of the Chat DROP command is:
+ 
+.BX 1 14 73
+.IN 2
+DROP         (operands are ignored)
+DELL
+.BX OFF
+.IN
+ 
+When entered  from a screen which  has already been dedicated  to a user,
+ the Chat DROP command will:
+ 
+1) Clear the screen from which it was entered,
+2) Clear the input area (ie the command line) from that screen,
+3) Un-assign the screen as if you had switched to the nicknames screen
+    and you had blanked out the corresponding field.
+ 
+Unlike the  DISMISS command (qqv),  the DROP  command will not  erase the
+ disk-logfile for the corresponding user.
+ 
+ 
+Usage notes:
+ 
+1) Attempting a "DROP" command on screen 0 will result in the usual error
+    tag being displayed ("*** Error ***").  Since screen 0 is not dedica-
+    ted to any specific user, it cannot be "dropped".
+ 
+2) The "DELL" synonym for the DROP  command allows you to drop the person
+    assigned to the currently displayed  screen by pressing the backward-
+    field key  ("|<---" key located on  the right of the  second keyboard
+    row --  the one  ending with "uiop"),  typing a "D"  over the  "T" of
+    "Tell Nickname " and pressing ENTER.
+ 
+.CM File: DISMISS HELPCHAT A1 (05/30/86 18:27:50)
+.FO OFF
+DISMISS
+ 
+The format of the Chat DISMISS command is:
+ 
+.BX 1 14 73
+.IN 2
+DISMISS      (operands are ignored)
+.BX OFF
+.IN
+ 
+When entered  from a screen which  has already been dedicated  to a user,
+ the Chat DISMISS command will:
+ 
+1) Clear the screen from which it was entered,
+2) Clear the input area (ie the command line) from that screen,
+3) Un-assign the screen as if you had switched to the nicknames screen
+    and you had blanked out the corresponding field,
+4) Erase the disk-logfile for the user assigned to that screen.
+ 
+The DISMISS command is therefore a "stronger" version of the DROP command
+ (qqv).
+ 
+ 
+Usage notes:
+ 
+1) Attempting a "DROP" command on screen 0 will result in the usual error
+    tag being displayed ("*** Error ***").  Since screen 0 is not dedica-
+    ted to any specific user, it cannot be "dropped".
+ 
+.CM File: CMS HELPCHAT A1 (05/30/86 18:27:44)
+.FO OFF
+CMS
+ 
+The format of the Chat CMS command is:
+ 
+.BX 1 14 73
+.IN 2
+CMS          command-text
+.BX OFF
+.IN
+ 
+The CMS command  allows you to execute any CMS  command from within Chat.
+ The command text will be printed to screen 0, and Chat will edit a ready
+ message ("R; T=...") identical to the one provided by CMS and print it
+ on screen 0 upon command completion.
+ 
+ 
+Usage notes:
+ 
+1) Any CMS command can be called from Chat (not just CMS SUBSET commands)
+    with the following exceptions:
+ 
+     a) Chat  cannot be called  recursively, ie you cannot  issue another
+         CHAT command from within Chat.
+ 
+     b) Any command  causing the Chat program to be  removed from storage
+         will  cause CMS  to  abend. This  includes  "NUCXDROP CHAT"  and
+         "NUCXDROP *" commands.
+ 
+     c)  Any command  causing termination  of the  IUCV connection  esta-
+         blished by Chat will cause it to stop functionning. These inclu-
+         de IUCVTRAP, WAKEUP release 5, etc.
+ 
+2) The command will be executed as  per a REXX "Address CMS" command, not
+    just "Address COMMAND", ie exactly as if it had been entered from CMS
+    command mode.
+ 
+3) Any command  entered from the  Chat environment and not  recognized as
+    begin a  Chat command will  be passed  to CMS for  execution, thereby
+    effecting  an  implicit-CMS  function  similar  to  XEDIT's  IMPCMSCP
+    option. It  is therefore  useless to prefix  the command  with "CMS",
+    unless the CMS  command to be executed is also  a valid Chat command.
+ 
+4) While the CMS command is  executing, all incoming messages (and possi-
+    bly all the  output from the command  if you run the "Trap  VM and CP
+    output" option  -- see  "Options" selection from  main menu)  will be
+    held to be displayed upon completion of the command. You should there
+    fore avoid calling long CMS commands from Chat (eg XEDIT, NOTE, MAIL)
+    since you would not notice messages sent to you until you got back to
+    Chat. Furthermore,  if more than 255  messages are sent to  you while
+    the CMS command  is executing, all messages in excess  of 255 will be
+    displayed on your terminal and lost to the Chat program.
+ 
+5) The settings  of the  MSG, WNG,  CPCONIO and  VMCONIO options  will be
+    changed back  to their original value  upon return from CMS,  in case
+    the  CMS program  you called  might  have clobbered  the settings  to
+    suppress a "PUN FILE..." message  or suchlike. It is therefore impos-
+    sible to  change the settings  of the CP/VMCONIO options  by issuing,
+    for instance, a "SET CPCONIO OFF" command from Chat. Use the "Trap VM
+    and CP output" option instead  (see "Options" selection from the main
+    help menu).
+ 
+6) An erase/write operation is performed  on the console after completion
+    of the CMS command, except if  the command was recognized as being an
+    unknown CP/CMS command, an invalid  SUBSET command, or if the command
+    started with  "CP". For example,  "CP IND"  will not cause  an erase-
+    write operation, but "IND" alone will.
+ 
+7) (information  for system  programmers  developping applications  under
+    Chat) Chat issues  an HNDINT CLEAR before calling CMS  to execute the
+    command and  thereafter issues an  HNDINT SET (preceded by  the usual
+    CONWAIT). The CMS command itself is called from an internal REXX pro-
+    gram (resident within  the Chat module itself). The  Chat CMS command
+    therefore conforms EXACTLY to the REXX "Address CMS" conventions. The
+    screen will be erased and  re-written (using erase-write) upon return
+    from CMS.
+ 
+.CM File: DISCONN HELPCHAT A1 (07/04/86 22:32:13)
+.FO OFF
+DISConnect
+ 
+The format of the Chat DISConnect command is:
+ 
+.BX 1 14 73
+.IN 2
+DISConnect   <reply-message-text>
+              Message has been recorded.
+.BX OFF
+.IN
+ 
+The DISConnect command disconnects you from your terminal and places Chat
+ in an  "answering-machine" state, in  which it will record  all incoming
+ messages and (possibly)  reply with a message to  their originators. The
+ standard reply message is:
+ 
+   "* Disconnected -- reply-message-text",
+ 
+ where reply-message-text  is the  text you  specified in  the DISConnect
+ command, or  "Message has  been recorded."  if you  did not  specify any
+ parameter.
+ 
+ 
+When you reconnect to your account, you  will have to press ENTER once to
+ get back to Chat (after having entered a CP "Begin" command as usual, if
+ your account  runs with  the CP  "SET RUN OFF"  option). Chat  will have
+ printed the  following messages on all  the screens where a  message was
+ received during your "disconnection":
+ 
+Disconnected at MM/DD/YY HH:MM:SS
+  (the various messages that were received on that screen)
+  (...)
+Reconnected at MM/DD/YY HH:MM:SS -- nnn message(s) on this screen
+ 
+ 
+The screens where  no message was received will be  left unchanged. Addi-
+ tionally, all  incoming messages will be  logged on the "ALL  LOG" file,
+ with a time stamp on columns 82-98, regardless of the "Keep a log of all
+ transactions" option (see the "Options" selection from main help menu).
+ 
+The optional  "CHATDISC" exec, which  is automatically called  whenever a
+ message is  received in disconnected  mode, allows you to  customize the
+ reply message, defining different replies  according to the message ori-
+ ginator.  See the  "CHATDISC" selection  from  main help  menu for  more
+ details on the subject.
+ 
+ 
+Usage notes:
+ 
+1) Chat will re-configure its internal  work area according to the device
+    characteristics  of the  console when  reconnecting, so  there is  no
+    problem  about disconnecting  from an  IBM-PC and  reconnecting on  a
+    3279-3B, for example.
+ 
+2) If the CHATDISC exec  cannot be found on any of  your disks, Chat will
+    use  the default  "* Disconnected  -- reply-message-text"  message to
+    reply  to the  originator. However,  the following  messages will  be
+    ignored and will not be replied to:
+ 
+    - Messages from yourself (this includes CP/VMCONIO text)
+    - Messages from a RSCS virtual machine  (userid = rscs userid on YOUR
+       node)
+    - Messages starting with an asterisk
+ 
+   If you  decide to create  a CHATDISC EXEC,  it should also  conform to
+    these three rules  (but anyway you should read  the "CHATDISC" selec-
+    tion from main menu before starting a CHATDISC exec).
+ 
+3) Chat will use a "CP MSG" command to send the reply message to users of
+    the local node, so that the message  gets replied even if RSCS is not
+    available (or has crashed). The CHATDISC EXEC, if any, should conform
+    to this rule unless you are sure that your RSCS will always be avail-
+    able.
+ 
+4) Chat will  automatically exit  from disconnecting answering  mode upon
+    reconnection when the "Trap VM and CP output" option is activated. In
+    this case it will not be necessary  to hit ENTER to get back to Chat.
+ 
+.CM File: SPECIALC HELPCHAT A1 (05/30/86 18:29:00)
+.FO OFF
+Special Chat commands for macro writers  -- to be issued from the console
+ stack only.
+ 
+The general format of the Chat special commands is:
+ 
+.BX 1 14 73
+.IN 2
+^Cargs
+.BX OFF
+.IN
+ 
+Where "C" is the command name (see below) and "args" are the arguments to
+ the command, if  any. These commands are intended to  be issued from the
+ CMS console stack only (ie the  Chat macro should &STACK the command for
+ later execution by Chat), and do not  cause the data entered on the Chat
+ command line  to be lost.  Note that there is  no blank between  the "^"
+ sign, the command name and  the arguments. Any invalid "special command"
+ will be ignored by Chat to avoid the possible loops which could occur if
+ an error  message was  printed, causing  control to  be returned  to the
+ macro issuing the illegal command, etc.
+ 
+ 
+ 
+Here follows a brief description for  each of the recognized Chat special
+ commands:
+ 
+ 
+The "^n" screen-switch command
+.BX 1 73
+.IN 2
+^n
+.BX OFF
+.IN
+ 
+This command will cause Chat to  switch to screen number "n" after having
+ preserved the command  line. The PFkey-simulation commands, "nn", should
+ not be used for that purpose since  they would cause any data entered on
+ the command line to be lost and  could switch to the wrong screen if the
+ user had changed the PFkey assignation.
+ 
+ 
+ 
+The "^*" message-echo command
+.BX 1 73
+.IN 2
+^*Xmessage
+.BX OFF
+.IN
+ 
+This  command will  cause the  specified message  text ("message")  to be
+ printed to the current screen,  without any header being inserted before
+ the actual  message text. This message  will not be logged  to disk. The
+ first character of  the argument, "X", indicates whether  the message is
+ to be hilighted or not: "H" indicates a red, hilighted message while any
+ other value indicates a blue, unintensified message.
+ 
+Note that a message  can be easily displayed on screen 0  by issuing a CP
+ "MSG * message-text" command, which  will furthermore cause an "Incoming
+ message on #0" tag to be displayed.
+ 
+.CM File: MODEM HELPCHAT A1 (05/30/86 18:28:14)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*                Using Chat on a modem terminal                       *
+*                                                                     *
+***********************************************************************
+ 
+Several features  have been  added to  the Chat program  to make  its use
+ possible (and  even comfortable) on modem-connected,  or otherwise slow,
+ terminals. Here  is a description of  the steps that should  be taken to
+ configure Chat for modem use:
+ 
+ 
+(1) The main problem with Chat is that it scrolls the screen, which makes
+     it necessary to rewrite the entire  screen whenever a new message is
+     received. This problem  can be fixed by changing the  setting of the
+     "Scrolling window"  option on  the nicknames screen.  The "scrolling
+     window" is the number of lines that are scrolled out of the physical
+     screen  when a  scroll operation  is performed;  the same  amount of
+     blank lines are then made available  at the bottom of the screen and
+     filled little by little, without need for a screen refresh. The ini-
+     tial setting is 1, but it can be increased to 9 if required.
+ 
+(2) Another problem  is to  minimize the number  of screen  switches. The
+     "Automatic  screen-switch" option  from the  nicknames menu  must be
+     set to  "NO" to suppress all  automatic screen-switching operations.
+ 
+    Every possible effort  must be made to minimize the  number of manual
+     screen-switches as  well. It is  strongly recommended that  the Chat
+     message filtering exec, CHATFILT (qqv),  be altered to echo all RSCS
+     messages (and possibly  all messages from similar  local servers) to
+     the  current screen  (instead of  screen  0). Refer  to comments  in
+     "CHATFILT EXEC", as well as to the CHATFILT selection from main menu
+     for more details on the subject.
+ 
+(3) In an attempt to reduce the number of I/O operations, it is recommen-
+     ded that  you define  a logical  "Line-end character"  as well  as a
+     "Message-end character" (from the corresponding options on the nick-
+     name screen) and you use them whenever possible to send several com-
+     mands in  a single  transmission. Chat's line-end  character feature
+     is identical  to CP's TERM  LINEND feature  and provides a  means to
+     send several "logical"  commands on the same  physical command line.
+     The message-end character allows you  to enter more than one message
+     in a single "Tell" command:  each message-end character will start a
+     new message  (to the  same user). Refer  to the  "Options" selection
+     from main help menu for more details on these commands.
+ 
+(4) Since the nicknames-screen is quite "large" and requires much time to
+     be transmitted through the modem,  you should try to avoid switching
+     to it.  Un-assigning screens can be  achieved by means of  the (very
+     fast) "Drop" command (qqv) without having to switch to the nicknames
+     screen.
+ 
+(5) Modem-connected terminals are usually  cheap models which lack lower-
+     case characters, PFkeys, etc. Chat  is able to handle terminals with
+     less than 80 physical columns, provided than a corresponding CP TERM
+     LINESIZE command  has been  issued prior to  entering Chat.  In that
+     case the "status area" (normally  located at the bottom right corner
+     of the screen) will  be moved to the upper left  corner to make sure
+     that it will appear on the display.
+ 
+     (a) Lowercase  characters: if your terminal  cannot handle lowercase
+          characters (eg  it displays  them as  semi-graphic characters),
+          you should turn on the  "Translate: Output to uppercase" option
+          on the  nicknames screen, as  well as the "Translate:  Input to
+          lowercase" option (see below).
+ 
+     (b) ALL  CAPS input: if your  terminal is able to  display lowercase
+          characters without  providing them on  the keyboard, or  if for
+          any other reason you are unable to enter your messages in lower
+          case, you  should turn on  the "Translate: Input  to lowercase"
+          option on the  nicknames screen. This will cause  your input to
+          be  converted  to  lowercase,   with  capitals  being  inserted
+          wherever required, ie  at the beginning of  the sentence, after
+          punctuation  marks  (.?!) and  when  an  isolated "i"  appears.
+ 
+          Example:
+ 
+         THIS IS A SAMPLE SENTENCE. CHAT WILL MAKE IT NEATER, I'M SURE IT WILL!
+ 
+    ---> This is a sample sentence. Chat will make it neater, I'm sure it will!
+ 
+ 
+     (c) Lack of PF-keys: the  "PF-keys simulation" option from the nick-
+          names  screen should  be activated.  You will  then be  able to
+          simulate the depression of a  given PF-key by entering its num-
+          ber on the command line  of any message-screen, either directly
+          after the arrow or after a "Tell Nickname" command. Since there
+          is no command line on the nicknames screen, it was decided that
+          pressing ENTER  when the nicknames  screen is displayed  and no
+          field has been  altered will cause Chat to switch  to screen 0,
+          as if the PF9 key had been pressed.
+ 
+.CM File: RELAY HELPCHAT A1 (06/13/86 20:53:22)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*             Communicating with Relays under Chat                    *
+*                                                                     *
+***********************************************************************
+ 
+Chat provides a  set of facilities for communication  with Relays, making
+ the output  neater and saving  some disk  space when logging  the output
+ to disk.
+ 
+In order for these facilities to  be activated, you must change the nick-
+ name(s) of your usual relay host(s)  to something starting with the word
+ "RELAY"  (eg "RELAY",  "RELAYUTC", "RELAYHEC").  You will  then have  to
+ assign a screen to  your relay, exactly as if it were  a normal user. If
+ the userid of the relay you plan  to connect yourself to is "RELAY", you
+ can activate  this facility without defining  a new entry in  your NAMES
+ file by assigning  a screen to 'RELAY at host_relay_node'.  In that case
+ a special 'Relay:n' nickname will  be temporarily assigned to the relay.
+ 
+ 
+Chat will then automatically:
+ 
+1) Suppress the "From Nickname: " header on that screen.
+ 
+2) Suppress the "To   Nickname: " header on that screen and replace it
+    with a relay header (see below)
+ 
+3) Change any single leading dot (".") in an incoming message to a blank.
+    Relays send leading dots when formatting a long message to paragraphs
+    because RSCS would strip leading blanks from the message.
+ 
+   Example:
+ 
+      <Eric> This line is a normal one, but the
+      .      continuation line will start with
+      .      a dot so that RSCS doesn't strip the
+      .      blanks.
+ 
+   Chat will automatically remove all these trailing dots.
+ 
+4) Suppress printing  of the  messages from  relay to  screen 0.  Since a
+    considerable amount of messages is to  be expected from relay, it was
+    deemed  unnecessary to  display them  on  screen 0  where they  would
+    perpetually scroll the important messages out of the screen...
+ 
+5) Parse the "/Signon"  and "/Nickname" commands and  alter the nicknames
+    screen "R."  field accordingly  (see below). The  field will  be left
+    unchanged if you do not specify any argument to the command.
+ 
+6) Suppress  the possible  message-prefix  (from MSGNOH-endowed  relays).
+    This prefix is  usually "Relay: ", but anything with  a ": " sequence
+    within the first 8 characters of the message will be removed.
+ 
+ 
+You must also fill in the  nicknames screen "R." field (located below the
+ field corresponding to screen number 6) with your own relay-nickname, ie
+ the one you have used on the "/SIGNON" command when signing on to relay,
+ not your NAMES file nickname for the  userid at node of your host relay.
+ 
+ 
+ 
+Relay  headers  for  outbound  messages: the  standard  "To   Nickname: "
+ header is replaced with the following header when on a relay screen:
+ 
+- No header at all  if the message text started with a  "/" or "&" (relay
+   command prefix characters)
+ 
+- No header at all if the nicknames screen "R." field has been left blank
+ 
+- "<Your_relay_nickname> "  if the  nicknames field  "R." field  has been
+   previously filled with the nickname  you are currently using on relay.
+ 
+.CM File: CHATDISC HELPCHAT A1 (05/30/86 18:27:36)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*    How to use Chat as a disconnected answering machine program      *
+*                                                                     *
+***********************************************************************
+ 
+In this file you  will find information about the use of  Chat as a GONE-
+ like  answering machine.  You can  skip the  next paragraph  if you  are
+ already familiar with automatic answering programs.
+ 
+ 
+What  is an  automatic answering  machine program?  Similar to  a mundane
+ answerphone, it will  record messages sent during your  absence and send
+ back an  acknowledgement to the sender,  saying where you are,  what you
+ are doing  and when you  will be back.  A phone set  being intrinsically
+ stupid and perfectly  tactless will leave a message saying  that you are
+ at a party today and hope to have  fun there until 3 am; and if for some
+ reason your  boss unexpectedly decides  to give you  a ring to  tell you
+ that "Well, I know  I've asked you to finish that urgent  job as soon as
+ you can, but I  really wouldn't want you to think I am  a tyrant or any-
+ thing... Listen,  I've just watched 'Tosca'  at the TV and  I was struck
+ by the physical resemblance between that  Scarpia and me, and that Tosca
+ had the  very same  hair as you  and it kept  tormenting me  and... Hey,
+ what's that message??? Where did you  say you were????", you can be sure
+ your  answerphone  will  impassibly  and unerringly  deliver  the  fatal
+ message....
+ It being a  fairly well-known fact that computers are  much more complex
+ than phone sets  (just ask your local telephone company  clerk if he can
+ help  you find  out  what's going  wrong with  the  IBM 3090-400  you've
+ just finished installing in your dining room), you would expect a compu-
+ ter-programmed answering  machine to be  a little more  intelligent than
+ that stupid answerphone  that now lays broken in the  middle of the yard
+ after having  delayed your pay raise  by an undefinite but  probably not
+ unsignificant period  of time... Indeed, Chat  will allow you to  set up
+ different replies according to the person that "calls" you: one for your
+ boss, saying "Good  night sir. I'm so  busy with that piece  of work you
+ gave me yesterday that I decided to start my answering machine so as not
+ to get disturbed by phone calls. Will do my utmost best to have finished
+ that  job  tomorrow.",  another  one for  your  office  friends,  saying
+ "Hiya! I'm at  Christina's party! Why don't ya join  us???"; another one
+ for your boyfriend (the same but with some sweet nothings appended); and
+ yet another  one for that !$+%*&!^!  Bob who keeps on  bothering you day
+ and night, saying something that you  probably wouldn't want to see in a
+ public help file like this one. But since computers are generally gifted
+ with Artificial Imbecility  (AI), you would still have to  tell the pro-
+ gram who is Bob, who is your  boyfriend, who is your boss, etc., so that
+ it doesn't send  your boyfriend the message that  was initially intended
+ for Bob, and vice-versa...  In fact you will have to  write a short pro-
+ gram in a language that the computer is able to understand (don't panic,
+ it's not THAT  difficult!), telling it who is to  receive which message,
+ etc.
+ 
+ 
+To start  the Chat built-in answering  machine program, you must  issue a
+ "DISConnect" command from  the Chat environment. This  command accepts a
+ message text as optional parameter, and causes Chat to wait for incoming
+ messages, log them on disk and reply with a message. The standard messa-
+ ge is:
+ 
+      "* Disconnected -- your message has been recorded."
+ 
+        if you did not specify  any argument to the "DISConnect" command,
+    or:
+ 
+      "* Disconnected -- message text",
+ 
+        if you did specify a message text when issuing the "DISC" command
+ 
+ 
+If you  just want Chat  to behave as  a mundane phone  answering machine,
+ sending  the default  message back  to everybody,  you do  not need  the
+ CHATDISC EXEC program  -- just erase it from your  disk and forget about
+ it. In the following discussion we will assume that this is not the case
+ and that you wish to set up Chat for "intelligent" message answering.
+ 
+The "CHATDISC EXEC"  program, if present, will receive  control from Chat
+ whenever a message is received while in answering machine mode (ie after
+ you have issued  a Chat "DISC" command). The  sender's "userid" (account
+ number) and "node" (host computer  identification), the text of the mes-
+ sage he sent you and the text of the standard reply message (the one you
+ specified when  you executed the "DISC  default-reply-message-text" com-
+ mand) will be  passed to the program. CHATDISC will  then have to decide
+ on an appropriate reply message, send it, and return control to the Chat
+ program. An "Exit 0" instruction in  CHATDISC will tell Chat not to send
+ any further  message to the sender,  while an "Exit 1"  instruction will
+ cause Chat to send the standard reply back to the sender.
+ 
+This simple convention makes it possible for CHATDISC to ignore a message
+ (no reply at all)  or to send both a personalized  message and the stan-
+ dard reply. For example, you may wish to ignore all messages from system
+ servers such as DIRMAINT, which are totally unable to receive reply mes-
+ sages, least  of all to  analyze them and decide  not to bother  you any
+ more since  you are not there  to read the  message. Or you may  wish to
+ send an  additional message to some  friends to whom you  have something
+ particular to say, for example:
+ 
+  * Disconnected -- Hi, Christina!! Will you be at the party tonight?
+  * Disconnected -- gone for lunch, back in an hour or so.
+ 
+The first message being issued by CHATDISC and the second being the stan-
+ dard reply message (issued by Chat).
+ 
+ 
+ 
+Important notes:
+ 
+1) ANY reply  message issued by CHATDISC  must be prefixed with  an aste-
+    risk. NO message starting with an asterisk should ever be replied to.
+    This  will avoid  possible  "message wars"  between two  disconnected
+    answering machines who would keep replying to each other...
+ 
+2) Messages from yourself, or from a  RSCS machine, should not be replied
+    to. When  functioning in "answerphone"  mode, Chat will not  reply to
+    these  messages, and  it is  your  responsibility to  make sure  that
+    CHATDISC does not reply to these messages.
+ 
+3) If you  run with  the "Trap  VM and CP  output" option  activated, you
+    should take  all appropriate steps  to make  sure that no  message is
+    printed to the virtual console  when processing the incoming message.
+    You should  notably make sure  that no  message is printed  when your
+    disk becomes full, or then "remember" the condition (via GLOBALV) and
+    never attempt any further disk  logging. Another solution would be to
+    stack a  "QUIT" command  to terminate  Chat upon  receipt of  a "DISK
+    FULL" message.
+ 
+4) All the functions of the "GONE"  exec are not implemented in the stan-
+    dard CHATDISC provided  with the Chat package, but there  would be no
+    technical problem about adding them.
+ 
+5) Chat optionally allows you to set  up your timer while disconnected in
+    such a way that it will "eat" some CPU time at regular time intervals
+    (every 10 minutes) to make sure  that your account doesn't get forced
+    off by your system's resource limiter or similar -- assuming there is
+    one. This  is realized by adding  a "CP SET TIMER  REAL" command into
+    CHAT EXEC (before the call to the module, of course). Please not that
+    it is your responsibility to make sure that your administration staff
+    allows the use of disconnected anwering machines -- the author should
+    in no way be considered responsible  for any problem that might arise
+    due to use (and possible abuse) of the CHATDISC program.
+ 
+6) More information  about the "DISConnect"  command can be found  in the
+    appropriate helpfile from the "CHATCMD" help sub-menu.
+ 
+.CM File: CHATFILT HELPCHAT A1 (06/07/86 16:08:43)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*            How to use Chat message filtering facility               *
+*                                                                     *
+***********************************************************************
+ 
+The Chat message  filtering facility is a  user-tailorable REXX procedure
+ ("CHATFILT EXEC") that  allows you to filter incoming  messages. It will
+ receive control upon receipt of a message  from a user which has not yet
+ been assigned a  screen, and will decide whether a  new screen should be
+ automatically allocated  for this user  (default option) or not.  In the
+ latter case, the  messages will either be printed on  screen 0 (and only
+ there)  or completely  ignored, as  indicated by  the CHATFILT  program.
+ Since the exec will NOT be called when the message originator has alrea-
+ dy been dedicated  a screen, it will require only  a very limited amount
+ of CPU time on the average, unless of course you keep receiving messages
+ from someone you do not want to talk with and to whom you do not want to
+ assign a screen. For the same reason,  the exec is not called to process
+ CP/VMCONIO  output from  yourself (those  are automatically  directed to
+ screen 0).
+ 
+ 
+Possible  applications for  this filter  are: (the  lines marked  with an
+ asterisk indicate  that the "standard"  CHATFILT EXEC - the  one shipped
+ along with the Chat package - supports that particular function)
+ 
+ 
+  (1) Cancel the automatic screen allocation process by causing all messa
+       ges from new users  to be sent to screen 0.  You can then manually
+       assign screens,  in the  order that you  choose, to  those persons
+       with whom you want to speak.
+ 
+  (2) Cancel the  automatic screen allocation  process and block  out all
+       messages from new users. A message is sent back to the originator,
+       saying that you are busy and cannot receive any message right now,
+       and the message  is ignored (and possibly logged to  disk, at your
+       option). You can still converse with  up to six people by manually
+       assigning a screen to them -- in that case their messages will not
+       get blocked.  You can drop  them whenever desired by  just de-assi
+       gning the screen. You can also define a list of users whose messa-
+       ges  must  never  be  ignored  (eg  your  boss  or  husband/wife).
+ 
+* (3) Cause all messages from file  servers and/or system accounts to get
+       printed to screen 0 instead of being dedicated a screen. Suggested
+       userids to be trapped to  screen 0 are: MAILER, LISTSERV, NETSERV,
+       DIRMAINT, CMSBATCH. Please note that messages from RSCS are always
+       confined to screen 0.
+ 
+* (4) Cause  all messages  starting with  an  asterisk to  be trapped  to
+       screen 0.
+ 
+* (5) Suppress all  "FILE (nnnn)  ENQUEUED ON  LINK xxxx"  messages (from
+       RSCS). Since an  error message is sent when the  file is rejected,
+       you need  not have  any qualms about  discarding this  useless and
+       boring message.
+ 
+ 
+* (6) Parse the "SENT FILE..." messages and neaten then up. Example:
+ 
+       File 1234 has been sent across the Geneva to Roma line to Bob
+       File 1234 has been sent across the Roma to Israel line to Bob
+       File 1234 has reached Bob
+ 
+ 
+* (7) Parse the "FILE SPOOLED TO userid -- ORG..." messages from RSCS,
+       scan your reader for the file and display a message to current
+       screen, such as:
+ 
+       File "CHAT MODULE" (2345) from Eric has been placed in your reader
+ 
+ 
+* (8) Parse the "CPQ:..." messages, search your names file for the corres
+       ponding nickname and display a nice message, such as:
+ 
+       Rosanne is disconnected.
+       Christian is not logged on.
+       Sylvia is logged on terminal number 56C.
+ 
+ 
+  (9) Display all RSCS  messages to current screen rather  than screen 0.
+       This is particularly useful for modem users since it will save you
+       a screen  switch operation.  The code for  this function  has been
+       provided in  the "standard" CHATFILT  EXEC in "comments"  form and
+       can be easily made operational.
+ 
+ 
+*(10) Parse the "LINK xxx INACTIVE", "LINK xxx NOT CONNECTED" and "PATH
+       LOST TO xxx" messages, search your NAMES file for the correspon-
+       ding nicknames and display a message such as:
+ 
+       Link failure on the Geneva to Roma path
+       Link failure on the Roma to BITNIC path
+ 
+   Please refer to the comments  in "CHATFILT EXEC" for more information.
+It is strongly recommended that unexperienced REXX programmers do not try
+to add new  functions to the standard exec since  any REXX interpretation
+error might cause the console to  hang and might require a "cold" startup
+of your virtual machine (log off and  log on again) to clear the problem.
+The cause of this little annoyance lays in the fact that Chat cannot give
+the control of the terminal back to CMS while CHATFILT is being called --
+refer to the comments in CHATFILT EXEC for more details on this topic.
+ 
+.CM File: CHATNAME HELPCHAT A1 (05/30/86 18:27:40)
+.FO OFF
+Chat NAMES command (CHATNAME)
+ 
+The format of the CMS CHATNAME command is:
+ 
+.BX 1 14 73
+.IN 2
+CHATNAME     <nickname <userid <nodeid <full_name>>>>
+.BX OFF
+.IN
+ 
+The CMS CHATNAME command is identical  to the standard IBM NAMES command,
+ with the following differences:
+ 
+1) Not only the  nickname, but the userid, nodeid  and person's full-name
+    can be  specified on the command  line, making it much  easier to add
+    new nicknames. This is particularly  convenient when someone sent you
+    a message and you want to add a  nickname for him: you do not have to
+    write his userid and node on a scrap of paper before calling NAMES as
+    was the case with the standard IBM command.
+ 
+2) The length of  the nickname field has been expanded  to 14 characters,
+    the maximum length accepted by Chat.
+ 
+3) The nickname  is trimmed to mixed  case according to the  Chat conven-
+    tions (see "Nicknames" selection from main help menu for more details
+    on the subject).
+ 
+4) The console "insert mode" key can be used freely under CHATNAME, which
+    was not the case under the standard NAMES (you had to move to the end
+    of the text and press the ERASE  EOF key before being able to use the
+    insert mode key).
+ 
+5) The screen layout has been slightly altered to make sure that CHATNAME
+    is not mismatched for the standard NAMES exec.
+ 
+6) A "Charlot  RELOAD" command is  issued upon  exit from the  program to
+    reload the  NAMES file into  storage, when using the  Charlot message
+    filtering program.  This will  only affect the  users of  the Charlot
+    program.
+ 
+ 
+The CHATNAME  program is an  optional component  of the Chat  package and
+ requires the following files:
+ 
+   CHATNAME EXEC      (maybe renamed to NAMES EXEC on your system)
+   CHATNAME XEDIT
+   CHATXNAM MODULE
+ 
+If these files are  not present on any of your disks,  you may order them
+ from ERIC at FRECP11 (Eric Thomas).
+ 
+.CM File: CHATRL HELPCHAT A1 (07/08/86 10:36:45)
+.FO OFF
+Chat RDRLIST command (CHATRL)
+ 
+The format of the CMS CHATRL command is:
+ 
+.BX 1 14 73
+.IN 2
+CHATRL       (no argument is accepted)
+.BX OFF
+.IN
+ 
+The CMS  CHATRL command is similar  to the standard IBM  RDRLIST command,
+ with the following exceptions:
+ 
+1) The file  sender's nickname,  if any, is  substituted to  the standard
+    "userid node" indication, making the  list much easier to read. Nick-
+     names with a blank ":node" entry are supported.
+ 
+2) Mails sent via  a MIT mailer are displayed with  the sender's nickname
+    or  "userid node"  indication instead  of the  mailer machine's  one,
+    provided that the mailer's userid is "MAILER".
+ 
+3) The nickname  is trimmed to mixed  case according to the  Chat conven-
+    tions (see "Nicknames" selection from main help menu for more details
+    on the subject).
+ 
+4) An assembly language reader queue processor is used to minimize execu-
+    tion time  when building the list.  This new processor can  handle an
+    unlimited number of  reader files, unlike the  standard RDRLIST which
+    cannot cope with more than 110  files (which could cause notes not to
+    be received in  chronological order, even though  the supplied reader
+    list had been sorted by date).
+ 
+5) Messages are  passed to  the XEDIT  environment if it  is found  to be
+    active. For example, issuing a CHATRL command against an empty reader
+    while under  XEDIT would  display "No  file in  your reader."  in the
+    XEDIT message area  instead of clearing the XEDIT  screen and forcing
+    you to press the CLEAR or PA2 key thereafter.
+ 
+6) The MSGSERV  program is  automatically activated, if  present. MSGSERV
+    is a program  written by Martin Scheffler (also  known as "MegaByte")
+    to direct all incoming messages and CP/CMS output to the XEDIT messa-
+    ge area. Contact Martin Scheffler  (I7090202 at DBSTU1) for distribu-
+    tion.
+ 
+7) For performance considerations it has  been decided that the file ori-
+    gin field  ("userid node" or  "<Nickname>") would not  be re-computed
+    each time you execute a  prefix command from Chat-RDRLIST. This means
+    that if  you execute  a prefix command  that dynamically  changes the
+    file TAG, the userid/node/nickname indication on the reader list will
+    not  be updated  until you  depress  the Refresh  PF-key (PF2).  This
+    little restriction will,  however, save a considerable  amount of CPU
+    time, especially if you have a large NAMES file.
+ 
+ 
+The  CHATRL program  is an  optional component  of the  Chat package  and
+ requires the following files:
+ 
+   CHATRL   EXEC    (maybe renamed to RDRLIST or RL EXEC on your system)
+   CHATXEQ  XEDIT
+   CHATRDRL MODULE
+ 
+If these files are  not present on any of your disks,  you may order them
+ from ERIC at FRECP11 (Eric Thomas).
+ 
+.CM File: INSTALL HELPCHAT A1 (04/28/87 14:40:45)
+.FO OFF
+***********************************************************************
+*                                                                     *
+*        How to install Chat on a public disk or file server          *
+*                                                                     *
+***********************************************************************
+ 
+Special note about  file servers: any official (ie  not clandestine) file
+ server is allowed to distribute the  Chat package, provided that it com-
+ plies to the following rules:
+ 
+  1) The name of the programs must  not be changed without express autho-
+      rization from the author.
+ 
+  2) The file server owners must accept  to make new versions of the pro-
+      gram available on the server  within a reasonable delay. The reason
+      for this restriction  is that any severe "bug" in  the program will
+      usually cause  about fifty complaining notes  a week to be  sent to
+      the author's  reader. That traffic must  be stopped as soon  as the
+      problem is corrected, for obvious  reasons (both technical and psy-
+      chological...)
+ 
+  3) The author is notified of the installation of the program so that he
+      can send new versions of the program to the server's owner.
+ 
+ 
+ 
+The following  files must be  made available on  the public disk  or file
+ server:
+ 
+    CHAT     MODULE
+    CHAT     EXEC    (Chat package)
+ 
+    CHATXEQ  XEDIT
+    CHATRDRL MODULE  (Chat-RDRLIST package)
+ 
+    CHATNAME XEDIT
+    CHATXNAM MODULE  (Chat-NAMES package)
+ 
+None of these programs should ever be renamed.
+The users should be asked not to copy them to their own minidisks and not
+ to alter them in  any way. Failure to observe this  rule could result in
+ mild to severe  damage to the user's virtual core  and/or minidisks, for
+ which the author could not  be held responsible. Only experienced system
+ programmers should make changes to these programs.
+ 
+ 
+ 
+ 
+The following programs must be  made available under the same conditions,
+ but they can be renamed if desired:
+ 
+    CHATRL   EXEC   (Chat-RDRLIST package) suggested name: "RL", "CRL"
+    CHATNAME EXEC   (Chat-NAMES   package) suggested name: "CNAME", "CN"
+ 
+It is of course possible to  rename them to "RDRLIST" and "NAMES" respec-
+ tively to override  the default IBM execs, but this  is not recommended.
+ An  alternative solution  would  be  to install  them  as "RDRLIST"  and
+ "NAMES" on a public disk devoted to network files, while the versions on
+ the system disks  are left unchanged. Users should NOT  copy those files
+ to their own disks, even if they want to have them with another name. In
+ that case they  should define synonyms for the execs  on the system disk
+ to be sure that they always use the latest version.
+ 
+ 
+ 
+The following files must be made  available on the public disk or server:
+ 
+    CHATDISC EXEC
+    CHATFILT EXEC   (Chat package)
+ 
+They must not be renamed. The users are, however, encouraged to copy them
+ to their own minidisk and to alter  them to suit their needs; changes to
+ these execs  will be signaled  in the  CHATnn CHATMEMO files  which will
+ have to be made available to the users (see below), so that they can ma-
+ ke the change in their own personalised copy.
+ 
+ 
+ 
+CHATnn CHATMEMO files: these files  contain a detailed description of all
+ the changes that took place in Chat  from one release to the other. They
+ should be made available to all the  Chat users, which should be told to
+ have a  look at them  from time to  time. A new/revised  CHATnn CHATMEMO
+ will be sent  along with each update  to the Chat program  and should be
+ inspected by the local  Chat contact to check that there  is no new pro-
+ blem with  the (possible) local  modifications to the system  before the
+ new  version is  placed  on the  system  disk (this  does  not apply  to
+ servers). Only the two lastest CHATMEMOs need to be kept -- as a rule of
+ thumb, any  such memos that has  been removed from Netserv  is no longer
+ required and can be discarded. It is strongly suggested that a notice be
+ added into the local "user newsletter" system, if any, to tell the users
+ about the newly obtained version of the program.
+ 
+ 
+ 
+Help files:  file servers will only  need to keep the  CHAT HELPCMS file.
+ This file is  a concatenation of several helpfiles,  including two help-
+ menus. The  scattered HELPCHAT files  can be extracted from  the HELPCMS
+ file by  means of a special  exec, CHATHELP, available from  the author.
+ The  HELPCHAT/HELPMENU system  will be  used by  Chat if  available, but
+ for technical  reasons the  bare HELPCMS file  takes precedence  over it
+ (otherwise a HELPMENU  file on the help-disk would not  be detected by a
+ STATE command unless it has been preivously accessed). It is recommended
+ that the Chat help information be kept in HELPCHAT/HELPMENU form if Chat
+ is installed on a public disk, in  which case CHATHELP must be run every
+ time  a new  HELPCMS file  is obtained  to automatically  regenerate the
+ scattered HELPCHAT files. It is recommended, but not mandatory, that the
+ files be placed on the help disk (usually MAINT 19D). In any case, it is
+ MANDATORY that the  old CHAT HELPCMS file be erased,  otherwise it would
+ be displayed and the HELPMENU file would just be ignored.
+ 
+ 
+Obtaining the files:  the Chat package 'per se' can  be obtained from the
+ nearest  Netserv  server, which  will  always  have the  latest  version
+ (unless a link has been down for  a long time). Those among you who have
+ Netserv privileges can even set  up an Automatic File Distribution (AFD)
+ request for the Chat files  (see "NETSERV HELPFILE" for more information
+ on AFD). Other  users can contact the  author to be added  onto the Chat
+ distribution list, in which case  they will automatically receive a note
+ from  the Chat  distribution account  (CHAT at  FRECP11) whenever  a new
+ version of the  program has been made available on  the Netserv servers.
+ The Chat-RDRLIST and Chat-NAMES packages cannot be obtained from Netserv
+ but are automatically distributed by the Chat distribution account. Con-
+ tact the author (Eric Thomas <ERIC@FRECP11>)  if you wish to be added to
+ the Chat distribution list.
+ 
+ 
+Help files  in other  languages: although it  is obviously  impossible to
+ provide all the Chat helpfiles in several languages, it would be interes
+ ting to have "general introduction" helpfiles in other languages for the
+ potential  Chat users  which are  not familiar  with english.  Some Chat
+ users  have translated  some of  the english  helpfiles (or  written new
+ ones) in their  own tongue, and have accepted to  make them available to
+ everybody.
+ 
+- Prof.Dr. P.L. Reichertz   <PL_REI@DHVMHH1>
+  (from Medizinisches Hochschulrechenzentrum Hannover, Germany)
+ 
+   has written a set of two helpfiles in German:
+ 
+      CHATEIN  HELPCMS  -- Allgemeine und kurze Einf}hrung in das CHAT
+      CHATINST HELPCMS  -- Allgemeine implementierungshinweise
+ 
+   They are available from Netserv as GERMAN CHATMEMO.
+ 
+ 
+- Luis Miguel Fernandez Candocia <EARNAD@EMDUCM11>
+  (from Universidad Complutense de Madrid, Spain)
+ 
+   has translated, in collaboration with  other people of his University,
+   the  complete set  of Chat  helpfiles  into Spanish.  These files  are
+   available as SPANISH CHATMEMO.
+ 
+ 
+ 
+If you have written or translated helpfiles for Chat in your own language
+ and you are willing to make  them available to users from other systems,
+ just contact me (Eric Thomas <ERIC@FRECP11>)  and I will mention them in
+ this helpfile. I will try to  make them available on Netserv (as "GERMAN
+ CHATMEMO",  "SPANISH CHATMEMO",  etc),  provided that  they are  general
+ enough (ie  a file explaining  from which system  disk the files  can be
+ obtained at this or that node is not suitable).
+ 
+.CM File: CHATRDRL HELPCHAT A1 (07/08/86 12:14:07)
+.FO OFF
+Technical information about the CHATRDRL assembler reader-queue processor
+ 
+This information is designed for EXEC/REXX programmers who develop appli-
+ cations using the CHATRDRL module as a sub-program. This is not the help
+ information file for the Chat-RDRLIST command (CHATRL).
+ 
+ 
+The format of the CHATRDRL command is:
+ 
+.BX 1 14 73
+.IN 2
+CHATRDRL     userid node RSCS-userid MAILER-userid  <options>
+ 
+ 
+             Available options are:
+ 
+               NONAMES
+               REALRDR
+               REALPUN
+               REALPRT
+               ALLFILES
+.BX OFF
+.IN
+ 
+CHATRDRL is a reader-queue assembler  processor which was primarily desi-
+ gned to support  the Chat-RDRLIST command. It will scan  the contents of
+ your reader and stack an information line for each file (in RDRLIST for-
+ mat). Unlike EXECIO, CHATRDRL is not limited by the 8k-reply-buffer-size
+ "feature" and can handle any number of spool files. It will, additional-
+ ly, substitute the file sender's nickname  (from your NAMES file) to his
+ userid/node, whenever applicable. Note that  the NAMES file is read into
+ storage at initialization using  the considerably fast block-read method
+ (ADMSBLKR), then pre-processed and converted into a smaller fixed format
+ table which is  then scanned via BXLE whenever required  -- it is really
+ as fast as it CAN be.
+ 
+ 
+Available options:
+ 
+NONAMES   indicates that  the NAMES file  must not be used  for searching
+          nicknames.  Note that  this option  will considerably  speed up
+          CHATRDRL,  especially if  your  NAMES file  is large:  CHATRDRL
+          spends about two-thirds of its time  to read in the NAMES file,
+          format it and scan the table...
+ 
+REALRDR   indicates that the  real system reader must  be processed. This
+          option is restricted to privileged  (class E) users. It implies
+          the NONAMES option, and yields a slightly different output (see
+          below).
+ 
+REALPUN   is identical to  REALRDR except that the system  punch chain is
+          scanned.
+ 
+REALPRT   is identical to  REALRDR except that the system  print chain is
+          scanned.
+ 
+ALLFILES  is applicable only when one of the REALxxx option is specified;
+          it indicates  that normally unseen  files, such as  files being
+          processed by  system (ie  being printed, being  SPTAPEd), files
+          currently open for  reading, must be included in  the list too.
+          These files  will be identified by  an asterisk in column  1 of
+          the RDRLIST-line, and cannot be CP TRANSFERred, CP PURGEd, etc.
+          However, some  applications (such as counting  the total number
+          of lines in the system spool) might require information on the-
+          se files. Note  that files which have not yet  been enqueued on
+          the reader chain, such as files which have not yet been closed,
+          started console,  will not  be listed. The  only way  to obtain
+          them is  to scan the VSPLCTL  block of every URO  VDEVBLOK, for
+          every user in the system -- a CPU consuming task indeed...
+ 
+Options  must be  entered immediately  after the  last mandatory  keyword
+ (MAILER-userid), without any parenthesis.
+ 
+ 
+Notes on real reader-chain processing:
+ 
+1) When one of the REALxxx options is specified, the first four arguments
+   become irrelevant  since the TAG data  is not inspected and  the NAMES
+   file is ignored.  They can be conveniently  replaced by place-holders,
+   eg "CHATRDRL . .  . . REALRDR". Note that the  TAG information is kept
+   on  disk by  CP and  is therefore  not easily  accessible, to  say the
+   least...
+ 
+2) Real-reader scanning  in a  time-sharing environment  is intrinsically
+   tricky since another user can be  dispatched at any time and can PURGE
+   the very  file you were  processing, causing  the pointer to  the next
+   file in  chain to become  invalid... Whenever CHATRDRL detects  such a
+   condition, it will immediately return to the caller with a return code
+   of 2. It  will probably have stacked some lines  already, and the last
+   one will  probably be  garbage; therefore  the calling  program should
+   clear everything  that might  have been stacked  by CHATRDRL  (using a
+   DESBUF/DROPBUF command  as applicable)  and re-issue the  command. The
+   condition should not persist, unless  (perhaps) a SPTAPE DUMP with the
+   PURGE option is in progress. It is therefore suggested that the follo-
+   wing algorithm be used to invoke CHATRDRL:
+ 
+     Do 10     /* 10 retries should suffice */
+       'MAKEBUF'
+       'CHATRDRL . . . . REALRDR'
+        If rc ^= 2 Then Leave
+       'DROPBUF'
+     End
+     If rc = 2 Then Call Sorry_couldn't_manage_to_have_CHATRDRL_function
+ 
+3) You should also be aware of the  fact that, for the same reason, it is
+   possible for CHATRDRL  to "miss" some reader files if  a CP ORDER com-
+   mand is issued just at the wrong instant. This condition is impossible
+   to detect  (although in certain cases  it CAN be detected,  eg when it
+   causes files to be listed twice) and is VERY unlikely to occur.
+ 
+4) The output  produced by  CHATRDRL when scanning  real spool  chains is
+   slightly different  (see detailed description below)  and includes the
+   (real) SFBLOCK  address associated with  the file, making  it possible
+   for the calling program to obtain  any information about the file that
+   CHATRDRL did not provide, eg DISTcode.  Note that since the file might
+   have  "disappeared"  at the  time  the  calling program  examines  the
+   SFBLOCK,  yielding irrelevant  information, it  is strongly  suggested
+   that the spoolid be retrieved from  the SFBLOCK along with the desired
+   information (on  the same DCP  command) and compared with  the spoolid
+   returned by CHATRDRL; if they do not match, the file should be ignored
+   (it has just been purged). Note that the spoolid might still be intact
+   in real storage while the file has been purged (eg if the storage used
+   by  the SFBLOCK  was not  yet recycled);  but in  that case  the WHOLE
+   SFBLOCK will probably have been left intact and the information obtai-
+   ned from it would be correct, although no longer useful.
+ 
+ 
+Format of output lines:
+ 
+.BX 1 9 40 75
+  cols        Virtual reader chain              Real spool chain
+.BX
+    1               blank                       normal  file: blank
+                                               "unseen" file: asterisk
+   2-6              blanks                             idem
+.BX
+   7-14       filename, or "(none)"                    idem
+    15              blank                              idem
+.BX
+  16-23       filetype, or "(none)"                    idem
+    24              blank                              idem
+.BX
+  25-27       spool device type                        idem
+            (PUN, CON, PRT, RDR, DMP)                  idem
+    28              blank                              idem
+.BX
+    29           file class                            idem
+    30              blank                              idem
+.BX
+  31-38        sender's userid                (local) origin userid
+    39              blank                              idem
+  40-47        sender's nodeid                (local) owner's userid
+    48              blank                              idem
+ 
+    or
+  31-47        sender's nickname                        N/A
+.BX
+  49-52        file hold status                        idem
+            (NONE, USER, SYS, USYS)                    idem
+    53              blank                              idem
+.BX
+  54-61        number of records                       idem
+    62              blank                              idem
+.BX
+  63-67       creation date (mm/dd)                    idem
+  68-71             blanks                             idem
+.BX
+  72-79       creation time (hh:mm:ss)                 idem
+  80-82             blanks                             idem
+.BX
+  83-90       filename, or "(none)"             real SFBLOCK address
+   91               blank                              idem
+.BX
+  92-99       filetype, or "(none)"               reserved (blanks)
+   100              blank                              idem
+.BX
+ 101-103      spool device type                        idem
+            (PUN, CON, PRT, RDR, DMP)                  idem
+   104              blank                              idem
+.BX
+ 105-108           spoolid                             idem
+   109              blank                              idem
+.BX
+ 110-126     copy of columns 31-47                     idem
+.BX OFF
+ 
+ 
+Return codes:
+ 
+   0        Normal return code
+   1        Reader (or specified real spool chain) is empty
+   2        Problem scanning real reader chain. See usage note (2)
+  28        Invalid option
+ 
+Any comments, remarks or suggestions should be directed to:
+ 
+          Eric Thomas <ERIC@FRECP11>
+ 
+.CM File: CHAT HELPMENU A2 (07/08/86 10:30:28)
+ 
+A file may be selected for viewing by placing the cursor
+under any character of it and pressing the PF1 or ENTER
+key.
+A MENU file is indicated when a name is preceded by an asterisk (*).
+ 
+If you are reading this for the first time, select "Summary".
+ 
+For a description of the CHAT commands, select "ChatCMD" (menu helpfile).
+.SP 2
+.FO OFF
+*ChatCMD
+CHATDISC
+CHATFILT
+CHATNAMES
+CHATRDRL
+CHATRL
+Install
+Layout
+Messages
+Modem
+Nicknames
+Options
+Overview
+PFkeys
+Relay
+Requires
+Summary
+Tags
+Tutorial
+.CM File: CHATCMD HELPMENU A2 (03/30/86 16:17:26)
+ 
+A file may be selected for viewing by placing the cursor
+under any character of it and pressing the PF1 or ENTER key.
+The minimum command abbreviation is indicated as uppercase.
+.SP 2
+.FO OFF
+&
+?
+??
+=
+CMS
+DISConn
+DISMISS
+DROP
+nn
+PICTURE
+Query
+QUIT
+SpecialCMD
+TELL
+
+<HR>
+</PRE>
+</BODY>
+</HTML>

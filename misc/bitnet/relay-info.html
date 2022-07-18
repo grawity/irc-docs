@@ -1,0 +1,197 @@
+<HTML>
+<title>Relay Information</title>
+<BODY>
+<CENTER><H1>Information about Relay and how to use it</H1>
+<HR></CENTER>
+You are a user at an institution whose mainframe computer(s) is
+connected to BITNET, EARN (Bitnet in Europe), or a cooperating
+network. As such, you have the ability to send an interactive
+message to any other user on those networks. But if you do, that
+person is the only person to see that message. Think about what
+it would be like if many people, all over the world, could see
+your message, and you could see theirs. That's Relay.<p>
+Relay is a distributed messaging network, overlaying BITNET/EARN,
+composed of many linked Relay host sites. Its purpose is to serve
+as an Academic Conferencing System. The users on Relay may be in
+many different physical locations, even different countries, but
+they all appear to be talking as if they were sitting next to each
+other. When on Relay, you'll be sending interactive messages to
+RELAY@VTBIT. Other users you meet on Relay will be sending their
+interactive messages to other Relay servers, but you can all talk
+to each other because RELAY@VTBIT is "linked" to these other servers.<p>
+The Virginia Tech Computing Center provides Relay as a service
+to the network community. As Virginia Tech is providing the funding,
+all users at other universities should be aware that use of this Relay
+is a privilege, not a right. The Master Relay Operater (MasterOp) is an
+employee of Virginia Tech and enlists other users, either at Virginia
+Tech or elsewhere, to serve as Relay Operators (RelayOps) who assist
+in the administration and smooth operation of the Relay.<p>
+The MasterOp and his RelayOps reserve the right to make the final
+decision on appropriate behavior. Many users would claim that the right
+of free speech allows them to carry on any activities they wish on this
+relay. Free speech is not the primary principle that runs this relay;
+low cost is. Any activity that is deemed to be wasting resources of this
+university may be terminated. Any users that disagree with the policies
+of the Virginia Tech Relay (known as Va_Tech) are welcome to apply to the
+Relay Master Coordinator for their own copy of Relay, and to set up a node
+that they can fund on their own university's machine. Please note that
+decisions made by the Va_Tech operators are subjective, and may or may not
+represent official university policies.<p>
+Relay works on the idea of channels. You may talk directly to the
+users on your channel, or use Relay commands to talk to others and to
+perform specific tasks. The "/" is the command prefix for Relay. Any
+message beginning with it is interpreted as a command. All other
+messages are relayed to every other user on your channel.<p>
+<b>Examples:</b><p>
+Here's how you'd send a message from you to everyone on the channel:<p>
+<dl>
+<dd>From VM/CMS Systems: TELL RELAY AT VTBIT Hi there!
+<dd>From VAX/VMS Systems: SEND RELAY@VTBIT Hi there!
+<dd><i>or</i>
+<dd>SEND/NOPROMPT RELAY@VTBIT and then press
+<dd>return <enter>,
+<dd>and type messages at the prompt.
+</dl><p>
+Here's how you'd send a command to Relay. As an example, here's the
+HELP command. This command will provide a listing of all Relay commands:<p>
+<dl>
+<dd>From VM/CMS Systems: TELL RELAY AT VTBIT /help
+<dd>From VAX/VMS systems: SEND RELAY@VTBIT /help
+<dd><i>or</i>
+<dd>END/NOPROMPT RELAY@VTBIT and then press
+<dd>return <enter>, and type /help at the prompt.
+</dl><p>
+Please note that you cannot send messages to Relay by E-Mail, Telnet,
+FTP, or IRC. Relay is a service that is only accessible to
+BITNET/EARN interactive users, and at the present time has no Internet
+access.<p>
+To use Relay, you must first 'sign on', which adds you to the list of
+users currently using Relay (see below for more information on how to
+sign on). Ordinarily, when you sign on, you are placed on channel
+number 1. You can, at any time, change to another channel (see example
+below). Channels are always a number, and the following channel divisions
+are supported as of Relay version 2.06b:<p>
+Channel 1 is the default, public channel.<p>
+Channels 0 through 99 are public channels.<p>
+Channels between 100 and 999 are private channels; the channel
+number does not appear on the user list (it is shown as '??'),
+but anyone has the capability of joining an occupied channel in
+that range with the /channel command.<p>
+Channels between 1000 and 999999999 are private channels as well;
+the channel number does not appear on the user list (it is
+shown as '??'), and no user is permitted to join an occupied
+channel in that range without being invited by someone on that
+channel with the /invite command.<p>
+Channels less than zero (negative channels) are 'super-private';
+users on a negative channel do not appear on the user list at all.<p>
+Channels -1 to -999 can be joined by any user with the /channel
+command.<p>
+Channels between -1000 to -999999999 are 'super-private' as well;
+no user is permitted to join an occupied channel in that range
+without being invited by someone on that channel with the /invite
+command.<p>
+<b>/Signon [nickname] [channel],[options]</b><p>
+In order to start using Relay, you must use the /signon command. The
+parameter <nickname> is used to give yourself a name which will be used
+to prefix all of your messages. If you omit the nickname, Relay will
+use your user ID. However, once you've chosen a nickname and used it
+in the /signon command, Relay will remember the nickname and auto-
+matically assign it to you even if you do not specify a nickname the
+next time you issue you the /signon command to join Relay. Then when
+you're signed on, Relay will put your nickname in front of everything
+you say so people know who's talking.<p>
+Example: If the nickname you've chosen is Superman, and you do:<p>
+TELL RELAY AT VTBIT Hello, everyone.<p>
+Then everyone on your channel sees: <Superman> Hello, everyone.<p>
+If you wish to signon to a specific channel, you can give the channel number
+following the nickname; if you omit it, you will be placed on channel 1.<p>
+For the benefit of users on special terminals, such as Japanese Katakana
+terminals with no lowercase characters, you can signon with SHIFT as an
+option field (/signon myname,shift). Relay will then translate messages
+to uppercase before sending to you.<p>
+For users on terminals with uppercase only but who want their messages
+to appear to everyone else in lowercase, you can use the 'UNSHIFT' option.
+This will translate your messages to lowercase.<p>
+Examples: /signon LoisLane 10<br>
+/signon Superman 10,unshift<p>
+<b>/Signoff (also /Bye)</b><p>
+This command is used to leave Relay.<p>
+<b>/Who</b><p>
+The /who command will list all users on all channels, showing their
+channel number (if not private), nickname, real user ID and node name,
+and the name of the Relay they are using. To list only users on a single
+channel, use '/who <channel>' (e.g. /who 25). To list only users on your
+channel use the command '/who *' (you must be signed on to use this form).<p>
+<b>/Names</b><p>
+The same as the /who command, but /names returns slightly different
+information, including the users' /register (real) names.<p>
+<b>/Whois <nickname> or /Whois <userid@node></b><p>
+The /whois <nickname> command will show you the real user ID and node
+of the user with the given nickname. It will also show you the user's
+/register name. Often in conversation users will exchange mail or files
+with each other, and the /whois command lets you quickly find out their
+user ID and node.<p>
+Example: /whois LoisLane<p>
+If you already know the user's user ID and node, you can use the
+/whois command to find out which nickname they are currently using
+by using the /whois <userid@node> command.<p>
+Example: /whois stu123@statevm<p>
+<b>/List</b><p>
+The /list command displays the currently active positive channels and
+how many users are on each channel. To list only those channels with
+defined /topics, the command is: /TList.<p>
+<b>/Links</b><p>
+The /links command displays all currently active relays and the
+configuration in which they are linked to each other.<p>
+<b>/Help</b><p>
+The /help command will display an abbreviated list of commands for quick
+reference, one line per command showing the syntax and meaning of each.<p>
+<b>/Info</b><p>
+The /info command sends you this file. If your host relay does not send
+the file (it may not be on its disk) you can request /info from another
+relay.<p>
+<b>/Channel <number></b><p>
+The /channel command is used to change to another channel.<p>
+Example: /channel 25<p>
+<b>/Msg <nickname> <message-text></b><p>
+The /msg command sends a private message to only the user you specify by
+nickname. You can send private messages to anyone signed on regardless
+of which channel they're on. Private messages appear with asterisks around
+the sending user's nickname.<p>
+Example: Superman does: /msg LoisLane Do you know who I am?
+LoisLane sees: <*Superman*> Do you know who I am?<p>
+<b>/Ignore <nickname></b><p>
+The /ignore command allows you to screen out private messages from
+someone who may be bothering or harassing you. If you use it, the
+user you /ignore will no longer be able to send to you via Relay.<p>
+Example: /ignore LexLuthor<p>
+<b>/Nick <new-nickname></b><p>
+The /Nick command is used to change your nickname, useful for correcting
+typing errors or schizophrenic personalities. Note: If you fail to
+specify a nickname the next time you /signon, Relay will automatically
+assign you the nickname you used on your last /signon, regardless of
+whether you later changed it with /nick.<p>
+<b>/Summon [userid]@[node]</b><p>
+The /Summon command causes an invitation to be sent to the user you've
+specified, who is not currently on Relay, asking them to join Relay on
+your channel. Note for VM users: the '@' is sometimes a character
+delete symbol; in regular CMS you may have to type 'userid"@node' to
+really get the '@' character.<p>
+Example: /summon stu123@statevm<p>
+<b>/Invite <nickname></b><p>
+The /invite command causes a private message to be sent to the specified
+nickname inviting them to join you on your channel. This is a quick way
+to summon a user who is already signed on, but on a different channel.
+If you are on a channel below -999 or above 999, the only way another
+user will be permitted to join your channel is if you use the /invite
+command to allow them entrance.<p>
+<b>/Stats</b><p>
+The /stats command displays basic statistics concerning your session
+on Relay. Specifically, it shows you the Relay you're using and
+its version number, your nickname, /register name, channel you're
+currently on, and the /topic set on the channel.<p>
+Note: The above list of commands is not all-inclusive. The /help
+command will return a list of all available commands.<p>
+<HR>
+</BODY>
+</HTML>

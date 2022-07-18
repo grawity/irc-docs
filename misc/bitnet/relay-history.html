@@ -1,0 +1,518 @@
+<HTML>
+<title>Relay History</title>
+<BODY>
+<i> (Except from presentation made at 1987 Spring NETCON in New Orleans)</i>
+<H1> RELAY:  Past, Present, and Future</H1>                
+<dl>
+<dd> Jeff Kell (JEFF@UTCVM)
+</dl>
+<HR>
+ As usual, the toughest part of starting any discussion is trying to get        
+ comfortable with your audience.  This is especially true when you are in       
+ a position where you are expected to take sides with a particular issue.       
+ We all know that Relay is definately a hot item for debate, whether you        
+ want to discuss if it should exist or not, if it should be restricted or       
+ not, if operators are fair or not, or any other piece of this complex          
+ puzzle.  Let me start by saying I still don't know the answers, and go         
+ one step further to say there may not be one.  In spite of the endless         
+ battles and debates, Relay has existed for over two years and appears to       
+ still have more to come.  It has been an interesting project for me, and       
+ has gone beyond what I ever thought it would be.  I would like to share        
+ some of the highlights with you now.                                           
+                                                                                
+<H3>The Prehistoric Period</H3>                                                       
+                                                                                
+ Many, many moons ago (I'd prefer not to be specific) I was working at          
+ UTC as a student operator on an IBM 360 which was connected to a larger        
+ IBM 360 at UT Knoxville which was running OS/MVT (an ancestor of MVS)          
+ with HASP (an ancestor of JES2).  You fed it cards and you got greenbar        
+ printouts.  There wasn't a video terminal on campus anywhere.  The             
+ closest thing to a terminal was the system hardcopy console, which was         
+ basically a souped-up IBM selectric typewriter.  We were one of eight          
+ remote stations connected to UTK, and we only connected twice during the       
+ day to submit whatever jobs the students had finished keypunching, and         
+ then connected at night to retrieve any remaining print.  You couldn't         
+ be connected to UTK and run anything locally since our system only had         
+ 64K (seriously) and could only do one thing at a time.  About the most         
+ fun you could have was displaying job queues for other campuses.<p>       
+                                                                                
+ One evening, a strange message came over the console, something like:          
+  *$21.05.31 HASP0254I 0,'HAVING FUN LOOKING AT THE JOBS FOR MEMPHIS?'<p>      
+                                                                                
+ Well, looking up the error code for HASP0254I, I discovered it was an          
+ operator message, and the '0' meant it came from the host system which         
+ is remote number 0 (we were remote 4).  I had just received my first           
+ interactive message of my life.  I looked up the command to send back a        
+ reply and entered:<p>
+                                                             
+  $DM0,'NOTHING ELSE TO DO UNTIL CAVANAUGHS BIG LIST FINISHES PRINTING'<p>     
+                                                                                
+ Now this WAS fun.  We talked about 30 minutes.  He introduced me to the        
+ other night operators at the other remotes.  It certainly beat watching        
+ the 1403 eat paper for hours, which was about all there was to do since        
+ I worked nights and was the only person there.  Thus, even in the days         
+ of cards, punches, and dumb printing consoles, chatting was possible.<p>      
+                                                                                
+                                                                                
+<H3>Ancient History</H3>                                                              
+                                                                                
+ The next era of computing brought UTC an HP-2000 interactive system that       
+ ran BASIC, BASIC, or BASIC.  It did have video terminals, but before you       
+ get ahead of me and guess, there was no TELL or MSG or similar command.        
+ However, under my boss's direction (I was student programmer now) we did       
+ create a program to leave messages for another user which were displayed       
+ when you logged on.  It was pretty simple, using a shared file, a few          
+ pointers, and some careful file locking techniques you could submit a          
+ message to another user by giving their ID.  The sending and receiving         
+ ID's were written to the file along with the message line.  The 'reader'       
+ program simply found matching records, printed them, and deleted them.<p>         
+                                                                                
+ One evening when logging in from home (yes, we had dialups then, and I         
+ had a 'borrowed' terminal) I found a message from my boss saying there         
+ was a problem in some other program, and to contact him.  He said to           
+ try to call, and if his phone was busy, he was probably still logged on,       
+ and I should get back on and send him a message that I was now there.          
+ He was going to check every 10 minutes or so while he was on.<p>                  
+                                                                                
+ We eventually made contact, and went into this 'loop' of sending a few         
+ lines, then running the 'reader' until we got an answer.  Not exactly          
+ efficient, more like a real pain.  After a little thought, the next day        
+ I copied the 'reader' code into the 'writer' program as a subroutine and       
+ had it call the 'reader' between lines of the message as you were typing       
+ it in.  If you just hit return, it would not send anything, just check         
+ for new messages.  It worked.<p>                                                  
+                                                                                
+ It was relatively dumb, very inefficient, and locked you up a lot since        
+ it had to lock the file during reads and writes so the delete pointers         
+ wouldn't get lost.  But it was an improvement, and it worked.<p>                  
+                                                                                
+ And... it even worked for more than two users.<p>                                 
+                                                                                
+                                                                                
+<H3>The Non-IBM Period</H3>                                                           
+                                                                                
+ Eventually our old IBM dinosaur was replaced by a new HP-3000 system.          
+ Soon we all had real terminals, on a real computer, and had a real TELL        
+ command.  However, as is still the case with most non-VM systems, you          
+ could not capture 'TELL' text.  At least it was something.<p>                     
+                                                                                
+ We did convert the message program from the HP-2000 so that it would           
+ run on the HP-3000.  However, this was strictly administrative, and I          
+ became a full time real staff member, and got buried in real work for          
+ the next years that followed.  'Fun' during this time came from things         
+ like the Star Trek era, Adventure, Zork, and becoming an HP hack.<p>              
+                                                                                
+                                                                                
+<H3>The IBM Renaissance</H3>                                                          
+                                                                                
+ Around three years ago, Academic Computing acquired the 4381.  They put        
+ it in another shop, and I had nothing to do with it (grin).  They didn't       
+ do much with it other than load software and play for awhile, then they        
+ brought up MUSIC, a student oriented system with editor and compilers.         
+ They gave me an account, I tried it, and I hated it.  It had nothing of        
+ interest, and reminded me of the old card, punch, and printer IBM days.        
+ Several more months went by.  They connected to Bitnet.  Big deal, or so       
+ I thought at the time.  Then, out of curiosity, I finally got a CMS ID         
+ from them (which were hard to come by).<p>                                        
+                                                                                
+ A little playing around, lost and dazed, plus some helpful hints from          
+ Mike Robinson, their Systems Programmer, and I eventually got a TELL to        
+ work, and spoke to some of the Knoxville staff.  It was interesting and        
+ easier than the phone.  But I had no ideas of how to talk to other sites       
+ or who to talk to, so much like the IBM days, it was fun enough just to        
+ sit down and see who was logged on in France or who-knows-where.<p>               
+                                                                                
+ Finally I made contact with someone offsite who recommended that I try         
+ a chat.  It was Latehack's machine in Stuttgart, Germany for those of          
+ you who may remember it.  I was a little late getting started to have          
+ used the original one at PSU, this was my first.  And it was just too          
+ neat.  It was generally full of people exploring around the network,           
+ not so much the usual 'General Hospital' that Relay often has now, but         
+ neither was it a stuffy over-technical babbling either.<p>                        
+                                                                                
+ Soon I was frequenting many different chats... Billy (BMACADM), Missing        
+ Link (PORTLAND), Helpdesk (TAMVM1), Latehack and Earlyhack (two people         
+ at DS0RUS1P), Forum (BITNIC), Server (TAMCBA), and Castle (WVNVM), to          
+ name a few.  There were others as well, often short lived, but we tried        
+ to keep track of as many as we could.  Then came Henry Nussbacher...<p>           
+                                                                                
+ Around February of 1985, Henry Nussbacher sent a lengthy letter to every       
+ node administrator and technical contact in Bitnet which said "chats           
+ represent the most serious threat ever to the future of Bitnet" and            
+ that sites should hunt down and destroy any they found in existance.<p>           
+                                                                                
+ Henry DID have a valid point.  Bitnet links carry files and messages,          
+ with messages taking priority over file transfers.  Obviously, there is        
+ a finite number of messages that can travel over a given link in a given       
+ period of time.  If more messages arrive than can be processed, the file       
+ transfers are halted since all the available buffers are occupied by the       
+ higher-priority messages.  What is this magic number?  Nobody knows for        
+ sure, and it varies by buffer size, distance, error rate, line quality,        
+ RSCS version, and other variables.  But it can be no more than:<p>          
+                                                                                
+        9600 bits/second link speed = 1200 bytes/second<br>                  
+                   1 message buffer = 160 bytes<br>                          
+                                    = 7.5 messages/second = 450 msg/min<p>      
+                                                                                
+ Now, if you've been on any chat or Relay, you know that during busy peak       
+ times, you can get a screen full of messages 2 or 3 times a minute and         
+ sometimes more.  Two screens amounts to, say, 40 lines, or 40 messages         
+ per minute.  Twelve people on the same channel gives you a grand total         
+ of 480 messages per minute, since they are all getting the same thing.         
+ It is quite easy to halt file transfers this way once you pass 12 users        
+ or so.  Even with channel limits of, say, 10 users; two full channels          
+ can easily knock you out of the water as well.  Chats could, and indeed        
+ were in many cases, killing file transfers through Bitnet, which was the       
+ primary purpose it was designed to do -- transfer files.<p>                       
+                                                                                
+ It was indeed a danger, BUT it didn't mean that chatting itself was            
+ killing the network, just the way it worked.  But there weren't any            
+ alternatives.  Yet.<p>                                                            
+                                                                                
+ Many chats died on the spot.  Others went to restrictions on time, day,        
+ channels, total users, and so forth.  Others went underground.  But            
+ some continued to live.  As long as there weren't a lot of users there,        
+ it was okay.  But each additional user increased the load geometrically.       
+ If there were more distribution points so that everybody didn't have           
+ to pour into one place, and messages didn't explode out from one place,        
+ it should smooth the load...<p>                                                   
+                                                                                
+                                                                                
+<H3>The Conception</H3>                                                               
+                                                                                
+ I knew what I wanted to do, but hadn't the vaguest notion how to do it.        
+ First you have to trap the messages coming in so you can do something          
+ with them.  A little asking around led me to IUCVTRAP, a module which          
+ intercepts incoming messages so you can access them from a program.            
+ That wasn't too difficult, and in a day or two I had a very stupid             
+ program that would activate IUCVTRAP, hold incoming messages, and then         
+ dump them out when I requested.  At least it got rid of the hideous            
+ beep that CMS gives you for every message.<p>                                     
+                                                                                
+ Next I had it parse out the node and user, and reformat it a bit so that       
+ it would make the lines look neater, and not blow up when you got local        
+ messages.  That worked okay, until it blew up on a 'SENT FILE' message         
+ directly from another node; well, okay, a little more patchwork.  About        
+ a hundred lines of code and finally I had what I guess you could call a        
+ message filter; it made incoming messages neat, stopped the bell, and          
+ invoked whatever CMS commands you entered (like TELL).<p>                         
+                                                                                
+ Then I got tired of doing 'TELL' all the time and decided to change some       
+ more around.  The result was a 125 line Rexx EXEC (which still exists to       
+ this day) with three commands:<p>                                                 
+    &TARGET user node  - Set the 'target' user to talk to<br>                       
+    &XEQ               - Invoke a CMS command<br>                                   
+    &QUIT              - Self-explanatory :-)<p>                                   
+ Any other string you typed in would be sent to the 'target'.  It would         
+ even replace 'node(user)' with just a '->' if the message came from the        
+ target user.  Big deal, right?  Well, at the time it was, and that EXEC        
+ was the beginning of Relay.<p>                                                    
+                                                                                
+                                                                                
+ <H3>The Gestation Period</H3>                                                         
+                                                                                
+ The first step to get anything interesting out of this was to convert          
+ the single target into a list of users.  The receiving code scanned the        
+ whole table, the transmit code sent to everyone.  Now we need nicknames,       
+ so we include that in the known user table, and we add ourself to the          
+ user table.  Finally, make a quick &ADD command to replace &TARGET, and        
+ try it out.  A few bugs, and I realize you don't send to everybody, you        
+ omit the originator.  Now we've got ourselves a chat (that you can't           
+ signoff from, but what the heck).<p>                                              
+                                                                                
+ The other bells and whistles are pretty straightforward and I'll skip          
+ the details, but soon it had signon, signoff, who, and private messages.       
+ Now I had a full chat, but with only one channel.  So now how to hook          
+ them together became the big issue.<p>                                            
+                                                                                
+ Chats always prefix messages with a nickname.  If I linked these things        
+ together by adding them into each other's tables, you get two sets of          
+ nicknames, but it does get all the messages where you want them to go.         
+ This is, in simplest terms, all there was to it; any chat could do it,         
+ at least with only one channel, but you had the nickname problem.  More        
+ code is added to keep track of who is a relay and who is a user, and if        
+ messages come from a relay rather than a user, don't prefix the nickname       
+ but pass the message 'as is'.  This was Relay Version 0.01.<p>                    
+                                                                                
+                                                                                
+<H3>The Birth and Early Childhood</H3>                                                
+                                                                                
+ There it was... but what an ugly child it was.  The /WHO lists didn't          
+ show anybody on the other Relay, private messages didn't work across a         
+ Relay link, you name it.  Working with Latehack, we devised a set of           
+ special commands, prefixed with a hex code to tell them apart from user        
+ commands, so that Relays could talk to each other at their level.  The         
+ basic code for Relay linkage (signon and signoff) was added, and he also       
+ modified his chat to support it.  We eventually got them to link to each       
+ other.  This was Version 0.02, or thereabouts.<p>                                 
+                                                                                
+ Next, the /who table information was addressed.  Rather than sending the       
+ messages users usually see on signon and signoff, we made special coded        
+ commands so the Relays would exchange information (VADD and VDEL, which        
+ stand for virtual add and virtual delete, for those interested).  All          
+ the necessary information for the /who table was included in the VADD.         
+ Now it was almost tolerable, and at Version 0.03.<p>                              
+                                                                                
+ Around this time I had tried linking other chats together, like Billy          
+ and Helpdesk.  This, needless to say, annoyed various operators on the         
+ respective chats who will remain anonymous.  I got dumped a lot, and           
+ even locked from one; one particular person would dump me off if I             
+ just signed on to talk normally.  Well, so it needs work, okay.<p>                
+                                                                                
+ Mike Pepper at YALEVM got the first off-site copy of Relay and we got          
+ to test it for real.  Jeff Robinson (Jedi) at PORTLAND even helped me          
+ test some stuff earlier on and may remember the early version before he        
+ dumped it and went back to Missing Link (grin).  Billy ran it one night        
+ in place of the real Billy and nearly scared everyone to death, and it         
+ was still ugly.  He went back to Billy (grin).  Steve Goldsmith (Forum)        
+ of Bitnic helped out in testing and setup the original Relay at BITNIC.        
+ He hacked at Forum to put Relay support in there too, but it never quite       
+ worked right, and was still ugly, and he went back to Forum (grin) but         
+ fortunately left Relay at BITNIC intact to help me with testing.<p>               
+                                                                                
+ So, I had probably annoyed about everybody by this time, and nobody            
+ liked Relay.  Only Pepper held in there.  Latehack graduated and got a         
+ real job.  After some grumbling, and eventually getting to V0.07 or some       
+ such version, I was about to throw in the towel.<p>                               
+                                                                                
+                                                                                
+ <H3>The Adolescent Period</H3>                                                        
+                                                                                
+ I took two days off work on leave to make a long weekend, went down to         
+ the cluster with a stack of listings, notes, and ideas and proceeded to        
+ rewrite everything from the ground up.  This time it included channels,        
+ channel changes, nickname changes, sorted /who lists, the whole nine           
+ yards.  Over that weekend Version 1.00 came into being, and it was now         
+ getting big, closing in on 1000 lines.  Debugging it was tough because         
+ of the size, and there was no way to test 'pieces' of it like before.          
+ I shipped a copy to Pepper on Sunday, and when he got in Monday, there         
+ were even more bugs in the remote processing code.  Many changes later         
+ after shipping who knows how many copies of fixes up there, it was back        
+ in business.  A copy of the fixed one was installed at Bitnic.  Alan           
+ Clegg at NCSUVM came aboard and took at copy there.  We had four Relays        
+ linked by the end of June 1985.<p>                                                
+                                                                                
+ Then some clown signs on to channel 9999, and it shows up on the /who as       
+ being channel '99' (it was formatting to 2 digits).  Space on /who was         
+ limited, so what the heck, private channels were born.  It's not a bug,        
+ its a feature.  Literally.  Likewise, when somebody signed on to channel       
+ -1, the 'super' private channels were born.  No bug, its a feature.  If        
+ I had done the necessary edits and checks beforehand, we probably never        
+ would have HAD private channels.  Anyway, that was a good inside joke          
+ for some time after that.<p>                                                      
+                                                                                
+ We ended up somewhere around V1.03 when VTVM2 came online with a Relay.        
+ It's long gone, but they were around early.  They caused the worst fear        
+ to date -- Relay simply would NOT work there.  Some days later, the            
+ culprit was found: local RSCS mods.  Their IDENTIFY command was still          
+ returning their old node name (VM2), plus their RSCS was translating           
+ our hex codes into something different, wreaking havoc on all Relays.          
+ A few kludge fixes and the problem was repaired.<p>                               
+                                                                                
+ By the end of August, we picked up YALEVMX, ASUACAD, and CORNELLC.  And        
+ we even had a few users.  Billy and Missing Link were shot by this time        
+ by management; Forum and Helpdesk were getting busy with displaced users       
+ from the cancelled chats.  Meanwhile, I had been talking with Nussbacher       
+ about Relay in detail, and he produced the 'CHAT ANALYSIS' paper that is       
+ currently on NICSERVE which shows the feasibility of the Relay design.         
+ Things were looking brighter.<p>                                                  
+                                                                                
+                                                                                
+ <H3>The Growing Pains</H3>                                                            
+                                                                                
+ Relay was finally working, but it was still not that great.  We had many       
+ problems with links, keeping Relays connected properly, and it was just        
+ too bland in general.  We needed some bells and whistles to make it look       
+ better, and needed to make it more reliable.  Many people contributed a        
+ lot of time, ideas, code fragments, and suggestions during this time and       
+ I took what seemed to be the best of the bunch and added them in.  This        
+ growing period produced a new version almost every 2 to 3 weeks.  By the       
+ time V1.05 was out, we had all the basic features settled down, plus the       
+ private channel support.  By the end of August, Version 1.8 was out and        
+ we had added line folding, automatic Relay linking and link checks, the        
+ Relay logon message, /whois, /stats, /summon, and /invite.  Users were         
+ showing up now, sometimes 20, sometimes more, maybe too many sometimes.<p>        
+                                                                                
+ The first of many node management actions started.  Users were not using       
+ their nearest relay, but instead would use whatever Relay they wanted          
+ to use.  It was difficult if not impossible to convince them to move to        
+ the correct relay.  Peak usage times were starting to consume CPU at the       
+ heavily used Relays.<p>                                                           
+                                                                                
+ Version 1.11 was shipped in October 1985 and provided Relay polling (to        
+ check links every five minutes), the /list command, and topics.  It also       
+ included channel limits and some optional service area checking.  This         
+ placed users on the correct Relays and distributed the load better, but        
+ soon we were looking at 30 to 40 users or more, and even had heavy usage       
+ during the day.  Node management steps in again, mainly due to daytime         
+ use of Relay.  Late November 1985 brought Version 1.14 with the quiesce        
+ feature.  Management was pleased, users were not.  The flames came from        
+ the other side of the fence this time, but there was nothing I could do.<p>       
+                                                                                
+ Users eventually accepted the daytime 'split' of the Relay network and         
+ continued their use after hours.  More users came.  And more Relays.           
+ To back up a month, October brought FRECP11, FRHEC11, DEARN, AEARN,            
+ and ISRAEARN, showing European management acceptance of Relay, plus            
+ UIUCVMD.  November brought UWAVM, TCSVM, CLVM, NDSUVM1, and UREGINA1.          
+ By the end of 1985, HEARN, PURCCVM, and OREGON1 also joined Relay.             
+ User peaks were now averaging 50, sometimes reaching 80.<p>                       
+                                                                                
+ Central relays on smaller CPUs were seen running 40% or more CPU during        
+ peaks.  Bitnic's Relay was processing 600-800 messages per minute.  And        
+ as you might guess, management was not pleased.  Bitnic's Relay was all        
+ but shut down altogether for days at a time because of the load it put         
+ on their CPU.  Relay 'hackers' were scanning private channels from EXECs       
+ or by brute force.  Users were sending 'pictures' through Relay without        
+ knowing the load it was generating.  These and other things started to         
+ get completely out of hand.  Node managers and Relay owners alike were         
+ demanding some relief.<p>                                                         
+                                                                                
+                                                                                
+ <H3>Reaching Maturity</H3>                                                            
+                                                                                
+ A major optimization effort went underway from December 1985 all the way       
+ through to July of 1986.  Most of this credit goes to Eric Thomas at           
+ FRECP11 (who also did the new LISTSERV) for his assembler modules which        
+ were developed to do much of the routine work of Relay.  This work was         
+ done slowly and in stages, optimizing on the Rexx code as much as was          
+ possible in the process.<p>                                                       
+                                                                                
+ Relay was still using IUCVTRAP as of V1.14 and doing all other work in         
+ Rexx.  The first stage of the message processing involves parsing out          
+ the node name and user ID, then stripping excess blanks.  If the message       
+ was from a node itself, several checks are done to determine if a user         
+ is logged off, not accepting messages, or a link failure has occurred.         
+ Finally, if it decides to process the message, it splits out based on          
+ whether it received an operator command, user command, relay command,          
+ user message, or RSCS error message.  Eric created an Assembler module         
+ called RELGNEXT which did all this preliminary work, and I removed the         
+ code from Relay.  It was better, and faster, but not that much; about          
+ 10% of the CPU load was removed.<p>                                               
+                                                                                
+ Next, Eric created a special message trapping module called RELIUCV to         
+ replace the older IUCVTRAP which wasn't terribly efficient at handling         
+ the volume of messages that Relay must handle.  It was much better, at         
+ least during peaks.  Meanwhile, Alan Clegg had done the /signup code,          
+ and it also was added.  I started making changes to the Rexx code to           
+ clean it up a bit.  All told, we cut out another 10-15%, but as we had         
+ guessed, still more users came, and the end result was still not good          
+ enough.<p>                                                                        
+                                                                                
+ Eric then combined RELGNEXT with RELIUCV by downloading the user table         
+ from Relay and doing the user search in Assembler.  It could then go           
+ ahead and simply ignore '*' messages, messages from unknown users, and         
+ RSCS errors that didn't match to the table.  These 'junk' messages were        
+ simply copied to the console log and the next message was processed,           
+ returning to Relay only when necessary, and having the user already            
+ matched in the table.  A message sending module (RELXMIT) was created          
+ to send messages to users.  I converted Relay for the new modules, and         
+ changed all the messaging code to use RELXMIT.  Another 10-15%.<p>                
+                                                                                
+ I ran Relay under a Rexx profiler to find bottlenecks.  The frequently         
+ used routines were rewritten and trimmed to a minimum of code.  Service        
+ area lookups were aided with a cache table.  Nickname lookups were             
+ changed to use Rexx stem variables.  Channel handling was changed.  The        
+ code was vastly reworked (much to the discontent of sites who had local        
+ modifications to the Relay code).  Eric incorporated the message relay         
+ routine itself into RELIUCV so that as long as Relay was only sending          
+ messages, RELIUCV could do all the work.  Relay only processed commands.       
+ RELIUCV was expanded to identify the message as a user, relay, or an           
+ operator command, and go ahead and perform preliminary checks before           
+ returning to Relay.  Bottom line was another 10-15% reduction.  In July        
+ 1986 we released Version 1.21 which was generally twice as fast as the         
+ 1.14 version we started with.  Overhead was reduced, Relay got faster,         
+ and everybody was pleased again.<p>                                               
+                                                                                
+                                                                                
+ <H3>Recent Events and the Present</H3>                                                
+                                                                                
+ Then we saw 100 users, and 120, and 150, and things were getting close         
+ again.  Most conversations turned to mush, with the exception of people        
+ trying to carry on a decent conversation going to private channels.            
+ Another management push started to develop guidelines that could then          
+ be presented to the Bitnet Executive Committee, and how they could be          
+ enforced, once and for all.  A lot of discussion wavered back and forth        
+ about where to draw the line.  The end result is the current file you          
+ get when you signup, RELAY INFO.<p>                                               
+                                                                                
+ August 1986 brought version 1.22 with user classes, prime time, /getop,        
+ stricter limits, and the infamous 'Roaster' as the operators call it.          
+ This carried us over through fall, until version 1.23 came out at the          
+ end of December with /names, /contact, automatic reboot capability,            
+ automatic service area assignments via Eric's LSVBITFD module from             
+ LISTSERV, and the /rates display.<p>                                              
+                                                                                
+ Increased network traffic at the first of 1987 soon started causing big        
+ file queues at the main network hubs:  CUNYVM, PSUVM, and OHSTVMA.  The        
+ file traffic was higher than ever, LISTSERV's were everywhere, and the         
+ popularity of mail-based special-interest discussion groups was growing        
+ rapidly.  Soon, the network routing tables which ship around the first         
+ of the month were not arriving at their destinations for weeks, being          
+ held by traffic at the hubs.  Some files were actually held at PSUVM at        
+ one time for over a month, simply awaiting transmission.<p>                       
+                                                                                
+ Service areas were changed to distribute the Relay load more evenly, but       
+ the queues persisted.  Many sites near the hub nodes could barely serve        
+ their local area users, much less extend service to other surrounding          
+ sites.  Once again, Relays were quiesced during the day; when the queues       
+ were at their worst, they remained quiesced continually.  Some problems        
+ were resolved eventually, but the balance is still quite delicate.  Thus       
+ when NCSUVM had to abandon their Relay due to lack of available CPU, no        
+ other sites were available to serve their users, and they had to be left       
+ out.  Relay 1.24 was released in early May 1987 and contained the code         
+ necessary to enforce this lockout.<p>                                             
+                                                                                
+                                                                                
+ <H3>Future directions</H3>                                                            
+                                                                                
+ The future is not exactly bright unless some broad changes are made in         
+ the Relay environment, that is, what it is used for, by whom, and when.        
+ Network loads continue to increase (aside from Relay) so Relays will           
+ continue to quiesce periodically to remove the load.  New 'features' in        
+ Relay will be few, as some sites still continue to run high CPU use by         
+ the Relay itself during peak use periods.  Many ideas have been both           
+ discussed and even tried, but generally only add to the overhead caused        
+ by Relay.<p>                                                                      
+                                                                                
+ As these growing problems continue to persist, controls will probably          
+ be more and more severe and enforced.  More and more people sign on to         
+ Relay just to play, and more and more people continue to aggravate the         
+ operation of Relay, increasing the overhead on the host and the load on        
+ the network.  For example, channel changes require a considerable amount       
+ of processing to perform.  The channel is validated, channel limits are        
+ checked, the change is made, other users on the channel must be informed       
+ that you have left, other users on the new channel must be informed that       
+ you have arrived, and every other Relay must be notified of the change         
+ to update their tables as well, and inform their users, and so on.             
+ Nickname changes, signons, signoffs, topic changes, and other commands         
+ have similar costs.  Simple /who and /names require considerable work to       
+ exclude private channels, sort the table in channel order, and result in       
+ many messages being sent back to the requestor.  Users who try to search       
+ private channels, for example, cause nothing but trouble for everyone.<p>         
+                                                                                
+ Relay is on the verge of collapse.  NCSUVM's decision to cancel Relay at       
+ their site is a bad omen.  It is no longer due to network load.  It is         
+ only marginally due to CPU load.  It is due to the users.<p>                      
+                                                                                
+ VTVM2 was approached to run a replacement Relay for NCSUVM.  Their             
+ staff replied "We have monitored several channels on Relay on numerous         
+ occasions and have seen nothing to indicate that Relay would be of any         
+ benefit to Virginia Tech."  That general idea echoes throughout the            
+ entire history of Relay.  In fact, most sites run Relay simply so their        
+ users are not tempted to run their own centralized chats and further           
+ load the network.  That's the bottom line.  And it's not something that        
+ I can do anything about.<p>                                                       
+                                                                                
+ <i>It's in your hands.  You tell me.</i>                                              
+ <p>                                                                               
+ /Jeff/
+<HR>
+<i>Postscript update:</i><p>                                                              
+                                                                                
+In 1989, a pascal version of the Relay program was written by                   
+Valdis Kletnieks.  Most sites have changed to this version                      
+since it uses much less cpu.  The rexx version is usually                       
+referred to as V1 and the pascal version is usually referred                    
+to as V2.                   
+</BODY>
+</HTML>                                                    

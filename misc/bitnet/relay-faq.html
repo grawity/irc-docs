@@ -1,0 +1,586 @@
+<HTML>
+<title>Relay FAQ</title>
+<BODY>
+<H2>Frequently Asked Questions about RELAY</H2>
+<HR> 
+
+<b>RELAY FAQ, v 1.0</b><p>                                                                
+<i>by: Leanne Phillips, (LEP@PSUARCH), Paul B. Davidson, (ELMO@DRYCAS),            
+Ben Perkins (blp@phoenix.net), Reba Taylor (REBAT@VTVM1), Dov B.            
+Toren (A18@TAUNIVM), and Fred Melssen (U211610@HNYKUN11).                                                        
+</i><p>                                                                                
+
+This file is intended to answer many frequently asked questions that we,        
+as operators, have seen far too many times.  The answers given here are         
+intended to help the new RELAY user get acclimated to the RELAY system.         
+It is not intended to answer *all* the questions (s)he may have.                
+Proper use of the /HELP command, as well as careful reading of the
+following files, will provide a more complete education.
+<p>
+<ul>
+<li><A HREF="reluse.html">RELAY USEGUIDE</a>
+<li><A HREF="relinf.html">RELAY INFO</a> 
+<li><A HREF="relrul.html">RELAY RULES</a> 
+</ul><p>
+<HR>
+<A NAME="top"><H2>Table of Contents:</H2></a>
+<ol>
+<li><A HREF="faq.html#Q1">Where did RELAY come from?</a>
+<li><A HREF="faq.html#Q2">What is RELAY, anyway?</a>
+<li><A HREF="faq.html#Q3">How do I talk to RELAY?</a>
+<li><A HREF="faq.html#Q4">Why do I have to use my real name in my /REGISTER?</a>
+<li><A HREF="faq.html#Q5">Why can't I use whatever RELAY server I want?</a>
+<li><A HREF="faq.html#Q6">Why is there a prime time?</a>
+<li><A HREF="faq.html#Q7">Why is there a limit to the number of people on a 
+                          channel, or a host?</a>
+<li><A HREF="faq.html#Q8">How do I send a private message to another user,
+                          regardless of channel?</a>
+<li><A HREF="faq.html#Q9">What does the <*nick*> symbol mean?</a>
+<li><A HREF="faq.html#Q10">How can I see who is signed on right now?</a>
+<li><A HREF="faq.html#Q11">What does the "-" in the /WHO, /NAMES, /SINCE,
+                           etc. lists mean?</a>
+<li><A HREF="faq.html#Q12">What does the "*" in the /WHO, /NAMES, /SINCE
+                           etc. lists mean?</a>
+<li><A HREF="faq.html#Q13">What does the "#" in the /WHO, /NAMES, /SINCE
+                           etc. lists mean?</a>
+<li><A HREF="faq.html#Q14">What does the "??" mean in the channel
+                           column of /WHO?</a>
+<li><A HREF="faq.html#Q15">What is a private channel?</a>
+<li><A HREF="faq.html#Q16">How do I make sure the private channel is
+                           empty before I go?</a>
+<li><A HREF="faq.html#Q17">How can I change channels?</a>
+<li><A HREF="faq.html#Q18">How can I see what the topics are on the channels?</a>
+<li><A HREF="faq.html#Q19">How can I change the topic in the topic list?</a>
+<li><A HREF="faq.html#Q20">Why is there a time limit on when the topics
+                           can be changed?</a>
+<li><A HREF="faq.html#Q21">What does the <<nick>> symbol mean?</a>
+<li><A HREF="faq.html#Q22">How do users become ghosted, and how can
+                           they become unghosted?</a>
+<li><A HREF="faq.html#Q23">What does it mean when RELAY says not all
+                           RELAY hosts know what my nick is, or what
+                           channel I'm on?</a>
+<li><A HREF="faq.html#Q24">Why did RELAY kick me off just then?</a>
+<li><A HREF="faq.html#Q25">Who do I ask about problems with my
+                           computer, electronic mail, the editor I use,
+                           ftp, or other similar problems?</a>
+<li><A HREF="faq.html#Q26">Why isn't swearing allowed on RELAY?</a>
+<li><A HREF="faq.html#Q27">Why aren't picture execs allowed on RELAY?</a>
+<li><A HREF="faq.html#Q28">Someone is harassing me.  What should I do about it?</a>
+<li><A HREF="faq.html#Q29">Can ops watch when they are not on a channel?</a>
+<li><A HREF="faq.html#Q30">What are the differences between the user classes?</a>
+<li><A HREF="faq.html#Q31">How do I become an Operator?</a>
+<li><A HREF="faq.html#Q32">To whom do I talk if I have more questions                          
+                           or problems with RELAY?</a>
+<li><A HREF="faq.html#Q33">What is RELUSR-L and how do I get in on it?</a>
+</ol>
+<HR>
+<A NAME="Q1"><b>Where did RELAY come from?</b></a>                                                   
+<p>
+   In the early 1980's, Henry Nussbacher released CHAT ANALYSIS, a paper        
+   warning that if unrestricted chat machine usage and interactive              
+   messaging were allowed to continue in their current state, the load on       
+   the network would doom BITNET.  As a result, efforts to decrease             
+   network and CPU loads were begun.  In 1985, Jeff Kell, at the                
+   University of Tennessee -- Chattanooga, developed RELAY, a distributed       
+   messaging program, written in REXX.  Over the ensuing years, RELAY's         
+   growth exploded.  In 1989, Valdis Kletnieks, then at Clarkson                
+   University, developed RELAY V2, written in Pascal.  Both versions of         
+   RELAY were significant improvements over the previous state of the           
+   network.                                                                     
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                                
+
+<A NAME="Q2"><b>What is RELAY, anyway?</b></a>                                                       
+<p>
+   RELAY is a distributed messaging network, overlaying BITNET/EARN,            
+   composed of many linked RELAY host sites.  Its purpose is to serve as        
+   an Academic Conferencing System, similar in function to a CB radio           
+   network.  The users may be in many different physical locations, even        
+   from different countries.  All appear to be talking as if they were          
+   sitting next to each other.                                                  
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+                                                                                
+<A NAME="Q3"><b>How do I talk to RELAY?</b></a>                                                      
+<p>
+   RELAY works on the idea of channels.  You may talk directly to the           
+   users in your channel, or use RELAY commands to talk to others and to        
+   perform specific tasks.  The "/" is the command prefix for RELAY.  Any       
+   message beginning with it is interpreted as a command.  All other            
+   messages are relayed to every other user in your channel.                    
+                                                                                
+   <blockquote>
+   Examples:<br>                                                                    
+   Direct message, from you to the channel:<p>                                     
+   <b>VM/CMS</b> Systems:<p>                                                         
+   <PRE> TELL RELAY AT CLVM Hi there!</PRE><p>                                    
+   <b>VAX/VMS</b> Systems:<p>                                                        
+   <PRE> SEND/NOPROMPT RELAY@CLVM "Hi there!"</PRE><p>                            
+   or:<p>                                                      
+   <PRE> SEND RELAY@CLVM</PRE>press return (enter), and type                 
+   messages at the prompt.                                         
+   <p>                                                                             
+   Commands, from you to RELAY: (in this case, the HELP command.  This          
+   command will provide a listing of all RELAY commands.)<p>                       
+   <b>VM/CMS</b> Systems:<p>                                                         
+   <PRE> TELL RELAY AT CLVM /HELP</PRE><p>                                        
+   <b>VAX/VMS</b> systems:<p>                                                        
+   <PRE> SEND/NOPROMPT RELAY@CLVM "/HELP"</PRE><p>                                
+   or:<p>                                                      
+   <PRE> SEND RELAY@CLVM</PRE>press return (enter), and type                 
+   /HELP at the prompt.                                            
+   <p>                                                                            
+
+   Please note that you cannot send messages to RELAY by E-Mail, Telnet,        
+   FTP, or IRC.    RELAY is a service that is only accessible to                
+   BITNET/EARN interactive users, and at the present time has no Internet       
+   access.                                                                      
+   </blockquote><p>                                                                             
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>   
+
+<A NAME="Q4"><b>Why do I have to use my real name in my /REGISTER?</b></a>                           
+<p>
+   RELAY exists in a state of almost constant self-justification.  There        
+   have been several instances when certain individuals have abused RELAY       
+   to the  point of losing the privilege of sending interactive messages        
+   on BITNET.  It is a much easier task to point a finger at individuals        
+   who are likely troublemakers, as well as help assign some name               
+   recognition to each account if RELAY requires individuals to use their       
+   real name in a /REGISTER.  In addition, since some universities allow        
+   the use of one account by more than one person, forcing each user to         
+   /REGISTER with a different name lets operators easily identify the           
+   individual who may be having problems, versus the users who are              
+   skilled RELAY veterans.  It also makes it easier to avoid confusion,         
+   as many people share nicknames with other users.  Having the /REGISTER       
+   information there allows a user to know which is the person with whom        
+   conversations have been held, and which is the unknown person.               
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+                                                                                
+<A NAME="Q5"><b>Why can't I use whatever RELAY server I want?</b></a>                               
+<p>
+    One of RELAY's major goals is keep network load to a minimum.  To           
+    help accomplish this goal, each node on the network is assigned             
+    to use the RELAY server most directly linked to it in the network.          
+    This is called the node's 'primary' server.  At times when network          
+    conditions make the primary server unreachable, a 'secondary'               
+    server may be used.  For a full list of your node's primary and             
+    secondary servers, send the /SERVERS command to RELAY.  The syntax          
+    is:<p>                                                                         
+    <PRE>/SERVERS <nodename></PRE><br>
+    where nodename is the node you need             
+    approximated to the nearest host.               
+    <br>Example: <PRE>/SERVERS UTKVX3</PRE><p>                                                        
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+                                                                                
+<A NAME="Q6"><b>Why is there a prime time?</b></a>                                                   
+<p>
+   Prime time is yet another way of limiting the amount of traffic on           
+   RELAY and the network itself.  During the day, the computers of many         
+   colleges and universities are severely loaded down by jobs not related       
+   to the network in any way.  These machines do stay linked to the             
+   network and process many files intended for research projects and            
+   correspondence.  Use of RELAY during certain daytime hours is thus           
+   restricted so as not to add to the network and CPU loads, and so as to       
+   keep the administrators happy.  If you have legitimate conferencing          
+   needs during the day, you may apply through the Masterop of your host        
+   for the ability to sign on during prime time hours.                          
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                                
+
+<A NAME="Q7"><b>Why is there a limit to the number of people on a channel, 
+or a host?</b></a>        
+<p>
+   Again, network considerations force RELAY to place limits on the             
+   number of users. RELAY can only help the network by sending out              
+   messages in a fashion that is less time consuming to the network             
+   itself.  If many people are signed on RELAY, and all on the same             
+   channel, RELAY's helpfulness to the network is severely limited.             
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q8"><b>How do I send a private message to another user, 
+regardless of channel?</b></a>                                                                     
+<p>
+   <blockquote>
+   RELAY's /MSG command allows you to converse privately with any user          
+   on any RELAY channel.  To use /MSG, the syntax is:                           
+   <p>                                                                             
+   <PRE>/MSG [nickname] [message]</PRE><p>                                              
+   Example: <PRE>/MSG Ben Hi there, can you help me for a second?</PRE><p>                        
+   </blockquote>
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+
+<A NAME="Q9"><b>What does the <*nick*> symbol mean?</b></a>                                          
+<p>
+   If you receive a message from RELAY with a <*nick*> in front of the          
+   message, it means that the user has sent you a message using the /MSG        
+   command detailed above.  No other users saw this message.                    
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q10"><b>How can I see who is signed on right now?</b></a>                                    
+<p>
+   RELAY provides two basic commands for viewing who is signed on               
+   at a given time.  They are the /WHO and /NAMES commands.  The                
+   format and information displayed on each user differs between                
+   them, but the syntax for each is the same.  The three forms of               
+   the commands are as follows:                                                 
+   <p>                                                                             
+   <PRE>
+   /WHO       -  Displays all users signed onto the RELAY network.          
+   /WHO *     -  Displays all users on the same channel you occupy.         
+   /WHO #     -  Displays all users on channel number #.                    
+   </PRE><p>                                                                             
+   All three forms of /NAMES work in the same manner.                           
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+                                                                                
+<A NAME="Q11"><b>What does the "-" in the /WHO, /NAMES, /SINCE, 
+etc. lists mean?</b></a>              
+<p>
+   If a user (including yourself) has a "-" next to the name, it means          
+   that the user is currently using the same host server as you.                
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q12"><b>What does the "*" in the /WHO, /NAMES, /SINCE 
+etc. lists mean?</b></a>               
+<p>
+   The asterisk indicates that the user is a general Operator.  This            
+   person can help you and answer questions if you have them.                   
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q13"><b>What does the "#" in the /WHO, /NAMES, /SINCE 
+etc. lists mean?</b></a>               
+<p>
+   The number sign indicates that the user is a Master Operator.                
+   These individuals have the responsibility of the maintenance and             
+   daily operation of the host servers.  They influence the rules that          
+   are specific to their server and are involved in handling the more           
+   difficult problems.                                                          
+   Most RELAY servers disablee the "#" symbols, due to new releases                                                                             
+   of RELAY. This means that you will see the "*" symbol for operators
+   as well as masteroperators.
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+                                                                                
+<A NAME="Q14"><b>What does the "??" mean in the channel 
+column of /WHO?</b></a>                       
+<p>
+   If a user is listed as being on channel "??", it means that person is        
+   on a private channel.  (further description of private channels below)       
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+                                                                                
+<A NAME="Q15"><b>What is a private channel?</b></a>                                                   
+<p>
+   RELAY has two types of channels.  Public channels, 0 - 99, are listed        
+   in numerical order.  You are able to identify which users are in             
+   which channels.  Private channels, 100 - 999, are not listed in order.       
+   You can not identify which users are in which private channels.              
+   Because they are private, it is against RELAY rules and etiquette to         
+   change to a private channel unless you are invited to that channel           
+   or unless you know that the channel is unoccupied.                           
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q16"><b>How do I make sure the private channel is 
+empty before I go?</b></a>                 
+<p>
+   Send a /NAMES <channel-number> command to RELAY, and it will report          
+   the status of a private channel (Occupied/Unoccupied).  Note that            
+   using this command on a public channel will display a list of all            
+   users on that channel.                                                       
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q17"><b>How can I change channels?</b></a>                                                   
+<p>
+   Send the /CHANNEL <new-channel-number> command.                              
+   <br>
+   Example: (you want to go to channel 2)<br>                                       
+   <PRE>/CHANNEL 2</PRE>                                                                   
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+                                                                               
+<A NAME="Q18"><b>How can I see what the topics are on the channels?</b></a>                           
+<p>
+   The /TLIST command will show you a list of each channel which has a          
+   topic associated with it.  Note that private channels will show up           
+   with a topic, but the channel number field will be a double question         
+   mark.                                                                        
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q19"><b>How can I change the topic in the topic list?</b></a>                                
+<p>
+   You may change the topic on your channel by using the /TOPIC command.        
+   Note, however, that you should first obtain permission from the other        
+   users on the channel before you change the topic.  Only one channel          
+   topic change is permitted per channel per 5-minute time span.                
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q20"><b>Why is there a time limit on when the 
+topics can be changed?</b></a>                 
+<p>
+   In the past, there was no time limit on how frequently topics could be       
+   changed.  This could create some situations when people would change         
+   the topic back and forth very rapidly, in what we call a 'topic war'.        
+   This is detrimental to network load, and thus we have had to limit the       
+   number of changes that can occur in time.                                    
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q21"><b>What does the <<nick>> symbol mean?</b></a>                                          
+<p>
+   To properly explain this symbol, we must first explain the concept of        
+   'ghosting'.  RELAY is a network, in some senses, very much like the          
+   BITNET itself.  It sends messages around to its individual hosts,            
+   informing them of who has signed on and where they are, etc.  No             
+   network is perfect.  RELAY, being a an overlay, is less perfect than         
+   most.  Occasionally, RELAY will not get the message that a person is         
+   signed on, and thus, that person becomes a "ghost".  That person may         
+   still be able to talk to the channel (s)he is on, but the nickname           
+   will be shown to the users in the format shown above.  If you see            
+   someone's nick bracketed by the "<<" and ">>" symbols, wait to make          
+   sure that RELAY isn't correcting the problem itself (which it can do),       
+   and then inform the user of the problem.                                     
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q22"><b>How do users become ghosted, and how can 
+they become unghosted?</b></a>              
+<p>
+   Users become ghosted in the manner described above. The BEST way to          
+   unghost yourself is to signoff your host server then signon again.           
+   RELAY contains some internal procedures designed to eliminate ghosts,        
+   some of which result in the "*Deghosted User*" sometimes seen in the         
+   /NAMES list.  Please note that RELAY operators do not have the power         
+   to unghost you.                                                              
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q23"><b>What does it mean when RELAY says not all 
+RELAY hosts know what my nick is, or what channel I'm on?  
+How do I fix it?</b></a>                           
+<p>
+   This is a special case of the ghosting problem.  RELAY has detected          
+   the fact that you are a ghost, but RELAY is unable to correct the            
+   situation.  Once again, signing off at your RELAY host is the best           
+   way to deal with this problem.                                               
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+                                                                                
+<A NAME="Q24"><b>Why did RELAY kick me off just then?</b></a>                                        
+<p>
+   The /BYE or /SIGNOFF commands are the only way that you can actually        
+    sign yourself off RELAY. There are, however, quite a few other ways         
+    in which you can end up being removed from the system, most of them         
+    automatic functions of the RELAY software.  Below is a listing of           
+    some of the possibilities:                                                  
+    <p>                                                                            
+    </ul>
+    <li><b>Deletion by Operator:</b>  This one should not come as a surprise to you        
+       when it happens.  In most cases, you shall have ample warning from       
+       an Operator before he or she actually removes you from RELAY.  If        
+       such a measure is finally deemed necessary, you shall see a              
+       message saying which Operator deleted you and a short reason for         
+       it.                                                                      
+                                                                                
+    <li><b>Removal for Hyperactivity:</b>  RELAY is intended for normal chatting           
+       and occasional use of the various commands.  Sending huge streams        
+       of commands, using picture sending programs, or in other ways            
+       flooding the system with messages will result in your removal from       
+       RELAY with approximately a 15 minute suspension of privileges.           
+       RELAY will notify you that you have been removed due to                  
+       "hyperactivity."                                                         
+                                                                                
+    <li><b>Removal for Inactivity:</b>  This is one of RELAY's automatic cleanup           
+       routines.  Because of the host limits (discussed above), users who       
+       go for extended periods of time without sending a message or             
+       command to RELAY are automatically removed.  This helps keep space       
+       available for people who wish to actively use the system.  The           
+       only message you receive from RELAY in this case is a signoff            
+       message.                                                                 
+                                                                                
+    <li><b>Removal due to Network Problems:</b>  If the physical network links             
+       between you and your RELAY host go down, RELAY will automatically        
+       sign you off.  You shall most likely receive no notification in          
+       this case since RELAY is unable to get messages to you.  You shall       
+       be able to sign back on as soon as the network links are restored.       
+                                                                                
+    <li><b>Removal due to Being Unable to Receive Messages:</b>  This category             
+       embraces several different possibilities.  If RELAY tries to send        
+       a message to you and your host system responds to RELAY saying           
+       that you are no longer signed on, or that you are not currently          
+       receiving messages, RELAY will automatically sign you off.  A case       
+       where the first could happen would be trying to sign off at one          
+       terminal and on at another one, while remaining on RELAY.  One           
+       case where the second would happen occurs when you issue the             
+       command to disable messages to your BITNET address (e.g. VM/CMS -        
+       SET MSG OFF, VAX/VMS - SET BROADCAST=NONE).  A third possibility         
+       is one which generally affects only users on VAX/VMS systems.            
+       Using the HOLD SCREEN or PAUSE key for too long, especially during       
+       a /WHO list or on a busy channel, can result in the message              
+       buffers of your system filling up.  When this happens, your system       
+       will tell RELAY that you are "not receiving messages temporarily."       
+       When RELAY sees this, it will sign you off, just as it did for           
+       intentionally going to a non-receiving condition.                        
+       </ul>
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+                                                                                
+<A NAME="Q25"><b>Who do I ask about problems with my computer, 
+electronic mail,              
+the editor I use, ftp, or other similar problems?</b></a>                           
+<p>
+ None of these topics are directly connected with RELAY.  Further,           
+    many of them vary from system to system.  For this reason, RELAY            
+    Operators are often unable to help you with questions of this kind.         
+    Your local computer center administrators (the people who gave you          
+    the account) are usually the ones best suited to answer questions of        
+    this nature.  Other RELAY users and Operators may be able to help           
+    you, but it is not their responsibility to know your individual             
+    system and thus their information may not be correct for your local         
+    area.                                                                       
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                                
+
+<A NAME="Q26"><b>Why isn't swearing allowed on RELAY?</b></a>                                         
+<p>
+   Because of the academic conferencing/usage purpose for RELAY's               
+   existence, and because the network administrators for the host servers       
+   may monitor any channel at any time, the rules of CREN (one of the           
+   governing organizations of BITNET) must be followed at all times.            
+   Since swearing is seen as non-academic and degrading, CREN disallows         
+   its use over the network.                                                    
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q27"><b>Why aren't picture execs allowed on RELAY?</b></a>                                   
+<p>
+   Picture execs rapidly send messages to RELAY.  This tags the user as         
+   being "hyperactive".  See the discussion of "hyperactivity" above.           
+   Picture execs are not considered to be of academic use and therefore         
+   are a breach of the CREN rules.                                              
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+                                                                                
+<A NAME="Q28"><b>Someone is harassing me.  What should I do about it?</b></a>                         
+<p>
+   There are a number of answers to this question, and the one which            
+   is most appropriate varies from situation to situation.  The best            
+   first step is generally to firmly inform the person who is bothering         
+   you that you do not appreciate it and wish it stopped immediately.           
+   If this is done in a polite manner, it is often enough to solve the          
+   problem.  If the harassment persists, you have two options.  The             
+   first and easiest recourse is to make use of RELAY's /IGNORE command         
+   (e.g. /IGNORE BigJerk).  This will block out all RELAY messages from         
+   the ignored user, informing him/her of the fact that (s)he has been          
+   ignored.  The final option involves the intervention of a RELAY              
+   Operator.  The /GETOP command can be useful in summoning an Operator         
+   in this situation.  Explain the problem to the Operator who responds         
+   and (s)he will try to resolve the problem.  Please note that a               
+   "console log" (a system generated record of the messages you've sent         
+   and received) can be very useful in proving harassment.  If you are          
+   unsure how to create a console log, ask one of your local computer           
+   center consultants.                                                          
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                              
+
+<A NAME="Q29"><b>Can ops watch when they are not on a channel?</b></a>                                
+<p>
+   The only way for any user, including operators and Master Operators,         
+   to see what is happening on another channel is to change to that             
+   channel and watch the conversation.  Operators can not see private           
+   conversations sent with /MSG, nor can they monitor channels where            
+   they are not signed on.                                                      
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q30"><b>What are the differences between the user classes?</b></a>                           
+<p>
+   When you /REGISTER to RELAY, you get class 2 by default (at some hosts       
+   it is class 1).  There are five conceptual class levels:                     
+   <p>                                                                             
+   <PRE>
+   Class 0 - Banned from RELAY. Any user, whose class is 0, can not use         
+             RELAY.                                                             
+   Class 1 - A user who has previously been banned from RELAY and is            
+             currently serving a probationary period.  OR A user whose          
+             /REGISTER remains unconfirmed.  Channel access:  0 - 999.          
+   Class 2 - The default class for /REGISTER. Channel access: 0 - 999.          
+   Class 3 - A class granted to you by your host's MasterOp or any Op on        
+             your host server who can provide you with that class.              
+             Channel access: full range of negative and positive                
+             channels.                                                          
+   Classes 4 - 7 - General Operators, with different privileges according       
+             to class.  Privileges granted at each level are decided by         
+             the Master Op of each host.  Channel access: All channels,         
+             same as in class 3.                                                
+   Class 8 - MasterOp. Channel access: All channels as above.                   
+   Class 9 - THE Master Operator for the individual server.  This is the        
+             person responsible for the RELAY account and is the /CONTACT       
+             for the RELAY server.                                              
+   </PRE><p>                                                                        
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+                                                                                
+<A NAME="Q31"><b>How do I become an Operator?</b></a>                                                 
+<p>
+   Master Operators are the only people who may grant privileges of Class       
+   4 or higher.  General Operators have neither the power nor the               
+   authority to make you an op.  If there is more than one Master Op at         
+   a host, they will confer before giving someone Operator status.  The         
+   criteria used in choosing is sometimes site-dependent, eg. who may be        
+   an op, or how many ops are allowed.  If you wish to be considered, you       
+   may send e-mail to the person(s) listed in the response to /CONTACT.         
+   Be patient and understanding if the answer is no.  You may elect to          
+   ask again periodically, so you are the first person in mind when it          
+   comes time to select a new operator.                                         
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+
+<A NAME="Q32"><b>To whom do I talk if I have more questions 
+or problems with RELAY?</b></a>           
+<p>
+   There are a number of places where you may find answers to other             
+   questions.  Most simple questions can be answered by any Operator            
+   signed onto RELAY at a given time.  In cases where the question              
+   concerns specific policies of your RELAY host, or if there are no            
+   Operators available, you may always send e-mail to your host's Master        
+   Operator.  You may find the name and address of your MasterOp by             
+   sending the /CONTACT command to your host.  Your MasterOp is also the        
+   person to whom you should appeal in cases where you feel another             
+   Operator did not handle a problem fairly.  Finally, a wealth of              
+   information about RELAY's rules, its history, and its function can be        
+   found in the files RELAY RULES, RELAY INFO, and RELAY USEGUIDE.              
+   If you wish to join a discussion list for users of RELAY, then you           
+   may join RELUSR-L at LISTSERV@NCSUVM.                                        
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>                                                                             
+                                                                                
+<A NAME="Q33"><b>What is RELUSR-L and how do I get in on it?</b></a>                                  
+<p>
+   RELUSR-L is forum for the discussion of RELAY related matters, carried       
+   on through electronic mail.  Using a network server known as a               
+   LISTSERV, RELUSR-L allows people interested in RELAY to converse with        
+   each other, with all mail being distributed from two centralized             
+   locations.  Subscription records are kept at each of these sites, and        
+   LISTSERV insures that each subscriber gets a copy of every mailing to        
+   RELUSR-L.  The two sites are LISTSERV@UALTAVM and LISTSERV@NCSUVM.           
+   Canadian users are served by UALTAVM, while users in other areas are         
+   served by NCSUVM.  The two sites interact to insure that subscribers         
+   at both sites get the same mail.                                             
+   The simplest way to subscribe to the list, or send any other type of         
+   command is to send an interactive message to the LISTSERV.                   
+   <p>                                                                             
+   The syntax for Subscribing is as follows:                                    
+   <p>
+   <PRE>SUBscribe RELUSR-L <full name>                                            
+   </PRE><p>                                                                         
+   Example: (on a VM/CMS system)                                                
+   <p>
+   <PRE>TELL LISTSERV@NCSUVM SUBscribe RELUSR-L Joe Smith                         
+   </PRE><p>                                                                        
+      This will add the person sending the command to RELUSR-L and tell         
+      LISTSERV that his name is Joe Smith.  It is important to remember         
+      that all commands must be sent to LISTSERV, not RELUSR-L.  LISTSERV       
+      will generally acknowledge the subscription with an interactive           
+      message and then send you mail notifying you that you have been           
+      added to the list.                                                        
+      <p>                                                                     
+   Once you have subscribed, LISTSERV will forward you a copy of all mail       
+   sent over the list.  To reply to it or send your own mail, you simply        
+   make use of whatever electronic mail facility your system supports,          
+   and address the mail to RELUSR-L@NCSUVM (RELUSR-L@UALTAVM for                
+   Canadians).<p>                                                                  
+   Please try to post to RELUSR-L only matters of concern to the RELAY          
+   community as a whole.  If you see a post about 'Link Failures' from          
+   Joe Smith and have something to say on that topic, reply to the list.        
+   But if Joe just happens to be a friend of yours and you want to ask          
+   him how he has been, please ask him privately rather than over the           
+   list.  This helps to save network bandwidth and also keeps list              
+   subscribers from having to sort through posts that don't concern them.       
+   <p>                                                               
+   If you have further questions about RELUSR-L, send mail to Reba Taylor       
+   (REBAT@VTVM1).  If you have more questions about LISTSERV in general,        
+   send the 'INFO REFCARD' command to your nearest LISTSERV.
+<p>
+<p><center><A HREF="faq.html#top">[-go to top-]</A></center><HR>
+</BODY>
+</HTML>                    
